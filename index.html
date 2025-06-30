@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Major Financial Flows (FY21-23)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to override or extend Tailwind for specific layout/visuals */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Default dark background, easily changeable by user */
+            background-color: #1a202c; /* Equivalent to Tailwind's bg-gray-900 */
+            color: #e2e8f0; /* Equivalent to Tailwind's text-gray-200 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Hide overflow from SVG lines initially */
+        }
+
+        .diagram-container {
+            position: relative;
+            width: 95vw; /* Fluid width for responsiveness */
+            max-width: 1200px; /* Max width for desktop */
+            height: 70vh; /* Adjust height based on viewport */
+            max-height: 800px;
+            background-color: #2d3748; /* Slightly lighter dark background, like bg-gray-800 */
+            border-radius: 1rem; /* rounded-xl */
+            padding: 2rem;
+            display: flex; /* Use flexbox for initial node positioning */
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .node {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            border-radius: 9999px; /* rounded-full */
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.875rem; /* text-sm */
+            color: #1a202c; /* text-gray-900 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            z-index: 10; /* Ensure nodes are above lines */
+            transition: all 0.3s ease-in-out; /* Smooth transitions for potential future interactions */
+            cursor: pointer; /* Indicate clickability */
+        }
+
+        /* Node specific colors */
+        .node.mft { background-color: #f6ad55; } /* Orange */
+        .node.schwab { background-color: #4299e1; } /* Blue */
+        .node.the85fund { background-color: #48bb78; } /* Green */
+        .node.concord { background-color: #e53e3e; } /* Red */
+        .node.knights { background-color: #9f7aea; } /* Purple */
+        .node.donorstrust { background-color: #63b3ed; } /* Light Blue */
+
+        /* SVG styles for lines and arrows */
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allow clicks through SVG to nodes */
+            z-index: 5; /* Lines below nodes */
+        }
+
+        .line {
+            stroke-width: 4;
+            fill: none;
+            marker-end: url(#arrowhead); /* Default arrowhead */
+        }
+        .line.quantified {
+            stroke: #ecc94b; /* Yellow for quantified flows */
+        }
+        .line.unquantified {
+            stroke: #a0aec0; /* Gray for unquantified flows */
+            stroke-dasharray: 8 8; /* Dashed line */
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 640px) { /* sm breakpoint */
+            .node {
+                width: 140px;
+                height: 140px;
+                font-size: 0.95rem;
+            }
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .diagram-container {
+                width: 85vw;
+            }
+            .node {
+                width: 160px;
+                height: 160px;
+                font-size: 1rem;
+            }
+        }
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .diagram-container {
+                width: 70vw;
+            }
+            .node {
+                width: 180px;
+                height: 180px;
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100; /* Above all other content */
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease-in-out;
+        }
+
+        .modal.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #2d3748; /* Same as diagram container background */
+            padding: 2rem;
+            border-radius: 0.75rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            width: 90%;
+            max-width: 500px;
+            color: #e2e8f0;
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem; /* rounded-md */
+            transition: background-color 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background-color: #4a5568; /* hover:bg-gray-700 */
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4299e1; /* Blue spinner */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+            display: block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="diagram-container">
+        <!-- Nodes -->
+        <div id="mft" class="node mft">MFT ✨</div>
+        <div id="schwab" class="node schwab">Schwab Charitable Fund ✨</div>
+        <div id="donorstrust" class="node donorstrust">DonorsTrust (DT) ✨</div>
+        <div id="the85fund" class="node the85fund">The 85 Fund ✨</div>
+        <div id="concord" class="node concord">Concord Fund (Judicial Crisis) ✨</div>
+        <div id="knights" class="node knights">Knights of Columbus Fund ✨</div>
+
+        <!-- SVG for lines and arrowheads -->
+        <svg id="flow-diagram-svg">
+            <defs>
+                <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#ecc94b" />
+                </marker>
+                <marker id="arrowhead-unquantified" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#a0aec0" />
+                </marker>
+            </defs>
+        </svg>
+
+        <!-- Legend -->
+        <div class="absolute bottom-4 right-4 bg-gray-700 p-4 rounded-lg shadow-lg text-sm z-20">
+            <h3 class="font-bold text-lg mb-2">Legend</h3>
+            <div class="flex items-center mb-1">
+                <span class="w-4 h-4 rounded-full mft mr-2"></span> MFT
+            </div>
+            <div class="flex items-center mb-1">
+                <span class="w-4 h-4 rounded-full schwab mr-2"></span> Schwab Charitable Fund
+            </div>
+            <div class="flex items-center mb-1">
+                <span class="w-4 h-4 rounded-full the85fund mr-2"></span> The 85 Fund
+            </div>
+            <div class="flex items-center mb-1">
+                <span class="w-4 h-4 rounded-full concord mr-2"></span> Concord Fund
+            </div>
+            <div class="flex items-center mb-1">
+                <span class="w-4 h-4 rounded-full knights mr-2"></span> Knights of Columbus Fund
+            </div>
+            <div class="flex items-center mb-1">
+                <span class="w-4 h-4 rounded-full donorstrust mr-2"></span> DonorsTrust (DT)
+            </div>
+            <div class="flex items-center mt-3 mb-1">
+                <div class="w-8 h-1 bg-yellow-400 rounded mr-2"></div> Quantified Flow
+            </div>
+            <div class="flex items-center">
+                <div class="w-8 h-1 bg-gray-400 rounded mr-2" style="border-top: 4px dashed #a0aec0;"></div> Verified, Unquantified Flow
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for LLM response -->
+    <div id="summaryModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+            <h2 id="modalTitle" class="text-xl font-bold mb-4"></h2>
+            <div id="modalBody" class="text-gray-300">
+                <div id="loadingIndicator" class="loading-spinner hidden"></div>
+                <p id="summaryText"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            positionElements();
+            addNodeClickListeners();
+        });
+        window.addEventListener('resize', positionElements);
+
+        function positionElements() {
+            const container = document.querySelector('.diagram-container');
+            const containerRect = container.getBoundingClientRect();
+            const nodes = {
+                mft: document.getElementById('mft'),
+                schwab: document.getElementById('schwab'),
+                donorstrust: document.getElementById('donorstrust'),
+                the85fund: document.getElementById('the85fund'),
+                concord: document.getElementById('concord'),
+                knights: document.getElementById('knights')
+            };
+
+            // Define node positions as percentages relative to container
+            // These positions are approximations based on the diagram and can be fine-tuned
+            const positions = {
+                mft: { top: 75, left: 50 },
+                schwab: { top: 45, left: 50 },
+                donorstrust: { top: 20, left: 70 },
+                the85fund: { top: 20, left: 30 },
+                concord: { top: 75, left: 20 },
+                knights: { top: 55, left: 10 }
+            };
+
+            for (const id in nodes) {
+                const node = nodes[id];
+                const nodeWidth = node.offsetWidth;
+                const nodeHeight = node.offsetHeight;
+
+                // Calculate absolute position based on percentages and center the node
+                node.style.top = `${(positions[id].top / 100) * containerRect.height - (nodeHeight / 2)}px`;
+                node.style.left = `${(positions[id].left / 100) * containerRect.width - (nodeWidth / 2)}px`;
+            }
+
+            drawLines(nodes);
+        }
+
+        function drawLines(nodes) {
+            const svg = document.getElementById('flow-diagram-svg');
+            // Clear previous lines
+            svg.querySelectorAll('.flow-line').forEach(line => line.remove());
+
+            const container = document.querySelector('.diagram-container');
+            const containerRect = container.getBoundingClientRect();
+
+            // Helper function to get center coordinates of a node relative to SVG
+            const getNodeCenter = (nodeId) => {
+                const node = nodes[nodeId];
+                const rect = node.getBoundingClientRect();
+                return {
+                    x: (rect.left + rect.right) / 2 - containerRect.left,
+                    y: (rect.top + rect.bottom) / 2 - containerRect.top
+                };
+            };
+
+            const flows = [
+                // Quantified Flows
+                { from: 'mft', to: 'schwab', type: 'quantified', label: '$307,500,000' },
+                { from: 'mft', to: 'concord', type: 'quantified', label: '$84,400,000' },
+                { from: 'knights', to: 'mft', type: 'quantified', label: '$7,600,000' }, // This flow direction is inferred from diagram, as Knights is on the left and MFT on right, with arrow pointing from Knights.
+
+                // Verified, Unquantified Flows
+                { from: 'schwab', to: 'the85fund', type: 'unquantified' },
+                { from: 'donorstrust', to: 'the85fund', type: 'unquantified' }
+            ];
+
+            flows.forEach(flow => {
+                const start = getNodeCenter(flow.from);
+                const end = getNodeCenter(flow.to);
+
+                // Calculate control points for a slight curve (optional, but makes diagram clearer)
+                const midX = (start.x + end.x) / 2;
+                const midY = (start.y + end.y) / 2;
+
+                let dPath;
+                // Adjust for label position, if label exists
+                const labelOffset = 15; // Offset for label placement
+                const labelAngle = Math.atan2(end.y - start.y, end.x - start.x);
+                let labelX = midX + (Math.cos(labelAngle - Math.PI / 2) * labelOffset);
+                let labelY = midY + (Math.sin(labelAngle - Math.PI / 2) * labelOffset);
+
+                if (flow.from === 'mft' && flow.to === 'schwab') {
+                    // For MFT to Schwab, a slight curve upwards
+                    const cp1x = start.x;
+                    const cp1y = start.y - 50; // Curve up from MFT
+                    const cp2x = end.x;
+                    const cp2y = end.y + 50; // Curve down to Schwab
+                    dPath = `M${start.x} ${start.y} C${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${end.x} ${end.y}`;
+                } else if (flow.from === 'mft' && flow.to === 'concord') {
+                     // For MFT to Concord, a slight curve downwards and left
+                    const cp1x = start.x - 50;
+                    const cp1y = start.y + 50;
+                    const cp2x = end.x + 50;
+                    const cp2y = end.y - 50;
+                    dPath = `M${start.x} ${start.y} C${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${end.x} ${end.y}`;
+                } else if (flow.from === 'knights' && flow.to === 'mft') {
+                     // For Knights to MFT, a slight curve upwards
+                    const cp1x = start.x;
+                    const cp1y = start.y - 50;
+                    const cp2x = end.x - 100;
+                    const cp2y = end.y - 50;
+                    dPath = `M${start.x} ${start.y} C${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${end.x} ${end.y}`;
+                }
+                else {
+                    // Straight line for others
+                    dPath = `M${start.x} ${start.y} L${end.x} ${end.y}`;
+                }
+
+
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', dPath);
+                path.setAttribute('class', `line flow-line ${flow.type}`);
+                path.setAttribute('marker-end', `url(#arrowhead${flow.type === 'unquantified' ? '-unquantified' : ''})`);
+                svg.appendChild(path);
+
+                // Add text label for quantified flows
+                if (flow.label) {
+                    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', labelX);
+                    text.setAttribute('y', labelY);
+                    text.setAttribute('text-anchor', 'middle');
+                    text.setAttribute('dominant-baseline', 'middle');
+                    text.setAttribute('fill', '#ecc94b'); /* Yellow text color */
+                    text.setAttribute('font-size', '0.75rem'); /* text-xs */
+                    text.setAttribute('font-weight', 'bold');
+                    text.textContent = flow.label;
+                    svg.appendChild(text);
+                }
+            });
+        }
+
+        // --- LLM Integration ---
+
+        const nodeData = {
+            mft: {
+                name: "Marble Freedom Trust",
+                text: `Marble Freedom Trust (MFT) as the Capital Source: Headed by conservative activist Leonard Leo, MFT became a financial juggernaut after receiving a historic $1.6 billion donation from Barre Seid in 2021. Its foundational purpose is to make substantial grants to other organizations.
+                Table 1: Marble Freedom Trust Key Financials (FY2021-FY2023)
+                Fiscal Year (MFT, Ending April) | Total Revenue | Contributions | Investment Income | Sales of Assets | Total Assets
+                2021 (Ending 04/30/2022)        | $26,601,822   | $0            | $6,314,108        | $20,287,714     | $1,226,534,029
+                2022 (Ending 04/30/2023)        | $48,470,772   | $0            | $26,662,557       | $21,808,215     | $1,042,289,889
+                2023 (Ending 04/30/2024)        | $62,284,458   | $27,924,703   | $23,214,450       | $11,145,305     | $992,102,282
+                Table 2: Marble Freedom Trust Expenditure and Grants Paid (FY2021-FY2023)
+                Fiscal Year (MFT, Ending April) | Total Expenses | Total Grants Paid | Primary Recipients (Examples)
+                2021 (Ending 04/30/2022)        | $184,923,907   | $182,700,000     | Schwab Charitable Fund ($153,800,000) , Judicial Crisis Network (Concord Fund) ($28,900,000)
+                2022 (Ending 04/30/2023)        | $223,627,384   | $216,850,000     | Schwab Charitable Fund ($153,750,000) , Judicial Crisis Network (Concord Fund) ($55,500,000) , Knights of Columbus Charitable Fund ($7,600,000)
+                2023 (Ending 04/30/2024)        | $200,659,956   | $189,150,000     | Specific recipients for FY2023 not detailed in provided information
+                Direct Control of MFT: Leonard Leo holds the unequivocal positions of founder, chairman, and trustee of Marble Freedom Trust. This grants him direct and commanding control over its overarching strategy and its financial disbursements, which are fueled by a historic $1.6 billion donation.`
+            },
+            donorstrust: {
+                name: "DonorsTrust (DT)",
+                text: `DonorsTrust (DT) as the Distribution Network: DonorsTrust is a long-established donor-advised fund, frequently characterized as the 'dark money ATM of the right'. It provides an exceptionally efficient and often anonymous mechanism to channel funds to a vast array of conservative and libertarian causes.
+                Table 3: DonorsTrust Key Financials (FY2021-FY2023)
+                Fiscal Year (DT, Ending December) | Total Revenue     | Contributions     | Total Assets
+                2021                              | $1,094,663,581    | $1,081,035,499    | $1,504,903,651
+                2022                              | $323,050,038      | $303,257,214      | $1,387,471,760
+                2023                              | $158,252,948      | N/A               | $1,291,166,098
+                Table 4: DonorsTrust Expenditure and Grants Paid (FY2021-FY2023)
+                Fiscal Year (DT, Ending December) | Total Expenses | Total Giving/Grants Paid | Key Granting Areas (FY2022 Examples)
+                2021                              | $191,858,622   | $187,697,675             | CMD calculated $123M to right-wing groups
+                2022                              | $248,109,953   | $242,230,612             | Right-Wing Policy and Advocacy ($74.5M, including $9M to Consumers’ Research , $3M to Teneo Network , $19.3M to State Policy Network) ; Litigation ($19.6M, including $4.3M to Federalist Society ); Right-Wing Media ($16.5M, including $4.4M to Real Clear Foundation ); Climate Deniers ($12.4M) ; Youth Groups ($6.6M) ; Hate & Guns (nearly $4M)
+                2023                              | $357,941,924   | $351,237,082             | Detailed major recipients not explicitly provided in available information
+                Strategic Use of DT: While Leo holds no formal position at DonorsTrust, he consistently utilizes it as a pivotal financial partner and a "strategic funding vehicle" within his broader network. Leo's extensive network actively directs money to and frequently receives money from DonorsTrust, rendering it an indispensable component of his operational sphere.`
+            },
+            schwab: {
+                name: "Schwab Charitable Fund",
+                text: `The consistent and very large grants from MFT to Schwab Charitable Fund during MFT's FY2021 ($153.8 million) and FY2022 ($153.75 million) indicate that Schwab Charitable has become MFT's primary conduit for funneling funds, seemingly displacing DonorsTrust in this role. This strategic adjustment could be driven by various factors, including evolving preferences for anonymity, operational efficiencies, or the specific types of grants MFT intends to make through its DAF intermediaries.
+                Another critical layer of indirect funding within Leo's network involves MFT's extensive use of the Schwab Charitable Fund. MFT funnels "hundreds of millions of dollars" through Schwab Charitable to organizations like the 85 Fund. While the 85 Fund does not directly receive money from MFT, it is controlled and funded by Leo through Schwab Charitable, which in turn receives its substantial funding from MFT.`
+            },
+            the85fund: {
+                name: "The 85 Fund",
+                text: `Schwab Charitable made grants to The 85 Fund exceeding $141 million in both 2022 and 2023, accounting for nearly all of The 85 Fund's revenue in those years. DonorsTrust also continues to be a significant funder of The 85 Fund, with the 85 Fund receiving over 99% of its funding in a single year from DonorsTrust.`
+            },
+            concord: {
+                name: "Concord Fund (Judicial Crisis)",
+                text: `Judicial Crisis Network (Concord Fund) ($28,900,000) from MFT's FY2021 grants. Judicial Crisis Network (Concord Fund) ($55,500,000) from MFT's FY2022 grants.
+                Table 2: Marble Freedom Trust Expenditure and Grants Paid (FY2021-FY2023) example recipient for MFT: Judicial Crisis Network (Concord Fund) ($28,900,000) in 2021, and ($55,500,000) in 2022.`
+            },
+            knights: {
+                name: "Knights of Columbus Fund",
+                text: `Knights of Columbus Charitable Fund ($7,600,000) from MFT's FY2022 grants.
+                Table 2: Marble Freedom Trust Expenditure and Grants Paid (FY2021-FY2023) example recipient for MFT: Knights of Columbus Charitable Fund ($7,600,000) in 2022.`
+            }
+        };
+
+        async function getNodeSummary(nodeId) {
+            const modalTitle = document.getElementById('modalTitle');
+            const summaryText = document.getElementById('summaryText');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            modalTitle.textContent = `About ${nodeData[nodeId].name}`;
+            summaryText.textContent = ''; // Clear previous content
+            loadingIndicator.classList.remove('hidden'); // Show loading spinner
+            openModal();
+
+            const promptText = `Based on the following text about ${nodeData[nodeId].name}:
+"${nodeData[nodeId].text}"
+Please provide a concise summary (2-3 sentences) of its primary role and significance in the financial network.`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: promptText }] });
+
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Canvas will automatically provide the API key here
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    summaryText.textContent = text;
+                } else {
+                    summaryText.textContent = 'Could not generate summary. Response structure unexpected.';
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                summaryText.textContent = 'Failed to load summary. Please try again later.';
+            } finally {
+                loadingIndicator.classList.add('hidden'); // Hide loading spinner
+            }
+        }
+
+        function addNodeClickListeners() {
+            const nodeIds = ['mft', 'schwab', 'donorstrust', 'the85fund', 'concord', 'knights'];
+            nodeIds.forEach(id => {
+                const node = document.getElementById(id);
+                if (node) {
+                    node.addEventListener('click', () => getNodeSummary(id));
+                }
+            });
+        }
+
+        function openModal() {
+            document.getElementById('summaryModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('summaryModal').classList.remove('show');
+        }
+    </script>
+</body>
+</html>
