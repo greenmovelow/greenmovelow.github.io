@@ -1,41 +1,47 @@
-# Financial Flows Visualization: Marble Freedom Trust & DAF Network
+# Restoring Democracy's Promise
 
-This repository hosts a static web application that visually represents the major financial flows within a specific conservative funding network, focusing on the interplay between **Marble Freedom Trust (MFT)**, **DonorsTrust (DT)**, and other related donor-advised funds (DAFs) and organizations.
+This repository contains the source code for [**restoring-democracy.org**](https://restoring-democracy.org/ "null"), the official web presence for the investigative journalism project, **Restoring Democracy's Promise**.
 
-## Overview
+## Project Mission
 
-The visualization is built to clarify the complex financial arteries, showing both quantified and unquantified, but verified, money movements as identified in a detailed investigative report. It aims to provide an accessible and interactive way to understand how these entities function as a unified financial powerhouse, particularly under the strategic direction of Leonard Leo.
+Restoring Democracy’s Promise is a newsroom founded on a simple premise: to restore democratic accountability through irrefutable, evidence-driven investigations. We trace the money, map the influence, and expose the hidden machinery of power that shapes American policy from the shadows. This website serves as the front door to our work.
 
-## Features
+## Website Features
 
-* **Interactive Node Map:** A clear, color-coded diagram displaying key organizations (nodes) and the financial transfers (lines) between them.
-* **Quantified & Unquantified Flows:** Distinct visual representation for flows with reported dollar amounts versus verified, yet unquantified, connections.
-* **LLM-Powered Summaries:** Click on any organizational node (e.g., MFT, DonorsTrust) to open a modal window with a concise, AI-generated summary of that entity's role and significance within the network. This summary is derived directly from the underlying investigative report.
-* **Responsive Design:** The visualization adjusts to different screen sizes, providing a good viewing experience on various devices.
-* **Customizable Theme:** The background color is set to a dark, journalistic tone, easily customizable to match a blog's aesthetic.
+The site is composed of three key components:
 
-## How to View
+1. **Main Landing Page (`index.html`):** A professional landing page that introduces the project's mission, features our flagship investigation, and provides clear calls-to-action for readers to subscribe and get involved.
+    
+2. **Interactive Financial Report (`pincerfinancial.html`):** A deep-dive, interactive data visualization that maps the "Sustained Financial Superhighway" of the Marble Freedom Trust network. It allows users to explore the flow of hundreds of millions of dollars through various entities over multiple fiscal years.
+    
+3. **The Editor's Vault (`vault.html`):** A hidden "Easter egg" page for engaged followers, rewarding exploration and hinting at future investigations.
+    
 
-This is a static HTML page, so you can simply open the `index.html` file in your web browser.
+## Technology Stack
 
-Alternatively, since this repository is named `greenmovelow.github.io`, it is automatically deployed as a GitHub Pages user site. You can access it live at:
+This is a modern, static website built for speed, security, and accessibility.
 
-**[https://greenmovelow.github.io/](https://greenmovelow.github.io/)**
-
-*(Please note: It may take a few minutes for GitHub Pages to deploy after pushing new commits.)*
+- **Framework:** None. Just clean, semantic HTML5.
+    
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/ "null") for a professional, responsive, utility-first design.
+    
+- **Interactivity:** Vanilla JavaScript for the interactive timeline and UI elements, with [Chart.js](https://www.chartjs.org/ "null") for data visualization.
+    
+- **Deployment:** Hosted on [Netlify](https://www.netlify.com/ "null") and connected to this GitHub repository for continuous deployment. Every change pushed to the `main` branch is automatically deployed to the live site.
+    
 
 ## Data Source
 
-The financial data, organizational relationships, and narrative context for this visualization are derived from the "Final Report: The MFT-DonorsTrust Financial Artery," a meta-journalistic investigative journalism piece. The report details primary source analysis of tax filings (e.g., MFT's Form 990) and secondary source reporting.
+The financial data, organizational relationships, and narrative context for the interactive visualization are derived from the "Final Report: The MFT-DonorsTrust Financial Artery," a meta-journalistic investigative piece based on primary source analysis of tax filings and secondary source reporting.
 
-## Technical Details
+## Contact & Feedback
 
-* **HTML5:** For structuring the web page.
-* **Tailwind CSS:** For responsive and utility-first styling.
-* **SVG:** Used for drawing dynamic flow lines and arrowheads between nodes.
-* **JavaScript:** Powers the interactive elements, node positioning, line drawing, and the integration with the Gemini API for LLM-generated summaries.
-* **Gemini API:** Used to call the `gemini-2.0-flash` LLM to generate on-demand summaries of each organization based on pre-fed textual data from the report.
+For questions, feedback, or tips, please contact the editor at [editor@restoring-democracy.org](mailto:editor@restoring-democracy.org "null").
 
-## Contribution / Feedback
+## License
 
-While this is a static visualization, feedback on its clarity, accuracy (relative to the source material), or suggestions for improvements are welcome.
+The code in this repository is licensed under the MIT License. See the [LICENSE](https://www.google.com/search?q=LICENSE "null") file for more details.
+
+## Copyright
+
+© 2023-2025 Restoring Democracy’s Promise. All rights reserved.
