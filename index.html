@@ -16,8 +16,12 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3 { font-family: 'Teko', sans-serif; letter-spacing: 0.5px; }
-        .active-nav { color: #1d4ed8; border-bottom-color: #1d4ed8; }
-        .inactive-nav { color: #4b5563; border-bottom-color: transparent; }
+        
+        .nav-link.active-nav { color: #1d4ed8; }
+        .desktop-nav-link.active-nav { border-bottom-color: #1d4ed8; }
+        .desktop-nav-link.inactive-nav { border-bottom-color: transparent; }
+        .mobile-nav-link.active-nav { background-color: #eff6ff; }
+
         .content-section { display: none; }
         .content-section.active { display: block; }
         .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 500px; }
@@ -52,7 +56,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,20 +64,42 @@
                 <div class="flex items-center">
                     <span class="text-2xl font-bold text-slate-900 font-['Teko']">FINANCIAL CONDUIT ANALYSIS</span>
                 </div>
+                
+                <!-- Desktop Menu -->
                 <div class="hidden md:block">
-                    <div id="nav-links" class="ml-10 flex items-baseline space-x-4">
-                        <a href="#summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Summary</a>
-                        <a href="#money-trail" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Money Trail</a>
-                        <a href="#key-players" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Key Players</a>
-                        <a href="#the-mechanism" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">The Mechanism</a>
-                        <a href="#timeline" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Interactive Timeline</a>
+                    <div id="desktop-nav-links" class="ml-10 flex items-baseline space-x-4">
+                        <a href="#summary" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Summary</a>
+                        <a href="#money-trail" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Money Trail</a>
+                        <a href="#key-players" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Key Players</a>
+                        <a href="#the-mechanism" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">The Mechanism</a>
+                        <a href="#timeline" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Interactive Timeline</a>
                     </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button id="mobile-menu-button" type="button" class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-100 focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </nav>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div id="mobile-nav-links" class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <!-- Mobile links are dynamically inserted here -->
+            </div>
+        </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full">
         
         <section id="summary" class="content-section">
             <div class="text-center mb-12">
@@ -265,17 +291,51 @@
             </div>
         </section>
     </main>
+    
+    <footer class="bg-slate-100 border-t border-slate-200 mt-auto">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            <p>&copy; 2025 Restoring Democracy's Promise.</p>
+            <p class="mt-1">Read the full investigation: <a href="https://exposed1.substack.com/p/exclusive-the-pincer-movement" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">The Pincer Movement</a>.</p>
+        </div>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.content-section');
-            const navLinks = document.querySelectorAll('.nav-link');
             
+            // --- Mobile Menu Setup ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const desktopNavLinksContainer = document.getElementById('desktop-nav-links');
+            const mobileNavLinksContainer = document.getElementById('mobile-nav-links');
+
+            // Clone desktop links to mobile menu for consistency
+            const desktopLinks = desktopNavLinksContainer.querySelectorAll('a');
+            mobileNavLinksContainer.innerHTML = ''; // Clear container
+            desktopLinks.forEach(link => {
+                const mobileLink = link.cloneNode(true);
+                mobileLink.className = 'nav-link mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100';
+                mobileNavLinksContainer.appendChild(mobileLink);
+            });
+
+            // Toggle mobile menu visibility
+            mobileMenuButton.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.toggle('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', String(!isHidden));
+                hamburgerIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+            
+            // --- Main Navigation Logic ---
             function handleNavigation() {
                 const hash = window.location.hash || '#summary';
                 sections.forEach(section => {
                     section.classList.toggle('active', '#' + section.id === hash);
                 });
-                navLinks.forEach(link => {
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.toggle('active-nav', link.getAttribute('href') === hash);
                     link.classList.toggle('inactive-nav', link.getAttribute('href') !== hash);
                 });
@@ -284,15 +344,21 @@
                 if (hash === '#timeline') initTimeline();
             }
             
-            window.addEventListener('hashchange', handleNavigation);
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
+            // Handle clicks on ALL nav links (desktop and mobile)
+            document.querySelector('body').addEventListener('click', (e) => {
+                if (e.target.matches('.nav-link')) {
                     e.preventDefault();
                     window.location.hash = e.target.getAttribute('href');
-                });
+                    if (mobileMenu.classList.contains('hidden') === false) {
+                       mobileMenuButton.click(); // Close mobile menu if open
+                    }
+                }
             });
+            
+            window.addEventListener('hashchange', handleNavigation);
+            handleNavigation(); // Initial call
 
-            handleNavigation();
+            // --- Section-Specific Logic ---
 
             // Money Trail Section Logic
             const detailsPane = {
@@ -305,18 +371,9 @@
                 '85f': document.getElementById('node-85f'),
             };
             const paneData = {
-                mft: {
-                    title: 'Marble Freedom Trust (MFT)',
-                    content: 'The source of the funds. A 501(c)(4) trust endowed with a $1.6B contribution. Its primary purpose is to make large grants to other entities in the network. It provides the capital and the political direction.'
-                },
-                daf: {
-                    title: 'DAF Conduits (Schwab Charitable & DonorsTrust)',
-                    content: 'The intermediaries. Major Donor-Advised Fund sponsors that act as passive conduits, accepting funds from MFT and, upon "advice," granting them to other charities, thereby obscuring the original source and providing regulatory cover.'
-                },
-                '85f': {
-                    title: 'The 85 Fund',
-                    content: 'The destination hub. A 501(c)(3) organization that receives the anonymized funds from the DAFs. It then distributes this money to operational groups and pays millions in consulting fees to Leonard Leo\'s for-profit firm.'
-                }
+                mft: { title: 'Marble Freedom Trust (MFT)', content: 'The source of the funds. A 501(c)(4) trust endowed with a $1.6B contribution. Its primary purpose is to make large grants to other entities in the network. It provides the capital and the political direction.' },
+                daf: { title: 'DAF Conduits (Schwab Charitable & DonorsTrust)', content: 'The intermediaries. Major Donor-Advised Fund sponsors that act as passive conduits, accepting funds from MFT and, upon "advice," granting them to other charities, thereby obscuring the original source and providing regulatory cover.' },
+                '85f': { title: 'The 85 Fund', content: 'The destination hub. A 501(c)(3) organization that receives the anonymized funds from the DAFs. It then distributes this money to operational groups and pays millions in consulting fees to Leonard Leo\'s for-profit firm.' }
             };
             function updateDetails(key) {
                 if (!paneData[key]) return;
@@ -328,7 +385,7 @@
             Object.entries(flowNodes).forEach(([key, node]) => {
                 node.addEventListener('click', () => updateDetails(key));
             });
-            if (document.querySelector('#money-trail.active')) updateDetails('mft');
+            updateDetails('mft');
 
             // DAF Mechanism Logic
             let dafStep = 1;
@@ -405,9 +462,8 @@
                     const elRect = el.getBoundingClientRect();
                     return {
                         x: elRect.left - containerRect.left + elRect.width / 2,
-                        y: elRect.top - containerRect.top + elRect.height / 2,
-                        top: elRect.top - containerRect.top,
                         bottom: elRect.bottom - containerRect.top,
+                        top: elRect.top - containerRect.top,
                     }
                 }
 
@@ -444,22 +500,18 @@
                     const is2223 = phase === '22-23';
                     const is24 = phase === '24';
                     
-                    // MFT -> Schwab
                     flows.mft_schwab.el.classList.toggle('visible', is2223 || is24);
                     flows.mft_schwab.label.classList.toggle('visible', is2223 || is24);
                     flows.mft_schwab.label.textContent = is2223 ? '$307.5M' : '$59.1M';
                     
-                    // Schwab -> 85 Fund
                     flows.schwab_85f.el.classList.toggle('visible', is2223 || is24);
                     flows.schwab_85f.label.classList.toggle('visible', is2223 || is24);
                     flows.schwab_85f.label.textContent = is2223 ? '$282M' : '$59.1M';
 
-                    // MFT -> DonorsTrust
                     flows.mft_donors.el.classList.toggle('visible', is24);
                     flows.mft_donors.label.classList.toggle('visible', is24);
                     flows.mft_donors.label.textContent = '$59.1M';
 
-                    // DonorsTrust -> 85 Fund
                     flows.donors_85f.el.classList.toggle('visible', is24);
                     flows.donors_85f.label.classList.toggle('visible', is24);
                     flows.donors_85f.label.textContent = '$59.1M';
@@ -468,13 +520,11 @@
                 btn2223.addEventListener('click', () => setTimeline('22-23'));
                 btn24.addEventListener('click', () => setTimeline('24'));
                 
-                const resizeObserver = new ResizeObserver(() => {
-                    updateAllFlowLines();
-                });
+                const resizeObserver = new ResizeObserver(updateAllFlowLines);
                 resizeObserver.observe(container);
 
                 updateAllFlowLines();
-                setTimeline('22-23'); // Set initial state
+                setTimeline('22-23');
                 timelineInitialized = true;
             }
         });
