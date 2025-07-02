@@ -6,6 +6,7 @@
     <title>Infographic: The Pincer Movement</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="assets/gold_green_logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -43,6 +44,15 @@
             background-color: #1B263B;
             border-left: 5px solid #00B4D8;
         }
+        .content-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .content-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -50,11 +60,14 @@
     <div class="container mx-auto p-4 md:p-8">
 
         <header class="text-center mb-12">
+            <div class="max-w-4xl mx-auto mb-8">
+                <a href="/" class="text-sm font-medium text-cyan-300 hover:text-white hover:underline">&larr; Return to Homepage</a>
+            </div>
             <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-wider">The Pincer Movement</h1>
-            <p class="text-lg md:text-xl text-slate-300 mt-2 max-w-4xl mx-auto">An investigation into the coordinated assault on American democratic institutions.</p>
+            <p class="text-lg md:text-xl text-slate-300 mt-2 max-w-4xl mx-auto">An Infographic Summary of the Coordinated Assault on American Democratic Institutions.</p>
         </header>
 
-        <section id="introduction" class="mb-16">
+        <section id="introduction" class="mb-16 content-section">
             <div class="bg-[#1B263B] p-6 md:p-8 rounded-xl shadow-2xl">
                 <h2 class="text-3xl font-bold text-white mb-4">A Coordinated Strategy</h2>
                 <p class="text-slate-300 mb-6 text-lg">Our investigation uncovered a two-pronged strategy designed to enforce ideological conformity. A top-down pincer of state power works in concert with a bottom-up pincer of grassroots activism, fueled by a sophisticated financial network. This dynamic was field-tested in Winneshiek County, Iowa, where a local sheriff faced the full force of the state for expressing a dissenting legal opinion.</p>
@@ -87,7 +100,7 @@
             </div>
         </section>
 
-        <section id="project2025" class="mb-16">
+        <section id="project2025" class="mb-16 content-section">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-white">The Top-Down Pincer: Project 2025's Machinery</h2>
              <p class="text-slate-300 mb-8 text-lg text-center max-w-3xl mx-auto">Project 2025, led by The Heritage Foundation, is a comprehensive blueprint to radically restructure the U.S. government. It is not merely a policy paper but a detailed operational plan for consolidating executive power.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -117,7 +130,7 @@
             </div>
         </section>
         
-        <section id="christian-nationalism" class="mb-16">
+        <section id="christian-nationalism" class="mb-16 content-section">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-white">The Bottom-Up Pincer: The Ideological Engine</h2>
             <p class="text-slate-300 mb-8 text-lg text-center max-w-3xl mx-auto">The movement is animated by Christian Nationalist ideology, which seeks "dominion" over all spheres of society. This is driven by local power brokers like The Family Leader and secretive, high-wealth national networks like Ziklag.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -143,7 +156,7 @@
             </div>
         </section>
 
-        <section id="financial" class="mb-16">
+        <section id="financial" class="mb-16 content-section">
              <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-white">The Financial Artery: Dark Money & Opaque Funding</h2>
              <p class="text-slate-300 mb-8 text-lg text-center max-w-3xl mx-auto">A sophisticated financial apparatus converts private wealth into political power, often shielding donors' identities through vehicles like Donor-Advised Funds (DAFs).</p>
              <div class="bg-[#1B263B] p-6 md:p-8 rounded-xl shadow-2xl">
@@ -155,18 +168,18 @@
                         <p class="text-sm text-slate-300">From Barre Seid to</p>
                         <p class="font-semibold text-white">Marble Freedom Trust</p>
                     </div>
-                    <div class="flowchart-arrow text-center text-4xl transform rotate-90 md:rotate-0">→</div>
+                    <div class="flowchart-arrow text-center text-4xl transform rotate-90 md:rotate-0">&rarr;</div>
                     <div class="flowchart-node md:col-span-2">
                         <h4 class="font-bold text-lg text-[#90E0EF]">Dark Money Conduits</h4>
-                        <p class="font-semibold text-white">DonorsTrust & The 85 Fund</p>
-                        <p class="text-sm text-slate-300">Funneling over $152.5M in one year</p>
+                        <p class="font-semibold text-white">DAFgiving360&trade; & DonorsTrust</p>
+                        <p class="text-sm text-slate-300">Funneling over $485M since 2022</p>
                     </div>
                  </div>
                  <div class="flex justify-center my-4">
-                    <div class="flowchart-arrow text-4xl">↓</div>
+                     <div class="flowchart-arrow text-4xl">&darr;</div>
                  </div>
                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="flowchart-node bg-opacity-50 border-[#00B4D8]">
+                     <div class="flowchart-node bg-opacity-50 border-[#00B4D8]">
                         <h4 class="font-bold text-lg text-white">Policy Arm</h4>
                         <p class="text-sm text-slate-300">The Heritage Foundation (Project 2025)</p>
                     </div>
@@ -182,7 +195,7 @@
              </div>
         </section>
 
-        <section id="tactics" class="mb-16">
+        <section id="tactics" class="mb-16 content-section">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-white">The Alliance in Action: Tactics of Control</h2>
             <p class="text-slate-300 mb-8 text-lg text-center max-w-3xl mx-auto">The network deploys specific strategies to challenge elections, surveil populations, and enforce conformity.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -209,7 +222,7 @@
 
         <footer class="text-center mt-12 pt-8 border-t border-slate-700">
              <p class="text-slate-400">This infographic summarizes the key findings of the investigation "EXCLUSIVE: The Pincer Movement."</p>
-             <p class="text-slate-500 text-sm mt-2">All data is sourced from the full report and its underlying evidence dossier.</p>
+             <p class="text-slate-500 text-sm mt-2">&copy; 2025 Restoring Democracy's Promise. All Rights Reserved.</p>
         </footer>
 
     </div>
@@ -344,6 +357,21 @@
                 }
             });
         }
+
+        // Section fade-in observer
+        const sections = document.querySelectorAll('.content-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
     </script>
 
 </body>
