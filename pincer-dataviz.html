@@ -6,6 +6,7 @@
     <title>THE PINCER MOVEMENT: An Interactive Dossier</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="assets/gold_green_logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
@@ -13,7 +14,7 @@
     <!-- Design and Implementation Notes -->
     <!-- Palette: Dark Mode with Red Accents. -->
     <!-- Structure: SPA structured as a thematic, scrollable dossier with sticky navigation. -->
-    <!-- UPDATES: Content updated to match final investigative report. "The Money" flowchart redesigned for accuracy. Added animations and corrected footer. -->
+    <!-- UPDATES: Removed JS connector drawing in Alliance Network to fix CSS Grid layout issue on live server. -->
 
     <style>
         :root { 
@@ -121,6 +122,15 @@
         /* --- START: CSS Flowchart Styles --- */
         .flowchart-node { border: 1px solid #4A5568; padding: 0.75rem 1rem; text-align: center; border-radius: 0.5rem; background-color: #2D3748; transition: all 0.3s ease; cursor: pointer; min-height: 4.5rem; display: flex; flex-direction: column; justify-content: center; }
         .flowchart-node:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.5); border-color: var(--accent-red); }
+        .alliance-network { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: center; justify-items: center; position: relative; }
+        @media screen and (min-width: 1024px) {
+            .alliance-network { grid-template-columns: 1fr auto 1fr; grid-template-rows: auto auto auto; gap: 1rem 2rem; }
+            #node-leo { grid-area: 1 / 2 / 2 / 3; }
+            #node-vought { grid-area: 3 / 1 / 4 / 2; }
+            #node-vanderplaats { grid-area: 3 / 3 / 4 / 4; }
+            #node-heritage { grid-area: 5 / 1 / 6 / 2; }
+            #node-tfl { grid-area: 5 / 3 / 6 / 4; }
+        }
         .money-network { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
         .money-tier { display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%; }
         @media screen and (min-width: 768px) { .money-tier { flex-direction: row; justify-content: center; gap: 2rem; } }
@@ -189,10 +199,29 @@
                      The Pincer Movement is defined by the symbiotic relationship between its ideological and bureaucratic arms, connected by key personnel who operate across multiple organizations. This is not a loose coalition but a tightly integrated network. <span class="font-bold accent-red">Click or tap on any node below to explore the connections.</span>
                  </p>
                 <div id="alliance-network-container" class="alliance-network">
+                    <!-- Row 1 -->
                     <div id="node-leo" class="flowchart-node w-56"><h4 class="text-xl">Leonard Leo</h4><p class="text-sm text-gray-400">The Architect</p></div>
+                    
+                    <!-- Row 2 (Connectors) -->
+                    <div class="w-full flex justify-center items-center lg:col-span-3 lg:grid lg:grid-cols-3 gap-2">
+                        <div class="w-full h-px bg-gray-700 lg:w-px lg:h-full lg:justify-self-end"></div>
+                        <div class="text-4xl flowchart-arrow -my-4 lg:my-0">&darr;</div>
+                        <div class="w-full h-px bg-gray-700 lg:w-px lg:h-full lg:justify-self-start"></div>
+                    </div>
+
+                    <!-- Row 3 -->
                     <div id="node-vought" class="flowchart-node w-56"><h4 class="text-xl">Russell Vought</h4><p class="text-sm text-gray-400">The Bureaucrat</p></div>
+                    <div class="hidden lg:block"></div> <!-- Spacer -->
                     <div id="node-vanderplaats" class="flowchart-node w-56"><h4 class="text-xl">Bob Vander Plaats</h4><p class="text-sm text-gray-400">The Mobilizer</p></div>
+
+                    <!-- Row 4 (Connectors) -->
+                    <div class="text-4xl flowchart-arrow">&darr;</div>
+                    <div class="hidden lg:block"></div> <!-- Spacer -->
+                    <div class="text-4xl flowchart-arrow">&darr;</div>
+
+                    <!-- Row 5 -->
                     <div id="node-heritage" class="flowchart-node w-56"><h4 class="text-xl">Project 2025</h4><p class="text-sm text-gray-400">(The Heritage Foundation)</p></div>
+                    <div class="hidden lg:block"></div> <!-- Spacer -->
                     <div id="node-tfl" class="flowchart-node w-56"><h4 class="text-xl">The Family Leader</h4><p class="text-sm text-gray-400">(Christian Nationalism)</p></div>
                 </div>
             </div>
@@ -312,7 +341,7 @@
                 'node-seid': { title: 'Barre Seid: The Megadonor', content: '<p>Donated his $1.6 billion electronics company, Tripp Lite, to the Marble Freedom Trust in 2021. This transaction is likely the largest single political donation in U.S. history, creating a massive financial engine for the conservative movement.</p>'},
                 'node-mft': { title: 'Marble Freedom Trust', content: '<p>Chaired by Leonard Leo, this 501(c)(4) trust received the $1.6B contribution from Barre Seid. It acts as a central financial hub, granting over $447M to Schwab Charitable and over $41M to DonorsTrust to "crush liberal dominance."</p>'},
                 'node-schwab': { title: 'Schwab Charitable (DAFgiving360™)', content: '<p>A massive Donor-Advised Fund (DAF) sponsor that acts as a financial conduit. It has received over $447M from MFT and, in turn, granted over $282M to The 85 Fund, legally obscuring the money trail from the original political source.</p>'},
-                'node-donors': { title: 'DonorsTrust', content: '<p>A major DAF often called the "dark money ATM of the political right." It received at least $41.1M from MFT, channeling funds to a vast network of conservative groups and further obscuring financial pathways.</p>'},
+                'node-donors': { title: 'DonorsTrust', content: '<p>A major DAF often called the "dark money ATM of the right." It received at least $41.1M from MFT, channeling funds to a vast network of conservative groups and further obscuring financial pathways.</p>'},
                 'node-85fund': { title: 'The 85 Fund', content: '<p>A 501(c)(3) operational hub that received over $282M from the MFT account at Schwab Charitable. It funds conservative causes and has paid over $21M in a single year to CRC Advisors, a for-profit firm chaired by Leonard Leo.</p>'},
                 'node-concord': { title: 'The Concord Fund', content: '<p>The 501(c)(4) lobbying arm of the network, formerly the Judicial Crisis Network. It has received over $90M directly from MFT to run campaigns supporting conservative judicial nominees. It also pays millions to Leo\'s CRC Advisors.</p>'},
                 'timeline-1': { title: 'Q2 2021: The Seid Donation', content: '<p>Industrialist Barre Seid donates his entire $1.6 billion company to the Marble Freedom Trust in a transaction structured to avoid an estimated $400 million in taxes.</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> Barre Seid, Leonard Leo</p>' },
@@ -429,6 +458,7 @@
                                     bar.style.width = `${bar.dataset.value}%`;
                                 });
                             }
+                            observer.unobserve(entry.target);
                         }
                     });
                 }, { threshold: 0.1 });
