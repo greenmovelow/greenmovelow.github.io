@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restoring Democracy's Promise</title>
+    <meta name="description" content="A Blueprint for Accountability Journalism.">
+    
+    <link rel="icon" href="assets/gold_green_logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QJ3L9CT4Z7');
+    </script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#2d5c4f',
+                        'brand-green-dark': '#24473e',
+                        'brand-orange': '#f4a261',
+                        'brand-gold': '#D4AF37',
+                        'brand-white': '#F6F7F8',
+                        'brand-offblack': '#161616',
+                        'brand-sand': '#e4d5b9',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .footer-tooltip {
+            position: relative;
+            cursor: pointer;
+        }
+        .footer-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 220px;
+            background-color: #24473e;
+            color: #f4a261;
+            text-align: center;
+            border-radius: 8px;
+            padding: 7px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            font-size: 1em;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+        .footer-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-brand-green text-brand-white font-sans antialiased">
+
+    <div class="flex flex-col min-h-screen">
+        <!-- Header & Hero Section -->
+        <header class="relative text-center py-16 md:py-24 px-4">
+            <div class="absolute inset-0 bg-brand-green-dark opacity-50"></div>
+            <div class="relative max-w-4xl mx-auto">
+                <img id="main-logo" src="assets/gold_green_logo.png" alt="Restoring Democracy's Promise Logo" class="mx-auto mb-6 h-20 w-20 md:h-28 md:w-28 cursor-pointer">
+                
+                <h1 class="font-serif text-4xl md:text-6xl font-bold text-brand-gold tracking-tight text-shadow">Restoring Democracy’s Promise</h1>
+                <p class="mt-4 text-lg md:text-xl text-brand-orange italic">A Blueprint for Accountability Journalism</p>
+                <p class="mt-8 max-w-2xl mx-auto text-brand-white text-base md:text-lg">
+                    We are a different kind of newsroom—founded to expose the hidden machinery of power and restore democratic accountability with irrefutable, evidence-driven investigations.
+                </p>
+                <a class="mt-8 inline-block bg-brand-orange text-brand-offblack font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-brand-gold hover:text-brand-green transition-all duration-300 transform hover:scale-105" href="https://exposed1.substack.com/subscribe" target="_blank">Join the Investigation</a>
+            </div>
+        </header>
+
+        <main class="flex-grow">
+            <!-- Featured Investigation Section -->
+            <section class="py-16 md:py-20 bg-brand-white text-brand-offblack">
+                <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-green-dark">Exposing the Financial Superhighway</h2>
+                        <p class="mt-4 text-lg text-slate-700">
+                            Our flagship investigation, <a href="https://exposed1.substack.com/p/exclusive-the-pincer-movement" target="_blank" class="text-brand-green hover:underline font-semibold">The Pincer Movement</a>, uncovers a sophisticated, multi-year network designed to channel hundreds of millions in dark money through the charitable sector.
+                        </p>
+                        <p class="mt-4 text-lg text-slate-700">
+                            We trace the money, map the players, and explain the mechanisms used to reshape American policy from the shadows.
+                        </p>
+                        <a href="https://greenmovelow.github.io/" target="_blank" class="mt-6 inline-block bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Explore the Interactive Report →</a>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <img src="assets/network_1.png" alt="Blueprint of Power visual" class="rounded-lg shadow-2xl w-full">
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="py-16 md:py-20">
+                <div class="max-w-4xl mx-auto px-4 text-center">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-gold">We Are Investigative System-Breakers</h2>
+                    <p class="mt-6 max-w-3xl mx-auto text-lg text-brand-sand leading-relaxed">
+                        We trace the money, the influence, and the downstream impact behind political schemes, dark money networks, and ideological power centers. Our newsroom is a blueprint for journalism driven by irrefutable evidence and radical transparency. We don't just report the news; we provide the receipts.
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Subscribe / QR Code Section -->
+            <section class="py-16 md:py-20 bg-brand-green-dark">
+                 <div class="max-w-4xl mx-auto px-4 text-center">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-orange">Stay Connected</h2>
+                    <p class="mt-4 text-lg text-brand-sand">Subscribe with your phone to get our latest investigations delivered directly to you.</p>
+                    <img src="assets/qr_code.png" alt="Subscribe QR Code" class="mt-6 mx-auto w-40 h-40 md:w-48 md:h-48 rounded-lg shadow-lg bg-white p-2">
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-brand-offblack text-brand-sand py-8 px-4">
+            <div class="max-w-4xl mx-auto text-center text-sm">
+                <img src="assets/gold_green_logo.png" class="h-10 w-10 mx-auto mb-4" alt="Restoring Democracy Logo Icon">
+                <div class="footer-tooltip">
+                    <p>&copy; 2023-2025 Restoring Democracy’s Promise. All rights reserved.</p>
+                    <span class="tooltip-text">This project is powered by receipts.</span>
+                </div>
+                <p class="mt-2">Contact: <a href="mailto:editor@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline">editor@restoring-democracy.org</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Easter Egg: Logo click 5x goes to /vault.html
+        let clickCount = 0;
+        let timer;
+        document.getElementById('main-logo').addEventListener('click', function() {
+            clickCount++;
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                clickCount = 0;
+            }, 1600); // 1.6 second window to complete the clicks
+            if (clickCount === 5) {
+                window.location.href = "vault.html";
+            }
+        });
+    </script>
+</body>
+</html>
