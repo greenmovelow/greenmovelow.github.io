@@ -13,7 +13,7 @@
     <!-- Design and Implementation Notes -->
     <!-- Palette: Dark Mode with Red Accents. -->
     <!-- Structure: SPA structured as a thematic, scrollable dossier with sticky navigation. -->
-    <!-- UPDATES: Rebuilt Alliance Network connector logic for pixel-perfect alignment. Replaced static violence chart with a custom interactive visualization. -->
+    <!-- UPDATES: Content updated to match final investigative report. "The Money" flowchart redesigned for accuracy. Added animations and corrected footer. -->
 
     <style>
         :root { 
@@ -66,6 +66,13 @@
             align-items: center; 
             justify-content: center; 
             backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
         }
         .modal-content { 
             background-color: var(--background-secondary); 
@@ -74,6 +81,21 @@
             width: 90%; 
             max-height: 90vh; 
             overflow-y: auto; 
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        
+        .content-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .content-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* --- START: Interactive Timeline Styles --- */
@@ -99,19 +121,9 @@
         /* --- START: CSS Flowchart Styles --- */
         .flowchart-node { border: 1px solid #4A5568; padding: 0.75rem 1rem; text-align: center; border-radius: 0.5rem; background-color: #2D3748; transition: all 0.3s ease; cursor: pointer; min-height: 4.5rem; display: flex; flex-direction: column; justify-content: center; }
         .flowchart-node:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.5); border-color: var(--accent-red); }
-        .alliance-network { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: center; justify-items: center; position: relative; }
-        @media screen and (min-width: 1024px) {
-            .alliance-network { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: repeat(3, auto); gap: 2rem 4rem; padding-bottom: 1rem; }
-            #node-leo { grid-area: 1 / 2 / 2 / 3; }
-            #node-vought { grid-area: 2 / 1 / 3 / 2; }
-            #node-vanderplaats { grid-area: 2 / 3 / 3 / 4; }
-            #node-heritage { grid-area: 3 / 1 / 4 / 2; }
-            #node-tfl { grid-area: 3 / 3 / 4 / 4; }
-        }
         .money-network { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
         .money-tier { display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%; }
         @media screen and (min-width: 768px) { .money-tier { flex-direction: row; justify-content: center; gap: 2rem; } }
-        .connector { position: absolute; background-color: #4A5568; z-index: 1; }
         .flowchart-arrow { color: var(--accent-red); }
         /* --- END: CSS Flowchart Styles --- */
         
@@ -138,7 +150,15 @@
     <nav id="navbar" class="sticky-nav shadow-lg border-b border-gray-800">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between h-16">
-                <h1 class="text-3xl uppercase text-white">The Pincer Movement</h1>
+                <!-- Return to Homepage Link -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="text-sm font-medium text-gray-300 hover:text-white hover:underline">
+                        &larr; Return to Homepage
+                    </a>
+                </div>
+                
+                <h1 class="text-3xl uppercase text-white hidden lg:block">The Pincer Movement</h1>
+                
                 <div class="hidden md:flex space-x-6 text-lg uppercase">
                     <a href="#alliance" class="nav-item text-gray-300 hover:text-accent-red transition duration-300">The Alliance</a>
                     <a href="#timeline" class="nav-item text-gray-300 hover:text-accent-red transition duration-300">The Timeline</a>
@@ -161,13 +181,13 @@
             </p>
         </header>
 
-        <section id="alliance" class="py-16">
+        <section id="alliance" class="py-16 content-section">
             <h2 class="text-5xl text-center mb-4">The Alliance Network</h2>
             <h3 class="text-2xl text-center accent-red mb-12 uppercase">People, Power, and Policy</h3>
             <div class="card p-4 sm:p-8">
                  <p class="text-lg mb-8 leading-relaxed text-center">
-                    The Pincer Movement is defined by the symbiotic relationship between its ideological and bureaucratic arms, connected by key personnel who operate across multiple organizations. This is not a loose coalition but a tightly integrated network. <span class="font-bold accent-red">Click or tap on any node below to explore the connections.</span>
-                </p>
+                     The Pincer Movement is defined by the symbiotic relationship between its ideological and bureaucratic arms, connected by key personnel who operate across multiple organizations. This is not a loose coalition but a tightly integrated network. <span class="font-bold accent-red">Click or tap on any node below to explore the connections.</span>
+                 </p>
                 <div id="alliance-network-container" class="alliance-network">
                     <div id="node-leo" class="flowchart-node w-56"><h4 class="text-xl">Leonard Leo</h4><p class="text-sm text-gray-400">The Architect</p></div>
                     <div id="node-vought" class="flowchart-node w-56"><h4 class="text-xl">Russell Vought</h4><p class="text-sm text-gray-400">The Bureaucrat</p></div>
@@ -178,7 +198,7 @@
             </div>
         </section>
 
-        <section id="timeline" class="py-16">
+        <section id="timeline" class="py-16 content-section">
             <h2 class="text-5xl text-center mb-4">The Timeline of Convergence</h2>
             <h3 class="text-2xl text-center accent-red mb-12 uppercase">How The Movement Was Built</h3>
              <div class="card p-8">
@@ -189,7 +209,7 @@
             </div>
         </section>
 
-        <section id="ideology" class="py-16">
+        <section id="ideology" class="py-16 content-section">
             <h2 class="text-5xl text-center mb-4">The Ideology</h2>
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
                 <div class="card p-8 lg:col-span-2">
@@ -199,24 +219,24 @@
                 </div>
                 <div class="card p-8 lg:col-span-3">
                      <h4 class="text-3xl mb-4 text-center">Adherence and Radicalization</h4>
-                     <p class="text-center text-gray-400">
-                        While not all supporters subscribe to the 7MM doctrine, PRRI polling data reveals a significant overlap with Christian Nationalist views. This alignment is critical, as it indicates a large potential base that is sympathetic to the movement's goals and, troublingly, receptive to the rhetoric of political violence.
-                     </p>
+                      <p class="text-center text-gray-400">
+                          While not all supporters subscribe to the 7MM doctrine, PRRI polling data reveals a significant overlap with Christian Nationalist views. This alignment is critical, as it indicates a large potential base that is sympathetic to the movement's goals and, troublingly, receptive to the rhetoric of political violence.
+                      </p>
                      <div id="interactive-stats" class="stats-container"></div>
                 </div>
             </div>
         </section>
 
-        <section id="blueprint" class="py-16">
+        <section id="blueprint" class="py-16 content-section">
             <h2 class="text-5xl text-center mb-4">The Blueprint</h2>
             <h3 class="text-2xl text-center accent-red mb-12 uppercase">Project 2025's Mandate</h3>
              <p class="max-w-4xl mx-auto text-center text-lg text-gray-400 mb-12">
-                Project 2025 is a 920-page operational blueprint for a radical restructuring of the federal government. It's a detailed plan to consolidate executive power by purging the civil service and politicizing the Department of Justice.
+                 Project 2025 is a 920-page operational blueprint for a radical restructuring of the federal government. It's a detailed plan to consolidate executive power by purging the civil service and politicizing the Department of Justice.
             </p>
              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="card p-8">
                     <h4 class="text-3xl mb-4">Mechanism 1: Schedule F</h4>
-                    <p class="leading-relaxed">A plan to reclassify up to **50,000** federal employees, stripping their job protections. This allows them to be fired and replaced with individuals vetted for ideological loyalty, creating a subservient workforce.</p>
+                    <p class="leading-relaxed">A plan to reclassify up to 50,000 federal employees, stripping their job protections. This allows them to be fired and replaced with individuals vetted for ideological loyalty, creating a subservient workforce.</p>
                 </div>
                  <div class="card p-8">
                     <h4 class="text-3xl mb-4">Mechanism 2: DOJ Capture</h4>
@@ -225,46 +245,47 @@
             </div>
         </section>
 
-        <section id="money" class="py-16">
+        <section id="money" class="py-16 content-section">
             <h2 class="text-5xl text-center mb-4">The Money</h2>
             <h3 class="text-2xl text-center accent-red mb-12 uppercase">The Dark Money Engine</h3>
             <div class="card p-8">
                  <p class="text-lg mb-8 leading-relaxed text-center">
-                    The Pincer Movement is fueled by a torrent of "dark money" flowing through a sophisticated network. At its apex sits a massive $1.6 billion trust, which feeds Donor-Advised Funds (DAFs) that obscure donors and deploy capital to a web of front groups. <span class="font-bold accent-red">Click a node to see details.</span>
-                </p>
+                     The Pincer Movement is fueled by a torrent of "dark money" flowing through a sophisticated network. At its apex sits a massive $1.6 billion trust, which feeds Donor-Advised Funds (DAFs) that obscure donors and deploy capital to a web of front groups. <span class="font-bold accent-red">Click a node to see details.</span>
+                 </p>
                  <div class="money-network">
-                     <div class="money-tier"> <div id="node-seid" class="flowchart-node w-64"><h4 class="text-xl">Barre Seid</h4><p>$1.6B Donation</p></div> </div>
-                     <div class="flowchart-arrow text-3xl">&darr;</div>
-                     <div class="money-tier"> <div id="node-mft" class="flowchart-node w-64 border-accent-red"><h4 class="text-xl">Marble Freedom Trust</h4><p>(Chaired by Leonard Leo)</p></div> </div>
-                     <div class="flowchart-arrow text-3xl">&darr;</div>
-                      <div class="money-tier"> <div id="node-85fund" class="flowchart-node w-64"><h4 class="text-xl">The 85 Fund</h4><p>(Concord Fund)</p></div> </div>
-                     <div class="flowchart-arrow text-3xl">&darr;</div>
-                     <div class="money-tier">
-                         <div id="node-donors" class="flowchart-node w-64"><h4 class="text-xl">DonorsTrust</h4><p>"Dark Money ATM"</p></div>
-                         <div class="hidden md:block flowchart-arrow text-3xl">&rarr;</div>
-                         <div class="md:hidden flowchart-arrow text-3xl">&darr;</div>
-                         <div id="node-tflf" class="flowchart-node w-64"><h4 class="text-xl">The Family Leader Fdn.</h4><p>Iowa Operations</p></div>
-                     </div>
+                      <div class="money-tier"> <div id="node-seid" class="flowchart-node w-64"><h4 class="text-xl">Barre Seid</h4><p>$1.6B Donation</p></div> </div>
+                      <div class="flowchart-arrow text-3xl">&darr;</div>
+                      <div class="money-tier"> <div id="node-mft" class="flowchart-node w-64 border-accent-red"><h4 class="text-xl">Marble Freedom Trust</h4><p>(Chaired by Leonard Leo)</p></div> </div>
+                      <div class="flowchart-arrow text-3xl">&darr;</div>
+                      <div class="money-tier">
+                           <div id="node-schwab" class="flowchart-node w-64"><h4 class="text-xl">Schwab Charitable</h4><p>(DAFgiving360&trade;)</p></div>
+                           <div id="node-donors" class="flowchart-node w-64"><h4 class="text-xl">DonorsTrust</h4><p>"Dark Money ATM"</p></div>
+                      </div>
+                      <div class="flowchart-arrow text-3xl">&darr;</div>
+                      <div class="money-tier">
+                           <div id="node-85fund" class="flowchart-node w-64"><h4 class="text-xl">The 85 Fund</h4><p>(Operational Hub)</p></div>
+                           <div id="node-concord" class="flowchart-node w-64"><h4 class="text-xl">The Concord Fund</h4><p>(Lobbying Hub)</p></div>
+                      </div>
                  </div>
             </div>
         </section>
 
-        <section id="tactics" class="py-16">
+        <section id="tactics" class="py-16 content-section">
             <h2 class="text-5xl text-center mb-4">The Tactics</h2>
             <h3 class="text-2xl text-center accent-red mb-12 uppercase">Shaping the Battlefield</h3>
               <div class="card p-8">
                  <div id="tabs-container" class="mb-4 flex flex-wrap justify-center border-b border-gray-700">
-                    <button data-tab="steeplechase" class="tab-button text-2xl px-6 py-3 border-b-2 border-transparent text-gray-400 hover:text-white">Steeplechase</button>
-                    <button data-tab="watchtower" class="tab-button text-2xl px-6 py-3 border-b-2 border-transparent text-gray-400 hover:text-white">Watchtower</button>
-                    <button data-tab="checkmate" class="tab-button text-2xl px-6 py-3 border-b-2 border-transparent text-gray-400 hover:text-white">Checkmate</button>
-                </div>
+                     <button data-tab="steeplechase" class="tab-button text-2xl px-6 py-3 border-b-2 border-transparent text-gray-400 hover:text-white">Steeplechase</button>
+                     <button data-tab="watchtower" class="tab-button text-2xl px-6 py-3 border-b-2 border-transparent text-gray-400 hover:text-white">Watchtower</button>
+                     <button data-tab="checkmate" class="tab-button text-2xl px-6 py-3 border-b-2 border-transparent text-gray-400 hover:text-white">Checkmate</button>
+                 </div>
                  <div id="tab-content" class="mt-6 text-lg leading-relaxed"></div>
             </div>
         </section>
 
     </main>
     
-    <div id="modal" class="modal-overlay hidden">
+    <div id="modal" class="modal-overlay">
         <div class="modal-content rounded-lg shadow-xl p-6 relative">
             <button id="closeModal" class="absolute top-2 right-4 text-3xl text-gray-500 hover:text-white">&times;</button>
             <div id="modal-body"></div>
@@ -274,7 +295,7 @@
 
     <footer class="border-t border-gray-800 py-8">
         <div class="container mx-auto px-4 text-center text-gray-500">
-            <p>&copy; 2025 Reclaiming Democracy's Promise. All Rights Reserved.</p>
+            <p>&copy; 2025 Restoring Democracy's Promise. All Rights Reserved.</p>
             <p class="text-sm mt-2">This interactive dossier is based on the keystone report "THE PINCER MOVEMENT: An Architecture of Autocracy."</p>
         </div>
     </footer>
@@ -289,16 +310,17 @@
                 'node-heritage': { title: 'Project 2025 (The Heritage Foundation)', content: '<p>A 920-page blueprint for a radical overhaul of the federal government. Its "Mandate for Leadership" details plans for purging the civil service (Schedule F) and politicizing the Department of Justice.</p>' },
                 'node-tfl': { title: 'The Family Leader', content: '<p>A Christian Nationalist organization that seeks to embed "biblical values" into government. Instrumental in passing legislation like SF 418 in Iowa and mobilizing a conservative religious voting bloc.</p>' },
                 'node-seid': { title: 'Barre Seid: The Megadonor', content: '<p>Donated his $1.6 billion electronics company, Tripp Lite, to the Marble Freedom Trust in 2021. This transaction is likely the largest single political donation in U.S. history, creating a massive financial engine for the conservative movement.</p>'},
-                'node-mft': { title: 'Marble Freedom Trust', content: '<p>Chaired by Leonard Leo, this trust received the $1.6B contribution from Barre Seid. It acts as a central financial hub, granting tens of millions to other conservative DAFs and organizations to "crush liberal dominance."</p>'},
-                'node-donors': { title: 'DonorsTrust', content: '<p>A major Donor-Advised Fund (DAF) often called the "dark money ATM of the political right." It receives funds from entities like MFT and channels them to a vast network of conservative groups, including The Heritage Foundation and the Alliance Defending Freedom, often obscuring the original donors.</p>'},
-                'node-85fund': { title: 'The 85 Fund', content: '<p>Another DAF closely linked to Leonard Leo which also operates under the name "Concord Fund." It operates the Honest Elections Project (HEP) and funnels money to a web of other groups, engaging in circular funding with DonorsTrust to further complicate financial tracking.</p>'},
-                'node-tflf': { title: 'The Family Leader Foundation', content: '<p>The 501(c)(3) arm of Bob Vander Plaats\'s organization, based in Iowa. Tax records show it has received significant funding from Leonard Leo\'s network via DonorsTrust, demonstrating a direct financial pipeline from the national dark money apparatus to state-level political operations.</p>'},
-                'timeline-1': { title: 'Q2 2021: The Seid Donation', content: '<p>Industrialist Barre Seid donates his entire $1.6 billion electronics company to the newly formed Marble Freedom Trust...</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> Barre Seid, Leonard Leo</p>' },
-                'timeline-2': { title: 'Q1 2022: Project 2025 Launched', content: '<p>The Heritage Foundation formally launches the "Project 2025" coalition...</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> The Heritage Foundation</p>' },
-                'timeline-3': { title: 'Q4 2022: MFT Initial Dispersal', content: '<p>The Marble Freedom Trust makes its first major grants...</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> MFT, DonorsTrust, 85 Fund</p>' },
-                'timeline-4': { title: 'Q2 2023: HEP Voter Challenges Begin', content: '<p>The Honest Elections Project (HEP)...begins funding and promoting mass voter registration challenges...</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> Honest Elections Project</p>' },
-                'timeline-5': { title: 'Q1 2024: "Mandate for Leadership" Published', content: '<p>Project 2025 releases its 920-page playbook...</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> Project 2025, Russell Vought</p>' },
-                'timeline-6': { title: 'Q1 2025: The "Pincer" Converges', content: '<p>The parallel tracks...are now fully mature and aimed at the same goal: reshaping American democracy.</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> All</p>' }
+                'node-mft': { title: 'Marble Freedom Trust', content: '<p>Chaired by Leonard Leo, this 501(c)(4) trust received the $1.6B contribution from Barre Seid. It acts as a central financial hub, granting over $447M to Schwab Charitable and over $41M to DonorsTrust to "crush liberal dominance."</p>'},
+                'node-schwab': { title: 'Schwab Charitable (DAFgiving360™)', content: '<p>A massive Donor-Advised Fund (DAF) sponsor that acts as a financial conduit. It has received over $447M from MFT and, in turn, granted over $282M to The 85 Fund, legally obscuring the money trail from the original political source.</p>'},
+                'node-donors': { title: 'DonorsTrust', content: '<p>A major DAF often called the "dark money ATM of the political right." It received at least $41.1M from MFT, channeling funds to a vast network of conservative groups and further obscuring financial pathways.</p>'},
+                'node-85fund': { title: 'The 85 Fund', content: '<p>A 501(c)(3) operational hub that received over $282M from the MFT account at Schwab Charitable. It funds conservative causes and has paid over $21M in a single year to CRC Advisors, a for-profit firm chaired by Leonard Leo.</p>'},
+                'node-concord': { title: 'The Concord Fund', content: '<p>The 501(c)(4) lobbying arm of the network, formerly the Judicial Crisis Network. It has received over $90M directly from MFT to run campaigns supporting conservative judicial nominees. It also pays millions to Leo\'s CRC Advisors.</p>'},
+                'timeline-1': { title: 'Q2 2021: The Seid Donation', content: '<p>Industrialist Barre Seid donates his entire $1.6 billion company to the Marble Freedom Trust in a transaction structured to avoid an estimated $400 million in taxes.</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> Barre Seid, Leonard Leo</p>' },
+                'timeline-2': { title: 'Q1 2022: Project 2025 Launched', content: '<p>The Heritage Foundation formally launches the "Project 2025" coalition, a detailed plan to overhaul the federal government under a conservative president.</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> The Heritage Foundation, Russell Vought</p>' },
+                'timeline-3': { title: 'Q4 2022: MFT Initial Dispersal', content: '<p>The Marble Freedom Trust makes its first major grants, including $153.8M to Schwab Charitable, establishing the financial superhighway.</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> MFT, Schwab Charitable</p>' },
+                'timeline-4': { title: 'Q2 2023: HEP Voter Challenges Begin', content: '<p>The Honest Elections Project (HEP), an alias of The 85 Fund, begins funding and promoting mass voter registration challenges in key states.</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> The 85 Fund</p>' },
+                'timeline-5': { title: 'Q4 2023: D.C. AG Investigation', content: '<p>The Attorney General for Washington, D.C., launches an investigation into Leonard Leo\'s nonprofit network, examining whether he is illegally enriching himself through his for-profit consulting firm, CRC Advisors.</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> Leonard Leo, CRC Advisors</p>' },
+                'timeline-6': { title: 'Q1 2025: The "Pincer" Converges', content: '<p>The parallel tracks of bureaucratic deconstruction (Project 2025) and cultural mobilization (The Family Leader) are now fully mature and aimed at the same goal: reshaping American democracy.</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> All</p>' }
             };
             const tabContentData = {
                 'steeplechase': { title: 'Mobilizing the Shadow Campaign', content: 'Christian Nationalist networks leverage religious institutions for get-out-the-vote (GOTV) operations. Groups like Faith Wins conduct voter registration drives in churches, while figures like Lance Wallnau host revival-style events that are, in essence, highly targeted voter mobilization efforts. This "shadow campaign" utilizes the tax-exempt status of religious institutions to bypass traditional campaign finance scrutiny, creating a powerful and opaque political machine.'},
@@ -308,9 +330,9 @@
             const timelineEvents = [
                 { id: 'timeline-1', date: 'Q2 2021', title: 'The Seid Donation', align: 'left' },
                 { id: 'timeline-2', date: 'Q1 2022', title: 'Project 2025 Launched', align: 'right' },
-                { id: 'timeline-3', date: 'Q4 2022', title: 'MFT Dispersal', align: 'left' },
+                { id: 'timeline-3', date: 'Q4 2022', title: 'MFT Initial Dispersal', align: 'left' },
                 { id: 'timeline-4', date: 'Q2 2023', title: 'Voter Challenges Begin', align: 'right' },
-                { id: 'timeline-5', date: 'Q1 2024', title: 'Mandate Published', align: 'left' },
+                { id: 'timeline-5', date: 'Q4 2023', title: 'D.C. AG Investigation', align: 'left' },
                 { id: 'timeline-6', date: 'Q1 2025', title: 'The Pincer Converges', align: 'right' },
             ];
             const sevenMountainsData = [
@@ -340,10 +362,10 @@
                     const data = modalData[id];
                     if (data) {
                         modalBody.innerHTML = `<h3 class="text-3xl mb-4 accent-red">${data.title}</h3><div class="text-gray-300 leading-relaxed">${data.content}</div>`;
-                        modal.classList.remove('hidden');
+                        modal.classList.add('visible');
                     }
                 };
-                function hideModal() { modal.classList.add('hidden'); }
+                function hideModal() { modal.classList.remove('visible'); }
                 document.querySelectorAll('.flowchart-node, .timeline-item').forEach(el => {
                     el.addEventListener('click', () => window.showModal(el.id));
                 });
@@ -353,6 +375,8 @@
 
             function buildTimeline() {
                 const container = document.getElementById('timeline-container');
+                if (!container) return;
+                container.innerHTML = ''; // Clear previous content
                 timelineEvents.forEach(event => {
                     const itemDiv = document.createElement('div');
                     itemDiv.className = `timeline-item ${event.align}`;
@@ -364,6 +388,8 @@
             
             function build7MMInfographic() {
                 const container = document.getElementById('seven-mountains-infographic');
+                if (!container) return;
+                container.innerHTML = ''; // Clear previous content
                 sevenMountainsData.forEach(mountain => {
                     const item = document.createElement('div');
                     item.className = 'mountain-item';
@@ -371,63 +397,11 @@
                     container.appendChild(item);
                 });
             }
-
-            function buildAllianceConnectors() {
-                const container = document.getElementById('alliance-network-container');
-                container.querySelectorAll('.connector').forEach(c => c.remove());
-
-                if (window.innerWidth < 1024) {
-                    const nodes = Array.from(container.querySelectorAll('.flowchart-node'));
-                    nodes.forEach((node, index) => {
-                        if (index < nodes.length - 1) {
-                            const connector = document.createElement('div');
-                            connector.className = 'connector';
-                            connector.style.width = '2px';
-                            connector.style.height = '1.5rem';
-                            connector.style.top = `${node.offsetTop + node.offsetHeight}px`;
-                            connector.style.left = `calc(50% - 1px)`;
-                            container.appendChild(connector);
-                        }
-                    });
-                } else {
-                    const leo = document.getElementById('node-leo');
-                    const vought = document.getElementById('node-vought');
-                    const vanderplaats = document.getElementById('node-vanderplaats');
-                    const heritage = document.getElementById('node-heritage');
-                    const tfl = document.getElementById('node-tfl');
-
-                    if (!leo || !vought || !vanderplaats || !heritage || !tfl) return;
-                    
-                    const leoBottom = leo.offsetTop + leo.offsetHeight;
-                    const voughtTop = vought.offsetTop;
-                    const voughtBottom = vought.offsetTop + vought.offsetHeight;
-                    const heritageTop = heritage.offsetTop;
-                    const leoCenter = leo.offsetLeft + leo.offsetWidth / 2;
-                    const voughtCenter = vought.offsetLeft + vought.offsetWidth / 2;
-                    const vanderplaatsCenter = vanderplaats.offsetLeft + vanderplaats.offsetWidth / 2;
-
-                    const connectors = [
-                        { top: leoBottom, left: leoCenter -1, width: '2px', height: `${voughtTop - leoBottom}px` }, // Vertical from Leo
-                        { top: voughtTop - 2, left: voughtCenter, width: `${vanderplaatsCenter - voughtCenter}px`, height: '2px' }, // Horizontal bar
-                        { top: voughtBottom, left: voughtCenter - 1, width: '2px', height: `${heritageTop - voughtBottom}px` }, // Vought to Heritage
-                        { top: voughtBottom, left: vanderplaatsCenter - 1, width: '2px', height: `${heritageTop - voughtBottom}px` } // Vander Plaats to TFL
-                    ];
-
-                    connectors.forEach(c => {
-                        const connEl = document.createElement('div');
-                        connEl.className = 'connector';
-                        connEl.style.top = `${c.top}px`;
-                        connEl.style.left = `${c.left}px`;
-                        connEl.style.width = c.width;
-                        connEl.style.height = c.height;
-                        container.appendChild(connEl);
-                    });
-                }
-            }
             
             function initInteractiveStats() {
                 const container = document.getElementById('interactive-stats');
                 if (!container) return;
+                container.innerHTML = ''; // Clear previous content
                 violenceStats.forEach(stat => {
                     const group = document.createElement('div');
                     group.className = 'stat-bar-group';
@@ -441,43 +415,52 @@
                     `;
                     container.appendChild(group);
                 });
-                // Animate bars on scroll into view
+            }
+            
+            function initSectionObserver() {
+                const sections = document.querySelectorAll('.content-section');
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            const bars = entry.target.querySelectorAll('.stat-bar-foreground');
-                            bars.forEach(bar => {
-                                bar.style.width = `${bar.dataset.value}%`;
-                            });
-                            observer.unobserve(entry.target);
+                            entry.target.classList.add('is-visible');
+                            if(entry.target.id === 'ideology') {
+                                const bars = document.querySelectorAll('#interactive-stats .stat-bar-foreground');
+                                bars.forEach(bar => {
+                                    bar.style.width = `${bar.dataset.value}%`;
+                                });
+                            }
                         }
                     });
-                }, { threshold: 0.5 });
-                observer.observe(container);
+                }, { threshold: 0.1 });
+
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
             }
 
             function initTacticsChart() {
                  const tabsContainer = document.getElementById('tabs-container');
                  const tabContentContainer = document.getElementById('tab-content');
+                 if (!tabsContainer || !tabContentContainer) return;
                  const setActiveTab = (tabName) => {
-                     tabsContainer.querySelectorAll('.tab-button').forEach(button => {
-                         button.classList.toggle('text-white', button.dataset.tab === tabName);
-                         button.classList.toggle('border-accent-red', button.dataset.tab === tabName);
-                         button.classList.toggle('text-gray-400', button.dataset.tab !== tabName);
-                         button.classList.toggle('border-transparent', button.dataset.tab !== tabName);
-                     });
-                     
-                     const content = tabContentData[tabName];
-                     tabContentContainer.innerHTML = `<div id="${tabName}" class="tab-pane"><h4 class="text-3xl mb-4">${content.title}</h4>${content.content}</div>`;
+                      tabsContainer.querySelectorAll('.tab-button').forEach(button => {
+                          button.classList.toggle('text-white', button.dataset.tab === tabName);
+                          button.classList.toggle('border-accent-red', button.dataset.tab === tabName);
+                          button.classList.toggle('text-gray-400', button.dataset.tab !== tabName);
+                          button.classList.toggle('border-transparent', button.dataset.tab !== tabName);
+                      });
+                      
+                      const content = tabContentData[tabName];
+                      tabContentContainer.innerHTML = `<div id="${tabName}" class="tab-pane"><h4 class="text-3xl mb-4">${content.title}</h4>${content.content}</div>`;
 
-                     if (tabName === 'checkmate') {
-                         const tacticsCtx = document.getElementById('tacticsChart').getContext('2d');
-                         new Chart(tacticsCtx, { type: 'bar', data: { labels: ['Voter Registrations Challenged (GA)', 'Registrations Removed'], datasets: [{ label: 'Number of Voters', data: [63000, 630], backgroundColor: ['#4A5568', '#E53E3E'], borderWidth: 1 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: 'Effectiveness of Mass Voter Challenges', font: { size: 16 } } } } });
-                     }
+                      if (tabName === 'checkmate') {
+                          const tacticsCtx = document.getElementById('tacticsChart').getContext('2d');
+                          new Chart(tacticsCtx, { type: 'bar', data: { labels: ['Voter Registrations Challenged (GA)', 'Registrations Removed'], datasets: [{ label: 'Number of Voters', data: [63000, 630], backgroundColor: ['#4A5568', '#E53E3E'], borderWidth: 1 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: 'Effectiveness of Mass Voter Challenges', font: { size: 16 } } } } });
+                      }
                  };
                  tabsContainer.addEventListener('click', (e) => {
-                     const button = e.target.closest('.tab-button');
-                     if (button) setActiveTab(button.dataset.tab);
+                      const button = e.target.closest('.tab-button');
+                      if (button) setActiveTab(button.dataset.tab);
                  });
                  setActiveTab('steeplechase');
             }
@@ -486,7 +469,10 @@
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                     anchor.addEventListener('click', function (e) {
                         e.preventDefault();
-                        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                        const targetElement = document.querySelector(this.getAttribute('href'));
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
                     });
                 });
             }
@@ -497,15 +483,7 @@
             safeInit("Tactics Chart", initTacticsChart);
             safeInit("Modals", initModals);
             safeInit("Smooth Scrolling", initSmoothScrolling);
-            safeInit("Alliance Connectors", buildAllianceConnectors);
-            
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                    buildAllianceConnectors();
-                }, 250);
-            });
+            safeInit("Section Observer", initSectionObserver);
         });
     </script>
 </body>
