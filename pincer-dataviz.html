@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE PINCER MOVEMENT: An Interactive Dossier</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Design and Implementation Notes -->
+    <!-- Palette: Dark Mode with Red Accents. -->
+    <!-- Structure: SPA structured as a thematic, scrollable dossier with sticky navigation. -->
+    <!-- UPDATES: Rebuilt Alliance Network connector logic for pixel-perfect alignment. Replaced static violence chart with a custom interactive visualization. -->
+
+    <style>
+        :root { 
+            --accent-red: #E53E3E; 
+            --background-primary: #121212;
+            --background-secondary: #1E1E1E;
+            --border-color: #333;
+            --text-primary: #E0E0E0;
+            --text-secondary: #A0A0A0;
+            --font-display: 'Teko', sans-serif;
+            --font-body: 'Roboto Slab', serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body { 
+            font-family: var(--font-body); 
+            background-color: var(--background-primary); 
+            color: var(--text-primary); 
+            border: 8px solid var(--accent-red);
+            margin: 0;
+        }
+        h1, h2, h3, .nav-item { 
+            font-family: var(--font-display); 
+            font-weight: 600; 
+        }
+        .accent-red { color: var(--accent-red); }
+        .card { 
+            background-color: var(--background-secondary); 
+            border: 1px solid var(--border-color); 
+            transition: all 0.3s ease-in-out; 
+        }
+        .card:hover { 
+            border-color: var(--accent-red); 
+            box-shadow: 0 0 15px rgba(229, 62, 62, 0.2); 
+        }
+        .sticky-nav { 
+            position: sticky; 
+            top: 0; 
+            z-index: 50; 
+            background-color: rgba(18, 18, 18, 0.8); 
+            backdrop-filter: blur(10px); 
+        }
+        .modal-overlay { 
+            position: fixed; 
+            top: 0; left: 0; right: 0; bottom: 0; 
+            background-color: rgba(0, 0, 0, 0.85); 
+            z-index: 100; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            backdrop-filter: blur(5px);
+        }
+        .modal-content { 
+            background-color: var(--background-secondary); 
+            border: 1px solid var(--accent-red); 
+            max-width: 550px; 
+            width: 90%; 
+            max-height: 90vh; 
+            overflow-y: auto; 
+        }
+        
+        /* --- START: Interactive Timeline Styles --- */
+        .timeline-container { position: relative; padding: 2rem 0; margin: 0 auto; max-width: 800px; }
+        .timeline-container::after { content: ''; position: absolute; width: 4px; background-color: var(--border-color); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; cursor: pointer; }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 25px; height: 25px; right: -13px; background-color: var(--background-primary); border: 4px solid var(--accent-red); top: 25px; border-radius: 50%; z-index: 1; transition: all 0.2s ease-in-out; }
+        .timeline-item.right::after { left: -12px; }
+        .timeline-item:hover::after { transform: scale(1.2); box-shadow: 0 0 10px var(--accent-red); }
+        .timeline-content { padding: 20px 30px; background-color: #2D3748; position: relative; border-radius: 6px; border: 1px solid #4A5568; }
+        .timeline-item.left .timeline-content { text-align: right; }
+        @media screen and (max-width: 768px) {
+            .timeline-container::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.right { left: 0%; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 18px; }
+            .timeline-item.left .timeline-content { text-align: left; }
+        }
+        /* --- END: Interactive Timeline Styles --- */
+        
+        /* --- START: CSS Flowchart Styles --- */
+        .flowchart-node { border: 1px solid #4A5568; padding: 0.75rem 1rem; text-align: center; border-radius: 0.5rem; background-color: #2D3748; transition: all 0.3s ease; cursor: pointer; min-height: 4.5rem; display: flex; flex-direction: column; justify-content: center; }
+        .flowchart-node:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.5); border-color: var(--accent-red); }
+        .alliance-network { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: center; justify-items: center; position: relative; }
+        @media screen and (min-width: 1024px) {
+            .alliance-network { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: repeat(3, auto); gap: 2rem 4rem; padding-bottom: 1rem; }
+            #node-leo { grid-area: 1 / 2 / 2 / 3; }
+            #node-vought { grid-area: 2 / 1 / 3 / 2; }
+            #node-vanderplaats { grid-area: 2 / 3 / 3 / 4; }
+            #node-heritage { grid-area: 3 / 1 / 4 / 2; }
+            #node-tfl { grid-area: 3 / 3 / 4 / 4; }
+        }
+        .money-network { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .money-tier { display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%; }
+        @media screen and (min-width: 768px) { .money-tier { flex-direction: row; justify-content: center; gap: 2rem; } }
+        .connector { position: absolute; background-color: #4A5568; z-index: 1; }
+        .flowchart-arrow { color: var(--accent-red); }
+        /* --- END: CSS Flowchart Styles --- */
+        
+        /* --- START: 7MM Infographic Styles --- */
+        .mountain-item { display: flex; align-items: center; margin-bottom: 1rem; padding: 0.5rem; border-radius: 0.375rem; transition: background-color 0.2s ease-in-out; }
+        .mountain-item:hover { background-color: rgba(255,255,255,0.05); }
+        .mountain-icon { flex-shrink: 0; width: 2.5rem; height: 2.5rem; margin-right: 1rem; color: var(--accent-red); }
+        /* --- END: 7MM Infographic Styles --- */
+        
+        /* --- START: Interactive Stats Styles --- */
+        .stats-container { margin-top: 2rem; padding: 0 1rem; }
+        .stat-bar-group { position: relative; margin-bottom: 2rem; }
+        .stat-bar-label { font-family: var(--font-body); font-size: 1rem; margin-bottom: 0.5rem; color: var(--text-secondary); }
+        .stat-bar-background { background-color: #2D3748; border-radius: 0.25rem; height: 2.5rem; }
+        .stat-bar-foreground { background-color: var(--accent-red); border-radius: 0.25rem; height: 100%; transition: width 1s ease-out, box-shadow 0.3s ease; position: relative; }
+        .stat-bar-group:hover .stat-bar-foreground { box-shadow: 0 0 15px rgba(229, 62, 62, 0.5); }
+        .stat-bar-percentage { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); font-family: var(--font-display); font-size: 1.25rem; font-weight: bold; color: var(--text-primary); text-shadow: 1px 1px 2px rgba(0,0,0,0.7); }
+        /* --- END: Interactive Stats Styles --- */
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav id="navbar" class="sticky-nav shadow-lg border-b border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-3xl uppercase text-white">The Pincer Movement</h1>
+                <div class="hidden md:flex space-x-6 text-lg uppercase">
+                    <a href="#alliance" class="nav-item text-gray-300 hover:text-accent-red transition duration-300">The Alliance</a>
+                    <a href="#timeline" class="nav-item text-gray-300 hover:text-accent-red transition duration-300">The Timeline</a>
+                    <a href="#ideology" class="nav-item text-gray-300 hover:text-accent-red transition duration-300">The Ideology</a>
+                    <a href="#blueprint" class="nav-item text-gray-300 hover:text-accent-red transition duration-300">The Blueprint</a>
+                    <a href="#money" class="nav-item text-gray-300 hover:text-accent-red transition duration-300">The Money</a>
+                    <a href="#tactics" class="nav-item text-gray-300 hover:text-accent-red transition duration-300">The Tactics</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center my-12 md:my-20">
+            <h1 class="text-6xl md:text-8xl font-bold uppercase tracking-wider text-white">The Pincer Movement</h1>
+            <h2 class="text-2xl md:text-4xl mt-2 accent-red uppercase tracking-wide">An Architecture of Autocracy</h2>
+            <p class="max-w-3xl mx-auto mt-6 text-lg text-gray-400">
+                This investigation exposes a deeply integrated, two-pronged assault on the foundations of American pluralism and democratic governance. It is not a story of two separate movements, but a forensic analysis of a coordinated campaign to reshape the United States from both within and without its institutions of power.
+            </p>
+        </header>
+
+        <section id="alliance" class="py-16">
+            <h2 class="text-5xl text-center mb-4">The Alliance Network</h2>
+            <h3 class="text-2xl text-center accent-red mb-12 uppercase">People, Power, and Policy</h3>
+            <div class="card p-4 sm:p-8">
+                 <p class="text-lg mb-8 leading-relaxed text-center">
+                    The Pincer Movement is defined by the symbiotic relationship between its ideological and bureaucratic arms, connected by key personnel who operate across multiple organizations. This is not a loose coalition but a tightly integrated network. <span class="font-bold accent-red">Click or tap on any node below to explore the connections.</span>
+                </p>
+                <div id="alliance-network-container" class="alliance-network">
+                    <div id="node-leo" class="flowchart-node w-56"><h4 class="text-xl">Leonard Leo</h4><p class="text-sm text-gray-400">The Architect</p></div>
+                    <div id="node-vought" class="flowchart-node w-56"><h4 class="text-xl">Russell Vought</h4><p class="text-sm text-gray-400">The Bureaucrat</p></div>
+                    <div id="node-vanderplaats" class="flowchart-node w-56"><h4 class="text-xl">Bob Vander Plaats</h4><p class="text-sm text-gray-400">The Mobilizer</p></div>
+                    <div id="node-heritage" class="flowchart-node w-56"><h4 class="text-xl">Project 2025</h4><p class="text-sm text-gray-400">(The Heritage Foundation)</p></div>
+                    <div id="node-tfl" class="flowchart-node w-56"><h4 class="text-xl">The Family Leader</h4><p class="text-sm text-gray-400">(Christian Nationalism)</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" class="py-16">
+            <h2 class="text-5xl text-center mb-4">The Timeline of Convergence</h2>
+            <h3 class="text-2xl text-center accent-red mb-12 uppercase">How The Movement Was Built</h3>
+             <div class="card p-8">
+                <p class="text-lg mb-8 leading-relaxed text-center">
+                    This was not a spontaneous development. The Pincer Movement was assembled piece by piece over several years, with strategic funding preceding organizational and tactical rollouts. <span class="font-bold accent-red">Click any point on the timeline to see the details of each event.</span>
+                </p>
+                <div id="timeline-container" class="timeline-container"></div>
+            </div>
+        </section>
+
+        <section id="ideology" class="py-16">
+            <h2 class="text-5xl text-center mb-4">The Ideology</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                <div class="card p-8 lg:col-span-2">
+                    <h4 class="text-3xl mb-4">The Seven Mountains Mandate</h4>
+                    <p class="mb-6 leading-relaxed text-sm">The ideological fuel for the movement is the Seven Mountains Mandate (7MM), a dominionist doctrine positing that Christians are divinely ordained to achieve control over the seven key spheres of societal influence to bring about the "kingdom of God on Earth."</p>
+                    <div id="seven-mountains-infographic"></div>
+                </div>
+                <div class="card p-8 lg:col-span-3">
+                     <h4 class="text-3xl mb-4 text-center">Adherence and Radicalization</h4>
+                     <p class="text-center text-gray-400">
+                        While not all supporters subscribe to the 7MM doctrine, PRRI polling data reveals a significant overlap with Christian Nationalist views. This alignment is critical, as it indicates a large potential base that is sympathetic to the movement's goals and, troublingly, receptive to the rhetoric of political violence.
+                     </p>
+                     <div id="interactive-stats" class="stats-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blueprint" class="py-16">
+            <h2 class="text-5xl text-center mb-4">The Blueprint</h2>
+            <h3 class="text-2xl text-center accent-red mb-12 uppercase">Project 2025's Mandate</h3>
+             <p class="max-w-4xl mx-auto text-center text-lg text-gray-400 mb-12">
+                Project 2025 is a 920-page operational blueprint for a radical restructuring of the federal government. It's a detailed plan to consolidate executive power by purging the civil service and politicizing the Department of Justice.
+            </p>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-8">
+                    <h4 class="text-3xl mb-4">Mechanism 1: Schedule F</h4>
+                    <p class="leading-relaxed">A plan to reclassify up to **50,000** federal employees, stripping their job protections. This allows them to be fired and replaced with individuals vetted for ideological loyalty, creating a subservient workforce.</p>
+                </div>
+                 <div class="card p-8">
+                    <h4 class="text-3xl mb-4">Mechanism 2: DOJ Capture</h4>
+                    <p class="leading-relaxed">A "top-to-bottom overhaul" of the Department of Justice to ensure litigation and investigations are "consistent with the President’s agenda," effectively turning the DOJ into a political weapon.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="money" class="py-16">
+            <h2 class="text-5xl text-center mb-4">The Money</h2>
+            <h3 class="text-2xl text-center accent-red mb-12 uppercase">The Dark Money Engine</h3>
+            <div class="card p-8">
+                 <p class="text-lg mb-8 leading-relaxed text-center">
+                    The Pincer Movement is fueled by a torrent of "dark money" flowing through a sophisticated network. At its apex sits a massive $1.6 billion trust, which feeds Donor-Advised Funds (DAFs) that obscure donors and deploy capital to a web of front groups. <span class="font-bold accent-red">Click a node to see details.</span>
+                </p>
+                 <div class="money-network">
+                     <div class="money-tier"> <div id="node-seid" class="flowchart-node w-64"><h4 class="text-xl">Barre Seid</h4><p>$1.6B Donation</p></div> </div>
+                     <div class="flowchart-arrow text-3xl">&darr;</div>
+                     <div class="money-tier"> <div id="node-mft" class="flowchart-node w-64 border-accent-red"><h4 class="text-xl">Marble Freedom Trust</h4><p>(Chaired by Leonard Leo)</p></div> </div>
+                     <div class="flowchart-arrow text-3xl">&darr;</div>
+                      <div class="money-tier"> <div id="node-85fund" class="flowchart-node w-64"><h4 class="text-xl">The 85 Fund</h4><p>(Concord Fund)</p></div> </div>
+                     <div class="flowchart-arrow text-3xl">&darr;</div>
+                     <div class="money-tier">
+                         <div id="node-donors" class="flowchart-node w-64"><h4 class="text-xl">DonorsTrust</h4><p>"Dark Money ATM"</p></div>
+                         <div class="hidden md:block flowchart-arrow text-3xl">&rarr;</div>
+                         <div class="md:hidden flowchart-arrow text-3xl">&darr;</div>
+                         <div id="node-tflf" class="flowchart-node w-64"><h4 class="text-xl">The Family Leader Fdn.</h4><p>Iowa Operations</p></div>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+        <section id="tactics" class="py-16">
+            <h2 class="text-5xl text-center mb-4">The Tactics</h2>
+            <h3 class="text-2xl text-center accent-red mb-12 uppercase">Shaping the Battlefield</h3>
+              <div class="card p-8">
+                 <div id="tabs-container" class="mb-4 flex flex-wrap justify-center border-b border-gray-700">
+                    <button data-tab="steeplechase" class="tab-button text-2xl px-6 py-3 border-b-2 border-transparent text-gray-400 hover:text-white">Steeplechase</button>
+                    <button data-tab="watchtower" class="tab-button text-2xl px-6 py-3 border-b-2 border-transparent text-gray-400 hover:text-white">Watchtower</button>
+                    <button data-tab="checkmate" class="tab-button text-2xl px-6 py-3 border-b-2 border-transparent text-gray-400 hover:text-white">Checkmate</button>
+                </div>
+                 <div id="tab-content" class="mt-6 text-lg leading-relaxed"></div>
+            </div>
+        </section>
+
+    </main>
+    
+    <div id="modal" class="modal-overlay hidden">
+        <div class="modal-content rounded-lg shadow-xl p-6 relative">
+            <button id="closeModal" class="absolute top-2 right-4 text-3xl text-gray-500 hover:text-white">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+
+    <footer class="border-t border-gray-800 py-8">
+        <div class="container mx-auto px-4 text-center text-gray-500">
+            <p>&copy; 2025 Reclaiming Democracy's Promise. All Rights Reserved.</p>
+            <p class="text-sm mt-2">This interactive dossier is based on the keystone report "THE PINCER MOVEMENT: An Architecture of Autocracy."</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- START: Data Definitions ---
+            const modalData = {
+                'node-leo': { title: 'Leonard Leo: The Architect', content: '<p>A key conservative legal strategist. Chairs the Marble Freedom Trust and is a central figure in The 85 Fund and the Federalist Society. Orchestrates funding and judicial strategy for the conservative movement.</p>' },
+                'node-vought': { title: 'Russell Vought: The Bureaucrat', content: '<p>Former OMB Director and a lead author of Project 2025. A self-described "Christian Nation-ist" who advocates for dismantling the administrative state and using government power to enforce ideological goals.</p>' },
+                'node-vanderplaats': { title: 'Bob Vander Plaats: The Mobilizer', content: '<p>President & CEO of The Family Leader, an influential Christian Nationalist group in Iowa. Expert at grassroots mobilization and translating theological goals into state-level policy and political pressure.</p>' },
+                'node-heritage': { title: 'Project 2025 (The Heritage Foundation)', content: '<p>A 920-page blueprint for a radical overhaul of the federal government. Its "Mandate for Leadership" details plans for purging the civil service (Schedule F) and politicizing the Department of Justice.</p>' },
+                'node-tfl': { title: 'The Family Leader', content: '<p>A Christian Nationalist organization that seeks to embed "biblical values" into government. Instrumental in passing legislation like SF 418 in Iowa and mobilizing a conservative religious voting bloc.</p>' },
+                'node-seid': { title: 'Barre Seid: The Megadonor', content: '<p>Donated his $1.6 billion electronics company, Tripp Lite, to the Marble Freedom Trust in 2021. This transaction is likely the largest single political donation in U.S. history, creating a massive financial engine for the conservative movement.</p>'},
+                'node-mft': { title: 'Marble Freedom Trust', content: '<p>Chaired by Leonard Leo, this trust received the $1.6B contribution from Barre Seid. It acts as a central financial hub, granting tens of millions to other conservative DAFs and organizations to "crush liberal dominance."</p>'},
+                'node-donors': { title: 'DonorsTrust', content: '<p>A major Donor-Advised Fund (DAF) often called the "dark money ATM of the political right." It receives funds from entities like MFT and channels them to a vast network of conservative groups, including The Heritage Foundation and the Alliance Defending Freedom, often obscuring the original donors.</p>'},
+                'node-85fund': { title: 'The 85 Fund', content: '<p>Another DAF closely linked to Leonard Leo which also operates under the name "Concord Fund." It operates the Honest Elections Project (HEP) and funnels money to a web of other groups, engaging in circular funding with DonorsTrust to further complicate financial tracking.</p>'},
+                'node-tflf': { title: 'The Family Leader Foundation', content: '<p>The 501(c)(3) arm of Bob Vander Plaats\'s organization, based in Iowa. Tax records show it has received significant funding from Leonard Leo\'s network via DonorsTrust, demonstrating a direct financial pipeline from the national dark money apparatus to state-level political operations.</p>'},
+                'timeline-1': { title: 'Q2 2021: The Seid Donation', content: '<p>Industrialist Barre Seid donates his entire $1.6 billion electronics company to the newly formed Marble Freedom Trust...</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> Barre Seid, Leonard Leo</p>' },
+                'timeline-2': { title: 'Q1 2022: Project 2025 Launched', content: '<p>The Heritage Foundation formally launches the "Project 2025" coalition...</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> The Heritage Foundation</p>' },
+                'timeline-3': { title: 'Q4 2022: MFT Initial Dispersal', content: '<p>The Marble Freedom Trust makes its first major grants...</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> MFT, DonorsTrust, 85 Fund</p>' },
+                'timeline-4': { title: 'Q2 2023: HEP Voter Challenges Begin', content: '<p>The Honest Elections Project (HEP)...begins funding and promoting mass voter registration challenges...</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> Honest Elections Project</p>' },
+                'timeline-5': { title: 'Q1 2024: "Mandate for Leadership" Published', content: '<p>Project 2025 releases its 920-page playbook...</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> Project 2025, Russell Vought</p>' },
+                'timeline-6': { title: 'Q1 2025: The "Pincer" Converges', content: '<p>The parallel tracks...are now fully mature and aimed at the same goal: reshaping American democracy.</p><p class="mt-2 text-sm text-gray-400"><b>Key Actors:</b> All</p>' }
+            };
+            const tabContentData = {
+                'steeplechase': { title: 'Mobilizing the Shadow Campaign', content: 'Christian Nationalist networks leverage religious institutions for get-out-the-vote (GOTV) operations. Groups like Faith Wins conduct voter registration drives in churches, while figures like Lance Wallnau host revival-style events that are, in essence, highly targeted voter mobilization efforts. This "shadow campaign" utilizes the tax-exempt status of religious institutions to bypass traditional campaign finance scrutiny, creating a powerful and opaque political machine.'},
+                'watchtower': { title: 'Weaponizing Culture for Turnout', content: 'The alliance masterfully weaponizes divisive cultural issues to energize its base. Legislation targeting transgender rights, like Iowa\'s SF 418, serves not only as a policy goal but as a potent messaging tool amplified through faith-based and right-wing media. This strategy frames political contests as existential battles for the nation\'s soul, driving turnout among voters who might otherwise be disengaged.'},
+                'checkmate': { title: 'Purging the Opposition', content: '<p class="mb-6">This involves strategies to fund and deploy tools for mass voter challenges. Software like EagleAI is used to flag registrations, which are then passed to activists for challenges, aiming to disenfranchise voters based on flimsy or inaccurate data. Court findings have described the data used as "utterly lacking reliability," yet the tactic persists as a method of voter suppression, funded by the same dark money network.</p><div class="chart-container"><canvas id="tacticsChart"></canvas></div>'}
+            };
+            const timelineEvents = [
+                { id: 'timeline-1', date: 'Q2 2021', title: 'The Seid Donation', align: 'left' },
+                { id: 'timeline-2', date: 'Q1 2022', title: 'Project 2025 Launched', align: 'right' },
+                { id: 'timeline-3', date: 'Q4 2022', title: 'MFT Dispersal', align: 'left' },
+                { id: 'timeline-4', date: 'Q2 2023', title: 'Voter Challenges Begin', align: 'right' },
+                { id: 'timeline-5', date: 'Q1 2024', title: 'Mandate Published', align: 'left' },
+                { id: 'timeline-6', date: 'Q1 2025', title: 'The Pincer Converges', align: 'right' },
+            ];
+            const sevenMountainsData = [
+                { name: 'Government', icon: '<svg class="mountain-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>' },
+                { name: 'Media', icon: '<svg class="mountain-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><path d="M17 2v4"></path><path d="M7 2v4"></path><path d="M2 12h20"></path></svg>' },
+                { name: 'Arts & Entertainment', icon: '<svg class="mountain-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 8 4 4-4 4"></path><path d="m8 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>' },
+                { name: 'Business', icon: '<svg class="mountain-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>' },
+                { name: 'Education', icon: '<svg class="mountain-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3.33 1.67 6.67 1.67 10 0v-5"></path></svg>' },
+                { name: 'Family', icon: '<svg class="mountain-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20v-6m0 0V4m0 10h4m-4 0H6"/><path d="M14 4h3v4h-3zM6 4h3v4H6zM12 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>' },
+                { name: 'Religion', icon: '<svg class="mountain-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>' }
+            ];
+             const violenceStats = [
+                { label: 'Christian Nationalist Adherents', value: 38, description: 'Agree that "true American patriots may have to resort to violence in order to save our country."' },
+                { label: 'Christian Nationalist Sympathizers', value: 33, description: 'Also agree with the statement.' }
+            ];
+            // --- END: Data Definitions ---
+
+            function safeInit(name, func) {
+                try { func(); } catch (e) { console.error(`❌ ERROR initializing ${name}:`, e); }
+            }
+            
+            function initModals() {
+                const modal = document.getElementById('modal');
+                const modalBody = document.getElementById('modal-body');
+                const closeModalBtn = document.getElementById('closeModal');
+                window.showModal = (id) => {
+                    const data = modalData[id];
+                    if (data) {
+                        modalBody.innerHTML = `<h3 class="text-3xl mb-4 accent-red">${data.title}</h3><div class="text-gray-300 leading-relaxed">${data.content}</div>`;
+                        modal.classList.remove('hidden');
+                    }
+                };
+                function hideModal() { modal.classList.add('hidden'); }
+                document.querySelectorAll('.flowchart-node, .timeline-item').forEach(el => {
+                    el.addEventListener('click', () => window.showModal(el.id));
+                });
+                closeModalBtn.addEventListener('click', hideModal);
+                modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
+            }
+
+            function buildTimeline() {
+                const container = document.getElementById('timeline-container');
+                timelineEvents.forEach(event => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = `timeline-item ${event.align}`;
+                    itemDiv.id = event.id;
+                    itemDiv.innerHTML = `<div class="timeline-content"><h4 class="text-2xl font-bold">${event.date}</h4><p class="text-lg text-gray-300">${event.title}</p></div>`;
+                    container.appendChild(itemDiv);
+                });
+            }
+            
+            function build7MMInfographic() {
+                const container = document.getElementById('seven-mountains-infographic');
+                sevenMountainsData.forEach(mountain => {
+                    const item = document.createElement('div');
+                    item.className = 'mountain-item';
+                    item.innerHTML = `${mountain.icon}<span class="font-body text-lg">${mountain.name}</span>`;
+                    container.appendChild(item);
+                });
+            }
+
+            function buildAllianceConnectors() {
+                const container = document.getElementById('alliance-network-container');
+                container.querySelectorAll('.connector').forEach(c => c.remove());
+
+                if (window.innerWidth < 1024) {
+                    const nodes = Array.from(container.querySelectorAll('.flowchart-node'));
+                    nodes.forEach((node, index) => {
+                        if (index < nodes.length - 1) {
+                            const connector = document.createElement('div');
+                            connector.className = 'connector';
+                            connector.style.width = '2px';
+                            connector.style.height = '1.5rem';
+                            connector.style.top = `${node.offsetTop + node.offsetHeight}px`;
+                            connector.style.left = `calc(50% - 1px)`;
+                            container.appendChild(connector);
+                        }
+                    });
+                } else {
+                    const leo = document.getElementById('node-leo');
+                    const vought = document.getElementById('node-vought');
+                    const vanderplaats = document.getElementById('node-vanderplaats');
+                    const heritage = document.getElementById('node-heritage');
+                    const tfl = document.getElementById('node-tfl');
+
+                    if (!leo || !vought || !vanderplaats || !heritage || !tfl) return;
+                    
+                    const leoBottom = leo.offsetTop + leo.offsetHeight;
+                    const voughtTop = vought.offsetTop;
+                    const voughtBottom = vought.offsetTop + vought.offsetHeight;
+                    const heritageTop = heritage.offsetTop;
+                    const leoCenter = leo.offsetLeft + leo.offsetWidth / 2;
+                    const voughtCenter = vought.offsetLeft + vought.offsetWidth / 2;
+                    const vanderplaatsCenter = vanderplaats.offsetLeft + vanderplaats.offsetWidth / 2;
+
+                    const connectors = [
+                        { top: leoBottom, left: leoCenter -1, width: '2px', height: `${voughtTop - leoBottom}px` }, // Vertical from Leo
+                        { top: voughtTop - 2, left: voughtCenter, width: `${vanderplaatsCenter - voughtCenter}px`, height: '2px' }, // Horizontal bar
+                        { top: voughtBottom, left: voughtCenter - 1, width: '2px', height: `${heritageTop - voughtBottom}px` }, // Vought to Heritage
+                        { top: voughtBottom, left: vanderplaatsCenter - 1, width: '2px', height: `${heritageTop - voughtBottom}px` } // Vander Plaats to TFL
+                    ];
+
+                    connectors.forEach(c => {
+                        const connEl = document.createElement('div');
+                        connEl.className = 'connector';
+                        connEl.style.top = `${c.top}px`;
+                        connEl.style.left = `${c.left}px`;
+                        connEl.style.width = c.width;
+                        connEl.style.height = c.height;
+                        container.appendChild(connEl);
+                    });
+                }
+            }
+            
+            function initInteractiveStats() {
+                const container = document.getElementById('interactive-stats');
+                if (!container) return;
+                violenceStats.forEach(stat => {
+                    const group = document.createElement('div');
+                    group.className = 'stat-bar-group';
+                    group.innerHTML = `
+                        <div class="stat-bar-label">${stat.label}</div>
+                        <div class="stat-bar-background">
+                            <div class="stat-bar-foreground" style="width: 0%;" data-value="${stat.value}">
+                                <span class="stat-bar-percentage">${stat.value}%</span>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(group);
+                });
+                // Animate bars on scroll into view
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const bars = entry.target.querySelectorAll('.stat-bar-foreground');
+                            bars.forEach(bar => {
+                                bar.style.width = `${bar.dataset.value}%`;
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                observer.observe(container);
+            }
+
+            function initTacticsChart() {
+                 const tabsContainer = document.getElementById('tabs-container');
+                 const tabContentContainer = document.getElementById('tab-content');
+                 const setActiveTab = (tabName) => {
+                     tabsContainer.querySelectorAll('.tab-button').forEach(button => {
+                         button.classList.toggle('text-white', button.dataset.tab === tabName);
+                         button.classList.toggle('border-accent-red', button.dataset.tab === tabName);
+                         button.classList.toggle('text-gray-400', button.dataset.tab !== tabName);
+                         button.classList.toggle('border-transparent', button.dataset.tab !== tabName);
+                     });
+                     
+                     const content = tabContentData[tabName];
+                     tabContentContainer.innerHTML = `<div id="${tabName}" class="tab-pane"><h4 class="text-3xl mb-4">${content.title}</h4>${content.content}</div>`;
+
+                     if (tabName === 'checkmate') {
+                         const tacticsCtx = document.getElementById('tacticsChart').getContext('2d');
+                         new Chart(tacticsCtx, { type: 'bar', data: { labels: ['Voter Registrations Challenged (GA)', 'Registrations Removed'], datasets: [{ label: 'Number of Voters', data: [63000, 630], backgroundColor: ['#4A5568', '#E53E3E'], borderWidth: 1 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: 'Effectiveness of Mass Voter Challenges', font: { size: 16 } } } } });
+                     }
+                 };
+                 tabsContainer.addEventListener('click', (e) => {
+                     const button = e.target.closest('.tab-button');
+                     if (button) setActiveTab(button.dataset.tab);
+                 });
+                 setActiveTab('steeplechase');
+            }
+
+            function initSmoothScrolling() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                    });
+                });
+            }
+
+            safeInit("Timeline Builder", buildTimeline);
+            safeInit("7MM Infographic Builder", build7MMInfographic);
+            safeInit("Interactive Stats", initInteractiveStats);
+            safeInit("Tactics Chart", initTacticsChart);
+            safeInit("Modals", initModals);
+            safeInit("Smooth Scrolling", initSmoothScrolling);
+            safeInit("Alliance Connectors", buildAllianceConnectors);
+            
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    buildAllianceConnectors();
+                }, 250);
+            });
+        });
+    </script>
+</body>
+</html>
