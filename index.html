@@ -22,41 +22,33 @@
         .content-section.active { display: block; }
         .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 500px; }
         @media (min-width: 768px) { .chart-container { height: 450px; } }
-        .flow-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            height: 4px;
-            background-color: #d1d5db;
-            transition: all 0.3s ease;
+        
+        .flow-node, .timeline-node {
+            transition: all 0.3s ease-in-out;
         }
-        .flow-arrow-head {
-            position: absolute;
-            top: 50%;
-            right: -1px;
-            transform: translateY(-50%) rotate(45deg);
-            width: 16px;
-            height: 16px;
-            border-top: 4px solid #d1d5db;
-            border-right: 4px solid #d1d5db;
-            transition: all 0.3s ease;
+        .flow-node:hover, .timeline-node:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-        .flow-node.active-node {
+        .flow-node.active-node, .timeline-node.active-node {
             border-color: #1d4ed8;
             box-shadow: 0 0 15px rgba(29, 78, 216, 0.4);
             transform: scale(1.05);
         }
-        .network-node.highlight-node {
-            background-color: #1e40af;
-            color: white;
-            transform: scale(1.1);
-            z-index: 20;
+
+        .timeline-flow {
+            transition: opacity 0.5s ease-in-out, background-color 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
         }
-        .network-line.highlight-line {
-            background-color: #1e40af;
-            height: 3px;
-            z-index: 10;
+        .timeline-flow.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .timeline-button.active {
+            background-color: #1d4ed8;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -74,7 +66,7 @@
                         <a href="#money-trail" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Money Trail</a>
                         <a href="#key-players" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Key Players</a>
                         <a href="#the-mechanism" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">The Mechanism</a>
-                        <a href="#full-network" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Full Network</a>
+                        <a href="#timeline" class="nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">Interactive Timeline</a>
                     </div>
                 </div>
             </div>
@@ -85,9 +77,9 @@
         
         <section id="summary" class="content-section">
             <div class="text-center mb-12">
-                <h1 class="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight">THE ARCHITECTURE OF OBSCURITY</h1>
+                <h1 class="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight">THE SUSTAINED SUPERHIGHWAY</h1>
                 <p class="mt-4 max-w-4xl mx-auto text-lg text-slate-600">
-                    An interactive analysis of a sophisticated financial network designed to channel a $1.6 billion windfall into political influence, leveraging the infrastructure of American philanthropy.
+                    An interactive analysis of a sophisticated, multi-year financial network designed to channel a $1.6 billion windfall into political influence, leveraging the infrastructure of American philanthropy.
                 </p>
             </div>
 
@@ -97,19 +89,19 @@
                     <p class="mt-2 text-slate-600">The historic, tax-advantaged contribution from Barre Seid that capitalized the Marble Freedom Trust.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                    <h3 class="text-4xl text-blue-800">$447+ Million</h3>
-                    <p class="mt-2 text-slate-600">Total grants from MFT to Schwab Charitable, transforming it into a high-volume financial superhighway.</p>
+                    <h3 class="text-4xl text-blue-800">$485+ Million</h3>
+                    <p class="mt-2 text-slate-600">Total grants from MFT to intermediary DAFs like Schwab Charitable and DonorsTrust since 2022.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                    <h3 class="text-4xl text-blue-800">$282+ Million</h3>
-                    <p class="mt-2 text-slate-600">Funds routed from Schwab Charitable to The 85 Fund, a central hub in Leonard Leo's network.</p>
+                    <h3 class="text-4xl text-blue-800">$400+ Million</h3>
+                    <p class="mt-2 text-slate-600">Funds routed from these DAFs to The 85 Fund, a central hub in Leonard Leo's network.</p>
                 </div>
             </div>
             
             <div class="mt-12 bg-white p-8 rounded-lg shadow-lg border border-slate-200">
                 <h2 class="text-3xl md:text-4xl text-slate-900">Executive Summary</h2>
                 <p class="mt-4 text-slate-700 leading-relaxed">
-                    This analysis deconstructs the financial architecture linking the **Marble Freedom Trust (MFT)**, a 501(c)(4) entity controlled by activist Leonard Leo, and **DAFgiving360™ (Schwab Charitable)**, a major donor-advised fund (DAF) sponsor. What began as an investigation into a grant discrepancy has uncovered a sustained, multi-hundred-million-dollar pathway designed to channel politically motivated funds through the charitable sector. This structure obscures the funds' origins, provides a veneer of charitable legitimacy, and exploits U.S. nonprofit law to reshape American law and public policy. This application allows you to interactively explore this network, trace the money, and understand the mechanisms at play.
+                    This analysis deconstructs the financial architecture linking the **Marble Freedom Trust (MFT)** and major donor-advised fund (DAF) sponsors like **Schwab Charitable (DAFgiving360™)** and **DonorsTrust**. Our investigation reveals a sustained, multi-hundred-million-dollar pathway designed to channel politically motivated funds through the charitable sector. This structure obscures the funds' origins, provides a veneer of charitable legitimacy, and exploits U.S. nonprofit law to reshape American law and public policy. This application allows you to interactively explore this network, trace the money across different fiscal years, and understand the mechanisms at play.
                 </p>
             </div>
         </section>
@@ -117,56 +109,36 @@
         <section id="money-trail" class="content-section">
             <div class="text-center mb-12">
                 <h2 class="text-4xl md:text-5xl text-slate-900">The Primary Money Trail</h2>
-                <p class="mt-3 max-w-3xl mx-auto text-lg text-slate-600">The core of the network involves a two-step transfer. Click on each entity or the financial flows to reveal the details of this high-volume conduit.</p>
+                <p class="mt-3 max-w-3xl mx-auto text-lg text-slate-600">The core of the network involves a two-step transfer from a political entity to an operational hub via a charitable intermediary. Click on each element to reveal its role.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-white p-8 rounded-lg shadow-lg border border-slate-200 min-h-[300px]">
-                <div class="md:col-span-3 text-center">
-                    <div id="node-mft" class="flow-node border-2 border-slate-300 p-4 rounded-lg cursor-pointer transition-all duration-300 h-full flex flex-col justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-y-8 md:gap-x-8 items-center bg-white p-8 rounded-lg shadow-lg border border-slate-200 min-h-[300px]">
+                <div class="flow-node-container md:col-span-1 text-center">
+                    <div id="node-mft" class="flow-node border-2 border-slate-300 p-4 rounded-lg cursor-pointer h-full flex flex-col justify-center">
                         <h3 class="text-2xl text-slate-800">Marble Freedom Trust</h3>
                         <p class="text-sm text-slate-500">The Capital Source</p>
                     </div>
                 </div>
-                <div class="md:col-span-2 text-center relative h-16 md:h-auto">
-                    <div class="flow-arrow hidden md:block">
-                       <div class="flow-arrow-head"></div>
-                    </div>
-                    <div id="flow-1" class="p-2 rounded-md cursor-pointer transition-colors duration-300">
-                        <p class="text-2xl font-bold text-blue-700 md:relative md:top-[-40px]">~ $307M</p>
-                        <p class="text-xs text-slate-500">(FY22-23)</p>
-                    </div>
-                     <span class="md:hidden text-4xl text-slate-400">↓</span>
-                </div>
-                <div class="md:col-span-3 text-center">
-                    <div id="node-sc" class="flow-node border-2 border-slate-300 p-4 rounded-lg cursor-pointer transition-all duration-300 h-full flex flex-col justify-center">
-                        <h3 class="text-2xl text-slate-800">Schwab Charitable</h3>
-                        <p class="text-sm text-slate-500">The Intermediary Conduit</p>
+                <div class="text-center text-4xl text-slate-400">→</div>
+                <div class="flow-node-container md:col-span-1 text-center">
+                    <div id="node-daf" class="flow-node border-2 border-slate-300 p-4 rounded-lg cursor-pointer h-full flex flex-col justify-center">
+                        <h3 class="text-2xl text-slate-800">DAF Conduits</h3>
+                        <p class="text-sm text-slate-500">The Intermediaries</p>
                     </div>
                 </div>
-                <div class="md:col-span-1 text-center relative h-16 md:h-auto">
-                     <span class="md:hidden text-4xl text-slate-400">↓</span>
-                </div>
-                <div class="md:col-span-3 text-center">
-                    <div id="node-85f" class="flow-node border-2 border-slate-300 p-4 rounded-lg cursor-pointer transition-all duration-300 h-full flex flex-col justify-center">
+                 <div class="text-center text-4xl text-slate-400">→</div>
+                <div class="flow-node-container md:col-span-1 text-center">
+                    <div id="node-85f" class="flow-node border-2 border-slate-300 p-4 rounded-lg cursor-pointer h-full flex flex-col justify-center">
                         <h3 class="text-2xl text-slate-800">The 85 Fund</h3>
                         <p class="text-sm text-slate-500">The Operational Hub</p>
                     </div>
                 </div>
-                <div class="md:col-span-12 relative h-16 md:h-auto text-center">
-                    <div class="flow-arrow hidden md:block" style="left: 62.5%; width: 20.8%;">
-                       <div class="flow-arrow-head"></div>
-                    </div>
-                    <div id="flow-2" class="p-2 rounded-md cursor-pointer transition-colors duration-300 md:absolute md:left-[72%] md:bottom-[-20px]">
-                        <p class="text-2xl font-bold text-blue-700">~ $282M</p>
-                        <p class="text-xs text-slate-500">(FY22-23)</p>
-                    </div>
-                </div>
             </div>
 
-            <div id="details-pane" class="mt-8 bg-slate-100 p-6 rounded-lg min-h-[250px] transition-all duration-500 border border-slate-200">
+            <div id="details-pane" class="mt-8 bg-slate-100 p-6 rounded-lg min-h-[200px] transition-all duration-500 border border-slate-200">
                 <h3 id="details-title" class="text-2xl md:text-3xl text-slate-900">Select an Element</h3>
                 <div id="details-content" class="mt-4 text-slate-700 leading-relaxed">
-                    <p>Click on any of the entities or financial flows in the diagram above to learn more about their role, the specific transactions, and their significance in the network.</p>
+                    <p>Click on any of the entities in the diagram above to learn more about their role in the network.</p>
                 </div>
             </div>
         </section>
@@ -174,26 +146,26 @@
         <section id="key-players" class="content-section">
              <div class="text-center mb-12">
                 <h2 class="text-4xl md:text-5xl text-slate-900">The Key Players</h2>
-                <p class="mt-3 max-w-3xl mx-auto text-lg text-slate-600">Understanding the entities and individuals behind the money is crucial to understanding the network's purpose and strategy.</p>
+                <p class="mt-3 max-w-3xl mx-auto text-lg text-slate-600">Understanding the entities behind the money is crucial to understanding the network's purpose and strategy.</p>
             </div>
             <div class="space-y-8">
                 <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-200">
                     <h3 class="text-3xl text-slate-900">Marble Freedom Trust (MFT)</h3>
                     <p class="text-md text-slate-500 mt-1">Role: The Capital Engine</p>
-                    <p class="mt-4 text-slate-700">A secretive 501(c)(4) "social welfare" organization that functions as the financial engine for Leonard Leo's network. Established in 2020, it was capitalized by a historic $1.6 billion donation of company stock from Barre Seid, a transaction structured to avoid an estimated $400 million in taxes. MFT's sole purpose is to deploy this windfall to a select group of organizations to "crush liberal dominance."</p>
+                    <p class="mt-4 text-slate-700">A secretive 501(c)(4) "social welfare" organization that functions as the financial engine for Leonard Leo's network. Established in 2020, it was capitalized by a historic $1.6 billion donation. MFT's sole purpose is to deploy this windfall to a select group of organizations.</p>
                     <div class="mt-4 chart-container">
                         <canvas id="mftGrantsChart"></canvas>
                     </div>
                 </div>
                  <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-200">
-                    <h3 class="text-3xl text-slate-900">Schwab Charitable (DAFgiving360™)</h3>
-                     <p class="text-md text-slate-500 mt-1">Role: The Financial Intermediary</p>
-                    <p class="mt-4 text-slate-700">One of the nation's largest Donor-Advised Fund (DAF) sponsors, managing over $41 billion in assets. It functions as a neutral financial conduit, processing grants on behalf of donors. This "pass-through" nature is key to the network's strategy, as it allows funds from a political 501(c)(4) like MFT to be "washed" of their origin, re-emerging as grants from an apolitical 501(c)(3) public charity.</p>
+                    <h3 class="text-3xl text-slate-900">The DAF Conduits (Schwab Charitable & DonorsTrust)</h3>
+                     <p class="text-md text-slate-500 mt-1">Role: The Financial Intermediaries</p>
+                    <p class="mt-4 text-slate-700">Major Donor-Advised Fund (DAF) sponsors that function as neutral financial conduits. This "pass-through" nature is key to the network's strategy, as it allows funds from a political 501(c)(4) like MFT to be "washed" of their origin, re-emerging as grants from an apolitical 501(c)(3) public charity, which provides both anonymity and regulatory cover.</p>
                 </div>
                  <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-200">
                     <h3 class="text-3xl text-slate-900">The 85 Fund</h3>
                      <p class="text-md text-slate-500 mt-1">Role: The Operational Hub</p>
-                    <p class="mt-4 text-slate-700">A 501(c)(3) organization (formerly the Judicial Education Project) that acts as a central distribution hub. It receives the vast majority of its funding—over $282 million in two years—from the MFT-funded DAF at Schwab Charitable. The 85 Fund then distributes this money to other conservative groups and, crucially, pays tens of millions annually to CRC Advisors, a for-profit firm chaired by Leonard Leo.</p>
+                    <p class="mt-4 text-slate-700">A 501(c)(3) organization that acts as a central distribution hub. It receives the vast majority of its funding from the MFT-funded DAFs. The 85 Fund then distributes this money to other conservative groups and, crucially, pays tens of millions annually to CRC Advisors, a for-profit firm chaired by Leonard Leo.</p>
                 </div>
             </div>
         </section>
@@ -211,15 +183,15 @@
                     <div class="mt-6 space-y-4">
                         <div id="daf-step-1" class="p-4 border-l-4 border-slate-200 transition-all duration-300">
                             <h4 class="font-bold text-lg text-slate-800">Step 1: The Contribution</h4>
-                            <p class="text-sm text-slate-600">MFT (a political 501c4) donates $153M to a DAF account at Schwab Charitable (a public 501c3). MFT gets a tax deduction. The money's origin is now shielded.</p>
+                            <p class="text-sm text-slate-600">MFT (a political 501c4) donates millions to a DAF account. MFT gets a tax deduction. The money's origin is now shielded.</p>
                         </div>
                         <div id="daf-step-2" class="p-4 border-l-4 border-slate-200 transition-all duration-300 opacity-50">
                             <h4 class="font-bold text-lg text-slate-800">Step 2: The "Advice"</h4>
-                            <p class="text-sm text-slate-600">MFT "advises" Schwab Charitable to grant funds from its account to The 85 Fund. The grant is now legally from Schwab, not MFT.</p>
+                            <p class="text-sm text-slate-600">MFT "advises" the DAF sponsor to grant funds from its account to The 85 Fund. The grant is now legally from the DAF sponsor, not MFT.</p>
                         </div>
                         <div id="daf-step-3" class="p-4 border-l-4 border-slate-200 transition-all duration-300 opacity-50">
                              <h4 class="font-bold text-lg text-slate-800">Step 3: The Grant & The Shield</h4>
-                            <p class="text-sm text-slate-600">Schwab grants $141M to The 85 Fund. For regulatory purposes (the "public support test"), this grant is considered public support, protecting The 85 Fund's charitable status, which a direct grant from MFT would have jeopardized.</p>
+                            <p class="text-sm text-slate-600">The DAF grants the money to The 85 Fund. For regulatory purposes, this grant is considered "public support," protecting The 85 Fund's charitable status, which a direct grant from MFT would have jeopardized.</p>
                         </div>
                     </div>
                     <div class="mt-4 text-center">
@@ -232,30 +204,64 @@
                     <div class="mt-4 space-y-4">
                         <div>
                             <h4 class="font-semibold text-slate-800">501(c)(4) as Capital Engine</h4>
-                            <p class="text-sm text-slate-600">MFT's (c)(4) status was perfect for absorbing the $1.6B company stock donation tax-free, something a (c)(3) or private foundation would struggle with.</p>
+                            <p class="text-sm text-slate-600">MFT's (c)(4) status was perfect for absorbing the $1.6B company stock donation tax-free.</p>
                         </div>
                         <hr>
                          <div>
                             <h4 class="font-semibold text-slate-800">DAF as Anonymizer</h4>
-                            <p class="text-sm text-slate-600">Grants made from the DAF are publicly recorded as coming from Schwab Charitable, not MFT. This breaks the public money trail.</p>
+                            <p class="text-sm text-slate-600">Grants made from the DAF are publicly recorded as coming from Schwab Charitable or DonorsTrust, not MFT. This breaks the public money trail.</p>
                         </div>
                         <hr>
                         <div>
                             <h4 class="font-semibold text-slate-800">DAF as Status Shield</h4>
-                            <p class="text-sm text-slate-600">This is the most sophisticated step. A grant from a DAF sponsor counts towards a charity's "public support test." This allows The 85 Fund to be almost entirely funded by one source (MFT) while legally appearing to be publicly supported, thus protecting its valuable 501(c)(3) status.</p>
+                            <p class="text-sm text-slate-600">This is the most sophisticated step. A grant from a DAF sponsor counts towards a charity's "public support test." This allows The 85 Fund to be almost entirely funded by one source (MFT) while legally appearing to be publicly supported.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="full-network" class="content-section">
+        <section id="timeline" class="content-section">
             <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl text-slate-900">The Full Financial Ecosystem</h2>
-                <p class="mt-3 max-w-3xl mx-auto text-lg text-slate-600">The MFT-Schwab-85 Fund pathway is the main artery, but it's part of a larger, closed-loop system for influence and profit. Hover over or click entities to see their connections.</p>
+                <h2 class="text-4xl md:text-5xl text-slate-900">The Sustained Financial Superhighway</h2>
+                <p class="mt-3 max-w-3xl mx-auto text-lg text-slate-600">This interactive timeline visualizes the primary funding channels identified in our investigation. Select a time period to see how the money flowed.</p>
+            </div>
+            
+            <div class="flex justify-center space-x-4 mb-8">
+                <button id="btn-fy22-23" class="timeline-button px-6 py-2 rounded-md font-semibold bg-white border border-slate-300 hover:bg-slate-100 transition-all">FY2022-2023</button>
+                <button id="btn-fy24" class="timeline-button px-6 py-2 rounded-md font-semibold bg-white border border-slate-300 hover:bg-slate-100 transition-all">FY2024</button>
             </div>
 
-            <div class="relative w-full h-[700px] md:h-[600px] bg-white p-4 md:p-8 rounded-lg shadow-lg border border-slate-200" id="network-container">
+            <div class="relative w-full min-h-[500px] bg-white p-4 md:p-8 rounded-lg shadow-lg border border-slate-200" id="timeline-container">
+                <!-- Nodes -->
+                <div id="tn-mft" class="timeline-node absolute top-[5%] left-1/2 -translate-x-1/2 w-48 text-center p-4 bg-red-100 border-2 border-red-300 rounded-lg">
+                    <h4 class="font-bold">Marble Freedom Trust</h4>
+                    <p class="text-sm">(Source)</p>
+                </div>
+                <div id="tn-schwab" class="timeline-node absolute top-[40%] left-[25%] -translate-x-1/2 w-48 text-center p-4 bg-sky-100 border-2 border-sky-300 rounded-lg">
+                    <h4 class="font-bold">DAFgiving360™</h4>
+                    <p class="text-sm">(Schwab Charitable)</p>
+                </div>
+                <div id="tn-donors" class="timeline-node absolute top-[40%] left-[75%] -translate-x-1/2 w-48 text-center p-4 bg-sky-100 border-2 border-sky-300 rounded-lg">
+                    <h4 class="font-bold">DonorsTrust</h4>
+                     <p class="text-sm">(DAF Intermediary)</p>
+                </div>
+                <div id="tn-85f" class="timeline-node absolute bottom-[5%] left-1/2 -translate-x-1/2 w-48 text-center p-4 bg-indigo-100 border-2 border-indigo-300 rounded-lg">
+                    <h4 class="font-bold">The 85 Fund</h4>
+                    <p class="text-sm">(Parallel Flow)</p>
+                </div>
+
+                <!-- Flows -->
+                <div id="flow-mft-schwab" class="timeline-flow absolute bg-slate-400"></div>
+                <div id="flow-mft-donors" class="timeline-flow absolute bg-slate-400"></div>
+                <div id="flow-schwab-85f" class="timeline-flow absolute bg-slate-400"></div>
+                <div id="flow-donors-85f" class="timeline-flow absolute bg-slate-400"></div>
+                
+                <!-- Labels -->
+                <div id="label-mft-schwab" class="timeline-flow absolute text-center font-bold text-blue-700 p-1 bg-white/70 rounded"></div>
+                <div id="label-mft-donors" class="timeline-flow absolute text-center font-bold text-blue-700 p-1 bg-white/70 rounded"></div>
+                <div id="label-schwab-85f" class="timeline-flow absolute text-center font-bold text-blue-700 p-1 bg-white/70 rounded"></div>
+                <div id="label-donors-85f" class="timeline-flow absolute text-center font-bold text-blue-700 p-1 bg-white/70 rounded"></div>
             </div>
         </section>
     </main>
@@ -263,84 +269,19 @@
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.content-section');
             const navLinks = document.querySelectorAll('.nav-link');
-            const detailsPane = {
-                title: document.getElementById('details-title'),
-                content: document.getElementById('details-content')
-            };
-            const flowNodes = {
-                mft: document.getElementById('node-mft'),
-                sc: document.getElementById('node-sc'),
-                '85f': document.getElementById('node-85f'),
-                flow1: document.getElementById('flow-1'),
-                flow2: document.getElementById('flow-2')
-            };
             
-            const paneData = {
-                mft: {
-                    title: 'Marble Freedom Trust (MFT)',
-                    content: 'The source of the funds. A 501(c)(4) trust endowed with a $1.6B contribution. Its primary purpose is to make large grants to other entities in the network. It provides the capital and the political direction.'
-                },
-                sc: {
-                    title: 'Schwab Charitable (DAFgiving360™)',
-                    content: 'The intermediary. A Donor-Advised Fund sponsor that is one of the largest philanthropic entities in the US. It acts as a passive conduit, accepting funds from MFT and, upon "advice," granting them to other charities, thereby obscuring the original source.'
-                },
-                '85f': {
-                    title: 'The 85 Fund',
-                    content: 'The destination hub. A 501(c)(3) organization that receives the anonymized funds from Schwab Charitable. It then distributes this money to operational groups and pays millions in consulting fees to Leonard Leo\'s for-profit firm, CRC Advisors.'
-                },
-                flow1: {
-                    title: 'Flow 1: MFT → Schwab Charitable',
-                    content: 'A sustained, high-volume funding stream. Key transactions include **$153.8M** (FYE 2022) and **$153.75M** (FYE 2023), totaling over $307M. This inflow establishes the DAF account as a major financial reservoir for the network.'
-                },
-                flow2: {
-                    title: 'Flow 2: Schwab Charitable → The 85 Fund',
-                    content: 'The corresponding outflow. Key transactions include **$141.5M** (FYE 2022) and **$141.25M** (FYE 2023), totaling over $282M. The timing and amounts correlate directly with the MFT inflows, confirming the pass-through strategy. The difference likely covers fees and other smaller grants.'
-                }
-            };
-
-            function updateDetails(key) {
-                if (!paneData[key]) return;
-                detailsPane.title.textContent = paneData[key].title;
-                detailsPane.content.innerHTML = `<p>${paneData[key].content}</p>`;
-                
-                Object.values(flowNodes).forEach(node => node.classList.remove('active-node'));
-                if (flowNodes[key]) {
-                   flowNodes[key].classList.add('active-node');
-                }
-            }
-
-            Object.entries(flowNodes).forEach(([key, node]) => {
-                node.addEventListener('click', () => updateDetails(key));
-            });
-            
-            updateDetails('mft');
-
-
             function handleNavigation() {
                 const hash = window.location.hash || '#summary';
                 sections.forEach(section => {
-                    if ('#' + section.id === hash) {
-                        section.classList.add('active');
-                    } else {
-                        section.classList.remove('active');
-                    }
+                    section.classList.toggle('active', '#' + section.id === hash);
                 });
                 navLinks.forEach(link => {
-                    if (link.getAttribute('href') === hash) {
-                        link.classList.add('active-nav');
-                        link.classList.remove('inactive-nav');
-                    } else {
-                        link.classList.remove('active-nav');
-                        link.classList.add('inactive-nav');
-                    }
+                    link.classList.toggle('active-nav', link.getAttribute('href') === hash);
+                    link.classList.toggle('inactive-nav', link.getAttribute('href') !== hash);
                 });
 
-                if (hash === '#key-players') {
-                    renderMftChart();
-                }
-                if (hash === '#full-network') {
-                    renderNetworkMap();
-                }
+                if (hash === '#key-players') renderMftChart();
+                if (hash === '#timeline') initTimeline();
             }
             
             window.addEventListener('hashchange', handleNavigation);
@@ -353,195 +294,189 @@
 
             handleNavigation();
 
+            // Money Trail Section Logic
+            const detailsPane = {
+                title: document.getElementById('details-title'),
+                content: document.getElementById('details-content')
+            };
+            const flowNodes = {
+                mft: document.getElementById('node-mft'),
+                daf: document.getElementById('node-daf'),
+                '85f': document.getElementById('node-85f'),
+            };
+            const paneData = {
+                mft: {
+                    title: 'Marble Freedom Trust (MFT)',
+                    content: 'The source of the funds. A 501(c)(4) trust endowed with a $1.6B contribution. Its primary purpose is to make large grants to other entities in the network. It provides the capital and the political direction.'
+                },
+                daf: {
+                    title: 'DAF Conduits (Schwab Charitable & DonorsTrust)',
+                    content: 'The intermediaries. Major Donor-Advised Fund sponsors that act as passive conduits, accepting funds from MFT and, upon "advice," granting them to other charities, thereby obscuring the original source and providing regulatory cover.'
+                },
+                '85f': {
+                    title: 'The 85 Fund',
+                    content: 'The destination hub. A 501(c)(3) organization that receives the anonymized funds from the DAFs. It then distributes this money to operational groups and pays millions in consulting fees to Leonard Leo\'s for-profit firm.'
+                }
+            };
+            function updateDetails(key) {
+                if (!paneData[key]) return;
+                detailsPane.title.textContent = paneData[key].title;
+                detailsPane.content.innerHTML = `<p>${paneData[key].content}</p>`;
+                Object.values(flowNodes).forEach(node => node.classList.remove('active-node'));
+                if (flowNodes[key]) flowNodes[key].classList.add('active-node');
+            }
+            Object.entries(flowNodes).forEach(([key, node]) => {
+                node.addEventListener('click', () => updateDetails(key));
+            });
+            if (document.querySelector('#money-trail.active')) updateDetails('mft');
+
+            // DAF Mechanism Logic
             let dafStep = 1;
             const dafNextBtn = document.getElementById('daf-next-btn');
-            const dafSteps = [
-                document.getElementById('daf-step-1'),
-                document.getElementById('daf-step-2'),
-                document.getElementById('daf-step-3'),
-            ];
-
+            const dafSteps = [document.getElementById('daf-step-1'), document.getElementById('daf-step-2'), document.getElementById('daf-step-3')];
             function updateDafSteps() {
                 dafSteps.forEach((step, index) => {
-                    if (index < dafStep) {
-                        step.style.opacity = '1';
-                        step.classList.remove('border-slate-200');
-                        step.classList.add('border-blue-700');
-                    } else {
-                        step.style.opacity = '0.5';
-                        step.classList.add('border-slate-200');
-                        step.classList.remove('border-blue-700');
-                    }
+                    const isActive = index < dafStep;
+                    step.style.opacity = isActive ? '1' : '0.5';
+                    step.classList.toggle('border-blue-700', isActive);
+                    step.classList.toggle('border-slate-200', !isActive);
                 });
-                 if (dafStep > 2) {
-                    dafNextBtn.textContent = "Reset";
-                } else {
-                    dafNextBtn.textContent = "Next Step";
-                }
+                dafNextBtn.textContent = dafStep > 2 ? "Reset" : "Next Step";
             }
             updateDafSteps();
-
             dafNextBtn.addEventListener('click', () => {
-                dafStep++;
-                if (dafStep > 3) {
-                    dafStep = 1;
-                }
+                dafStep = (dafStep % 3) + 1;
                 updateDafSteps();
             });
 
+            // MFT Chart Logic
             let mftChartInstance = null;
             function renderMftChart() {
-                if (mftChartInstance) {
-                    return;
-                }
+                if (mftChartInstance) return;
                 const ctx = document.getElementById('mftGrantsChart').getContext('2d');
-                const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-                gradient.addColorStop(0, 'rgba(29, 78, 216, 0.7)');
-                gradient.addColorStop(1, 'rgba(29, 78, 216, 0.1)');
-
                 mftChartInstance = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['FYE 2021', 'FYE 2022', 'FYE 2023', 'FYE 2024'],
+                        labels: ['FY22-23 (Schwab)', 'FY24 (Schwab)', 'FY24 (DonorsTrust)'],
                         datasets: [{
-                            label: 'Grants to Schwab Charitable ($M)',
-                            data: [18, 153.8, 153.75, 122],
-                            backgroundColor: gradient,
+                            label: 'Grants to DAFs ($M)',
+                            data: [307.5, 59.1, 59.1],
+                            backgroundColor: 'rgba(29, 78, 216, 0.7)',
                             borderColor: 'rgba(29, 78, 216, 1)',
                             borderWidth: 2,
                             borderRadius: 4
                         }]
                     },
                     options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
+                        responsive: true, maintainAspectRatio: false,
                         plugins: {
-                            legend: {
-                                display: false
-                            },
-                            title: {
-                                display: true,
-                                text: 'Marble Freedom Trust Grants to Schwab Charitable',
-                                font: { size: 16, family: 'Inter'},
-                                color: '#334155',
-                                padding: { bottom: 20 }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return ` $${context.parsed.y} Million`;
-                                    }
-                                }
-                            }
+                            legend: { display: false },
+                            title: { display: true, text: 'Marble Freedom Trust Grants to DAF Intermediaries', font: { size: 16 }, color: '#334155', padding: { bottom: 20 } },
+                            tooltip: { callbacks: { label: context => ` $${context.parsed.y} Million` } }
                         },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Grant Amount (in Millions USD)'
-                                }
-                            }
-                        }
+                        scales: { y: { beginAtZero: true, title: { display: true, text: 'Grant Amount (in Millions USD)' } } }
                     }
                 });
             }
 
-            let networkRendered = false;
-            function renderNetworkMap() {
-                if (networkRendered) return;
-                const container = document.getElementById('network-container');
-                const nodes = {
-                    seid: { text: "Barre Seid", top: '5%', left: '50%', type: 'source' },
-                    mft: { text: "Marble Freedom Trust", top: '20%', left: '50%', type: 'engine' },
-                    schwab: { text: "Schwab Charitable", top: '40%', left: '25%', type: 'conduit' },
-                    donors: { text: "Donors Trust", top: '40%', left: '75%', type: 'conduit' },
-                    '85f': { text: "The 85 Fund", top: '65%', left: '25%', type: 'hub' },
-                    concord: { text: "The Concord Fund", top: '65%', left: '75%', type: 'hub' },
-                    crc: { text: "CRC Advisors", top: '90%', left: '50%', type: 'profit' }
-                };
-                const connections = [
-                    { from: 'seid', to: 'mft', label: '$1.6B' },
-                    { from: 'mft', to: 'schwab', label: '$447M+' },
-                    { from: 'mft', to: 'donors', label: '$41M+' },
-                    { from: 'schwab', to: '85f', label: '$282M+' },
-                    { from: 'mft', to: 'concord' },
-                    { from: '85f', to: 'crc', label: '$21M+/yr' },
-                    { from: 'concord', to: 'crc' },
-                ];
+            // Interactive Timeline Logic
+            let timelineInitialized = false;
+            function initTimeline() {
+                if (timelineInitialized) return;
                 
-                const nodeColors = {
-                    source: 'bg-amber-500',
-                    engine: 'bg-red-700',
-                    conduit: 'bg-sky-600',
-                    hub: 'bg-indigo-700',
-                    profit: 'bg-green-700'
+                const container = document.getElementById('timeline-container');
+                const nodes = {
+                    mft: document.getElementById('tn-mft'),
+                    schwab: document.getElementById('tn-schwab'),
+                    donors: document.getElementById('tn-donors'),
+                    '85f': document.getElementById('tn-85f'),
                 };
+                const flows = {
+                    mft_schwab: { el: document.getElementById('flow-mft-schwab'), label: document.getElementById('label-mft-schwab') },
+                    mft_donors: { el: document.getElementById('flow-mft-donors'), label: document.getElementById('label-mft-donors') },
+                    schwab_85f: { el: document.getElementById('flow-schwab-85f'), label: document.getElementById('label-schwab-85f') },
+                    donors_85f: { el: document.getElementById('flow-donors-85f'), label: document.getElementById('label-donors-85f') },
+                };
+                const btn2223 = document.getElementById('btn-fy22-23');
+                const btn24 = document.getElementById('btn-fy24');
 
-                let html = '';
+                function getCoords(el) {
+                    const containerRect = container.getBoundingClientRect();
+                    const elRect = el.getBoundingClientRect();
+                    return {
+                        x: elRect.left - containerRect.left + elRect.width / 2,
+                        y: elRect.top - containerRect.top + elRect.height / 2,
+                        top: elRect.top - containerRect.top,
+                        bottom: elRect.bottom - containerRect.top,
+                    }
+                }
 
-                connections.forEach(conn => {
-                    const fromNode = nodes[conn.from];
-                    const toNode = nodes[conn.to];
-                    const x1 = parseFloat(fromNode.left);
-                    const y1 = parseFloat(fromNode.top);
-                    const x2 = parseFloat(toNode.left);
-                    const y2 = parseFloat(toNode.top);
-                    
-                    const length = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+                function drawLine(fromEl, toEl, flowData) {
+                    const from = getCoords(fromEl);
+                    const to = getCoords(toEl);
+                    const x1 = from.x, y1 = from.bottom, x2 = to.x, y2 = to.top;
+
+                    const length = Math.sqrt((x2-x1)**2 + (y2-y1)**2);
                     const angle = Math.atan2(y2-y1, x2-x1) * 180 / Math.PI;
                     
-                    const top = `${y1}%`;
-                    const left = `${x1}%`;
+                    flowData.el.style.width = `${length}px`;
+                    flowData.el.style.top = `${y1}px`;
+                    flowData.el.style.left = `${x1}px`;
+                    flowData.el.style.transform = `rotate(${angle}deg)`;
+                    flowData.el.style.transformOrigin = '0 0';
+                    flowData.el.style.height = '4px';
 
-                    html += `<div id="line-${conn.from}-${conn.to}" data-from="${conn.from}" data-to="${conn.to}" class="network-line absolute h-0.5 bg-slate-300 transition-all duration-300" style="width: ${length}%; top: ${top}; left: ${left}; transform: rotate(${angle}deg); transform-origin: 0 0;"></div>`;
+                    flowData.label.style.top = `${y1 + (y2-y1)/2 - 15}px`;
+                    flowData.label.style.left = `${x1 + (x2-x1)/2 - 30}px`;
+                }
+
+                function updateAllFlowLines() {
+                    drawLine(nodes.mft, nodes.schwab, flows.mft_schwab);
+                    drawLine(nodes.mft, nodes.donors, flows.mft_donors);
+                    drawLine(nodes.schwab, nodes['85f'], flows.schwab_85f);
+                    drawLine(nodes.donors, nodes['85f'], flows.donors_85f);
+                }
+                
+                function setTimeline(phase) {
+                    btn2223.classList.toggle('active', phase === '22-23');
+                    btn24.classList.toggle('active', phase === '24');
+
+                    const is2223 = phase === '22-23';
+                    const is24 = phase === '24';
                     
-                    if(conn.label) {
-                        const midX = x1 + (x2 - x1) * 0.5;
-                        const midY = y1 + (y2 - y1) * 0.5;
-                         html += `<div id="label-${conn.from}-${conn.to}" data-from="${conn.from}" data-to="${conn.to}" class="network-label absolute text-xs bg-slate-50 px-1 rounded-sm text-slate-600 font-semibold" style="top: calc(${midY}% - 8px); left: calc(${midX}% - 20px);">${conn.label}</div>`;
-                    }
-                });
+                    // MFT -> Schwab
+                    flows.mft_schwab.el.classList.toggle('visible', is2223 || is24);
+                    flows.mft_schwab.label.classList.toggle('visible', is2223 || is24);
+                    flows.mft_schwab.label.textContent = is2223 ? '$307.5M' : '$59.1M';
+                    
+                    // Schwab -> 85 Fund
+                    flows.schwab_85f.el.classList.toggle('visible', is2223 || is24);
+                    flows.schwab_85f.label.classList.toggle('visible', is2223 || is24);
+                    flows.schwab_85f.label.textContent = is2223 ? '$282M' : '$59.1M';
 
-                Object.entries(nodes).forEach(([id, node]) => {
-                    html += `<div id="node-${id}" data-node-id="${id}" class="network-node absolute -translate-x-1/2 -translate-y-1/2 p-2 md:px-3 md:py-2 rounded-lg text-white text-xs md:text-sm shadow-lg cursor-pointer transition-all duration-300 ${nodeColors[node.type]}" style="top: ${node.top}; left: ${node.left};">${node.text}</div>`;
-                });
+                    // MFT -> DonorsTrust
+                    flows.mft_donors.el.classList.toggle('visible', is24);
+                    flows.mft_donors.label.classList.toggle('visible', is24);
+                    flows.mft_donors.label.textContent = '$59.1M';
 
-                container.innerHTML = html;
-                networkRendered = true;
+                    // DonorsTrust -> 85 Fund
+                    flows.donors_85f.el.classList.toggle('visible', is24);
+                    flows.donors_85f.label.classList.toggle('visible', is24);
+                    flows.donors_85f.label.textContent = '$59.1M';
+                }
 
-                container.addEventListener('click', (e) => {
-                    const target = e.target.closest('.network-node');
-                    if(target) {
-                        const nodeId = target.dataset.nodeId;
-                        highlightNode(nodeId);
-                    } else {
-                        clearHighlights();
-                    }
+                btn2223.addEventListener('click', () => setTimeline('22-23'));
+                btn24.addEventListener('click', () => setTimeline('24'));
+                
+                const resizeObserver = new ResizeObserver(() => {
+                    updateAllFlowLines();
                 });
+                resizeObserver.observe(container);
+
+                updateAllFlowLines();
+                setTimeline('22-23'); // Set initial state
+                timelineInitialized = true;
             }
-
-            function highlightNode(nodeId) {
-                clearHighlights();
-                document.getElementById(`node-${nodeId}`).classList.add('highlight-node');
-                document.querySelectorAll('.network-line').forEach(line => {
-                    if(line.dataset.from === nodeId || line.dataset.to === nodeId) {
-                        line.classList.add('highlight-line');
-                    }
-                });
-                 document.querySelectorAll('.network-label').forEach(label => {
-                    if(label.dataset.from === nodeId || label.dataset.to === nodeId) {
-                        label.classList.add('font-bold', 'text-blue-800');
-                    }
-                });
-            }
-            
-            function clearHighlights() {
-                document.querySelectorAll('.network-node').forEach(n => n.classList.remove('highlight-node'));
-                document.querySelectorAll('.network-line').forEach(l => l.classList.remove('highlight-line'));
-                document.querySelectorAll('.network-label').forEach(l => l.classList.remove('font-bold', 'text-blue-800'));
-            }
-
         });
     </script>
 </body>
