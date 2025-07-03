@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://restoring-democracy.org/sitemap.xml
