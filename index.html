@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restoring Democracy's Promise</title>
     <meta name="description" content="A Blueprint for Accountability Journalism.">
-    
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://restoring-democracy.org/">
     <meta property="og:title" content="Exclusive: The Pincer Movement - An Architecture of Autocracy">
@@ -21,7 +21,7 @@
     <meta property="twitter:image" content="https://laurenericksondotcom.wordpress.com/2011/09/26/word-image-combinations-in-scott-mcclouds-show-and-tell/">
 
     <link rel="icon" href="assets/gold_green_logo.png">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
         gtag('js', new Date());
         gtag('config', 'G-QJ3L9CT4Z7');
     </script>
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -83,6 +83,19 @@
             visibility: visible;
             opacity: 1;
         }
+        /* New style for the prominent investigation link */
+        .prominent-investigation-link {
+            background-color: #D4AF37; /* brand-gold */
+            color: #161616; /* brand-offblack */
+            font-bold py-4 px-8 rounded-lg shadow-xl text-2xl; /* existing classes */
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            transform: scale(1.02); /* Slightly larger */
+        }
+        .prominent-investigation-link:hover {
+            background-color: #f4a261; /* brand-orange on hover */
+            color: #24473e; /* brand-green-dark on hover */
+            transform: scale(1.05); /* Slightly more prominent on hover */
+        }
     </style>
 </head>
 <body class="bg-brand-green text-brand-white font-sans antialiased">
@@ -92,18 +105,18 @@
             <div class="absolute inset-0 bg-brand-green-dark opacity-50"></div>
             <div class="relative max-w-4xl mx-auto">
                 <img id="main-logo" src="assets/gold_green_logo.png" alt="Restoring Democracy's Promise Logo" class="mx-auto mb-6 h-20 w-20 md:h-28 md:w-28 cursor-pointer">
-                
+
                 <h1 class="font-serif text-4xl md:text-6xl font-bold text-brand-gold tracking-tight text-shadow">Restoring Democracy’s Promise</h1>
                 <p class="mt-4 text-lg md:text-xl text-brand-orange italic">A Blueprint for Accountability Journalism</p>
                 <p class="mt-8 max-w-2xl mx-auto text-brand-white text-base md:text-lg">
                     We are a different kind of newsroom—founded to expose the hidden machinery of power and restore democratic accountability with irrefutable, evidence-driven investigations.
                 </p>
                 <a class="mt-8 inline-block bg-brand-orange text-brand-offblack font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-brand-gold hover:text-brand-green transition-all duration-300 transform hover:scale-105" href="https://exposed1.substack.com/subscribe" target="_blank">Join the Investigation</a>
-                
+
                 <div class="flex justify-center my-8">
-                    <a href="https://exposed1.substack.com/p/exclusive-the-pincer-movement" 
-                       class="bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-8 rounded-lg shadow-xl text-2xl animate-pulse" 
-                       target="_blank" 
+                    <a href="https://exposed1.substack.com/p/exclusive-the-pincer-movement"
+                       class="prominent-investigation-link inline-block font-bold py-4 px-8 rounded-lg shadow-xl text-2xl"
+                       target="_blank"
                        rel="noopener noreferrer">
                         READ THE FULL INVESTIGATION: THE PINCER MOVEMENT
                     </a>
@@ -125,7 +138,7 @@
                             <p class="mt-2 text-slate-600 flex-grow">A deep-dive analysis of the money trail from the Marble Freedom Trust through DAFs like Schwab Charitable and DonorsTrust. Follow the money year by year.</p>
                             <a href="/pincerfinancial.html" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Launch Interactive Timeline &rarr;</a>
                         </div>
-                        
+
                         <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
                             <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The Pincer Movement</h3>
                             <p class="mt-2 text-slate-600 flex-grow">An interactive data visualization mapping the full "Pincer Movement" strategy. Explore the key players, their connections, and the flow of influence.</p>
@@ -140,7 +153,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="py-16 md:py-20">
                 <div class="max-w-4xl mx-auto px-4 text-center">
                     <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-gold">We Are Investigative System-Breakers</h2>
@@ -149,7 +162,7 @@
                     </p>
                 </div>
             </section>
-            
+
             <section class="py-16 md:py-20 bg-brand-green-dark">
                  <div class="max-w-4xl mx-auto px-4 text-center">
                     <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-orange">Stay Connected</h2>
@@ -167,6 +180,10 @@
                     <span class="tooltip-text">This project is powered by receipts.</span>
                 </div>
                 <p class="mt-2">Contact: <a href="mailto:editor@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline">editor@restoring-democracy.org</a></p>
+                <p class="mt-2">Phone: <a href="tel:+17542936975" class="text-brand-orange hover:text-brand-gold hover:underline">754-293-6975</a></p>
+                <p class="mt-4">
+                    <a href="privacy-policy.html" class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">Privacy Policy</a>
+                </p>
             </div>
         </footer>
     </div>
