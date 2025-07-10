@@ -12,7 +12,7 @@
 
 ## 1. Introduction and Scope
 
-At Restoring Democracy’s Promise (RDP), we are committed to upholding the highest standards of journalistic integrity and data privacy. This policy outlines how we collect, use, store, and protect data in the context of our advanced Artificial Intelligence (AI) systems. This policy applies to all RDP-managed AI systems, including Julia, Alex, and any custom GPTs or AI tools used for reporting, analysis, source management, or editorial support. Our AI tools are designed to augment, not replace, human judgment, and all final decisions remain with our journalists and editors.
+At Restoring Democracy’s Promise (RDP), we are committed to upholding the highest standards of journalistic integrity and data privacy. This policy outlines how we collect, use, store, and protect data in the context of our advanced Artificial Intelligence (AI) systems. This policy applies to all RDP-managed databases and AI systems, including any tools used for reporting, analysis, source management, or editorial support. Our AI tools are designed to augment, not replace, human judgment, and all final decisions remain with our journalists and editors.
 
 ## 2. Information We Collect
 
@@ -35,7 +35,7 @@ The information processed by our AI systems is used exclusively to fulfill our j
 * **Operational Improvement:** To monitor and improve the performance, accuracy, and efficiency of our AI tools.
 * **Compliance:** To ensure adherence to internal policies, ethical guidelines, and legal obligations.
 
-This policy applies to all RDP-managed AI systems, including Julia, Alex, and any custom GPTs or AI tools used for reporting, analysis, source management, or editorial support.
+This policy applies to all RDP-managed AI systems, including databases or AI tools used for reporting, analysis, source management, or editorial support.
 
 ## 4. How We Share Information
 
@@ -70,9 +70,8 @@ This AI Privacy & Data Policy may be updated periodically to reflect changes in 
 If you have any questions or concerns about this AI Privacy & Data Policy or our data practices, please contact us at:
 
 Restoring Democracy’s Promise
-[Your Organization's Address]
-[Your Organization's Email Address]
-[Your Organization's Phone Number (Optional)]
+editor@restoring-democracy.org
+754-293-6975
 
 ### 🔐 Coverage of Future AI Assistants
 
