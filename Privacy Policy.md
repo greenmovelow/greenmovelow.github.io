@@ -1,10 +1,10 @@
-# 📄 AI Privacy & Data Policy – Restoring Democracy’s Promise
+# 📄 Privacy and Data Policy – Restoring Democracy’s Promise
 
 **Effective Date:** July 2025
 
 **Applies to:**
 
-* Red Team Council (memory-based AI review)
+*Database retention
 * All AI-driven research, publishing, or data tools under Restoring Democracy’s Promise (RDP)
 * Any future AI-enabled tools, plugins, or assistant interfaces operated by RDP
 
