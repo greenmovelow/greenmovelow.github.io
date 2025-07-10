@@ -4,7 +4,7 @@
 
 **Applies to:**
 
-*Database retention
+* Database retention
 * All AI-driven research, publishing, or data tools under Restoring Democracy’s Promise (RDP)
 * Any future AI-enabled tools, plugins, or assistant interfaces operated by RDP
 
