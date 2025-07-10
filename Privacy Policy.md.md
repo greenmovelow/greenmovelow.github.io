@@ -3,8 +3,7 @@
 **Effective Date:** July 2025
 
 **Applies to:**
-* Julia (GPT-based Investigative Assistant)
-* Alex (Editorial GPT)
+
 * Red Team Council (memory-based AI review)
 * All AI-driven research, publishing, or data tools under Restoring Democracy’s Promise (RDP)
 * Any future AI-enabled tools, plugins, or assistant interfaces operated by RDP
