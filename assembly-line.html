@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Assembly Line: An RDP Investigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="assets/gold_green_logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --accent-red: #E53E3E; 
+            --background-primary: #121212;
+            --background-secondary: #1E1E1E;
+            --border-color: #333;
+            --text-primary: #E0E0E0;
+            --text-secondary: #A0A0A0;
+            --font-display: 'Teko', sans-serif;
+            --font-body: 'Roboto Slab', serif;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--background-primary);
+            color: var(--text-primary);
+            border: 8px solid var(--accent-red);
+            margin: 0;
+        }
+        h1, h2, h3, h4, .tab-button {
+            font-family: var(--font-display);
+            font-weight: 600;
+        }
+        .accent-red { color: var(--accent-red); }
+        .bg-custom-med { background-color: var(--background-secondary); }
+        .border-custom-light { border-color: var(--border-color); }
+        
+        .tab-button {
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-button.active {
+            border-bottom-color: var(--accent-red);
+            color: #FFFFFF;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background-color: var(--background-secondary);
+            border-left: 5px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 0.25rem;
+            margin-bottom: 1rem;
+        }
+        .card-highlight {
+            border-left-color: var(--accent-red);
+        }
+        .flow-node {
+            background-color: #2D3748;
+            border: 1px solid #4A5568;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--text-secondary);
+            padding: 0 0.5rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="sticky top-0 z-50 shadow-lg border-b border-gray-800" style="background-color: rgba(18, 18, 18, 0.8); backdrop-filter: blur(10px);">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="/" title="Return to Homepage">
+                        <img src="assets/gold_green_logo.png" alt="Restoring Democracy's Promise Logo" class="h-8 w-8">
+                    </a>
+                    <a href="/" class="text-sm font-medium text-gray-300 hover:text-white hover:underline hidden sm:block">
+                        &larr; Return to Homepage
+                    </a>
+                </div>
+                <h1 class="text-3xl uppercase text-white hidden lg:block">The Assembly Line</h1>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 max-w-4xl">
+
+        <header class="text-center py-6">
+            <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-wider">THE ASSEMBLY LINE</h1>
+            <p class="text-xl md:text-2xl accent-red mt-2" style="font-family: var(--font-display); font-weight: 600;">How 'The Machine' Turns Christian Model Legislation Into Law</p>
+            <p class="text-sm text-gray-400 mt-2">An Exclusive Investigation by Restoring Democracy's Promise</p>
+        </header>
+
+        <main class="mt-6">
+            <div class="flex justify-around border-b border-custom-light mb-6">
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl active" onclick="showTab('summary')">Summary</button>
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('network')">The Machine</button>
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('evidence')">Evidence</button>
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('impact')">Impact</button>
+            </div>
+
+            <div id="summary" class="tab-content active">
+                <div class="card card-highlight">
+                    <h2 class="text-3xl accent-red mb-2">Executive Summary</h2>
+                    <p class="text-gray-300 leading-relaxed">A months-long investigation exposes a covert network—"The Machine"—rewriting state law from the shadows. This meticulously engineered ecosystem operates beyond public scrutiny to advance a Christian nationalist agenda, transforming Iowa into the laboratory for America's next phase of culture war policy.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl text-white mb-2">The Smoking Gun</h3>
+                    <p class="text-gray-300 leading-relaxed">For the first time, RDP reveals the direct financial link between <b class="text-white">USATransform (Ziklag)</b>, a national billionaire-backed group, and <b class="text-white">The Family Leader Foundation</b>, the preeminent Christian nationalist force in Iowa. A 2022 IRS Schedule I filing documents a <b class="accent-red">$200,000 grant</b>, conclusively tying national strategy to state execution.</p>
+                </div>
+                 <div class="card">
+                    <h3 class="text-2xl text-white mb-2">The Assembly Line</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">The Machine operates a powerful "assembly line" for turning model legislation into binding law, bypassing democratic debate and replacing transparency with strategic obfuscation.</p>
+                    <div class="space-y-2">
+                        <div class="flow-node"><b>1. Model Legislation</b><br><span class="text-sm text-gray-400">Drafted by national think tanks</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node"><b>2. Legislative Sponsor</b><br><span class="text-sm text-gray-400">Handed to aligned lawmakers</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node"><b>3. Faith Mobilization</b><br><span class="text-sm text-gray-400">"Grassroots" campaigns orchestrated</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node"><b>4. Policy Enactment</b><br><span class="text-sm text-gray-400">Laws passed under manufactured pressure</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="network" class="tab-content">
+                <div class="card card-highlight">
+                    <h2 class="text-3xl accent-red mb-2">Mapping The Machine</h2>
+                    <p class="text-gray-300 leading-relaxed">The Machine's backbone is built on six synergistic organizations, each playing a specialized role in a coordinated, top-down strategy.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="card"><b>Marble Freedom Trust</b><br><span class="text-gray-400 leading-relaxed">The Apex Funder. A multi-billion dollar reservoir providing long-term capital.</span></div>
+                    <div class="card"><b>Donors Trust Inc.</b><br><span class="text-gray-400 leading-relaxed">The "Dark Money ATM." An anonymizing hub dispersing hundreds of millions.</span></div>
+                    <div class="card"><b>The Concord Fund</b><br><span class="text-gray-400 leading-relaxed">The Political Influence Engine. Targets funds to impact elections and key policy battles.</span></div>
+                    <div class="card card-highlight"><b>USATransform (Ziklag)</b><br><span class="text-gray-400 leading-relaxed">The Invisible Hand. A strategic funder connecting dark money to state-level initiatives.</span></div>
+                    <div class="card"><b>Mission Generation/NSCA</b><br><span class="text-gray-400 leading-relaxed">The Credentialing Outfit. Embeds religious actors in public schools.</span></div>
+                    <div class="card"><b>Faith Wins</b><br><span class="text-gray-400 leading-relaxed">The Mobilization Force. Trains clergy to act as political foot soldiers.</span></div>
+                </div>
+            </div>
+
+            <div id="evidence" class="tab-content">
+                <div class="card card-highlight">
+                    <h2 class="text-3xl accent-red mb-2">The Money Trail</h2>
+                     <p class="text-gray-300 leading-relaxed">RDP's forensic analysis of IRS 990 filings reveals a sophisticated financial architecture designed for maximum impact and minimum transparency.</p>
+                </div>
+                <div class="card">
+                     <h3 class="text-2xl text-white mb-4 text-center">Financial Flow Diagram</h3>
+                     <div class="space-y-2">
+                        <div class="flow-node"><b>Marble Freedom Trust</b><br><span class="text-sm text-gray-400">Apex Funder</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node"><b>Donors Trust Inc.</b><br><span class="text-sm text-gray-400">Dark Money Clearinghouse ($350M+ in 2023)</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node card-highlight" style="border-color: var(--accent-red);"><b>USATransform (Ziklag)</b><br><span class="text-sm text-gray-400">Strategic Operational Funder</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node card-highlight" style="border-color: var(--accent-red);"><b>The Family Leader Foundation</b><br><span class="text-sm accent-red font-bold">$200,000 Grant (2022)</span></div>
+                    </div>
+                </div>
+                <div class="card">
+                     <h3 class="text-2xl text-white mb-2">Case Study: School Chaplains</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">The Machine's strategy is clear in its push for "school chaplain" bills, creating a "credentialing vacuum" that only its allied organization, the NSCA, is positioned to fill.</p>
+                    <div class="bg-gray-900 p-4 rounded">
+                        <canvas id="credentialsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div id="impact" class="tab-content">
+                 <div class="card card-highlight">
+                    <h2 class="text-3xl accent-red mb-2">The Iowa Laboratory</h2>
+                    <p class="text-gray-300 leading-relaxed">The policy impact in Iowa has been swift and severe, serving as a test case for a national rollout.</p>
+                </div>
+                <div class="card">
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 leading-relaxed">
+                        <li>Gender identity was removed from the Iowa Civil Rights Act, stripping protections from transgender Iowans.</li>
+                        <li>Public school students are now permitted to leave campus for religious instruction during class hours.</li>
+                        <li>New legal tools have been created to challenge anti-discrimination protections on "religious freedom" grounds.</li>
+                        <li>Local democracy has been weakened as dissenters face coordinated pressure campaigns and electoral targeting.</li>
+                    </ul>
+                </div>
+                 <div class="card">
+                    <h3 class="text-2xl text-white mb-2">Why This Matters</h3>
+                     <p class="text-gray-300 leading-relaxed">The Machine's "assembly line" approach is fundamentally changing how law is written in America. Elected officials are replaced by outside drafters, and grassroots activism is supplanted by professional outrage factories. For the first time, we have irrefutable proof connecting the national Machine to its state-level execution in Iowa.</p>
+                </div>
+                <div class="card card-highlight">
+                     <p class="text-center text-2xl accent-red" style="font-family: var(--font-display); font-weight: 700;">"If democracy is dismantled, it won't be by force—but by assembly line."</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="border-t border-gray-800 py-8 mt-4">
+        <div class="container mx-auto px-4 text-center text-gray-500">
+            <p>&copy; 2025 Restoring Democracy's Promise. All Rights Reserved.</p>
+            <p class="text-sm mt-2">This interactive report is based on the keystone investigation "THE ASSEMBLY LINE."</p>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.toggle('active', button.getAttribute('onclick').includes(`'${tabName}'`));
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.toggle('active', content.id === tabName);
+            });
+        }
+
+        const ctx = document.getElementById('credentialsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['NSCA School Chaplain', 'Licensed TX School Counselor'],
+                datasets: [{
+                    label: 'Required Training/Experience (Hours)',
+                    data: [40, 3000],
+                    backgroundColor: ['rgba(74, 85, 104, 0.7)', 'rgba(229, 62, 62, 0.7)'],
+                    borderColor: ['#4A5568', '#E53E3E'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { color: '#A0A0A0' },
+                        grid: { color: '#333' }
+                    },
+                    y: {
+                       ticks: { color: '#E0E0E0', font: { size: 14, family: "'Roboto Slab', serif" } },
+                       grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        bodyFont: { family: "'Roboto Slab', serif" },
+                        callbacks: {
+                            label: (context) => context.raw === 40 ? ' 40-hour online course' : ' 3,000+ supervised clinical hours + Master\'s Degree'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
