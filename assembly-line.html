@@ -21,6 +21,10 @@
             --font-display: 'Teko', sans-serif;
             --font-body: 'Roboto Slab', serif;
         }
+        /* Universal Box Sizing Fix */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
         body {
             font-family: var(--font-body);
             background-color: var(--background-primary);
@@ -44,12 +48,9 @@
             border-bottom-color: var(--accent-red);
             color: #FFFFFF;
         }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
         .card {
             background-color: var(--background-secondary);
             border-left: 5px solid var(--border-color);
@@ -57,15 +58,21 @@
             border-radius: 0.25rem;
             margin-bottom: 1rem;
         }
-        .card-highlight {
-            border-left-color: var(--accent-red);
-        }
+        .card-highlight { border-left-color: var(--accent-red); }
+
         .flow-node {
             background-color: #2D3748;
             border: 1px solid #4A5568;
             padding: 1rem;
             border-radius: 0.5rem;
             text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .flow-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            border-color: var(--accent-red);
         }
         .flow-arrow {
             display: flex;
@@ -75,6 +82,38 @@
             color: var(--text-secondary);
             padding: 0 0.5rem;
             margin: 0.5rem 0;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 300px; /* Adjusted for better mobile display */
+            width: 100%;
+        }
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: var(--background-secondary);
+            border: 1px solid var(--accent-red);
+            max-width: 500px;
+            width: 90%;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            position: relative;
         }
     </style>
 </head>
@@ -123,15 +162,15 @@
                 </div>
                  <div class="card">
                     <h3 class="text-2xl text-white mb-2">The Assembly Line</h3>
-                    <p class="text-gray-300 mb-4 leading-relaxed">The Machine operates a powerful "assembly line" for turning model legislation into binding law, bypassing democratic debate and replacing transparency with strategic obfuscation.</p>
+                    <p class="text-gray-300 mb-4 leading-relaxed">The Machine operates a powerful "assembly line" for turning model legislation into binding law. <b class="accent-red">Click any step below for details.</b></p>
                     <div class="space-y-2">
-                        <div class="flow-node"><b>1. Model Legislation</b><br><span class="text-sm text-gray-400">Drafted by national think tanks</span></div>
+                        <div class="flow-node" onclick="showModal(1)"><b>1. Model Legislation</b><br><span class="text-sm text-gray-400">Drafted by national think tanks</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node"><b>2. Legislative Sponsor</b><br><span class="text-sm text-gray-400">Handed to aligned lawmakers</span></div>
+                        <div class="flow-node" onclick="showModal(2)"><b>2. Legislative Sponsor</b><br><span class="text-sm text-gray-400">Handed to aligned lawmakers</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node"><b>3. Faith Mobilization</b><br><span class="text-sm text-gray-400">"Grassroots" campaigns orchestrated</span></div>
+                        <div class="flow-node" onclick="showModal(3)"><b>3. Faith Mobilization</b><br><span class="text-sm text-gray-400">"Grassroots" campaigns orchestrated</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node"><b>4. Policy Enactment</b><br><span class="text-sm text-gray-400">Laws passed under manufactured pressure</span></div>
+                        <div class="flow-node" onclick="showModal(4)"><b>4. Policy Enactment</b><br><span class="text-sm text-gray-400">Laws passed under manufactured pressure</span></div>
                     </div>
                 </div>
             </div>
@@ -159,19 +198,19 @@
                 <div class="card">
                      <h3 class="text-2xl text-white mb-4 text-center">Financial Flow Diagram</h3>
                      <div class="space-y-2">
-                        <div class="flow-node"><b>Marble Freedom Trust</b><br><span class="text-sm text-gray-400">Apex Funder</span></div>
+                        <div class="flow-node" style="cursor:default;"><b>Marble Freedom Trust</b><br><span class="text-sm text-gray-400">Apex Funder</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node"><b>Donors Trust Inc.</b><br><span class="text-sm text-gray-400">Dark Money Clearinghouse ($350M+ in 2023)</span></div>
+                        <div class="flow-node" style="cursor:default;"><b>Donors Trust Inc.</b><br><span class="text-sm text-gray-400">Dark Money Clearinghouse ($350M+ in 2023)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node card-highlight" style="border-color: var(--accent-red);"><b>USATransform (Ziklag)</b><br><span class="text-sm text-gray-400">Strategic Operational Funder</span></div>
+                        <div class="flow-node card-highlight" style="border-color: var(--accent-red); cursor:default;"><b>USATransform (Ziklag)</b><br><span class="text-sm text-gray-400">Strategic Operational Funder</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node card-highlight" style="border-color: var(--accent-red);"><b>The Family Leader Foundation</b><br><span class="text-sm accent-red font-bold">$200,000 Grant (2022)</span></div>
+                        <div class="flow-node card-highlight" style="border-color: var(--accent-red); cursor:default;"><b>The Family Leader Foundation</b><br><span class="text-sm accent-red font-bold">$200,000 Grant (2022)</span></div>
                     </div>
                 </div>
                 <div class="card">
                      <h3 class="text-2xl text-white mb-2">Case Study: School Chaplains</h3>
                     <p class="text-gray-300 mb-4 leading-relaxed">The Machine's strategy is clear in its push for "school chaplain" bills, creating a "credentialing vacuum" that only its allied organization, the NSCA, is positioned to fill.</p>
-                    <div class="bg-gray-900 p-4 rounded">
+                    <div class="chart-container">
                         <canvas id="credentialsChart"></canvas>
                     </div>
                 </div>
@@ -200,6 +239,15 @@
             </div>
         </main>
     </div>
+    
+    <div id="modal-container" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-modal" class="absolute top-2 right-4 text-4xl text-gray-500 hover:text-white">&times;</button>
+            <h3 id="modal-title" class="text-3xl accent-red mb-4"></h3>
+            <p id="modal-body" class="text-gray-300 leading-relaxed"></p>
+        </div>
+    </div>
+
 
     <footer class="border-t border-gray-800 py-8 mt-4">
         <div class="container mx-auto px-4 text-center text-gray-500">
@@ -209,6 +257,40 @@
     </footer>
 
     <script>
+        // --- Modal Data and Functions ---
+        const modalData = {
+            1: { title: 'Step 1: Model Legislation', content: 'National think tanks and legal groups like the Heritage Foundation and Alliance Defending Freedom draft "model" bills. These texts come complete with legal justifications and talking points, forming the ideological core of the legislation.' },
+            2: { title: 'Step 2: Legislative Sponsor', content: 'The model bills are distributed to allied state lawmakers. This process outsources the work of governance to a private, unaccountable network, ensuring ideological consistency across states.' },
+            3: { title: 'Step 3: Faith Mobilization', content: 'Groups like Faith Wins and state-level partners like The Family Leader orchestrate "grassroots" campaigns. They provide scripts, testimony templates, and rally supporters to create the illusion of widespread, organic demand for the legislation.' },
+            4: { title: 'Step 4: Policy Enactment', content: 'Under pressure from the manufactured outrage and lobbying from network operatives, the legislation is fast-tracked. Opposition is often neutralized through targeted pressure campaigns or primary challenges.' }
+        };
+
+        const modalContainer = document.getElementById('modal-container');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        function showModal(step) {
+            const data = modalData[step];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalBody.textContent = data.content;
+                modalContainer.classList.add('visible');
+            }
+        }
+
+        function hideModal() {
+            modalContainer.classList.remove('visible');
+        }
+
+        closeModalBtn.addEventListener('click', hideModal);
+        modalContainer.addEventListener('click', (e) => {
+            if (e.target === modalContainer) {
+                hideModal();
+            }
+        });
+
+        // --- Tab Navigation ---
         function showTab(tabName) {
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.classList.toggle('active', button.getAttribute('onclick').includes(`'${tabName}'`));
@@ -218,13 +300,14 @@
             });
         }
 
+        // --- Chart.js ---
         const ctx = document.getElementById('credentialsChart').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['NSCA School Chaplain', 'Licensed TX School Counselor'],
+                labels: ['NSCA Chaplain', 'Licensed Counselor'],
                 datasets: [{
-                    label: 'Required Training/Experience (Hours)',
+                    label: 'Required Training (Hours)',
                     data: [40, 3000],
                     backgroundColor: ['rgba(74, 85, 104, 0.7)', 'rgba(229, 62, 62, 0.7)'],
                     borderColor: ['#4A5568', '#E53E3E'],
@@ -234,10 +317,11 @@
             options: {
                 indexAxis: 'y',
                 responsive: true,
+                maintainAspectRatio: false, // Key fix for responsiveness
                 scales: {
                     x: {
                         beginAtZero: true,
-                        ticks: { color: '#A0A0A0' },
+                        ticks: { color: '#A0A0A0', font: { family: "'Roboto Slab', serif" } },
                         grid: { color: '#333' }
                     },
                     y: {
