@@ -77,6 +77,18 @@
         }
         .text-light { color: var(--text-light); }
         .accent-color { color: var(--accent-burnished-gold); }
+
+        /* Vis.js Navigation Buttons Styling */
+        .vis-button {
+            background-color: rgba(0, 43, 75, 0.7); /* Navy Blue, semi-transparent */
+            border: 1px solid var(--accent-burnished-gold);
+            color: var(--accent-burnished-gold); /* Gold for icons */
+            border-radius: 50%;
+        }
+        .vis-button:hover {
+            background-color: rgba(0, 43, 75, 1); /* Solid Navy Blue on hover */
+            color: white; /* White icons on hover */
+        }
     </style>
 </head>
 <body>
@@ -105,7 +117,7 @@
         </header>
 
         <div class="bg-card-dark p-6 rounded-lg shadow-lg">
-            <p class="text-light mb-4">Click on any node in the diagram below to learn more about its role in The God Machine network. Hover over nodes for quick information. Use your mouse wheel or pinch-to-zoom to explore the connections.</p>
+            <p class="text-light mb-4">Click on any node in the diagram below to learn more about its role in The God Machine network. Hover over nodes for quick information. Use your mouse wheel or pinch-to-zoom to explore the connections. The navigation buttons allow you to pan, zoom, and reset the view.</p>
             <div id="mynetwork"></div>
 
             <div id="node-info" class="node-info-panel mt-6">
@@ -159,18 +171,18 @@
                 shape: 'box',
                 size: 20,
                 font: {
-                    color: '#FFFFFF', // Text color on nodes
+                    color: 'var(--text-dark)', // Changed to dark text for readability on light background
                     face: 'Teko'
                 },
                 color: {
-                    background: 'var(--card-background)',
+                    background: 'var(--neutral-light-grey)', // Changed to light grey background
                     border: 'var(--primary-navy-blue)',
                     highlight: {
-                        background: 'var(--card-background)',
+                        background: 'var(--neutral-light-grey)',
                         border: 'var(--accent-burnished-gold)'
                     },
                     hover: {
-                        background: 'var(--card-background)',
+                        background: 'var(--neutral-light-grey)',
                         border: 'var(--accent-burnished-gold)'
                     }
                 },
@@ -182,14 +194,14 @@
             edges: {
                 width: 2,
                 color: {
-                    color: 'var(--text-light)', // Color of the edges
+                    color: 'var(--text-light)',
                     highlight: 'var(--accent-burnished-gold)',
                     hover: 'var(--accent-burnished-gold)',
                     inherit: 'from',
                     opacity: 0.8
                 },
                 font: {
-                    color: 'var(--text-light)', // Edge label color
+                    color: 'var(--text-light)',
                     face: 'Roboto Slab',
                     size: 10,
                     align: 'middle'
@@ -205,9 +217,9 @@
             },
             groups: {
                 funding: { color: { background: 'var(--accent-burnished-gold)', border: 'var(--accent-burnished-gold)' }, font: { color: 'var(--text-dark)' } },
-                legislation: { color: { background: 'var(--primary-navy-blue)', border: 'var(--accent-burnished-gold)' } },
-                mobilization: { color: { background: 'var(--primary-navy-blue)', border: 'var(--accent-burnished-gold)' } },
-                credentialing: { color: { background: 'var(--primary-navy-blue)', border: 'var(--accent-burnished-gold)' } },
+                legislation: { color: { background: 'var(--primary-navy-blue)', border: 'var(--accent-burnished-gold)' }, font: { color: 'var(--text-light)' } },
+                mobilization: { color: { background: 'var(--primary-navy-blue)', border: 'var(--accent-burnished-gold)' }, font: { color: 'var(--text-light)' } },
+                credentialing: { color: { background: 'var(--primary-navy-blue)', border: 'var(--accent-burnished-gold)' }, font: { color: 'var(--text-light)' } },
                 target: { color: { background: 'var(--neutral-light-grey)', border: 'var(--accent-burnished-gold)' }, font: { color: 'var(--text-dark)' } },
                 individual: { color: { background: 'var(--accent-burnished-gold)', border: 'var(--accent-burnished-gold)' }, font: { color: 'var(--text-dark)' } }
             },
@@ -225,7 +237,7 @@
                 adaptiveTimestep: true
             },
             interaction: {
-                navigationButtons: true,
+                navigationButtons: true, // Keep navigation buttons enabled
                 keyboard: true,
                 zoomView: true,
                 dragView: true
@@ -298,6 +310,7 @@
                         a.textContent = link.text;
                         a.target = "_blank";
                         a.rel = "noopener noreferrer";
+                        // Styling for links within the info panel
                         a.className = "inline-block bg-primary-navy-blue hover:bg-card-background text-accent-burnished-gold font-bold py-2 px-4 rounded-lg shadow-md transition-colors duration-300 mr-2 mt-2 border border-accent-burnished-gold";
                         infoLinks.appendChild(a);
                     });
