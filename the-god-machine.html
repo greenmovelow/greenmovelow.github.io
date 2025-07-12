@@ -43,7 +43,12 @@
         .tab-button {
             transition: all 0.3s ease;
             border-bottom: 3px solid transparent;
+            /* Explicitly set smaller font for very small screens */
+            font-size: 0.75rem; /* text-xs */
+            padding-left: 0.5rem; /* px-2 */
+            padding-right: 0.5rem; /* px-2 */
         }
+        /* Apply Tailwind's responsive classes directly in HTML for better control */
         .tab-button.active {
             border-bottom-color: var(--accent-red);
             color: #FFFFFF;
@@ -145,10 +150,10 @@
 
         <main class="mt-6">
             <div class="flex justify-around border-b border-custom-light mb-6">
-                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl active" onclick="showTab('summary')">Summary</button>
-                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('network')">The Components</button>
-                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('evidence')">Financial Evidence</button>
-                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('impact')">Consequences</button>
+                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl active" onclick="showTab('summary')">Summary</button>
+                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" onclick="showTab('network')">Components</button>
+                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" onclick="showTab('evidence')">Financial</button>
+                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" onclick="showTab('impact')">Consequences</button>
             </div>
 
             <div id="summary" class="tab-content active">
@@ -206,7 +211,7 @@
                     </div>
                 </div>
                 <div class="card">
-                     <h3 class="text-2xl text-white mb-2">Credentialing Vacuum and Public Risk</h3>
+                     <h3 class="2xl text-white mb-2">Credentialing Vacuum and Public Risk</h3>
                     <p class="text-gray-300 mb-4 leading-relaxed">The push for chaplains creates a significant risk by allowing individuals with minimal training to provide counseling in schools, contrasting sharply with the rigorous requirements for licensed professionals.</p>
                     <div class="chart-container">
                         <canvas id="credentialsChart"></canvas>
@@ -342,4 +347,3 @@
     </script>
 </body>
 </html>
-
