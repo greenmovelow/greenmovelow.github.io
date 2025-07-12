@@ -217,19 +217,19 @@
                     <p class="leading-relaxed" style="color: var(--text-light);">The "God Machine" operates through a highly coordinated network, with each entity playing a specific, interconnected role in manufacturing demand for school chaplains.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="component-card" data-component-id="nacl" onclick="highlightComponent('nacl')">
+                    <div class="component-card" data-component-id="nacl" onclick="highlightAndShowComponent('nacl', 1)">
                         <b>The Bill Mill: NACL</b><br>
                         <span style="color: var(--text-secondary);" class="leading-relaxed">The National Association of Christian Lawmakers drafts and promotes “model legislation” for friendly lawmakers, creating demand for chaplain roles.</span>
                     </div>
-                    <div class="component-card" data-component-id="faithwins" onclick="highlightComponent('faithwins')">
+                    <div class="component-card" data-component-id="faithwins" onclick="highlightAndShowComponent('faithwins', 2)">
                         <b>The Mobilizer: Faith Wins</b><br>
                         <span style="color: var(--text-secondary);" class="leading-relaxed">Manufactures “grassroots” pressure campaigns, leveraging paid clergy and volunteers to lobby for these bills, creating public pressure.</span>
                     </div>
-                    <div class="component-card" data-component-id="nsca" onclick="highlightComponent('nsca')">
+                    <div class="component-card" data-component-id="nsca" onclick="highlightAndShowComponent('nsca', 3)">
                         <b>The Credentialer: Mission Generation / NSCA</b><br>
                         <span style="color: var(--text-secondary);" class="leading-relaxed">Sells the only credential available for the chaplain roles the NACL-pushed laws create, monopolizing the certification process.</span>
                     </div>
-                    <div class="component-card" data-component-id="money" onclick="highlightComponent('money')">
+                    <div class="component-card" data-component-id="money" onclick="highlightAndShowComponent('money', 4)">
                         <b>The Money: Anonymous Donors</b><br>
                         <span style="color: var(--text-secondary);" class="leading-relaxed">Channels untraceable grants through donor-advised funds (DAFs), ensuring secrecy and consistent underwriting for the entire operation.</span>
                     </div>
@@ -372,17 +372,17 @@
             });
         }
 
-        // --- Component Card Highlighting for "Network" Tab ---
-        function highlightComponent(componentId) {
+        // --- Component Card Highlighting for "Network" Tab and Modal ---
+        function highlightAndShowComponent(componentId, modalStep) {
             document.querySelectorAll('.component-card').forEach(card => {
                 card.classList.remove('active-component');
             });
             const activeCard = document.querySelector(`.component-card[data-component-id="${componentId}"]`);
             if (activeCard) {
                 activeCard.classList.add('active-component');
-                // Optional: Scroll to the highlighted card if it's off-screen
                 activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
+            showModal(modalStep); // Also show the modal for the component
         }
 
         // --- Chart.js ---
@@ -432,11 +432,14 @@
             }
         });
 
-        // Initialize active component highlight if 'network' tab is active on load
+        // Initialize active tab on load, and potentially component highlight
         document.addEventListener('DOMContentLoaded', () => {
-            if (document.getElementById('network').classList.contains('active')) {
-                // Optionally highlight the first component by default or based on URL hash
-                // highlightComponent('nacl');
+            // Restore active tab based on URL hash if present
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showTab(hash);
+            } else {
+                showTab('summary'); // Default to summary tab
             }
         });
     </script>
