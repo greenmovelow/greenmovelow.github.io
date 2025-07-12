@@ -46,9 +46,9 @@
         }
         #mynetwork {
             width: 100%;
-            height: 600px; /* Increased height for better visualization */
+            height: 600px;
             border: 2px solid var(--accent-burnished-gold);
-            background-color: var(--background-dark);
+            background-color: var(--background-dark); /* Vis.js network canvas background */
             border-radius: 8px;
             margin-top: 1rem;
         }
@@ -70,7 +70,7 @@
             border-radius: 0.25rem;
             margin-top: 1rem;
             color: var(--text-light);
-            display: none; /* Hidden by default */
+            display: none;
         }
         .node-info-panel.active {
             display: block;
@@ -79,15 +79,21 @@
         .accent-color { color: var(--accent-burnished-gold); }
 
         /* Vis.js Navigation Buttons Styling */
+        /* Target vis-button for background, border, and general color */
         .vis-button {
-            background-color: rgba(0, 43, 75, 0.7); /* Navy Blue, semi-transparent */
-            border: 1px solid var(--accent-burnished-gold);
-            color: var(--accent-burnished-gold); /* Gold for icons */
-            border-radius: 50%;
+            background-color: rgba(0, 43, 75, 0.7) !important; /* Navy Blue, semi-transparent, using !important to override Vis.js default */
+            border: 1px solid var(--accent-burnished-gold) !important; /* Gold border */
+            border-radius: 50% !important;
+        }
+        /* Target path elements within vis-button for icon color */
+        .vis-button svg path {
+            fill: var(--accent-burnished-gold) !important; /* Gold for icons */
         }
         .vis-button:hover {
-            background-color: rgba(0, 43, 75, 1); /* Solid Navy Blue on hover */
-            color: white; /* White icons on hover */
+            background-color: rgba(0, 43, 75, 1) !important; /* Solid Navy Blue on hover */
+        }
+        .vis-button:hover svg path {
+            fill: white !important; /* White icons on hover */
         }
     </style>
 </head>
@@ -171,11 +177,11 @@
                 shape: 'box',
                 size: 20,
                 font: {
-                    color: 'var(--text-dark)', // Changed to dark text for readability on light background
+                    color: 'var(--text-dark)', // Set to dark text to contrast with light node background
                     face: 'Teko'
                 },
                 color: {
-                    background: 'var(--neutral-light-grey)', // Changed to light grey background
+                    background: 'var(--neutral-light-grey)', // Set node background to light grey
                     border: 'var(--primary-navy-blue)',
                     highlight: {
                         background: 'var(--neutral-light-grey)',
@@ -237,7 +243,7 @@
                 adaptiveTimestep: true
             },
             interaction: {
-                navigationButtons: true, // Keep navigation buttons enabled
+                navigationButtons: true,
                 keyboard: true,
                 zoomView: true,
                 dragView: true
@@ -310,7 +316,6 @@
                         a.textContent = link.text;
                         a.target = "_blank";
                         a.rel = "noopener noreferrer";
-                        // Styling for links within the info panel
                         a.className = "inline-block bg-primary-navy-blue hover:bg-card-background text-accent-burnished-gold font-bold py-2 px-4 rounded-lg shadow-md transition-colors duration-300 mr-2 mt-2 border border-accent-burnished-gold";
                         infoLinks.appendChild(a);
                     });
