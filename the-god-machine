@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The God Machine: An RDP Investigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="assets/gold_green_logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --accent-red: #E53E3E; 
+            --background-primary: #121212;
+            --background-secondary: #1E1E1E;
+            --border-color: #333;
+            --text-primary: #E0E0E0;
+            --text-secondary: #A0A0A0;
+            --font-display: 'Teko', sans-serif;
+            --font-body: 'Roboto Slab', serif;
+        }
+        /* Universal Box Sizing Fix */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--background-primary);
+            color: var(--text-primary);
+            border: 8px solid var(--accent-red);
+            margin: 0;
+        }
+        h1, h2, h3, h4, .tab-button {
+            font-family: var(--font-display);
+            font-weight: 600;
+        }
+        .accent-red { color: var(--accent-red); }
+        .bg-custom-med { background-color: var(--background-secondary); }
+        .border-custom-light { border-color: var(--border-color); }
+        
+        .tab-button {
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-button.active {
+            border-bottom-color: var(--accent-red);
+            color: #FFFFFF;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .card {
+            background-color: var(--background-secondary);
+            border-left: 5px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 0.25rem;
+            margin-bottom: 1rem;
+        }
+        .card-highlight { border-left-color: var(--accent-red); }
+
+        .flow-node {
+            background-color: #2D3748;
+            border: 1px solid #4A5568;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .flow-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            border-color: var(--accent-red);
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--text-secondary);
+            padding: 0 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 300px; /* Adjusted for better mobile display */
+            width: 100%;
+        }
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: var(--background-secondary);
+            border: 1px solid var(--accent-red);
+            max-width: 500px;
+            width: 90%;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="sticky top-0 z-50 shadow-lg border-b border-gray-800" style="background-color: rgba(18, 18, 18, 0.8); backdrop-filter: blur(10px);">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="/" title="Return to Homepage">
+                        <img src="assets/gold_green_logo.png" alt="Restoring Democracy's Promise Logo" class="h-8 w-8">
+                    </a>
+                    <a href="/" class="text-sm font-medium text-gray-300 hover:text-white hover:underline hidden sm:block">
+                        &larr; Return to Homepage
+                    </a>
+                </div>
+                <h1 class="text-3xl uppercase text-white hidden lg:block">The God Machine</h1>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 max-w-4xl">
+
+        <header class="text-center py-6">
+            <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-wider">THE GOD MACHINE</h1>
+            <p class="text-xl md:text-2xl accent-red mt-2" style="font-family: var(--font-display); font-weight: 600;">How a Tax-Exempt ‘Ministry’ Built a Business Selling Chaplains to Public Schools</p>
+            <p class="text-sm text-gray-400 mt-2">An Exclusive Investigation by Restoring Democracy's Promise</p>
+        </header>
+
+        <main class="mt-6">
+            <div class="flex justify-around border-b border-custom-light mb-6">
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl active" onclick="showTab('summary')">Summary</button>
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('network')">The Components</button>
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('evidence')">Financial Evidence</button>
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('impact')">Consequences</button>
+            </div>
+
+            <div id="summary" class="tab-content active">
+                <div class="card card-highlight">
+                    <h2 class="text-3xl accent-red mb-2">Executive Summary: Anatomy of a Manufactured Market</h2>
+                    <p class="text-gray-300 leading-relaxed">A forensic investigation by Restoring Democracy’s Promise reveals how the presence of chaplains in public schools, framed as an act of faith, is the final stage in a calculated, revenue-generating machine. This operation is funded by anonymous money, engineered by political operatives, and delivered via legislation, turning American classrooms into a marketplace.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl text-white mb-2">The Central Operator</h3>
+                    <p class="text-gray-300 leading-relaxed">At the heart of this scheme is <b class="text-white">Mission Generation, Inc.</b>—operating as the <b class="text-white">National School Chaplain Association (NSCA)</b>. This organization positioned itself to be the sole provider of “certified” chaplains to public schools, leveraging laws drafted by its own legislative partners. Its financials expose concerning activity, including a <b class="accent-red">$150,000 loan to its founder.</b></p>
+                </div>
+                 <div class="card">
+                    <h3 class="text-2xl text-white mb-2">The Assembly Line: Four Parts, One Purpose</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">This is not a grassroots campaign, but a <b class="accent-red">symbiotic network</b>—a four-part machine where every function exists to generate demand, create a credentialing monopoly, and extract value. <b class="accent-red">Click any step below for details.</b></p>
+                    <div class="space-y-2">
+                        <div class="flow-node" onclick="showModal(1)"><b>1. The Bill Mill</b><br><span class="text-sm text-gray-400">(National Association of Christian Lawmakers – NACL)</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node" onclick="showModal(2)"><b>2. The Mobilizer</b><br><span class="text-sm text-gray-400">(Faith Wins)</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node" onclick="showModal(3)"><b>3. The Credentialer</b><br><span class="text-sm text-gray-400">(Mission Generation/NSCA)</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node" onclick="showModal(4)"><b>4. The Money</b><br><span class="text-sm text-gray-400">(Anonymous Donors via DAFs)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="network" class="tab-content">
+                <div class="card card-highlight">
+                    <h2 class="text-3xl accent-red mb-2">Mapping The God Machine’s Components</h2>
+                    <p class="text-gray-300 leading-relaxed">The "God Machine" operates through a highly coordinated network, with each entity playing a specific, interconnected role in manufacturing demand for school chaplains.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="card"><b>The Bill Mill: NACL</b><br><span class="text-gray-400 leading-relaxed">The National Association of Christian Lawmakers drafts and promotes “model legislation” for friendly lawmakers, creating demand for chaplain roles.</span></div>
+                    <div class="card"><b>The Mobilizer: Faith Wins</b><br><span class="text-gray-400 leading-relaxed">Manufactures “grassroots” pressure campaigns, leveraging paid clergy and volunteers to lobby for these bills, creating public pressure.</span></div>
+                    <div class="card card-highlight"><b>The Credentialer: Mission Generation / NSCA</b><br><span class="text-gray-400 leading-relaxed">Sells the only credential available for the chaplain roles the NACL-pushed laws create, monopolizing the certification process.</span></div>
+                    <div class="card"><b>The Money: Anonymous Donors</b><br><span class="text-gray-400 leading-relaxed">Channels untraceable grants through donor-advised funds (DAFs), ensuring secrecy and consistent underwriting for the entire operation.</span></div>
+                </div>
+            </div>
+
+            <div id="evidence" class="tab-content">
+                <div class="card card-highlight">
+                    <h2 class="text-3xl accent-red mb-2">The Financial Engine: Anatomy of a Self-Dealing Scheme</h2>
+                     <p class="text-gray-300 leading-relaxed">A forensic review of IRS Form 990s from 2020–2023 exposes the financial logic that animates this machine, highlighting anonymous funding, monetized legislation, and a significant red flag loan.</p>
+                </div>
+                <div class="card">
+                     <h3 class="text-2xl text-white mb-4 text-center">Key Financial Flows</h3>
+                     <div class="space-y-2">
+                        <div class="flow-node" style="cursor:default;"><b>Anonymous Donor-Advised Fund (DAF)</b><br><span class="text-sm text-gray-400">Untraceable Grants</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node card-highlight" style="border-color: var(--accent-red); cursor:default;"><b>Mission Generation, Inc.</b><br><span class="text-sm accent-red font-bold">Identical $352,000 Grants (2022 & 2023)</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node" style="cursor:default;"><b>NSCA "Chaplain" Certifications</b><br><span class="text-sm accent-red font-bold">$75,412 Program Service Revenue (2023)</span></div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node card-highlight" style="border-color: var(--accent-red); cursor:default;"><b>Rocky Malloy (Founder)</b><br><span class="text-sm accent-red font-bold">$150,000 Loan from Mission Generation</span></div>
+                    </div>
+                </div>
+                <div class="card">
+                     <h3 class="text-2xl text-white mb-2">Credentialing Vacuum and Public Risk</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">The push for chaplains creates a significant risk by allowing individuals with minimal training to provide counseling in schools, contrasting sharply with the rigorous requirements for licensed professionals.</p>
+                    <div class="chart-container">
+                        <canvas id="credentialsChart"></canvas>
+                    </div>
+                     <p class="text-sm text-gray-400 mt-4 leading-relaxed"><i>Comparison illustrates required training hours: 40 for an NSCA Chaplain vs. 3,000+ for a Licensed Counselor (plus a Master's degree).</i></p>
+                </div>
+            </div>
+
+            <div id="impact" class="tab-content">
+                 <div class="card card-highlight">
+                    <h2 class="text-3xl accent-red mb-2">Consequences: Breach of Public Trust</h2>
+                    <p class="text-gray-300 leading-relaxed">The "God Machine" represents more than a policy push; it's a fundamental breach of public trust, transforming public education into a battleground for profit-driven culture wars.</p>
+                </div>
+                <div class="card">
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 leading-relaxed">
+                        <li>A tax-exempt nonprofit lobbies for laws that create a captive market for its own product.</li>
+                        <li>Anonymous donors fund the operation, evading public scrutiny and accountability.</li>
+                        <li>The nonprofit’s founder is the direct beneficiary of questionable six-figure loans, indicating potential private inurement.</li>
+                        <li>Students and local communities are left to pay the price as professional counseling is replaced by unqualified, religiously-affiliated roles.</li>
+                    </ul>
+                </div>
+                 <div class="card">
+                    <h3 class="text-2xl text-white mb-2">The Broader Methodology: "The Pincer Movement"</h3>
+                     <p class="text-gray-300 leading-relaxed">This case study is part of a national "Pincer Movement." One arm pushes model bills and legislative action; the other establishes a credentialing monopoly and revenue stream, all amplified by anonymous dark money. This exploits regulatory gaps and the opacity of charitable giving, using the nonprofit system as a lever for profit and policy.</p>
+                </div>
+                <div class="card card-highlight">
+                     <p class="text-center text-2xl accent-red" style="font-family: var(--font-display); font-weight: 700;">"This is not merely a violation of public trust; it is the transformation of American schools into a battleground for profit-driven culture wars."</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div id="modal-container" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-modal" class="absolute top-2 right-4 text-4xl text-gray-500 hover:text-white">&times;</button>
+            <h3 id="modal-title" class="text-3xl accent-red mb-4"></h3>
+            <p id="modal-body" class="text-gray-300 leading-relaxed"></p>
+        </div>
+    </div>
+
+
+    <footer class="border-t border-gray-800 py-8 mt-4">
+        <div class="container mx-auto px-4 text-center text-gray-500">
+            <p>&copy; 2025 Restoring Democracy's Promise. All Rights Reserved.</p>
+            <p class="text-sm mt-2">This interactive report is based on the keystone investigation "THE GOD MACHINE."</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Modal Data and Functions ---
+        const modalData = {
+            1: { title: '1. The Bill Mill (NACL)', content: 'The National Association of Christian Lawmakers (NACL) drafts and promotes "model legislation" to friendly lawmakers across states. These bills create the legal framework for chaplains in public schools, manufacturing the demand for their services.' },
+            2: { title: '2. The Mobilizer (Faith Wins)', content: 'Faith Wins organizes and trains "grassroots" pressure campaigns. They mobilize paid clergy and volunteers to lobby legislators and create the illusion of widespread public demand for the chaplain bills, influencing policy enactment.' },
+            3: { title: '3. The Credentialer (Mission Generation/NSCA)', content: 'Mission Generation, operating as the National School Chaplain Association (NSCA), sells the exclusive "certified" chaplain credential. This positions them as the sole provider for the roles created by the NACL-pushed laws, establishing a monopoly.' },
+            4: { title: '4. The Money (Anonymous Donors)', content: 'Anonymous donors channel untraceable grants through Donor-Advised Funds (DAFs) to Mission Generation and potentially other network entities. This opaque funding ensures secrecy and continuity for the entire "God Machine" operation, shielding benefactors from public scrutiny.' }
+        };
+
+        const modalContainer = document.getElementById('modal-container');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        function showModal(step) {
+            const data = modalData[step];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalBody.textContent = data.content;
+                modalContainer.classList.add('visible');
+            }
+        }
+
+        function hideModal() {
+            modalContainer.classList.remove('visible');
+        }
+
+        closeModalBtn.addEventListener('click', hideModal);
+        modalContainer.addEventListener('click', (e) => {
+            if (e.target === modalContainer) {
+                hideModal();
+            }
+        });
+
+        // --- Tab Navigation ---
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.toggle('active', button.getAttribute('onclick').includes(`'${tabName}'`));
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.toggle('active', content.id === tabName);
+            });
+        }
+
+        // --- Chart.js ---
+        const ctx = document.getElementById('credentialsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['NSCA Chaplain', 'Licensed Counselor'],
+                datasets: [{
+                    label: 'Required Training (Hours)',
+                    data: [40, 3000],
+                    backgroundColor: ['rgba(74, 85, 104, 0.7)', 'rgba(229, 62, 62, 0.7)'],
+                    borderColor: ['#4A5568', '#E53E3E'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false, // Key fix for responsiveness
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { color: '#A0A0A0', font: { family: "'Roboto Slab', serif" } },
+                        grid: { color: '#333' }
+                    },
+                    y: {
+                       ticks: { color: '#E0E0E0', font: { size: 14, family: "'Roboto Slab', serif" } },
+                       grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        bodyFont: { family: "'Roboto Slab', serif" },
+                        callbacks: {
+                            label: (context) => context.raw === 40 ? ' 40-hour online course' : ' 3,000+ supervised clinical hours + Master\'s Degree'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
