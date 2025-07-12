@@ -11,13 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --accent-red: #E53E3E; 
-            --background-primary: #121212;
-            --background-secondary: #1E1E1E;
-            --border-color: #333;
-            --text-primary: #E0E0E0;
-            --text-secondary: #A0A0A0;
+        /* NEW COLOR PALETTE: Navy Blue, Burnished Gold, Light Grey */
+        :root {
+            --primary-navy-blue: #002B4B; /* Deep, authoritative Navy Blue */
+            --accent-burnished-gold: #B8860B; /* Desaturated, Burnished Gold */
+            --neutral-light-grey: #F0F0F0; /* Cool, clinical Light Grey for backgrounds/text */
+            --text-dark: #333333; /* Dark text for light backgrounds */
+            --text-light: #E0E1DD; /* Light text for dark backgrounds */
+            --background-dark: #1A1A1A; /* For general dark backgrounds */
+            --card-background: #252525; /* Slightly lighter dark for card backgrounds */
+
             --font-display: 'Teko', sans-serif;
             --font-body: 'Roboto Slab', serif;
         }
@@ -27,47 +30,65 @@
         }
         body {
             font-family: var(--font-body);
-            background-color: var(--background-primary);
-            color: var(--text-primary);
-            border: 8px solid var(--accent-red);
+            background-color: var(--primary-navy-blue); /* Changed to Navy Blue */
+            color: var(--text-light); /* Changed to light text */
+            border: 8px solid var(--accent-burnished-gold); /* Changed to Burnished Gold */
             margin: 0;
         }
         h1, h2, h3, h4, .tab-button {
             font-family: var(--font-display);
             font-weight: 600;
         }
-        .accent-red { color: var(--accent-red); }
-        .bg-custom-med { background-color: var(--background-secondary); }
-        .border-custom-light { border-color: var(--border-color); }
-        
+        .accent-color { color: var(--accent-burnished-gold); } /* New accent class */
+        .bg-card-dark { background-color: var(--card-background); } /* New card background class */
+        .border-accent { border-color: var(--accent-burnished-gold); } /* New accent border */
+
         .tab-button {
             transition: all 0.3s ease;
             border-bottom: 3px solid transparent;
-            /* Explicitly set smaller font for very small screens */
-            font-size: 0.75rem; /* text-xs */
-            padding-left: 0.5rem; /* px-2 */
-            padding-right: 0.5rem; /* px-2 */
+            font-size: 0.75rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            color: var(--text-light); /* Ensure tab buttons are visible */
         }
-        /* Apply Tailwind's responsive classes directly in HTML for better control */
         .tab-button.active {
-            border-bottom-color: var(--accent-red);
-            color: #FFFFFF;
+            border-bottom-color: var(--accent-burnished-gold); /* Changed to Burnished Gold */
+            color: var(--accent-burnished-gold); /* Highlight active tab with gold */
         }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
         .card {
-            background-color: var(--background-secondary);
-            border-left: 5px solid var(--border-color);
+            background-color: var(--card-background); /* Changed to new card background */
+            border-left: 5px solid var(--accent-burnished-gold); /* Changed to Burnished Gold */
             padding: 1.5rem;
             border-radius: 0.25rem;
             margin-bottom: 1rem;
         }
-        .card-highlight { border-left-color: var(--accent-red); }
+        .card-highlight { border-left-color: var(--accent-burnished-gold); } /* Consistent highlight */
+
+        /* Styles for the "Components" section cards to make them interactive and highlight */
+        .component-card {
+            background-color: var(--card-background);
+            border-left: 5px solid var(--primary-navy-blue); /* Default border for components */
+            padding: 1.5rem;
+            border-radius: 0.25rem;
+            margin-bottom: 1rem;
+            cursor: pointer; /* Indicate interactivity */
+            transition: border-left-color 0.3s ease, background-color 0.3s ease;
+        }
+        .component-card.active-component {
+            border-left-color: var(--accent-burnished-gold); /* Highlight active component */
+            background-color: rgba(184, 134, 11, 0.1); /* Subtle background highlight */
+        }
+        .component-card:hover {
+            border-left-color: var(--accent-burnished-gold); /* Hover effect */
+        }
 
         .flow-node {
-            background-color: #2D3748;
-            border: 1px solid #4A5568;
+            background-color: var(--card-background); /* Changed to card background */
+            border: 1px solid var(--primary-navy-blue); /* Changed to navy blue border */
+            color: var(--text-light); /* Ensure text is light */
             padding: 1rem;
             border-radius: 0.5rem;
             text-align: center;
@@ -77,28 +98,31 @@
         .flow-node:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-            border-color: var(--accent-red);
+            border-color: var(--accent-burnished-gold); /* Changed to Burnished Gold */
         }
         .flow-arrow {
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            color: var(--text-secondary);
+            color: var(--text-light); /* Changed to light text */
             padding: 0 0.5rem;
             margin: 0.5rem 0;
         }
         .chart-container {
             position: relative;
             margin: auto;
-            height: 300px; /* Adjusted for better mobile display */
+            height: 300px;
             width: 100%;
+            background-color: var(--neutral-light-grey); /* Chart background to light grey */
+            padding: 1rem;
+            border-radius: 0.5rem;
         }
         /* Modal Styles */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.85);
+            background-color: rgba(0, 0, 0, 0.9); /* Slightly darker overlay for new palette */
             z-index: 100;
             display: flex;
             align-items: center;
@@ -112,30 +136,37 @@
             visibility: visible;
         }
         .modal-content {
-            background-color: var(--background-secondary);
-            border: 1px solid var(--accent-red);
+            background-color: var(--card-background); /* Modal content background */
+            border: 1px solid var(--accent-burnished-gold); /* Modal border */
             max-width: 500px;
             width: 90%;
             padding: 2rem;
             border-radius: 0.5rem;
             position: relative;
+            color: var(--text-light);
+        }
+        .modal-content h3 {
+            color: var(--accent-burnished-gold); /* Modal title accent */
+        }
+        .modal-content button {
+            color: var(--text-secondary); /* Close button color */
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <nav class="sticky top-0 z-50 shadow-lg border-b border-gray-800" style="background-color: rgba(18, 18, 18, 0.8); backdrop-filter: blur(10px);">
+    <nav class="sticky top-0 z-50 shadow-lg border-b border-gray-800" style="background-color: rgba(0, 43, 75, 0.8); backdrop-filter: blur(10px);">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center space-x-4">
                     <a href="/" title="Return to Homepage">
                         <img src="assets/gold_green_logo.png" alt="Restoring Democracy's Promise Logo" class="h-8 w-8">
                     </a>
-                    <a href="/" class="text-sm font-medium text-gray-300 hover:text-white hover:underline hidden sm:block">
+                    <a href="/" class="text-sm font-medium" style="color: var(--text-light); hover:text-white hover:underline hidden sm:block">
                         &larr; Return to Homepage
                     </a>
                 </div>
-                <h1 class="text-3xl uppercase text-white hidden lg:block">The God Machine</h1>
+                <h1 class="text-3xl uppercase" style="color: var(--accent-burnished-gold);" >The God Machine</h1>
             </div>
         </div>
     </nav>
@@ -143,13 +174,13 @@
     <div class="container mx-auto p-4 max-w-4xl">
 
         <header class="text-center py-6">
-            <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-wider">THE GOD MACHINE</h1>
-            <p class="text-xl md:text-2xl accent-red mt-2" style="font-family: var(--font-display); font-weight: 600;">How a Tax-Exempt ‘Ministry’ Built a Business Selling Chaplains to Public Schools</p>
-            <p class="text-sm text-gray-400 mt-2">An Exclusive Investigation by Restoring Democracy's Promise</p>
+            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wider" style="color: var(--accent-burnished-gold);">THE GOD MACHINE</h1>
+            <p class="text-xl md:text-2xl accent-color mt-2" style="font-family: var(--font-display); font-weight: 600;">How a Tax-Exempt ‘Ministry’ Built a Business Selling Chaplains to Public Schools</p>
+            <p class="text-sm" style="color: var(--text-light); opacity: 0.7;">An Exclusive Investigation by Restoring Democracy's Promise</p>
         </header>
 
         <main class="mt-6">
-            <div class="flex justify-around border-b border-custom-light mb-6">
+            <div class="flex justify-around border-b border-accent mb-6">
                 <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl active" onclick="showTab('summary')">Summary</button>
                 <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" onclick="showTab('network')">Components</button>
                 <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" onclick="showTab('evidence')">Financial</button>
@@ -158,75 +189,103 @@
 
             <div id="summary" class="tab-content active">
                 <div class="card card-highlight">
-                    <h2 class="text-3xl accent-red mb-2">Executive Summary: Anatomy of a Manufactured Market</h2>
-                    <p class="text-gray-300 leading-relaxed">A forensic investigation by Restoring Democracy’s Promise reveals how the presence of chaplains in public schools, framed as an act of faith, is the final stage in a calculated, revenue-generating machine. This operation is funded by anonymous money, engineered by political operatives, and delivered via legislation, turning American classrooms into a marketplace.</p>
+                    <h2 class="text-3xl accent-color mb-2">Executive Summary: Anatomy of a Manufactured Market</h2>
+                    <p class="leading-relaxed" style="color: var(--text-light);">A forensic investigation by Restoring Democracy’s Promise reveals how the presence of chaplains in public schools, framed as an act of faith, is the final stage in a calculated, revenue-generating machine. This operation is funded by anonymous money, engineered by political operatives, and delivered via legislation, turning American classrooms into a marketplace.</p>
                 </div>
                 <div class="card">
                     <h3 class="text-2xl text-white mb-2">The Central Operator</h3>
-                    <p class="text-gray-300 leading-relaxed">At the heart of this scheme is <b class="text-white">Mission Generation, Inc.</b>—operating as the <b class="text-white">National School Chaplain Association (NSCA)</b>. This organization positioned itself to be the sole provider of “certified” chaplains to public schools, leveraging laws drafted by its own legislative partners. Its financials expose concerning activity, including a <b class="accent-red">$150,000 loan to its founder.</b></p>
+                    <p class="leading-relaxed" style="color: var(--text-light);">At the heart of this scheme is <b style="color: var(--text-light);">Mission Generation, Inc.</b>—operating as the <b style="color: var(--text-light);">National School Chaplain Association (NSCA)</b>. This organization positioned itself to be the sole provider of “certified” chaplains to public schools, leveraging laws drafted by its own legislative partners. Its financials expose concerning activity, including a <b class="accent-color">$150,000 loan to its founder.</b></p>
                 </div>
                  <div class="card">
-                    <h3 class="text-2xl text-white mb-2">The Assembly Line: Four Parts, One Purpose</h3>
-                    <p class="text-gray-300 mb-4 leading-relaxed">This is not a grassroots campaign, but a <b class="accent-red">symbiotic network</b>—a four-part machine where every function exists to generate demand, create a credentialing monopoly, and extract value. <b class="accent-red">Click any step below for details.</b></p>
+                    <h3 class="text-2xl text-white mb-4">The Assembly Line: Four Parts, One Purpose</h3>
+                    <p class="mb-4 leading-relaxed" style="color: var(--text-light);">This is not a grassroots campaign, but a <b class="accent-color">symbiotic network</b>—a four-part machine where every function exists to generate demand, create a credentialing monopoly, and extract value. <b class="accent-color">Click any step below for details.</b></p>
                     <div class="space-y-2">
-                        <div class="flow-node" onclick="showModal(1)"><b>1. The Bill Mill</b><br><span class="text-sm text-gray-400">(National Association of Christian Lawmakers – NACL)</span></div>
+                        <div class="flow-node" onclick="showModal(1)"><b>1. The Bill Mill</b><br><span class="text-sm" style="color: var(--text-secondary);">(National Association of Christian Lawmakers – NACL)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(2)"><b>2. The Mobilizer</b><br><span class="text-sm text-gray-400">(Faith Wins)</span></div>
+                        <div class="flow-node" onclick="showModal(2)"><b>2. The Mobilizer</b><br><span class="text-sm" style="color: var(--text-secondary);">(Faith Wins)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(3)"><b>3. The Credentialer</b><br><span class="text-sm text-gray-400">(Mission Generation/NSCA)</span></div>
+                        <div class="flow-node" onclick="showModal(3)"><b>3. The Credentialer</b><br><span class="text-sm" style="color: var(--text-secondary);">(Mission Generation/NSCA)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(4)"><b>4. The Money</b><br><span class="text-sm text-gray-400">(Anonymous Donors via DAFs)</span></div>
+                        <div class="flow-node" onclick="showModal(4)"><b>4. The Money</b><br><span class="text-sm" style="color: var(--text-secondary);">(Anonymous Donors via DAFs)</span></div>
                     </div>
                 </div>
             </div>
 
             <div id="network" class="tab-content">
                 <div class="card card-highlight">
-                    <h2 class="text-3xl accent-red mb-2">Mapping The God Machine’s Components</h2>
-                    <p class="text-gray-300 leading-relaxed">The "God Machine" operates through a highly coordinated network, with each entity playing a specific, interconnected role in manufacturing demand for school chaplains.</p>
+                    <h2 class="text-3xl accent-color mb-2">Mapping The God Machine’s Components</h2>
+                    <p class="leading-relaxed" style="color: var(--text-light);">The "God Machine" operates through a highly coordinated network, with each entity playing a specific, interconnected role in manufacturing demand for school chaplains.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="card"><b>The Bill Mill: NACL</b><br><span class="text-gray-400 leading-relaxed">The National Association of Christian Lawmakers drafts and promotes “model legislation” for friendly lawmakers, creating demand for chaplain roles.</span></div>
-                    <div class="card"><b>The Mobilizer: Faith Wins</b><br><span class="text-gray-400 leading-relaxed">Manufactures “grassroots” pressure campaigns, leveraging paid clergy and volunteers to lobby for these bills, creating public pressure.</span></div>
-                    <div class="card card-highlight"><b>The Credentialer: Mission Generation / NSCA</b><br><span class="text-gray-400 leading-relaxed">Sells the only credential available for the chaplain roles the NACL-pushed laws create, monopolizing the certification process.</span></div>
-                    <div class="card"><b>The Money: Anonymous Donors</b><br><span class="text-gray-400 leading-relaxed">Channels untraceable grants through donor-advised funds (DAFs), ensuring secrecy and consistent underwriting for the entire operation.</span></div>
+                    <div class="component-card" data-component-id="nacl" onclick="highlightComponent('nacl')">
+                        <b>The Bill Mill: NACL</b><br>
+                        <span style="color: var(--text-secondary);" class="leading-relaxed">The National Association of Christian Lawmakers drafts and promotes “model legislation” for friendly lawmakers, creating demand for chaplain roles.</span>
+                    </div>
+                    <div class="component-card" data-component-id="faithwins" onclick="highlightComponent('faithwins')">
+                        <b>The Mobilizer: Faith Wins</b><br>
+                        <span style="color: var(--text-secondary);" class="leading-relaxed">Manufactures “grassroots” pressure campaigns, leveraging paid clergy and volunteers to lobby for these bills, creating public pressure.</span>
+                    </div>
+                    <div class="component-card" data-component-id="nsca" onclick="highlightComponent('nsca')">
+                        <b>The Credentialer: Mission Generation / NSCA</b><br>
+                        <span style="color: var(--text-secondary);" class="leading-relaxed">Sells the only credential available for the chaplain roles the NACL-pushed laws create, monopolizing the certification process.</span>
+                    </div>
+                    <div class="component-card" data-component-id="money" onclick="highlightComponent('money')">
+                        <b>The Money: Anonymous Donors</b><br>
+                        <span style="color: var(--text-secondary);" class="leading-relaxed">Channels untraceable grants through donor-advised funds (DAFs), ensuring secrecy and consistent underwriting for the entire operation.</span>
+                    </div>
+                </div>
+                <div class="card mt-6 text-center">
+                    <h3 class="text-2xl accent-color mb-4">Interactive Network Map: The God Machine Flowchart</h3>
+                    <p style="color: var(--text-light);" class="mb-4">Explore the full operational flowchart of The God Machine and its interconnected entities.</p>
+                    <a href="god-machine-flowchart.html" target="_blank" rel="noopener noreferrer" class="inline-block bg-white hover:bg-gray-200 text-primary-navy-blue font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300">
+                        <img src="assets/gold_green_logo.png" alt="Link to Interactive Flowchart" class="h-6 inline-block mr-2"> Launch Interactive Flowchart
+                    </a>
+                    <p class="text-sm mt-2" style="color: var(--text-secondary);"><i>(Opens in a new tab for an immersive experience)</i></p>
                 </div>
             </div>
 
             <div id="evidence" class="tab-content">
                 <div class="card card-highlight">
-                    <h2 class="text-3xl accent-red mb-2">The Financial Engine: Anatomy of a Self-Dealing Scheme</h2>
-                     <p class="text-gray-300 leading-relaxed">A forensic review of IRS Form 990s from 2020–2023 exposes the financial logic that animates this machine, highlighting anonymous funding, monetized legislation, and a significant red flag loan.</p>
+                    <h2 class="text-3xl accent-color mb-2">The Financial Engine: Anatomy of a Self-Dealing Scheme</h2>
+                     <p class="leading-relaxed" style="color: var(--text-light);">A forensic review of IRS Form 990s from 2020–2023 exposes the financial logic that animates this machine, highlighting anonymous funding, monetized legislation, and a significant red flag loan.</p>
                 </div>
                 <div class="card">
-                     <h3 class="text-2xl text-white mb-4 text-center">Key Financial Flows</h3>
+                     <h3 class="2xl text-white mb-4 text-center">Key Financial Flows</h3>
                      <div class="space-y-2">
-                        <div class="flow-node" style="cursor:default;"><b>Anonymous Donor-Advised Fund (DAF)</b><br><span class="text-sm text-gray-400">Untraceable Grants</span></div>
+                        <div class="flow-node" style="cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><b>Anonymous Donor-Advised Fund (DAF)</b><br><span class="text-sm" style="color: #666;">Untraceable Grants</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node card-highlight" style="border-color: var(--accent-red); cursor:default;"><b>Mission Generation, Inc.</b><br><span class="text-sm accent-red font-bold">Identical $352,000 Grants (2022 & 2023)</span></div>
+                        <div class="flow-node card-highlight" style="border-color: var(--accent-burnished-gold); cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><b>Mission Generation, Inc.</b><br><span class="text-sm accent-color font-bold">Identical $352,000 Grants (2022 & 2023)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" style="cursor:default;"><b>NSCA "Chaplain" Certifications</b><br><span class="text-sm accent-red font-bold">$75,412 Program Service Revenue (2023)</span></div>
+                        <div class="flow-node" style="cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><b>NSCA "Chaplain" Certifications</b><br><span class="text-sm accent-color font-bold">$75,412 Program Service Revenue (2023)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node card-highlight" style="border-color: var(--accent-red); cursor:default;"><b>Rocky Malloy (Founder)</b><br><span class="text-sm accent-red font-bold">$150,000 Loan from Mission Generation</span></div>
+                        <div class="flow-node card-highlight" style="border-color: var(--accent-burnished-gold); cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><b>Rocky Malloy (Founder)</b><br><span class="text-sm accent-color font-bold">$150,000 Loan from Mission Generation</span></div>
                     </div>
                 </div>
                 <div class="card">
                      <h3 class="2xl text-white mb-2">Credentialing Vacuum and Public Risk</h3>
-                    <p class="text-gray-300 mb-4 leading-relaxed">The push for chaplains creates a significant risk by allowing individuals with minimal training to provide counseling in schools, contrasting sharply with the rigorous requirements for licensed professionals.</p>
+                    <p class="mb-4 leading-relaxed" style="color: var(--text-light);">The push for chaplains creates a significant risk by allowing individuals with minimal training to provide counseling in schools, contrasting sharply with the rigorous requirements for licensed professionals.</p>
                     <div class="chart-container">
                         <canvas id="credentialsChart"></canvas>
                     </div>
-                     <p class="text-sm text-gray-400 mt-4 leading-relaxed"><i>Comparison illustrates required training hours: 40 for an NSCA Chaplain vs. 3,000+ for a Licensed Counselor (plus a Master's degree).</i></p>
+                     <p class="text-sm mt-4 leading-relaxed" style="color: var(--text-secondary);"><i>Comparison illustrates required training hours: 40 for an NSCA Chaplain vs. 3,000+ for a Licensed Counselor (plus a Master's degree).</i></p>
+                     <div class="mt-6 p-4 border border-accent rounded-lg text-center bg-card-dark">
+                        <h4 class="text-xl accent-color mb-2">Evidence Dossier: The Credentialing Gap</h4>
+                        <p style="color: var(--text-light);" class="mb-4">Dive deeper into the stark differences between NSCA chaplain certification and professional licensing standards.</p>
+                        <a href="credentialing-gap-dossier.html" target="_blank" rel="noopener noreferrer" class="inline-block bg-white hover:bg-gray-200 text-primary-navy-blue font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300">
+                             <img src="assets/gold_green_logo.png" alt="Link to Credentialing Gap Dossier" class="h-6 inline-block mr-2"> Explore the Dossier
+                        </a>
+                        <p class="text-sm mt-2" style="color: var(--text-secondary);"><i>(Opens in a new tab for detailed evidence)</i></p>
+                    </div>
                 </div>
             </div>
 
             <div id="impact" class="tab-content">
                  <div class="card card-highlight">
-                    <h2 class="text-3xl accent-red mb-2">Consequences: Breach of Public Trust</h2>
-                    <p class="text-gray-300 leading-relaxed">The "God Machine" represents more than a policy push; it's a fundamental breach of public trust, transforming public education into a battleground for profit-driven culture wars.</p>
+                    <h2 class="text-3xl accent-color mb-2">Consequences: Breach of Public Trust</h2>
+                    <p class="leading-relaxed" style="color: var(--text-light);">The "God Machine" represents more than a policy push; it's a fundamental breach of public trust, transforming public education into a battleground for profit-driven culture wars.</p>
                 </div>
                 <div class="card">
-                    <ul class="list-disc list-inside space-y-2 text-gray-300 leading-relaxed">
+                    <ul class="list-disc list-inside space-y-2 leading-relaxed" style="color: var(--text-light);">
                         <li>A tax-exempt nonprofit lobbies for laws that create a captive market for its own product.</li>
                         <li>Anonymous donors fund the operation, evading public scrutiny and accountability.</li>
                         <li>The nonprofit’s founder is the direct beneficiary of questionable six-figure loans, indicating potential private inurement.</li>
@@ -235,26 +294,25 @@
                 </div>
                  <div class="card">
                     <h3 class="text-2xl text-white mb-2">The Broader Methodology: "The Pincer Movement"</h3>
-                     <p class="text-gray-300 leading-relaxed">This case study is part of a national "Pincer Movement." One arm pushes model bills and legislative action; the other establishes a credentialing monopoly and revenue stream, all amplified by anonymous dark money. This exploits regulatory gaps and the opacity of charitable giving, using the nonprofit system as a lever for profit and policy.</p>
+                     <p class="leading-relaxed" style="color: var(--text-light);">This case study is part of a national "Pincer Movement." One arm pushes model bills and legislative action; the other establishes a credentialing monopoly and revenue stream, all amplified by anonymous dark money. This exploits regulatory gaps and the opacity of charitable giving, using the nonprofit system as a lever for profit and policy.</p>
                 </div>
                 <div class="card card-highlight">
-                     <p class="text-center text-2xl accent-red" style="font-family: var(--font-display); font-weight: 700;">"This is not merely a violation of public trust; it is the transformation of American schools into a battleground for profit-driven culture wars."</p>
+                     <p class="text-center text-2xl accent-color" style="font-family: var(--font-display); font-weight: 700;">"This is not merely a violation of public trust; it is the transformation of American schools into a battleground for profit-driven culture wars."</p>
                 </div>
             </div>
         </main>
     </div>
-    
+
     <div id="modal-container" class="modal-overlay">
         <div class="modal-content">
-            <button id="close-modal" class="absolute top-2 right-4 text-4xl text-gray-500 hover:text-white">&times;</button>
-            <h3 id="modal-title" class="text-3xl accent-red mb-4"></h3>
-            <p id="modal-body" class="text-gray-300 leading-relaxed"></p>
+            <button id="close-modal" class="absolute top-2 right-4 text-4xl hover:text-white">&times;</button>
+            <h3 id="modal-title" class="text-3xl accent-color mb-4"></h3>
+            <p id="modal-body" class="leading-relaxed"></p>
         </div>
     </div>
 
-
-    <footer class="border-t border-gray-800 py-8 mt-4">
-        <div class="container mx-auto px-4 text-center text-gray-500">
+    <footer class="border-t py-8 mt-4" style="border-color: var(--primary-navy-blue);">
+        <div class="container mx-auto px-4 text-center" style="color: var(--text-secondary);">
             <p>&copy; 2025 Restoring Democracy's Promise. All Rights Reserved.</p>
             <p class="text-sm mt-2">This interactive report is based on the keystone investigation "THE GOD MACHINE."</p>
         </div>
@@ -297,11 +355,34 @@
         // --- Tab Navigation ---
         function showTab(tabName) {
             document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.toggle('active', button.getAttribute('onclick').includes(`'${tabName}'`));
+                button.classList.remove('active');
+                if (button.getAttribute('onclick').includes(`'${tabName}'`)) {
+                    button.classList.add('active');
+                }
             });
             document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.toggle('active', content.id === tabName);
+                content.classList.remove('active');
+                if (content.id === tabName) {
+                    content.classList.add('active');
+                }
             });
+            // Reset component highlights when switching tabs
+            document.querySelectorAll('.component-card').forEach(card => {
+                card.classList.remove('active-component');
+            });
+        }
+
+        // --- Component Card Highlighting for "Network" Tab ---
+        function highlightComponent(componentId) {
+            document.querySelectorAll('.component-card').forEach(card => {
+                card.classList.remove('active-component');
+            });
+            const activeCard = document.querySelector(`.component-card[data-component-id="${componentId}"]`);
+            if (activeCard) {
+                activeCard.classList.add('active-component');
+                // Optional: Scroll to the highlighted card if it's off-screen
+                activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
 
         // --- Chart.js ---
@@ -313,23 +394,29 @@
                 datasets: [{
                     label: 'Required Training (Hours)',
                     data: [40, 3000],
-                    backgroundColor: ['rgba(74, 85, 104, 0.7)', 'rgba(229, 62, 62, 0.7)'],
-                    borderColor: ['#4A5568', '#E53E3E'],
+                    backgroundColor: [
+                        'rgba(0, 43, 75, 0.7)',  /* Navy Blue for NSCA Chaplain */
+                        'rgba(184, 134, 11, 0.7)' /* Burnished Gold for Licensed Counselor */
+                    ],
+                    borderColor: [
+                        '#002B4B',
+                        '#B8860B'
+                    ],
                     borderWidth: 2
                 }]
             },
             options: {
                 indexAxis: 'y',
                 responsive: true,
-                maintainAspectRatio: false, // Key fix for responsiveness
+                maintainAspectRatio: false,
                 scales: {
                     x: {
                         beginAtZero: true,
-                        ticks: { color: '#A0A0A0', font: { family: "'Roboto Slab', serif" } },
-                        grid: { color: '#333' }
+                        ticks: { color: '#333333', font: { family: "'Roboto Slab', serif" } }, /* Dark text for light grey background */
+                        grid: { color: '#BBBBBB' } /* Lighter grid for light background */
                     },
                     y: {
-                       ticks: { color: '#E0E0E0', font: { size: 14, family: "'Roboto Slab', serif" } },
+                       ticks: { color: '#333333', font: { size: 14, family: "'Roboto Slab', serif" } }, /* Dark text for labels */
                        grid: { display: false }
                     }
                 },
@@ -342,6 +429,14 @@
                         }
                     }
                 }
+            }
+        });
+
+        // Initialize active component highlight if 'network' tab is active on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.getElementById('network').classList.contains('active')) {
+                // Optionally highlight the first component by default or based on URL hash
+                // highlightComponent('nacl');
             }
         });
     </script>
