@@ -30,18 +30,18 @@
         }
         body {
             font-family: var(--font-body);
-            background-color: var(--primary-navy-blue); /* Changed to Navy Blue */
-            color: var(--text-light); /* Changed to light text */
-            border: 8px solid var(--accent-burnished-gold); /* Changed to Burnished Gold */
+            background-color: var(--primary-navy-blue);
+            color: var(--text-light);
+            border: 8px solid var(--accent-burnished-gold);
             margin: 0;
         }
         h1, h2, h3, h4, .tab-button {
             font-family: var(--font-display);
             font-weight: 600;
         }
-        .accent-color { color: var(--accent-burnished-gold); } /* New accent class */
-        .bg-card-dark { background-color: var(--card-background); } /* New card background class */
-        .border-accent { border-color: var(--accent-burnished-gold); } /* New accent border */
+        .accent-color { color: var(--accent-burnished-gold); }
+        .bg-card-dark { background-color: var(--card-background); }
+        .border-accent { border-color: var(--accent-burnished-gold); }
 
         .tab-button {
             transition: all 0.3s ease;
@@ -49,46 +49,46 @@
             font-size: 0.75rem;
             padding-left: 0.5rem;
             padding-right: 0.5rem;
-            color: var(--text-light); /* Ensure tab buttons are visible */
+            color: var(--text-light);
         }
         .tab-button.active {
-            border-bottom-color: var(--accent-burnished-gold); /* Changed to Burnished Gold */
-            color: var(--accent-burnished-gold); /* Highlight active tab with gold */
+            border-bottom-color: var(--accent-burnished-gold);
+            color: var(--accent-burnished-gold);
         }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
         .card {
-            background-color: var(--card-background); /* Changed to new card background */
-            border-left: 5px solid var(--accent-burnished-gold); /* Changed to Burnished Gold */
+            background-color: var(--card-background);
+            border-left: 5px solid var(--accent-burnished-gold);
             padding: 1.5rem;
             border-radius: 0.25rem;
             margin-bottom: 1rem;
         }
-        .card-highlight { border-left-color: var(--accent-burnished-gold); } /* Consistent highlight */
+        .card-highlight { border-left-color: var(--accent-burnished-gold); }
 
         /* Styles for the "Components" section cards to make them interactive and highlight */
         .component-card {
             background-color: var(--card-background);
-            border-left: 5px solid var(--primary-navy-blue); /* Default border for components */
+            border-left: 5px solid var(--primary-navy-blue);
             padding: 1.5rem;
             border-radius: 0.25rem;
             margin-bottom: 1rem;
-            cursor: pointer; /* Indicate interactivity */
+            cursor: pointer;
             transition: border-left-color 0.3s ease, background-color 0.3s ease;
         }
         .component-card.active-component {
-            border-left-color: var(--accent-burnished-gold); /* Highlight active component */
-            background-color: rgba(184, 134, 11, 0.1); /* Subtle background highlight */
+            border-left-color: var(--accent-burnished-gold);
+            background-color: rgba(184, 134, 11, 0.1);
         }
         .component-card:hover {
-            border-left-color: var(--accent-burnished-gold); /* Hover effect */
+            border-left-color: var(--accent-burnished-gold);
         }
 
         .flow-node {
-            background-color: var(--card-background); /* Changed to card background */
-            border: 1px solid var(--primary-navy-blue); /* Changed to navy blue border */
-            color: var(--text-light); /* Ensure text is light */
+            background-color: var(--card-background);
+            border: 1px solid var(--primary-navy-blue);
+            color: var(--text-light);
             padding: 1rem;
             border-radius: 0.5rem;
             text-align: center;
@@ -98,14 +98,14 @@
         .flow-node:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-            border-color: var(--accent-burnished-gold); /* Changed to Burnished Gold */
+            border-color: var(--accent-burnished-gold);
         }
         .flow-arrow {
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            color: var(--text-light); /* Changed to light text */
+            color: var(--text-light);
             padding: 0 0.5rem;
             margin: 0.5rem 0;
         }
@@ -114,7 +114,7 @@
             margin: auto;
             height: 300px;
             width: 100%;
-            background-color: var(--neutral-light-grey); /* Chart background to light grey */
+            background-color: var(--neutral-light-grey);
             padding: 1rem;
             border-radius: 0.5rem;
         }
@@ -122,7 +122,7 @@
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.9); /* Slightly darker overlay for new palette */
+            background-color: rgba(0, 0, 0, 0.9);
             z-index: 100;
             display: flex;
             align-items: center;
@@ -136,8 +136,8 @@
             visibility: visible;
         }
         .modal-content {
-            background-color: var(--card-background); /* Modal content background */
-            border: 1px solid var(--accent-burnished-gold); /* Modal border */
+            background-color: var(--card-background);
+            border: 1px solid var(--accent-burnished-gold);
             max-width: 500px;
             width: 90%;
             padding: 2rem;
@@ -146,10 +146,10 @@
             color: var(--text-light);
         }
         .modal-content h3 {
-            color: var(--accent-burnished-gold); /* Modal title accent */
+            color: var(--accent-burnished-gold);
         }
         .modal-content button {
-            color: var(--text-secondary); /* Close button color */
+            color: var(--text-secondary);
         }
     </style>
 </head>
@@ -237,7 +237,7 @@
                 <div class="card mt-6 text-center">
                     <h3 class="text-2xl accent-color mb-4">Interactive Network Map: The God Machine Flowchart</h3>
                     <p style="color: var(--text-light);" class="mb-4">Explore the full operational flowchart of The God Machine and its interconnected entities.</p>
-                    <a href="god-machine-flowchart.html" target="_blank" rel="noopener noreferrer" class="inline-block bg-white hover:bg-gray-200 text-primary-navy-blue font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300">
+                    <a href="god-machine-flowchart.html" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary-navy-blue hover:bg-card-background text-accent-burnished-gold font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300">
                         <img src="assets/gold_green_logo.png" alt="Link to Interactive Flowchart" class="h-6 inline-block mr-2"> Launch Interactive Flowchart
                     </a>
                     <p class="text-sm mt-2" style="color: var(--text-secondary);"><i>(Opens in a new tab for an immersive experience)</i></p>
@@ -271,7 +271,7 @@
                      <div class="mt-6 p-4 border border-accent rounded-lg text-center bg-card-dark">
                         <h4 class="text-xl accent-color mb-2">Evidence Dossier: The Credentialing Gap</h4>
                         <p style="color: var(--text-light);" class="mb-4">Dive deeper into the stark differences between NSCA chaplain certification and professional licensing standards.</p>
-                        <a href="credentialing-gap-dossier.html" target="_blank" rel="noopener noreferrer" class="inline-block bg-white hover:bg-gray-200 text-primary-navy-blue font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300">
+                        <a href="credentialing-gap-dossier.html" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary-navy-blue hover:bg-card-background text-accent-burnished-gold font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300">
                              <img src="assets/gold_green_logo.png" alt="Link to Credentialing Gap Dossier" class="h-6 inline-block mr-2"> Explore the Dossier
                         </a>
                         <p class="text-sm mt-2" style="color: var(--text-secondary);"><i>(Opens in a new tab for detailed evidence)</i></p>
@@ -382,7 +382,7 @@
                 activeCard.classList.add('active-component');
                 activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
-            showModal(modalStep); // Also show the modal for the component
+            showModal(modalStep);
         }
 
         // --- Chart.js ---
@@ -395,8 +395,8 @@
                     label: 'Required Training (Hours)',
                     data: [40, 3000],
                     backgroundColor: [
-                        'rgba(0, 43, 75, 0.7)',  /* Navy Blue for NSCA Chaplain */
-                        'rgba(184, 134, 11, 0.7)' /* Burnished Gold for Licensed Counselor */
+                        'rgba(0, 43, 75, 0.7)',
+                        'rgba(184, 134, 11, 0.7)'
                     ],
                     borderColor: [
                         '#002B4B',
@@ -412,11 +412,11 @@
                 scales: {
                     x: {
                         beginAtZero: true,
-                        ticks: { color: '#333333', font: { family: "'Roboto Slab', serif" } }, /* Dark text for light grey background */
-                        grid: { color: '#BBBBBB' } /* Lighter grid for light background */
+                        ticks: { color: '#333333', font: { family: "'Roboto Slab', serif" } },
+                        grid: { color: '#BBBBBB' }
                     },
                     y: {
-                       ticks: { color: '#333333', font: { size: 14, family: "'Roboto Slab', serif" } }, /* Dark text for labels */
+                       ticks: { color: '#333333', font: { size: 14, family: "'Roboto Slab', serif" } },
                        grid: { display: false }
                     }
                 },
@@ -434,12 +434,11 @@
 
         // Initialize active tab on load, and potentially component highlight
         document.addEventListener('DOMContentLoaded', () => {
-            // Restore active tab based on URL hash if present
             const hash = window.location.hash.substring(1);
             if (hash && document.getElementById(hash)) {
                 showTab(hash);
             } else {
-                showTab('summary'); // Default to summary tab
+                showTab('summary');
             }
         });
     </script>
