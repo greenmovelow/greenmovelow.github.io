@@ -155,25 +155,36 @@
 
     var options = {
         nodes: {
-            shape: 'box',
-            font: {
-                face: 'Teko',
-                size: 18,
-                color: 'var(--text-dark)'
-            },
-            borderWidth: 2,
-            color: {
-                background: 'var(--flowchart-canvas-background)',
-                border: 'var(--primary-navy-blue)',
-                highlight: {
-                    background: 'var(--accent-burnished-gold)',
-                    border: 'var(--primary-navy-blue)'
-                },
-                hover: {
-                    background: 'var(--accent-burnished-gold)',
-                    border: 'var(--primary-navy-blue)'
-                }
-            },
+    shape: 'box',
+    font: {
+        face: 'Teko',
+        size: 18,
+        color: '#1A1A1A',       // Dark label text
+        strokeWidth: 0,
+        align: 'center'
+    },
+    borderWidth: 2,
+    color: {
+        background: 'var(--flowchart-canvas-background)',  // Light gold
+        border: 'var(--primary-navy-blue)',
+        highlight: {
+            background: 'var(--accent-burnished-gold)',
+            border: 'var(--primary-navy-blue)'
+        },
+        hover: {
+            background: 'var(--accent-burnished-gold)',
+            border: 'var(--primary-navy-blue)'
+        }
+    },
+    widthConstraint: { minimum: 150, maximum: 250 },
+    shadow: {
+        enabled: true,
+        color: 'rgba(0,0,0,0.25)',
+        size: 10,
+        x: 0,
+        y: 0
+    }
+},
             widthConstraint: { minimum: 150, maximum: 250 },
             shadow: {
                 enabled: true,
@@ -224,10 +235,28 @@
 
     var network = new vis.Network(container, data, options);
 
-    network.on("stabilizationIterationsDone", function () {
-        network.setOptions({ physics: false });
-        network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
+    network.on("selectNode", function (params) {
+    const nodeId = params.nodes[0];
+    if (nodeId && nodeDetails[nodeId]) {
+        const details = nodeDetails[nodeId];
+        infoTitle.textContent = details.title;
+        infoDescription.textContent = details.description;
+        nodeInfoPanel.classList.add('active');
+        nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Add visual glow to active node
+        nodes.update({ id: nodeId, shadow: { enabled: true, size: 20, color: '#D4AF37' } });
+    }
+});
+    network.on("deselectNode", function () {
+    nodeInfoPanel.classList.remove('active');
+    scrollPrompt.style.display = 'block';
+
+    // Reset glow on all nodes
+    nodes.get().forEach(n => {
+        nodes.update({ id: n.id, shadow: { enabled: true, size: 10, color: 'rgba(0,0,0,0.25)' } });
     });
+});
 
     const nodeInfoPanel = document.getElementById('node-info');
     const infoTitle = document.getElementById('info-title');
