@@ -244,6 +244,8 @@
         nodeInfoPanel.classList.add('active');
         nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
+        scrollPrompt.style.display = 'none'; // ← THIS IS MISSING
+
         // Add visual glow to active node
         nodes.update({ id: nodeId, shadow: { enabled: true, size: 20, color: '#D4AF37' } });
     }
