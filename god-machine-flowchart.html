@@ -14,7 +14,7 @@
         :root {
             --primary-navy-blue: #0A2239; /* Deep, authoritative Navy Blue */
             --accent-burnished-gold: #D4AF37; /* Desaturated, Burnished Gold */
-            --background-dark: #121212; /* Canvas background */
+            --background-dark: #121212; /* Vis.js canvas background */
             --text-light: #E0E1DD; /* For general light text */
             --text-dark: #1A1A1A; /* For general dark text (on light backgrounds) */
             --node-background-light: #F0F0F0; /* Light background for nodes */
@@ -42,7 +42,7 @@
             border-radius: 8px;
         }
         .node-info-panel {
-            background-color: #1a202c;
+            background-color: #1a202c; /* Dark background for info panel */
             border-left: 5px solid var(--accent-burnished-gold);
             padding: 1.5rem;
             border-radius: 0.25rem;
@@ -114,46 +114,63 @@
         var options = {
             nodes: {
                 shape: 'box',
-                font: { face: 'Teko', size: 18, color: 'var(--text-dark)' }, // Explicitly dark text for all nodes
+                font: { face: 'Teko', size: 18, color: 'var(--text-dark)' }, // Default: Dark text
                 borderWidth: 2,
                 color: {
-                    background: 'var(--node-background-light)', // Default light background for nodes
+                    background: 'var(--node-background-light)', // Default: Light background
                     border: 'var(--primary-navy-blue)',
-                    highlight: { background: 'white', border: 'var(--accent-burnished-gold)' }
+                    highlight: { background: 'white', border: 'var(--accent-burnished-gold)' },
+                    hover: { background: 'var(--node-background-light)', border: 'var(--accent-burnished-gold)' } // Ensure hover uses light background
                 },
-                widthConstraint: { minimum: 150, maximum: 250 }, // Added max width to prevent nodes from being too wide
+                widthConstraint: { minimum: 150, maximum: 250 },
                 shadow: true
             },
             edges: {
                 width: 2,
-                color: { color: 'var(--text-light)', highlight: 'var(--accent-burnished-gold)' },
+                color: { color: 'var(--text-light)', highlight: 'var(--accent-burnished-gold)' }, // Light text for edges
                 font: { color: 'var(--text-light)', face: 'Roboto Slab', size: 12, strokeWidth: 0, align: 'top' },
                 arrows: { to: { enabled: true, scaleFactor: 0.8 } },
                 smooth: { type: 'curvedCW', roundness: 0.2 }
             },
             groups: {
-                // Specific group styling, ensuring font color contrasts with background
-                funding: { color: { background: 'var(--node-background-gold)', border: 'var(--accent-burnished-gold)' }, font: { color: 'var(--text-dark)' } }, // Gold background, dark text
-                ops: { color: { background: 'var(--node-background-navy)', border: 'var(--primary-navy-blue)' }, font: { color: 'var(--text-light)' } }, // Navy background, light text
-                credentialer: { color: { background: 'var(--node-background-navy)', border: 'var(--primary-navy-blue)' }, font: { color: 'var(--text-light)' } }, // Navy background, light text
-                target: { color: { background: 'var(--node-background-light)', border: 'var(--primary-navy-blue)' }, font: { color: 'var(--text-dark)' } }, // Light background, dark text
-                individual: { shape: 'ellipse', color: { background: 'var(--node-background-gold)', border: 'var(--accent-burnished-gold)' }, font: { color: 'var(--text-dark)' } } // Gold background, dark text
+                // Explicitly set node background and font colors for each group for high contrast
+                funding: {
+                    color: { background: 'var(--node-background-gold)', border: 'var(--accent-burnished-gold)' },
+                    font: { color: 'var(--text-dark)' } // Dark text on gold background
+                },
+                ops: {
+                    color: { background: 'var(--node-background-navy)', border: 'var(--primary-navy-blue)' },
+                    font: { color: 'var(--text-light)' } // Light text on navy background
+                },
+                credentialer: {
+                    color: { background: 'var(--node-background-navy)', border: 'var(--primary-navy-blue)' },
+                    font: { color: 'var(--text-light)' } // Light text on navy background
+                },
+                target: {
+                    color: { background: 'var(--node-background-light)', border: 'var(--primary-navy-blue)' },
+                    font: { color: 'var(--text-dark)' } // Dark text on light background
+                },
+                individual: {
+                    shape: 'ellipse',
+                    color: { background: 'var(--node-background-gold)', border: 'var(--accent-burnished-gold)' },
+                    font: { color: 'var(--text-dark)' } // Dark text on gold background
+                }
             },
             physics: {
                 enabled: true,
                 stabilization: {
                     enabled: true,
-                    iterations: 1000, // Increase iterations for better stabilization
+                    iterations: 1000,
                     updateInterval: 100,
                     fit: true
                 },
                 barnesHut: {
-                    gravitationalConstant: -2000, // Adjusted to make nodes pull closer
+                    gravitationalConstant: -2000,
                     centralGravity: 0.1,
-                    springLength: 120, // Adjusted spring length
+                    springLength: 120,
                     springConstant: 0.05,
                     damping: 0.09,
-                    avoidOverlap: 0.5 // Increased to push overlapping nodes apart
+                    avoidOverlap: 0.5
                 },
                 solver: 'barnesHut'
             },
@@ -167,13 +184,14 @@
 
         var network = new vis.Network(container, data, options);
 
-        // Fit the network after stabilization (useful for initial load)
         network.on("stabilizationIterationsDone", function () {
+            // Disable physics after initial stabilization
+            network.setOptions( { physics: false } );
+            // Fit the network to ensure it fills the available space well
             network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
-            network.setOptions( { physics: false } ); // Disable physics after stabilization
         });
 
-
+        // Node Information Panel logic (remains unchanged)
         const nodeInfoPanel = document.getElementById('node-info');
         const infoTitle = document.getElementById('info-title');
         const infoDescription = document.getElementById('info-description');
