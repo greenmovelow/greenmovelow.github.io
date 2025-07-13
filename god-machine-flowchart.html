@@ -232,6 +232,10 @@
             dragView: true
         }
     };
+const nodeInfoPanel = document.getElementById('node-info');
+    const infoTitle = document.getElementById('info-title');
+    const infoDescription = document.getElementById('info-description');
+    const scrollPrompt = document.getElementById('scroll-prompt');
 
     var network = new vis.Network(container, data, options);
 
@@ -259,11 +263,6 @@
         nodes.update({ id: n.id, shadow: { enabled: true, size: 10, color: 'rgba(0,0,0,0.25)' } });
     });
 });
-
-    const nodeInfoPanel = document.getElementById('node-info');
-    const infoTitle = document.getElementById('info-title');
-    const infoDescription = document.getElementById('info-description');
-    const scrollPrompt = document.getElementById('scroll-prompt');
 
     const nodeDetails = {
         'daf': {
