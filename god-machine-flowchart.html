@@ -88,6 +88,13 @@
         </div>
     </main>
 
+    <footer class="border-t py-8 mt-4" style="border-color: var(--primary-navy-blue);">
+        <div class="container mx-auto px-4 text-center" style="color: var(--text-secondary);">
+            <p>&copy; 2025 Restoring Democracy's Promise. All Rights Reserved.</p>
+            <p class="text-sm mt-2">This interactive report is part of the keystone investigation "THE GOD MACHINE."</p>
+        </div>
+    </footer>
+
     <script type="text/javascript">
         var nodes = new vis.DataSet([
             { id: 'daf', label: 'Anonymous Donors (DAFs)', group: 'funding' },
@@ -114,13 +121,13 @@
         var options = {
             nodes: {
                 shape: 'box',
-                font: { face: 'Teko', size: 18, color: 'var(--text-dark)' }, // Default: Dark text
+                font: { face: 'Teko', size: 18, color: 'var(--text-dark)' }, // Default: Dark text for most nodes
                 borderWidth: 2,
                 color: {
-                    background: 'var(--node-background-light)', // Default: Light background
+                    background: 'var(--node-background-light)', // Default: Light background for most nodes
                     border: 'var(--primary-navy-blue)',
                     highlight: { background: 'white', border: 'var(--accent-burnished-gold)' },
-                    hover: { background: 'var(--node-background-light)', border: 'var(--accent-burnished-gold)' } // Ensure hover uses light background
+                    hover: { background: 'var(--node-background-light)', border: 'var(--accent-burnished-gold)' }
                 },
                 widthConstraint: { minimum: 150, maximum: 250 },
                 shadow: true
@@ -133,7 +140,7 @@
                 smooth: { type: 'curvedCW', roundness: 0.2 }
             },
             groups: {
-                // Explicitly set node background and font colors for each group for high contrast
+                // Explicitly define colors for each group for perfect contrast
                 funding: {
                     color: { background: 'var(--node-background-gold)', border: 'var(--accent-burnished-gold)' },
                     font: { color: 'var(--text-dark)' } // Dark text on gold background
@@ -185,13 +192,10 @@
         var network = new vis.Network(container, data, options);
 
         network.on("stabilizationIterationsDone", function () {
-            // Disable physics after initial stabilization
             network.setOptions( { physics: false } );
-            // Fit the network to ensure it fills the available space well
             network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
         });
 
-        // Node Information Panel logic (remains unchanged)
         const nodeInfoPanel = document.getElementById('node-info');
         const infoTitle = document.getElementById('info-title');
         const infoDescription = document.getElementById('info-description');
