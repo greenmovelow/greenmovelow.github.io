@@ -227,6 +227,39 @@ const options = {
 };
 
 const network = new vis.Network(container, data, options);
-                          </script>
+const nodeDetails = {
+    daf: { title: 'Anonymous Donors (DAFs)', description: 'Untraceable donor funding vehicle used to finance religious networks without public oversight.' },
+    nacl: { title: 'NACL', description: 'Drafts state legislation enabling chaplain access to public school systems.' },
+    faithwins: { title: 'Faith Wins', description: 'Mobilizes religious lobbying efforts to pressure state legislatures.' },
+    missiongen: { title: 'Mission Generation / NSCA', description: 'Provides credentialing and chaplaincy programs for religious operatives.' },
+    publicschools: { title: 'Public Schools', description: 'Target institutions for strategic chaplain placement.' },
+    chaplains: { title: 'NSCA Certified Chaplains', description: 'Graduates of NSCA programs deployed to schools and government.' },
+    rockymalloy: { title: 'Rocky Malloy', description: 'Founder and major financial beneficiary of Mission Generation.' }
+};
+
+network.on('selectNode', function (params) {
+    const nodeId = params.nodes[0];
+    if (nodeId && nodeDetails[nodeId]) {
+        const details = nodeDetails[nodeId];
+        infoTitle.textContent = details.title;
+        fullDescription = details.description;
+        infoDescription.textContent = truncate(fullDescription, 200);
+        toggleReadMore.classList.toggle('hidden', fullDescription.length <= 200);
+        nodeInfoPanel.classList.add('active');
+        nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        nodes.update({ id: nodeId, shadow: { enabled: true, size: 20, color: '#D4AF37' } });
+    }
+});
+
+network.on('deselectNode', function () {
+    nodeInfoPanel.classList.remove('active');
+    infoTitle.textContent = '';
+    infoDescription.textContent = '';
+    toggleReadMore.classList.add('hidden');
+    fullDescription = '';
+    isExpanded = false;
+});
+    </script>
 </body>
 </html>
