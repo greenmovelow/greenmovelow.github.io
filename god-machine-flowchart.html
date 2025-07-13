@@ -18,14 +18,29 @@
             --text-light: #E0E1DD; /* For general light text */
             --text-dark: #1A1A1A; /* For general dark text (on light backgrounds) */
             
-            /* NEW: Vis.js specific colors */
+            /* NEW: Vis.js specific colors for desired effect */
             --flowchart-canvas-light-gold: #FAFAD2; /* Light gold toned background for the network canvas */
-            --node-default-bg: #333333; /* Dark background for unselected nodes (black/charcoal) */
-            --node-default-border: #777777; /* Lighter border for unselected nodes */
-            --node-default-text: #F0F0F0; /* Light text for unselected nodes */
-            --node-active-bg: var(--primary-navy-blue); /* Navy blue background for active node */
-            --node-active-border: var(--accent-burnished-gold); /* Gold border for active node */
-            --node-active-text: #F0F0F0; /* Light text for active node */
+            
+            /* Node default state (dark background, light text) */
+            --node-default-bg: #333333; /* Dark charcoal/black */
+            --node-default-border: #777777; /* Grey outline */
+            --node-default-text: #F0F0F0; /* Light text */
+
+            /* Node active/highlight state (navy blue background, light text, gold border) */
+            --node-active-bg: var(--primary-navy-blue);
+            --node-active-border: var(--accent-burnished-gold);
+            --node-active-text: #F0F0F0;
+
+            /* Specific group override colors for backgrounds that are not default dark */
+            --node-funding-bg: var(--accent-burnished-gold); /* Gold for funding */
+            --node-funding-text: var(--text-dark); /* Dark text on gold */
+            
+            --node-individual-bg: var(--accent-burnished-gold); /* Gold for individual */
+            --node-individual-text: var(--text-dark); /* Dark text on gold */
+
+            --node-target-bg: var(--node-background-light); /* Light for target */
+            --node-target-text: var(--text-dark); /* Dark text on light */
+
 
             --font-display: 'Teko', sans-serif;
             --font-body: 'Roboto Slab', serif;
@@ -48,13 +63,13 @@
             border-radius: 8px;
         }
         .node-info-panel {
-            background-color: #1a202c;
+            background-color: #1a202c; /* Dark background for info panel */
             border-left: 5px solid var(--accent-burnished-gold);
             padding: 1.5rem;
             border-radius: 0.25rem;
             margin-top: 1rem;
             display: none;
-            color: var(--text-light);
+            color: var(--text-light); /* Ensure text is visible in info panel */
         }
         .node-info-panel.active { display: block; }
         .vis-navigation .vis-button {
@@ -90,6 +105,9 @@
             <div id="node-info" class="node-info-panel">
                 <h3 id="info-title" class="text-2xl mb-2"></h3>
                 <p id="info-description" class="leading-relaxed"></p>
+                <p id="scroll-prompt" class="mt-4 text-sm text-center text-accent-burnished-gold animate-pulse">
+                    &darr; Scroll down for node details &darr;
+                </p>
             </div>
         </div>
     </main>
@@ -152,7 +170,7 @@
             },
             edges: {
                 width: 2,
-                color: { color: 'var(--text-light)', highlight: 'var(--accent-burnished-gold)' },
+                color: { color: 'var(--text-light)', highlight: 'var(--accent-burnished-gold)' }, // Light text for edges
                 font: { color: 'var(--text-light)', face: 'Roboto Slab', size: 12, strokeWidth: 0, align: 'top' },
                 arrows: { to: { enabled: true, scaleFactor: 0.8 } },
                 smooth: { type: 'curvedCW', roundness: 0.2 }
@@ -161,10 +179,10 @@
                 // Explicitly set node background and font colors for each group for high contrast
                 // These will override the general 'nodes' settings for specific groups
                 funding: {
-                    color: { background: 'var(--accent-burnished-gold)', border: 'var(--accent-burnished-gold)' },
-                    font: { color: 'var(--text-dark)' }, // Dark text on gold
+                    color: { background: 'var(--node-funding-bg)', border: 'var(--accent-burnished-gold)' },
+                    font: { color: 'var(--node-funding-text)' }, // Dark text on gold
                     highlight: { background: 'var(--node-active-bg)', border: 'var(--node-active-border)', font: { color: 'var(--node-active-text)' } },
-                    hover: { background: 'var(--accent-burnished-gold)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--text-dark)' } }
+                    hover: { background: 'var(--node-funding-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-funding-text)' } }
                 },
                 ops: {
                     color: { background: 'var(--node-default-bg)', border: 'var(--node-default-border)' },
@@ -179,24 +197,24 @@
                     hover: { background: 'var(--node-default-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-default-text)' } }
                 },
                 target: {
-                    color: { background: 'var(--node-default-bg)', border: 'var(--node-default-border)' },
-                    font: { color: 'var(--node-default-text)' }, // Light text on dark
+                    color: { background: 'var(--node-target-bg)', border: 'var(--primary-navy-blue)' },
+                    font: { color: 'var(--node-target-text)' }, // Dark text on light
                     highlight: { background: 'var(--node-active-bg)', border: 'var(--node-active-border)', font: { color: 'var(--node-active-text)' } },
-                    hover: { background: 'var(--node-default-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-default-text)' } }
+                    hover: { background: 'var(--node-target-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-target-text)' } }
                 },
                 individual: {
                     shape: 'ellipse',
-                    color: { background: 'var(--accent-burnished-gold)', border: 'var(--accent-burnished-gold)' },
-                    font: { color: 'var(--text-dark)' }, // Dark text on gold
+                    color: { background: 'var(--node-individual-bg)', border: 'var(--accent-burnished-gold)' },
+                    font: { color: 'var(--node-individual-text)' }, // Dark text on gold
                     highlight: { background: 'var(--node-active-bg)', border: 'var(--node-active-border)', font: { color: 'var(--node-active-text)' } },
-                    hover: { background: 'var(--accent-burnished-gold)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--text-dark)' } }
+                    hover: { background: 'var(--node-individual-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-individual-text)' } }
                 }
             },
             physics: {
                 enabled: true,
                 stabilization: {
                     enabled: true,
-                    iterations: 1500, // Increased iterations further
+                    iterations: 1500,
                     updateInterval: 100,
                     fit: true
                 },
@@ -206,7 +224,7 @@
                     springLength: 120,
                     springConstant: 0.05,
                     damping: 0.09,
-                    avoidOverlap: 0.8 // Increased to push nodes apart more strongly
+                    avoidOverlap: 0.8
                 },
                 solver: 'barnesHut'
             },
@@ -221,22 +239,22 @@
         var network = new vis.Network(container, data, options);
 
         network.on("stabilizationIterationsDone", function () {
-            network.setOptions( { physics: false } ); // Disable physics after initial stabilization
+            network.setOptions( { physics: false } );
             network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
         });
         network.on("dragEnd", function (params) {
-            // Re-enable physics temporarily to allow settling if dragged, then disable
             if (params.nodes.length > 0 || params.edges.length > 0) {
                 network.setOptions( { physics: true } );
-                network.stabilize(100); // Run a few stabilization iterations
+                network.stabilize(100);
                 network.setOptions( { physics: false } );
             }
         });
 
-
         const nodeInfoPanel = document.getElementById('node-info');
         const infoTitle = document.getElementById('info-title');
         const infoDescription = document.getElementById('info-description');
+        const scrollPrompt = document.getElementById('scroll-prompt');
+
         const nodeDetails = {
             'daf': { title: 'Anonymous Donor-Advised Funds (DAFs)', description: 'The untraceable financial engine. DAFs legally shield the identity of major donors, allowing hundreds of thousands of dollars to flow to Mission Generation without public accountability.' },
             'nacl': { title: 'National Association of Christian Lawmakers (NACL)', description: 'The legislative "bill mill." This group drafts and distributes model legislation to allied state lawmakers, creating the legal framework that allows public schools to hire or accept chaplains.' },
@@ -254,11 +272,25 @@
                 infoTitle.textContent = details.title;
                 infoDescription.textContent = details.description;
                 nodeInfoPanel.classList.add('active');
+                // Scroll to the info panel when a node is selected
+                nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                scrollPrompt.style.display = 'none'; // Hide prompt once user interacts
             } else {
                 nodeInfoPanel.classList.remove('active');
+                scrollPrompt.style.display = 'block'; // Show prompt if no node is selected
             }
         });
-        network.on("deselectNode", function () { nodeInfoPanel.classList.remove('active'); });
+        network.on("deselectNode", function () {
+            nodeInfoPanel.classList.remove('active');
+            scrollPrompt.style.display = 'block'; // Show prompt if no node is selected
+        });
+        
+        // Initial state: show scroll prompt
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!network.getSelectedNodes().length && !network.getSelectedEdges().length) {
+                scrollPrompt.style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>
