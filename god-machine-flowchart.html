@@ -14,19 +14,25 @@
         :root {
             --primary-navy-blue: #0A2239; /* Deep, authoritative Navy Blue */
             --accent-burnished-gold: #D4AF37; /* Desaturated, Burnished Gold */
-            --background-dark: #121212; /* Vis.js canvas background */
+            --background-dark: #121212; /* Overall background of the page */
             --text-light: #E0E1DD; /* For general light text */
             --text-dark: #1A1A1A; /* For general dark text (on light backgrounds) */
-            --node-background-light: #F0F0F0; /* Light background for nodes */
-            --node-background-gold: var(--accent-burnished-gold); /* Gold background for specific nodes */
-            --node-background-navy: var(--primary-navy-blue); /* Navy background for specific nodes */
+            
+            /* NEW: Vis.js specific colors */
+            --flowchart-canvas-light-gold: #FAFAD2; /* Light gold toned background for the network canvas */
+            --node-default-bg: #333333; /* Dark background for unselected nodes (black/charcoal) */
+            --node-default-border: #777777; /* Lighter border for unselected nodes */
+            --node-default-text: #F0F0F0; /* Light text for unselected nodes */
+            --node-active-bg: var(--primary-navy-blue); /* Navy blue background for active node */
+            --node-active-border: var(--accent-burnished-gold); /* Gold border for active node */
+            --node-active-text: #F0F0F0; /* Light text for active node */
 
             --font-display: 'Teko', sans-serif;
             --font-body: 'Roboto Slab', serif;
         }
         body {
             font-family: var(--font-body);
-            background-color: var(--primary-navy-blue);
+            background-color: var(--primary-navy-blue); /* Page background */
             color: var(--text-light);
         }
         h1, h2, h3, h4 {
@@ -38,17 +44,17 @@
             width: 100%;
             height: 75vh;
             border: 2px solid var(--accent-burnished-gold);
-            background-color: var(--background-dark); /* Vis.js network canvas background */
+            background-color: var(--flowchart-canvas-light-gold); /* Light gold canvas background */
             border-radius: 8px;
         }
         .node-info-panel {
-            background-color: #1a202c; /* Dark background for info panel */
+            background-color: #1a202c;
             border-left: 5px solid var(--accent-burnished-gold);
             padding: 1.5rem;
             border-radius: 0.25rem;
             margin-top: 1rem;
             display: none;
-            color: var(--text-light); /* Ensure text is visible in info panel */
+            color: var(--text-light);
         }
         .node-info-panel.active { display: block; }
         .vis-navigation .vis-button {
@@ -121,53 +127,76 @@
         var options = {
             nodes: {
                 shape: 'box',
-                font: { face: 'Teko', size: 18, color: 'var(--text-dark)' }, // Default: Dark text for most nodes
+                font: { face: 'Teko', size: 18, color: 'var(--node-default-text)' }, // Default text color is light
                 borderWidth: 2,
                 color: {
-                    background: 'var(--node-background-light)', // Default: Light background for most nodes
-                    border: 'var(--primary-navy-blue)',
-                    highlight: { background: 'white', border: 'var(--accent-burnished-gold)' },
-                    hover: { background: 'var(--node-background-light)', border: 'var(--accent-burnished-gold)' }
+                    background: 'var(--node-default-bg)', // Default node background is dark
+                    border: 'var(--node-default-border)', // Default node border
+                    highlight: { // On click/highlight
+                        background: 'var(--node-active-bg)', // Navy blue active background
+                        border: 'var(--node-active-border)' // Gold active border
+                    },
+                    hover: { // On hover
+                        background: 'var(--node-default-bg)', // Keep default dark background on hover
+                        border: 'var(--accent-burnished-gold)' // Gold border on hover
+                    }
                 },
                 widthConstraint: { minimum: 150, maximum: 250 },
-                shadow: true
+                shadow: {
+                    enabled: true,
+                    color: 'rgba(0,0,0,0.5)', // Subtle dark shadow
+                    size: 8,
+                    x: 3,
+                    y: 3
+                }
             },
             edges: {
                 width: 2,
-                color: { color: 'var(--text-light)', highlight: 'var(--accent-burnished-gold)' }, // Light text for edges
+                color: { color: 'var(--text-light)', highlight: 'var(--accent-burnished-gold)' },
                 font: { color: 'var(--text-light)', face: 'Roboto Slab', size: 12, strokeWidth: 0, align: 'top' },
                 arrows: { to: { enabled: true, scaleFactor: 0.8 } },
                 smooth: { type: 'curvedCW', roundness: 0.2 }
             },
             groups: {
-                // Explicitly define colors for each group for perfect contrast
+                // Explicitly set node background and font colors for each group for high contrast
+                // These will override the general 'nodes' settings for specific groups
                 funding: {
-                    color: { background: 'var(--node-background-gold)', border: 'var(--accent-burnished-gold)' },
-                    font: { color: 'var(--text-dark)' } // Dark text on gold background
+                    color: { background: 'var(--accent-burnished-gold)', border: 'var(--accent-burnished-gold)' },
+                    font: { color: 'var(--text-dark)' }, // Dark text on gold
+                    highlight: { background: 'var(--node-active-bg)', border: 'var(--node-active-border)', font: { color: 'var(--node-active-text)' } },
+                    hover: { background: 'var(--accent-burnished-gold)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--text-dark)' } }
                 },
                 ops: {
-                    color: { background: 'var(--node-background-navy)', border: 'var(--primary-navy-blue)' },
-                    font: { color: 'var(--text-light)' } // Light text on navy background
+                    color: { background: 'var(--node-default-bg)', border: 'var(--node-default-border)' },
+                    font: { color: 'var(--node-default-text)' }, // Light text on dark
+                    highlight: { background: 'var(--node-active-bg)', border: 'var(--node-active-border)', font: { color: 'var(--node-active-text)' } },
+                    hover: { background: 'var(--node-default-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-default-text)' } }
                 },
                 credentialer: {
-                    color: { background: 'var(--node-background-navy)', border: 'var(--primary-navy-blue)' },
-                    font: { color: 'var(--text-light)' } // Light text on navy background
+                    color: { background: 'var(--node-default-bg)', border: 'var(--node-default-border)' },
+                    font: { color: 'var(--node-default-text)' }, // Light text on dark
+                    highlight: { background: 'var(--node-active-bg)', border: 'var(--node-active-border)', font: { color: 'var(--node-active-text)' } },
+                    hover: { background: 'var(--node-default-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-default-text)' } }
                 },
                 target: {
-                    color: { background: 'var(--node-background-light)', border: 'var(--primary-navy-blue)' },
-                    font: { color: 'var(--text-dark)' } // Dark text on light background
+                    color: { background: 'var(--node-default-bg)', border: 'var(--node-default-border)' },
+                    font: { color: 'var(--node-default-text)' }, // Light text on dark
+                    highlight: { background: 'var(--node-active-bg)', border: 'var(--node-active-border)', font: { color: 'var(--node-active-text)' } },
+                    hover: { background: 'var(--node-default-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-default-text)' } }
                 },
                 individual: {
                     shape: 'ellipse',
-                    color: { background: 'var(--node-background-gold)', border: 'var(--accent-burnished-gold)' },
-                    font: { color: 'var(--text-dark)' } // Dark text on gold background
+                    color: { background: 'var(--accent-burnished-gold)', border: 'var(--accent-burnished-gold)' },
+                    font: { color: 'var(--text-dark)' }, // Dark text on gold
+                    highlight: { background: 'var(--node-active-bg)', border: 'var(--node-active-border)', font: { color: 'var(--node-active-text)' } },
+                    hover: { background: 'var(--accent-burnished-gold)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--text-dark)' } }
                 }
             },
             physics: {
                 enabled: true,
                 stabilization: {
                     enabled: true,
-                    iterations: 1000,
+                    iterations: 1500, // Increased iterations further
                     updateInterval: 100,
                     fit: true
                 },
@@ -177,7 +206,7 @@
                     springLength: 120,
                     springConstant: 0.05,
                     damping: 0.09,
-                    avoidOverlap: 0.5
+                    avoidOverlap: 0.8 // Increased to push nodes apart more strongly
                 },
                 solver: 'barnesHut'
             },
@@ -192,9 +221,18 @@
         var network = new vis.Network(container, data, options);
 
         network.on("stabilizationIterationsDone", function () {
-            network.setOptions( { physics: false } );
+            network.setOptions( { physics: false } ); // Disable physics after initial stabilization
             network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
         });
+        network.on("dragEnd", function (params) {
+            // Re-enable physics temporarily to allow settling if dragged, then disable
+            if (params.nodes.length > 0 || params.edges.length > 0) {
+                network.setOptions( { physics: true } );
+                network.stabilize(100); // Run a few stabilization iterations
+                network.setOptions( { physics: false } );
+            }
+        });
+
 
         const nodeInfoPanel = document.getElementById('node-info');
         const infoTitle = document.getElementById('info-title');
