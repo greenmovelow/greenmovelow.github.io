@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ]);
 
     const data = { nodes: nodes, edges: edges };
-
+const network = new vis.Network(container, data, options);
     const options = {
         nodes: {
             shape: 'box',
