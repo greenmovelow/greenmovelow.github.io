@@ -129,177 +129,167 @@
         </div>
     </footer>
 
-    <script type="text/javascript">
-        var nodes = new vis.DataSet([
-            { id: 'daf', label: 'Anonymous Donors (DAFs)', group: 'funding' },
-            { id: 'nacl', label: 'NACL', group: 'ops' },
-            { id: 'faithwins', label: 'Faith Wins', group: 'ops' },
-            { id: 'missiongen', label: 'Mission Generation / NSCA', group: 'credentialer' },
-            { id: 'publicschools', label: 'Public Schools', group: 'target' },
-            { id: 'chaplains', label: 'NSCA Certified Chaplains', group: 'credentialer' },
-            { id: 'rockymalloy', label: 'Rocky Malloy', group: 'individual' }
-        ]);
-        var edges = new vis.DataSet([
-            { from: 'daf', to: 'missiongen', label: 'Funds', title: '$352k Grant x2' },
-            { from: 'nacl', to: 'publicschools', label: 'Pushes Legislation' },
-            { from: 'faithwins', to: 'nacl', label: 'Lobbies For' },
-            { from: 'missiongen', to: 'chaplains', label: 'Certifies' },
-            { from: 'chaplains', to: 'publicschools', label: 'Deployed To' },
-            { from: 'missiongen', to: 'rockymalloy', label: 'Provides Loan To', title: '$150,000 Loan' },
-            { from: 'nacl', to: 'missiongen', label: 'Creates Market For' }
-        ]);
+<script type="text/javascript">
+    var nodes = new vis.DataSet([
+        { id: 'daf', label: 'Anonymous Donors (DAFs)', group: 'funding' },
+        { id: 'nacl', label: 'NACL', group: 'ops' },
+        { id: 'faithwins', label: 'Faith Wins', group: 'ops' },
+        { id: 'missiongen', label: 'Mission Generation / NSCA', group: 'credentialer' },
+        { id: 'publicschools', label: 'Public Schools', group: 'target' },
+        { id: 'chaplains', label: 'NSCA Certified Chaplains', group: 'credentialer' },
+        { id: 'rockymalloy', label: 'Rocky Malloy', group: 'individual' }
+    ]);
 
-        var container = document.getElementById('mynetwork');
-        var data = { nodes: nodes, edges: edges };
+    var edges = new vis.DataSet([
+        { from: 'daf', to: 'missiongen', label: 'Funds', title: '$352k Grant x2' },
+        { from: 'nacl', to: 'publicschools', label: 'Pushes Legislation' },
+        { from: 'faithwins', to: 'nacl', label: 'Lobbies For' },
+        { from: 'missiongen', to: 'chaplains', label: 'Certifies' },
+        { from: 'chaplains', to: 'publicschools', label: 'Deployed To' },
+        { from: 'missiongen', to: 'rockymalloy', label: 'Provides Loan To', title: '$150,000 Loan' },
+        { from: 'nacl', to: 'missiongen', label: 'Creates Market For' }
+    ]);
 
-        var options = {
-            nodes: {
-                shape: 'box',
-                font: { face: 'Teko', size: 18, color: 'var(--node-default-text-color)' }, // Default text color set to light for default dark nodes
-                borderWidth: 2,
-                color: {
-                    background: 'var(--node-default-bg-color)', // Default node background set to dark
-                    border: 'var(--node-default-border-color)', // Default node border
-                    highlight: { // On click/highlight
-                        background: 'var(--node-highlight-bg-color)', // Navy blue active background
-                        border: 'var(--node-highlight-border-color)' // Gold active border
-                    },
-                    hover: { // On hover
-                        background: 'var(--node-default-bg-color)', // Keep default dark background on hover
-                        border: 'var(--accent-burnished-gold)' // Gold border on hover
-                    }
+    var container = document.getElementById('mynetwork');
+    var data = { nodes: nodes, edges: edges };
+
+    var options = {
+        nodes: {
+            shape: 'box',
+            font: {
+                face: 'Teko',
+                size: 18,
+                color: 'var(--text-dark)'
+            },
+            borderWidth: 2,
+            color: {
+                background: 'var(--flowchart-canvas-background)',
+                border: 'var(--primary-navy-blue)',
+                highlight: {
+                    background: 'var(--accent-burnished-gold)',
+                    border: 'var(--primary-navy-blue)'
                 },
-                widthConstraint: { minimum: 150, maximum: 250 },
-                shadow: {
-                    enabled: true,
-                    color: 'rgba(0,0,0,0.5)',
-                    size: 8,
-                    x: 3,
-                    y: 3
+                hover: {
+                    background: 'var(--accent-burnished-gold)',
+                    border: 'var(--primary-navy-blue)'
                 }
             },
-            edges: {
-                width: 2,
-                color: { color: 'var(--text-light)', highlight: 'var(--accent-burnished-gold)' },
-                font: { color: 'var(--text-light)', face: 'Roboto Slab', size: 12, strokeWidth: 0, align: 'top' },
-                arrows: { to: { enabled: true, scaleFactor: 0.8 } },
-                smooth: { type: 'curvedCW', roundness: 0.2 }
-            },
-            groups: {
-                // Explicitly set node background and font colors for each group for high contrast
-                // These settings will override the general 'nodes' settings for specific groups
-                funding: {
-                    color: { background: 'var(--node-funding-bg)', border: 'var(--accent-burnished-gold)' },
-                    font: { color: 'var(--node-funding-text)' }, // Dark text on gold
-                    highlight: { background: 'var(--node-highlight-bg-color)', border: 'var(--node-highlight-border-color)', font: { color: 'var(--node-highlight-text-color)' } },
-                    hover: { background: 'var(--node-funding-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-funding-text)' } }
-                },
-                ops: {
-                    color: { background: 'var(--node-default-bg-color)', border: 'var(--node-default-border-color)' },
-                    font: { color: 'var(--node-default-text-color)' }, // Light text on dark
-                    highlight: { background: 'var(--node-highlight-bg-color)', border: 'var(--node-highlight-border-color)', font: { color: 'var(--node-highlight-text-color)' } },
-                    hover: { background: 'var(--node-default-bg-color)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-default-text-color)' } }
-                },
-                credentialer: {
-                    color: { background: 'var(--node-default-bg-color)', border: 'var(--node-default-border-color)' },
-                    font: { color: 'var(--node-default-text-color)' }, // Light text on dark
-                    highlight: { background: 'var(--node-highlight-bg-color)', border: 'var(--node-highlight-border-color)', font: { color: 'var(--node-highlight-text-color)' } },
-                    hover: { background: 'var(--node-default-bg-color)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-default-text-color)' } }
-                },
-                target: {
-                    color: { background: 'var(--node-target-bg)', border: 'var(--primary-navy-blue)' },
-                    font: { color: 'var(--node-target-text)' }, // Dark text on light
-                    highlight: { background: 'var(--node-highlight-bg-color)', border: 'var(--node-highlight-border-color)', font: { color: 'var(--node-highlight-text-color)' } },
-                    hover: { background: 'var(--node-target-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-target-text)' } }
-                },
-                individual: {
-                    shape: 'ellipse',
-                    color: { background: 'var(--node-individual-bg)', border: 'var(--accent-burnished-gold)' },
-                    font: { color: 'var(--node-individual-text)' }, // Dark text on gold
-                    highlight: { background: 'var(--node-highlight-bg-color)', border: 'var(--node-highlight-border-color)', font: { color: 'var(--node-highlight-text-color)' } },
-                    hover: { background: 'var(--node-individual-bg)', border: 'var(--accent-burnished-gold)', font: { color: 'var(--node-individual-text)' } }
-                }
-            },
-            physics: {
+            widthConstraint: { minimum: 150, maximum: 250 },
+            shadow: {
                 enabled: true,
-                stabilization: {
-                    enabled: true,
-                    iterations: 1500,
-                    updateInterval: 100,
-                    fit: true
-                },
-                barnesHut: {
-                    gravitationalConstant: -2000,
-                    centralGravity: 0.1,
-                    springLength: 120,
-                    springConstant: 0.05,
-                    damping: 0.09,
-                    avoidOverlap: 0.8
-                },
-                solver: 'barnesHut'
+                color: 'rgba(0,0,0,0.5)',
+                size: 8,
+                x: 3,
+                y: 3
+            }
+        },
+        edges: {
+            width: 2,
+            color: { color: 'var(--text-dark)', highlight: 'var(--accent-burnished-gold)' },
+            font: {
+                color: 'var(--text-dark)',
+                face: 'Roboto Slab',
+                size: 12,
+                strokeWidth: 0,
+                align: 'top'
             },
-            interaction: {
-                navigationButtons: true,
-                keyboard: true,
-                zoomView: true,
-                dragView: true
-            }
-        };
+            arrows: { to: { enabled: true, scaleFactor: 0.8 } },
+            smooth: { type: 'curvedCW', roundness: 0.2 }
+        },
+        physics: {
+            enabled: true,
+            stabilization: {
+                enabled: true,
+                iterations: 1500,
+                updateInterval: 100,
+                fit: true
+            },
+            barnesHut: {
+                gravitationalConstant: -2000,
+                centralGravity: 0.1,
+                springLength: 120,
+                springConstant: 0.05,
+                damping: 0.09,
+                avoidOverlap: 0.8
+            },
+            solver: 'barnesHut'
+        },
+        interaction: {
+            navigationButtons: true,
+            keyboard: true,
+            zoomView: true,
+            dragView: true
+        }
+    };
 
-        var network = new vis.Network(container, data, options);
+    var network = new vis.Network(container, data, options);
 
-        network.on("stabilizationIterationsDone", function () {
-            network.setOptions( { physics: false } );
-            network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
-        });
-        network.on("dragEnd", function (params) {
-            if (params.nodes.length > 0 || params.edges.length > 0) {
-                network.setOptions( { physics: true } );
-                network.stabilize(100);
-                network.setOptions( { physics: false } );
-            }
-        });
+    network.on("stabilizationIterationsDone", function () {
+        network.setOptions({ physics: false });
+        network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
+    });
 
-        const nodeInfoPanel = document.getElementById('node-info');
-        const infoTitle = document.getElementById('info-title');
-        const infoDescription = document.getElementById('info-description');
-        const scrollPrompt = document.getElementById('scroll-prompt');
+    const nodeInfoPanel = document.getElementById('node-info');
+    const infoTitle = document.getElementById('info-title');
+    const infoDescription = document.getElementById('info-description');
+    const scrollPrompt = document.getElementById('scroll-prompt');
 
-        const nodeDetails = {
-            'daf': { title: 'Anonymous Donor-Advised Funds (DAFs)', description: 'The untraceable financial engine. DAFs legally shield the identity of major donors, allowing hundreds of thousands of dollars to flow to Mission Generation without public accountability.' },
-            'nacl': { title: 'National Association of Christian Lawmakers (NACL)', description: 'The legislative "bill mill." This group drafts and distributes model legislation to allied state lawmakers, creating the legal framework that allows public schools to hire or accept chaplains.' },
-            'faithwins': { title: 'Faith Wins', description: 'The "grassroots" mobilizer. This group manufactures political pressure by organizing clergy and activists to lobby for the NACL\'s bills, creating the appearance of organic public demand.' },
-            'missiongen': { title: 'Mission Generation / NSCA', description: 'The credentialing monopoly. By being the primary organization offering "chaplain certification," it captures the market created by its legislative partners. Financial records show it receiving identical $352,000 anonymous grants and providing a $150,000 loan to its founder.' },
-            'publicschools': { title: 'Public Schools', description: 'The target. The entire machine is oriented to place its certified, ideologically-aligned personnel inside public schools, often replacing licensed, professional counselors.' },
-            'chaplains': { title: 'NSCA Certified Chaplains', description: 'The product. These individuals, requiring only a 40-hour online course, are deployed into schools, creating a pipeline that bypasses professional standards for counseling and mental health support.' },
-            'rockymalloy': { title: 'Rocky Malloy', description: 'Founder of Mission Generation, Inc. and recipient of a $150,000 loan from the nonprofit, a transaction identified as a classic red flag for private inurement by the IRS.' }
-        };
+    const nodeDetails = {
+        'daf': {
+            title: 'Anonymous Donor-Advised Funds (DAFs)',
+            description: 'The untraceable financial engine. DAFs legally shield the identity of major donors, allowing hundreds of thousands of dollars to flow to Mission Generation without public accountability.'
+        },
+        'nacl': {
+            title: 'National Association of Christian Lawmakers (NACL)',
+            description: 'The legislative "bill mill." This group drafts and distributes model legislation to allied state lawmakers, creating the legal framework that allows public schools to hire or accept chaplains.'
+        },
+        'faithwins': {
+            title: 'Faith Wins',
+            description: 'The "grassroots" mobilizer. This group manufactures political pressure by organizing clergy and activists to lobby for the NACL\'s bills, creating the appearance of organic public demand.'
+        },
+        'missiongen': {
+            title: 'Mission Generation / NSCA',
+            description: 'The credentialing monopoly. By being the primary organization offering "chaplain certification," it captures the market created by its legislative partners. Financial records show it receiving identical $352,000 anonymous grants and providing a $150,000 loan to its founder.'
+        },
+        'publicschools': {
+            title: 'Public Schools',
+            description: 'The target. The entire machine is oriented to place its certified, ideologically-aligned personnel inside public schools, often replacing licensed, professional counselors.'
+        },
+        'chaplains': {
+            title: 'NSCA Certified Chaplains',
+            description: 'The product. These individuals, requiring only a 40-hour online course, are deployed into schools, creating a pipeline that bypasses professional standards for counseling and mental health support.'
+        },
+        'rockymalloy': {
+            title: 'Rocky Malloy',
+            description: 'Founder of Mission Generation, Inc. and recipient of a $150,000 loan from the nonprofit, a transaction identified as a classic red flag for private inurement by the IRS.'
+        }
+    };
 
-        network.on("selectNode", function (params) {
-            const nodeId = params.nodes[0];
-            if (nodeId && nodeDetails[nodeId]) {
-                const details = nodeDetails[nodeId];
-                infoTitle.textContent = details.title;
-                infoDescription.textContent = details.description;
-                nodeInfoPanel.classList.add('active');
-                nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Scroll to info panel
-                scrollPrompt.style.display = 'none'; // Hide prompt once user interacts
-            } else {
-                nodeInfoPanel.classList.remove('active');
-                scrollPrompt.style.display = 'block'; // Show prompt if no node is selected
-            }
-        });
-        network.on("deselectNode", function () {
+    network.on("selectNode", function (params) {
+        const nodeId = params.nodes[0];
+        if (nodeId && nodeDetails[nodeId]) {
+            const details = nodeDetails[nodeId];
+            infoTitle.textContent = details.title;
+            infoDescription.textContent = details.description;
+            nodeInfoPanel.classList.add('active');
+            nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollPrompt.style.display = 'none';
+        } else {
             nodeInfoPanel.classList.remove('active');
-            scrollPrompt.style.display = 'block'; // Show prompt if no node is selected
-        });
-        
-        // Initial state: show scroll prompt
-        document.addEventListener('DOMContentLoaded', () => {
-            if (!network.getSelectedNodes().length && !network.getSelectedEdges().length) {
-                scrollPrompt.style.display = 'block';
-            }
-        });
-    </script>
+            scrollPrompt.style.display = 'block';
+        }
+    });
+
+    network.on("deselectNode", function () {
+        nodeInfoPanel.classList.remove('active');
+        scrollPrompt.style.display = 'block';
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!network.getSelectedNodes().length && !network.getSelectedEdges().length) {
+            scrollPrompt.style.display = 'block';
+        }
+    });
+</script>
 </body>
 </html>
