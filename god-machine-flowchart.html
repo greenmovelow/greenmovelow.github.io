@@ -12,12 +12,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-navy-blue: #0A2239;
-            --accent-burnished-gold: #D4AF37;
-            --background-dark: #121212;
-            --text-light: #E0E1DD;
-            --text-dark: #1A1A1A;
-            --node-background: #F0F0F0;
+            --primary-navy-blue: #0A2239; /* Deep, authoritative Navy Blue */
+            --accent-burnished-gold: #D4AF37; /* Desaturated, Burnished Gold */
+            --background-dark: #121212; /* Canvas background */
+            --text-light: #E0E1DD; /* For general light text */
+            --text-dark: #1A1A1A; /* For general dark text (on light backgrounds) */
+            --node-background-light: #F0F0F0; /* Light background for nodes */
+            --node-background-gold: var(--accent-burnished-gold); /* Gold background for specific nodes */
+            --node-background-navy: var(--primary-navy-blue); /* Navy background for specific nodes */
+
             --font-display: 'Teko', sans-serif;
             --font-body: 'Roboto Slab', serif;
         }
@@ -35,7 +38,7 @@
             width: 100%;
             height: 75vh;
             border: 2px solid var(--accent-burnished-gold);
-            background-color: var(--background-dark);
+            background-color: var(--background-dark); /* Vis.js network canvas background */
             border-radius: 8px;
         }
         .node-info-panel {
@@ -45,15 +48,16 @@
             border-radius: 0.25rem;
             margin-top: 1rem;
             display: none;
+            color: var(--text-light); /* Ensure text is visible in info panel */
         }
         .node-info-panel.active { display: block; }
         .vis-navigation .vis-button {
-            background-color: rgba(10, 34, 57, 0.8);
-            border: 1px solid var(--accent-burnished-gold);
-            border-radius: 50%;
+            background-color: rgba(10, 34, 57, 0.8) !important;
+            border: 1px solid var(--accent-burnished-gold) !important;
+            border-radius: 50% !important;
         }
-        .vis-navigation .vis-button:hover { background-color: var(--primary-navy-blue); }
-        .vis-navigation .vis-button svg { fill: var(--accent-burnished-gold); }
+        .vis-navigation .vis-button:hover { background-color: var(--primary-navy-blue) !important; }
+        .vis-navigation .vis-button svg { fill: var(--accent-burnished-gold) !important; }
     </style>
 </head>
 <body class="antialiased">
@@ -75,6 +79,7 @@
              <h1 class="text-4xl md:text-5xl font-black uppercase tracking-wider">The God Machine</h1>
         </header>
         <div class="p-4 rounded-lg">
+            <p class="text-light mb-4">Click on any node in the diagram below to learn more about its role in The God Machine network. Hover over nodes for quick information. Use your mouse wheel or pinch-to-zoom to explore the connections. The navigation buttons allow you to pan, zoom, and reset the view. The network will stabilize after a moment.</p>
             <div id="mynetwork"></div>
             <div id="node-info" class="node-info-panel">
                 <h3 id="info-title" class="text-2xl mb-2"></h3>
@@ -105,18 +110,18 @@
 
         var container = document.getElementById('mynetwork');
         var data = { nodes: nodes, edges: edges };
-        
+
         var options = {
             nodes: {
                 shape: 'box',
-                font: { face: 'Roboto Slab', size: 14, color: 'var(--text-dark)' }, // DARK text for LIGHT nodes
+                font: { face: 'Teko', size: 18, color: 'var(--text-dark)' }, // Explicitly dark text for all nodes
                 borderWidth: 2,
                 color: {
-                    background: 'var(--node-background)', // LIGHT background for all nodes
+                    background: 'var(--node-background-light)', // Default light background for nodes
                     border: 'var(--primary-navy-blue)',
                     highlight: { background: 'white', border: 'var(--accent-burnished-gold)' }
                 },
-                widthConstraint: { minimum: 150 },
+                widthConstraint: { minimum: 150, maximum: 250 }, // Added max width to prevent nodes from being too wide
                 shadow: true
             },
             edges: {
@@ -127,15 +132,47 @@
                 smooth: { type: 'curvedCW', roundness: 0.2 }
             },
             groups: {
-                funding: { color: { background: 'var(--accent-burnished-gold)', border: '#A1720A' }, font: { color: 'var(--text-dark)'} },
-                individual: { shape: 'ellipse', color: { background: 'var(--accent-burnished-gold)'}, font: { color: 'var(--text-dark)'}},
-                target: { color: { background: '#CFD8DC', border: '#90A4AE' }, font: { color: 'var(--text-dark)' } }
+                // Specific group styling, ensuring font color contrasts with background
+                funding: { color: { background: 'var(--node-background-gold)', border: 'var(--accent-burnished-gold)' }, font: { color: 'var(--text-dark)' } }, // Gold background, dark text
+                ops: { color: { background: 'var(--node-background-navy)', border: 'var(--primary-navy-blue)' }, font: { color: 'var(--text-light)' } }, // Navy background, light text
+                credentialer: { color: { background: 'var(--node-background-navy)', border: 'var(--primary-navy-blue)' }, font: { color: 'var(--text-light)' } }, // Navy background, light text
+                target: { color: { background: 'var(--node-background-light)', border: 'var(--primary-navy-blue)' }, font: { color: 'var(--text-dark)' } }, // Light background, dark text
+                individual: { shape: 'ellipse', color: { background: 'var(--node-background-gold)', border: 'var(--accent-burnished-gold)' }, font: { color: 'var(--text-dark)' } } // Gold background, dark text
             },
-            physics: { solver: 'forceAtlas2Based', forceAtlas2Based: { gravitationalConstant: -120, centralGravity: 0.1, springLength: 150 } },
-            interaction: { navigationButtons: true, keyboard: true }
+            physics: {
+                enabled: true,
+                stabilization: {
+                    enabled: true,
+                    iterations: 1000, // Increase iterations for better stabilization
+                    updateInterval: 100,
+                    fit: true
+                },
+                barnesHut: {
+                    gravitationalConstant: -2000, // Adjusted to make nodes pull closer
+                    centralGravity: 0.1,
+                    springLength: 120, // Adjusted spring length
+                    springConstant: 0.05,
+                    damping: 0.09,
+                    avoidOverlap: 0.5 // Increased to push overlapping nodes apart
+                },
+                solver: 'barnesHut'
+            },
+            interaction: {
+                navigationButtons: true,
+                keyboard: true,
+                zoomView: true,
+                dragView: true
+            }
         };
 
         var network = new vis.Network(container, data, options);
+
+        // Fit the network after stabilization (useful for initial load)
+        network.on("stabilizationIterationsDone", function () {
+            network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
+            network.setOptions( { physics: false } ); // Disable physics after stabilization
+        });
+
 
         const nodeInfoPanel = document.getElementById('node-info');
         const infoTitle = document.getElementById('info-title');
