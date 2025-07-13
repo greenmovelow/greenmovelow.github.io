@@ -143,14 +143,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const infoDescription = document.getElementById('info-description');
     const scrollPrompt = document.getElementById('scroll-prompt');
 
+    const toggleReadMore = document.createElement('button');
+    toggleReadMore.id = 'toggle-read-more';
+    toggleReadMore.className = 'text-xs text-accent-burnished-gold mt-2 underline hidden';
+    toggleReadMore.textContent = 'Read more';
+    nodeInfoPanel.appendChild(toggleReadMore);
+
+    let fullDescription = '';
+    let isExpanded = false;
+
+    toggleReadMore.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        infoDescription.textContent = isExpanded ? fullDescription : truncate(fullDescription, 200);
+        toggleReadMore.textContent = isExpanded ? 'Show less' : 'Read more';
+    });
+
+    function truncate(text, limit) {
+        return text.length > limit ? text.slice(0, limit) + '…' : text;
+    }
+
     const nodes = new vis.DataSet([
-        { id: 'daf', label: 'Anonymous Donors (DAFs)', group: 'funding' },
-        { id: 'nacl', label: 'NACL', group: 'ops' },
-        { id: 'faithwins', label: 'Faith Wins', group: 'ops' },
-        { id: 'missiongen', label: 'Mission Generation / NSCA', group: 'credentialer' },
-        { id: 'publicschools', label: 'Public Schools', group: 'target' },
-        { id: 'chaplains', label: 'NSCA Certified Chaplains', group: 'credentialer' },
-        { id: 'rockymalloy', label: 'Rocky Malloy', group: 'individual' }
+        { id: 'daf', label: 'Anonymous Donors (DAFs)', group: 'funding', title: 'Untraceable donor funding vehicle' },
+        { id: 'nacl', label: 'NACL', group: 'ops', title: 'Drafts legislation for chaplain access' },
+        { id: 'faithwins', label: 'Faith Wins', group: 'ops', title: 'Mobilizes religious lobbying pressure' },
+        { id: 'missiongen', label: 'Mission Generation / NSCA', group: 'credentialer', title: 'Chaplain credentialing monopoly' },
+        { id: 'publicschools', label: 'Public Schools', group: 'target', title: 'Targeted for chaplain placement' },
+        { id: 'chaplains', label: 'NSCA Certified Chaplains', group: 'credentialer', title: 'Product of Mission Generation' },
+        { id: 'rockymalloy', label: 'Rocky Malloy', group: 'individual', title: 'Founder and loan recipient' }
     ]);
 
     const edges = new vis.DataSet([
@@ -168,52 +187,27 @@ document.addEventListener('DOMContentLoaded', function () {
     const options = {
         nodes: {
             shape: 'box',
-            font: {
-                face: 'Teko',
-                size: 18,
-                color: '#1A1A1A',
-                align: 'center'
-            },
+            font: { face: 'Teko', size: 18, color: '#1A1A1A', align: 'center' },
             borderWidth: 2,
             color: {
                 background: 'var(--flowchart-canvas-background)',
                 border: 'var(--primary-navy-blue)',
-                highlight: {
-                    background: 'var(--accent-burnished-gold)',
-                    border: 'var(--primary-navy-blue)'
-                },
-                hover: {
-                    background: 'var(--accent-burnished-gold)',
-                    border: 'var(--primary-navy-blue)'
-                }
+                highlight: { background: 'var(--accent-burnished-gold)', border: 'var(--primary-navy-blue)' },
+                hover: { background: 'var(--accent-burnished-gold)', border: 'var(--primary-navy-blue)' }
             },
             widthConstraint: { minimum: 150, maximum: 250 },
-            shadow: {
-                enabled: true,
-                color: 'rgba(0,0,0,0.25)',
-                size: 10
-            }
+            shadow: { enabled: true, color: 'rgba(0,0,0,0.25)', size: 10 }
         },
         edges: {
             width: 2,
             color: { color: 'var(--text-dark)', highlight: 'var(--accent-burnished-gold)' },
-            font: {
-                color: 'var(--text-dark)',
-                face: 'Roboto Slab',
-                size: 12,
-                align: 'top'
-            },
+            font: { color: 'var(--text-dark)', face: 'Roboto Slab', size: 12, align: 'top' },
             arrows: { to: { enabled: true, scaleFactor: 0.8 } },
             smooth: { type: 'curvedCW', roundness: 0.2 }
         },
         physics: {
             enabled: true,
-            stabilization: {
-                enabled: true,
-                iterations: 1500,
-                updateInterval: 100,
-                fit: true
-            },
+            stabilization: { enabled: true, iterations: 1500, updateInterval: 100, fit: true },
             barnesHut: {
                 gravitationalConstant: -2000,
                 centralGravity: 0.1,
@@ -221,87 +215,85 @@ document.addEventListener('DOMContentLoaded', function () {
                 springConstant: 0.05,
                 damping: 0.09,
                 avoidOverlap: 0.8
-            },
-            solver: 'barnesHut'
+            }
         },
         interaction: {
             navigationButtons: true,
             keyboard: true,
             zoomView: true,
-            dragView: true
+            dragView: true,
+            tooltipDelay: 100
+        }
+    };
+
+    const nodeDetails = {
+        'daf': {
+            title: 'Anonymous Donor-Advised Funds (DAFs)',
+            description: 'The untraceable financial engine. DAFs legally shield the identity of major donors, allowing hundreds of thousands of dollars to flow to Mission Generation without public accountability.'
+        },
+        'nacl': {
+            title: 'National Association of Christian Lawmakers (NACL)',
+            description: 'The legislative "bill mill." This group drafts and distributes model legislation to allied state lawmakers, creating the legal framework that allows public schools to hire or accept chaplains.'
+        },
+        'faithwins': {
+            title: 'Faith Wins',
+            description: 'The "grassroots" mobilizer. This group manufactures political pressure by organizing clergy and activists to lobby for the NACL\'s bills, creating the appearance of organic public demand.'
+        },
+        'missiongen': {
+            title: 'Mission Generation / NSCA',
+            description: 'The credentialing monopoly. By being the primary organization offering "chaplain certification," it captures the market created by its legislative partners. Financial records show it receiving identical $352,000 anonymous grants and providing a $150,000 loan to its founder.'
+        },
+        'publicschools': {
+            title: 'Public Schools',
+            description: 'The target. The entire machine is oriented to place its certified, ideologically-aligned personnel inside public schools, often replacing licensed, professional counselors.'
+        },
+        'chaplains': {
+            title: 'NSCA Certified Chaplains',
+            description: 'The product. These individuals, requiring only a 40-hour online course, are deployed into schools, creating a pipeline that bypasses professional standards for counseling and mental health support.'
+        },
+        'rockymalloy': {
+            title: 'Rocky Malloy',
+            description: 'Founder of Mission Generation, Inc. and recipient of a $150,000 loan from the nonprofit, a transaction identified as a classic red flag for private inurement by the IRS.'
         }
     };
 
     const network = new vis.Network(container, data, options);
     network.stabilize();
-
-    network.once("stabilizationIterationsDone", function () {
-    network.setOptions({ physics: false });  // 🔒 Locks layout in place
-    network.fit({ animation: { duration: 500 } }); // Smooth auto-zoom
-});
-    const nodeDetails = {
-    'daf': {
-        title: 'Anonymous Donor-Advised Funds (DAFs)',
-        description: 'The untraceable financial engine. DAFs legally shield the identity of major donors, allowing hundreds of thousands of dollars to flow to Mission Generation without public accountability.'
-    },
-    'nacl': {
-        title: 'National Association of Christian Lawmakers (NACL)',
-        description: 'The legislative "bill mill." This group drafts and distributes model legislation to allied state lawmakers, creating the legal framework that allows public schools to hire or accept chaplains.'
-    },
-    'faithwins': {
-        title: 'Faith Wins',
-        description: 'The "grassroots" mobilizer. This group manufactures political pressure by organizing clergy and activists to lobby for the NACL\'s bills, creating the appearance of organic public demand.'
-    },
-    'missiongen': {
-        title: 'Mission Generation / NSCA',
-        description: 'The credentialing monopoly. By being the primary organization offering "chaplain certification," it captures the market created by its legislative partners. Financial records show it receiving identical $352,000 anonymous grants and providing a $150,000 loan to its founder.'
-    },
-    'publicschools': {
-        title: 'Public Schools',
-        description: 'The target. The entire machine is oriented to place its certified, ideologically-aligned personnel inside public schools, often replacing licensed, professional counselors.'
-    },
-    'chaplains': {
-        title: 'NSCA Certified Chaplains',
-        description: 'The product. These individuals, requiring only a 40-hour online course, are deployed into schools, creating a pipeline that bypasses professional standards for counseling and mental health support.'
-    },
-    'rockymalloy': {
-        title: 'Rocky Malloy',
-        description: 'Founder of Mission Generation, Inc. and recipient of a $150,000 loan from the nonprofit, a transaction identified as a classic red flag for private inurement by the IRS.'
-    }
-};
+    network.once('stabilizationIterationsDone', () => network.fit());
 
     network.on("selectNode", function (params) {
-    const nodeId = params.nodes[0];
-    if (nodeId && nodeDetails[nodeId]) {
-        const details = nodeDetails[nodeId];
-        infoTitle.textContent = details.title;
-        infoDescription.textContent = details.description;
-        nodeInfoPanel.classList.add('active');
-        nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const nodeId = params.nodes[0];
+        if (nodeId && nodeDetails[nodeId]) {
+            const details = nodeDetails[nodeId];
+            infoTitle.textContent = details.title;
+            fullDescription = details.description;
+            isExpanded = false;
+            infoDescription.textContent = truncate(fullDescription, 200);
+            toggleReadMore.classList.toggle('hidden', fullDescription.length <= 200);
+            toggleReadMore.textContent = 'Read more';
+            nodeInfoPanel.classList.add('active');
 
-        scrollPrompt.style.display = 'none';
+            // Smart scroll only on mobile
+            if (window.innerWidth < 768) {
+                nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
 
-        // 🌈 Apply group-specific glow color
-        const node = nodes.get(nodeId);
-        const group = node.group;
+            scrollPrompt.style.display = 'none';
 
-        // Define group-specific shadow colors
-        const glowColors = {
-            funding: '#D4AF37',      // Gold
-            ops: '#FFD700',          // Bright Yellow
-            credentialer: '#FF4500', // Red-Orange
-            target: '#32CD32',       // Lime Green
-            individual: '#BA55D3'    // Medium Orchid
-        };
+            const node = nodes.get(nodeId);
+            const group = node.group;
+            const glowColors = {
+                funding: '#D4AF37',
+                ops: '#FFD700',
+                credentialer: '#FF4500',
+                target: '#32CD32',
+                individual: '#BA55D3'
+            };
+            const glowColor = glowColors[group] || '#D4AF37';
 
-        const glowColor = glowColors[group] || '#D4AF37'; // fallback to gold
-
-        nodes.update({
-            id: nodeId,
-            shadow: { enabled: true, size: 20, color: glowColor }
-        });
-    }
-});
+            nodes.update({ id: nodeId, shadow: { enabled: true, size: 20, color: glowColor } });
+        }
+    });
 
     network.on("deselectNode", function () {
         nodeInfoPanel.classList.remove('active');
