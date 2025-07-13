@@ -294,26 +294,6 @@
         }
     };
 
-    network.on("selectNode", function (params) {
-        const nodeId = params.nodes[0];
-        if (nodeId && nodeDetails[nodeId]) {
-            const details = nodeDetails[nodeId];
-            infoTitle.textContent = details.title;
-            infoDescription.textContent = details.description;
-            nodeInfoPanel.classList.add('active');
-            nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            scrollPrompt.style.display = 'none';
-        } else {
-            nodeInfoPanel.classList.remove('active');
-            scrollPrompt.style.display = 'block';
-        }
-    });
-
-    network.on("deselectNode", function () {
-        nodeInfoPanel.classList.remove('active');
-        scrollPrompt.style.display = 'block';
-    });
-
     document.addEventListener('DOMContentLoaded', () => {
         if (!network.getSelectedNodes().length && !network.getSelectedEdges().length) {
             scrollPrompt.style.display = 'block';
