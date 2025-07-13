@@ -130,7 +130,14 @@
     </footer>
 
 <script type="text/javascript">
-    var nodes = new vis.DataSet([
+document.addEventListener('DOMContentLoaded', function () {
+    const container = document.getElementById('mynetwork');
+    const nodeInfoPanel = document.getElementById('node-info');
+    const infoTitle = document.getElementById('info-title');
+    const infoDescription = document.getElementById('info-description');
+    const scrollPrompt = document.getElementById('scroll-prompt');
+
+    const nodes = new vis.DataSet([
         { id: 'daf', label: 'Anonymous Donors (DAFs)', group: 'funding' },
         { id: 'nacl', label: 'NACL', group: 'ops' },
         { id: 'faithwins', label: 'Faith Wins', group: 'ops' },
@@ -140,7 +147,7 @@
         { id: 'rockymalloy', label: 'Rocky Malloy', group: 'individual' }
     ]);
 
-    var edges = new vis.DataSet([
+    const edges = new vis.DataSet([
         { from: 'daf', to: 'missiongen', label: 'Funds', title: '$352k Grant x2' },
         { from: 'nacl', to: 'publicschools', label: 'Pushes Legislation' },
         { from: 'faithwins', to: 'nacl', label: 'Lobbies For' },
@@ -150,48 +157,35 @@
         { from: 'nacl', to: 'missiongen', label: 'Creates Market For' }
     ]);
 
-    var container = document.getElementById('mynetwork');
-    var data = { nodes: nodes, edges: edges };
+    const data = { nodes: nodes, edges: edges };
 
-    var options = {
+    const options = {
         nodes: {
-    shape: 'box',
-    font: {
-        face: 'Teko',
-        size: 18,
-        color: '#1A1A1A',       // Dark label text
-        strokeWidth: 0,
-        align: 'center'
-    },
-    borderWidth: 2,
-    color: {
-        background: 'var(--flowchart-canvas-background)',  // Light gold
-        border: 'var(--primary-navy-blue)',
-        highlight: {
-            background: 'var(--accent-burnished-gold)',
-            border: 'var(--primary-navy-blue)'
-        },
-        hover: {
-            background: 'var(--accent-burnished-gold)',
-            border: 'var(--primary-navy-blue)'
-        }
-    },
-    widthConstraint: { minimum: 150, maximum: 250 },
-    shadow: {
-        enabled: true,
-        color: 'rgba(0,0,0,0.25)',
-        size: 10,
-        x: 0,
-        y: 0
-    }
-},
+            shape: 'box',
+            font: {
+                face: 'Teko',
+                size: 18,
+                color: '#1A1A1A',
+                align: 'center'
+            },
+            borderWidth: 2,
+            color: {
+                background: 'var(--flowchart-canvas-background)',
+                border: 'var(--primary-navy-blue)',
+                highlight: {
+                    background: 'var(--accent-burnished-gold)',
+                    border: 'var(--primary-navy-blue)'
+                },
+                hover: {
+                    background: 'var(--accent-burnished-gold)',
+                    border: 'var(--primary-navy-blue)'
+                }
+            },
             widthConstraint: { minimum: 150, maximum: 250 },
             shadow: {
                 enabled: true,
-                color: 'rgba(0,0,0,0.5)',
-                size: 8,
-                x: 3,
-                y: 3
+                color: 'rgba(0,0,0,0.25)',
+                size: 10
             }
         },
         edges: {
@@ -201,7 +195,6 @@
                 color: 'var(--text-dark)',
                 face: 'Roboto Slab',
                 size: 12,
-                strokeWidth: 0,
                 align: 'top'
             },
             arrows: { to: { enabled: true, scaleFactor: 0.8 } },
@@ -232,77 +225,66 @@
             dragView: true
         }
     };
-const nodeInfoPanel = document.getElementById('node-info');
-    const infoTitle = document.getElementById('info-title');
-    const infoDescription = document.getElementById('info-description');
-    const scrollPrompt = document.getElementById('scroll-prompt');
 
-    var network = new vis.Network(container, data, options);
-network.stabilize();
-    network.once('stabilizationIterationsDone', function () {   
-network.fit(); // Adjust viewport to fit all nodes
-});
-    network.on("selectNode", function (params) {
-    const nodeId = params.nodes[0];
-    if (nodeId && nodeDetails[nodeId]) {
-        const details = nodeDetails[nodeId];
-        infoTitle.textContent = details.title;
-        infoDescription.textContent = details.description;
-        nodeInfoPanel.classList.add('active');
-        nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const network = new vis.Network(container, data, options);
+    network.stabilize();
 
-        scrollPrompt.style.display = 'none'; // ← THIS IS MISSING
-
-        // Add visual glow to active node
-        nodes.update({ id: nodeId, shadow: { enabled: true, size: 20, color: '#D4AF37' } });
-    }
-});
-    network.on("deselectNode", function () {
-    nodeInfoPanel.classList.remove('active');
-    scrollPrompt.style.display = 'block';
-
-    // Reset glow on all nodes
-    nodes.get().forEach(n => {
-        nodes.update({ id: n.id, shadow: { enabled: true, size: 10, color: 'rgba(0,0,0,0.25)' } });
+    network.once('stabilizationIterationsDone', function () {
+        network.fit();
     });
-});
 
     const nodeDetails = {
         'daf': {
             title: 'Anonymous Donor-Advised Funds (DAFs)',
-            description: 'The untraceable financial engine. DAFs legally shield the identity of major donors, allowing hundreds of thousands of dollars to flow to Mission Generation without public accountability.'
+            description: 'The untraceable financial engine...'
         },
         'nacl': {
             title: 'National Association of Christian Lawmakers (NACL)',
-            description: 'The legislative "bill mill." This group drafts and distributes model legislation to allied state lawmakers, creating the legal framework that allows public schools to hire or accept chaplains.'
+            description: 'The legislative "bill mill."...'
         },
         'faithwins': {
             title: 'Faith Wins',
-            description: 'The "grassroots" mobilizer. This group manufactures political pressure by organizing clergy and activists to lobby for the NACL\'s bills, creating the appearance of organic public demand.'
+            description: 'The "grassroots" mobilizer...'
         },
         'missiongen': {
             title: 'Mission Generation / NSCA',
-            description: 'The credentialing monopoly. By being the primary organization offering "chaplain certification," it captures the market created by its legislative partners. Financial records show it receiving identical $352,000 anonymous grants and providing a $150,000 loan to its founder.'
+            description: 'The credentialing monopoly...'
         },
         'publicschools': {
             title: 'Public Schools',
-            description: 'The target. The entire machine is oriented to place its certified, ideologically-aligned personnel inside public schools, often replacing licensed, professional counselors.'
+            description: 'The target...'
         },
         'chaplains': {
             title: 'NSCA Certified Chaplains',
-            description: 'The product. These individuals, requiring only a 40-hour online course, are deployed into schools, creating a pipeline that bypasses professional standards for counseling and mental health support.'
+            description: 'The product...'
         },
         'rockymalloy': {
             title: 'Rocky Malloy',
-            description: 'Founder of Mission Generation, Inc. and recipient of a $150,000 loan from the nonprofit, a transaction identified as a classic red flag for private inurement by the IRS.'
+            description: 'Founder of Mission Generation...'
         }
     };
 
-    document.addEventListener('DOMContentLoaded', () => {
-        if (!network.getSelectedNodes().length && !network.getSelectedEdges().length) {
-            scrollPrompt.style.display = 'block';
+    network.on("selectNode", function (params) {
+        const nodeId = params.nodes[0];
+        if (nodeId && nodeDetails[nodeId]) {
+            const details = nodeDetails[nodeId];
+            infoTitle.textContent = details.title;
+            infoDescription.textContent = details.description;
+            nodeInfoPanel.classList.add('active');
+            nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollPrompt.style.display = 'none';
+            nodes.update({ id: nodeId, shadow: { enabled: true, size: 20, color: '#D4AF37' } });
         }
     });
+
+    network.on("deselectNode", function () {
+        nodeInfoPanel.classList.remove('active');
+        scrollPrompt.style.display = 'block';
+        nodes.get().forEach(n => {
+            nodes.update({ id: n.id, shadow: { enabled: true, size: 10, color: 'rgba(0,0,0,0.25)' } });
+        });
+    });
+});
 </script>
 </body>
 </html>
