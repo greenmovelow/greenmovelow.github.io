@@ -235,10 +235,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const network = new vis.Network(container, data, options);
     network.stabilize();
 
-    network.once('stabilizationIterationsDone', function () {
-        network.fit();
-    });
-
+    network.once("stabilizationIterationsDone", function () {
+    network.setOptions({ physics: false });  // 🔒 Locks layout in place
+    network.fit({ animation: { duration: 500 } }); // Smooth auto-zoom
+});
     const nodeDetails = {
     'daf': {
         title: 'Anonymous Donor-Advised Funds (DAFs)',
