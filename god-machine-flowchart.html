@@ -239,8 +239,8 @@ const nodeInfoPanel = document.getElementById('node-info');
 
     var network = new vis.Network(container, data, options);
 network.once('stabilizationIterationsDone', function () {
+   network.stabilize();
     network.fit(); // Adjust viewport to fit all nodes
-network.stabilize();
 });
     network.on("selectNode", function (params) {
     const nodeId = params.nodes[0];
