@@ -238,7 +238,10 @@ const nodeInfoPanel = document.getElementById('node-info');
     const scrollPrompt = document.getElementById('scroll-prompt');
 
     var network = new vis.Network(container, data, options);
-
+network.once('stabilizationIterationsDone', function () {
+    network.fit(); // Adjust viewport to fit all nodes
+network.stabilize();
+});
     network.on("selectNode", function (params) {
     const nodeId = params.nodes[0];
     if (nodeId && nodeDetails[nodeId]) {
