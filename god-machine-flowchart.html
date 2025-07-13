@@ -185,48 +185,50 @@ document.addEventListener('DOMContentLoaded', function () {
     ]);
 
     const data = { nodes: nodes, edges: edges };
-const network = new vis.Network(container, data, options);
-    const options = {
-        nodes: {
-            shape: 'box',
-            font: { face: 'Teko', size: 18, color: '#1A1A1A', align: 'center' },
-            borderWidth: 2,
-            color: {
-                background: 'var(--flowchart-canvas-background)',
-                border: 'var(--primary-navy-blue)',
-                highlight: { background: 'var(--accent-burnished-gold)', border: 'var(--primary-navy-blue)' },
-                hover: { background: 'var(--accent-burnished-gold)', border: 'var(--primary-navy-blue)' }
-            },
-            widthConstraint: { minimum: 150, maximum: 250 },
-            shadow: { enabled: true, color: 'rgba(0,0,0,0.25)', size: 10 }
+
+const options = {
+    nodes: {
+        shape: 'box',
+        font: { face: 'Teko', size: 18, color: '#1A1A1A', align: 'center' },
+        borderWidth: 2,
+        color: {
+            background: 'var(--flowchart-canvas-background)',
+            border: 'var(--primary-navy-blue)',
+            highlight: { background: 'var(--accent-burnished-gold)', border: 'var(--primary-navy-blue)' },
+            hover: { background: 'var(--accent-burnished-gold)', border: 'var(--primary-navy-blue)' }
         },
-        edges: {
-            width: 2,
-            color: { color: 'var(--text-dark)', highlight: 'var(--accent-burnished-gold)' },
-            font: { color: 'var(--text-dark)', face: 'Roboto Slab', size: 12, align: 'top' },
-            arrows: { to: { enabled: true, scaleFactor: 0.8 } },
-            smooth: { type: 'curvedCW', roundness: 0.2 }
-        },
-        physics: {
-            enabled: true,
-            stabilization: { enabled: true, iterations: 1500, updateInterval: 100, fit: true },
-            barnesHut: {
-                gravitationalConstant: -2000,
-                centralGravity: 0.1,
-                springLength: 120,
-                springConstant: 0.05,
-                damping: 0.09,
-                avoidOverlap: 0.8
-            }
-        },
-        interaction: {
-            navigationButtons: true,
-            keyboard: true,
-            zoomView: true,
-            dragView: true,
-            tooltipDelay: 100
+        widthConstraint: { minimum: 150, maximum: 250 },
+        shadow: { enabled: true, color: 'rgba(0,0,0,0.25)', size: 10 }
+    },
+    edges: {
+        width: 2,
+        color: { color: 'var(--text-dark)', highlight: 'var(--accent-burnished-gold)' },
+        font: { color: 'var(--text-dark)', face: 'Roboto Slab', size: 12, align: 'top' },
+        arrows: { to: { enabled: true, scaleFactor: 0.8 } },
+        smooth: { type: 'curvedCW', roundness: 0.2 }
+    },
+    physics: {
+        enabled: true,
+        stabilization: { enabled: true, iterations: 1500, updateInterval: 100, fit: true },
+        barnesHut: {
+            gravitationalConstant: -2000,
+            centralGravity: 0.1,
+            springLength: 120,
+            springConstant: 0.05,
+            damping: 0.09,
+            avoidOverlap: 0.8
         }
-    };
+    },
+    interaction: {
+        navigationButtons: true,
+        keyboard: true,
+        zoomView: true,
+        dragView: true,
+        tooltipDelay: 100
+    }
+};
+
+const network = new vis.Network(container, data, options);
                           </script>
 </body>
 </html>
