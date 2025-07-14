@@ -1,146 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The God Machine: Interactive Flowchart - RDP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
-  <link rel="icon" href="assets/gold_green_logo.png"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    body {
-      font-family: 'Roboto Slab', serif;
-      background-color: #0A2239;
-      color: #E0E1DD;
-    }
-    h1, h2, h3, h4 {
-      font-family: 'Teko', sans-serif;
-      font-weight: 600;
-      color: #D4AF37;
-    }
-    #mynetwork {
-      width: 100%;
-      height: 75vh;
-      border: 2px solid #D4AF37;
-      background-color: #FAFAD2;
-      border-radius: 8px;
-    }
-    .node-info-panel {
-      background-color: #121212;
-      border-left: 5px solid #D4AF37;
-      padding: 1.5rem;
-      border-radius: 0.25rem;
-      margin-top: 1rem;
-      display: none;
-      color: #E0E1DD;
-    }
-    .node-info-panel.active {
-      display: block;
-    }
-    .vis-navigation .vis-button {
-      background-color: rgba(10, 34, 57, 0.8) !important;
-      border: 1px solid #D4AF37 !important;
-      border-radius: 50% !important;
-    }
-    .vis-navigation .vis-button:hover {
-      background-color: #0A2239 !important;
-    }
-    .vis-navigation .vis-button svg {
-      fill: #D4AF37 !important;
-    }
-    #info-description {
-      white-space: normal;
-      overflow: visible;
-      text-overflow: unset;
-      display: block;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    .animate-pulse {
-      animation: pulse 1.5s infinite;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The God Machine: Interactive Flowchart - RDP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link rel="icon" href="assets/gold_green_logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Branding Colors - DO NOT CHANGE THESE */
+            --primary-navy-blue: #0A2239; /* Deep, authoritative Navy Blue */
+            --accent-burnished-gold: #D4AF37; /* Desaturated, Burnished Gold */
+            --background-dark: #121212; /* Overall page background/dark sections */
+            --text-light: #E0E1DD; /* For light text on dark backgrounds */
+            --text-dark: #1A1A1A; /* For dark text on light backgrounds */
+            
+            /* Flowchart Specific Colors - Adjusted for direct Vis.js application */
+            --flowchart-canvas-background: #FAFAD2; /* Light gold toned background for the network canvas */
+            
+            /* Node Default Colors (Dark node, light text) */
+            --node-default-bg-color: #333333; /* Dark charcoal/black for default node fill */
+            --node-default-border-color: #777777; /* Grey outline for default node */
+            --node-default-text-color: #F0F0F0; /* Light text for default node labels */
+
+            /* Node Highlight Colors (Navy blue node, gold border, light text) */
+            --node-highlight-bg-color: var(--primary-navy-blue); /* Navy blue on highlight */
+            --node-highlight-border-color: var(--accent-burnished-gold); /* Gold border on highlight */
+            --node-highlight-text-color: #F0F0F0; /* Light text on highlight */
+
+            /* Group Specific Node Colors for better branding & readability */
+            --group-funding-bg: var(--accent-burnished-gold); /* Gold background for funding nodes */
+            --group-funding-text: var(--text-dark); /* Dark text on gold */
+
+            --group-target-bg: var(--flowchart-canvas-background); /* Light gold/canvas background for target nodes */
+            --group-target-text: var(--text-dark); /* Dark text on light */
+
+            --group-individual-bg: var(--accent-burnished-gold); /* Gold for individual nodes */
+            --group-individual-text: var(--text-dark); /* Dark text on gold */
+
+
+            --font-display: 'Teko', sans-serif;
+            --font-body: 'Roboto Slab', serif;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--primary-navy-blue); /* Page background */
+            color: var(--text-light);
+        }
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--accent-burnished-gold);
+        }
+        #mynetwork {
+            width: 100%;
+            height: 75vh;
+            border: 2px solid var(--accent-burnished-gold);
+            background-color: var(--flowchart-canvas-background); /* Light gold canvas background */
+            border-radius: 8px;
+        }
+        .node-info-panel {
+            background-color: var(--background-dark); /* Dark background for info panel */
+            border-left: 5px solid var(--accent-burnished-gold);
+            padding: 1.5rem;
+            border-radius: 0.25rem;
+            margin-top: 1rem;
+            display: none;
+            color: var(--text-light); /* Ensure text is visible in info panel */
+        }
+        .node-info-panel.active { display: block; }
+        .vis-navigation .vis-button {
+            background-color: rgba(10, 34, 57, 0.8) !important;
+            border: 1px solid var(--accent-burnished-gold) !important;
+            border-radius: 50% !important;
+        }
+        .vis-navigation .vis-button:hover { background-color: var(--primary-navy-blue) !important; }
+        .vis-navigation .vis-button svg { fill: var(--accent-burnished-gold) !important; }
+        
+        /* Ensure the scroll prompt animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
 </head>
 <body class="antialiased">
-  <nav class="sticky top-0 z-50 shadow-lg" style="background-color: rgba(10, 34, 57, 0.9); backdrop-filter: blur(10px);">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
-        <a href="the-god-machine.html" class="flex items-center space-x-3 text-gray-300 hover:text-white">
-          <img src="assets/gold_green_logo.png" alt="RDP Logo" class="h-8 w-8"/>
-          <span class="text-sm font-medium hidden sm:inline">&larr; Return to The God Machine</span>
-        </a>
-        <h1 class="text-3xl uppercase tracking-wider">Interactive Dossier</h1>
-      </div>
-    </div>
-  </nav>
 
-  <main class="max-w-7xl mx-auto p-4 w-full">
-    <header class="text-center pt-4 pb-2">
-      <h1 class="text-4xl md:text-5xl font-black uppercase tracking-wider">The God Machine</h1>
-    </header>
-    <div class="p-4 rounded-lg">
-      <p class="text-light mb-4">Click on any node in the diagram below to learn more about its role in The God Machine network. Hover over nodes for quick information. Use your mouse wheel or pinch-to-zoom to explore the connections. The navigation buttons allow you to pan, zoom, and reset the view. The network will stabilize after a moment.</p>
-      <div id="mynetwork"></div>
-      <div id="node-info" class="node-info-panel">
-        <h3 id="info-title" class="text-2xl mb-2"></h3>
-        <p id="info-description" class="leading-relaxed"></p>
-        <p id="scroll-prompt" class="mt-4 text-sm text-center text-accent-burnished-gold animate-pulse">
-          &darr; Scroll down for node details &darr;
-        </p>
-      </div>
-    </div>
-  </main>
+    <nav class="sticky top-0 z-50 shadow-lg" style="background-color: rgba(10, 34, 57, 0.9); backdrop-filter: blur(10px);">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                 <a href="the-god-machine.html" class="flex items-center space-x-3 text-gray-300 hover:text-white">
+                    <img src="assets/gold_green_logo.png" alt="RDP Logo" class="h-8 w-8">
+                    <span class="text-sm font-medium hidden sm:inline">&larr; Return to The God Machine</span>
+                </a>
+                <h1 class="text-3xl uppercase tracking-wider">Interactive Dossier</h1>
+            </div>
+        </div>
+    </nav>
 
-  <footer class="border-t py-8 mt-4" style="border-color: #0A2239;">
-    <div class="container mx-auto px-4 text-center" style="color: #ccc;">
-      <p>&copy; 2025 Restoring Democracy's Promise. All Rights Reserved.</p>
-      <p class="text-sm mt-2">This interactive report is part of the keystone investigation "THE GOD MACHINE."</p>
-    </div>
-  </footer>
+    <main class="max-w-7xl mx-auto p-4 w-full">
+        <header class="text-center pt-4 pb-2">
+             <h1 class="text-4xl md:text-5xl font-black uppercase tracking-wider">The God Machine</h1>
+        </header>
+        <div class="p-4 rounded-lg">
+            <p class="text-light mb-4">Click on any node in the diagram below to learn more about its role in The God Machine network. Hover over nodes for quick information. Use your mouse wheel or pinch-to-zoom to explore the connections. The navigation buttons allow you to pan, zoom, and reset the view. The network will stabilize after a moment.</p>
+            <div id="mynetwork"></div>
+            <div id="node-info" class="node-info-panel">
+                <h3 id="info-title" class="text-2xl mb-2"></h3>
+                <p id="info-description" class="leading-relaxed"></p>
+                <p id="scroll-prompt" class="mt-4 text-sm text-center text-accent-burnished-gold animate-pulse">
+                    &darr; Scroll down for node details &darr;
+                </p>
+            </div>
+        </div>
+    </main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const container = document.getElementById('mynetwork');
-      const nodeInfoPanel = document.getElementById('node-info');
-      const infoTitle = document.getElementById('info-title');
-      const infoDescription = document.getElementById('info-description');
-      const scrollPrompt = document.getElementById('scroll-prompt');
+    <footer class="border-t py-8 mt-4" style="border-color: var(--primary-navy-blue);">
+        <div class="container mx-auto px-4 text-center" style="color: var(--text-secondary);">
+            <p>&copy; 2025 Restoring Democracy's Promise. All Rights Reserved.</p>
+            <p class="text-sm mt-2">This interactive report is part of the keystone investigation "THE GOD MACHINE."</p>
+        </div>
+    </footer>
 
-      const toggleReadMore = document.createElement('button');
-      toggleReadMore.id = 'toggle-read-more';
-      toggleReadMore.className = 'text-xs text-yellow-400 mt-2 underline hidden';
-      toggleReadMore.textContent = 'Read more';
-      nodeInfoPanel.appendChild(toggleReadMore);
+<!-- everything up to <script> remains the same -->
+<script type="text/javascript">
+    var nodes = new vis.DataSet([
+        { id: 'daf', label: 'Anonymous Donors (DAFs)', group: 'funding' },
+        { id: 'nacl', label: 'NACL', group: 'ops' },
+        { id: 'faithwins', label: 'Faith Wins', group: 'ops' },
+        { id: 'missiongen', label: 'Mission Generation / NSCA', group: 'credentialer' },
+        { id: 'publicschools', label: 'Public Schools', group: 'target' },
+        { id: 'chaplains', label: 'NSCA Certified Chaplains', group: 'credentialer' },
+        { id: 'rockymalloy', label: 'Rocky Malloy', group: 'individual' }
+    ]);
 
-      let fullDescription = '';
-      let isExpanded = false;
-
-      toggleReadMore.addEventListener('click', () => {
-        isExpanded = !isExpanded;
-        infoDescription.textContent = isExpanded ? fullDescription : truncate(fullDescription, 200);
-        toggleReadMore.textContent = isExpanded ? 'Show less' : 'Read more';
-      });
-
-      function truncate(text, limit) {
-        return text.length > limit ? text.slice(0, limit) + '…' : text;
-      }
-
-      const nodes = new vis.DataSet([
-        { id: 'daf', label: 'Anonymous Donors (DAFs)', title: 'Untraceable donor funding vehicle' },
-        { id: 'nacl', label: 'NACL', title: 'Drafts legislation for chaplain access' },
-        { id: 'faithwins', label: 'Faith Wins', title: 'Mobilizes religious lobbying pressure' },
-        { id: 'missiongen', label: 'Mission Generation / NSCA', title: 'Chaplain credentialing monopoly' },
-        { id: 'publicschools', label: 'Public Schools', title: 'Targeted for chaplain placement' },
-        { id: 'chaplains', label: 'NSCA Certified Chaplains', title: 'Product of Mission Generation' },
-        { id: 'rockymalloy', label: 'Rocky Malloy', title: 'Founder and loan recipient' }
-      ]);
-
-      const edges = new vis.DataSet([
+    var edges = new vis.DataSet([
         { from: 'daf', to: 'missiongen', label: 'Funds', title: '$352k Grant x2' },
         { from: 'nacl', to: 'publicschools', label: 'Pushes Legislation' },
         { from: 'faithwins', to: 'nacl', label: 'Lobbies For' },
@@ -148,87 +149,148 @@
         { from: 'chaplains', to: 'publicschools', label: 'Deployed To' },
         { from: 'missiongen', to: 'rockymalloy', label: 'Provides Loan To', title: '$150,000 Loan' },
         { from: 'nacl', to: 'missiongen', label: 'Creates Market For' }
-      ]);
+    ]);
 
-      const data = { nodes, edges };
+    var container = document.getElementById('mynetwork');
+    var data = { nodes: nodes, edges: edges };
 
-      const options = {
+    var options = {
         nodes: {
-          shape: 'box',
-          font: { face: 'Teko', size: 18, color: '#1A1A1A', align: 'center' },
-          borderWidth: 2,
-          color: {
-            background: '#FAFAD2',
-            border: '#0A2239',
-            highlight: { background: '#D4AF37', border: '#0A2239' },
-            hover: { background: '#D4AF37', border: '#0A2239' }
-          },
-          widthConstraint: { minimum: 150, maximum: 250 },
-          shadow: { enabled: true, color: 'rgba(0,0,0,0.25)', size: 10 }
+            shape: 'box',
+            font: {
+                face: 'Teko',
+                size: 18,
+                color: '#000000' // Fix for label visibility
+            },
+            borderWidth: 2,
+            color: {
+                background: 'var(--flowchart-canvas-background)',
+                border: 'var(--primary-navy-blue)',
+                highlight: {
+                    background: 'var(--accent-burnished-gold)',
+                    border: 'var(--primary-navy-blue)'
+                },
+                hover: {
+                    background: 'var(--accent-burnished-gold)',
+                    border: 'var(--primary-navy-blue)'
+                }
+            },
+            widthConstraint: { minimum: 150, maximum: 250 },
+            shadow: {
+                enabled: true,
+                color: 'rgba(0,0,0,0.5)',
+                size: 8,
+                x: 3,
+                y: 3
+            }
         },
         edges: {
-          width: 2,
-          color: { color: '#1A1A1A', highlight: '#D4AF37' },
-          font: { color: '#1A1A1A', face: 'Roboto Slab', size: 12, align: 'top' },
-          arrows: { to: { enabled: true, scaleFactor: 0.8 } },
-          smooth: { type: 'curvedCW', roundness: 0.2 }
+            width: 2,
+            color: { color: 'var(--text-dark)', highlight: 'var(--accent-burnished-gold)' },
+            font: {
+                color: 'var(--text-dark)',
+                face: 'Roboto Slab',
+                size: 12,
+                strokeWidth: 0,
+                align: 'top'
+            },
+            arrows: { to: { enabled: true, scaleFactor: 0.8 } },
+            smooth: { type: 'curvedCW', roundness: 0.2 }
         },
         physics: {
-          enabled: true,
-          stabilization: { enabled: true, iterations: 1500, updateInterval: 100, fit: true },
-          barnesHut: {
-            gravitationalConstant: -2000,
-            centralGravity: 0.1,
-            springLength: 120,
-            springConstant: 0.05,
-            damping: 0.09,
-            avoidOverlap: 0.8
-          }
+            enabled: true,
+            stabilization: {
+                enabled: true,
+                iterations: 1500,
+                updateInterval: 100,
+                fit: true
+            },
+            barnesHut: {
+                gravitationalConstant: -2000,
+                centralGravity: 0.1,
+                springLength: 120,
+                springConstant: 0.05,
+                damping: 0.09,
+                avoidOverlap: 0.8
+            },
+            solver: 'barnesHut'
         },
         interaction: {
-          navigationButtons: true,
-          keyboard: true,
-          zoomView: true,
-          dragView: true,
-          tooltipDelay: 100
+            navigationButtons: true,
+            keyboard: true,
+            zoomView: true,
+            dragView: true
         }
-      };
+    };
+    // ...rest of the script unchanged
+    var network = new vis.Network(container, data, options);
 
-      const network = new vis.Network(container, data, options);
-      const nodeDetails = {
-        daf: { title: 'Anonymous Donors (DAFs)', description: 'Untraceable donor funding vehicle used to finance religious networks without public oversight.' },
-        nacl: { title: 'NACL', description: 'Drafts state legislation enabling chaplain access to public school systems.' },
-        faithwins: { title: 'Faith Wins', description: 'Mobilizes religious lobbying efforts to pressure state legislatures.' },
-        missiongen: { title: 'Mission Generation / NSCA', description: 'Provides credentialing and chaplaincy programs for religious operatives.' },
-        publicschools: { title: 'Public Schools', description: 'Target institutions for strategic chaplain placement.' },
-        chaplains: { title: 'NSCA Certified Chaplains', description: 'Graduates of NSCA programs deployed to schools and government.' },
-        rockymalloy: { title: 'Rocky Malloy', description: 'Founder and major financial beneficiary of Mission Generation.' }
-      };
+    network.on("stabilizationIterationsDone", function () {
+        network.setOptions({ physics: false });
+        network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
+    });
 
-      network.on('selectNode', function (params) {
+    const nodeInfoPanel = document.getElementById('node-info');
+    const infoTitle = document.getElementById('info-title');
+    const infoDescription = document.getElementById('info-description');
+    const scrollPrompt = document.getElementById('scroll-prompt');
+
+    const nodeDetails = {
+        'daf': {
+            title: 'Anonymous Donor-Advised Funds (DAFs)',
+            description: 'The untraceable financial engine. DAFs legally shield the identity of major donors, allowing hundreds of thousands of dollars to flow to Mission Generation without public accountability.'
+        },
+        'nacl': {
+            title: 'National Association of Christian Lawmakers (NACL)',
+            description: 'The legislative "bill mill." This group drafts and distributes model legislation to allied state lawmakers, creating the legal framework that allows public schools to hire or accept chaplains.'
+        },
+        'faithwins': {
+            title: 'Faith Wins',
+            description: 'The "grassroots" mobilizer. This group manufactures political pressure by organizing clergy and activists to lobby for the NACL\'s bills, creating the appearance of organic public demand.'
+        },
+        'missiongen': {
+            title: 'Mission Generation / NSCA',
+            description: 'The credentialing monopoly. By being the primary organization offering "chaplain certification," it captures the market created by its legislative partners. Financial records show it receiving identical $352,000 anonymous grants and providing a $150,000 loan to its founder.'
+        },
+        'publicschools': {
+            title: 'Public Schools',
+            description: 'The target. The entire machine is oriented to place its certified, ideologically-aligned personnel inside public schools, often replacing licensed, professional counselors.'
+        },
+        'chaplains': {
+            title: 'NSCA Certified Chaplains',
+            description: 'The product. These individuals, requiring only a 40-hour online course, are deployed into schools, creating a pipeline that bypasses professional standards for counseling and mental health support.'
+        },
+        'rockymalloy': {
+            title: 'Rocky Malloy',
+            description: 'Founder of Mission Generation, Inc. and recipient of a $150,000 loan from the nonprofit, a transaction identified as a classic red flag for private inurement by the IRS.'
+        }
+    };
+
+    network.on("selectNode", function (params) {
         const nodeId = params.nodes[0];
         if (nodeId && nodeDetails[nodeId]) {
-          const details = nodeDetails[nodeId];
-          infoTitle.textContent = details.title;
-          fullDescription = details.description;
-          infoDescription.textContent = truncate(fullDescription, 200);
-          toggleReadMore.classList.toggle('hidden', fullDescription.length <= 200);
-          nodeInfoPanel.classList.add('active');
-          nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const details = nodeDetails[nodeId];
+            infoTitle.textContent = details.title;
+            infoDescription.textContent = details.description;
+            nodeInfoPanel.classList.add('active');
+            nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollPrompt.style.display = 'none';
+        } else {
+            nodeInfoPanel.classList.remove('active');
+            scrollPrompt.style.display = 'block';
         }
-      });
-
-      network.on('deselectNode', function () {
-        nodeInfoPanel.classList.remove('active');
-        infoTitle.textContent = '';
-        infoDescription.textContent = '';
-        toggleReadMore.classList.add('hidden');
-        fullDescription = '';
-        isExpanded = false;
-      });
-
-      network.stabilize();
     });
-  </script>
+
+    network.on("deselectNode", function () {
+        nodeInfoPanel.classList.remove('active');
+        scrollPrompt.style.display = 'block';
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!network.getSelectedNodes().length && !network.getSelectedEdges().length) {
+            scrollPrompt.style.display = 'block';
+        }
+    });
+</script>
 </body>
 </html>
