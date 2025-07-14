@@ -6,8 +6,7 @@
     <title>The God Machine: An RDP Investigation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="icon" href="assets/gold_green_logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="assets/rdp_logo_gold_on_green_bg.png"> <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -151,6 +150,15 @@
         .modal-content button {
             color: var(--text-secondary);
         }
+        /* -- CORRECTED BUTTON STYLES -- */
+        .btn-report {
+            background-color: var(--accent-burnished-gold);
+            color: var(--primary-navy-blue);
+        }
+        .btn-report:hover {
+            background-color: var(--primary-navy-blue);
+            color: var(--accent-burnished-gold);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -160,8 +168,7 @@
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center space-x-4">
                     <a href="/" title="Return to Homepage">
-                        <img src="assets/gold_green_logo.png" alt="Restoring Democracy's Promise Logo" class="h-8 w-8">
-                    </a>
+                        <img src="assets/rdp_logo_gold_on_green_bg.png" alt="Restoring Democracy's Promise Logo" class="h-8 w-8"> </a>
                     <a href="/" class="text-sm font-medium" style="color: var(--text-light); hover:text-white hover:underline hidden sm:block">
                         &larr; Return to Homepage
                     </a>
@@ -196,7 +203,7 @@
                     <h3 class="text-2xl text-white mb-2">The Central Operator</h3>
                     <p class="leading-relaxed" style="color: var(--text-light);">At the heart of this scheme is <b style="color: var(--text-light);">Mission Generation, Inc.</b>—operating as the <b style="color: var(--text-light);">National School Chaplain Association (NSCA)</b>. This organization positioned itself to be the sole provider of “certified” chaplains to public schools, leveraging laws drafted by its own legislative partners. Its financials expose concerning activity, including a <b class="accent-color">$150,000 loan to its founder.</b></p>
                 </div>
-                 <div class="card">
+                      <div class="card">
                     <h3 class="text-2xl text-white mb-4">The Assembly Line: Four Parts, One Purpose</h3>
                     <p class="mb-4 leading-relaxed" style="color: var(--text-light);">This is not a grassroots campaign, but a <b class="accent-color">symbiotic network</b>—a four-part machine where every function exists to generate demand, create a credentialing monopoly, and extract value. <b class="accent-color">Click any step below for details.</b></p>
                     <div class="space-y-2">
@@ -237,8 +244,7 @@
                 <div class="card mt-6 text-center">
                     <h3 class="text-2xl accent-color mb-4">Interactive Network Map: The God Machine Flowchart</h3>
                     <p style="color: var(--text-light);" class="mb-4">Explore the full operational flowchart of The God Machine and its interconnected entities.</p>
-                    <a href="god-machine-flowchart.html" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary-navy-blue hover:bg-card-background text-accent-burnished-gold font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300">
-                        <img src="assets/gold_green_logo.png" alt="Link to Interactive Flowchart" class="h-6 inline-block mr-2"> Launch Interactive Flowchart
+                    <a href="god-machine-flowchart.html" target="_blank" rel="noopener noreferrer" class="btn-report inline-block font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300"> <img src="assets/rdp_logo_gold_on_green_bg.png" alt="Link to Interactive Flowchart" class="h-6 inline-block mr-2"> Launch Interactive Flowchart
                     </a>
                     <p class="text-sm mt-2" style="color: var(--text-secondary);"><i>(Opens in a new tab for an immersive experience)</i></p>
                 </div>
@@ -247,11 +253,11 @@
             <div id="evidence" class="tab-content">
                 <div class="card card-highlight">
                     <h2 class="text-3xl accent-color mb-2">The Financial Engine: Anatomy of a Self-Dealing Scheme</h2>
-                     <p class="leading-relaxed" style="color: var(--text-light);">A forensic review of IRS Form 990s from 2020–2023 exposes the financial logic that animates this machine, highlighting anonymous funding, monetized legislation, and a significant red flag loan.</p>
+                    <p class="leading-relaxed" style="color: var(--text-light);">A forensic review of IRS Form 990s from 2020–2023 exposes the financial logic that animates this machine, highlighting anonymous funding, monetized legislation, and a significant red flag loan.</p>
                 </div>
                 <div class="card">
-                     <h3 class="2xl text-white mb-4 text-center">Key Financial Flows</h3>
-                     <div class="space-y-2">
+                    <h3 class="2xl text-white mb-4 text-center">Key Financial Flows</h3>
+                    <div class="space-y-2">
                         <div class="flow-node" style="cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><b>Anonymous Donor-Advised Fund (DAF)</b><br><span class="text-sm" style="color: #666;">Untraceable Grants</span></div>
                         <div class="flow-arrow">↓</div>
                         <div class="flow-node card-highlight" style="border-color: var(--accent-burnished-gold); cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><b>Mission Generation, Inc.</b><br><span class="text-sm accent-color font-bold">Identical $352,000 Grants (2022 & 2023)</span></div>
@@ -262,17 +268,16 @@
                     </div>
                 </div>
                 <div class="card">
-                     <h3 class="2xl text-white mb-2">Credentialing Vacuum and Public Risk</h3>
+                    <h3 class="2xl text-white mb-2">Credentialing Vacuum and Public Risk</h3>
                     <p class="mb-4 leading-relaxed" style="color: var(--text-light);">The push for chaplains creates a significant risk by allowing individuals with minimal training to provide counseling in schools, contrasting sharply with the rigorous requirements for licensed professionals.</p>
                     <div class="chart-container">
                         <canvas id="credentialsChart"></canvas>
                     </div>
-                     <p class="text-sm mt-4 leading-relaxed" style="color: var(--text-secondary);"><i>Comparison illustrates required training hours: 40 for an NSCA Chaplain vs. 3,000+ for a Licensed Counselor (plus a Master's degree).</i></p>
-                     <div class="mt-6 p-4 border border-accent rounded-lg text-center bg-card-dark">
+                    <p class="text-sm mt-4 leading-relaxed" style="color: var(--text-secondary);"><i>Comparison illustrates required training hours: 40 for an NSCA Chaplain vs. 3,000+ for a Licensed Counselor (plus a Master's degree).</i></p>
+                    <div class="mt-6 p-4 border border-accent rounded-lg text-center bg-card-dark">
                         <h4 class="text-xl accent-color mb-2">Evidence Dossier: The Credentialing Gap</h4>
                         <p style="color: var(--text-light);" class="mb-4">Dive deeper into the stark differences between NSCA chaplain certification and professional licensing standards.</p>
-                        <a href="credentialing-gap-dossier.html" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary-navy-blue hover:bg-card-background text-accent-burnished-gold font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300">
-                             <img src="assets/gold_green_logo.png" alt="Link to Credentialing Gap Dossier" class="h-6 inline-block mr-2"> Explore the Dossier
+                        <a href="credentialing-gap-dossier.html" target="_blank" rel="noopener noreferrer" class="btn-report inline-block font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300"> <img src="assets/rdp_logo_gold_on_green_bg.png" alt="Link to Credentialing Gap Dossier" class="h-6 inline-block mr-2"> Explore the Dossier
                         </a>
                         <p class="text-sm mt-2" style="color: var(--text-secondary);"><i>(Opens in a new tab for detailed evidence)</i></p>
                     </div>
@@ -280,7 +285,7 @@
             </div>
 
             <div id="impact" class="tab-content">
-                 <div class="card card-highlight">
+                      <div class="card card-highlight">
                     <h2 class="text-3xl accent-color mb-2">Consequences: Breach of Public Trust</h2>
                     <p class="leading-relaxed" style="color: var(--text-light);">The "God Machine" represents more than a policy push; it's a fundamental breach of public trust, transforming public education into a battleground for profit-driven culture wars.</p>
                 </div>
@@ -292,12 +297,12 @@
                         <li>Students and local communities are left to pay the price as professional counseling is replaced by unqualified, religiously-affiliated roles.</li>
                     </ul>
                 </div>
-                 <div class="card">
+                      <div class="card">
                     <h3 class="text-2xl text-white mb-2">The Broader Methodology: "The Pincer Movement"</h3>
-                     <p class="leading-relaxed" style="color: var(--text-light);">This case study is part of a national "Pincer Movement." One arm pushes model bills and legislative action; the other establishes a credentialing monopoly and revenue stream, all amplified by anonymous dark money. This exploits regulatory gaps and the opacity of charitable giving, using the nonprofit system as a lever for profit and policy.</p>
+                           <p class="leading-relaxed" style="color: var(--text-light);">This case study is part of a national "Pincer Movement." One arm pushes model bills and legislative action; the other establishes a credentialing monopoly and revenue stream, all amplified by anonymous dark money. This exploits regulatory gaps and the opacity of charitable giving, using the nonprofit system as a lever for profit and policy.</p>
                 </div>
                 <div class="card card-highlight">
-                     <p class="text-center text-2xl accent-color" style="font-family: var(--font-display); font-weight: 700;">"This is not merely a violation of public trust; it is the transformation of American schools into a battleground for profit-driven culture wars."</p>
+                           <p class="text-center text-2xl accent-color" style="font-family: var(--font-display); font-weight: 700;">"This is not merely a violation of public trust; it is the transformation of American schools into a battleground for profit-driven culture wars."</p>
                 </div>
             </div>
         </main>
@@ -416,8 +421,8 @@
                         grid: { color: '#BBBBBB' }
                     },
                     y: {
-                       ticks: { color: '#333333', font: { size: 14, family: "'Roboto Slab', serif" } },
-                       grid: { display: false }
+                        ticks: { color: '#333333', font: { size: 14, family: "'Roboto Slab', serif" } },
+                        grid: { display: false }
                     }
                 },
                 plugins: {
@@ -442,5 +447,4 @@
             }
         });
     </script>
-</body>
-</html>
+</html>         
