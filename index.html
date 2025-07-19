@@ -103,6 +103,19 @@
     <div class="flex flex-col min-h-screen">
         <header class="relative text-center py-16 md:py-24 px-4">
             <div class="absolute inset-0 bg-brand-green-dark opacity-50"></div>
+            
+            <div class="absolute top-4 right-4 z-10">
+                <button id="share-button" title="Share this page" class="p-2 rounded-full text-white hover:bg-brand-green-dark transition-colors duration-200">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                </button>
+            </div>
+
             <div class="relative max-w-4xl mx-auto">
                 <img id="main-logo" src="assets/gold_green_logo.png" alt="Restoring Democracy's Promise Logo" class="mx-auto mb-6 h-20 w-20 md:h-28 md:w-28 cursor-pointer">
 
@@ -121,7 +134,7 @@
                         READ THE FULL INVESTIGATION: THE PINCER MOVEMENT
                     </a>
                 </div>
-                </div>
+            </div>
         </header>
 
         <main class="flex-grow">
@@ -208,6 +221,29 @@
                 window.location.href = "vault.html";
             }
         });
+
+        // --- Share Button Functionality ADDED HERE ---
+        const shareButton = document.getElementById('share-button');
+        if (shareButton) {
+            shareButton.addEventListener('click', async () => {
+                const shareData = {
+                    title: 'Restoring Democracy\'s Promise',
+                    text: 'A blueprint for accountability journalism. Exposing the hidden machinery of power with irrefutable, evidence-driven investigations.',
+                    url: window.location.href
+                };
+                try {
+                    if (navigator.share) {
+                        await navigator.share(shareData);
+                    } else {
+                        throw new Error('Web Share API not supported');
+                    }
+                } catch (err) {
+                    navigator.clipboard.writeText(window.location.href).then(() => {
+                        alert('Link copied to clipboard!');
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>
