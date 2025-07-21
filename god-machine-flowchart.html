@@ -141,6 +141,7 @@
     </footer>
 
 <script type="text/javascript">
+    // --- CORRECTED DATASET ---
     var nodes = new vis.DataSet([
         { id: 'daf', label: 'Anonymous Donors (DAFs)', group: 'funding' },
         { id: 'nacl', label: 'NACL', group: 'ops' },
@@ -152,14 +153,15 @@
     ]);
 
     var edges = new vis.DataSet([
-        { from: 'daf', to: 'missiongen', label: 'Funds', title: '$352k Grant x2' },
+        { from: 'daf', to: 'missiongen', label: 'Funds', title: 'Verifiable $352k Grant (2022)' },
         { from: 'nacl', to: 'publicschools', label: 'Pushes Legislation' },
         { from: 'faithwins', to: 'nacl', label: 'Lobbies For' },
         { from: 'missiongen', to: 'chaplains', label: 'Certifies' },
         { from: 'chaplains', to: 'publicschools', label: 'Deployed To' },
-        { from: 'missiongen', to: 'rockymalloy', label: 'Provides Loan To', title: '$150,000 Loan' },
+        { from: 'missiongen', to: 'rockymalloy', label: 'Provides Loan To', title: '$200,000 Principal Loan' },
         { from: 'nacl', to: 'missiongen', label: 'Creates Market For' }
     ]);
+    // --- END CORRECTION ---
 
     var container = document.getElementById('mynetwork');
     var data = { nodes: nodes, edges: edges };
@@ -245,10 +247,11 @@
     const infoDescription = document.getElementById('info-description');
     const scrollPrompt = document.getElementById('scroll-prompt');
 
+    // --- CORRECTED NODE DETAILS ---
     const nodeDetails = {
         'daf': {
             title: 'Anonymous Donor-Advised Funds (DAFs)',
-            description: 'The untraceable financial engine. DAFs legally shield the identity of major donors, allowing hundreds of thousands of dollars to flow to Mission Generation without public accountability.'
+            description: 'The untraceable financial engine. DAFs legally shield the identity of major donors, allowing large, coordinated grants (like a verified $352,000 grant in 2022) to flow to Mission Generation without public accountability.'
         },
         'nacl': {
             title: 'National Association of Christian Lawmakers (NACL)',
@@ -260,7 +263,7 @@
         },
         'missiongen': {
             title: 'Mission Generation / NSCA',
-            description: 'The credentialing monopoly. By being the primary organization offering "chaplain certification," it captures the market created by its legislative partners. Financial records show it receiving identical $352,000 anonymous grants and providing a $150,000 loan to its founder.'
+            description: 'The credentialing monopoly. This organization captures the market created by its partners. Financial records show it operates at a massive deficit and has engaged in questionable transactions, including providing loans to its founder with an original principal of $200,000.'
         },
         'publicschools': {
             title: 'Public Schools',
@@ -272,9 +275,10 @@
         },
         'rockymalloy': {
             title: 'Rocky Malloy',
-            description: 'Founder of Mission Generation, Inc. and recipient of a $150,000 loan from the nonprofit, a transaction identified as a classic red flag for private inurement by the IRS.'
+            description: 'Founder of Mission Generation, Inc. and recipient of loans with an original principal of $200,000 from the nonprofit, a transaction identified as a classic red flag for private inurement by the IRS.'
         }
     };
+    // --- END CORRECTION ---
 
     network.on("selectNode", function (params) {
         const nodeId = params.nodes[0];
@@ -296,7 +300,7 @@
         scrollPrompt.style.display = 'block';
     });
 
-    // --- Share Button Functionality ADDED HERE ---
+    // --- Share Button Functionality ---
     const shareButton = document.getElementById('share-button');
     if (shareButton) {
         shareButton.addEventListener('click', async () => {
