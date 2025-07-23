@@ -79,7 +79,7 @@
         }
         .component-card.active-component {
             border-left-color: var(--accent-burnished-gold);
-            background-color: rgba(184, 134, 11, 0.1);
+            background-color: rgba(184, 134, 11, 0.1); /* Gold with transparency */
         }
         .component-card:hover {
             border-left-color: var(--accent-burnished-gold);
@@ -95,11 +95,22 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
-        .flow-node:hover {
+        /* Specific styling for flow nodes in the Summary tab */
+        #summary .flow-node {
+            background-color: var(--accent-burnished-gold); /* Gold background */
+            color: var(--primary-navy-blue); /* Navy text for contrast */
+            border-color: var(--accent-burnished-gold); /* Match border to background */
+        }
+        /* Hover effect for the gold flow nodes */
+        #summary .flow-node:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            background-color: var(--primary-navy-blue); /* Darken on hover */
+            color: var(--accent-burnished-gold); /* Gold text on hover */
             border-color: var(--accent-burnished-gold);
         }
+
+
         .flow-arrow {
             display: flex;
             align-items: center;
@@ -155,6 +166,7 @@
         .btn-report {
             background-color: var(--accent-burnished-gold);
             color: var(--primary-navy-blue);
+            font-family: var(--font-display); /* Ensure button text matches display font */
         }
         .btn-report:hover {
             background-color: var(--primary-navy-blue);
@@ -216,19 +228,19 @@
                 </div>
                 <div class="card">
                     <h3 class="text-2xl text-white mb-2">The Central Operator</h3>
-                    <p class="leading-relaxed" style="color: var(--text-light);">At the heart of this scheme is <b style="color: var(--text-light);">Mission Generation, Inc.</b>—operating as the <b style="color: var(--text-light);">National School Chaplain Association (NSCA)</b>. This organization positioned itself to be the sole provider of “certified” chaplains to public schools, leveraging laws drafted by its own legislative partners. Its financials expose concerning activity, including a <b class="accent-color">$150,000 loan to its founder.</b></p>
+                    <p class="leading-relaxed" style="color: var(--text-light);">At the heart of this scheme is <span style="color: var(--text-light); font-weight: bold;">Mission Generation, Inc.</span>—operating as the <span style="color: var(--text-light); font-weight: bold;">National School Chaplain Association (NSCA)</span>. This organization positioned itself to be the sole provider of “certified” chaplains to public schools, leveraging laws drafted by its own legislative partners. Its financials expose concerning activity, including a <span class="accent-color">$200,000 loan to its founder.</span></p>
                 </div>
                       <div class="card">
                     <h3 class="text-2xl text-white mb-4">The Assembly Line: Four Parts, One Purpose</h3>
-                    <p class="mb-4 leading-relaxed" style="color: var(--text-light);">This is not a grassroots campaign, but a <b class="accent-color">symbiotic network</b>—a four-part machine where every function exists to generate demand, create a credentialing monopoly, and extract value. <b class="accent-color">Click any step below for details.</b></p>
+                    <p class="mb-4 leading-relaxed" style="color: var(--text-light);">This is not a grassroots campaign, but a <span class="accent-color">symbiotic network</span>—a four-part machine where every function exists to generate demand, create a credentialing monopoly, and extract value. <span class class="accent-color">Click any step below for details.</span></p>
                     <div class="space-y-2">
-                        <div class="flow-node" onclick="showModal(1)"><b>1. The Bill Mill</b><br><span class="text-sm" style="color: var(--text-secondary);">(National Association of Christian Lawmakers – NACL)</span></div>
+                        <div class="flow-node" onclick="showModal(1)"><b>1. The Bill Mill</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(National Association of Christian Lawmakers – NACL)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(2)"><b>2. The Mobilizer</b><br><span class="text-sm" style="color: var(--text-secondary);">(Faith Wins)</span></div>
+                        <div class="flow-node" onclick="showModal(2)"><b>2. The Mobilizer</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(Faith Wins)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(3)"><b>3. The Credentialer</b><br><span class="text-sm" style="color: var(--text-secondary);">(Mission Generation/NSCA)</span></div>
+                        <div class="flow-node" onclick="showModal(3)"><b>3. The Credentialer</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(Mission Generation/NSCA)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(4)"><b>4. The Money</b><br><span class="text-sm" style="color: var(--text-secondary);">(Anonymous Donors via DAFs)</span></div>
+                        <div class="flow-node" onclick="showModal(4)"><b>4. The Money</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(Anonymous Donors via DAFs)</span></div>
                     </div>
                 </div>
             </div>
@@ -263,6 +275,14 @@
                     </a>
                     <p class="text-sm mt-2" style="color: var(--text-secondary);"><i>(Opens in a new tab for an immersive experience)</i></p>
                 </div>
+                <div class="card mt-6 text-center">
+                    <h3 class="text-2xl accent-color mb-4">Core Evidence: Legislative Assembly Line Unpacked</h3>
+                    <p style="color: var(--text-light);" class="mb-4">Dive into the computational analysis of bill language, credentialing gaps, and the monetization structure that forms the bedrock of The God Machine.</p>
+                    <a href="assembly-line-unpacked.html" target="_blank" rel="noopener noreferrer" class="btn-report inline-block font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300"> 
+                        <img src="assets/rdp_logo_gold_on_green_bg.png" alt="Link to Legislative Assembly Line Dossier" class="h-6 inline-block mr-2"> Explore Legislative Assembly Line
+                    </a>
+                    <p class="text-sm mt-2" style="color: var(--text-secondary);"><i>(Opens in a new tab for detailed evidence)</i></p>
+                </div>
             </div>
 
             <div id="evidence" class="tab-content">
@@ -273,13 +293,13 @@
                 <div class="card">
                     <h3 class="2xl text-white mb-4 text-center">Key Financial Flows</h3>
                     <div class="space-y-2">
-                        <div class="flow-node" style="cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><b>Anonymous Donor-Advised Fund (DAF)</b><br><span class="text-sm" style="color: #666;">Untraceable Grants</span></div>
+                        <div class="flow-node" style="cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><span>Anonymous Donor-Advised Fund (DAF)</span><br><span class="text-sm" style="color: #666;">Untraceable Grants</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node card-highlight" style="border-color: var(--accent-burnished-gold); cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><b>Mission Generation, Inc.</b><br><span class="text-sm accent-color font-bold">Identical $352,000 Grants (2022 & 2023)</span></div>
+                        <div class="flow-node card-highlight" style="border-color: var(--accent-burnished-gold); cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><span>Mission Generation, Inc.</span><br><span class="text-sm accent-color font-weight: bold;">Identical $352,000 Grants (2022 & 2023)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" style="cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><b>NSCA "Chaplain" Certifications</b><br><span class="text-sm accent-color font-bold">$75,412 Program Service Revenue (2023)</span></div>
+                        <div class="flow-node" style="cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><span>NSCA "Chaplain" Certifications</span><br><span class="text-sm accent-color font-weight: bold;">$75,412 Program Service Revenue (2023)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node card-highlight" style="border-color: var(--accent-burnished-gold); cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><b>Rocky Malloy (Founder)</b><br><span class="text-sm accent-color font-bold">$150,000 Loan from Mission Generation</span></div>
+                        <div class="flow-node card-highlight" style="border-color: var(--accent-burnished-gold); cursor:default; background-color: var(--neutral-light-grey); color: var(--text-dark);"><span>Rocky Malloy (Founder)</span><br><span class="text-sm accent-color font-weight: bold;">$200,000 Loan from Mission Generation</span></div>
                     </div>
                 </div>
                 <div class="card">
@@ -318,6 +338,14 @@
                 </div>
                 <div class="card card-highlight">
                            <p class="text-center text-2xl accent-color" style="font-family: var(--font-display); font-weight: 700;">"This is not merely a violation of public trust; it is the transformation of American schools into a battleground for profit-driven culture wars."</p>
+                </div>
+                <div class="card mt-6 text-center">
+                    <h3 class="text-2xl accent-color mb-4">Deep Dive: Legislative Assembly Line Unpacked</h3>
+                    <p style="color: var(--text-light);" class="mb-4">Explore the computational analysis of bill language, credentialing gaps, and the monetization structure that forms the bedrock of The God Machine.</p>
+                    <a href="assembly-line-unpacked.html" target="_blank" rel="noopener noreferrer" class="btn-report inline-block font-bold py-2 px-4 rounded-lg shadow-lg transition-colors duration-300"> 
+                        <img src="assets/rdp_logo_gold_on_green_bg.png" alt="Link to Legislative Assembly Line Dossier" class="h-6 inline-block mr-2"> View Assembly Line Evidence
+                    </a>
+                    <p class="text-sm mt-2" style="color: var(--text-secondary);"><i>(Opens in a new tab for detailed evidence)</i></p>
                 </div>
             </div>
         </main>
@@ -490,4 +518,4 @@
             }
         });
     </script>
-</html>"
+</html>
