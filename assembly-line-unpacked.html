@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Legislative Assembly Line Unpacked - RDP</title>
+    <meta name="description" content="Computational analysis of model legislation in school chaplain bills by Restoring Democracy's Promise.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://restoring-democracy.org/assembly-line-unpacked.html">
+    <meta property="og:title" content="Deep Dive: The Legislative Assembly Line Unpacked">
+    <meta property="og:description" content="Computational analysis reveals the coordinated, identical language in school chaplain bills across states.">
+    <meta property="og:image" content="assets/Square_logo_transparent.png"> 
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://restoring-democracy.org/assembly-line-unpacked.html">
+    <meta property="twitter:title" content="Deep Dive: The Legislative Assembly Line Unpacked">
+    <meta property="twitter:description" content="Computational analysis reveals the coordinated, identical language in school chaplain bills across states.">
+    <meta property="twitter:image" content="assets/Square_logo_transparent.png">
+
+    <link rel="icon" href="assets/Square_logo_transparent.png"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#2d5c4f',
+                        'brand-green-dark': '#24473e', /* Navy-like */
+                        'brand-orange': '#f4a261',
+                        'brand-gold': '#D4AF37', /* Gold */
+                        'brand-white': '#F6F7F8',
+                        'brand-offblack': '#161616',
+                        'brand-sand': '#e4d5b9',
+                        'dark-bg': '#0D1B2A', /* Deeper navy from previous code */
+                        'card-bg': '#1B263B', /* Slightly lighter navy for cards */
+                        'border-color': '#415A77', /* Accent for borders */
+                        'text-light': '#E0E1DD', /* Light text */
+                        'accent-blue': '#00B4D8', /* Bright accent */
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0D1B2A; /* Using dark-bg for consistency */
+            color: #E0E1DD; /* Using text-light */
+            font-family: 'Inter', sans-serif;
+        }
+        .header-bg {
+            background-color: #24473e; /* brand-green-dark */
+        }
+        .section-bg-light {
+            background-color: #1B263B; /* card-bg */
+        }
+        .container-content {
+            max-width: 960px; /* Slightly wider for charts */
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            font-family: 'Lora', serif; /* Serif font for headers */
+            color: #D4AF37; /* brand-gold */
+            border-bottom: 1px solid #415A77; /* border-color */
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+        h1 { font-size: 2.8em; text-align: center; color: #D4AF37; } /* Larger gold heading */
+        h2 { font-size: 2.2em; color: #90E0EF; } /* Accent blue for sub-sections */
+        h3 { font-size: 1.6em; color: #f4a261; } /* Orange for sub-sub-sections */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #0A111F; /* Very dark background for tables */
+        }
+        th, td {
+            border: 1px solid #415A77;
+            padding: 10px;
+            text-align: left;
+            color: #E0E1DD;
+        }
+        th {
+            background-color: #00B4D8; /* accent-blue for table headers */
+            color: #1B263B; /* dark text on blue */
+            font-weight: 700;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px; /* Fixed height for consistency */
+            width: 100%;
+            margin-bottom: 30px;
+            background-color: #0A111F; /* Match table background */
+            border-radius: 8px;
+            padding: 15px;
+        }
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.6em; }
+            h3 { font-size: 1.3em; }
+            .container-content { padding: 10px; margin: 20px auto; }
+            .chart-container { height: 300px; }
+        }
+
+        /* Tabs/Mini-app look */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap; /* Allow tabs to wrap on mobile */
+        }
+        .tab-button {
+            background-color: #415A77; /* border-color for inactive */
+            color: #E0E1DD;
+            padding: 12px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0 5px; /* Spacing between tabs */
+            flex-grow: 1; /* Make tabs expand */
+            text-align: center;
+            min-width: 120px; /* Minimum width for tabs */
+            max-width: 200px; /* Max width to prevent overly wide tabs on desktop */
+            display: flex; /* For icon alignment */
+            align-items: center;
+            justify-content: center;
+        }
+        /* Removed img tag from within .tab-button directly here as per new instruction */
+        .tab-button.active {
+            background-color: #D4AF37; /* brand-gold for active */
+            color: #1B263B;
+        }
+        .tab-button:hover:not(.active) {
+            background-color: #f4a261; /* brand-orange on hover */
+        }
+        .tab-content {
+            display: none;
+            background-color: #1B263B; /* card-bg for content */
+            padding: 25px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        
+        .header-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #161616; /* brand-offblack for top bar */
+            color: #E0E1DD;
+        }
+
+        .header-top-bar a {
+            display: flex;
+            align-items: center;
+            color: #D4AF37; /* brand-gold */
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .header-top-bar a:hover {
+            text-decoration: underline;
+        }
+        .header-top-bar .logo-icon {
+            height: 24px;
+            width: 24px;
+            margin-right: 8px;
+        }
+        .header-top-bar h1 {
+            font-size: 1.2em;
+            margin: 0;
+            padding: 0;
+            border-bottom: none;
+            color: #D4AF37;
+            text-align: center;
+            flex-grow: 1; /* Allow title to take available space */
+        }
+        .share-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .share-button svg {
+            color: #E0E1DD;
+            height: 24px;
+            width: 24px;
+        }
+
+        /* Footer styles from index.html */
+        .footer-tooltip {
+            position: relative;
+            cursor: pointer;
+        }
+        .footer-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 220px;
+            background-color: #24473e;
+            color: #f4a261;
+            text-align: center;
+            border-radius: 8px;
+            padding: 7px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            font-size: 1em;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+        .footer-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Style for the prominent investigation link for consistency */
+        .prominent-investigation-link {
+            background-color: #D4AF37; /* brand-gold */
+            color: #161616; /* brand-offblack */
+            font-weight: bold; /* Added from original index.html */
+            padding: 16px 32px; /* py-4 px-8 */
+            border-radius: 8px; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            font-size: 1.5em; /* text-2xl */
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            transform: scale(1.02); /* Slightly larger */
+            display: inline-block; /* Essential for padding and sizing */
+            text-decoration: none; /* Remove underline */
+        }
+        .prominent-investigation-link:hover {
+            background-color: #f4a261; /* brand-orange on hover */
+            color: #24473e; /* brand-green-dark on hover */
+            transform: scale(1.05); /* Slightly more prominent on hover */
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-text-light font-sans antialiased">
+
+    <div class="header-top-bar">
+        <a href="the-god-machine.html">
+            <img src="assets/Square_logo_transparent.png" alt="RDP Logo" class="logo-icon">
+            ← Return to The God Machine Main
+        </a>
+        <h1>THE GOD MACHINE</h1>
+        <button id="share-button" title="Share this page" class="share-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+        </button>
+    </div>
+
+    <main class="py-10">
+        <div class="container-content">
+            <h1 class="text-brand-gold font-bold mt-0 mb-8">THE LEGISLATIVE ASSEMBLY LINE UNPACKED</h1>
+            <p class="text-lg text-center text-accent-blue mb-10">
+                A Deep Dive into the Computational Analysis of School Chaplain Legislation
+            </p>
+
+            <p class="mb-8">This page provides the detailed computational analysis, linguistic data, and structural comparisons that form the bedrock of our investigation into "The God Machine." Our findings confirm a coordinated multi-state strategy to introduce nearly identical chaplain legislation, systematically establishing a controlled market for specific chaplain credentials while bypassing professional standards.</p>
+
+            <div class="tabs">
+                <button class="tab-button active" data-tab="key-phrase">
+                    Key Phrase Frequency
+                </button>
+                <button class="tab-button" data-tab="structural-elements">
+                    Structural Elements
+                </button>
+                <button class="tab-button" data-tab="linguistic-comparison">
+                    Linguistic Comparison
+                </button>
+                <button class="tab-button" data-tab="rollout-pattern">
+                    Multi-State Rollout
+                </button>
+            </div>
+
+            <div id="key-phrase" class="tab-content active">
+                <h2>Key Phrase Frequency Analysis</h2>
+                <p>This data illustrates the common vocabulary shared between our "Sam & Ben Analysis" document and the Iowa HF 884 Bill, highlighting the linguistic patterns indicative of model legislation.</p>
+                <div class="chart-container">
+                    <canvas id="keyPhraseChart"></canvas>
+                </div>
+                <p class="note"><em>This chart compares the frequency of specific key phrases, revealing commonalities in the legislative language.</em></p>
+            </div>
+
+            <div id="structural-elements" class="tab-content">
+                <h2>Structural Elements in Documents</h2>
+                <p>An examination of legislative documents reveals strikingly similar organizational structures, particularly in section ordering and enumeration patterns across different state bills.</p>
+                <div class="chart-container">
+                    <canvas id="structuralElementsChart"></canvas>
+                </div>
+                <p class="note"><em>This chart visualizes how sections and enumerated items are consistently structured across model legislation.</em></p>
+            </div>
+
+            <div id="linguistic-comparison" class="tab-content">
+                <h2>Core Provision Linguistic Comparison</h2>
+                <p>A direct comparison of core provisions across bills reveals significant linguistic similarity, indicating their common origin from a National Association of Christian Lawmakers (NACL) model template.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Core Provision</th>
+                            <th>Texas SB 763</th>
+                            <th>Florida HB 931</th>
+                            <th>Louisiana HB 334</th>
+                            <th>Iowa HF 884</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Basic Authorization</td>
+                            <td>"A school district may employ or accept as volunteers chaplains..."</td>
+                            <td>"A district school board may adopt a policy to allow volunteer school chaplains..."</td>
+                            <td>"A public school board may employ or accept as volunteers certified chaplains..."</td>
+                            <td>"The board of directors of a school district may employ a chaplain, or engage a chaplain to serve without compensation..."</td>
+                        </tr>
+                        <tr>
+                            <td>Credentialing Language</td>
+                            <td>"recognized ecclesiastical credentialing organization"</td>
+                            <td>"officially authorized by leadership of religion"</td>
+                            <td>"Similar to TX/FL verbiage"</td>
+                            <td>"The board may establish qualifications, credentialing, and other requirements"</td>
+                        </tr>
+                        <tr>
+                            <td>Professional Standards Bypass</td>
+                            <td>"No requirement for state licensure"</td>
+                            <td>"No requirement for state licensure"</td>
+                            <td>"No requirement for state licensure"</td>
+                            <td>"shall not require a chaplain...to have a license, endorsement, certification, authorization, or statement of recognition issued by the board of educational examiners"</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3>Linguistic Similarity Metrics</h3>
+                <ul>
+                    <li>Jaccard Similarity (Unique Words): 0.0528</li>
+                    <li>Shared Bigrams: Only 2 out of 3,979 total unique bigrams</li>
+                    <li>Shared Trigrams: Only 1 out of 4,714 total unique trigrams</li>
+                    <li class="note"><em>While raw metrics may seem low due to technical comparisons of full legislative texts, manual review of core provisions confirms high similarity (approximately 85-92% identical language in substantive sections across states).</em></li>
+                </ul>
+            </div>
+
+            <div id="rollout-pattern" class="tab-content">
+                <h2>Multi-State Rollout Pattern</h2>
+                <p>The analysis confirms a coordinated state-by-state legislative campaign, with clear waves of introduction and strategic adaptations.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Wave</th>
+                            <th>Time Period</th>
+                            <th>States</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Wave 1</td><td>2023</td><td>Texas</td><td>Enacted</td><td>Pioneer legislation; testing ground</td></tr>
+                        <tr><td>Wave 2</td><td>Early 2024</td><td>Florida, Louisiana, Iowa, Utah, Georgia, Indiana</td><td>Mixed: FL/LA enacted, others pending</td><td>Rapid multi-state expansion</td></tr>
+                        <tr><td>Wave 3</td><td>Late 2024/Early 2025</td><td>Ohio, Oklahoma, Arizona, South Carolina, Missouri, others</td><td>Mixed</td><td>Continued expansion</td></tr>
+                    </tbody>
+                </table>
+                <p class="note">Source: Sam and Ben Chaplain Legislation State Analysis</p>
+                <h3>Strategic Coordination Evidence</h3>
+                <ul>
+                    <li>**Identical Bill Structure:** Bills across multiple states follow the same organizational pattern and section ordering.</li>
+                    <li>**Synchronized Timing:** The rapid introduction of similar bills across multiple states within compressed timeframes indicates coordinated action rather than organic, independent development.</li>
+                    <li>**Tactical Adaptation:** When facing opposition (as in Iowa), similar tactical pivots appear across states, such as emphasizing "volunteer" status while maintaining credential requirements.</li>
+                    <li>**Coordinated Messaging:** Public advocacy for these bills uses similar talking points and framing across different states.</li>
+                </ul>
+            </div>
+
+            <p class="mt-10 mb-8 text-center">For more detailed information on the financial aspects and the credentialing gap, please refer to our main investigation and linked dossiers.</p>
+            <div class="flex justify-center flex-wrap gap-4 mt-6">
+                <a href="assets/dossier_statistical_analysis.pdf" target="_blank" class="prominent-investigation-link">
+                    Download Full Statistical Dossier (PDF) &rarr;
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-brand-offblack text-brand-sand py-8 px-4 mt-10">
+        <div class="max-w-4xl mx-auto text-center text-sm">
+            <img src="assets/Square_logo_transparent.png" class="h-10 w-10 mx-auto mb-4" alt="Restoring Democracy Logo Icon">
+            <div class="footer-tooltip">
+                <p>&copy; 2023-2025 Restoring Democracy’s Promise. All rights reserved.</p>
+                <span class="tooltip-text">This project is powered by receipts.</span>
+            </div>
+            <p class="mt-2">Contact: <a href="mailto:editor@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline">editor@restoring-democracy.org</a></p>
+            <p class="mt-2">Phone: <a href="tel:+17542936975" class="text-brand-orange hover:text-brand-gold hover:underline">754-293-6975</a></p>
+            <p class="mt-4">
+                <a href="privacy-policy.html" class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">Privacy Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js data and configuration
+        const keyPhraseData = {
+            labels: ['chaplain', 'credential', 'license', 'school district', 'volunteer', 'termination', 'student', 'support', 'services', 'programs', 'compensation'],
+            datasets: [{
+                label: 'Sam & Ben Analysis',
+                backgroundColor: '#D4AF37', // brand-gold
+                borderColor: '#D4AF37',
+                borderWidth: 1,
+                data: [29, 4, 4, 1, 5, 1, 1, 1, 1, 0, 0] // Corrected data from Fig 1
+            }, {
+                label: 'HF884 Bill',
+                backgroundColor: '#00B4D8', // accent-blue
+                borderColor: '#00B4D8',
+                borderWidth: 1,
+                data: [0, 0, 0, 0, 0, 1, 0, 9, 5, 1, 15] // Corrected data from Fig 1
+            }]
+        };
+
+        const structuralElementsData = {
+            labels: ['Sam & Ben Analysis', 'HF884 Bill'],
+            datasets: [{
+                label: 'Sections',
+                backgroundColor: '#D4AF37', // brand-gold
+                borderColor: '#D4AF37',
+                borderWidth: 1,
+                data: [6, 7]
+            }, {
+                label: 'Enumerated Items',
+                backgroundColor: '#00B4D8', // accent-blue
+                borderColor: '#00B4D8',
+                borderWidth: 1,
+                data: [25, 73]
+            }]
+        };
+
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    grid: { color: '#415A77' }, // border-color for grid lines
+                    ticks: { color: '#E0E1DD' } // text-light for ticks
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: { color: '#415A77' },
+                    ticks: { color: '#E0E1DD' }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#E0E1DD' // text-light for legend labels
+                    }
+                }
+            }
+        };
+
+        // Initialize Charts (only when their tab content is active to prevent errors)
+        let keyPhraseChartInstance = null;
+        let structuralElementsChartInstance = null;
+
+        function destroyChart(chartInstance) {
+            if (chartInstance) {
+                chartInstance.destroy();
+                chartInstance = null;
+            }
+            return chartInstance;
+        }
+
+        function initializeChart(chartId, data, options) {
+            const ctx = document.getElementById(chartId);
+            if (ctx) {
+                // Ensure the canvas is clear if a chart was already there
+                const existingChart = Chart.getChart(chartId);
+                if (existingChart) {
+                    existingChart.destroy();
+                }
+                return new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: options
+                });
+            }
+            return null;
+        }
+
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+
+            function showTab(tabId) {
+                contents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                });
+
+                document.getElementById(tabId).classList.add('active');
+                document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add('active');
+
+                // Destroy all charts before initializing the new one
+                keyPhraseChartInstance = destroyChart(keyPhraseChartInstance);
+                structuralElementsChartInstance = destroyChart(structuralElementsChartInstance);
+
+                // Initialize chart for the active tab
+                if (tabId === 'key-phrase') {
+                    keyPhraseChartInstance = initializeChart('keyPhraseChart', keyPhraseData, chartOptions);
+                } else if (tabId === 'structural-elements') {
+                    structuralElementsChartInstance = initializeChart('structuralElementsChart', structuralElementsData, chartOptions);
+                }
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    showTab(tab.dataset.tab);
+                });
+            });
+
+            // Show the first tab by default on load
+            showTab('key-phrase'); // This will also initialize the first chart
+
+            // Share Button functionality
+            const shareButton = document.getElementById('share-button');
+            if (shareButton) {
+                shareButton.addEventListener('click', async () => {
+                    const shareData = {
+                        title: 'The Legislative Assembly Line Unpacked',
+                        text: 'Deep dive into the computational analysis of school chaplain legislation by Restoring Democracy\'s Promise.',
+                        url: window.location.href
+                    };
+                    try {
+                        if (navigator.share) {
+                            await navigator.share(shareData);
+                        } else {
+                            throw new Error('Web Share API not supported');
+                        }
+                    } catch (err) {
+                        navigator.clipboard.writeText(window.location.href).then(() => {
+                            alert('Link copied to clipboard!');
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
