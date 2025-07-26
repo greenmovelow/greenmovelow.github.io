@@ -6,7 +6,7 @@
     <title>THE PINCER MOVEMENT: An Interactive Dossier</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="icon" href="assets/square_logo_transparent.png">
+    <link rel="icon" href="assets/Square_logo_transparent.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
@@ -157,7 +157,7 @@
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center space-x-4">
     <a href="/" title="Return to Homepage">
-        <img src="assets/square_logo_transparent.png" alt="Restoring Democracy's Promise Logo" class="h-8 w-8">
+        <img src="assets/square-logo-transparent.png" alt="Restoring Democracy's Promise Logo" class="h-8 w-8">
     </a>
     <a href="/" class="text-sm font-medium text-gray-300 hover:text-white hover:underline hidden sm:block">
         &larr; Return to Homepage
@@ -182,7 +182,7 @@
 
 <header class="text-center mb-12">
     <a href="/" title="Return to Homepage">
-        <img src="assets/square_logo_transparent.png" alt="Restoring Democracy's Promise Logo" class="mx-auto mb-6 h-12 w-12">
+        <img src="assets/square-logo-transparent.png" alt="Restoring Democracy's Promise Logo" class="mx-auto mb-6 h-12 w-12">
     </a>
     <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-wider">The Pincer Movement</h1>
     <p class="text-lg md:text-xl text-slate-300 mt-2 max-w-4xl mx-auto">An Infographic Summary of the Coordinated Assault on American Democratic Institutions.</p>
@@ -196,17 +196,16 @@
                      The Pincer Movement is defined by the symbiotic relationship between its ideological and bureaucratic arms, connected by key personnel who operate across multiple organizations. This is not a loose coalition but a tightly integrated network. <span class="font-bold accent-red">Click or tap on any node below to explore the connections.</span>
                  </p>
                 <div id="alliance-network-container" class="alliance-network">
+                    
                     <svg aria-hidden="true" class="hidden lg:block" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;">
-                        <line x1="50%" y1="12%" x2="83%" y2="52%" stroke="var(--accent-red)" stroke-width="2" stroke-dasharray="8 4"/>
+                        <polyline points="50%,13% 50%,32% 83%,32%" stroke="var(--accent-red)" stroke-width="2" stroke-dasharray="8 4" fill="none" />
                     </svg>
 
                     <div id="node-leo" class="flowchart-node w-56"><h4 class="text-xl">Leonard Leo</h4><p class="text-sm text-gray-400">The Architect</p></div>
                     
-                    <div class="w-full flex justify-center items-center lg:col-span-3 lg:grid lg:grid-cols-3 gap-2">
-                        <div class="w-full h-px bg-gray-700 lg:w-px lg:h-full lg:justify-self-end"></div>
-                        <div class="text-4xl flowchart-arrow -my-4 lg:my-0">&darr;</div>
-                        <div class="w-full h-px bg-gray-700 lg:w-px lg:h-full lg:justify-self-start"></div>
-                    </div>
+                    <div class="text-4xl flowchart-arrow lg:grid lg:grid-cols-3 lg:col-span-3">
+                         <div class="lg:col-start-2">&darr;</div>
+                     </div>
 
                     <div id="node-vought" class="flowchart-node w-56"><h4 class="text-xl">Russell Vought</h4><p class="text-sm text-gray-400">The Bureaucrat</p></div>
                     <div class="hidden lg:block"></div> <div id="node-vanderplaats" class="flowchart-node w-56"><h4 class="text-xl">Bob Vander Plaats</h4><p class="text-sm text-gray-400">The Mobilizer</p></div>
