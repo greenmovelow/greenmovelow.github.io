@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==============================================
+Custom Styles from The God Machine Project
+==============================================
+*/
+
+body {
+    background-color: #0A2239; /* primary-navy-blue from reference */
+    color: #E0E1DD;
+    font-family: 'Inter', sans-serif;
+}
+.container-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1, h2, h3 {
+    font-family: 'Lora', serif;
+    color: #D4AF37; /* brand-gold */
+    border-bottom: 1px solid #415A77;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+h1 { font-size: 2.8em; text-align: center; }
+h2 { font-size: 2.2em; color: #90E0EF; }
+h3 { font-size: 1.6em; color: #f4a261; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: rgba(10, 34, 57, 0.5); /* Semi-transparent navy */
+}
+th, td {
+    border: 1px solid #415A77;
+    padding: 10px;
+    text-align: left;
+    color: #E0E1DD;
+}
+th {
+    background-color: #00B4D8;
+    color: #0A2239;
+    font-weight: 700;
+}
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    margin-bottom: 30px;
+    background-color: rgba(10, 34, 57, 0.5);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+/* Tabs/Mini-app look */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+.tab-button {
+    background-color: #415A77;
+    color: #E0E1DD;
+    padding: 12px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px 8px 0 0;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0 5px;
+    flex-grow: 1;
+    text-align: center;
+    min-width: 120px;
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tab-button.active {
+    background-color: #D4AF37;
+    color: #0A2239;
+}
+.tab-button:hover:not(.active) {
+    background-color: #f4a261;
+}
+.tab-content {
+    display: none;
+    background-color: rgba(10, 34, 57, 0.5); /* Match chart background */
+    padding: 25px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.tab-content.active {
+    display: block;
+}
+
+.header-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #161616;
+    color: #E0E1DD;
+}
+.header-top-bar a {
+    display: flex;
+    align-items: center;
+    color: #D4AF37;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+.header-top-bar a:hover {
+    text-decoration: underline;
+}
+.header-top-bar .logo-icon {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+}
+.header-top-bar h1 {
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+    color: #D4AF37;
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* Footer styles */
+.footer-tooltip {
+    position: relative;
+    cursor: pointer;
+}
+.footer-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 220px;
+    background-color: #24473e;
+    color: #f4a261;
+    text-align: center;
+    border-radius: 8px;
+    padding: 7px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    font-size: 1em;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+.footer-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Dossier Button Style */
+.btn-dossier {
+    display: inline-block;
+    background-color: #1E1E1E; /* card-background from reference */
+    border: 1px solid #D4AF37; /* accent-burnished-gold */
+    color: #E0E1DD; /* text-light */
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    font-weight: 600;
+}
+.btn-dossier:hover {
+    background-color: #D4AF37;
+    color: #121212; /* background-dark from reference */
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.6em; }
+    h3 { font-size: 1.3em; }
+    .container-content { padding: 10px; margin: 20px auto; }
+    .chart-container { height: 300px; }
+}
