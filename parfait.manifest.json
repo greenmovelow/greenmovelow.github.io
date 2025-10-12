@@ -1,0 +1,23 @@
+{
+  "parfait_version": "1.0.0",
+  "module": "state_submodel",
+  "state": "IA",
+  "build_id": "IA_v1.0",
+  "updated_utc": "2025-10-12T04:47:11Z",
+  "interface": {
+    "schema_meta": [
+      "county_fips",
+      "county_name",
+      "as_of_date"
+    ],
+    "row_count_expected": 99,
+    "column_count_expected": 27
+  },
+  "layers": {
+    "dataset_csv": "ia_submodel_v1_0.csv",
+    "counties_table": "counties.ia_v1_0.json",
+    "data_dictionary": "data_dictionary_IA_v1.0.json",
+    "model_card": "Model_Card-IA_Submodel_v1.0.md",
+    "checksums": null
+  }
+}
