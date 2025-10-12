@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iowa Submodel v1.0 — Map Viewer | Restoring Democracy's Promise</title>
+    <meta name="description" content="An interactive map and data viewer for the Iowa Submodel v1.0, an investigation by Restoring Democracy's Promise.">
+    <link rel="icon" href="assets/Square_logo_green.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QJ3L9CT4Z7');
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#2d5c4f',
+                        'brand-green-dark': '#24473e',
+                        'brand-orange': '#f4a261',
+                        'brand-gold': '#D4AF37',
+                        'brand-white': '#F6F7F8',
+                        'brand-offblack': '#161616',
+                        'brand-sand': '#e4d5b9',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .th-sort { cursor: pointer; }
+        .th-sort:hover { text-decoration: underline; }
+        .tooltip {
+            position: absolute; pointer-events: none; background: rgba(0,0,0,0.75);
+            color: #fff; padding: 6px 8px; border-radius: 4px; font-size: 12px; line-height: 1.2;
+        }
+        .legend-swatch { width: 18px; height: 12px; display: inline-block; margin-right: 6px; }
+        .footer-tooltip { position: relative; cursor: pointer; }
+        .footer-tooltip .tooltip-text {
+            visibility: hidden; width: 220px; background-color: #24473e; color: #f4a261;
+            text-align: center; border-radius: 8px; padding: 7px 0; position: absolute;
+            z-index: 1; bottom: 120%; left: 50%; transform: translateX(-50%);
+            opacity: 0; transition: opacity 0.4s; font-size: 1em; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+        .footer-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+    </style>
+</head>
+<body class="bg-brand-white text-brand-offblack font-sans antialiased">
+
+    <nav class="sticky top-0 z-50 shadow-lg bg-brand-green text-brand-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="/" title="Return to Homepage">
+                        <img src="assets/Square_logo_transparent.png" alt="RDP Logo" class="h-8 w-8">
+                    </a>
+                    <a href="/" class="text-sm font-medium hover:underline hidden sm:block">&larr; Return to Homepage</a>
+                </div>
+                <h1 class="text-xl sm:text-2xl font-serif text-brand-gold">Iowa Submodel: Map Viewer</h1>
+                <div class="flex items-center">
+                    <button id="share-button" title="Share this page" class="p-2 rounded-full hover:bg-brand-green-dark transition-colors duration-200">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="mx-auto max-w-7xl p-4 sm:p-6">
+            <header class="mb-6">
+              <h1 class="text-2xl sm:text-3xl font-bold font-serif text-brand-green-dark">Iowa Submodel v1.0 — Choropleth Map + Table</h1>
+              <p class="text-sm text-slate-600">This tool loads and displays data from our Iowa socio-economic model. Select a metric to color the map and use the table to explore details.</p>
+            </header>
+
+            <section id="meta" class="mb-6 rounded-lg border bg-white p-4 shadow">
+              <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+                <div><span class="font-semibold">Module:</span> <span id="meta-module">—</span></div>
+                <div><span class="font-semibold">State:</span> <span id="meta-state">—</span></div>
+                <div><span class="font-semibold">Build ID:</span> <span id="meta-build">—</span></div>
+                <div><span class="font-semibold">Updated:</span> <span id="meta-updated">—</span></div>
+              </div>
+              <div class="mt-2 text-xs text-slate-600">
+                <span class="font-semibold">Layers:</span>
+                dataset: <code id="layer-dataset">—</code> • counties: <code id="layer-counties">—</code> • dictionary: <code id="layer-dict">—</code>
+              </div>
+            </section>
+
+            <section id="map-panel" class="mb-6 rounded-lg border bg-white p-4 shadow">
+              <div class="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex items-center gap-2">
+                  <label class="text-sm text-slate-700">Color metric</label>
+                  <select id="metric" class="rounded-md border px-2 py-1 text-sm">
+                    <option value="unemployment_rate">Unemployment %</option>
+                    <option value="poverty_rate">Poverty %</option>
+                    <option value="median_household_income">Median Income</option>
+                    <option value="food_insecurity_rate">Food Insecurity %</option>
+                    <option value="drought_severity_pct">Drought %</option>
+                    <option value="composite_risk_score">Composite Risk</option>
+                    <option value="risk_velocity">Risk Velocity</option>
+                    <option value="economic_velocity">Economic Velocity</option>
+                  </select>
+                </div>
+                <div id="legend" class="text-xs text-slate-700"></div>
+              </div>
+              <div class="relative">
+                <svg id="map" class="w-full" viewBox="0 0 800 500"></svg>
+                <div id="tooltip" class="tooltip" style="display:none;"></div>
+              </div>
+            </section>
+
+            <section id="stats" class="mb-6 rounded-lg border bg-white p-4 shadow">
+              <h2 class="mb-3 text-lg font-semibold font-serif text-brand-green-dark">Quick Metrics</h2>
+              <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 text-sm">
+                <div><span class="text-slate-600">Counties</span><div class="text-xl font-bold" id="stat-count">—</div></div>
+                <div><span class="text-slate-600">Mean Unemployment</span><div class="text-xl font-bold" id="stat-unemp">—</div></div>
+                <div><span class="text-slate-600">Mean Poverty</span><div class="text-xl font-bold" id="stat-pov">—</div></div>
+                <div><span class="text-slate-600">Median Income (median)</span><div class="text-xl font-bold" id="stat-income">—</div></div>
+                <div><span class="text-slate-600">Food Insecurity (mean)</span><div class="text-xl font-bold" id="stat-food">—</div></div>
+              </div>
+            </section>
+
+            <section class="mb-4 flex items-center gap-2">
+              <input id="search" type="text" placeholder="Search county or FIPS…" class="w-full max-w-sm rounded-md border px-3 py-2 text-sm outline-none" />
+              <button id="downloadCsv" class="rounded-md bg-brand-green px-3 py-2 text-sm font-semibold text-white hover:bg-brand-green-dark">Download table CSV</button>
+            </section>
+
+            <section class="rounded-lg border bg-white shadow">
+              <div class="overflow-auto">
+                <table id="tbl" class="min-w-[900px] w-full text-left text-sm">
+                  <thead class="sticky top-0 bg-slate-100">
+                    <tr>
+                      <th class="px-3 py-2 th-sort" data-k="county_name">County</th>
+                      <th class="px-3 py-2 th-sort" data-k="county_fips">FIPS</th>
+                      <th class="px-3 py-2 th-sort" data-k="unemployment_rate">Unemp %</th>
+                      <th class="px-3 py-2 th-sort" data-k="poverty_rate">Poverty %</th>
+                      <th class="px-3 py-2 th-sort" data-k="median_household_income">Median Income</th>
+                      <th class="px-3 py-2 th-sort" data-k="food_insecurity_rate">Food Insec %</th>
+                      <th class="px-3 py-2 th-sort" data-k="drought_severity_pct">Drought %</th>
+                      <th class="px-3 py-2 th-sort" data-k="economic_velocity">Econ Vel</th>
+                      <th class="px-3 py-2 th-sort" data-k="risk_velocity">Risk Vel</th>
+                      <th class="px-3 py-2 th-sort" data-k="composite_risk_score">Composite</th>
+                      <th class="px-3 py-2 th-sort" data-k="as_of_date">As-of</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody"></tbody>
+                </table>
+              </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-brand-offblack text-brand-sand py-8 px-4 mt-12">
+        <div class="max-w-4xl mx-auto text-center text-sm">
+            <img src="assets/Square_logo_transparent.png" class="h-10 w-10 mx-auto mb-4" alt="RDP Logo Icon">
+            <div class="footer-tooltip">
+                <p>&copy; 2023-2025 Restoring Democracy’s Promise. All rights reserved.</p>
+                <span class="tooltip-text">This project is powered by receipts.</span>
+            </div>
+            <p class="mt-2">Contact: <a href="mailto:editor@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline">editor@restoring-democracy.org</a></p>
+            <p class="mt-2">Phone: <a href="tel:+17542936975" class="text-brand-orange hover:text-brand-gold hover:underline">754-293-6975</a></p>
+            <p class="mt-4"><a href="privacy-policy.html" class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // VIEWER SCRIPT
+        const fmt = (v, d=null) => { if (v === null || v === undefined || v === "") return "—"; if (typeof v === "number" && Number.isFinite(v)) return d===null? v : v.toFixed(d); const n = Number(v); if (!Number.isNaN(n)) return d===null? n : n.toFixed(d); return String(v); };
+        const numberOrNull = (v) => { if (v === null || v === undefined || v === "") return null; if (typeof v === "number") return Number.isFinite(v) ? v : null; const n = Number(v); return Number.isNaN(n) ? null : n; };
+        let COUNTIES = []; let SORT_KEY = "county_name"; let SORT_ASC = true; let GEO = null; let COUNTY_BY_FIPS = new Map();
+        async function boot() {
+          const manifest = await (await fetch("./parfait.manifest.json", {cache: "no-store"})).json();
+          document.getElementById("meta-module").textContent = manifest.module;
+          document.getElementById("meta-state").textContent = manifest.state;
+          document.getElementById("meta-build").textContent = manifest.build_id;
+          document.getElementById("meta-updated").textContent = manifest.updated_utc;
+          document.getElementById("layer-dataset").textContent = manifest.layers.dataset_csv || "—";
+          document.getElementById("layer-counties").textContent = manifest.layers.counties_table || "—";
+          document.getElementById("layer-dict").textContent = manifest.layers.data_dictionary || "—";
+          const countiesUrl = manifest.layers.counties_table || "./counties.ia_v1_0.json";
+          const counties = await (await fetch(countiesUrl, {cache: "no-store"})).json();
+          COUNTIES = counties.rows || [];
+          COUNTIES.forEach(r => COUNTY_BY_FIPS.set(String(r.county_fips).padStart(5,"0"), r));
+          renderTable(); computeStats(); hookUI(); await drawMap();
+        }
+        function computeStats() {
+          const n = COUNTIES.length;
+          const mean = (arr) => { const xs = arr.map(numberOrNull).filter(v => v !== null); if (!xs.length) return null; return xs.reduce((a,b)=>a+b,0)/xs.length; };
+          const median = (arr) => { const xs = arr.map(numberOrNull).filter(v => v !== null).sort((a,b)=>a-b); if (!xs.length) return null; const m = Math.floor(xs.length/2); return xs.length % 2 ? xs[m] : (xs[m-1]+xs[m])/2; };
+          document.getElementById("stat-count").textContent = n;
+          document.getElementById("stat-unemp").textContent = fmt(mean(COUNTIES.map(r=>r.unemployment_rate)), 2);
+          document.getElementById("stat-pov").textContent = fmt(mean(COUNTIES.map(r=>r.poverty_rate)), 2);
+          document.getElementById("stat-income").textContent = fmt(median(COUNTIES.map(r=>r.median_household_income)));
+          document.getElementById("stat-food").textContent = fmt(mean(COUNTIES.map(r=>r.food_insecurity_rate)), 2);
+        }
+        function renderTable() {
+          COUNTIES.sort((a,b)=>{ const A = a[SORT_KEY], B = b[SORT_KEY]; if (A == null && B == null) return 0; if (A == null) return SORT_ASC ? 1 : -1; if (B == null) return SORT_ASC ? -1 : 1; if (typeof A === "number" && typeof B === "number") return SORT_ASC ? A-B : B-A; return SORT_ASC ? String(A).localeCompare(String(B)) : String(B).localeCompare(String(A)); });
+          const tb = document.getElementById("tbody"); tb.innerHTML = "";
+          for (const r of COUNTIES) {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `<td class="px-3 py-1.5">${fmt(r.county_name)}</td><td class="px-3 py-1.5">${fmt(r.county_fips)}</td><td class="px-3 py-1.5">${fmt(r.unemployment_rate,2)}</td><td class="px-3 py-1.5">${fmt(r.poverty_rate,2)}</td><td class="px-3 py-1.5">${fmt(r.median_household_income)}</td><td class="px-3 py-1.5">${fmt(r.food_insecurity_rate,2)}</td><td class="px-3 py-1.5">${fmt(r.drought_severity_pct,1)}</td><td class="px-3 py-1.5">${fmt(r.economic_velocity,3)}</td><td class="px-3 py-1.5">${fmt(r.risk_velocity,3)}</td><td class="px-3 py-1.5">${fmt(r.composite_risk_score,1)}</td><td class="px-3 py-1.5">${fmt(r.as_of_date)}</td>`;
+            tb.appendChild(tr);
+          }
+        }
+        function hookUI() {
+          document.querySelectorAll(".th-sort").forEach(th=>{ th.addEventListener("click", ()=>{ const k = th.getAttribute("data-k"); if (k === SORT_KEY) { SORT_ASC = !SORT_ASC; } else { SORT_KEY = k; SORT_ASC = true; } renderTable(); }); });
+          const search = document.getElementById("search");
+          search.addEventListener("input", ()=>{ const q = search.value.trim().toLowerCase(); Array.from(document.querySelectorAll("#tbody tr")).forEach(tr => { tr.style.display = tr.textContent.toLowerCase().includes(q) ? "" : "none"; }); });
+          document.getElementById("downloadCsv").addEventListener("click", ()=>{ const header = ["county_name","county_fips","unemployment_rate","poverty_rate","median_household_income","food_insecurity_rate","drought_severity_pct","economic_velocity","risk_velocity","composite_risk_score","as_of_date"]; const lines = [header.join(",")]; for (const r of COUNTIES) { lines.push(header.map(k => r[k] == null ? "" : r[k]).join(",")); } const blob = new Blob([lines.join("\n")], {type:"text/csv"}); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ia_submodel_view.csv"; a.click(); });
+          document.getElementById("metric").addEventListener("change", drawMap);
+        }
+        async function drawMap() {
+          const topo = await (await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json")).json();
+          const counties = topojson.feature(topo, topo.objects.counties);
+          const ia = { type: "FeatureCollection", features: counties.features.filter(f => String(f.id).startsWith("19")) };
+          const svg = d3.select("#map"); svg.selectAll("*").remove(); const g = svg.append("g");
+          const projection = d3.geoAlbersUsa(); const path = d3.geoPath(projection); projection.fitSize([800, 500], ia);
+          const metric = document.getElementById("metric").value;
+          const values = COUNTIES.map(r => numberOrNull(r[metric])).filter(v => v !== null);
+          const min = d3.min(values); const max = d3.max(values);
+          const color = d3.scaleQuantize().domain([min, max]).range(d3.schemeBlues[7]);
+          renderLegend(color, min, max); const tooltip = d3.select("#tooltip");
+          g.selectAll("path").data(ia.features).enter().append("path").attr("d", path)
+           .attr("fill", d => { const fips = String(d.id).padStart(5,"0"); const row = COUNTY_BY_FIPS.get(fips); const v = row ? numberOrNull(row[metric]) : null; return v===null ? "#eee" : color(v); })
+           .attr("stroke", "#444").attr("stroke-width", 0.5)
+           .on("mousemove", (event, d) => { const fips = String(d.id).padStart(5,"0"); const row = COUNTY_BY_FIPS.get(fips); const name = row?.county_name || "Unknown"; const v = row ? row[metric] : null; tooltip.style("display","block").style("left", (event.pageX + 12) + "px").style("top", (event.pageY + 12) + "px").html(`<div><strong>${name}</strong> <span class="text-xs text-gray-300">(${fips})</span></div><div class="text-xs">${metric.replace(/_/g," ")}: <strong>${fmt(v)}</strong></div>`); })
+           .on("mouseout", ()=> tooltip.style("display","none"));
+        }
+        function renderLegend(scale, min, max) {
+          const legend = document.getElementById("legend"); legend.innerHTML = "";
+          const bins = scale.range(); const frag = document.createDocumentFragment();
+          const title = document.createElement("div"); title.textContent = `Scale: ${fmt(min)} → ${fmt(max)}`; title.className = "mb-1 font-semibold";
+          frag.appendChild(title); const row = document.createElement("div"); row.className = "flex flex-wrap items-center gap-1";
+          bins.forEach(b => { const box = document.createElement("span"); box.className = "legend-swatch border"; box.style.background = b; row.appendChild(box); });
+          frag.appendChild(row); legend.appendChild(frag);
+        }
+        boot().catch(err => { console.error(err); alert("Failed to load data files or map topology."); });
+
+        // SHARE SCRIPT
+        const shareButton = document.getElementById('share-button');
+        if (shareButton) {
+            shareButton.addEventListener('click', async () => {
+                const shareData = { title: 'RDP: Iowa Submodel Map Viewer', text: 'Explore the data behind our Iowa investigation.', url: window.location.href };
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    navigator.clipboard.writeText(window.location.href).then(() => { alert('Link copied to clipboard!'); });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
