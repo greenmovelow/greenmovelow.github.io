@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "IA_v1.0",
-    "updated_utc": "2025-10-13T13:24:10Z",
+    "updated_utc": "2025-10-13T13:58:39Z",
     "row_count": 99,
     "source_csv": "ia_submodel_v1_0.csv",
     "provenance": "PUBLIC_PRIMARY (REALDATA) \u2014 per data_dictionary_IA_v1.0.json"
