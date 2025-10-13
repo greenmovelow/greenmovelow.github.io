@@ -3,7 +3,7 @@
   "module": "state_submodel",
   "state": "IA",
   "build_id": "IA_v1.0",
-  "updated_utc": "2025-10-12T04:47:11Z",
+  "updated_utc": "2025-10-13T14:08:05Z",
   "interface": {
     "schema_meta": [
       "county_fips",
