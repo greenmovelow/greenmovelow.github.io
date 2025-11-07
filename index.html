@@ -146,7 +146,20 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+
                         <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col border-2 border-brand-orange">
+                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The DEI Hoax: 6-Hour Probe, 60-Day Silence</h3>
+                            <p class="mt-2 text-slate-600 flex-grow">Our data-driven report on AG Brenna Bird's 6-hour investigation and the 60 days of silence that followed—a case study in 'process as punishment'.</p>
+                            <a href="https://exposed1.substack.com/p/the-dei-hoax-iowas-attorney-general" target="_blank" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Read the Investigation &rarr;</a>
+                        </div>
+                        
+                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
+                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">Palantir & The ALPR Leviathan</h3>
+                            <p class="mt-2 text-slate-600 flex-grow">An interactive report exposing the warrantless mass surveillance grid built from Automated License Plate Readers (ALPRs) and Palantir's data-sharing ecosystem.</p>
+                            <a href="https://restoring-democracy.org/alpr-leviathan.html" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Launch Interactive Report &rarr;</a>
+                        </div>
+
+                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
                             <h3 class="font-serif text-2xl font-bold text-brand-green-dark">Iowa's Pension Privatization</h3>
                             <p class="mt-2 text-slate-600 flex-grow">Our investigation into the Iowa DOGE task force, the ALEC connection, and the multi-million dollar conflict of interest at the heart of the plan to end public pensions.</p>
                             <a href="iowa-doge-pension-privatize.html" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Launch Interactive Investigation &rarr;</a>
@@ -170,7 +183,7 @@
                             <a href="/pincer-infographic.html" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">View the Infographic &rarr;</a>
                         </div>
                         
-                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col border-2 border-brand-orange">
+                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
                             <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The God Machine</h3>
                             <p class="mt-2 text-slate-600 flex-grow">Our exclusive investigation revealing how a tax-exempt 'ministry' built a business selling unqualified chaplains to public schools, fueled by anonymous dark money.</p>
                             <a href="the-god-machine.html" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Launch Interactive Report &rarr;</a>
@@ -191,8 +204,10 @@
             <section class="py-16 md:py-20 bg-brand-green-dark">
                  <div class="max-w-4xl mx-auto px-4 text-center">
                     <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-orange">Stay Connected</h2>
-                    <p class="mt-4 text-lg text-brand-sand">Subscribe with your phone to get our latest investigations delivered directly to you.</p>
-                    <img src="assets/qr_code.png" alt="Subscribe QR Code" class="mt-6 mx-auto w-40 h-40 md:w-48 md:h-48 rounded-lg shadow-lg bg-white p-2">
+                    <p class="mt-4 text-lg text-brand-sand">Subscribe to get our latest investigations delivered directly to you.</p>
+                    <a href="https://exposed1.substack.com/subscribe" target="_blank" class="mt-8 inline-block bg-brand-orange text-brand-offblack font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-brand-gold hover:text-brand-green transition-all duration-300 transform hover:scale-105">
+                        Subscribe Directly &rarr;
+                    </a>
                 </div>
             </section>
         </main>
@@ -200,6 +215,7 @@
         <footer class="bg-brand-offblack text-brand-sand py-8 px-4">
             <div class="max-w-4xl mx-auto text-center text-sm">
                 <img src="assets/Square_logo_transparent.png" class="h-10 w-10 mx-auto mb-4" alt="Restoring Democracy Logo Icon">
+                <p class="mb-4 text-lg font-serif italic text-brand-gold">Engineering Precision Journalism</p>
                 <div class="footer-tooltip">
                     <p>&copy; 2023-2025 Restoring Democracy’s Promise. All rights reserved.</p>
                     <span class="tooltip-text">This project is powered by receipts.</span>
@@ -222,34 +238,4 @@
             clearTimeout(timer);
             timer = setTimeout(function() {
                 clickCount = 0;
-            }, 1600); // 1.6 second window to complete the clicks
-            if (clickCount === 5) {
-                window.location.href = "vault.html";
-            }
-        });
-
-        // --- Share Button Functionality ADDED HERE ---
-        const shareButton = document.getElementById('share-button');
-        if (shareButton) {
-            shareButton.addEventListener('click', async () => {
-                const shareData = {
-                    title: 'Restoring Democracy\'s Promise',
-                    text: 'A blueprint for accountability journalism. Exposing the hidden machinery of power with irrefutable, evidence-driven investigations.',
-                    url: window.location.href
-                };
-                try {
-                    if (navigator.share) {
-                        await navigator.share(shareData);
-                    } else {
-                        throw new Error('Web Share API not supported');
-                    }
-                } catch (err) {
-                    navigator.clipboard.writeText(window.location.href).then(() => {
-                        alert('Link copied to clipboard!');
-                    });
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+            }, 1
