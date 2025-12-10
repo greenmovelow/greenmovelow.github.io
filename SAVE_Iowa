@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibit: The Leviathan Architecture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Surveillance UI Effects */
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(16, 185, 129, 0.1);
+            position: fixed;
+            z-index: 50;
+            animation: scan 6s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        .node-pulse {
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .data-stream {
+            stroke-dasharray: 5;
+            animation: dash 1s linear infinite;
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: -10; }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <div class="scanline"></div>
+
+    <nav class="bg-slate-900 border-b border-slate-700 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="https://restoring-democracy.org" class="flex items-center group">
+                        <span class="text-red-500 font-bold text-xl tracking-tighter group-hover:text-red-400 transition-colors"><i class="fas fa-shield-alt mr-2"></i>RDP</span>
+                    </a>
+                    <span class="ml-3 text-slate-400 text-xs font-mono border-l border-slate-600 pl-3">OPERATION LEVIATHAN // EVIDENCE EXHIBIT A</span>
+                </div>
+                <div class="hidden md:block">
+                    <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Return to Investigation <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative bg-slate-900 pt-16 pb-20 lg:pt-24 lg:pb-28 overflow-hidden">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                <span class="block">The Database They</span>
+                <span class="block text-red-500">Won't Name</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-400">
+                Interactive forensics on how Iowa traded driver's license data for a mass surveillance tool.
+            </p>
+        </div>
+    </div>
+
+    <section class="py-12 bg-slate-800 border-y border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-10">
+                <h2 class="text-base text-red-400 font-semibold tracking-wide uppercase">Exhibit I</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">The Architecture of Surveillance</p>
+                <p class="mt-4 max-w-2xl text-xl text-slate-400 lg:mx-auto">
+                    They claim it's a simple "voter check." The architecture reveals a bidirectional data pipeline.
+                </p>
+            </div>
+
+            <div class="bg-slate-900 rounded-xl p-4 shadow-2xl border border-slate-600 relative h-[500px] flex items-center justify-center overflow-hidden" id="network-container">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none" id="network-svg">
+                    </svg>
+
+                <div class="absolute left-[10%] top-[30%] text-center z-10 w-32">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-blue-400">
+                        <i class="fas fa-id-card text-2xl text-white"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-sm">IOWA DOT<br><span class="text-xs text-blue-400">(DMV Data)</span></h3>
+                </div>
+
+                <div class="absolute left-[10%] bottom-[30%] text-center z-10 w-32">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-blue-400">
+                        <i class="fas fa-vote-yea text-2xl text-white"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-sm">VOTER ROLLS<br><span class="text-xs text-blue-400">(Sec of State)</span></h3>
+                </div>
+
+                <div class="absolute left-[50%] top-[50%] transform -translate-x-1/2 -translate-y-1/2 text-center z-10 w-40">
+                    <div class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-2 shadow-xl border-4 border-red-500 node-pulse">
+                        <i class="fas fa-network-wired text-4xl text-red-500"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg">NLETS<br><span class="text-xs text-red-400 font-mono">THE "SHADOW" BRIDGE</span></h3>
+                </div>
+
+                <div class="absolute right-[10%] top-[20%] text-center z-10 w-32">
+                    <div class="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-slate-500">
+                        <i class="fas fa-database text-2xl text-white"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-sm">SAVE<br><span class="text-xs text-slate-400">(Benefits DB)</span></h3>
+                </div>
+
+                <div class="absolute right-[10%] bottom-[20%] text-center z-10 w-32">
+                    <div class="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-slate-500">
+                        <i class="fas fa-user-secret text-2xl text-white"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-sm">ICE / DHS<br><span class="text-xs text-slate-400">(Enforcement)</span></h3>
+                </div>
+                
+                <div class="absolute bottom-4 right-4 bg-slate-800 p-3 rounded border border-slate-600 text-xs font-mono text-green-400">
+                    STATUS: ACTIVE CONNECTION<br>
+                    PROTOCOL: 8 U.S.C. § 1621<br>
+                    TRAFFIC: BIDIRECTIONAL
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-10">
+                <h2 class="text-base text-blue-400 font-semibold tracking-wide uppercase">Exhibit II</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">Timeline of Deception</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-yellow-500 relative">
+                    <div class="absolute -top-3 -left-3 bg-yellow-500 text-black font-bold px-3 py-1 rounded">OCT 8, 2025</div>
+                    <h3 class="text-xl font-bold text-white mt-4">The "Trojan Horse" Order</h3>
+                    <div class="mt-4 space-y-4">
+                        <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                            <p class="text-xs text-slate-400 uppercase font-bold">The Public Story</p>
+                            <p class="text-sm text-slate-300">"We are mandating E-Verify to protect schools from hiring fraud after the Dr. Roberts scandal."</p>
+                        </div>
+                        <div class="bg-slate-900 p-3 rounded border border-red-900/50">
+                            <p class="text-xs text-red-400 uppercase font-bold">The Hidden Reality</p>
+                            <p class="text-sm text-white">Section 2 secretly mandated the creation of a "SAVE Clearinghouse," forcing the DOT to link the DMV database to federal systems.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-red-500 relative">
+                    <div class="absolute -top-3 -left-3 bg-red-500 text-white font-bold px-3 py-1 rounded">DEC 1, 2025</div>
+                    <h3 class="text-xl font-bold text-white mt-4">The "Settlement" Switch</h3>
+                    <div class="mt-4 space-y-4">
+                        <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                            <p class="text-xs text-slate-400 uppercase font-bold">The Public Story</p>
+                            <p class="text-sm text-slate-300">"AG Brenna Bird secures victory to access a 'federal immigration database' for election integrity."</p>
+                        </div>
+                        <div class="bg-slate-900 p-3 rounded border border-red-900/50">
+                            <p class="text-xs text-red-400 uppercase font-bold">The Hidden Reality</p>
+                            <p class="text-sm text-white">The "Victory" was actually a data trade. To use SAVE, Iowa agreed to give DHS "full use" of driver's license records via Nlets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-10">
+                <h2 class="text-base text-red-400 font-semibold tracking-wide uppercase">Exhibit III</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">What They Took</p>
+                <p class="mt-4 text-slate-400">The "Settlement" requires providing DHS with the following data points from the Iowa DOT:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-slate-900 p-6 rounded border border-slate-700 hover:border-red-500 transition duration-300">
+                    <i class="fas fa-camera text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-lg font-bold text-white">Biometric Photos</h3>
+                    <p class="text-sm text-slate-400 mt-2">High-res driver's license photos accessible by facial recognition algorithms.</p>
+                </div>
+                <div class="bg-slate-900 p-6 rounded border border-slate-700 hover:border-red-500 transition duration-300">
+                    <i class="fas fa-map-marker-alt text-4xl text-green-500 mb-4"></i>
+                    <h3 class="text-lg font-bold text-white">Residential History</h3>
+                    <p class="text-sm text-slate-400 mt-2">Current and past addresses linked to vehicle registrations.</p>
+                </div>
+                <div class="bg-slate-900 p-6 rounded border border-slate-700 hover:border-red-500 transition duration-300">
+                    <i class="fas fa-signature text-4xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-lg font-bold text-white">Digitized Signatures</h3>
+                    <p class="text-sm text-slate-400 mt-2">Used for matching against ballot envelopes and legal documents.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 border-t border-slate-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-slate-500 text-sm">
+                Investigative data derived from public records, including Iowa Executive Order 15 and DHS Settlement Agreements.
+            </p>
+            <p class="mt-2 text-slate-600 text-xs font-mono">
+                GENERATED BY RDP RESEARCH DIVISION // OPERATION LEVIATHAN
+            </p>
+            <div class="mt-8">
+                <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors shadow-lg hover:shadow-red-900/50">
+                    Read the Full Investigation
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple canvas drawing for the connection lines
+        function drawLines() {
+            const container = document.getElementById('network-container');
+            const svg = document.getElementById('network-svg');
+            
+            // Coordinates (Percentages based on HTML placement)
+            const hub = { x: 50, y: 50 };
+            const dot = { x: 10, y: 30 };
+            const voters = { x: 10, y: 70 };
+            const save = { x: 90, y: 20 };
+            const ice = { x: 90, y: 80 };
+
+            const connections = [
+                { from: dot, to: hub, color: '#3b82f6', dash: false },
+                { from: voters, to: hub, color: '#3b82f6', dash: true },
+                { from: hub, to: save, color: '#ef4444', dash: false },
+                { from: hub, to: ice, color: '#ef4444', dash: false },
+                { from: save, to: ice, color: '#94a3b8', dash: true } // Internal fed link
+            ];
+
+            let svgContent = '';
+
+            connections.forEach(conn => {
+                // Convert % to pixels roughly for stroke width calc, though SVG uses % mostly
+                svgContent += `<line x1="${conn.from.x}%" y1="${conn.from.y}%" x2="${conn.to.x}%" y2="${conn.to.y}%" 
+                               stroke="${conn.color}" stroke-width="2" class="data-stream" />`;
+            });
+
+            svg.innerHTML = svgContent;
+        }
+
+        // Run on load
+        window.addEventListener('load', drawLines);
+        window.addEventListener('resize', drawLines);
+    </script>
+</body>
+</html>
