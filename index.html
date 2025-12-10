@@ -127,11 +127,11 @@
                 <a class="mt-8 inline-block bg-brand-orange text-brand-offblack font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-brand-gold hover:text-brand-green transition-all duration-300 transform hover:scale-105" href="https://exposed1.substack.com/subscribe" target="_blank">Join the Investigation</a>
 
                 <div class="flex justify-center my-8">
-                    <a href="https://exposed1.substack.com/p/exclusive-the-pincer-movement"
+                    <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring"
                        class="prominent-investigation-link inline-block font-bold py-4 px-8 rounded-lg shadow-xl text-2xl"
                        target="_blank"
                        rel="noopener noreferrer">
-                        READ THE FULL INVESTIGATION: THE PINCER MOVEMENT
+                        READ THE FULL INVESTIGATION: THE DATABASE THEY WON'T NAME
                     </a>
                 </div>
             </div>
@@ -167,15 +167,21 @@
                         </div>
 
                         <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col border-2 border-brand-orange">
-                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The DEI Hoax: 6-Hour Probe, 60-Day Silence</h3>
-                            <p class="mt-2 text-slate-600 flex-grow">Our data-driven report on AG Brenna Bird's 6-hour investigation and the 60 days of silence that followed—a case study in 'process as punishment'.</p>
-                            <a href="https://exposed1.substack.com/p/the-dei-hoax-iowas-attorney-general" target="_blank" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Read the Investigation &rarr;</a>
+                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">Iowa's Secret Surveillance</h3>
+                            <p class="mt-2 text-slate-600 flex-grow">How the state quietly traded driver's license privacy for a federal voter purge tool. We expose the legal "welfare" loophole and the hidden Nlets data pipeline.</p>
+                            <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" target="_blank" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Read the Full Investigation &rarr;</a>
                         </div>
                         
-                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
+                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col border-2 border-brand-orange">
                             <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The ALPR Trap</h3>
                             <p class="mt-2 text-slate-600 flex-grow">How a hidden national grid quietly turns local license-plate readers into a permanent financial-behavior tracking system. We expose the "30-day retention" myth and the legal structures laundering your data.</p>
                             <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" target="_blank" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Read the Investigation &rarr;</a>
+                        </div>
+
+                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
+                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The DEI Hoax</h3>
+                            <p class="mt-2 text-slate-600 flex-grow">Our data-driven report on AG Brenna Bird's 6-hour investigation and the 60 days of silence that followed—a case study in 'process as punishment'.</p>
+                            <a href="https://exposed1.substack.com/p/the-dei-hoax-iowas-attorney-general" target="_blank" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Read the Investigation &rarr;</a>
                         </div>
 
                         <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
@@ -257,4 +263,34 @@
             clearTimeout(timer);
             timer = setTimeout(function() {
                 clickCount = 0;
-            }, 1
+            }, 1000);
+            
+            if (clickCount === 5) {
+                window.location.href = 'vault.html';
+            }
+        });
+
+        // Simple Web Share API for the share button
+        const shareButton = document.getElementById('share-button');
+        shareButton.addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: document.title,
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    console.log('Error sharing:', err);
+                }
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Link copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy link: ', err);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
