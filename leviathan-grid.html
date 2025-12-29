@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibit IV: The National Leviathan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617; /* Darker than slate-900 */
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* CRT / Surveillance Effects */
+        .scanline {
+            width: 100%;
+            height: 4px;
+            background: rgba(6, 182, 212, 0.1); /* Cyan scanline */
+            position: fixed;
+            z-index: 50;
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { top: -5%; opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { top: 105%; opacity: 0; }
+        }
+
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(30, 41, 59, 0.5) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 41, 59, 0.5) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Glitch Text Effect */
+        .glitch-text:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #ef4444;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Map Nodes */
+        .node {
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+        .node:hover {
+            filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.8));
+            transform: scale(1.2);
+        }
+        .node-active {
+            fill: #06b6d4; /* Cyan */
+            filter: drop-shadow(0 0 12px rgba(6, 182, 212, 1));
+        }
+        .node-alert {
+            fill: #ef4444; /* Red */
+            animation: pulse-red 1.5s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { filter: drop-shadow(0 0 0 rgba(239, 68, 68, 0.7)); }
+            70% { filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0)); }
+            100% { filter: drop-shadow(0 0 0 rgba(239, 68, 68, 0)); }
+        }
+
+        /* Connection Lines */
+        .connection-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 2s forwards ease-in-out;
+        }
+
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .data-packet {
+            offset-path: path("M100 100 L 300 100"); /* Dynamic */
+            animation: movePacket 2s linear infinite;
+        }
+    </style>
+</head>
+<body class="grid-bg min-h-screen flex flex-col">
+
+    <div class="scanline"></div>
+
+    <nav class="bg-slate-900/80 backdrop-blur-md border-b border-slate-700 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center group">
+                        <span class="text-cyan-500 font-bold text-xl tracking-tighter group-hover:text-cyan-400 transition-colors"><i class="fas fa-network-wired mr-2"></i>LEVIATHAN</span>
+                    </a>
+                    <span class="ml-3 text-slate-500 text-xs font-mono border-l border-slate-600 pl-3 hidden sm:inline">EXHIBIT IV: THE NATIONAL GRID</span>
+                </div>
+                <div>
+                    <span id="system-status" class="text-xs font-mono text-emerald-500 bg-emerald-900/20 px-2 py-1 rounded border border-emerald-900">SYSTEM: STANDBY</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-4 relative overflow-hidden">
+        
+        <div class="absolute left-4 top-24 w-64 hidden lg:block space-y-4">
+            <div class="bg-slate-900/90 border border-slate-700 p-4 rounded-lg shadow-xl">
+                <h3 class="text-xs text-slate-400 uppercase font-bold mb-2">Query Volume</h3>
+                <div class="text-3xl font-mono font-bold text-white" id="query-counter">25,000,000</div>
+                <div class="w-full bg-slate-800 h-1 mt-2 rounded overflow-hidden">
+                    <div id="query-bar" class="bg-cyan-500 h-full w-[12%] transition-all duration-1000"></div>
+                </div>
+                <p class="text-[10px] text-slate-500 mt-1 text-right">YEAR: <span id="year-display">2024</span></p>
+            </div>
+
+            <div class="bg-slate-900/90 border border-slate-700 p-4 rounded-lg shadow-xl opacity-50" id="laundering-panel">
+                <h3 class="text-xs text-slate-400 uppercase font-bold mb-2">Jurisdiction Status</h3>
+                <div class="flex items-center space-x-2 mb-1">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                    <span class="text-xs text-slate-300">Iowa (Restricted)</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                    <span class="text-xs text-slate-300">Nebraska (Open)</span>
+                </div>
+                <div class="mt-3 p-2 bg-red-900/20 border border-red-900/50 rounded text-[10px] text-red-400 font-mono hidden" id="bypass-alert">
+                    ⚠ BYPASS DETECTED<br>DATA RETENTION: INDEFINITE
+                </div>
+            </div>
+        </div>
+
+        <div class="relative w-full max-w-5xl aspect-video bg-slate-900 rounded-xl border border-slate-700 shadow-2xl overflow-hidden group">
+            
+            <svg id="main-map" viewBox="0 0 800 450" class="absolute inset-0 w-full h-full">
+                <path d="M50,100 L150,50 L350,60 L600,40 L750,120 L720,350 L500,400 L200,380 L50,250 Z" fill="#1e293b" stroke="#334155" stroke-width="2" />
+                
+                <circle id="node-des-moines" cx="420" cy="180" r="6" class="node fill-emerald-500" />
+                <text x="430" y="175" class="text-[10px] fill-emerald-500 font-mono opacity-0 transition-opacity duration-300" id="label-dm">DES MOINES</text>
+
+                <circle id="node-sarpy" cx="400" cy="190" r="6" class="node fill-slate-600" />
+                <text x="320" y="210" class="text-[10px] fill-red-500 font-mono opacity-0 transition-opacity duration-300" id="label-sarpy">SARPY COUNTY (NE)</text>
+
+                <circle id="node-nlets" cx="680" cy="200" r="12" class="node fill-slate-800 stroke-slate-500 stroke-2 opacity-50" />
+                <text x="690" y="190" class="text-[10px] fill-slate-400 font-mono opacity-0" id="label-nlets">NLETS / DHS</text>
+
+            </svg>
+
+            <div id="stage-prompt" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-slate-800/90 border border-slate-600 px-6 py-3 rounded-full cursor-pointer hover:bg-slate-700 hover:border-cyan-500 transition-all shadow-lg z-20 group-hover:scale-105">
+                <span class="text-sm font-bold text-cyan-400 uppercase tracking-widest"><i class="fas fa-play mr-2"></i>INITIATE SEQUENCE</span>
+            </div>
+
+            <div id="popup-1" class="absolute top-10 left-10 w-64 bg-slate-900 border-l-4 border-emerald-500 p-4 shadow-xl transform -translate-x-full transition-transform duration-500">
+                <h4 class="text-emerald-400 font-bold uppercase text-xs mb-1">Local Control</h4>
+                <p class="text-xs text-slate-300">Des Moines PD claims 122 cameras. Invoices show 130. Missing units leased on utility poles.</p>
+                <div class="mt-2 text-[10px] font-mono text-emerald-600">RETENTION: 30 DAYS</div>
+            </div>
+
+            <div id="popup-2" class="absolute bottom-10 right-10 w-72 bg-slate-900 border-l-4 border-red-500 p-4 shadow-xl transform translate-x-full transition-transform duration-500">
+                <h4 class="text-red-500 font-bold uppercase text-xs mb-1">The Laundry Cycle</h4>
+                <p class="text-xs text-slate-300">Dec 3, 2025 MOU links Des Moines to Sarpy County. Data leaves Iowa jurisdiction, enters Nebraska (ICE-friendly).</p>
+                <div class="mt-2 text-[10px] font-mono text-red-500 glitch-text">RETENTION: INDEFINITE</div>
+            </div>
+
+        </div>
+
+        <div class="mt-8 flex space-x-4">
+            <div class="w-3 h-3 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]"></div>
+            <div class="w-3 h-3 rounded-full bg-slate-700" id="step-2-dot"></div>
+            <div class="w-3 h-3 rounded-full bg-slate-700" id="step-3-dot"></div>
+            <div class="w-3 h-3 rounded-full bg-slate-700" id="step-4-dot"></div>
+        </div>
+
+    </main>
+
+    <script>
+        let currentStage = 0;
+        const promptBtn = document.getElementById('stage-prompt');
+        const statusDisplay = document.getElementById('system-status');
+        const mapSvg = document.getElementById('main-map');
+
+        // Animation Functions
+        promptBtn.addEventListener('click', nextStage);
+
+        function nextStage() {
+            currentStage++;
+            
+            if (currentStage === 1) {
+                // STAGE 1: LOCAL TRAP
+                statusDisplay.innerText = "SYSTEM: LOCAL ACTIVATION";
+                statusDisplay.className = "text-xs font-mono text-cyan-500 bg-cyan-900/20 px-2 py-1 rounded border border-cyan-900";
+                
+                document.getElementById('label-dm').style.opacity = 1;
+                document.getElementById('popup-1').classList.remove('-translate-x-full');
+                
+                promptBtn.innerHTML = '<span class="text-sm font-bold text-white uppercase tracking-widest">BRIDGE CONNECTION</span>';
+                document.getElementById('step-2-dot').classList.add('bg-cyan-500');
+            }
+            
+            else if (currentStage === 2) {
+                // STAGE 2: THE BRIDGE (LAUNDERING)
+                statusDisplay.innerText = "SYSTEM: JURISDICTION BYPASS";
+                statusDisplay.className = "text-xs font-mono text-yellow-500 bg-yellow-900/20 px-2 py-1 rounded border border-yellow-900 animate-pulse";
+
+                // Animate Line DM -> Sarpy
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", "420");
+                line.setAttribute("y1", "180");
+                line.setAttribute("x2", "400");
+                line.setAttribute("y2", "190");
+                line.setAttribute("stroke", "#ef4444");
+                line.setAttribute("stroke-width", "2");
+                line.classList.add("connection-line");
+                mapSvg.appendChild(line);
+
+                // Highlight Sarpy
+                setTimeout(() => {
+                    document.getElementById('node-sarpy').classList.add('node-alert');
+                    document.getElementById('label-sarpy').style.opacity = 1;
+                    document.getElementById('popup-2').classList.remove('translate-x-full');
+                    document.getElementById('laundering-panel').classList.remove('opacity-50');
+                    document.getElementById('bypass-alert').classList.remove('hidden');
+                }, 1000);
+
+                promptBtn.innerHTML = '<span class="text-sm font-bold text-red-500 uppercase tracking-widest">ACTIVATE NATIONAL GRID</span>';
+                document.getElementById('step-3-dot').classList.add('bg-cyan-500');
+            }
+
+            else if (currentStage === 3) {
+                // STAGE 3: THE SCALE (205 MILLION)
+                statusDisplay.innerText = "SYSTEM: FULL SCALE SURVEILLANCE";
+                statusDisplay.className = "text-xs font-mono text-red-600 bg-red-900/20 px-2 py-1 rounded border border-red-900 blink";
+
+                // Animate to NLETS
+                const line2 = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line2.setAttribute("x1", "400");
+                line2.setAttribute("y1", "190");
+                line2.setAttribute("x2", "680");
+                line2.setAttribute("y2", "200");
+                line2.setAttribute("stroke", "#ef4444");
+                line2.setAttribute("stroke-width", "4");
+                line2.setAttribute("stroke-opacity", "0.5");
+                line2.classList.add("connection-line");
+                mapSvg.appendChild(line2);
+
+                document.getElementById('node-nlets').style.opacity = 1;
+                document.getElementById('node-nlets').classList.add('node-alert');
+                document.getElementById('label-nlets').style.opacity = 1;
+
+                // Explode Counter
+                animateValue("query-counter", 25000000, 205000000, 3000);
+                document.getElementById('year-display').innerText = "2025";
+                document.getElementById('query-bar').style.width = "100%";
+                document.getElementById('query-bar').classList.remove('bg-cyan-500');
+                document.getElementById('query-bar').classList.add('bg-red-600');
+
+                promptBtn.innerHTML = '<span class="text-sm font-bold text-slate-400 uppercase tracking-widest">SEQUENCE COMPLETE</span>';
+                promptBtn.classList.add('pointer-events-none', 'opacity-50');
+                document.getElementById('step-4-dot').classList.add('bg-cyan-500');
+            }
+        }
+
+        // Counter Animation Helper
+        function animateValue(id, start, end, duration) {
+            let obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = current.toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+    </script>
+</body>
+</html>
