@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exhibit: The Confidential MOU</title>
+    <title>The Confidential MOU: Federalizing Voter Rolls</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/Square_logo_green.png"> 
     <style>
         :root {
             --highlight-red: #ef4444;
@@ -77,18 +78,33 @@
 
     <div class="scan-line"></div>
 
-    <header class="w-full bg-slate-900 border-b border-slate-800 p-4 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <div class="mr-3 text-red-600 text-xl"><i class="fas fa-shield-alt"></i></div>
-                <div class="text-xs font-mono text-slate-400">
-                    EVIDENCE FILE: <span class="text-red-500 font-bold">US-v-GRISWOLD-2025</span>
-                </div>
+    <header class="w-full bg-slate-900 border-b border-slate-800 p-4 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-4">
+            <div class="flex items-center space-x-4">
+                <a href="/" title="Return to Homepage" class="flex items-center group">
+                    <div class="mr-3 text-red-600 text-xl group-hover:text-red-500 transition-colors">
+                        <i class="fas fa-shield-alt"></i> </div>
+                    <span class="text-sm font-medium text-slate-300 group-hover:text-white transition-colors hidden sm:inline-block">
+                        &larr; Return to Homepage
+                    </span>
+                </a>
             </div>
             
-            <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize" target="_blank" class="hidden md:inline-flex items-center gap-2 text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded transition border border-slate-700">
-                <i class="fas fa-file-alt"></i> READ MANUSCRIPT
-            </a>
+            <div class="text-center hidden md:block">
+                <h1 class="text-xl uppercase font-bold text-red-600 tracking-wider">The National Leviathan</h1>
+            </div>
+
+            <div class="flex items-center">
+                <button id="share-button" title="Share this investigation" class="p-2 rounded-full text-slate-300 hover:bg-slate-800 hover:text-white transition-colors duration-200">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -98,7 +114,7 @@
                 CONFIDENTIAL
             </div>
             
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter mb-6 leading-tight">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter mb-6 leading-tight text-white">
                 THE REPUBLIC OF THE <br>
                 <span class="text-red-600">RED FLAG</span>
             </h1>
@@ -224,12 +240,16 @@
                     We track the systems that track you.
                 </p>
                 
-                <div class="flex justify-center mb-12">
-                    <a href="https://exposed1.substack.com/subscribe" class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-red-600 font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600 hover:bg-red-700 shadow-lg hover:shadow-red-900/50">
-                        Subscribe to the Investigation
+                <div class="flex flex-col md:flex-row justify-center gap-6 mb-12">
+                    <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize" target="_blank" class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-red-600 font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600 hover:bg-red-700 shadow-lg hover:shadow-red-900/50">
+                        Read the Full Investigation
                         <svg class="w-5 h-5 ml-2 -mr-1 transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
+                    </a>
+                    
+                    <a href="https://exposed1.substack.com/subscribe" target="_blank" class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-300 transition-all duration-200 bg-slate-800 font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-600 hover:bg-slate-700 hover:text-white shadow-lg border border-slate-700">
+                        Subscribe
                     </a>
                 </div>
                 
@@ -280,6 +300,33 @@
             }
             updateClock();
         }, 1000);
+
+        // Share button functionality
+        const shareButton = document.getElementById('share-button');
+        if (shareButton) {
+            shareButton.addEventListener('click', async () => {
+                const shareData = {
+                    title: 'The Confidential MOU: Federalizing Voter Rolls',
+                    text: 'A secret contract. A 45-day purge clock. And the data keys that turn voter rolls into a federal surveillance grid.',
+                    url: window.location.href
+                };
+                try {
+                    if (navigator.share) {
+                        await navigator.share(shareData);
+                    } else {
+                        // Fallback for desktop browsers
+                        navigator.clipboard.writeText(window.location.href).then(() => {
+                            alert('Link copied to clipboard!');
+                        });
+                    }
+                } catch (err) {
+                    console.error("Share failed:", err);
+                    navigator.clipboard.writeText(window.location.href).then(() => {
+                        alert('Link copied to clipboard!');
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>
