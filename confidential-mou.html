@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibit: The Confidential MOU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --highlight-red: #ef4444;
+            --bg-dark: #0f172a;
+            --paper-color: #f3f4f6;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: #e5e7eb;
+        }
+        .font-mono {
+            font-family: 'Courier Prime', monospace;
+        }
+        .redacted {
+            background-color: black;
+            color: black;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0 4px;
+            border-radius: 2px;
+        }
+        .redacted:hover {
+            background-color: #374151;
+        }
+        .redacted.revealed {
+            background-color: transparent;
+            color: var(--highlight-red);
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .stamp {
+            border: 4px solid var(--highlight-red);
+            color: var(--highlight-red);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transform: rotate(-12deg);
+            opacity: 0.8;
+            mask-image: url('data:image/svg+xml;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCACAAACQd1PeAAAADElEQVQImWP4//8/AAX+Av5Y8msOAAAAAElFTkSuQmCC'); 
+        }
+        .scan-line {
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255, 0, 0, 0.2) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            background-size: 100% 100%;
+            animation: scanline 10s linear infinite;
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        @keyframes scanline {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+        .card-stack {
+            transition: transform 0.3s ease;
+        }
+        .card-stack:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <div class="scan-line"></div>
+
+    <header class="w-full bg-slate-900 border-b border-slate-800 p-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="mr-3 text-red-600 text-xl"><i class="fas fa-shield-alt"></i></div>
+                <div class="text-xs font-mono text-slate-400">
+                    EVIDENCE FILE: <span class="text-red-500 font-bold">US-v-GRISWOLD-2025</span>
+                </div>
+            </div>
+            
+            <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize" target="_blank" class="hidden md:inline-flex items-center gap-2 text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded transition border border-slate-700">
+                <i class="fas fa-file-alt"></i> READ MANUSCRIPT
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="relative pt-20 pb-16 px-4 text-center max-w-4xl mx-auto">
+            <div class="absolute top-10 right-10 stamp text-2xl px-4 py-2 border-4 hidden md:block">
+                CONFIDENTIAL
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter mb-6 leading-tight">
+                THE REPUBLIC OF THE <br>
+                <span class="text-red-600">RED FLAG</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-slate-3
