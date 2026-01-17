@@ -101,12 +101,22 @@
         }
         /* New style for the prominent investigation link */
         .prominent-investigation-link {
-            background-color: #D4AF37; /* brand-gold */
-            color: #161616; /* brand-offblack */
-            font-bold py-4 px-8 rounded-lg shadow-xl text-2xl; /* existing classes */
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            transform: scale(1.02); /* Slightly larger */
-        }
+  background-color: #D4AF37; /* brand-gold */
+  color: #161616; /* brand-offblack */
+  font-weight: 800;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  transform: scale(1.02);
+}
+.prominent-investigation-link:hover {
+  background-color: #f4a261; /* brand-orange */
+  color: #24473e; /* brand-green-dark */
+  transform: scale(1.05);
+}
         .prominent-investigation-link:hover {
             background-color: #f4a261; /* brand-orange on hover */
             color: #24473e; /* brand-green-dark on hover */
@@ -140,6 +150,32 @@
                 <p class="mt-8 max-w-2xl mx-auto text-brand-white text-base md:text-lg">
                     We are a different kind of newsroom—founded to expose the hidden machinery of power and restore democratic accountability with irrefutable, evidence-driven investigations.
                 </p>
+              <div class="mt-8 max-w-2xl mx-auto">
+  <p class="text-brand-sand text-sm md:text-base leading-relaxed">
+    <span class="font-bold text-brand-gold">What we do:</span>
+    We operate in two lanes—
+    <span class="font-semibold">Investigative Journalism</span> (public records, document-driven reporting)
+    and <span class="font-semibold">Civic Systems Analysis</span> (maps, data models, and technical explainers).
+  </p>
+
+  <div class="mt-5 flex flex-wrap justify-center gap-3">
+    <a href="about.html" class="inline-block bg-brand-green-dark/60 text-brand-white font-semibold py-2 px-5 rounded-full hover:bg-brand-green-dark transition">
+      About the Project
+    </a>
+    <a href="secure-tips.html" class="inline-block bg-brand-green-dark/60 text-brand-white font-semibold py-2 px-5 rounded-full hover:bg-brand-green-dark transition">
+      Secure Tips
+    </a>
+  </div>
+
+  <div class="mt-5 text-xs md:text-sm text-brand-sand">
+    <span class="font-semibold text-brand-orange">Tip line:</span>
+    Signal <span class="font-semibold">[ADD_YOUR_SIGNAL_HANDLE]</span> •
+    Proton <a class="text-brand-orange hover:text-brand-gold hover:underline" href="mailto:[ADD_PROTON_ADDRESS]">[ADD_PROTON_ADDRESS]</a>
+    <div class="mt-1 opacity-90">
+      Don’t send sensitive material over standard email. Use Signal or Proton for confidential tips.
+    </div>
+  </div>
+              </div>
                 <a class="mt-8 inline-block bg-brand-orange text-brand-offblack font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-brand-gold hover:text-brand-green transition-all duration-300 transform hover:scale-105" href="https://exposed1.substack.com/subscribe" target="_blank">Join the Investigation</a>
 
                 <div class="flex justify-center my-8">
