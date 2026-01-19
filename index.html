@@ -3,350 +3,434 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Restoring Democracy’s Promise — Investigative Journalism & Civic Systems Analysis</title>
-<meta name="description" content="Restoring Democracy’s Promise is an independent investigative journalism project exposing the hidden machinery of power through public records, evidence-led reporting, and civic data analysis.">
 
-<link rel="canonical" href="https://restoring-democracy.org/">
-<meta name="robots" content="index,follow">
+  <title>Restoring Democracy’s Promise — Accountability Journalism & Civic Systems Analysis</title>
+  <meta name="description" content="Restoring Democracy’s Promise is an independent investigative newsroom exposing the hidden machinery of power through public records, evidence-led reporting, and civic systems analysis (RDP Analytics).">
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://restoring-democracy.org/">
-<meta property="og:title" content="Restoring Democracy’s Promise — Investigative Journalism & Civic Systems Analysis">
-<meta property="og:description" content="A different kind of newsroom—built to expose the hidden machinery of power with evidence-driven investigations, public records, and civic data analysis.">
-<meta property="og:image" content="https://restoring-democracy.org/assets/Square_logo_green.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+  <link rel="canonical" href="https://restoring-democracy.org/">
+  <meta name="robots" content="index,follow">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://restoring-democracy.org/">
-<meta name="twitter:title" content="Restoring Democracy’s Promise — Investigative Journalism & Civic Systems Analysis">
-<meta name="twitter:description" content="Evidence-driven investigations. Public records. Civic data analysis. Receipts.">
-<meta name="twitter:image" content="https://restoring-democracy.org/assets/Square_logo_green.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://restoring-democracy.org/">
+  <meta property="og:title" content="Restoring Democracy’s Promise — Accountability Journalism & Civic Systems Analysis">
+  <meta property="og:description" content="Evidence-driven investigations. Public records. Civic systems analysis. Receipts.">
+  <meta property="og:image" content="https://restoring-democracy.org/assets/Square_logo_green.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Restoring Democracy’s Promise",
-  "alternateName": "RDP",
-  "url": "https://restoring-democracy.org/",
-  "publisher": {
-    "@type": "Organization",
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://restoring-democracy.org/">
+  <meta name="twitter:title" content="Restoring Democracy’s Promise — Accountability Journalism & Civic Systems Analysis">
+  <meta name="twitter:description" content="Evidence-driven investigations. Public records. Civic systems analysis. Receipts.">
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/Square_logo_green.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
     "name": "Restoring Democracy’s Promise",
+    "alternateName": "RDP",
     "url": "https://restoring-democracy.org/",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://restoring-democracy.org/assets/Square_logo_green.png"
+    "publisher": {
+      "@type": "Organization",
+      "name": "Restoring Democracy’s Promise",
+      "url": "https://restoring-democracy.org/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://restoring-democracy.org/assets/Square_logo_green.png"
+      }
     }
   }
-}
-</script>
+  </script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-QJ3L9CT4Z7');
-    </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QJ3L9CT4Z7');
+  </script>
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'brand-green': '#2d5c4f',
-                        'brand-green-dark': '#24473e',
-                        'brand-orange': '#f4a261',
-                        'brand-gold': '#D4AF37',
-                        'brand-white': '#F6F7F8',
-                        'brand-offblack': '#161616',
-                        'brand-sand': '#e4d5b9',
-                    },
-                    fontFamily: {
-                        'sans': ['Inter', 'sans-serif'],
-                        'serif': ['Lora', 'serif'],
-                    }
-                }
-            }
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-green': '#2d5c4f',
+            'brand-green-dark': '#24473e',
+            'brand-orange': '#f4a261',
+            'brand-gold': '#D4AF37',
+            'brand-white': '#F6F7F8',
+            'brand-offblack': '#161616',
+            'brand-sand': '#e4d5b9',
+          },
+          fontFamily: {
+            'sans': ['Inter', 'sans-serif'],
+            'serif': ['Lora', 'serif'],
+          }
         }
-    </script>
-    <style>
-        .footer-tooltip {
-            position: relative;
-            cursor: pointer;
-        }
-        .footer-tooltip .tooltip-text {
-            visibility: hidden;
-            width: 220px;
-            background-color: #24473e;
-            color: #f4a261;
-            text-align: center;
-            border-radius: 8px;
-            padding: 7px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 120%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.4s;
-            font-size: 1em;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-        }
-        .footer-tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-        /* New style for the prominent investigation link */
-        .prominent-investigation-link {
-  background-color: #D4AF37; /* brand-gold */
-  color: #161616; /* brand-offblack */
-  font-weight: 800;
-  padding: 1rem 2rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 12px 24px rgba(0,0,0,0.25);
-  font-size: 1.5rem;
-  line-height: 1.2;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  transform: scale(1.02);
-}
-.prominent-investigation-link:hover {
-  background-color: #f4a261; /* brand-orange */
-  color: #24473e; /* brand-green-dark */
-  transform: scale(1.05);
-}
-        .prominent-investigation-link:hover {
-            background-color: #f4a261; /* brand-orange on hover */
-            color: #24473e; /* brand-green-dark on hover */
-            transform: scale(1.05); /* Slightly more prominent on hover */
-        }
-    </style>
+      }
+    }
+  </script>
+
+  <style>
+    .footer-tooltip { position: relative; cursor: pointer; }
+    .footer-tooltip .tooltip-text {
+      visibility: hidden;
+      width: 220px;
+      background-color: #24473e;
+      color: #f4a261;
+      text-align: center;
+      border-radius: 8px;
+      padding: 7px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      font-size: 1em;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    }
+    .footer-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+    .prominent-investigation-link {
+      background-color: #D4AF37; /* brand-gold */
+      color: #161616; /* brand-offblack */
+      font-weight: 800;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+      font-size: 1.35rem;
+      line-height: 1.2;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      transform: scale(1.01);
+    }
+    .prominent-investigation-link:hover {
+      background-color: #f4a261; /* brand-orange */
+      color: #24473e; /* brand-green-dark */
+      transform: scale(1.04);
+    }
+
+    .statement-card {
+      background: rgba(36, 71, 62, 0.55);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+      border-radius: 0.9rem;
+    }
+    .statement-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #161616;
+      background: #f4a261;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+    }
+  </style>
 </head>
+
 <body class="bg-brand-green text-brand-white font-sans antialiased">
+  <div class="flex flex-col min-h-screen">
 
-    <div class="flex flex-col min-h-screen">
-        <header class="relative text-center py-16 md:py-24 px-4">
-            <div class="absolute inset-0 bg-brand-green-dark opacity-50"></div>
-            
-            <div class="absolute top-4 right-4 z-10">
-                <button id="share-button" title="Share this page" class="p-2 rounded-full text-white hover:bg-brand-green-dark transition-colors duration-200">
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="18" cy="5" r="3"></circle>
-                        <circle cx="6" cy="12" r="3"></circle>
-                        <circle cx="18" cy="19" r="3"></circle>
-                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                    </svg>
-                </button>
+    <header class="relative text-center py-14 md:py-20 px-4">
+      <div class="absolute inset-0 bg-brand-green-dark opacity-50"></div>
+
+      <div class="absolute top-4 right-4 z-10">
+        <button id="share-button" title="Share this page" class="p-2 rounded-full text-white hover:bg-brand-green-dark transition-colors duration-200">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="relative max-w-4xl mx-auto">
+        <img id="main-logo" src="assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise Logo" class="mx-auto mb-6 h-20 w-20 md:h-28 md:w-28 cursor-pointer">
+
+        <h1 class="font-serif text-4xl md:text-6xl font-bold text-brand-gold tracking-tight">Restoring Democracy’s Promise</h1>
+        <p class="mt-4 text-lg md:text-xl text-brand-orange italic">A Blueprint for Accountability Journalism</p>
+
+        <p class="mt-7 max-w-2xl mx-auto text-brand-white text-base md:text-lg">
+          An independent newsroom built to expose the hidden machinery of power—through public records, verifiable evidence, and disciplined, document-driven reporting.
+        </p>
+
+        <div class="mt-7 max-w-2xl mx-auto">
+          <p class="text-brand-sand text-sm md:text-base leading-relaxed">
+            <span class="font-bold text-brand-gold">Our work has two core missions:</span>
+            <span class="font-semibold">Investigative Journalism</span> (records, contracts, court filings, oversight)
+            and <span class="font-semibold">Civic Systems Analysis</span> <span class="opacity-90">(RDP Analytics: maps, data models, technical explainers)</span>.
+          </p>
+
+          <!-- Buttons: stacked on mobile, side-by-side on larger screens -->
+          <div class="mt-5 flex flex-col sm:flex-row justify-center gap-3">
+            <a href="about.html" class="inline-block bg-brand-green-dark/60 text-brand-white font-semibold py-2 px-6 rounded-full hover:bg-brand-green-dark transition text-center">
+              About the Project
+            </a>
+            <a href="secure-tips.html" class="inline-block bg-brand-green-dark/60 text-brand-white font-semibold py-2 px-6 rounded-full hover:bg-brand-green-dark transition text-center">
+              Secure Tips
+            </a>
+          </div>
+        </div>
+
+        <!-- Minnesota statement block (new) -->
+        <div class="mt-8 max-w-3xl mx-auto statement-card p-5 md:p-6 text-left">
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+            <div class="flex-1">
+              <span class="statement-badge">Statement</span>
+              <h2 class="mt-3 font-serif text-2xl md:text-3xl font-bold text-brand-gold leading-tight">
+                When Did Armed Federal Raids Become Normal in Minnesota?
+              </h2>
+              <p class="mt-3 text-brand-sand leading-relaxed">
+                A statement on Operation Metro Surge, due process, and the rule of law in the Twin Cities—why constitutional limits, accountability, and humane governance are not optional.
+              </p>
             </div>
+            <div class="flex-shrink-0 md:pt-1">
+              <a href="https://exposed1.substack.com/p/when-did-armed-federal-raids-become"
+                 target="_blank" rel="noopener noreferrer"
+                 class="inline-block w-full md:w-auto text-center bg-brand-orange text-brand-offblack font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-brand-gold hover:text-brand-green transition-all duration-300 transform hover:scale-105">
+                Read the Statement &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
 
-            <div class="relative max-w-4xl mx-auto">
-                <img id="main-logo" src="assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise Logo" class="mx-auto mb-6 h-20 w-20 md:h-28 md:w-28 cursor-pointer">
+        <!-- Prominent investigation link stays -->
+        <div class="flex justify-center mt-8">
+          <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize"
+             class="prominent-investigation-link inline-block text-center"
+             target="_blank"
+             rel="noopener noreferrer">
+            READ THE FULL INVESTIGATION: INSIDE THE DOJ'S PLAN TO CONTROL THE VOTER ROLLS
+          </a>
+        </div>
+      </div>
+    </header>
 
-                <h1 class="font-serif text-4xl md:text-6xl font-bold text-brand-gold tracking-tight text-shadow">Restoring Democracy’s Promise</h1>
-                <p class="mt-4 text-lg md:text-xl text-brand-orange italic">A Blueprint for Accountability Journalism</p>
-                <p class="mt-8 max-w-2xl mx-auto text-brand-white text-base md:text-lg">
-                    We are a different kind of newsroom—founded to expose the hidden machinery of power and restore democratic accountability with irrefutable, evidence-driven investigations.
-                </p>
-              <div class="mt-8 max-w-2xl mx-auto">
-  <p class="text-brand-sand text-sm md:text-base leading-relaxed">
-    <span class="font-bold text-brand-gold">What we do:</span>
-    We operate in two lanes—
-    <span class="font-semibold">Investigative Journalism</span> (public records, document-driven reporting)
-    and <span class="font-semibold">Civic Systems Analysis</span> (maps, data models, and technical explainers).
-  </p>
+    <main class="flex-grow">
 
-  <div class="mt-5 flex flex-wrap justify-center gap-3">
-    <a href="about.html" class="inline-block bg-brand-green-dark/60 text-brand-white font-semibold py-2 px-5 rounded-full hover:bg-brand-green-dark transition">
-      About the Project
-    </a>
-    <a href="secure-tips.html" class="inline-block bg-brand-green-dark/60 text-brand-white font-semibold py-2 px-5 rounded-full hover:bg-brand-green-dark transition">
-      Secure Tips
-    </a>
-  </div>
+      <section class="py-16 md:py-20 bg-brand-white text-brand-offblack">
+        <div class="max-w-7xl mx-auto px-4">
+          <div class="text-center mb-12">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-green-dark">Our Investigations</h2>
+            <p class="mt-4 text-lg text-slate-700 max-w-3xl mx-auto">
+              Explore our interactive reports to see the data, trace the money, and understand the networks shaping our institutions.
+            </p>
+          </div>
 
-  <div class="mt-5 text-xs md:text-sm text-brand-sand">
-    <span class="font-semibold text-brand-orange">Tip line:</span>
-    Signal <span class="font-semibold">restoredemocracy.27</span> •
-    Secure E-mail <a class="text-brand-orange hover:text-brand-gold hover:underline" href="mailto:restoringdemocracyspromise.scoop255@passmail.net">restoringdemocracyspromise.scoop255@passmail.net</a>
-    <div class="mt-1 opacity-90">
-      Don’t send sensitive material over standard email. Use Signal or Proton for confidential tips.
-    </div>
-  </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+
+            <div class="bg-brand-offblack rounded-lg shadow-lg p-6 flex flex-col border-2 border-brand-gold relative overflow-hidden col-span-1 md:col-span-2 lg:col-span-2">
+              <div class="absolute top-0 right-0 bg-brand-gold text-brand-offblack text-xs font-bold px-3 py-1 uppercase tracking-wider">
+                Official Filing
               </div>
-                <a class="mt-8 inline-block bg-brand-orange text-brand-offblack font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-brand-gold hover:text-brand-green transition-all duration-300 transform hover:scale-105" href="https://exposed1.substack.com/subscribe" target="_blank">Join the Investigation</a>
-
-                <div class="flex justify-center my-8">
-                    <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize"
-                       class="prominent-investigation-link inline-block font-bold py-4 px-8 rounded-lg shadow-xl text-2xl"
-                       target="_blank"
-                       rel="noopener noreferrer">
-                        READ THE FULL INVESTIGATION: INSIDE THE DOJ'S PLAN TO CONTROL THE VOTER ROLLS
-                    </a>
+              <div class="flex flex-col md:flex-row gap-6 items-center">
+                <div class="flex-grow">
+                  <h3 class="font-serif text-3xl font-bold text-brand-white">Formal Inquiry Filed with Ethics Board</h3>
+                  <p class="mt-4 text-brand-sand text-lg">
+                    On November 8th, Restoring Democracy's Promise submitted a formal <strong>Memorandum of Concern</strong> to the Iowa Ethics and Campaign Disclosure Board outlining potential undisclosed conflicts of interest regarding IPERS investment decisions.
+                  </p>
+                  <p class="mt-2 text-sm text-brand-orange italic">Read the Announcement Here.</p>
                 </div>
+                <div class="flex-shrink-0 w-full md:w-auto">
+                  <a href="https://exposed1.substack.com/p/restoring-democracys-promise-submits" target="_blank"
+                     class="block w-full text-center bg-brand-gold text-brand-offblack font-bold py-4 px-8 rounded-lg text-lg shadow-xl hover:bg-brand-orange hover:text-brand-offblack transition-all duration-300 transform hover:scale-105">
+                    Read the Announcement &rarr;
+                  </a>
+                </div>
+              </div>
             </div>
-        </header>
 
-        <main class="flex-grow">
-            <section class="py-16 md:py-20 bg-brand-white text-brand-offblack">
-                <div class="max-w-7xl mx-auto px-4">
-                    <div class="text-center mb-12">
-                         <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-green-dark">Our Investigations</h2>
-                         <p class="mt-4 text-lg text-slate-700 max-w-3xl mx-auto">Explore our interactive reports to see the data, trace the money, and understand the networks shaping our world.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                        <div class="bg-brand-offblack rounded-lg shadow-lg p-6 flex flex-col border-2 border-brand-gold relative overflow-hidden col-span-1 md:col-span-2 lg:col-span-2">
-                            <div class="absolute top-0 right-0 bg-brand-gold text-brand-offblack text-xs font-bold px-3 py-1 uppercase tracking-wider">
-                                Official Filing
-                            </div>
-                            <div class="flex flex-col md:flex-row gap-6 items-center">
-                                <div class="flex-grow">
-                                    <h3 class="font-serif text-3xl font-bold text-brand-white">Formal Inquiry Filed with Ethics Board</h3>
-                                    <p class="mt-4 text-brand-sand text-lg">
-                                        On November 8th, Restoring Democracy's Promise submitted a formal <strong>Memorandum of Concern</strong> to the Iowa Ethics and Campaign Disclosure Board outlining potential undisclosed conflicts of interest regarding IPERS investment decisions.
-                                    </p>
-                                    <p class="mt-2 text-sm text-brand-orange italic">Read the Announcement Here.</p>
-                                </div>
-                                <div class="flex-shrink-0 w-full md:w-auto">
-                                    <a href="https://exposed1.substack.com/p/restoring-democracys-promise-submits" target="_blank" class="block w-full text-center bg-brand-gold text-brand-offblack font-bold py-4 px-8 rounded-lg text-lg shadow-xl hover:bg-brand-orange hover:text-brand-offblack transition-all duration-300 transform hover:scale-105">
-                                        Read the Announcement &rarr;
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col border-2 border-brand-orange">
-                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The Database They Won't Name</h3>
-                            <p class="mt-2 text-slate-600 flex-grow">A behind-the-scenes data integration turned routine “verification” into scalable surveillance infrastructure—built without public debate and ripe for expansion.</p>
-                            <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" target="_blank" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Read the Full Investigation &rarr;</a>
-                        </div>
-                        
-                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col border-2 border-brand-orange">
-                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The ALPR Trap</h3>
-                            <p class="mt-2 text-slate-600 flex-grow">How a hidden national grid quietly turns local license-plate readers into a permanent financial-behavior tracking system. We expose the "30-day retention" myth and the legal structures laundering your data.</p>
-                            <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" target="_blank" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Read the Investigation &rarr;</a>
-                        </div>
-
-                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
-                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The DEI Hoax</h3>
-                            <p class="mt-2 text-slate-600 flex-grow">Our data-driven report on AG Brenna Bird's 6-hour investigation and the 60 days of silence that followed—a case study in 'process as punishment'.</p>
-                            <a href="https://exposed1.substack.com/p/the-dei-hoax-iowas-attorney-general" target="_blank" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Read the Investigation &rarr;</a>
-                        </div>
-
-                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
-                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">Iowa's Pension Privatization</h3>
-                            <p class="mt-2 text-slate-600 flex-grow">Our investigation into the Iowa DOGE task force, the ALEC connection, and the multi-million dollar conflict of interest at the heart of the plan to end public pensions.</p>
-                            <a href="iowa-doge-pension-privatize.html" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Launch Interactive Investigation &rarr;</a>
-                        </div>
-                        
-                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
-                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The Financial Superhighway</h3>
-                            <p class="mt-2 text-slate-600 flex-grow">A deep-dive analysis of the money trail from the Marble Freedom Trust through DAFs like Schwab Charitable and DonorsTrust. Follow the money year by year.</p>
-                            <a href="/pincerfinancial.html" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Launch Interactive Timeline &rarr;</a>
-                        </div>
-
-                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
-                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The Pincer Movement</h3>
-                            <p class="mt-2 text-slate-600 flex-grow">An interactive data visualization mapping the full "Pincer Movement" strategy. Explore the key players, their connections, and the flow of influence.</p>
-                            <a href="/pincer-dataviz.html" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Launch Data Visualization &rarr;</a>
-                        </div>
-
-                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
-                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The Pincer Infographic</h3>
-                            <p class="mt-2 text-slate-600 flex-grow">A high-level visual summary of our flagship investigation. Get the key findings, major players, and the core concepts of the report at a glance.</p>
-                            <a href="/pincer-infographic.html" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">View the Infographic &rarr;</a>
-                        </div>
-                        
-                        <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
-                            <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The God Machine</h3>
-                            <p class="mt-2 text-slate-600 flex-grow">Our exclusive investigation revealing how a tax-exempt 'ministry' built a business selling unqualified chaplains to public schools, fueled by anonymous dark money.</p>
-                            <a href="the-god-machine.html" class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">Launch Interactive Report &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-16 md:py-20">
-                <div class="max-w-4xl mx-auto px-4 text-center">
-                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-gold">We Are Investigative System-Breakers</h2>
-                    <p class="mt-6 max-w-3xl mx-auto text-lg text-brand-sand leading-relaxed">
-                        We trace the money, the influence, and the downstream impact behind political schemes, dark money networks, and ideological power centers. Our newsroom is a blueprint for journalism driven by irrefutable evidence and radical transparency. We don't just report the news; we provide the receipts.
-                    </p>
-                </div>
-            </section>
-
-            <section class="py-16 md:py-20 bg-brand-green-dark">
-                 <div class="max-w-4xl mx-auto px-4 text-center">
-                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-orange">Stay Connected</h2>
-                    <p class="mt-4 text-lg text-brand-sand">Subscribe to get our latest investigations delivered directly to you.</p>
-                    <a href="https://exposed1.substack.com/subscribe" target="_blank" class="mt-8 inline-block bg-brand-orange text-brand-offblack font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-brand-gold hover:text-brand-green transition-all duration-300 transform hover:scale-105">
-                        Subscribe Directly &rarr;
-                    </a>
-                </div>
-            </section>
-        </main>
-
-        <footer class="bg-brand-offblack text-brand-sand py-8 px-4">
-            <div class="max-w-4xl mx-auto text-center text-sm">
-                <img src="assets/Square_logo_transparent.png" class="h-10 w-10 mx-auto mb-4" alt="Restoring Democracy Logo Icon">
-                <p class="mb-4 text-lg font-serif italic text-brand-gold">Engineering Precision Journalism</p>
-                <div class="footer-tooltip">
-                    <p>&copy; 2023-2025 Restoring Democracy’s Promise. All rights reserved.</p>
-                    <span class="tooltip-text">This project is powered by receipts.</span>
-                </div>
-                <p class="mt-2">Contact: <a href="mailto:editor@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline">editor@restoring-democracy.org</a></p>
-                <p class="mt-2">Phone: <a href="tel:+17542936975" class="text-brand-orange hover:text-brand-gold hover:underline">754-293-6975</a></p>
-                <p class="mt-4">
-                    <a href="privacy-policy.html" class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">Privacy Policy</a>
-                </p>
+            <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col border-2 border-brand-orange">
+              <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The Database They Won't Name</h3>
+              <p class="mt-2 text-slate-600 flex-grow">
+                A behind-the-scenes data integration turned routine “verification” into scalable surveillance infrastructure—built without public debate and ripe for expansion.
+              </p>
+              <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" target="_blank"
+                 class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">
+                Read the Full Investigation &rarr;
+              </a>
             </div>
-        </footer>
-    </div>
 
-    <script>
-        // Easter Egg: Logo click 5x goes to /vault.html
-        let clickCount = 0;
-        let timer;
-        document.getElementById('main-logo').addEventListener('click', function() {
-            clickCount++;
-            clearTimeout(timer);
-            timer = setTimeout(function() {
-                clickCount = 0;
-            }, 1000);
-            
-            if (clickCount === 5) {
-                window.location.href = 'vault.html';
-            }
-        });
+            <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col border-2 border-brand-orange">
+              <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The ALPR Trap</h3>
+              <p class="mt-2 text-slate-600 flex-grow">
+                How a hidden national grid quietly turns local license-plate readers into a permanent financial-behavior tracking system. We expose the "30-day retention" myth and the legal structures laundering your data.
+              </p>
+              <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" target="_blank"
+                 class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">
+                Read the Investigation &rarr;
+              </a>
+            </div>
 
-        // Simple Web Share API for the share button
-        const shareButton = document.getElementById('share-button');
-        shareButton.addEventListener('click', async () => {
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: document.title,
-                        url: window.location.href
-                    });
-                } catch (err) {
-                    console.log('Error sharing:', err);
-                }
-            } else {
-                // Fallback: copy to clipboard
-                navigator.clipboard.writeText(window.location.href).then(() => {
-                    alert('Link copied to clipboard!');
-                }).catch(err => {
-                    console.error('Failed to copy link: ', err);
-                });
-            }
+            <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
+              <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The DEI Hoax</h3>
+              <p class="mt-2 text-slate-600 flex-grow">
+                Our data-driven report on AG Brenna Bird's 6-hour investigation and the 60 days of silence that followed—a case study in 'process as punishment'.
+              </p>
+              <a href="https://exposed1.substack.com/p/the-dei-hoax-iowas-attorney-general" target="_blank"
+                 class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">
+                Read the Investigation &rarr;
+              </a>
+            </div>
+
+            <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
+              <h3 class="font-serif text-2xl font-bold text-brand-green-dark">Iowa's Pension Privatization</h3>
+              <p class="mt-2 text-slate-600 flex-grow">
+                Our investigation into the Iowa DOGE task force, the ALEC connection, and the multi-million dollar conflict of interest at the heart of the plan to end public pensions.
+              </p>
+              <a href="iowa-doge-pension-privatize.html"
+                 class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">
+                Launch Interactive Investigation &rarr;
+              </a>
+            </div>
+
+            <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
+              <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The Financial Superhighway</h3>
+              <p class="mt-2 text-slate-600 flex-grow">
+                A deep-dive analysis of the money trail from the Marble Freedom Trust through DAFs like Schwab Charitable and DonorsTrust. Follow the money year by year.
+              </p>
+              <a href="/pincerfinancial.html"
+                 class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">
+                Launch Interactive Timeline &rarr;
+              </a>
+            </div>
+
+            <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
+              <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The Pincer Movement</h3>
+              <p class="mt-2 text-slate-600 flex-grow">
+                An interactive data visualization mapping the full "Pincer Movement" strategy. Explore the key players, their connections, and the flow of influence.
+              </p>
+              <a href="/pincer-dataviz.html"
+                 class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">
+                Launch Data Visualization &rarr;
+              </a>
+            </div>
+
+            <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
+              <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The Pincer Infographic</h3>
+              <p class="mt-2 text-slate-600 flex-grow">
+                A high-level visual summary of our flagship investigation. Get the key findings, major players, and the core concepts of the report at a glance.
+              </p>
+              <a href="/pincer-infographic.html"
+                 class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">
+                View the Infographic &rarr;
+              </a>
+            </div>
+
+            <div class="bg-slate-50 rounded-lg shadow-lg p-6 flex flex-col">
+              <h3 class="font-serif text-2xl font-bold text-brand-green-dark">The God Machine</h3>
+              <p class="mt-2 text-slate-600 flex-grow">
+                Our exclusive investigation revealing how a tax-exempt 'ministry' built a business selling unqualified chaplains to public schools, fueled by anonymous dark money.
+              </p>
+              <a href="the-god-machine.html"
+                 class="mt-6 inline-block text-center bg-brand-green text-brand-white font-bold py-3 px-6 rounded-full text-base shadow-md hover:bg-brand-green-dark transition-colors duration-300">
+                Launch Interactive Report &rarr;
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Rewritten bottom identity block (less "system-breakers") -->
+      <section class="py-16 md:py-20">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-gold">We Investigate Systems of Power</h2>
+          <p class="mt-6 max-w-3xl mx-auto text-lg text-brand-sand leading-relaxed">
+            We follow the money, map the networks, and document how policy becomes machinery—then publish the underlying records so others can verify the work.
+            This is oversight journalism with an engineering mindset: measurable claims, transparent sourcing, and consequences that outlive the news cycle.
+          </p>
+        </div>
+      </section>
+
+      <!-- Subscribe stays ONLY at the bottom -->
+      <section class="py-16 md:py-20 bg-brand-green-dark">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-orange">Stay Connected</h2>
+          <p class="mt-4 text-lg text-brand-sand">Subscribe to get our latest investigations delivered directly to you.</p>
+          <a href="https://exposed1.substack.com/subscribe" target="_blank"
+             class="mt-8 inline-block bg-brand-orange text-brand-offblack font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-brand-gold hover:text-brand-green transition-all duration-300 transform hover:scale-105">
+            Subscribe Directly &rarr;
+          </a>
+
+          <!-- Tip line moved to bottom (optional but not "front and center") -->
+          <div class="mt-8 text-sm text-brand-sand opacity-95">
+            <span class="font-semibold text-brand-orange">Secure tips:</span>
+            Signal <span class="font-semibold">restoredemocracy.27</span> •
+            Secure E-mail <a class="text-brand-orange hover:text-brand-gold hover:underline" href="mailto:restoringdemocracyspromise.scoop255@passmail.net">restoringdemocracyspromise.scoop255@passmail.net</a>
+            <div class="mt-1 opacity-90">
+              Avoid sending sensitive material over standard email. Use Signal or Proton for confidential tips.
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="bg-brand-offblack text-brand-sand py-8 px-4">
+      <div class="max-w-4xl mx-auto text-center text-sm">
+        <img src="assets/Square_logo_transparent.png" class="h-10 w-10 mx-auto mb-4" alt="Restoring Democracy Logo Icon">
+        <p class="mb-4 text-lg font-serif italic text-brand-gold">Engineering Precision Journalism</p>
+
+        <div class="footer-tooltip">
+          <p>&copy; 2023-2025 Restoring Democracy’s Promise. All rights reserved.</p>
+          <span class="tooltip-text">This project is powered by receipts.</span>
+        </div>
+
+        <p class="mt-2">Contact: <a href="mailto:editor@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline">editor@restoring-democracy.org</a></p>
+        <p class="mt-2">Phone: <a href="tel:+17542936975" class="text-brand-orange hover:text-brand-gold hover:underline">754-293-6975</a></p>
+
+        <p class="mt-4">
+          <a href="privacy-policy.html" class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">Privacy Policy</a>
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Easter Egg: Logo click 5x goes to /vault.html
+    let clickCount = 0;
+    let timer;
+    document.getElementById('main-logo').addEventListener('click', function() {
+      clickCount++;
+      clearTimeout(timer);
+      timer = setTimeout(function() { clickCount = 0; }, 1000);
+
+      if (clickCount === 5) {
+        window.location.href = 'vault.html';
+      }
+    });
+
+    // Simple Web Share API for the share button
+    const shareButton = document.getElementById('share-button');
+    shareButton.addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: document.title, url: window.location.href });
+        } catch (err) {
+          console.log('Error sharing:', err);
+        }
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          alert('Link copied to clipboard!');
+        }).catch(err => {
+          console.error('Failed to copy link: ', err);
         });
-    </script>
+      }
+    });
+  </script>
 </body>
 </html>
