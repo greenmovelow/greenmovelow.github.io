@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dream Machine - RDP</title>
+    <meta name="description" content="Interactive forensics on how DOGE built a national voter surveillance system before Congress voted. Part V of the Warrantless Surveillance Series.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://restoring-democracy.org/dream-machine.html">
+    <meta property="og:title" content="The Dream Machine: How DOGE Built Cleta Mitchell's Dream Machine">
+    <meta property="og:description" content="Interactive forensics revealing how a voter-verification system became a surveillance architecture — before Congress voted.">
+    <meta property="og:image" content="assets/Square_logo_green.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://restoring-democracy.org/dream-machine.html">
+    <meta property="twitter:title" content="The Dream Machine: How DOGE Built Cleta Mitchell's Dream Machine">
+    <meta property="twitter:description" content="Interactive forensics revealing how a voter-verification system became a surveillance architecture — before Congress voted.">
+    <meta property="twitter:image" content="assets/Square_logo_green.png">
+    <link rel="icon" href="assets/Square_logo_green.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#2d5c4f',
+                        'brand-green-dark': '#24473e',
+                        'brand-orange': '#f4a261',
+                        'brand-gold': '#D4AF37',
+                        'brand-white': '#F6F7F8',
+                        'brand-offblack': '#161616',
+                        'brand-sand': '#e4d5b9',
+                        'dark-bg': '#0f172a',
+                        'card-bg': '#1e293b',
+                        'border-color': '#334155',
+                        'text-light': '#e2e8f0',
+                        'accent-red': '#ef4444',
+                        'accent-blue': '#3b82f6',
+                        'accent-cyan': '#22d3ee',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-serif { font-family: 'Lora', serif; }
+        
+        /* Surveillance UI Effects */
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(239, 68, 68, 0.08);
+            position: fixed;
+            z-index: 50;
+            animation: scan 8s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        .node-pulse {
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        .pulse-red {
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .data-stream {
+            stroke-dasharray: 8;
+            animation: dash 1.5s linear infinite;
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: -16; }
+        }
+
+        .timeline-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.7s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.9s; }
+
+        .lifecycle-stage {
+            transition: all 0.3s ease;
+        }
+
+        .lifecycle-stage:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .risk-bar {
+            transition: width 1.5s ease-out;
+        }
+
+        /* Footer tooltip */
+        .footer-tooltip {
+            position: relative;
+            cursor: pointer;
+        }
+        .footer-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 220px;
+            background-color: #24473e;
+            color: #f4a261;
+            text-align: center;
+            border-radius: 8px;
+            padding: 7px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            font-size: 1em;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+        .footer-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Tabs */
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background-color: #D4AF37;
+            color: #0f172a;
+        }
+        .tab-button:hover:not(.active) {
+            background-color: #334155;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <div class="scanline"></div>
+
+    <!-- Navigation Header -->
+    <nav class="bg-slate-900 border-b border-slate-700 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="https://restoring-democracy.org" class="flex items-center group">
+                        <img src="assets/Square_logo_transparent.png" alt="RDP Logo" class="h-8 w-8 mr-2 group-hover:opacity-80 transition-opacity">
+                        <span class="text-brand-gold font-bold text-lg tracking-tight group-hover:text-brand-orange transition-colors">RDP</span>
+                    </a>
+                    <span class="ml-3 text-slate-400 text-xs font-mono border-l border-slate-600 pl-3 hidden sm:inline">WARRANTLESS SURVEILLANCE SERIES // PART V</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://exposed1.substack.com/p/the-department-of-governance-by-algorithm" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hidden md:block">
+                        Return to Investigation <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                    <button onclick="shareExhibit()" class="text-slate-400 hover:text-white p-2 rounded-md transition-colors" title="Share">
+                        <i class="fas fa-share-alt text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-b from-slate-900 via-slate-800 to-dark-bg pt-16 pb-24 overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%221%22 fill=%22white%22/></svg>'); background-size: 50px 50px;"></div>
+        </div>
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-accent-red font-mono text-sm tracking-widest mb-4 uppercase">Evidence Exhibit // Part V</p>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-4">
+                <span class="block">The Dream</span>
+                <span class="block text-brand-gold">Machine</span>
+            </h1>
+            <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-300 leading-relaxed">
+                Interactive forensics on how a voter-verification system became a surveillance architecture — <span class="text-brand-orange font-semibold">before Congress voted</span>.
+            </p>
+            <div class="mt-8 flex justify-center space-x-4 text-sm font-mono">
+                <span class="px-3 py-1 bg-slate-800 border border-slate-600 rounded text-slate-400">STATUS: <span class="text-green-400">OPERATIONAL</span></span>
+                <span class="px-3 py-1 bg-slate-800 border border-slate-600 rounded text-slate-400">SCOPE: <span class="text-accent-red">300M+ AMERICANS</span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <div class="bg-slate-800 border-y border-slate-700 sticky top-16 z-30">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="flex justify-center space-x-1 py-2 overflow-x-auto">
+                <button class="tab-button active px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap" data-tab="overview">
+                    Overview
+                </button>
+                <button class="tab-button px-4 py-2 rounded-lg text-sm font-semibold text-slate-300 whitespace-nowrap" data-tab="timeline">
+                    The Timeline
+                </button>
+                <button class="tab-button px-4 py-2 rounded-lg text-sm font-semibold text-slate-300 whitespace-nowrap" data-tab="shadow">
+                    Shadow Database
+                </button>
+                <button class="tab-button px-4 py-2 rounded-lg text-sm font-semibold text-slate-300 whitespace-nowrap" data-tab="golden">
+                    Golden Record
+                </button>
+                <button class="tab-button px-4 py-2 rounded-lg text-sm font-semibold text-slate-300 whitespace-nowrap" data-tab="inheritance">
+                    The Inheritance
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="py-12">
+        <!-- OVERVIEW TAB -->
+        <div id="overview" class="tab-content active">
+            <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-base text-accent-red font-semibold tracking-wide uppercase font-mono">Exhibit I</h2>
+                    <p class="mt-2 text-3xl font-serif font-bold text-white sm:text-4xl">The Architecture of Control</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                        They claim it's routine "voter verification." The architecture reveals something else: a bulk ingestion pipeline built to scale before any law authorized it.
+                    </p>
+                </div>
+
+                <!-- System Architecture Diagram -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-2xl border border-slate-600 mb-12">
+                    <div class="relative h-[450px] flex items-center justify-center overflow-hidden" id="architecture-container">
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none" id="architecture-svg"></svg>
+
+                        <!-- Left Side: State Inputs -->
+                        <div class="absolute left-[8%] top-[25%] text-center z-10 w-28">
+                            <div class="w-14 h-14 bg-accent-blue rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-blue-400">
+                                <i class="fas fa-vote-yea text-xl text-white"></i>
+                            </div>
+                            <h3 class="font-bold text-white text-xs">VOTER ROLLS<br><span class="text-blue-400 text-[10px]">(State Upload)</span></h3>
+                        </div>
+
+                        <div class="absolute left-[8%] top-[55%] text-center z-10 w-28">
+                            <div class="w-14 h-14 bg-accent-blue rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-blue-400">
+                                <i class="fas fa-id-card text-xl text-white"></i>
+                            </div>
+                            <h3 class="font-bold text-white text-xs">DMV DATA<br><span class="text-blue-400 text-[10px]">(via Nlets)</span></h3>
+                        </div>
+
+                        <!-- Center: PCER Engine -->
+                        <div class="absolute left-[50%] top-[40%] transform -translate-x-1/2 text-center z-10 w-44">
+                            <div class="w-24 h-24 bg-slate-900 rounded-xl flex items-center justify-center mx-auto mb-2 shadow-xl border-4 border-brand-gold node-pulse">
+                                <i class="fas fa-microchip text-4xl text-brand-gold"></i>
+                            </div>
+                            <h3 class="font-bold text-white text-sm">PCER ENGINE<br><span class="text-brand-gold text-xs font-mono">"GOLDEN RECORD"</span></h3>
+                            <p class="text-[10px] text-slate-400 mt-1">Person Centric Entity Resolution</p>
+                        </div>
+
+                        <!-- Right Side: Federal Outputs -->
+                        <div class="absolute right-[8%] top-[20%] text-center z-10 w-28">
+                            <div class="w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-slate-500">
+                                <i class="fas fa-database text-xl text-white"></i>
+                            </div>
+                            <h3 class="font-bold text-white text-xs">NUMIDENT<br><span class="text-slate-400 text-[10px]">(SSA Cache)</span></h3>
+                        </div>
+
+                        <div class="absolute right-[8%] top-[50%] text-center z-10 w-28">
+                            <div class="w-14 h-14 bg-accent-red rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-red-400 pulse-red">
+                                <i class="fas fa-flag text-xl text-white"></i>
+                            </div>
+                            <h3 class="font-bold text-white text-xs">MISMATCH FLAGS<br><span class="text-red-400 text-[10px]">(45-Day Clock)</span></h3>
+                        </div>
+
+                        <div class="absolute right-[8%] top-[80%] text-center z-10 w-28">
+                            <div class="w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg border-2 border-slate-500">
+                                <i class="fas fa-user-times text-xl text-white"></i>
+                            </div>
+                            <h3 class="font-bold text-white text-xs">REMOVAL<br><span class="text-slate-400 text-[10px]">(State Action)</span></h3>
+                        </div>
+
+                        <!-- Status Box -->
+                        <div class="absolute bottom-4 right-4 bg-slate-900 p-3 rounded border border-slate-600 text-xs font-mono">
+                            <span class="text-green-400">STATUS: ACTIVE</span><br>
+                            <span class="text-slate-400">CONTRACT: $279M (IBM FALCON)</span><br>
+                            <span class="text-accent-red">TRAFFIC: BIDIRECTIONAL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700 text-center">
+                        <div class="text-4xl font-bold text-brand-gold mb-2">300-450M</div>
+                        <div class="text-slate-400 text-sm">Americans in the Numident cache</div>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700 text-center">
+                        <div class="text-4xl font-bold text-accent-red mb-2">5 Months</div>
+                        <div class="text-slate-400 text-sm">System ran before required notice</div>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700 text-center">
+                        <div class="text-4xl font-bold text-accent-cyan mb-2">15/25</div>
+                        <div class="text-slate-400 text-sm">SSA's own risk score: "Very High"</div>
+                    </div>
+                </div>
+
+                <!-- The Official Story -->
+                <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-600">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-6 text-center">The Official Story <span class="text-brand-orange">(And Why It Doesn't Hold Up)</span></h3>
+                    <p class="text-slate-300 text-center mb-8 max-w-2xl mx-auto">
+                        They insist this is routine: a legal housekeeping project to keep voter rolls accurate. The record describes something else.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Claim 1 -->
+                        <div class="bg-slate-900 p-5 rounded-lg border-l-4 border-slate-500">
+                            <p class="text-xs text-slate-400 uppercase font-bold mb-2">They Say</p>
+                            <p class="text-white font-medium">"SAVE only verifies non-citizens applying for benefits."</p>
+                        </div>
+                        <div class="bg-slate-900 p-5 rounded-lg border-l-4 border-accent-red">
+                            <p class="text-xs text-accent-red uppercase font-bold mb-2">The Record Shows</p>
+                            <p class="text-slate-300">The USCIS fact sheet changed between April and June 2025: from "SAVE does not verify U.S. born citizens" to "SAVE can verify U.S.-born citizens." The scope expanded before the public explanation caught up.</p>
+                        </div>
+
+                        <!-- Claim 2 -->
+                        <div class="bg-slate-900 p-5 rounded-lg border-l-4 border-slate-500">
+                            <p class="text-xs text-slate-400 uppercase font-bold mb-2">They Say</p>
+                            <p class="text-white font-medium">"The data follows secure, authorized channels."</p>
+                        </div>
+                        <div class="bg-slate-900 p-5 rounded-lg border-l-4 border-accent-red">
+                            <p class="text-xs text-accent-red uppercase font-bold mb-2">The Record Shows</p>
+                            <p class="text-slate-300">Whistleblowers disclosed that DOGE personnel created an unauthorized "live copy" of the Numident file and placed it in an unmonitored dev environment. A 19-year-old staffer previously terminated for leaking data was granted admin access.</p>
+                        </div>
+
+                        <!-- Claim 3 -->
+                        <div class="bg-slate-900 p-5 rounded-lg border-l-4 border-slate-500">
+                            <p class="text-xs text-slate-400 uppercase font-bold mb-2">They Say</p>
+                            <p class="text-white font-medium">"Errors can be corrected through normal appeals."</p>
+                        </div>
+                        <div class="bg-slate-900 p-5 rounded-lg border-l-4 border-accent-red">
+                            <p class="text-xs text-accent-red uppercase font-bold mb-2">The Record Shows</p>
+                            <p class="text-slate-300">For U.S. citizens queried through the SSN pathway, mismatches close "with no escalation" — no human review, no automatic appeal. The 45-day "clean" mandate forces action before voters know anything is wrong.</p>
+                        </div>
+
+                        <!-- Claim 4 -->
+                        <div class="bg-slate-900 p-5 rounded-lg border-l-4 border-slate-500">
+                            <p class="text-xs text-slate-400 uppercase font-bold mb-2">They Say</p>
+                            <p class="text-white font-medium">"Congress authorized this expansion."</p>
+                        </div>
+                        <div class="bg-slate-900 p-5 rounded-lg border-l-4 border-accent-red">
+                            <p class="text-xs text-accent-red uppercase font-bold mb-2">The Record Shows</p>
+                            <p class="text-slate-300">The system went live in April 2025. The legally required System of Records Notice wasn't published until October 31 — five months later. The Election Integrity Network got a briefing before Congress was informed.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- TIMELINE TAB -->
+        <div id="timeline" class="tab-content">
+            <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-base text-accent-red font-semibold tracking-wide uppercase font-mono">Exhibit II</h2>
+                    <p class="mt-2 text-3xl font-serif font-bold text-white sm:text-4xl">Timeline of Retroactive Authorization</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                        The system was operational for months before the paperwork caught up. This is the documented sequence.
+                    </p>
+                </div>
+
+                <!-- Timeline -->
+                <div class="relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-blue via-brand-gold to-accent-red transform md:-translate-x-1/2"></div>
+
+                    <!-- Timeline Items -->
+                    <div class="space-y-12">
+                        <!-- April 2025 -->
+                        <div class="timeline-item timeline-fade-in relative flex flex-col md:flex-row items-start">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
+                                <div class="bg-slate-800 p-6 rounded-lg border border-slate-600 inline-block">
+                                    <span class="inline-block px-3 py-1 bg-accent-blue text-white text-xs font-bold rounded mb-3">APRIL 2025</span>
+                                    <h3 class="text-xl font-bold text-white mb-2">System Goes Live</h3>
+                                    <p class="text-slate-400">DHS and DOGE announce SAVE overhaul. Fees eliminated. Bulk upload enabled. States begin ingesting voter rolls.</p>
+                                    <p class="text-xs text-accent-red font-mono mt-3">⚠ NO PUBLIC NOTICE PUBLISHED</p>
+                                </div>
+                            </div>
+                            <div class="absolute left-8 md:left-1/2 w-6 h-6 bg-accent-blue rounded-full border-4 border-slate-900 transform md:-translate-x-1/2 z-10"></div>
+                            <div class="md:w-1/2 md:pl-12"></div>
+                        </div>
+
+                        <!-- May 15, 2025 -->
+                        <div class="timeline-item timeline-fade-in relative flex flex-col md:flex-row items-start">
+                            <div class="md:w-1/2 md:pr-12 md:text-right"></div>
+                            <div class="absolute left-8 md:left-1/2 w-6 h-6 bg-slate-500 rounded-full border-4 border-slate-900 transform md:-translate-x-1/2 z-10"></div>
+                            <div class="md:w-1/2 md:pl-12 mt-4 md:mt-0">
+                                <div class="bg-slate-800 p-6 rounded-lg border border-slate-600 inline-block">
+                                    <span class="inline-block px-3 py-1 bg-slate-600 text-white text-xs font-bold rounded mb-3">MAY 15, 2025</span>
+                                    <h3 class="text-xl font-bold text-white mb-2">Secret Letter Agreement</h3>
+                                    <p class="text-slate-400">DHS, USCIS, and SSA sign a confidential "Letter Agreement" retroactively authorizing the matching of voter rolls against Numident records.</p>
+                                    <p class="text-xs text-brand-gold font-mono mt-3">🔒 CLASSIFIED UNTIL FOIA</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- June 12, 2025 -->
+                        <div class="timeline-item timeline-fade-in relative flex flex-col md:flex-row items-start">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
+                                <div class="bg-slate-800 p-6 rounded-lg border border-brand-gold inline-block">
+                                    <span class="inline-block px-3 py-1 bg-brand-gold text-slate-900 text-xs font-bold rounded mb-3">JUNE 12, 2025</span>
+                                    <h3 class="text-xl font-bold text-white mb-2">The Private Briefing</h3>
+                                    <p class="text-slate-400">USCIS officials brief the Election Integrity Network — Cleta Mitchell's voter-challenge organization — on SAVE's new capabilities. Voting-rights groups are not invited.</p>
+                                    <p class="text-xs text-brand-gold font-mono mt-3">★ SAME DAY: SSA RISK FORM GENERATED</p>
+                                </div>
+                            </div>
+                            <div class="absolute left-8 md:left-1/2 w-8 h-8 bg-brand-gold rounded-full border-4 border-slate-900 transform md:-translate-x-1/2 z-10 node-pulse"></div>
+                            <div class="md:w-1/2 md:pl-12"></div>
+                        </div>
+
+                        <!-- July 15, 2025 -->
+                        <div class="timeline-item timeline-fade-in relative flex flex-col md:flex-row items-start">
+                            <div class="md:w-1/2 md:pr-12 md:text-right"></div>
+                            <div class="absolute left-8 md:left-1/2 w-6 h-6 bg-accent-red rounded-full border-4 border-slate-900 transform md:-translate-x-1/2 z-10"></div>
+                            <div class="md:w-1/2 md:pl-12 mt-4 md:mt-0">
+                                <div class="bg-slate-800 p-6 rounded-lg border border-accent-red inline-block">
+                                    <span class="inline-block px-3 py-1 bg-accent-red text-white text-xs font-bold rounded mb-3">JULY 15, 2025</span>
+                                    <h3 class="text-xl font-bold text-white mb-2">Risk Accepted</h3>
+                                    <p class="text-slate-400">DOGE appointee Aram Moghaddassi signs authorization despite SSA warnings: "I have determined the business need is higher than the security risk... I accept all risks."</p>
+                                    <p class="text-xs text-accent-red font-mono mt-3">⚠ RISK SCORE: 15/25 "VERY HIGH"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- October 31, 2025 -->
+                        <div class="timeline-item timeline-fade-in relative flex flex-col md:flex-row items-start">
+                            <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
+                                <div class="bg-slate-800 p-6 rounded-lg border border-slate-600 inline-block">
+                                    <span class="inline-block px-3 py-1 bg-slate-600 text-white text-xs font-bold rounded mb-3">OCTOBER 31, 2025</span>
+                                    <h3 class="text-xl font-bold text-white mb-2">SORN Finally Published</h3>
+                                    <p class="text-slate-400">The legally required System of Records Notice is published in the Federal Register — five months after the system went live.</p>
+                                    <p class="text-xs text-slate-400 font-mono mt-3">📋 PRIVACY ACT COMPLIANCE: RETROACTIVE</p>
+                                </div>
+                            </div>
+                            <div class="absolute left-8 md:left-1/2 w-6 h-6 bg-slate-500 rounded-full border-4 border-slate-900 transform md:-translate-x-1/2 z-10"></div>
+                            <div class="md:w-1/2 md:pl-12"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Box -->
+                <div class="mt-16 bg-gradient-to-r from-accent-red/20 to-slate-800 p-8 rounded-xl border border-accent-red/50 text-center">
+                    <p class="text-2xl font-serif text-white mb-4">
+                        "The system didn't need Congress to exist. It needed an access channel — and someone willing to operationalize it."
+                    </p>
+                    <p class="text-slate-400 text-sm">— From the investigation</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- SHADOW DATABASE TAB -->
+        <div id="shadow" class="tab-content">
+            <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-base text-accent-red font-semibold tracking-wide uppercase font-mono">Exhibit III</h2>
+                    <p class="mt-2 text-3xl font-serif font-bold text-white sm:text-4xl">The Shadow Database</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                        Where did the data come from? The official story says DHS signed a data-sharing agreement with SSA. That story is incomplete.
+                    </p>
+                </div>
+
+                <!-- The Numident Explained -->
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-600 mb-12">
+                    <h3 class="text-2xl font-bold text-white mb-6 text-center">What Is the Numident?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-slate-900 p-6 rounded-lg border border-slate-700">
+                            <i class="fas fa-fingerprint text-4xl text-brand-gold mb-4"></i>
+                            <h4 class="font-bold text-white mb-2">Social Security Numbers</h4>
+                            <p class="text-sm text-slate-400">The master identifier for every American who has ever been assigned an SSN.</p>
+                        </div>
+                        <div class="bg-slate-900 p-6 rounded-lg border border-slate-700">
+                            <i class="fas fa-map-marker-alt text-4xl text-accent-blue mb-4"></i>
+                            <h4 class="font-bold text-white mb-2">Birthplace Data</h4>
+                            <p class="text-sm text-slate-400">Country of origin, state, and location — citizenship determination at its source.</p>
+                        </div>
+                        <div class="bg-slate-900 p-6 rounded-lg border border-slate-700">
+                            <i class="fas fa-users text-4xl text-accent-cyan mb-4"></i>
+                            <h4 class="font-bold text-white mb-2">Parents' Names</h4>
+                            <p class="text-sm text-slate-400">Mother's maiden name, father's full name — the data used for identity verification.</p>
+                        </div>
+                    </div>
+                    <p class="text-center text-slate-400 mt-6 text-sm">
+                        The Numident is not a voter roll. It is a list of <span class="text-white font-bold">every human being</span> who has ever been assigned a Social Security Number.
+                    </p>
+                </div>
+
+                <!-- Risk Assessment -->
+                <div class="bg-gradient-to-r from-accent-red/10 to-slate-800 p-8 rounded-xl border border-accent-red/30 mb-12">
+                    <h3 class="text-2xl font-bold text-white mb-6 text-center">SSA's Own Risk Assessment</h3>
+                    <p class="text-center text-slate-400 mb-8">On June 12, 2025, SSA's Office of the Chief Information Officer generated a formal Risk Acceptance Request Form for the DOGE cloud environment.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <!-- Impact Score -->
+                        <div class="bg-slate-900 p-6 rounded-lg">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-slate-400 text-sm font-mono uppercase">Impact Score</span>
+                                <span class="text-accent-red font-bold text-2xl">5 / 5</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-4 mb-3">
+                                <div class="bg-accent-red h-4 rounded-full risk-bar" style="width: 100%"></div>
+                            </div>
+                            <p class="text-accent-red font-bold text-center">"CATASTROPHIC"</p>
+                            <p class="text-slate-400 text-xs mt-2 text-center">Unauthorized access would result in "catastrophic damage to or loss of agency facilities and infrastructure."</p>
+                        </div>
+
+                        <!-- Likelihood Score -->
+                        <div class="bg-slate-900 p-6 rounded-lg">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-slate-400 text-sm font-mono uppercase">Likelihood Score</span>
+                                <span class="text-brand-orange font-bold text-2xl">3 / 5</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-4 mb-3">
+                                <div class="bg-brand-orange h-4 rounded-full risk-bar" style="width: 60%"></div>
+                            </div>
+                            <p class="text-brand-orange font-bold text-center">35-65% PROBABILITY</p>
+                            <p class="text-slate-400 text-xs mt-2 text-center">In SSA's framework, this score corresponds to a statistical probability of breach between 35% and 65%.</p>
+                        </div>
+                    </div>
+
+                    <!-- Total Risk -->
+                    <div class="bg-slate-900 p-6 rounded-lg border-2 border-accent-red text-center">
+                        <p class="text-slate-400 text-sm font-mono uppercase mb-2">Total Risk Score</p>
+                        <p class="text-6xl font-bold text-accent-red mb-2">15 <span class="text-2xl text-slate-400">/ 25</span></p>
+                        <p class="text-white font-bold text-xl">"VERY HIGH"</p>
+                        <p class="text-slate-400 text-sm mt-4 max-w-xl mx-auto">
+                            The environment contained live production data for <span class="text-white font-bold">300-450 million Americans</span>. If breached, the whistleblower complaint states, "the government may be responsible for re-issuing every American a new Social Security Number."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- The Warning Ignored -->
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-600">
+                    <h3 class="text-2xl font-bold text-white mb-6 text-center">The Warning Was Ignored</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-slate-900 p-5 rounded-lg border-l-4 border-brand-gold">
+                            <p class="text-xs text-brand-gold uppercase font-bold mb-2">June 16, 2025 — SSA Acting CISO Joe Cunningham</p>
+                            <p class="text-white italic">"Most security exposures and breaches occur within development environments due to reduced control measures... our standard policy prohibits the use of production data."</p>
+                        </div>
+
+                        <div class="flex justify-center">
+                            <i class="fas fa-arrow-down text-3xl text-slate-500"></i>
+                        </div>
+
+                        <div class="bg-slate-900 p-5 rounded-lg border-l-4 border-accent-red">
+                            <p class="text-xs text-accent-red uppercase font-bold mb-2">July 15, 2025 — DOGE Appointee Aram Moghaddassi</p>
+                            <p class="text-white italic">"I have determined the business need is higher than the security risk... and I accept all risks associated with this implementation."</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-6 bg-accent-red/10 rounded-lg border border-accent-red/30 text-center">
+                        <p class="text-white font-bold text-lg">
+                            This is not negligence discovered after the fact. It is negligence documented in advance, calculated to two significant figures, and formally accepted in writing.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- GOLDEN RECORD TAB -->
+        <div id="golden" class="tab-content">
+            <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-base text-accent-red font-semibold tracking-wide uppercase font-mono">Exhibit IV</h2>
+                    <p class="mt-2 text-3xl font-serif font-bold text-white sm:text-4xl">The Golden Record: Surveillance Without a Birthday</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                        They claim it's about protecting the vote. The architecture reveals a system that profiles Americans from birth.
+                    </p>
+                </div>
+
+                <!-- The Assumption -->
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-600 mb-12 text-center">
+                    <p class="text-xl text-slate-300 mb-4">
+                        The public defense rests on a single, comforting premise:
+                    </p>
+                    <p class="text-3xl font-serif font-bold text-white mb-4">
+                        "It's just about protecting the vote."
+                    </p>
+                    <p class="text-slate-400">
+                        That assumes the system only looks at adults. Because you have to be 18 to vote, we imagine the machinery activates on your eighteenth birthday.
+                    </p>
+                    <p class="text-2xl text-accent-red font-bold mt-6">That assumption is wrong.</p>
+                </div>
+
+                <!-- Lifecycle Diagram -->
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-600 mb-12">
+                    <h3 class="text-2xl font-bold text-white mb-8 text-center">The Golden Record Lifecycle</h3>
+                    
+                    <div class="relative">
+                        <!-- Connection Line -->
+                        <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-accent-cyan via-accent-blue via-brand-gold to-accent-red transform -translate-y-1/2 z-0"></div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative z-10">
+                            <!-- Birth -->
+                            <div class="lifecycle-stage bg-slate-900 p-5 rounded-lg border-2 border-accent-cyan text-center">
+                                <div class="w-16 h-16 bg-accent-cyan/20 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-accent-cyan">
+                                    <i class="fas fa-baby text-2xl text-accent-cyan"></i>
+                                </div>
+                                <h4 class="font-bold text-white text-sm mb-1">BIRTH</h4>
+                                <p class="text-[11px] text-slate-400">SSN assigned, Numident record created</p>
+                                <p class="text-[10px] text-accent-cyan font-mono mt-2">DAY 1</p>
+                            </div>
+
+                            <!-- Childhood -->
+                            <div class="lifecycle-stage bg-slate-900 p-5 rounded-lg border-2 border-accent-blue text-center">
+                                <div class="w-16 h-16 bg-accent-blue/20 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-accent-blue">
+                                    <i class="fas fa-child text-2xl text-accent-blue"></i>
+                                </div>
+                                <h4 class="font-bold text-white text-sm mb-1">CHILDHOOD</h4>
+                                <p class="text-[11px] text-slate-400">CHIP applications, school records, minor naturalization</p>
+                                <p class="text-[10px] text-accent-blue font-mono mt-2">AGES 0-17</p>
+                            </div>
+
+                            <!-- Pre-Registration -->
+                            <div class="lifecycle-stage bg-slate-900 p-5 rounded-lg border-2 border-brand-gold text-center">
+                                <div class="w-16 h-16 bg-brand-gold/20 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-brand-gold">
+                                    <i class="fas fa-clipboard-list text-2xl text-brand-gold"></i>
+                                </div>
+                                <h4 class="font-bold text-white text-sm mb-1">PRE-REGISTER</h4>
+                                <p class="text-[11px] text-slate-400">17-year-olds in states that allow it</p>
+                                <p class="text-[10px] text-brand-gold font-mono mt-2">AGE 17</p>
+                            </div>
+
+                            <!-- Voter Registration -->
+                            <div class="lifecycle-stage bg-slate-900 p-5 rounded-lg border-2 border-brand-orange text-center">
+                                <div class="w-16 h-16 bg-brand-orange/20 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-brand-orange">
+                                    <i class="fas fa-vote-yea text-2xl text-brand-orange"></i>
+                                </div>
+                                <h4 class="font-bold text-white text-sm mb-1">REGISTRATION</h4>
+                                <p class="text-[11px] text-slate-400">First official civic participation</p>
+                                <p class="text-[10px] text-brand-orange font-mono mt-2">AGE 18+</p>
+                            </div>
+
+                            <!-- Continuous -->
+                            <div class="lifecycle-stage bg-slate-900 p-5 rounded-lg border-2 border-accent-red text-center">
+                                <div class="w-16 h-16 bg-accent-red/20 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-accent-red">
+                                    <i class="fas fa-infinity text-2xl text-accent-red"></i>
+                                </div>
+                                <h4 class="font-bold text-white text-sm mb-1">CONTINUOUS</h4>
+                                <p class="text-[11px] text-slate-400">Ongoing vetting, biometric updates</p>
+                                <p class="text-[10px] text-accent-red font-mono mt-2">LIFETIME</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-center">
+                        <p class="text-slate-400 italic">
+                            "Records created for children <span class="text-white font-bold">can be related to their adult records later</span>."
+                        </p>
+                        <p class="text-xs text-slate-500 mt-2">— DHS "Continuous Vetting" technical documentation</p>
+                    </div>
+                </div>
+
+                <!-- Key Point -->
+                <div class="bg-gradient-to-r from-brand-gold/20 to-slate-800 p-8 rounded-xl border border-brand-gold/50 text-center">
+                    <p class="text-sm text-brand-gold font-mono uppercase mb-4">The Core Finding</p>
+                    <p class="text-3xl font-serif font-bold text-white mb-6">
+                        There is no minimum age for the Golden Record.
+                    </p>
+                    <p class="text-lg text-slate-300 max-w-2xl mx-auto">
+                        The system doesn't wait for you to participate in democracy. It enrolls you at birth and watches to see if you ever try.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- INHERITANCE TAB -->
+        <div id="inheritance" class="tab-content">
+            <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-base text-accent-red font-semibold tracking-wide uppercase font-mono">Exhibit V</h2>
+                    <p class="mt-2 text-3xl font-serif font-bold text-white sm:text-4xl">The Inheritance Problem</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                        This infrastructure will outlast the people who built it. The next administration will not need to create the system. They will inherit it.
+                    </p>
+                </div>
+
+                <!-- What Persists -->
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-600 mb-12">
+                    <h3 class="text-2xl font-bold text-white mb-8 text-center">What Doesn't Reset When Administrations Change</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-900 p-6 rounded-lg border border-slate-700 flex items-start">
+                            <div class="w-12 h-12 bg-accent-red/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-database text-xl text-accent-red"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">The Cached Numident Data</h4>
+                                <p class="text-sm text-slate-400">300-450 million Americans' SSNs, birthplaces, and parents' names — already copied, already operational.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 p-6 rounded-lg border border-slate-700 flex items-start">
+                            <div class="w-12 h-12 bg-brand-gold/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-key text-xl text-brand-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">The Biometric Join-Keys</h4>
+                                <p class="text-sm text-slate-400">Driver's license numbers linking voter files to DMV portraits, signatures, and address histories.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 p-6 rounded-lg border border-slate-700 flex items-start">
+                            <div class="w-12 h-12 bg-accent-blue/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-microchip text-xl text-accent-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">The PCER Matching Engine</h4>
+                                <p class="text-sm text-slate-400">The $279M IBM FALCON contract infrastructure — built, deployed, and running.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 p-6 rounded-lg border border-slate-700 flex items-start">
+                            <div class="w-12 h-12 bg-accent-cyan/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-user-clock text-xl text-accent-cyan"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">The Golden Records</h4>
+                                <p class="text-sm text-slate-400">Persistent identity profiles that don't expire, including those initialized at birth.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Structural Fact -->
+                <div class="bg-gradient-to-b from-accent-red/20 to-slate-900 p-10 rounded-xl border border-accent-red/50 text-center mb-12">
+                    <p class="text-lg text-slate-400 mb-6">The structural fact no one in Washington wants to say aloud:</p>
+                    <p class="text-2xl md:text-3xl font-serif font-bold text-white leading-relaxed max-w-3xl mx-auto">
+                        Whoever satisfies the next election will inherit a machine that can query the citizenship status of every American, cross-reference it with biometric data, and act on the results — <span class="text-accent-red">without asking Congress</span>, <span class="text-accent-red">without notifying you</span>, and <span class="text-accent-red">without any structural limit on what it's used for next</span>.
+                    </p>
+                </div>
+
+                <!-- Final Statement -->
+                <div class="bg-slate-900 p-8 rounded-xl border-2 border-brand-gold text-center">
+                    <p class="text-sm text-brand-gold font-mono uppercase mb-4">Conclusion</p>
+                    <p class="text-4xl font-serif font-bold text-white mb-4">
+                        The machine is running.
+                    </p>
+                    <p class="text-xl text-slate-400">
+                        Part VI shows who it finds.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-slate-800 border-t border-slate-700">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h3 class="text-2xl font-serif font-bold text-white mb-4">Read the Full Investigation</h3>
+            <p class="text-slate-400 mb-8">
+                This exhibit summarizes findings from Part V of the Warrantless Surveillance Series. The complete investigation includes primary documents, court filings, whistleblower disclosures, and source PDFs.
+            </p>
+            <a href="https://exposed1.substack.com/p/the-department-of-governance-by-algorithm" class="inline-flex items-center justify-center px-8 py-4 border-2 border-brand-gold text-lg font-bold rounded-lg text-brand-gold bg-transparent hover:bg-brand-gold hover:text-slate-900 transition-all duration-300 shadow-lg hover:shadow-brand-gold/30">
+                <i class="fas fa-book-open mr-3"></i>
+                Read the Full Investigation
+            </a>
+            <p class="text-slate-500 text-sm mt-6 font-mono">
+                Investigative data derived from court filings, FOIA responses, whistleblower disclosures, and federal documentation.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-offblack text-brand-sand py-8 px-4">
+        <div class="max-w-4xl mx-auto text-center text-sm">
+            <img src="assets/Square_logo_transparent.png" class="h-10 w-10 mx-auto mb-4" alt="Restoring Democracy Logo Icon">
+            <div class="footer-tooltip">
+                <p>&copy; 2023-2026 Restoring Democracy's Promise. All rights reserved.</p>
+                <span class="tooltip-text">This project is powered by receipts.</span>
+            </div>
+            <p class="mt-2">Contact: <a href="mailto:editor@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline">editor@restoring-democracy.org</a></p>
+            <p class="mt-2">Phone: <a href="tel:+17542936975" class="text-brand-orange hover:text-brand-gold hover:underline">754-293-6975</a></p>
+            <p class="mt-4">
+                <a href="privacy-policy.html" class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">Privacy Policy</a>
+            </p>
+            <p class="mt-4 text-xs font-mono text-slate-600">
+                GENERATED BY RDP RESEARCH DIVISION // WARRANTLESS SURVEILLANCE SERIES
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+
+            function showTab(tabId) {
+                contents.forEach(content => content.classList.remove('active'));
+                tabs.forEach(tab => tab.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+                document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add('active');
+                
+                // Scroll to top of content area
+                window.scrollTo({ top: 400, behavior: 'smooth' });
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => showTab(tab.dataset.tab));
+            });
+
+            // Draw architecture lines
+            drawArchitectureLines();
+            window.addEventListener('resize', drawArchitectureLines);
+        });
+
+        // Architecture diagram SVG lines
+        function drawArchitectureLines() {
+            const svg = document.getElementById('architecture-svg');
+            if (!svg) return;
+
+            const lines = [
+                // State inputs to PCER
+                { x1: '20%', y1: '25%', x2: '42%', y2: '40%', color: '#3b82f6' },
+                { x1: '20%', y1: '55%', x2: '42%', y2: '50%', color: '#3b82f6' },
+                // PCER to federal systems
+                { x1: '58%', y1: '40%', x2: '80%', y2: '20%', color: '#D4AF37' },
+                { x1: '58%', y1: '50%', x2: '80%', y2: '50%', color: '#ef4444' },
+                { x1: '80%', y1: '50%', x2: '80%', y2: '80%', color: '#ef4444' },
+            ];
+
+            let svgContent = '';
+            lines.forEach(line => {
+                svgContent += `<line x1="${line.x1}" y1="${line.y1}" x2="${line.x2}" y2="${line.y2}" 
+                               stroke="${line.color}" stroke-width="2" class="data-stream" opacity="0.7"/>`;
+            });
+
+            svg.innerHTML = svgContent;
+        }
+
+        // Share functionality
+        function shareExhibit() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'The Dream Machine - RDP Investigation',
+                    text: 'Interactive forensics on how DOGE built a national voter surveillance system before Congress voted.',
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Link copied to clipboard!');
+                }).catch(console.error);
+            }
+        }
+    </script>
+</body>
+</html>
