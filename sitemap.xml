@@ -2,24 +2,104 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://restoring-democracy.org/</loc>
-    <lastmod>2025-07-03</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-09</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://restoring-democracy.org/pincer-dataviz.html</loc>
-    <lastmod>2025-07-03</lastmod>
+    <loc>https://restoring-democracy.org/about.html</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://restoring-democracy.org/pincer-infographic.html</loc>
-    <lastmod>2025-07-03</lastmod>
+    <loc>https://restoring-democracy.org/secure-tips.html</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/privacy-policy.html</loc>
+    <lastmod>2025-08-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/dream_machine.html</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/the-god-machine.html</loc>
+    <lastmod>2025-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/god-machine-flowchart.html</loc>
+    <lastmod>2025-07-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/assembly-line-unpacked.html</loc>
+    <lastmod>2025-08-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/assembly-line.html</loc>
+    <lastmod>2025-07-19</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/credentialing-gap-dossier.html</loc>
+    <lastmod>2025-07-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/iowa-doge-pension-privatize.html</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/ia_viewer_map.html</loc>
+    <lastmod>2025-10-31</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/SAVE_Iowa.html</loc>
+    <lastmod>2025-12-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/confidential-mou.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/alpr-leviathan.html</loc>
+    <lastmod>2025-10-13</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/leviathan-grid.html</loc>
+    <lastmod>2025-12-29</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/pincer-dataviz.html</loc>
+    <lastmod>2025-07-26</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://restoring-democracy.org/pincerfinancial.html</loc>
-    <lastmod>2025-07-03</lastmod>
+    <lastmod>2025-07-26</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://restoring-democracy.org/vault.html</loc>
-    <lastmod>2025-07-03</lastmod>
+    <loc>https://restoring-democracy.org/pincer-infographic.html</loc>
+    <lastmod>2025-07-26</lastmod>
+    <priority>0.7</priority>
   </url>
 </urlset>
