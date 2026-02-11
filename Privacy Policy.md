@@ -30,11 +30,11 @@ We may update this Privacy Policy from time to time. Changes will be posted on t
 
 ## 8. Contact Us
 Restoring Democracy’s Promise  
-[editor@restoring-democracy.org](mailto:editor@restoring-democracy.org)  
+[compliance@restoring-democracy.org](mailto:compliance@restoring-democracy.org)  
 754-293-6975
 
 ---
 
 © 2023-2025 Restoring Democracy’s Promise. All rights reserved.  
-Contact: [editor@restoring-democracy.org](mailto:editor@restoring-democracy.org)
+Contact: [compliance@restoring-democracy.org](mailto:compliance@restoring-democracy.org)
 

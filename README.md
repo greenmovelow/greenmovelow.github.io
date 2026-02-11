@@ -36,7 +36,7 @@ The financial data, organizational relationships, and narrative context for the 
 
 ## Contact & Feedback
 
-For questions, feedback, or tips, please contact the editor at [editor@restoring-democracy.org](mailto:editor@restoring-democracy.org "null").
+For questions, feedback, or tips, please contact the editor at [webmaster@restoring-democracy.org](mailto:webmaster@restoring-democracy.org "null").
 
 ## License
 
