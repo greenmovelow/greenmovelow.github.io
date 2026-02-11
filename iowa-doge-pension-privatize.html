@@ -5,7 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Investigation: The Iowa Pension Proposal</title>
     <meta name="description" content="An interactive analysis of the Iowa DOGE Task Force's pension proposal and its national connections.">
-    <link rel="icon" href="assets/Square_logo_transparent.png">
+    <link rel="canonical" href="https://restoring-democracy.org/iowa-doge-pension-privatize">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Restoring Democracy's Promise">
+    <meta property="og:url" content="https://restoring-democracy.org/iowa-doge-pension-privatize">
+    <meta property="og:title" content="Interactive Investigation: The Iowa Pension Proposal">
+    <meta property="og:description" content="A conflict-of-interest investigation into Iowa's DOGE pension privatization plan and who stands to gain.">
+    <meta property="og:image" content="https://restoring-democracy.org/assets/og/iowa-doge-pension-privatize-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://restoring-democracy.org/iowa-doge-pension-privatize">
+    <meta name="twitter:title" content="Interactive Investigation: The Iowa Pension Proposal">
+    <meta name="twitter:description" content="A conflict-of-interest investigation into Iowa's DOGE pension privatization plan and who stands to gain.">
+    <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/iowa-doge-pension-privatize-og.jpg">
+    <link rel="icon" href="assets/Square_logo_green.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -57,6 +71,21 @@
             transition: width 1.5s ease-in-out;
             width: 0%;
         }
+
+        .investigation-link {
+            display: inline-flex;
+            align-items: center;
+            color: #b45309;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .investigation-link:hover,
+        .investigation-link:focus-visible {
+            color: #92400e;
+            border-bottom-color: #f59e0b;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -74,6 +103,7 @@
                 </div>            
                 <div class="hidden md:block">
                     <div id="desktop-nav-links" class="ml-10 flex items-baseline space-x-4">
+                        <a href="https://exposed1.substack.com/p/exclusive-doge-pension-privatize" target="_blank" rel="noopener noreferrer" class="investigation-link px-3 py-2 rounded-md text-sm">Read the Investigation ↗</a>
                         <a href="#conflict" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">The Conflict</a>
                         <a href="#payday" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">The Payday</a>
                         <a href="#blueprint" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">The Blueprint</a>
@@ -97,6 +127,7 @@
 
         <div class="md:hidden hidden" id="mobile-menu">
             <div id="mobile-nav-links" class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="https://exposed1.substack.com/p/exclusive-doge-pension-privatize" target="_blank" rel="noopener noreferrer" class="investigation-link block px-3 py-2 rounded-md text-base">Read the Investigation ↗</a>
                 </div>
         </div>
     </header>
@@ -241,6 +272,12 @@
     
     <footer class="bg-slate-800 text-slate-300 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm">
+            <button id="share-page-button" type="button" class="inline-flex items-center gap-2 text-amber-300 hover:text-amber-200 font-medium transition-colors mb-2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-4 w-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 8.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm12 7.5a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-12 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-1.95-1.125 8.4-4.5m0 0 8.4 4.5" />
+                </svg>
+                Share this page
+            </button>
             <p>This interactive is based on the investigative report "EXCLUSIVE: Iowa Task Force Member's Firm Stands to Gain $42.9 Million."</p>
             <p class="text-slate-400 mt-1">Data sourced from public records and the original manuscript.</p>
         </div>
@@ -256,14 +293,56 @@
             const closeIcon = document.getElementById('close-icon');
             const desktopNavLinksContainer = document.getElementById('desktop-nav-links');
             const mobileNavLinksContainer = document.getElementById('mobile-nav-links');
+            const sharePageButton = document.getElementById('share-page-button');
 
             const desktopLinks = desktopNavLinksContainer.querySelectorAll('a');
+            const existingMobileInvestigationLink = mobileNavLinksContainer.querySelector('.investigation-link');
             mobileNavLinksContainer.innerHTML = '';
+            if (existingMobileInvestigationLink) {
+                mobileNavLinksContainer.appendChild(existingMobileInvestigationLink);
+            }
             desktopLinks.forEach(link => {
+                if (!link.classList.contains('nav-link')) {
+                    return;
+                }
                 const mobileLink = link.cloneNode(true);
                 mobileLink.className = 'nav-link mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-amber-700 hover:bg-amber-50';
                 mobileNavLinksContainer.appendChild(mobileLink);
             });
+
+            if (sharePageButton) {
+                sharePageButton.addEventListener('click', async () => {
+                    const shareData = {
+                        title: document.title,
+                        text: 'Interactive Investigation: The Iowa Pension Proposal',
+                        url: window.location.href
+                    };
+
+                    if (navigator.share) {
+                        try {
+                            await navigator.share(shareData);
+                            return;
+                        } catch (error) {
+                            if (error.name === 'AbortError') {
+                                return;
+                            }
+                        }
+                    }
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(window.location.href);
+                        sharePageButton.textContent = 'Link copied!';
+                        setTimeout(() => {
+                            sharePageButton.innerHTML = `
+                                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-4 w-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 8.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm12 7.5a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-12 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-1.95-1.125 8.4-4.5m0 0 8.4 4.5" />
+                                </svg>
+                                Share this page
+                            `;
+                        }, 1800);
+                    }
+                });
+            }
 
             mobileMenuButton.addEventListener('click', () => {
                 const isHidden = mobileMenu.classList.toggle('hidden');
