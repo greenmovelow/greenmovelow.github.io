@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exhibit: The Leviathan Architecture</title>
+    <meta name="description" content="Interactive forensics on how Iowa traded driver's license data for a mass surveillance tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://restoring-democracy.org/save_iowa.html">
+    <meta property="og:title" content="SAVE: The Database They Won't Name">
+    <meta property="og:description" content="Interactive forensics on how Iowa traded driver's license data for a mass surveillance tool.">
+    <meta property="og:image" content="https://restoring-democracy.org/assets/OG/warrantless_3_og_banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://restoring-democracy.org/save_iowa.html">
+    <meta name="twitter:title" content="SAVE: The Database They Won't Name">
+    <meta name="twitter:description" content="Interactive forensics on how Iowa traded driver's license data for a mass surveillance tool.">
+    <meta name="twitter:image" content="https://restoring-democracy.org/assets/OG/warrantless_3_og_banner.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/rdp_logo_gold_on_green_bg.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/rdp_logo_gold_on_green_bg.png">
     <link rel="apple-touch-icon" href="/assets/rdp_logo_gold_on_green_bg.png">
@@ -69,10 +82,13 @@
                     </a>
                     <span class="ml-3 text-slate-400 text-xs font-mono border-l border-slate-600 pl-3">OPERATION LEVIATHAN // EVIDENCE EXHIBIT A</span>
                 </div>
-                <div class="hidden md:block">
-                    <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                <div class="flex items-center space-x-4">
+                    <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hidden md:block">
                         Return to Investigation <i class="fas fa-arrow-right ml-1 text-xs"></i>
                     </a>
+                    <button onclick="shareExhibit()" class="text-slate-400 hover:text-white p-2 rounded-md transition-colors" title="Share">
+                        <i class="fas fa-share-alt text-lg"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -268,6 +284,21 @@
         // Run on load
         window.addEventListener('load', drawLines);
         window.addEventListener('resize', drawLines);
+
+        // Share functionality
+        function shareExhibit() {
+            if (navigator.share) {
+                navigator.share({
+                    title: "SAVE: The Database They Won't Name",
+                    text: "Interactive forensics on how Iowa traded driver's license data for a mass surveillance tool.",
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Link copied to clipboard!');
+                }).catch(console.error);
+            }
+        }
     </script>
 </body>
 </html>
