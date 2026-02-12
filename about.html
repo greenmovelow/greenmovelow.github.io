@@ -1,59 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>About — Restoring Democracy’s Promise</title>
-  <meta name="description" content="About Restoring Democracy’s Promise (RDP): an independent civic accountability newsroom focused on investigative reporting, public-interest analysis, and civic systems accountability." />
+  <title>About — Restoring Democracy's Promise</title>
+  <meta name="description" content="About Restoring Democracy's Promise (RDP): an independent civic accountability newsroom focused on investigative reporting, public-interest analytical modeling, and civic systems accountability. National in scope, Iowa field desk. IRE member.">
 
-  <link rel="canonical" href="https://restoring-democracy.org/about.html" />
-  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://restoring-democracy.org/about.html">
+  <meta name="robots" content="index,follow">
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/rdp_logo_gold_on_green_bg.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/rdp_logo_gold_on_green_bg.png" />
-  <link rel="apple-touch-icon" href="/assets/rdp_logo_gold_on_green_bg.png" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Restoring Democracy's Promise">
+  <meta property="og:url" content="https://restoring-democracy.org/about.html">
+  <meta property="og:title" content="About — Restoring Democracy's Promise">
+  <meta property="og:description" content="An independent civic accountability newsroom exposing the hidden machinery of power through public records, evidence-led reporting, and civic systems analysis (RDP Analytics).">
+  <meta property="og:image" content="https://restoring-democracy.org/assets/OG/Banner_RDP_Color.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
 
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://restoring-democracy.org/about.html" />
-  <meta property="og:title" content="About — Restoring Democracy’s Promise" />
-  <meta property="og:description" content="An independent civic accountability newsroom exposing the hidden machinery of power through public records, evidence-led reporting, and civic systems analysis (RDP Analytics)." />
-  <meta property="og:image" content="https://restoring-democracy.org/assets/OG/Banner_RDP_Color.png" />
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://restoring-democracy.org/about.html">
+  <meta name="twitter:title" content="About — Restoring Democracy's Promise">
+  <meta name="twitter:description" content="Evidence-driven investigations. Public records. Civic systems analysis. Receipts.">
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/OG/Banner_RDP_Color.png">
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://restoring-democracy.org/about.html" />
-  <meta name="twitter:title" content="About — Restoring Democracy’s Promise" />
-  <meta name="twitter:description" content="Evidence-driven investigations. Public records. Civic systems analysis. Receipts." />
-  <meta name="twitter:image" content="https://restoring-democracy.org/assets/OG/Banner_RDP_Color.png" />
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <link rel="apple-touch-icon" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <meta name="theme-color" content="#2d5c4f">
 
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "name": "About — Restoring Democracy’s Promise",
+    "name": "About — Restoring Democracy's Promise",
     "url": "https://restoring-democracy.org/about.html",
     "isPartOf": {
       "@type": "WebSite",
-      "name": "Restoring Democracy’s Promise",
+      "name": "Restoring Democracy's Promise",
       "alternateName": "RDP",
       "url": "https://restoring-democracy.org/"
     },
     "publisher": {
-      "@type": "Organization",
-      "name": "Restoring Democracy’s Promise",
+      "@type": "NewsMediaOrganization",
+      "name": "Restoring Democracy's Promise",
       "url": "https://restoring-democracy.org/",
       "logo": {
         "@type": "ImageObject",
         "url": "https://restoring-democracy.org/assets/OG/Banner_RDP_Color.png"
+      },
+      "foundingDate": "2023",
+      "memberOf": {
+        "@type": "Organization",
+        "name": "Investigative Reporters and Editors",
+        "url": "https://www.ire.org/"
       }
     }
   }
   </script>
 
+  <!-- Fonts + Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QJ3L9CT4Z7');
+  </script>
 
   <script>
     tailwind.config = {
@@ -62,15 +87,17 @@
           colors: {
             'brand-green': '#2d5c4f',
             'brand-green-dark': '#24473e',
+            'brand-green-darker': '#1a332c',
             'brand-orange': '#f4a261',
             'brand-gold': '#D4AF37',
             'brand-white': '#F6F7F8',
             'brand-offblack': '#161616',
             'brand-sand': '#e4d5b9',
+            'brand-cream': '#faf8f4',
           },
           fontFamily: {
-            'sans': ['Inter', 'sans-serif'],
-            'serif': ['Lora', 'serif'],
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+            'serif': ['Lora', 'Georgia', 'serif'],
           }
         }
       }
@@ -78,295 +105,513 @@
   </script>
 
   <style>
+    /* ── Base ── */
+    html { scroll-padding-top: 72px; }
+    ::selection { background: rgba(212,175,55,0.25); color: #161616; }
+
+    /* ── Accessibility: skip link ── */
+    .skip-link {
+      position: absolute; top: -100%; left: 50%; transform: translateX(-50%);
+      background: #D4AF37; color: #161616; font-weight: 700; font-size: 0.875rem;
+      padding: 0.5rem 1.5rem; border-radius: 0 0 0.5rem 0.5rem; z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── Accessibility: focus ring ── */
+    :focus-visible {
+      outline: 2px solid #D4AF37;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    /* ── Nav ── */
+    .nav-bar { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: background-color 0.3s, box-shadow 0.3s; }
+    .nav-bar.scrolled { background-color: rgba(26, 51, 44, 0.97); box-shadow: 0 1px 12px rgba(0,0,0,0.25); }
+    .nav-link { position: relative; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.25s ease; }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: #D4AF37; }
+
+    /* ── Hero ── */
+    .hero-section {
+      background: linear-gradient(160deg, #1a332c 0%, #24473e 35%, #2d5c4f 60%, #24473e 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-section::before {
+      content: ''; position: absolute; top: -15%; right: -8%; width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 65%); pointer-events: none;
+    }
+    .hero-section::after {
+      content: ''; position: absolute; bottom: -10%; left: -5%; width: 450px; height: 450px;
+      background: radial-gradient(circle, rgba(244,162,97,0.03) 0%, transparent 65%); pointer-events: none;
+    }
+    .hero-grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── Hero staggered entrance ── */
+    .hero-enter { opacity: 0; transform: translateY(14px); animation: heroUp 0.65s ease forwards; }
+    .hero-d1 { animation-delay: 0.05s; }
+    .hero-d2 { animation-delay: 0.18s; }
+    .hero-d3 { animation-delay: 0.32s; }
+    .hero-d4 { animation-delay: 0.46s; }
+    @keyframes heroUp { to { opacity: 1; transform: translateY(0); } }
+
+    .rule-gold { border-top: 3px solid #D4AF37; }
+
+    /* ── Cards ── */
+    .card-lift { transition: transform 0.28s ease, box-shadow 0.28s ease; }
+    .card-lift:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+    /* ── Section cards (cream bg page) ── */
+    .section-card {
+      background: #fff;
+      border-radius: 1rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    /* ── Analytics gradient block ── */
+    .analytics-gradient {
+      background: linear-gradient(145deg, rgba(22,22,22,0.96) 0%, rgba(30,55,48,0.94) 50%, rgba(36,71,62,0.92) 100%);
+      border: 1.5px solid rgba(212,175,55,0.3); position: relative; overflow: hidden;
+    }
+    .analytics-gradient::before {
+      content: ''; position: absolute; bottom: -10%; left: -5%; width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 60%); pointer-events: none;
+    }
+
+    /* ── Mission card (dark bg) ── */
+    .mission-card {
+      background: rgba(36, 71, 62, 0.5); border: 1.5px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(6px); transition: border-color 0.3s;
+    }
+    .mission-card:hover { border-color: rgba(212, 175, 55, 0.45); }
+
+    /* ── Approach pill ── */
+    .approach-card {
+      background: #fff; border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 0.75rem; transition: border-color 0.25s;
+    }
+    .approach-card:hover { border-color: rgba(45,92,79,0.3); }
+
+    /* ── Badge ── */
+    .badge {
+      display: inline-block; font-size: 0.65rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 700; padding: 0.3rem 0.65rem; border-radius: 999px;
+    }
+
+    /* ── Mobile menu ── */
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .mobile-menu.open { max-height: 500px; }
+
+    /* ── Scroll-reveal ── */
+    .reveal {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Back-to-top ── */
+    .back-to-top {
+      position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 40;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(36,71,62,0.92); border: 1.5px solid rgba(212,175,55,0.35);
+      color: #D4AF37; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+      backdrop-filter: blur(8px); cursor: pointer;
+    }
+    .back-to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .back-to-top:hover { background: rgba(36,71,62,1); border-color: #D4AF37; }
+
+    /* ── Footer tooltip ── */
     .footer-tooltip { position: relative; cursor: pointer; }
     .footer-tooltip .tooltip-text {
-      visibility: hidden;
-      width: 240px;
-      background-color: #24473e;
-      color: #f4a261;
-      text-align: center;
-      border-radius: 10px;
-      padding: 8px 10px;
-      position: absolute;
-      z-index: 1;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 0.35s;
-      font-size: 0.95em;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+      visibility: hidden; width: 200px; background: #24473e; color: #f4a261;
+      text-align: center; border-radius: 6px; padding: 6px 0;
+      position: absolute; z-index: 1; bottom: 120%; left: 50%;
+      transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;
+      font-size: 0.85em; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
     .footer-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
 
-    .glass-card {
-      background: rgba(36, 71, 62, 0.52);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.28);
-      border-radius: 1rem;
-    }
-
-    .section-card {
-      background: #F6F7F8;
-      color: #161616;
-      border-radius: 1rem;
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 12px 26px rgba(0,0,0,0.10);
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: #f4a261;
-      color: #161616;
-    }
-
-    .link-btn {
-      display: inline-block;
-      border-radius: 999px;
-      padding: 0.55rem 1rem;
-      font-weight: 700;
-      transition: all 0.25s ease;
-      text-align: center;
+    /* ── Print ── */
+    @media print {
+      .nav-bar, .mobile-menu, .back-to-top, .skip-link { display: none !important; }
+      .hero-section { background: #24473e !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
     }
   </style>
 </head>
 
-<body class="bg-brand-green text-brand-white font-sans antialiased">
-  <div class="flex flex-col min-h-screen">
+<body class="bg-brand-cream text-brand-offblack font-sans antialiased">
 
-    <!-- Header -->
-    <header class="relative text-center py-10 md:py-14 px-4">
-      <div class="absolute inset-0 bg-brand-green-dark opacity-50"></div>
+  <!-- Accessibility: skip to content -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-      <!-- Top-right actions -->
-      <div class="absolute top-4 left-4 z-10">
-  <a href="index.html" title="Home" aria-label="Home"
-     class="p-2 rounded-full hover:bg-brand-green-dark transition-colors duration-200 inline-flex items-center">
-    <img src="assets/Square_logo_transparent.png"
-         alt="RDP Home"
-         class="h-9 w-9 md:h-10 md:w-10" />
-  </a>
+  <!-- ═══════════════ NAVIGATION ═══════════════ -->
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-darker/90" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
+      <div class="flex items-center justify-between h-16 lg:h-[68px]">
+        <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
+          <img id="main-logo" src="assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise home" class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          <span class="hidden sm:inline text-brand-gold font-serif font-bold text-lg lg:text-xl tracking-tight group-hover:text-brand-orange transition-colors">Restoring Democracy's Promise</span>
+          <span class="sm:hidden text-brand-white font-serif font-bold text-base">RDP</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-7">
+          <a href="index.html#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
+          <a href="index.html#analytics" class="nav-link text-brand-sand text-sm">Analytics</a>
+          <a href="about.html" class="nav-link text-brand-gold text-sm">About</a>
+          <a href="index.html#founder" class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="index.html#standards" class="nav-link text-brand-sand text-sm">Standards</a>
+          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm">Substack</a>
+          <a href="secure-tips.html" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+          <a href="index.html#support" class="ml-2 bg-brand-gold text-brand-offblack text-sm font-bold py-2 px-5 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-md">Support Our Work</a>
+        </div>
+        <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
       </div>
-      <div class="absolute top-4 right-4 z-10">
-  <button id="share-button" title="Share this page"
-    class="p-2 rounded-full text-white hover:bg-brand-green-dark transition-colors duration-200"
-    aria-label="Share this page">
-    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="18" cy="5" r="3"></circle>
-      <circle cx="6" cy="12" r="3"></circle>
-      <circle cx="18" cy="19" r="3"></circle>
-      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-    </svg>
-  </button>
+    </div>
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-darker/98 border-t border-brand-gold/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 space-y-1">
+        <a href="index.html#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
+        <a href="index.html#analytics" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
+        <a href="about.html" class="block py-2.5 px-3 text-brand-gold text-sm font-medium rounded transition">About</a>
+        <a href="index.html#founder" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
+        <a href="index.html#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
+        <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack ↗</a>
+        <a href="secure-tips.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
+        <div class="pt-2 pb-1"><a href="index.html#support" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">Support Our Work</a></div>
       </div>
+    </div>
+  </nav>
+  <div class="h-16 lg:h-[68px]"></div>
 
-      <div class="relative max-w-4xl mx-auto">
-        <img id="main-logo" src="assets/Square_logo_transparent.png"
-             alt="Restoring Democracy's Promise Logo"
-             class="mx-auto mb-5 h-20 md:h-28 w-20 md:w-28 object-contain cursor-pointer" />
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <header class="hero-section text-center py-16 md:py-24 lg:py-28 px-4">
+    <div class="hero-grain"></div>
+    <div class="relative max-w-4xl mx-auto z-10">
+      <img src="assets/OG/Banner_RDP_Clear.png" alt="Restoring Democracy's Promise Logo" class="mx-auto mb-6 h-16 md:h-20 w-auto drop-shadow-2xl hero-enter hero-d1">
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-brand-gold tracking-tight leading-[1.1] hero-enter hero-d2">About RDP</h1>
+      <div class="rule-gold max-w-24 mx-auto mt-6 mb-5 hero-enter hero-d2"></div>
+      <p class="text-xl md:text-2xl text-brand-orange italic font-semibold hero-enter hero-d3">Accountability journalism, built for civic durability.</p>
+      <p class="mt-5 text-base md:text-lg text-brand-sand leading-relaxed max-w-3xl mx-auto hero-enter hero-d3">An independent civic accountability newsroom focused on protecting constitutional limits, democratic governance, and public trust in an era of accelerating institutional stress.</p>
+      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3 hero-enter hero-d4">
+        <a href="index.html" class="inline-block bg-brand-gold text-brand-offblack font-bold py-3 px-7 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-lg text-sm">Return Home</a>
+        <a href="secure-tips.html" class="inline-block bg-transparent text-brand-white font-semibold py-3 px-7 rounded-full hover:bg-brand-green-dark transition-all duration-200 border border-brand-gold/40 text-sm">Send a Secure Tip</a>
+      </div>
+    </div>
+  </header>
 
-        <h1 class="font-serif text-3xl md:text-5xl font-bold text-brand-gold tracking-tight">
-          About Restoring Democracy’s Promise
-        </h1>
-        <p class="mt-3 text-base md:text-lg text-brand-orange italic">
-          Accountability journalism, built for civic durability.
+  <main id="main-content">
+
+    <!-- ═══════════════ MISSION ═══════════════ -->
+    <section class="py-16 md:py-20 bg-brand-green-dark">
+      <div class="max-w-4xl mx-auto px-4 reveal">
+        <div class="mission-card rounded-xl p-7 md:p-10">
+          <span class="badge bg-brand-orange text-brand-offblack mb-4">Mission</span>
+          <p class="text-brand-sand text-base md:text-lg leading-relaxed">
+            Restoring Democracy's Promise (RDP) is an independent civic accountability newsroom focused on protecting constitutional limits, democratic governance, and public trust in an era of accelerating institutional stress. We investigate not only <em>what</em> happens in government, but <em>how</em> power is exercised, normalized, and justified over time.
+          </p>
+          <p class="mt-5 text-brand-sand text-base md:text-lg leading-relaxed">
+            Our work is grounded in a simple premise: democracy erodes less often through sudden collapse than through the quiet normalization of exceptional practices. RDP exists to document and contextualize those moments — before "exceptional" becomes routine.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ WHAT WE DO ═══════════════ -->
+    <section class="py-16 md:py-20 bg-brand-cream">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="text-center mb-10 reveal">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-green-dark">What We Do</h2>
+          <p class="mt-3 text-base md:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">RDP operates at the intersection of investigative journalism, public-interest analysis, and systems accountability. We publish work meant to remain defensible after the news cycle moves on — backed by primary documents, clear methodology, and transparent sourcing.</p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-3 reveal">
+
+          <!-- 1. Investigative Journalism (unchanged) -->
+          <div class="section-card p-6 md:p-7 flex flex-col">
+            <div class="text-xs font-extrabold tracking-wide uppercase text-slate-400 mb-1">1</div>
+            <h3 class="font-serif text-xl font-bold text-brand-green-dark">Investigative Journalism</h3>
+            <p class="mt-3 text-slate-700 text-sm leading-relaxed flex-grow">
+              Original, evidence-led reporting rooted in public records — contracts, correspondence, court filings, and oversight documentation. Structural accountability over partisan framing.
+            </p>
+          </div>
+
+          <!-- 2. Editorial & Public Statements (unchanged) -->
+          <div class="section-card p-6 md:p-7 flex flex-col">
+            <div class="text-xs font-extrabold tracking-wide uppercase text-slate-400 mb-1">2</div>
+            <h3 class="font-serif text-xl font-bold text-brand-green-dark">Editorial &amp; Public Statements</h3>
+            <p class="mt-3 text-slate-700 text-sm leading-relaxed flex-grow">
+              Published sparingly, when circumstances require institutional clarity — extraordinary exercises of power, failures of oversight, or events with broad constitutional implications.
+            </p>
+          </div>
+
+          <!-- 3. RDP Analytics (expanded) -->
+          <div class="section-card p-6 md:p-7 flex flex-col border-brand-gold/30 border-2">
+            <div class="text-xs font-extrabold tracking-wide uppercase text-brand-gold mb-1">3</div>
+            <h3 class="font-serif text-xl font-bold text-brand-green-dark">RDP Analytics</h3>
+            <p class="mt-3 text-slate-700 text-sm leading-relaxed flex-grow">
+              The research and methods division of Restoring Democracy's Promise. We build public-interest models — timelines, network maps, contract and vendor tracing, and system diagrams — to make institutional power legible and testable.
+            </p>
+            <p class="mt-2 text-slate-500 text-xs italic">Sometimes described as investigative analytics or computational journalism.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ RDP ANALYTICS (Full Section) ═══════════════ -->
+    <section id="analytics" class="py-16 md:py-20 bg-brand-green">
+      <div class="max-w-5xl mx-auto px-4 reveal">
+        <div class="analytics-gradient rounded-2xl p-8 md:p-12 shadow-2xl relative z-10">
+          <div class="flex flex-col lg:flex-row items-start gap-8">
+            <div class="flex-grow">
+              <div class="flex items-center gap-3 mb-4">
+                <svg class="w-7 h-7 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white">RDP Analytics — Research &amp; Methods</h2>
+              </div>
+              <p class="text-brand-sand text-base md:text-lg leading-relaxed">
+                RDP Analytics is the computational research division of Restoring Democracy's Promise. We develop proprietary investigative modeling systems — including state-space-flow hybrid models for anomaly detection across government and financial data. These glass-box systems produce explainable, auditable results that power RDP's journalism and are available for licensing to aligned organizations.
+              </p>
+              <p class="mt-4 text-brand-sand text-sm leading-relaxed">
+                We build public-interest models — timelines, network maps, contract and vendor tracing, and system diagrams — to make institutional power legible and testable. Our tools serve civic organizations, human rights groups, pro-democracy coalitions, and any institution committed to using analytical power responsibly. Our systems are designed for transparency — not surveillance.
+              </p>
+              <p class="mt-4 text-brand-orange text-sm font-semibold">Measurable claims · Transparent sourcing · Reproducible analysis</p>
+
+              <div class="mt-6 pt-5 border-t border-brand-gold/15">
+                <p class="text-brand-sand text-sm leading-relaxed">
+                  <span class="font-semibold text-brand-gold">Technical inquiries, research collaboration, or data questions:</span>
+                </p>
+                <a href="mailto:analytics@restoring-democracy.org" class="mt-1 inline-block text-brand-orange hover:text-brand-gold transition font-semibold text-sm">analytics@restoring-democracy.org →</a>
+              </div>
+            </div>
+            <div class="flex-shrink-0 w-full lg:w-auto">
+              <div class="bg-brand-green-dark/60 border border-brand-gold/30 rounded-lg p-5">
+                <p class="text-brand-sand text-xs uppercase tracking-wider font-bold mb-3">Explore Analytics</p>
+                <div class="space-y-2">
+                  <a href="/pincer-dataviz.html" class="block text-brand-gold hover:text-brand-orange transition text-sm">Network Maps</a>
+                  <a href="/pincerfinancial.html" class="block text-brand-gold hover:text-brand-orange transition text-sm">Financial Timelines</a>
+                  <a href="dream_machine.html" class="block text-brand-gold hover:text-brand-orange transition text-sm">Systems Exhibits</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ OUR APPROACH ═══════════════ -->
+    <section class="py-16 md:py-20 bg-brand-cream">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="text-center mb-10 reveal">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-green-dark">Our Approach</h2>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3 reveal">
+          <div class="approach-card p-6">
+            <h3 class="font-serif text-lg font-bold text-brand-green-dark">Institutional, not personal</h3>
+            <p class="mt-3 text-slate-700 text-sm leading-relaxed">The work stands on documents, methods, and verifiable claims — never personality, never vibes.</p>
+          </div>
+          <div class="approach-card p-6">
+            <h3 class="font-serif text-lg font-bold text-brand-green-dark">Evidence-driven, not ideological</h3>
+            <p class="mt-3 text-slate-700 text-sm leading-relaxed">We follow records where they lead. Accountability isn't "left" or "right." It's what keeps the lights on.</p>
+          </div>
+          <div class="approach-card p-6">
+            <h3 class="font-serif text-lg font-bold text-brand-green-dark">Systems-focused, not performative</h3>
+            <p class="mt-3 text-slate-700 text-sm leading-relaxed">We document how policies become machinery — how incentives, contracts, and quiet exceptions reshape institutions.</p>
+          </div>
+        </div>
+        <p class="mt-8 text-slate-700 text-base leading-relaxed text-center max-w-3xl mx-auto reveal">
+          Quantifying responsibility is not the same as assigning moral blame. Explaining systems is not the same as excusing them. Our goal is civic durability: clear documentation that survives political turnover.
         </p>
+      </div>
+    </section>
 
-        <div class="mt-7 glass-card p-5 md:p-6 text-left">
-          <span class="pill">Mission</span>
-          <p class="mt-3 text-brand-sand leading-relaxed">
-            Restoring Democracy’s Promise (RDP) is an independent civic accountability newsroom focused on protecting
-            constitutional limits, democratic governance, and public trust in an era of accelerating institutional stress.
-            We investigate not only <em>what</em> happens in government, but <em>how</em> power is exercised, normalized, and justified over time.
+    <!-- ═══════════════ INDEPENDENCE & INTEGRITY ═══════════════ -->
+    <section class="py-16 md:py-20 bg-brand-green-dark">
+      <div class="max-w-4xl mx-auto px-4 reveal">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-gold text-center mb-10">Independence &amp; Integrity</h2>
+        <div class="mission-card rounded-xl p-7 md:p-10">
+          <p class="text-brand-sand text-base md:text-lg leading-relaxed">
+            Restoring Democracy's Promise is independent of political parties, candidates, and government agencies. Credibility is earned through transparent method, rigorous sourcing, and restraint in judgment.
           </p>
-
-          <p class="mt-4 text-brand-sand leading-relaxed">
-            Our work is grounded in a simple premise:
-            democracy erodes less often through sudden collapse than through the quiet normalization of exceptional practices.
-            RDP exists to document and contextualize those moments—before “exceptional” becomes routine.
+          <p class="mt-5 text-brand-sand text-base md:text-lg leading-relaxed">
+            We publish receipts because the public deserves more than narratives. We also believe lawful process and proportional power are not "nice-to-haves" — they are the operating system of democracy.
           </p>
+        </div>
+      </div>
+    </section>
 
-          <div class="mt-6 flex flex-col sm:flex-row gap-3">
-            <a href="index.html"
-               class="link-btn bg-brand-orange text-brand-offblack hover:bg-brand-gold hover:text-brand-green shadow-lg">
-              Return Home &rarr;
-            </a>
-            <a href="secure-tips.html"
-               class="link-btn bg-brand-green-dark/70 text-brand-white hover:bg-brand-green-dark shadow-lg">
-              Secure Tips &rarr;
-            </a>
+    <!-- ═══════════════ PRESS & MEDIA ═══════════════ -->
+    <section class="py-14 md:py-18 bg-brand-cream">
+      <div class="max-w-4xl mx-auto px-4 reveal">
+        <div class="section-card p-7 md:p-10">
+          <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
+            <div class="flex-shrink-0 w-12 h-12 bg-brand-green/10 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+            </div>
+            <div class="flex-grow">
+              <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark">Press &amp; Media</h2>
+              <p class="mt-4 text-slate-700 text-base leading-relaxed">
+                We respond to press inquiries when possible and can provide documentation packets, background context, and on-the-record summaries of published investigations. RDP is available for interviews, background briefings, and editorial collaboration with aligned news organizations.
+              </p>
+              <div class="mt-5 pt-5 border-t border-slate-200">
+                <p class="text-slate-600 text-sm font-semibold">Press inquiries:</p>
+                <a href="mailto:press@restoring-democracy.org" class="mt-1 inline-block text-brand-orange hover:text-brand-gold transition font-semibold text-base">press@restoring-democracy.org →</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </header>
+    </section>
 
-    <!-- Content -->
-    <main class="flex-grow">
-      <section class="py-12 md:py-16">
-        <div class="max-w-5xl mx-auto px-4 grid gap-6">
-
-          <!-- What we do -->
-          <div class="section-card p-6 md:p-8">
-            <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark">What We Do</h2>
-            <p class="mt-3 text-slate-700 leading-relaxed">
-              RDP operates at the intersection of investigative journalism, public-interest analysis, and systems accountability.
-              We publish work meant to remain defensible after the news cycle moves on—backed by primary documents, clear methodology, and transparent sourcing.
-            </p>
-
-            <div class="mt-6 grid gap-4 md:grid-cols-3">
-              <div class="rounded-xl border border-slate-200 p-5 bg-white">
-                <div class="text-sm font-extrabold tracking-wide uppercase text-slate-500">1</div>
-                <h3 class="mt-1 font-serif text-xl font-bold text-brand-green-dark">Investigative Journalism</h3>
-                <p class="mt-2 text-slate-700">
-                  Original, evidence-led reporting rooted in public records—contracts, correspondence, court filings, and oversight documentation.
-                  Structural accountability over partisan framing.
-                </p>
-              </div>
-
-              <div class="rounded-xl border border-slate-200 p-5 bg-white">
-                <div class="text-sm font-extrabold tracking-wide uppercase text-slate-500">2</div>
-                <h3 class="mt-1 font-serif text-xl font-bold text-brand-green-dark">Editorial & Public Statements</h3>
-                <p class="mt-2 text-slate-700">
-                  Published sparingly, when circumstances require institutional clarity—extraordinary exercises of power, failures of oversight,
-                  or events with broad constitutional implications.
-                </p>
-              </div>
-
-              <div class="rounded-xl border border-slate-200 p-5 bg-white">
-                <div class="text-sm font-extrabold tracking-wide uppercase text-slate-500">3</div>
-                <h3 class="mt-1 font-serif text-xl font-bold text-brand-green-dark">RDP Analytics</h3>
-                <p class="mt-2 text-slate-700">
-                  The analytical and computational research division of RDP—maps, network models, timelines, and technical explainers
-                  that quantify systems and trace accountability beyond individual actors.
-                </p>
-                <p class="mt-3 text-sm text-slate-600 italic">
-                  (Sometimes described as investigative analytics or computational journalism.)
-                </p>
-              </div>
-            </div>
+    <!-- ═══════════════ CONTACT DIRECTORY ═══════════════ -->
+    <section class="py-14 md:py-18 bg-brand-green">
+      <div class="max-w-4xl mx-auto px-4 reveal">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold text-center mb-8">Contact</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="bg-brand-green-dark/60 border border-brand-gold/20 rounded-xl p-6 text-center">
+            <p class="text-brand-sand text-xs uppercase tracking-wider font-bold mb-2">General &amp; Technical</p>
+            <a href="mailto:webmaster@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition text-sm font-semibold break-all">webmaster@restoring-democracy.org</a>
           </div>
-
-          <!-- Approach -->
-          <div class="section-card p-6 md:p-8">
-            <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark">Our Approach</h2>
-
-            <div class="mt-5 grid gap-4 md:grid-cols-3">
-              <div class="rounded-xl bg-white border border-slate-200 p-5">
-                <h3 class="font-bold text-brand-green-dark">Institutional, not personal</h3>
-                <p class="mt-2 text-slate-700">
-                  The work stands on documents, methods, and verifiable claims—never personality, never vibes.
-                </p>
-              </div>
-
-              <div class="rounded-xl bg-white border border-slate-200 p-5">
-                <h3 class="font-bold text-brand-green-dark">Evidence-driven, not ideological</h3>
-                <p class="mt-2 text-slate-700">
-                  We follow records where they lead. Accountability isn’t “left” or “right.” It’s what keeps the lights on.
-                </p>
-              </div>
-
-              <div class="rounded-xl bg-white border border-slate-200 p-5">
-                <h3 class="font-bold text-brand-green-dark">Systems-focused, not performative</h3>
-                <p class="mt-2 text-slate-700">
-                  We document how policies become machinery—how incentives, contracts, and quiet exceptions reshape institutions.
-                </p>
-              </div>
-            </div>
-
-            <p class="mt-6 text-slate-700 leading-relaxed">
-              Quantifying responsibility is not the same as assigning moral blame. Explaining systems is not the same as excusing them.
-              Our goal is civic durability: clear documentation that survives political turnover.
-            </p>
+          <div class="bg-brand-green-dark/60 border border-brand-gold/20 rounded-xl p-6 text-center">
+            <p class="text-brand-sand text-xs uppercase tracking-wider font-bold mb-2">Analytics &amp; Research</p>
+            <a href="mailto:analytics@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition text-sm font-semibold break-all">analytics@restoring-democracy.org</a>
           </div>
-
-          <!-- Independence -->
-          <div class="section-card p-6 md:p-8">
-            <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark">Independence & Integrity</h2>
-            <p class="mt-3 text-slate-700 leading-relaxed">
-              Restoring Democracy’s Promise is independent of political parties, candidates, and government agencies.
-              Credibility is earned through transparent method, rigorous sourcing, and restraint in judgment.
-            </p>
-            <p class="mt-4 text-slate-700 leading-relaxed">
-              We publish receipts because the public deserves more than narratives. We also believe lawful process and proportional power
-              are not “nice-to-haves”—they are the operating system of democracy.
-            </p>
+          <div class="bg-brand-green-dark/60 border border-brand-gold/20 rounded-xl p-6 text-center">
+            <p class="text-brand-sand text-xs uppercase tracking-wider font-bold mb-2">Press &amp; Media</p>
+            <a href="mailto:press@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition text-sm font-semibold break-all">press@restoring-democracy.org</a>
           </div>
-
-          <!-- Optional micro boilerplate -->
-          <div class="section-card p-6 md:p-8">
-            <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark">Summary</h2>
-            <p class="mt-3 text-slate-700 leading-relaxed">
-              <span class="font-semibold">Restoring Democracy’s Promise</span> is an independent civic accountability newsroom producing
-              evidence-driven investigations and civic systems analysis based on public records, primary documents, and transparent methodology.
-            </p>
-          </div>
-
         </div>
-      </section>
-    </main>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="bg-brand-green-dark/60 border border-brand-gold/20 rounded-xl p-6 text-center">
+            <p class="text-brand-sand text-xs uppercase tracking-wider font-bold mb-2">Corrections &amp; Compliance</p>
+            <a href="mailto:compliance@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition text-sm font-semibold break-all">compliance@restoring-democracy.org</a>
+          </div>
+          <div class="bg-brand-green-dark/60 border border-brand-gold/20 rounded-xl p-6 text-center">
+            <p class="text-brand-sand text-xs uppercase tracking-wider font-bold mb-2">Secure Tips</p>
+            <a href="secure-tips.html" class="text-brand-gold hover:text-brand-orange transition text-sm font-semibold">View secure contact methods →</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="bg-brand-offblack text-brand-sand py-8 px-4">
-      <div class="max-w-4xl mx-auto text-center text-sm">
-        <img src="assets/OG/Banner_RDP_Clear.png" class="h-10 w-auto mx-auto mb-4" alt="Restoring Democracy Logo Icon" />
-        <p class="mb-4 text-lg font-serif italic text-brand-gold">Engineering Precision Journalism</p>
+    <!-- ═══════════════ SUMMARY ═══════════════ -->
+    <section class="py-14 md:py-18 bg-brand-cream">
+      <div class="max-w-4xl mx-auto px-4 text-center reveal">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark mb-6">Summary</h2>
+        <p class="text-slate-700 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+          <span class="font-semibold">Restoring Democracy's Promise</span> is an independent civic accountability newsroom producing evidence-driven investigations and civic systems analysis based on public records, primary documents, and transparent methodology. Our dual-mission structure pairs investigative journalism with proprietary analytical infrastructure — and that infrastructure is itself a resource for the civic sector.
+        </p>
+      </div>
+    </section>
 
-        <div class="footer-tooltip">
-          <p>&copy; 2023-2025 Restoring Democracy’s Promise. All rights reserved.</p>
+    <!-- ═══════════════ INSTITUTIONAL CREDIBILITY ═══════════════ -->
+    <section class="py-8 md:py-10 bg-white border-y border-slate-200">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center">
+          <p class="text-sm text-slate-600">
+            <span class="font-semibold text-brand-green-dark">Investigative Journalism</span>
+            <span class="text-slate-400 mx-1">·</span>
+            <span class="font-semibold text-brand-green-dark">Civic Systems Analysis</span>
+          </p>
+          <span class="hidden md:inline text-slate-300">|</span>
+          <p class="text-xs text-slate-500 tracking-wide uppercase">
+            Member, <a href="https://www.ire.org/" target="_blank" rel="noopener noreferrer" class="text-brand-green hover:text-brand-green-dark underline decoration-dotted underline-offset-2 transition font-semibold">Investigative Reporters &amp; Editors (IRE)</a>
+            <span class="mx-1.5">·</span>National in scope<span class="mx-1.5">·</span>Iowa field desk
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════ BACK TO TOP ═══════════════ -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path></svg>
+  </button>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="bg-brand-offblack text-brand-sand py-10 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-1">
+          <img src="assets/OG/Banner_RDP_Clear.png" class="h-10 w-auto mb-3" alt="RDP logo">
+          <p class="font-serif text-sm italic text-brand-gold">Quantifying the Truth</p>
+          <p class="text-xs text-brand-sand/50 mt-0.5">Engineering Precision Journalism</p>
+          <p class="mt-3 text-xs text-brand-sand/40">Independent · Evidence-driven · Document-first</p>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Investigations</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="dream_machine.html" class="text-brand-sand/80 hover:text-brand-gold transition">The Dream Machine</a></li>
+            <li><a href="iowa-doge-pension-privatize.html" class="text-brand-sand/80 hover:text-brand-gold transition">Pension Privatization</a></li>
+            <li><a href="the-god-machine.html" class="text-brand-sand/80 hover:text-brand-gold transition">The God Machine</a></li>
+            <li><a href="/pincer-dataviz.html" class="text-brand-sand/80 hover:text-brand-gold transition">Pincer Movement</a></li>
+            <li><a href="/pincerfinancial.html" class="text-brand-sand/80 hover:text-brand-gold transition">Financial Superhighway</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Organization</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="about.html" class="text-brand-sand/80 hover:text-brand-gold transition">About RDP</a></li>
+            <li><a href="index.html#founder" class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
+            <li><a href="index.html#standards" class="text-brand-sand/80 hover:text-brand-gold transition">Standards &amp; Corrections</a></li>
+            <li><a href="privacy-policy.html" class="text-brand-sand/80 hover:text-brand-gold transition">Privacy Policy</a></li>
+            <li><a href="secure-tips.html" class="text-brand-sand/80 hover:text-brand-gold transition">Secure Tips</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Contact</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="mailto:webmaster@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition">webmaster@restoring-democracy.org</a></li>
+            <li><a href="mailto:analytics@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition">analytics@restoring-democracy.org</a></li>
+            <li><a href="mailto:press@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition">press@restoring-democracy.org</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-brand-sand/10 pt-6 text-center">
+        <div class="footer-tooltip inline-block">
+          <p class="text-xs text-brand-sand/50">&copy; 2023–2026 Restoring Democracy's Promise. All rights reserved.</p>
           <span class="tooltip-text">This project is powered by receipts.</span>
         </div>
-
-        <p class="mt-2">Contact: <a href="mailto:webmaster@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline">webmaster@restoring-democracy.org</a></p>
-
-        <p class="mt-4">
-          <a href="privacy-policy.html" class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">Privacy Policy</a>
-        </p>
       </div>
-    </footer>
-
-  </div>
+    </div>
+  </footer>
 
   <script>
-    // Easter Egg: Logo click 5x goes to /vault.html
-    let clickCount = 0;
-    let timer;
-    document.getElementById('main-logo').addEventListener('click', function() {
-      clickCount++;
-      clearTimeout(timer);
-      timer = setTimeout(function() { clickCount = 0; }, 1000);
+    // ── Navbar scroll ──
+    const nav = document.querySelector('.nav-bar');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
 
-      if (clickCount === 5) {
-        window.location.href = 'vault.html';
-      }
-    });
+    // ── Mobile menu ──
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('mobile-menu');
+    toggle.addEventListener('click', () => { const open = menu.classList.toggle('open'); toggle.setAttribute('aria-expanded', open); });
+    menu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { menu.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }); });
 
-    // Share button
-    const shareButton = document.getElementById('share-button');
-    shareButton.addEventListener('click', async () => {
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: document.title,
-            url: window.location.href
-          });
-        } catch (err) {
-          console.log('Error sharing:', err);
-        }
-      } else {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          alert('Link copied to clipboard!');
-        }).catch(err => {
-          console.error('Failed to copy link: ', err);
-        });
-      }
+    // ── Scroll-reveal ──
+    const ro = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+    // ── Back-to-top ──
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => { btt.classList.toggle('show', window.scrollY > 600); }, { passive: true });
+    btt.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+    // ── Easter egg: logo 5× click ──
+    let clickCount = 0, timer;
+    document.getElementById('main-logo').addEventListener('click', function(e) {
+      e.preventDefault(); clickCount++; clearTimeout(timer);
+      timer = setTimeout(() => { clickCount = 0; }, 1000);
+      if (clickCount === 5) window.location.href = 'vault.html';
     });
   </script>
 </body>
