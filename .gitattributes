@@ -1,0 +1,4 @@
+# Reduce recurring merge conflicts on Dream Machine social card artifacts.
+# Keep branch (ours) version when these files conflict during `git merge main`.
+dream_machine.html merge=ours
+assets/og/warrantless_5_og_banner.png binary merge=ours
