@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Identity Backbone — SAVE America Act | RDP</title>
+    <meta name="description" content="The SAVE America Act doesn't create a new verification system. It codifies one already running. An interactive explainer on the bill's data architecture.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://restoring-democracy.org/save-act-identity-backbone">
+    <meta property="og:title" content="The Identity Backbone: What the SAVE America Act Actually Builds">
+    <meta property="og:description" content="The bill doesn't just check IDs. It mandates the data plumbing for a national identity infrastructure. Follow the architecture.">
+    <meta property="og:image" content="https://restoring-democracy.org/assets/og/save_act_backbone.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://restoring-democracy.org/save-act-identity-backbone">
+    <meta name="twitter:title" content="The Identity Backbone: What the SAVE America Act Actually Builds">
+    <meta name="twitter:description" content="The bill doesn't just check IDs. It mandates the data plumbing for a national identity infrastructure. Follow the architecture.">
+    <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/save_act_backbone.png">
+    <link rel="icon" href="assets/Square_logo_green.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="canonical" href="https://restoring-democracy.org/save-act-identity-backbone">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#2d5c4f',
+                        'brand-green-dark': '#24473e',
+                        'brand-orange': '#f4a261',
+                        'brand-gold': '#D4AF37',
+                        'brand-white': '#F6F7F8',
+                        'brand-offblack': '#161616',
+                        'brand-sand': '#e4d5b9',
+                        'dark-bg': '#0c1a1a',
+                        'card-bg': '#1e293b',
+                        'border-color': '#334155',
+                        'text-light': '#e2e8f0',
+                        'accent-red': '#ef4444',
+                        'accent-blue': '#3b82f6',
+                        'accent-cyan': '#22d3ee',
+                        'accent-amber': '#f59e0b',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c1a1a;
+            color: #e2e8f0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v15m0 30v15M0 30h15m30 0h15' stroke='%23163030' stroke-width='0.5' fill='none'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%23163030'/%3E%3Ccircle cx='30' cy='0' r='1' fill='%23163030'/%3E%3Ccircle cx='30' cy='60' r='1' fill='%23163030'/%3E%3Ccircle cx='0' cy='30' r='1' fill='%23163030'/%3E%3Ccircle cx='60' cy='30' r='1' fill='%23163030'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+        }
+
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-serif { font-family: 'Lora', serif; }
+
+        /* Scanline */
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(45, 92, 79, 0.08);
+            position: fixed;
+            z-index: 50;
+            animation: scan 10s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* Pulse effects */
+        .node-pulse {
+            animation: pulse-gold 2.5s infinite;
+        }
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
+            70% { box-shadow: 0 0 0 14px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        .pulse-red {
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+            70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .pulse-amber {
+            animation: pulse-amber 2.2s infinite;
+        }
+        @keyframes pulse-amber {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); }
+            70% { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+
+        /* Data stream animation */
+        .data-stream {
+            stroke-dasharray: 8;
+            animation: dash 1.5s linear infinite;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: -16; }
+        }
+
+        /* Fade in */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Tabs */
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background-color: #D4AF37;
+            color: #0f172a;
+        }
+        .tab-button:hover:not(.active) {
+            background-color: #334155;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Stress test gauge bars */
+        .gauge-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: #1e293b;
+            overflow: hidden;
+            position: relative;
+        }
+        .gauge-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 0;
+        }
+        .gauge-fill.loaded { /* JS sets width */ }
+
+        /* Pipeline flow arrow animation */
+        .flow-arrow {
+            animation: flowPulse 2s ease-in-out infinite;
+        }
+        @keyframes flowPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Footer tooltip */
+        .footer-tooltip {
+            position: relative;
+            cursor: pointer;
+        }
+        .footer-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 220px;
+            background-color: #24473e;
+            color: #f4a261;
+            text-align: center;
+            border-radius: 8px;
+            padding: 7px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            font-size: 1em;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+        .footer-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0e1f1f; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* Series card hover */
+        .series-card {
+            transition: all 0.3s ease;
+        }
+        .series-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.15);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <div class="scanline"></div>
+
+    <!-- Navigation Header -->
+    <nav class="bg-[#0e1f1f] border-b border-[#1e3a3a] sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="https://restoring-democracy.org" class="flex items-center group">
+                        <img src="assets/Square_logo_transparent.png" alt="RDP Logo" class="h-8 w-8 mr-2 group-hover:opacity-80 transition-opacity">
+                        <span class="text-brand-gold font-bold text-lg tracking-tight group-hover:text-brand-orange transition-colors">RDP</span>
+                    </a>
+                    <span class="ml-3 text-slate-400 text-xs font-mono border-l border-slate-600 pl-3 hidden sm:inline">SAVE AMERICA ACT // EXPLAINER</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://exposed1.substack.com/p/the-save-america-act-from-voter-verification" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hidden md:block">
+                        Read the Full Analysis <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                    <button onclick="shareExhibit()" class="text-slate-400 hover:text-white p-2 rounded-md transition-colors" title="Share">
+                        <i class="fas fa-share-alt text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-b from-[#0e2222] via-[#142828] to-[#0c1a1a] pt-16 pb-24 overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%221%22 fill=%22white%22/></svg>'); background-size: 50px 50px;"></div>
+        </div>
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-brand-gold font-mono text-sm tracking-widest mb-4 uppercase">Restoring Democracy's Promise // Special Update</p>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-4">
+                <span class="block">The Identity</span>
+                <span class="block text-brand-gold">Backbone</span>
+            </h1>
+            <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-300 leading-relaxed">
+                The SAVE America Act doesn't create a new system. It <span class="text-brand-orange font-semibold">codifies the one already running</span> — and turns voter verification into the mandate for a national identity infrastructure.
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center gap-3 text-sm font-mono">
+                <span class="px-3 py-1 bg-slate-800 border border-slate-600 rounded text-slate-400">H.R. 1238 <span class="text-brand-gold">PASSED HOUSE 218-213</span></span>
+                <span class="px-3 py-1 bg-slate-800 border border-slate-600 rounded text-slate-400">FEB 11, 2026</span>
+            </div>
+            <p class="mt-6 text-sm text-slate-500 font-mono">Related to <a href="https://restoring-democracy.org/dream_machine" class="text-brand-gold hover:text-brand-orange transition-colors underline decoration-dotted underline-offset-4">The Warrantless Surveillance Series</a></p>
+        </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <div class="bg-[#112424] border-y border-[#1e3a3a] sticky top-16 z-30">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="flex justify-center space-x-1 py-2 overflow-x-auto">
+                <button class="tab-button active px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap" data-tab="overview">
+                    The Shift
+                </button>
+                <button class="tab-button px-4 py-2 rounded-lg text-sm font-semibold text-slate-300 whitespace-nowrap" data-tab="stress">
+                    Stress Tests
+                </button>
+                <button class="tab-button px-4 py-2 rounded-lg text-sm font-semibold text-slate-300 whitespace-nowrap" data-tab="joinkeys">
+                    Join Keys
+                </button>
+                <button class="tab-button px-4 py-2 rounded-lg text-sm font-semibold text-slate-300 whitespace-nowrap" data-tab="architecture">
+                    The Questions
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="py-12">
+
+        <!-- ═══════════════ TAB 1: THE SHIFT ═══════════════ -->
+        <div id="overview" class="tab-content active">
+            <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-base text-brand-gold font-semibold tracking-wide uppercase font-mono">Exhibit I</h2>
+                    <p class="mt-2 text-3xl font-serif font-bold text-white sm:text-4xl">From Voter Check to Identity Pipeline</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                        The bill mandates that states route entire voter rolls through federal immigration databases — and deepens the data plumbing between election offices, DMVs, and DHS.
+                    </p>
+                </div>
+
+                <!-- Pipeline Diagram -->
+                <div class="bg-slate-800 rounded-xl p-6 md:p-8 shadow-2xl border border-slate-600 mb-12 reveal">
+                    <p class="text-xs text-slate-500 font-mono uppercase tracking-widest mb-6 text-center">Data Flow Under H.R. 1238</p>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-0 relative">
+                        <!-- Step 1 -->
+                        <div class="bg-slate-900 p-5 border border-slate-700 md:border-r-0 rounded-l-lg md:rounded-r-none relative">
+                            <p class="text-[10px] font-mono text-accent-blue uppercase tracking-widest mb-3">Step 1 — Upload</p>
+                            <div class="w-12 h-12 bg-accent-blue/20 rounded-lg flex items-center justify-center mb-3 border border-accent-blue/40">
+                                <i class="fas fa-upload text-lg text-accent-blue"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mb-1">State Voter Rolls</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">Full voter files — names, DOBs, addresses, DL numbers — uploaded in bulk to the federal system.</p>
+                            <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 text-accent-red flow-arrow"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="bg-slate-900 p-5 border border-slate-700 md:border-r-0 relative">
+                            <p class="text-[10px] font-mono text-brand-gold uppercase tracking-widest mb-3">Step 2 — Match</p>
+                            <div class="w-12 h-12 bg-brand-gold/20 rounded-lg flex items-center justify-center mb-3 border border-brand-gold/40 node-pulse">
+                                <i class="fas fa-microchip text-lg text-brand-gold"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mb-1">SAVE / PCER Engine</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">Federal matching engine cross-references against SSA Numident data, DHS records, and DMV files via linking identifiers.</p>
+                            <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 text-accent-red flow-arrow"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="bg-slate-900 p-5 border border-slate-700 md:border-r-0 relative">
+                            <p class="text-[10px] font-mono text-accent-amber uppercase tracking-widest mb-3">Step 3 — Flag</p>
+                            <div class="w-12 h-12 bg-accent-amber/20 rounded-lg flex items-center justify-center mb-3 border border-accent-amber/40 pulse-amber">
+                                <i class="fas fa-exclamation-triangle text-lg text-accent-amber"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mb-1">Anomaly Flags</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">Mismatches generate status codes. States receive flagged records — with no requirement for human review before action.</p>
+                            <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 text-accent-red flow-arrow"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="bg-slate-900 p-5 border border-slate-700 rounded-r-lg md:rounded-l-none border-l border-accent-red/30" style="background: linear-gradient(135deg, #1e293b 0%, rgba(239,68,68,0.08) 100%);">
+                            <p class="text-[10px] font-mono text-accent-red uppercase tracking-widest mb-3">Step 4 — Purge</p>
+                            <div class="w-12 h-12 bg-accent-red/20 rounded-lg flex items-center justify-center mb-3 border border-accent-red/40 pulse-red">
+                                <i class="fas fa-user-times text-lg text-accent-red"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mb-1">Roll Removal</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">States are pressured to act on flags within tight windows. Burden of proof shifts to the voter — to clear a record they may not know exists.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Key Reclassification -->
+                <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-600 mb-12 reveal">
+                    <h3 class="text-xl font-serif font-bold text-white mb-8 text-center">What the Bill Reclassifies</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <p class="text-xs text-slate-500 font-mono uppercase mb-2">Before</p>
+                            <p class="text-slate-400 line-through text-sm mb-4">SAVE: case-by-case benefits eligibility check</p>
+                            <p class="text-accent-red text-lg">↓</p>
+                            <p class="text-xs text-accent-red font-mono uppercase mt-2 mb-2">After</p>
+                            <p class="text-white font-semibold text-sm">National citizenship-screening engine for elections</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-slate-500 font-mono uppercase mb-2">Before</p>
+                            <p class="text-slate-400 line-through text-sm mb-4">DMV data: state-held identity records</p>
+                            <p class="text-accent-red text-lg">↓</p>
+                            <p class="text-xs text-accent-red font-mono uppercase mt-2 mb-2">After</p>
+                            <p class="text-white font-semibold text-sm">Biometric feeder pipeline to federal matching</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-slate-500 font-mono uppercase mb-2">Before</p>
+                            <p class="text-slate-400 line-through text-sm mb-4">Voter roll: local administrative record</p>
+                            <p class="text-accent-red text-lg">↓</p>
+                            <p class="text-xs text-accent-red font-mono uppercase mt-2 mb-2">After</p>
+                            <p class="text-white font-semibold text-sm">Input dataset for federal identity resolution</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Core Observation -->
+                <div class="bg-gradient-to-b from-brand-gold/15 to-slate-900 p-10 rounded-xl border border-brand-gold/40 text-center reveal">
+                    <p class="text-sm text-brand-gold font-mono uppercase mb-4">The Core Observation</p>
+                    <p class="text-2xl md:text-3xl font-serif font-bold text-white leading-relaxed max-w-3xl mx-auto">
+                        The question is no longer just <em class="text-slate-300">who is eligible to vote</em>. It becomes: <span class="text-brand-gold">what permanent identity record is being built in the process of answering that question?</span>
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ═══════════════ TAB 2: STRESS TESTS ═══════════════ -->
+        <div id="stress" class="tab-content">
+            <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-base text-accent-red font-semibold tracking-wide uppercase font-mono">Exhibit II</h2>
+                    <p class="mt-2 text-3xl font-serif font-bold text-white sm:text-4xl">When the System Was Tested, It Failed</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                        Three states tried to use SAVE or similar federal systems for voter screening. Each exposed failures the bill does not resolve.
+                    </p>
+                </div>
+
+                <!-- Stress Test Cards -->
+                <div class="space-y-8">
+
+                    <!-- IOWA -->
+                    <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-600 reveal">
+                        <div class="bg-gradient-to-r from-accent-red/20 to-slate-800 px-6 py-4 border-b border-slate-700">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <span class="text-xs font-mono text-accent-red uppercase tracking-widest mr-3">Iowa</span>
+                                    <span class="text-xs text-slate-500 font-mono">2024 — DMV-to-Voter-Roll Cross-Match</span>
+                                </div>
+                                <span class="px-2 py-1 bg-accent-red/20 text-accent-red text-xs font-mono rounded border border-accent-red/30">CRITICAL FAILURE</span>
+                            </div>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <div class="text-7xl font-bold text-accent-red mb-2 font-mono">~88<sup class="text-3xl">%</sup></div>
+                                    <p class="text-lg text-white font-semibold mb-3">of flagged voters were U.S. citizens</p>
+                                    <p class="text-slate-400 text-sm leading-relaxed">The secretary of state flagged 2,176 registered voters as potential noncitizens using outdated DMV records. Civil-rights attorneys discovered that at least 1,899 of those flagged were citizens — many of them naturalized Americans whose earlier immigration status had never been updated in legacy state files.</p>
+                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between text-xs font-mono mb-1">
+                                            <span class="text-slate-400">U.S. Citizens Wrongly Flagged</span>
+                                            <span class="text-accent-red">≥1,899 of 2,176</span>
+                                        </div>
+                                        <div class="gauge-bar">
+                                            <div class="gauge-fill bg-gradient-to-r from-accent-red to-red-400" data-width="87" style="width:87%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-xs font-mono mb-1">
+                                            <span class="text-slate-400">Actual Noncitizens Found</span>
+                                            <span class="text-green-400">277 of 2,176</span>
+                                        </div>
+                                        <div class="gauge-bar">
+                                            <div class="gauge-fill bg-gradient-to-r from-green-600 to-green-400" data-width="13" style="width:13%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 mt-4">
+                                        <p class="text-xs text-slate-500 font-mono mb-1">SYSTEM FAILURE MODE</p>
+                                        <p class="text-sm text-slate-300">The system is most confident where it is most wrong — naturalized citizens whose records span two immigration statuses.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TEXAS -->
+                    <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-600 reveal">
+                        <div class="bg-gradient-to-r from-accent-amber/20 to-slate-800 px-6 py-4 border-b border-slate-700">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <span class="text-xs font-mono text-accent-amber uppercase tracking-widest mr-3">Texas</span>
+                                    <span class="text-xs text-slate-500 font-mono">Pilot — SAVE Bulk Upload Test</span>
+                                </div>
+                                <span class="px-2 py-1 bg-accent-amber/20 text-accent-amber text-xs font-mono rounded border border-accent-amber/30">STRUCTURAL INSTABILITY</span>
+                            </div>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <div class="text-7xl font-bold text-accent-amber mb-2 font-mono">18<sup class="text-3xl">%</sup></div>
+                                    <p class="text-lg text-white font-semibold mb-3">processing failure rate</p>
+                                    <p class="text-slate-400 text-sm leading-relaxed">Texas ran 1,657 voter records through the modernized SAVE system. Roughly 300 queries failed outright — not due to fraud, but because of duplicate entries, formatting mismatches, and data-quality problems. Nearly one in five records could not be resolved.</p>
+                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between text-xs font-mono mb-1">
+                                            <span class="text-slate-400">Queries That Failed</span>
+                                            <span class="text-accent-amber">~300 of 1,657</span>
+                                        </div>
+                                        <div class="gauge-bar">
+                                            <div class="gauge-fill bg-gradient-to-r from-accent-amber to-yellow-400" data-width="18" style="width:18%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 mt-4">
+                                        <p class="text-xs text-slate-500 font-mono mb-1">ENGINEERING ASSESSMENT</p>
+                                        <p class="text-sm text-slate-300">SAVE was designed for individual benefits queries. At bulk election scale, the failure rate is not statistical noise — it is structural instability in a system never engineered for this caseload.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SOUTH CAROLINA -->
+                    <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-600 reveal">
+                        <div class="bg-gradient-to-r from-slate-700 to-slate-800 px-6 py-4 border-b border-slate-700">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <span class="text-xs font-mono text-slate-400 uppercase tracking-widest mr-3">South Carolina</span>
+                                    <span class="text-xs text-slate-500 font-mono">2023 — Planning Documents</span>
+                                </div>
+                                <span class="px-2 py-1 bg-slate-700 text-slate-400 text-xs font-mono rounded border border-slate-600">WARNED — NEVER SCALED</span>
+                            </div>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <p class="text-slate-300 text-sm leading-relaxed max-w-2xl">Officials warned in internal planning documents that SAVE data would miss naturalization updates, produce name mismatches, and require extensive manual follow-up. The state would need to build an entire parallel review process to account for the system's limitations — undermining the premise of automated efficiency.</p>
+                            <div class="mt-4 bg-slate-900 p-3 rounded border border-slate-700">
+                                <p class="text-xs font-mono text-slate-500">OUTCOME: The very system the SAVE America Act would mandate was flagged as unreliable by the states that tested it.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conclusion Card -->
+                <div class="mt-12 bg-gradient-to-b from-accent-red/15 to-slate-900 p-8 rounded-xl border border-accent-red/40 text-center reveal">
+                    <p class="text-sm text-accent-red font-mono uppercase mb-4">The Pattern</p>
+                    <p class="text-xl md:text-2xl font-serif font-bold text-white leading-relaxed max-w-3xl mx-auto">
+                        Every state that stress-tested this system found the same result: it flags citizens as suspects, fails at scale, and produces errors faster than any correction process can resolve them.
+                    </p>
+                    <p class="mt-6 text-slate-400 text-sm">The SAVE America Act does not address these documented failure modes. It mandates them nationally.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ═══════════════ TAB 3: JOIN KEYS ═══════════════ -->
+        <div id="joinkeys" class="tab-content">
+            <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-base text-brand-gold font-semibold tracking-wide uppercase font-mono">Exhibit III</h2>
+                    <p class="mt-2 text-3xl font-serif font-bold text-white sm:text-4xl">The Persistent Identity Keys</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                        To match voter rolls to immigration data, states need more than names and birth dates. They need identifiers that travel across systems — and don't expire.
+                    </p>
+                </div>
+
+                <!-- Join Key Flow Diagram -->
+                <div class="bg-slate-800 rounded-xl p-6 md:p-8 shadow-2xl border border-slate-600 mb-12 reveal">
+                    <p class="text-xs text-slate-500 font-mono uppercase tracking-widest mb-6 text-center">How Join Keys Link Separate Databases Into One Profile</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+                        <!-- Source A -->
+                        <div class="bg-slate-900 p-4 rounded-lg border border-accent-blue/40 text-center">
+                            <div class="w-10 h-10 bg-accent-blue/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-vote-yea text-accent-blue"></i>
+                            </div>
+                            <p class="text-xs font-bold text-white mb-1">Voter Record</p>
+                            <p class="text-[10px] text-slate-500">Name · DOB · Address</p>
+                            <div class="mt-2 px-2 py-1 bg-accent-red/10 border border-accent-red/30 rounded text-[10px] font-mono text-red-300">DL# 123-456-789</div>
+                        </div>
+
+                        <!-- Arrow -->
+                        <div class="hidden md:flex items-center justify-center text-accent-red">
+                            <i class="fas fa-long-arrow-alt-right text-2xl flow-arrow"></i>
+                        </div>
+
+                        <!-- Center: Join Layer -->
+                        <div class="bg-slate-900 p-5 rounded-lg border-2 border-brand-gold text-center relative">
+                            <div class="w-14 h-14 bg-brand-gold/20 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-brand-gold node-pulse">
+                                <i class="fas fa-link text-xl text-brand-gold"></i>
+                            </div>
+                            <p class="text-sm font-bold text-white mb-1">Federal Join Layer</p>
+                            <p class="text-[10px] text-slate-400 mb-2">SAVE · NUMIDENT · PCER</p>
+                            <div class="px-2 py-1 bg-brand-gold/10 border border-brand-gold/30 rounded text-[10px] font-mono text-brand-gold">DL# → SSN → GOLDEN RECORD</div>
+                        </div>
+
+                        <!-- Arrow -->
+                        <div class="hidden md:flex items-center justify-center text-accent-red">
+                            <i class="fas fa-long-arrow-alt-right text-2xl flow-arrow"></i>
+                        </div>
+
+                        <!-- Source B -->
+                        <div class="bg-slate-900 p-4 rounded-lg border border-accent-red/40 text-center" style="background: linear-gradient(135deg, #1e293b, rgba(239,68,68,0.06));">
+                            <div class="w-10 h-10 bg-accent-red/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-user-shield text-accent-red"></i>
+                            </div>
+                            <p class="text-xs font-bold text-white mb-1">Full Identity Profile</p>
+                            <p class="text-[10px] text-slate-500">Photo · Signature · History</p>
+                            <div class="mt-2 px-2 py-1 bg-accent-amber/10 border border-accent-amber/30 rounded text-[10px] font-mono text-amber-300">GOLDEN RECORD</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What the Fields Actually Do -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 reveal">
+                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                        <div class="text-2xl mb-3">🪪</div>
+                        <h4 class="font-bold text-white text-sm mb-1 font-mono">Driver's License #</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-3">Not required for citizenship determination. Functions as a cross-system key that resolves to DMV portrait, signature, and address history.</p>
+                        <p class="text-[10px] font-mono text-accent-red uppercase">Risk: Critical — biometric gateway</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                        <div class="text-2xl mb-3">🔢</div>
+                        <h4 class="font-bold text-white text-sm mb-1 font-mono">SSN Fragment (Last 4)</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-3">Not required for citizenship determination. Functions as a persistent cross-system identifier across SSA, IRS, and other federal agencies.</p>
+                        <p class="text-[10px] font-mono text-accent-red uppercase">Risk: Critical — federal join key</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border border-brand-gold/40" style="background: linear-gradient(135deg, #1e293b, rgba(212,175,55,0.06));">
+                        <div class="text-2xl mb-3">🔗</div>
+                        <h4 class="font-bold text-white text-sm mb-1 font-mono">The Combined Effect</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-3">Together, these fields create deterministic join keys capable of building persistent "Golden Records" — identity profiles queryable across agencies and administrations.</p>
+                        <p class="text-[10px] font-mono text-brand-gold uppercase">Scope: Beyond citizenship verification</p>
+                    </div>
+                </div>
+
+                <!-- The Implication -->
+                <div class="bg-gradient-to-b from-brand-gold/15 to-slate-900 p-10 rounded-xl border border-brand-gold/40 text-center reveal">
+                    <p class="text-sm text-brand-gold font-mono uppercase mb-4">Why This Matters</p>
+                    <p class="text-xl md:text-2xl font-serif font-bold text-white leading-relaxed max-w-3xl mx-auto">
+                        Voting systems do not need to see your face to confirm citizenship. But once facial images and DMV data are linked to voter rolls through these keys, we have left election administration and entered persistent identity tracking.
+                    </p>
+                    <p class="mt-6 text-sm text-slate-500 font-mono">
+                        As documented in <a href="https://restoring-democracy.org/dream_machine" class="text-brand-gold hover:text-brand-orange transition-colors underline decoration-dotted underline-offset-4">Part V</a> and <a href="https://restoring-democracy.org/confidential-mou" class="text-brand-gold hover:text-brand-orange transition-colors underline decoration-dotted underline-offset-4">Part IV</a> of our investigation, this architecture already exists through MOUs between DHS, SSA, and several states. The SAVE America Act would codify it into statute.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ═══════════════ TAB 4: THE QUESTIONS ═══════════════ -->
+        <div id="architecture" class="tab-content">
+            <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-base text-accent-cyan font-semibold tracking-wide uppercase font-mono">Exhibit IV</h2>
+                    <p class="mt-2 text-3xl font-serif font-bold text-white sm:text-4xl">Three Engineering Questions the Bill Doesn't Answer</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                        When a system moves from low-volume benefit checks to national election infrastructure, engineering questions become constitutional questions.
+                    </p>
+                </div>
+
+                <!-- Question Cards -->
+                <div class="space-y-6 mb-12">
+                    <div class="bg-slate-800 p-6 md:p-8 rounded-xl border border-slate-600 reveal">
+                        <div class="flex items-start">
+                            <div class="w-14 h-14 bg-accent-red/20 rounded-full flex items-center justify-center mr-5 flex-shrink-0 border border-accent-red/30">
+                                <span class="text-2xl font-bold text-accent-red font-mono">01</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-2">What is the acceptable processing failure rate for a legally mandated system?</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed mb-3">Texas's pilot showed an 18% failure rate. The bill contains no defined threshold. When the system fails to return an answer, who absorbs the consequence — the voter, or the state?</p>
+                                <span class="text-xs font-mono text-accent-red px-2 py-1 bg-accent-red/10 rounded border border-accent-red/20">Undefined in legislation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-6 md:p-8 rounded-xl border border-slate-600 reveal">
+                        <div class="flex items-start">
+                            <div class="w-14 h-14 bg-accent-amber/20 rounded-full flex items-center justify-center mr-5 flex-shrink-0 border border-accent-amber/30">
+                                <span class="text-2xl font-bold text-accent-amber font-mono">02</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-2">How quickly does naturalization status propagate across federal databases?</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed mb-3">Iowa's false-positive rate was driven by naturalized citizens whose updated status hadn't reached legacy state files. Federal lag can extend weeks to months. Elections do not pause for database synchronization.</p>
+                                <span class="text-xs font-mono text-accent-amber px-2 py-1 bg-accent-amber/10 rounded border border-accent-amber/20">Known lag — no remedy specified</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-6 md:p-8 rounded-xl border border-slate-600 reveal">
+                        <div class="flex items-start">
+                            <div class="w-14 h-14 bg-accent-cyan/20 rounded-full flex items-center justify-center mr-5 flex-shrink-0 border border-accent-cyan/30">
+                                <span class="text-2xl font-bold text-accent-cyan font-mono">03</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-2">What is the formal remedy when the federal database is wrong?</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed mb-3">The confidential MOUs already offered to states require roll removals within 45 days of a federal flag. There is no independent verification step before removal. The burden shifts to the voter to prove the algorithm wrong.</p>
+                                <span class="text-xs font-mono text-accent-cyan px-2 py-1 bg-accent-cyan/10 rounded border border-accent-cyan/20">No defined correction process</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What This Is / Is Not -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 reveal">
+                    <div class="bg-slate-800 p-6 rounded-xl border border-green-700/40">
+                        <h4 class="font-bold text-green-400 font-mono text-sm uppercase mb-4"><i class="fas fa-check mr-2"></i>This Analysis Is</h4>
+                        <div class="space-y-3 text-sm text-slate-300">
+                            <p class="pl-4 border-l-2 border-green-700/60">A documented engineering claim: the system has known failure modes the legislation does not resolve.</p>
+                            <p class="pl-4 border-l-2 border-green-700/60">A data-architecture observation: identity fields being mandated exceed what citizenship checks require.</p>
+                            <p class="pl-4 border-l-2 border-green-700/60">A systems question: infrastructure outlasts the political moment that builds it.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h4 class="font-bold text-slate-400 font-mono text-sm uppercase mb-4"><i class="fas fa-times mr-2"></i>This Analysis Is Not</h4>
+                        <div class="space-y-3 text-sm text-slate-400">
+                            <p class="pl-4 border-l-2 border-slate-700">An argument that citizenship should not be verified in elections.</p>
+                            <p class="pl-4 border-l-2 border-slate-700">A claim about the intentions of any particular official or party.</p>
+                            <p class="pl-4 border-l-2 border-slate-700">A prediction about what this infrastructure will be used for — only an observation that the capability will exist.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Statement -->
+                <div class="bg-slate-900 p-8 rounded-xl border-2 border-brand-gold text-center reveal">
+                    <p class="text-sm text-brand-gold font-mono uppercase mb-4">The Structural Shift</p>
+                    <p class="text-2xl md:text-3xl font-serif font-bold text-white mb-4">
+                        Election laws change.<br>
+                        <span class="text-brand-gold">Data architecture endures.</span>
+                    </p>
+                    <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                        When voter verification requires interoperable identifiers, cross-agency matching, and photo-linked credentials, the scope has expanded beyond election law. It becomes a question of how the state constructs, links, and retains identity records — permanently.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-[#112424] border-t border-[#1e3a3a]">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h3 class="text-2xl font-serif font-bold text-white mb-4">Read the Full Analysis</h3>
+            <p class="text-slate-400 mb-8">
+                This exhibit accompanies the full analytical piece on Substack. The manuscript includes primary-source citations, extended analysis, and documentation of the data flows underlying the SAVE America Act.
+            </p>
+            <a href="https://exposed1.substack.com/p/the-save-america-act-from-voter-verification" class="inline-flex items-center justify-center px-8 py-4 border-2 border-brand-gold text-lg font-bold rounded-lg text-brand-gold bg-transparent hover:bg-brand-gold hover:text-slate-900 transition-all duration-300 shadow-lg hover:shadow-brand-gold/30">
+                <i class="fas fa-book-open mr-3"></i>
+                Read the Update on Substack
+            </a>
+        </div>
+    </section>
+
+    <!-- Series Connection -->
+    <section class="py-12 bg-gradient-to-b from-[#112424] to-[#0c1a1a] border-t border-[#1e3a3a]">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-center text-xs font-mono text-slate-500 uppercase tracking-widest mb-8">From the Warrantless Surveillance Series</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <a href="https://restoring-democracy.org/dream_machine" class="series-card bg-slate-800 p-6 rounded-xl border border-slate-600 block no-underline">
+                    <span class="text-xs font-mono text-accent-red uppercase tracking-widest">Part V</span>
+                    <h4 class="text-lg font-serif font-bold text-white mt-2 mb-2">The Dream Machine</h4>
+                    <p class="text-sm text-slate-400">How DOGE built a national voter-surveillance system before Congress voted — and why the SAVE Act now codifies what was already operational.</p>
+                    <span class="inline-block mt-3 text-brand-gold text-sm font-semibold">Explore the exhibit <i class="fas fa-arrow-right ml-1 text-xs"></i></span>
+                </a>
+                <a href="https://restoring-democracy.org/confidential-mou" class="series-card bg-slate-800 p-6 rounded-xl border border-slate-600 block no-underline">
+                    <span class="text-xs font-mono text-accent-amber uppercase tracking-widest">Part IV</span>
+                    <h4 class="text-lg font-serif font-bold text-white mt-2 mb-2">The Confidential MOU</h4>
+                    <p class="text-sm text-slate-400">Inside DOJ's private offer to 26 states: hand over your voter rolls, accept a 45-day purge clock, and let a federal algorithm decide who stays on.</p>
+                    <span class="inline-block mt-3 text-brand-gold text-sm font-semibold">Explore the exhibit <i class="fas fa-arrow-right ml-1 text-xs"></i></span>
+                </a>
+            </div>
+            <p class="text-center text-slate-600 text-xs font-mono mt-8">
+                The full series — Parts I through VI — is available at <a href="https://exposed1.substack.com" class="text-brand-gold hover:text-brand-orange transition-colors underline decoration-dotted underline-offset-2">exposed1.substack.com</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-offblack text-brand-sand py-8 px-4">
+        <div class="max-w-4xl mx-auto text-center text-sm">
+            <img src="assets/Square_logo_transparent.png" class="h-10 w-10 mx-auto mb-4" alt="Restoring Democracy Logo Icon">
+            <div class="footer-tooltip">
+                <p>&copy; 2023-2026 Restoring Democracy's Promise. All rights reserved.</p>
+                <span class="tooltip-text">This project is powered by receipts.</span>
+            </div>
+            <p class="mt-2">Contact: <a href="mailto:tips@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline">tips@restoring-democracy.org</a></p>
+            <p class="mt-4">
+                <a href="privacy-policy.html" class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">Privacy Policy</a>
+            </p>
+            <p class="mt-4 text-xs font-mono text-slate-600">
+                GENERATED BY RDP RESEARCH DIVISION // SAVE AMERICA ACT ANALYSIS
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+
+            function showTab(tabId) {
+                contents.forEach(content => content.classList.remove('active'));
+                tabs.forEach(tab => tab.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+                document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add('active');
+                window.scrollTo({ top: 400, behavior: 'smooth' });
+                // Re-trigger reveal animations for newly visible tab
+                setTimeout(() => {
+                    document.querySelectorAll(`#${tabId} .reveal`).forEach(el => {
+                        observer.observe(el);
+                    });
+                }, 100);
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => showTab(tab.dataset.tab));
+            });
+
+            // Intersection Observer for reveal animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.08 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+        // Share functionality
+        function shareExhibit() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'The Identity Backbone — SAVE America Act | RDP',
+                    text: 'The SAVE America Act doesn\'t create a new system. It codifies the one already running. An interactive explainer on the bill\'s data architecture.',
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    const btn = document.querySelector('[title="Share"]');
+                    const icon = btn.querySelector('i');
+                    icon.classList.remove('fa-share-alt');
+                    icon.classList.add('fa-check');
+                    setTimeout(() => {
+                        icon.classList.remove('fa-check');
+                        icon.classList.add('fa-share-alt');
+                    }, 2000);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
