@@ -38,30 +38,55 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "name": "About — Restoring Democracy's Promise",
-    "url": "https://restoring-democracy.org/about.html",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "Restoring Democracy's Promise",
-      "alternateName": "RDP",
-      "url": "https://restoring-democracy.org/"
-    },
-    "publisher": {
-      "@type": "NewsMediaOrganization",
-      "name": "Restoring Democracy's Promise",
-      "url": "https://restoring-democracy.org/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://restoring-democracy.org/assets/OG/Banner_RDP_Color.png"
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "name": "About — Restoring Democracy's Promise",
+        "url": "https://restoring-democracy.org/about.html",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Restoring Democracy's Promise",
+          "alternateName": "RDP",
+          "url": "https://restoring-democracy.org/"
+        },
+        "publisher": {
+          "@type": "NewsMediaOrganization",
+          "name": "Restoring Democracy's Promise",
+          "url": "https://restoring-democracy.org/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://restoring-democracy.org/assets/OG/Banner_RDP_Color.png"
+          },
+          "foundingDate": "2023",
+          "memberOf": {
+            "@type": "Organization",
+            "name": "Investigative Reporters and Editors",
+            "url": "https://www.ire.org/"
+          }
+        }
       },
-      "foundingDate": "2023",
-      "memberOf": {
-        "@type": "Organization",
-        "name": "Investigative Reporters and Editors",
-        "url": "https://www.ire.org/"
+      {
+        "@type": "Person",
+        "name": "Timothy C. Tucker",
+        "jobTitle": "Investigative Journalist",
+        "knowsAbout": [
+          "Election infrastructure",
+          "Surveillance systems",
+          "Data architecture",
+          "Governance analysis"
+        ],
+        "sameAs": [
+          "https://orcid.org/0009-0004-4733-0733",
+          "https://exposed1.substack.com"
+        ],
+        "worksFor": {
+          "@type": "NewsMediaOrganization",
+          "name": "Restoring Democracy's Promise",
+          "url": "https://restoring-democracy.org/"
+        },
+        "disambiguatingDescription": "Investigative systems journalist and founder of Restoring Democracy's Promise. Not to be confused with Timothy Tucker, the aviation author of Tim Tucker's Helicopter World."
       }
-    }
+    ]
   }
   </script>
 
@@ -300,6 +325,7 @@
       <div class="rule-gold max-w-24 mx-auto mt-6 mb-5 hero-enter hero-d2"></div>
       <p class="text-xl md:text-2xl text-brand-orange italic font-semibold hero-enter hero-d3">Accountability journalism, built for civic durability.</p>
       <p class="mt-5 text-base md:text-lg text-brand-sand leading-relaxed max-w-3xl mx-auto hero-enter hero-d3">An independent civic accountability newsroom focused on protecting constitutional limits, democratic governance, and public trust in an era of accelerating institutional stress.</p>
+      <p class="mt-4 text-sm md:text-base text-brand-sand/90 leading-relaxed max-w-3xl mx-auto hero-enter hero-d3"><strong>Disambiguation:</strong> Not to be confused with Timothy Tucker, the aviation author of <em>Tim Tucker's Helicopter World</em>.</p>
       <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3 hero-enter hero-d4">
         <a href="index.html" class="inline-block bg-brand-gold text-brand-offblack font-bold py-3 px-7 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-lg text-sm">Return Home</a>
         <a href="secure-tips.html" class="inline-block bg-transparent text-brand-white font-semibold py-3 px-7 rounded-full hover:bg-brand-green-dark transition-all duration-200 border border-brand-gold/40 text-sm">Send a Secure Tip</a>
