@@ -54,7 +54,7 @@
     },
     "isPartOf": {
       "@type": "CreativeWorkSeries",
-      "name": "Warrantless Surveillance Series",
+      "name": "Leviathan Series",
       "position": "2"
     },
     "datePublished": "2025-11-28",
@@ -312,7 +312,7 @@
             <img src="/assets/Square_logo_transparent.png" alt="RDP Logo" class="h-7 w-7 mr-2 group-hover:opacity-80 transition-opacity">
             <span class="text-brand-gold font-bold text-lg tracking-tight group-hover:text-brand-orange transition-colors">RDP</span>
           </a>
-          <span class="ml-3 text-text-dim text-xs font-mono border-l border-steel-border pl-3 hidden sm:inline">WARRANTLESS SURVEILLANCE SERIES // PART I — THE ALPR TRAP</span>
+          <span class="ml-3 text-text-dim text-xs font-mono border-l border-steel-border pl-3 hidden sm:inline">LEVIATHAN SERIES // PART II — THE ALPR TRAP</span>
         </div>
         <div class="flex items-center space-x-4">
           <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" target="_blank" rel="noopener noreferrer"
@@ -335,7 +335,7 @@
 
     <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <p class="text-grid-cyan font-mono text-sm tracking-widest mb-4 uppercase opacity-70">
-        Evidence Exhibit // Part I — The Crossroads Grid
+        Evidence Exhibit // Part II — The Crossroads Grid
       </p>
       <h1 class="text-4xl sm:text-5xl md:text-7xl font-serif font-bold text-text-off mb-2 leading-[1.1]">
         <span class="block">The ALPR</span>
@@ -402,9 +402,150 @@
     </section>
 
     <!-- ===== EXHIBIT I: THE 4-TIER ARCHITECTURE ===== -->
-    <section id="architecture" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
+    <section id="plate-flow" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 reveal">
       <div class="text-center mb-4">
         <p class="text-signal-red font-mono text-sm tracking-widest uppercase mb-2 opacity-70">Exhibit I</p>
+        <h2 class="text-3xl md:text-5xl font-serif font-bold text-text-off">Follow One Plate</h2>
+        <p class="mt-4 max-w-2xl mx-auto text-lg text-text-mid">
+          A single scan at a gas station on a Friday afternoon. Here's where it actually goes.
+        </p>
+      </div>
+
+      <div class="mt-8 bg-steel-dark/80 rounded-2xl border border-steel-border p-6 md:p-10 shadow-2xl overflow-hidden relative">
+        <!-- Ambient -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="w-[400px] h-[400px] rounded-full bg-signal-red/[0.02] blur-[80px]"></div>
+        </div>
+
+        <!-- The plate -->
+        <div class="text-center mb-10 relative">
+          <div class="inline-block bg-steel border-2 border-signal-red/40 rounded-lg px-8 py-4 shadow-xl">
+            <p class="plate-text text-signal-red text-3xl md:text-4xl font-bold tracking-[0.2em]">ABC 1234</p>
+            <p class="text-xs text-text-dim font-mono mt-1">CAPTURED: FRI 4:47 PM CST — GAS STATION, INTERSTATE 35</p>
+          </div>
+        </div>
+
+        <!-- Flow steps -->
+        <div class="space-y-0 relative">
+
+          <!-- Step 1: Camera Capture -->
+          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="1">
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-steel border-2 border-text-dim/40 flex items-center justify-center">
+                <span class="font-mono text-sm text-text-dim font-bold">01</span>
+              </div>
+              <div class="w-0.5 h-16 bg-gradient-to-b from-text-dim/40 to-signal-red/30 mt-1"></div>
+            </div>
+            <div class="pb-6">
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-bold text-text-off text-lg">Camera Capture</h4>
+                <span class="text-xs font-mono px-2 py-0.5 bg-steel rounded text-text-dim">T+0 sec</span>
+              </div>
+              <p class="text-text-mid text-sm leading-relaxed">A Flock Safety camera at the gas station photographs your rear plate, captures the image, GPS coordinates, timestamp, and vehicle characteristics. Uploaded to Flock's cloud instantly.</p>
+            </div>
+          </div>
+
+          <!-- Step 2: Flock National Network -->
+          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="2">
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-steel border-2 border-signal-red/30 flex items-center justify-center">
+                <span class="font-mono text-sm text-signal-red/70 font-bold">02</span>
+              </div>
+              <div class="w-0.5 h-16 bg-gradient-to-b from-signal-red/30 to-signal-red/40 mt-1"></div>
+            </div>
+            <div class="pb-6">
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-bold text-text-off text-lg">Flock National Network</h4>
+                <span class="text-xs font-mono px-2 py-0.5 bg-signal-red-dim rounded text-signal-red">T+1 sec</span>
+              </div>
+              <p class="text-text-mid text-sm leading-relaxed">Your scan is replicated across the national network. 75% of Flock's 4,800 partner agencies participate in the National Lookup Tool — your plate is now searchable by ~7,000 agencies and organizations nationwide. Flock's perpetual license means there is no mechanism to retract this data.</p>
+            </div>
+          </div>
+
+          <!-- Step 3: Nlets Pointer Index -->
+          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="3">
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-steel border-2 border-grid-cyan/30 flex items-center justify-center">
+                <span class="font-mono text-sm text-grid-cyan/70 font-bold">03</span>
+              </div>
+              <div class="w-0.5 h-16 bg-gradient-to-b from-grid-cyan/30 to-signal-red/40 mt-1"></div>
+            </div>
+            <div class="pb-6">
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-bold text-text-off text-lg">Nlets Pointer Index</h4>
+                <span class="text-xs font-mono px-2 py-0.5 bg-grid-cyan-dim rounded text-grid-cyan">T+2 sec</span>
+              </div>
+              <p class="text-text-mid text-sm leading-relaxed">Your plate metadata (event number, timestamp, origin agency) is registered in the Nationwide LPR Pointer Index. Any authorized federal agency — CBP, ICE, FBI — can now query this index and be pointed to the originating department. Your local PD has no record this happened.</p>
+            </div>
+          </div>
+
+          <!-- Step 4: State Repository -->
+          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="4">
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-steel border-2 border-signal-red/50 flex items-center justify-center">
+                <span class="font-mono text-sm text-signal-red font-bold">04</span>
+              </div>
+              <div class="w-0.5 h-16 bg-gradient-to-b from-signal-red/50 to-signal-red/30 mt-1"></div>
+            </div>
+            <div class="pb-6">
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-bold text-text-off text-lg">Texas LPR Database</h4>
+                <span class="text-xs font-mono px-2 py-0.5 bg-signal-red-dim rounded text-signal-red">T+minutes</span>
+              </div>
+              <p class="text-text-mid text-sm leading-relaxed">Your data flows into the Texas DPS repository. Stored for a minimum of 3 years. Shared with any authorized criminal justice agency. Reclassified as state intellectual property under SB 1499 — now shielded from public records requests. Your city's 30-day promise is meaningless here.</p>
+            </div>
+          </div>
+
+          <!-- Step 5: FCIC Financial Scoring -->
+          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="5">
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-steel border-2 border-signal-red/60 flex items-center justify-center">
+                <span class="font-mono text-sm text-signal-red font-bold">05</span>
+              </div>
+              <div class="w-0.5 h-16 bg-gradient-to-b from-signal-red/60 to-gold-accent/30 mt-1"></div>
+            </div>
+            <div class="pb-6">
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-bold text-text-off text-lg">Financial Crimes Intelligence Center</h4>
+                <span class="text-xs font-mono px-2 py-0.5 bg-signal-red-dim rounded text-signal-red">T+hours</span>
+              </div>
+              <p class="text-text-mid text-sm leading-relaxed">The FCIC in Tyler, Texas ingests your plate data and runs it through financial-crime pattern models. Your weekend drive is scored alongside other vehicles' movements. Combinations of time, place, and plate number that look "interesting" are flagged. Your car is now a financial risk asset — not because of anything you did, but because of where you happened to be when a camera blinked.</p>
+            </div>
+          </div>
+
+          <!-- Step 6: Commercial Brokers -->
+          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="6">
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-steel border-2 border-gold-accent/40 flex items-center justify-center">
+                <span class="font-mono text-sm text-gold-accent font-bold">06</span>
+              </div>
+              <div class="w-0.5 h-8 bg-gradient-to-b from-gold-accent/30 to-transparent mt-1"></div>
+            </div>
+            <div class="pb-2">
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-bold text-text-off text-lg">Commercial Data Brokers</h4>
+                <span class="text-xs font-mono px-2 py-0.5 bg-steel rounded text-gold-accent">T+ongoing</span>
+              </div>
+              <p class="text-text-mid text-sm leading-relaxed">Thomson Reuters CLEAR integrates your plate data with 6+ billion vehicle detections from Vigilant Solutions. LexisNexis Accurint adds it to insurance and fraud investigation databases. Palantir fuses it with banking and property records. Your Friday gas stop is now a data point in a commercial product — sold to banks, insurers, investigators, and federal agencies. Permanently.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- End state -->
+        <div class="mt-8 text-center p-6 bg-signal-red/5 border border-signal-red/20 rounded-xl">
+          <p class="font-mono text-xs text-signal-red uppercase tracking-widest mb-3">End State</p>
+          <p class="text-lg md:text-xl font-serif text-text-off leading-relaxed max-w-2xl mx-auto">
+            You stopped for gas. You committed no crime. Thirty days later, your city deleted the scan. <span class="text-signal-red font-semibold">The same record will exist in Texas for three years, in commercial databases indefinitely, and in a federal analyst's pattern model forever.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXHIBIT II: FOLLOW ONE PLATE ===== -->
+    <section id="architecture" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
+      <div class="text-center mb-4">
+        <p class="text-signal-red font-mono text-sm tracking-widest uppercase mb-2 opacity-70">Exhibit II</p>
         <h2 class="text-3xl md:text-5xl font-serif font-bold text-text-off">The Four Tiers</h2>
         <p class="mt-4 max-w-2xl mx-auto text-lg text-text-mid">
           Click each tier to see what it does, who operates it, and where the data goes next.
@@ -623,147 +764,6 @@
       </div>
     </section>
 
-    <!-- ===== EXHIBIT II: FOLLOW ONE PLATE ===== -->
-    <section id="plate-flow" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 reveal">
-      <div class="text-center mb-4">
-        <p class="text-signal-red font-mono text-sm tracking-widest uppercase mb-2 opacity-70">Exhibit II</p>
-        <h2 class="text-3xl md:text-5xl font-serif font-bold text-text-off">Follow One Plate</h2>
-        <p class="mt-4 max-w-2xl mx-auto text-lg text-text-mid">
-          A single scan at a gas station on a Friday afternoon. Here's where it actually goes.
-        </p>
-      </div>
-
-      <div class="mt-8 bg-steel-dark/80 rounded-2xl border border-steel-border p-6 md:p-10 shadow-2xl overflow-hidden relative">
-        <!-- Ambient -->
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div class="w-[400px] h-[400px] rounded-full bg-signal-red/[0.02] blur-[80px]"></div>
-        </div>
-
-        <!-- The plate -->
-        <div class="text-center mb-10 relative">
-          <div class="inline-block bg-steel border-2 border-signal-red/40 rounded-lg px-8 py-4 shadow-xl">
-            <p class="plate-text text-signal-red text-3xl md:text-4xl font-bold tracking-[0.2em]">ABC 1234</p>
-            <p class="text-xs text-text-dim font-mono mt-1">CAPTURED: FRI 4:47 PM CST — GAS STATION, INTERSTATE 35</p>
-          </div>
-        </div>
-
-        <!-- Flow steps -->
-        <div class="space-y-0 relative">
-
-          <!-- Step 1: Camera Capture -->
-          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="1">
-            <div class="flex flex-col items-center flex-shrink-0">
-              <div class="w-10 h-10 rounded-full bg-steel border-2 border-text-dim/40 flex items-center justify-center">
-                <span class="font-mono text-sm text-text-dim font-bold">01</span>
-              </div>
-              <div class="w-0.5 h-16 bg-gradient-to-b from-text-dim/40 to-signal-red/30 mt-1"></div>
-            </div>
-            <div class="pb-6">
-              <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-bold text-text-off text-lg">Camera Capture</h4>
-                <span class="text-xs font-mono px-2 py-0.5 bg-steel rounded text-text-dim">T+0 sec</span>
-              </div>
-              <p class="text-text-mid text-sm leading-relaxed">A Flock Safety camera at the gas station photographs your rear plate, captures the image, GPS coordinates, timestamp, and vehicle characteristics. Uploaded to Flock's cloud instantly.</p>
-            </div>
-          </div>
-
-          <!-- Step 2: Flock National Network -->
-          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="2">
-            <div class="flex flex-col items-center flex-shrink-0">
-              <div class="w-10 h-10 rounded-full bg-steel border-2 border-signal-red/30 flex items-center justify-center">
-                <span class="font-mono text-sm text-signal-red/70 font-bold">02</span>
-              </div>
-              <div class="w-0.5 h-16 bg-gradient-to-b from-signal-red/30 to-signal-red/40 mt-1"></div>
-            </div>
-            <div class="pb-6">
-              <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-bold text-text-off text-lg">Flock National Network</h4>
-                <span class="text-xs font-mono px-2 py-0.5 bg-signal-red-dim rounded text-signal-red">T+1 sec</span>
-              </div>
-              <p class="text-text-mid text-sm leading-relaxed">Your scan is replicated across the national network. 75% of Flock's 4,800 partner agencies participate in the National Lookup Tool — your plate is now searchable by ~7,000 agencies and organizations nationwide. Flock's perpetual license means there is no mechanism to retract this data.</p>
-            </div>
-          </div>
-
-          <!-- Step 3: Nlets Pointer Index -->
-          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="3">
-            <div class="flex flex-col items-center flex-shrink-0">
-              <div class="w-10 h-10 rounded-full bg-steel border-2 border-grid-cyan/30 flex items-center justify-center">
-                <span class="font-mono text-sm text-grid-cyan/70 font-bold">03</span>
-              </div>
-              <div class="w-0.5 h-16 bg-gradient-to-b from-grid-cyan/30 to-signal-red/40 mt-1"></div>
-            </div>
-            <div class="pb-6">
-              <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-bold text-text-off text-lg">Nlets Pointer Index</h4>
-                <span class="text-xs font-mono px-2 py-0.5 bg-grid-cyan-dim rounded text-grid-cyan">T+2 sec</span>
-              </div>
-              <p class="text-text-mid text-sm leading-relaxed">Your plate metadata (event number, timestamp, origin agency) is registered in the Nationwide LPR Pointer Index. Any authorized federal agency — CBP, ICE, FBI — can now query this index and be pointed to the originating department. Your local PD has no record this happened.</p>
-            </div>
-          </div>
-
-          <!-- Step 4: State Repository -->
-          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="4">
-            <div class="flex flex-col items-center flex-shrink-0">
-              <div class="w-10 h-10 rounded-full bg-steel border-2 border-signal-red/50 flex items-center justify-center">
-                <span class="font-mono text-sm text-signal-red font-bold">04</span>
-              </div>
-              <div class="w-0.5 h-16 bg-gradient-to-b from-signal-red/50 to-signal-red/30 mt-1"></div>
-            </div>
-            <div class="pb-6">
-              <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-bold text-text-off text-lg">Texas LPR Database</h4>
-                <span class="text-xs font-mono px-2 py-0.5 bg-signal-red-dim rounded text-signal-red">T+minutes</span>
-              </div>
-              <p class="text-text-mid text-sm leading-relaxed">Your data flows into the Texas DPS repository. Stored for a minimum of 3 years. Shared with any authorized criminal justice agency. Reclassified as state intellectual property under SB 1499 — now shielded from public records requests. Your city's 30-day promise is meaningless here.</p>
-            </div>
-          </div>
-
-          <!-- Step 5: FCIC Financial Scoring -->
-          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="5">
-            <div class="flex flex-col items-center flex-shrink-0">
-              <div class="w-10 h-10 rounded-full bg-steel border-2 border-signal-red/60 flex items-center justify-center">
-                <span class="font-mono text-sm text-signal-red font-bold">05</span>
-              </div>
-              <div class="w-0.5 h-16 bg-gradient-to-b from-signal-red/60 to-gold-accent/30 mt-1"></div>
-            </div>
-            <div class="pb-6">
-              <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-bold text-text-off text-lg">Financial Crimes Intelligence Center</h4>
-                <span class="text-xs font-mono px-2 py-0.5 bg-signal-red-dim rounded text-signal-red">T+hours</span>
-              </div>
-              <p class="text-text-mid text-sm leading-relaxed">The FCIC in Tyler, Texas ingests your plate data and runs it through financial-crime pattern models. Your weekend drive is scored alongside other vehicles' movements. Combinations of time, place, and plate number that look "interesting" are flagged. Your car is now a financial risk asset — not because of anything you did, but because of where you happened to be when a camera blinked.</p>
-            </div>
-          </div>
-
-          <!-- Step 6: Commercial Brokers -->
-          <div class="flex items-start gap-4 md:gap-6 flow-step" data-step="6">
-            <div class="flex flex-col items-center flex-shrink-0">
-              <div class="w-10 h-10 rounded-full bg-steel border-2 border-gold-accent/40 flex items-center justify-center">
-                <span class="font-mono text-sm text-gold-accent font-bold">06</span>
-              </div>
-              <div class="w-0.5 h-8 bg-gradient-to-b from-gold-accent/30 to-transparent mt-1"></div>
-            </div>
-            <div class="pb-2">
-              <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-bold text-text-off text-lg">Commercial Data Brokers</h4>
-                <span class="text-xs font-mono px-2 py-0.5 bg-steel rounded text-gold-accent">T+ongoing</span>
-              </div>
-              <p class="text-text-mid text-sm leading-relaxed">Thomson Reuters CLEAR integrates your plate data with 6+ billion vehicle detections from Vigilant Solutions. LexisNexis Accurint adds it to insurance and fraud investigation databases. Palantir fuses it with banking and property records. Your Friday gas stop is now a data point in a commercial product — sold to banks, insurers, investigators, and federal agencies. Permanently.</p>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- End state -->
-        <div class="mt-8 text-center p-6 bg-signal-red/5 border border-signal-red/20 rounded-xl">
-          <p class="font-mono text-xs text-signal-red uppercase tracking-widest mb-3">End State</p>
-          <p class="text-lg md:text-xl font-serif text-text-off leading-relaxed max-w-2xl mx-auto">
-            You stopped for gas. You committed no crime. Thirty days later, your city deleted the scan. <span class="text-signal-red font-semibold">The same record will exist in Texas for three years, in commercial databases indefinitely, and in a federal analyst's pattern model forever.</span>
-          </p>
-        </div>
-      </div>
-    </section>
-
     <!-- ===== HOW TO READ ===== -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
       <div class="bg-steel-dark/60 rounded-2xl border border-steel-border p-6 md:p-8">
@@ -797,49 +797,56 @@
     <!-- ===== SERIES NAVIGATION (Bottom — Part I on top, Part V on bottom) ===== -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
       <div class="bg-steel-dark/60 rounded-2xl border border-steel-border p-6 md:p-8">
-        <h2 class="text-2xl font-serif font-bold text-text-off mb-6">Warrantless Surveillance Series</h2>
+        <h2 class="text-2xl font-serif font-bold text-text-off mb-6">Leviathan Series</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- Part I -->
+          <a href="https://exposed1.substack.com/p/the-performance-of-protection" target="_blank" rel="noopener noreferrer" class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+            <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part I — Manuscript</span>
+            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">The Performance of Protection</h4>
+          </a>
 
           <!-- Part II — CURRENT -->
           <div class="bg-steel rounded-lg p-4 border-2 border-signal-red/50 relative">
             <span class="absolute top-2 right-2 text-[10px] font-mono bg-signal-red text-white px-2 py-0.5 rounded font-bold">CURRENT</span>
-            <span class="text-signal-red text-xs font-mono font-bold uppercase">Part I — Interactive</span>
+            <span class="text-signal-red text-xs font-mono font-bold uppercase">Part II — Interactive</span>
             <h4 class="text-text-off font-semibold mt-1">The ALPR Trap</h4>
           </div>
 
           <!-- Part III -->
-          <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" target="_blank" rel="noopener noreferrer"
-             class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
-            <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part II</span>
+          <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" target="_blank" rel="noopener noreferrer" class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+            <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part III</span>
             <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">SAVE: The Database They Won't Name</h4>
           </a>
 
-          <!-- Part III -->
-          <a href="/dream_machine"
-             class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+          <!-- Part III Interactive -->
+          <a href="https://restoring-democracy.org/save_iowa" target="_blank" rel="noopener noreferrer" class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
             <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part III — Interactive</span>
-            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">Launch "Dream Machine" Exhibit</h4>
+            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">Explore the SAVE Database: Iowa Case Study</h4>
           </a>
 
           <!-- Part IV -->
-          <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize" target="_blank" rel="noopener noreferrer"
-             class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+          <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize" target="_blank" rel="noopener noreferrer" class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
             <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part IV</span>
-            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">DOJ's Confidential SAVE MOU</h4>
+            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">DOJ's Confidential 26-State MOU</h4>
           </a>
 
           <!-- Part IV Interactive -->
-          <a href="/funding-flow"
-             class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+          <a href="/funding-flow" class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
             <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part IV — Interactive</span>
-            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">Funding Flow Exhibit</h4>
+            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">Follow the Money: How Federal Dollars Weaponized Immigration Enforcement</h4>
           </a>
 
           <!-- Part V -->
-          <a href="https://exposed1.substack.com/p/the-department-of-governance-by-algorithm" target="_blank" rel="noopener noreferrer"
-             class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+          <a href="https://exposed1.substack.com/p/the-department-of-governance-by-algorithm" target="_blank" rel="noopener noreferrer" class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
             <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part V</span>
-            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">The DOGE Machine</h4>
+            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">The Department of Governance by Algorithm: How DOGE Built Cleta Mitchell's Dream Machine</h4>
+          </a>
+
+          <!-- Part V Interactive -->
+          <a href="/dream_machine" class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+            <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part V — Interactive</span>
+            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">Launch the Dream Machine Exhibit</h4>
           </a>
 
         </div>
@@ -858,7 +865,7 @@
       <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" target="_blank" rel="noopener noreferrer"
          class="inline-flex items-center justify-center px-8 py-4 border-2 border-signal-red text-lg font-bold rounded-lg text-signal-red bg-transparent hover:bg-signal-red hover:text-white transition-all duration-300 shadow-lg hover:shadow-signal-red/20">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-        Read Part I: The ALPR Trap
+        Read Part II: The ALPR Trap
       </a>
       <p class="text-text-dim text-sm mt-6 font-mono">
         Sources: Texas DPS MOUs, HB 3109/SB 1499, Nlets documentation, public records requests, EFF/ACLU investigations.
@@ -879,7 +886,7 @@
         <a href="/privacy-policy" class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">Privacy Policy</a>
       </p>
       <p class="mt-4 text-xs font-mono text-steel-border">
-        GENERATED BY RDP RESEARCH DIVISION // WARRANTLESS SURVEILLANCE SERIES // PART I — THE CROSSROADS GRID
+        GENERATED BY RDP RESEARCH DIVISION // LEVIATHAN SERIES // PART II — THE CROSSROADS GRID
       </p>
     </div>
   </footer>

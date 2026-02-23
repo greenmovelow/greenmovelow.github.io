@@ -6,6 +6,7 @@
 
   <title>Restoring Democracy’s Promise | Investigative Journalism</title>
   <meta name="description" content="An independent investigative newsroom quantifying how power is built and exercised — through public records, AI-driven civic analytics, and document-first reporting. National in scope, Iowa field desk. IRE member.">
+  <meta name="author" content="Timothy C. Tucker">
 
   <link rel="canonical" href="https://restoring-democracy.org/">
   <meta name="robots" content="index,follow">
@@ -38,63 +39,33 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "NewsMediaOrganization",
-    "name": "Restoring Democracy's Promise",
-    "alternateName": "RDP",
-    "url": "https://restoring-democracy.org/",
-    "foundingDate": "2023",
-    "description": "An independent investigative newsroom and civic analytics organization quantifying how power is built and exercised through systems.",
-    "sameAs": [
-      "https://exposed1.substack.com",
-      "https://orcid.org/0009-0004-4733-0733"
-    ],
-    "founder": {
-      "@type": "Person",
-      "name": "Timothy C. Tucker",
-      "jobTitle": "Investigative Journalist",
-      "knowsAbout": [
-        "Election infrastructure",
-        "Surveillance systems",
-        "Data architecture",
-        "Governance analysis"
-      ],
-      "sameAs": [
-        "https://orcid.org/0009-0004-4733-0733",
-        "https://exposed1.substack.com"
-      ],
-      "memberOf": {
-        "@type": "Organization",
-        "name": "Investigative Reporters and Editors",
-        "url": "https://www.ire.org/"
+    "@graph": [
+      {
+        "@type": "NewsMediaOrganization",
+        "@id": "https://restoring-democracy.org/#organization",
+        "name": "Restoring Democracy's Promise",
+        "alternateName": "RDP",
+        "url": "https://restoring-democracy.org",
+        "founder": { "@id": "https://restoring-democracy.org/journalists/#timothy-c-tucker" },
+        "editor": { "@id": "https://restoring-democracy.org/journalists/#timothy-c-tucker" }
       },
-      "alumniOf": {
-        "@type": "CollegeOrUniversity",
-        "name": "Iowa State University"
+      {
+        "@type": "Person",
+        "@id": "https://restoring-democracy.org/journalists/#timothy-c-tucker",
+        "name": "Timothy C. Tucker",
+        "jobTitle": "Founder, Executive Editor & Investigative Journalist",
+        "url": "https://restoring-democracy.org/journalists/",
+        "sameAs": [
+          "https://orcid.org/0009-0004-4733-0733",
+          "https://exposed1.substack.com",
+          "https://x.com/rdpromise",
+          "https://bsky.app/profile/exposed1.substack.com",
+          "https://github.com/greenmovelow"
+        ],
+        "worksFor": { "@id": "https://restoring-democracy.org/#organization" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Iowa State University" },
+        "memberOf": { "@type": "Organization", "name": "Investigative Reporters & Editors", "url": "https://www.ire.org" }
       }
-    },
-    "memberOf": {
-      "@type": "Organization",
-      "name": "Investigative Reporters and Editors",
-      "url": "https://www.ire.org/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Restoring Democracy's Promise",
-      "url": "https://restoring-democracy.org/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://restoring-democracy.org/assets/OG/Banner_RDP_Color.png"
-      }
-    },
-    "ethicsPolicy": "https://restoring-democracy.org/about.html",
-    "correctionsPolicy": "https://restoring-democracy.org/corrections.html",
-    "knowsAbout": [
-      "surveillance systems",
-      "dark money networks",
-      "civic systems analysis",
-      "investigative journalism",
-      "ALPR networks",
-      "voter verification systems"
     ]
   }
   </script>
@@ -239,7 +210,7 @@
           <a href="#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
           <a href="#analytics" class="nav-link text-brand-sand text-sm">Analytics</a>
           <a href="about.html" class="nav-link text-brand-sand text-sm">About</a>
-          <a href="#founder" class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="/journalists/" class="nav-link text-brand-sand text-sm">Team</a>
           <a href="#standards" class="nav-link text-brand-sand text-sm">Standards</a>
           <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm">Substack</a>
           <a href="secure-tips.html" class="nav-link text-brand-sand text-sm">Secure Tips</a>
@@ -255,7 +226,7 @@
         <a href="#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
         <a href="#analytics" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
         <a href="about.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
-        <a href="#founder" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
+        <a href="/journalists/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
         <a href="#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
         <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack ↗</a>
         <a href="secure-tips.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
@@ -328,7 +299,7 @@
       <div class="max-w-7xl mx-auto px-4 relative z-10">
         <div class="text-center mb-10">
           <span class="badge bg-brand-gold text-brand-offblack mb-3">Flagship Investigation</span>
-          <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-white leading-tight">The Warrantless Surveillance Series</h2>
+          <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-white leading-tight">The Leviathan Series</h2>
           <p class="mt-4 text-base md:text-lg text-brand-sand max-w-3xl mx-auto leading-relaxed">How DHS expanded the SAVE system into a bulk citizenship-verification tool briefed to election activists first — built on risky SSA data copies and enabling biometric Golden Records from birth.</p>
         </div>
 
@@ -359,14 +330,17 @@
           <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" target="_blank" rel="noopener noreferrer" class="bg-brand-green-dark/40 border border-brand-gold/15 rounded-lg p-4 hover:border-brand-gold/40 transition-all duration-200 group">
             <span class="text-brand-orange text-xs font-bold uppercase tracking-wide">Part II</span>
             <h4 class="text-brand-white text-sm font-semibold mt-1 leading-snug group-hover:text-brand-gold transition">The ALPR Trap: America's Plate Reader Network</h4>
+            <a href="/alpr-trap" class="exhibit-link" style="display:inline-block;margin-top:0.4rem;font-size:0.7rem;font-weight:700;color:#D4AF37;text-decoration:none;letter-spacing:0.04em;">⚡ Interactive Exhibit →</a>
           </a>
           <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" class="bg-brand-green-dark/40 border border-brand-orange/20 rounded-lg p-4 hover:border-brand-orange/50 transition-all duration-200 group">
             <span class="text-brand-orange text-xs font-bold uppercase tracking-wide">Part III</span>
             <h4 class="text-brand-white text-sm font-semibold mt-1 leading-snug group-hover:text-brand-gold transition">SAVE: The Database They Won't Name</h4>
+            <a href="/save_iowa" class="exhibit-link" style="display:inline-block;margin-top:0.4rem;font-size:0.7rem;font-weight:700;color:#D4AF37;text-decoration:none;letter-spacing:0.04em;">⚡ Iowa Case Study →</a>
           </a>
           <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize" target="_blank" rel="noopener noreferrer" class="bg-brand-green-dark/40 border border-brand-gold/15 rounded-lg p-4 hover:border-brand-gold/40 transition-all duration-200 group">
             <span class="text-brand-orange text-xs font-bold uppercase tracking-wide">Part IV</span>
             <h4 class="text-brand-white text-sm font-semibold mt-1 leading-snug group-hover:text-brand-gold transition">DOJ's "Confidential" SAVE MOU to Federalize Voter Rolls</h4>
+            <a href="/funding-flow" class="exhibit-link" style="display:inline-block;margin-top:0.4rem;font-size:0.7rem;font-weight:700;color:#D4AF37;text-decoration:none;letter-spacing:0.04em;">⚡ Follow the Money →</a>
           </a>
         </div>
       </div>
@@ -484,7 +458,7 @@
               <div class="mt-6 pt-5 border-t border-brand-gold/15">
                 <p class="text-brand-sand text-sm">
                   <span class="font-semibold text-brand-gold">Licensing &amp; partnership inquiries:</span>
-                  <span class="text-brand-orange ml-1 font-semibold">Contact information available in the footer.</span>
+                  <a href="mailto:analytics@restoring-democracy.org" class="text-brand-orange ml-1 font-semibold hover:text-brand-gold hover:underline">analytics@restoring-democracy.org</a>
                 </p>
               </div>
             </div>
@@ -496,30 +470,6 @@
                   <a href="/pincerfinancial.html" class="block text-brand-gold hover:text-brand-orange transition text-sm">Financial Timelines</a>
                   <a href="dream_machine.html" class="block text-brand-gold hover:text-brand-orange transition text-sm">Systems Exhibits</a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════ FOUNDER ═══════════════ -->
-    <section id="founder" class="py-16 md:py-20 bg-brand-cream">
-      <div class="max-w-4xl mx-auto px-4">
-        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark text-center mb-10">About the Founder</h2>
-        <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-6 md:p-8">
-          <div class="flex flex-col sm:flex-row gap-6 items-start">
-            <div class="founder-photo" aria-hidden="true">T</div>
-            <div class="flex-grow">
-              <h3 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">Timothy C. Tucker</h3>
-              <p class="text-brand-orange text-sm font-semibold mt-1">Executive Editor &amp; Founder</p>
-              <p class="mt-4 text-slate-700 text-sm leading-relaxed">Investigative systems journalist. Founder of Restoring Democracy's Promise. Evidence-driven reporting on surveillance, data-sharing, and governance — national in scope, with an Iowa-based investigative desk.</p>
-              <p class="mt-3 text-slate-600 text-sm leading-relaxed">Tucker holds a B.S. in Electrical Engineering from Iowa State University. His reporting began at the local level, documenting extremist school board candidates, and expanded as evidence led into national networks shaping those campaigns. His work focuses on exposing how religion is weaponized as a political tool through dark money networks, model legislation, and coordinated influence operations. His work has been cited by organizations including the Interfaith Alliance of Iowa.</p>
-              <div class="mt-5 flex flex-wrap items-center gap-3 text-xs">
-                <a href="https://www.ire.org/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-brand-green/10 text-brand-green-dark font-semibold py-1.5 px-3 rounded-full hover:bg-brand-green/20 transition">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>IRE Member</a>
-                <a href="https://orcid.org/0009-0004-4733-0733" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-brand-green/10 text-brand-green-dark font-semibold py-1.5 px-3 rounded-full hover:bg-brand-green/20 transition">ORCID Profile</a>
-                <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-brand-orange/10 text-brand-orange font-semibold py-1.5 px-3 rounded-full hover:bg-brand-orange/20 transition">Substack ↗</a>
               </div>
             </div>
           </div>
@@ -548,8 +498,7 @@
           </div>
           <div class="bg-brand-green/40 rounded-xl p-6 border border-brand-gold/15">
             <h3 class="font-serif text-lg font-bold text-brand-white mb-3">Funding Transparency</h3>
-            <p class="text-brand-sand text-sm leading-relaxed">RDP is currently donor-supported and reader-funded through voluntary subscriptions. We accept no government funding, no advertising revenue, and no contributions that carry editorial conditions. We are exploring 501(c)(3) non-profit status. All future institutional funders will be disclosed publicly.</p>
-            <p class="text-brand-sand/70 text-xs mt-3 italic">Financial disclosures will be published annually once non-profit status is obtained.</p>
+            <p class="text-brand-sand text-sm leading-relaxed">RDP is currently donor-supported and reader-funded through voluntary subscriptions. We accept no government funding, no advertising revenue, and no contributions that carry editorial conditions. All future institutional funders will be disclosed publicly.</p>
           </div>
         </div>
       </div>
@@ -645,7 +594,7 @@
           <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Organization</h4>
           <ul class="space-y-1.5 text-sm">
             <li><a href="about.html" class="text-brand-sand/80 hover:text-brand-gold transition">About RDP</a></li>
-            <li><a href="#founder" class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
+            <li><a href="/journalists/" class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
             <li><a href="#standards" class="text-brand-sand/80 hover:text-brand-gold transition">Standards &amp; Corrections</a></li>
             <li><a href="privacy-policy.html" class="text-brand-sand/80 hover:text-brand-gold transition">Privacy Policy</a></li>
             <li><a href="secure-tips.html" class="text-brand-sand/80 hover:text-brand-gold transition">Secure Tips</a></li>

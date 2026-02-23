@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Timothy C. Tucker — Founder & Executive Editor | Restoring Democracy's Promise</title>
-  <meta name="description" content="Timothy C. Tucker is the Executive Editor of Restoring Democracy's Promise, an investigative newsroom based in Iowa. B.S. Electrical Engineering, Iowa State University. Member, Investigative Reporters & Editors (IRE).">
+  <title>Timothy C. Tucker — Founder, Executive Editor & Investigative Journalist | Restoring Democracy's Promise</title>
+  <meta name="description" content="Timothy C. Tucker is the Founder, Executive Editor & Investigative Journalist of Restoring Democracy's Promise, an investigative newsroom based in Iowa. B.S. Electrical Engineering, Iowa State University. Member, Investigative Reporters & Editors (IRE).">
   <meta name="author" content="Timothy C. Tucker">
 
   <link rel="canonical" href="https://restoring-democracy.org/timothy-c-tucker">
@@ -14,7 +14,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="profile">
   <meta property="og:url" content="https://restoring-democracy.org/timothy-c-tucker">
-  <meta property="og:title" content="Timothy C. Tucker — Founder & Executive Editor | Restoring Democracy's Promise">
+  <meta property="og:title" content="Timothy C. Tucker — Founder, Executive Editor & Investigative Journalist | Restoring Democracy's Promise">
   <meta property="og:description" content="Investigative journalist and founder of RDP. B.S. Electrical Engineering, Iowa State. IRE member. Covering surveillance systems, dark money, and government accountability.">
   <meta property="og:image" content="https://restoring-democracy.org/assets/og/timothy-c-tucker-og.png">
   <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
   <meta name="twitter:site" content="@rdpromise">
   <meta name="twitter:creator" content="@rdpromise">
   <meta name="twitter:url" content="https://restoring-democracy.org/timothy-c-tucker">
-  <meta name="twitter:title" content="Timothy C. Tucker — Founder & Executive Editor | Restoring Democracy's Promise">
+  <meta name="twitter:title" content="Timothy C. Tucker — Founder, Executive Editor & Investigative Journalist | Restoring Democracy's Promise">
   <meta name="twitter:description" content="Investigative journalist and founder of RDP. Covering surveillance systems, dark money, and government accountability from Iowa.">
   <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/timothy-c-tucker-og.png">
 
@@ -44,16 +44,20 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "NewsMediaOrganization",
+        "@id": "https://restoring-democracy.org/#organization",
+        "name": "Restoring Democracy's Promise",
+        "alternateName": "RDP",
+        "url": "https://restoring-democracy.org",
+        "founder": { "@id": "https://restoring-democracy.org/journalists/#timothy-c-tucker" },
+        "editor": { "@id": "https://restoring-democracy.org/journalists/#timothy-c-tucker" }
+      },
+      {
         "@type": "Person",
-        "@id": "https://restoring-democracy.org/timothy-c-tucker#person",
+        "@id": "https://restoring-democracy.org/journalists/#timothy-c-tucker",
         "name": "Timothy C. Tucker",
-        "givenName": "Timothy",
-        "familyName": "Tucker",
-        "additionalName": "C.",
-        "jobTitle": "Executive Editor",
-        "description": "Investigative journalist and founder of Restoring Democracy's Promise, an independent newsroom based in Iowa covering surveillance systems, dark money networks, and government accountability.",
-        "url": "https://restoring-democracy.org/timothy-c-tucker",
-        "image": "https://restoring-democracy.org/assets/og/timothy-c-tucker-og.png",
+        "jobTitle": "Founder, Executive Editor & Investigative Journalist",
+        "url": "https://restoring-democracy.org/journalists/",
         "sameAs": [
           "https://orcid.org/0009-0004-4733-0733",
           "https://exposed1.substack.com",
@@ -61,73 +65,9 @@
           "https://bsky.app/profile/exposed1.substack.com",
           "https://github.com/greenmovelow"
         ],
-        "worksFor": {
-          "@id": "https://restoring-democracy.org/#organization"
-        },
-        "founder": {
-          "@id": "https://restoring-democracy.org/#organization"
-        },
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "Iowa State University",
-          "url": "https://www.iastate.edu"
-        },
-        "hasCredential": [
-          {
-            "@type": "EducationalOccupationalCredential",
-            "credentialCategory": "degree",
-            "name": "B.S. in Electrical Engineering",
-            "recognizedBy": {
-              "@type": "CollegeOrUniversity",
-              "name": "Iowa State University"
-            }
-          }
-        ],
-        "memberOf": {
-          "@type": "Organization",
-          "name": "Investigative Reporters & Editors",
-          "alternateName": "IRE",
-          "url": "https://www.ire.org"
-        },
-        "knowsAbout": [
-          "Investigative Journalism",
-          "Surveillance Systems",
-          "Government Accountability",
-          "Dark Money Networks",
-          "Data-Driven Reporting",
-          "Civic Systems Analysis",
-          "FOIA / Public Records"
-        ]
-      },
-      {
-        "@type": "NewsMediaOrganization",
-        "@id": "https://restoring-democracy.org/#organization",
-        "name": "Restoring Democracy's Promise",
-        "alternateName": "RDP",
-        "url": "https://restoring-democracy.org",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://restoring-democracy.org/assets/Square_logo_green.png"
-        },
-        "founder": {
-          "@id": "https://restoring-democracy.org/timothy-c-tucker#person"
-        },
-        "employee": {
-          "@id": "https://restoring-democracy.org/timothy-c-tucker#person"
-        },
-        "description": "An independent investigative newsroom exposing the hidden machinery of power through public records, evidence-led reporting, and civic systems analysis."
-      },
-      {
-        "@type": "WebPage",
-        "url": "https://restoring-democracy.org/timothy-c-tucker",
-        "name": "Timothy C. Tucker — Founder & Executive Editor",
-        "description": "Author biography and professional profile for Timothy C. Tucker, founder of Restoring Democracy's Promise.",
-        "isPartOf": {
-          "@id": "https://restoring-democracy.org/#organization"
-        },
-        "about": {
-          "@id": "https://restoring-democracy.org/timothy-c-tucker#person"
-        }
+        "worksFor": { "@id": "https://restoring-democracy.org/#organization" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Iowa State University" },
+        "memberOf": { "@type": "Organization", "name": "Investigative Reporters & Editors", "url": "https://www.ire.org" }
       }
     ]
   }
@@ -250,6 +190,12 @@
       <a href="/" class="text-brand-sand/80 hover:text-white text-sm font-medium transition-colors">Home</a>
       <a href="/about" class="text-brand-sand/80 hover:text-white text-sm font-medium transition-colors">About</a>
       <a href="/secure-tips" class="text-brand-sand/80 hover:text-white text-sm font-medium transition-colors">Secure Tips</a>
+      <button onclick="shareThisPage()" title="Share this page" class="p-2 rounded-md text-brand-sand/80 hover:text-white transition-colors">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+      </button>
     </div>
 
     <div class="relative max-w-4xl mx-auto z-10 pt-8">
@@ -258,7 +204,7 @@
         Timothy C. Tucker
       </h1>
       <p class="mt-3 text-xl md:text-2xl text-brand-orange font-semibold">
-        Founder & Executive Editor
+        Founder, Executive Editor & Investigative Journalist
       </p>
       <p class="mt-1 text-lg text-brand-sand">
         <a href="/" class="hover:text-white transition-colors underline decoration-brand-gold/30 underline-offset-4">Restoring Democracy's Promise</a>
@@ -311,7 +257,7 @@
       <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark mb-6 section-divider">About</h2>
       <div class="prose prose-lg max-w-none text-brand-offblack leading-relaxed space-y-5">
         <p>
-          Timothy C. Tucker is the Executive Editor of <a href="/" class="text-brand-green font-semibold hover:text-brand-green-dark underline decoration-brand-gold/40 underline-offset-2">Restoring Democracy's Promise</a>, an investigative newsroom based in Iowa. His reporting began at the local level, documenting extremist school board candidates, but quickly expanded as evidence led him into the national networks shaping those campaigns.
+          Timothy C. Tucker is the Founder, Executive Editor & Investigative Journalist of <a href="/" class="text-brand-green font-semibold hover:text-brand-green-dark underline decoration-brand-gold/40 underline-offset-2">Restoring Democracy's Promise</a>, an investigative newsroom based in Iowa. His reporting began at the local level, documenting extremist school board candidates, but quickly expanded as evidence led him into the national networks shaping those campaigns.
         </p>
         <p>
           Living in one of the nation's hotbeds of Christian nationalism, he has focused on exposing how religion is weaponized as a political tool through dark money networks, model legislation, and coordinated influence operations. His work, cited by organizations such as the <strong>Interfaith Alliance of Iowa</strong>, frames local stories within a larger national struggle to preserve democratic institutions.
@@ -377,7 +323,7 @@
 
       <!-- Warrantless Surveillance Series -->
       <div class="mb-8">
-        <h3 class="font-serif text-xl font-bold text-brand-green-dark mb-4">The Warrantless Surveillance Series</h3>
+        <h3 class="font-serif text-xl font-bold text-brand-green-dark mb-4">The Leviathan Series</h3>
         <div class="space-y-3">
           <a href="https://exposed1.substack.com/p/the-department-of-governance-by-algorithm" target="_blank" rel="noopener noreferrer"
              class="investigation-link block bg-white rounded-xl shadow-sm p-4 group">
@@ -405,8 +351,18 @@
              class="investigation-link block bg-white rounded-xl shadow-sm p-4 group">
             <div class="flex items-center justify-between">
               <div>
-                <span class="text-xs font-semibold text-brand-orange uppercase tracking-wide">Part II</span>
+                <span class="text-xs font-semibold text-brand-orange uppercase tracking-wide">Part III</span>
                 <h4 class="text-brand-green-dark font-semibold group-hover:text-brand-gold transition mt-0.5">SAVE: The Benefits Database Now Monitoring Your Vote</h4>
+              </div>
+              <svg class="w-5 h-5 text-brand-gold opacity-50 group-hover:opacity-100 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a href="https://exposed1.substack.com/p/the-performance-of-protection" target="_blank" rel="noopener noreferrer" class="investigation-link block bg-white rounded-xl shadow-sm p-4 group">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-semibold text-brand-orange uppercase tracking-wide">Part I</span>
+                <h4 class="text-brand-green-dark font-semibold group-hover:text-brand-gold transition mt-0.5">The Performance of Protection</h4>
               </div>
               <svg class="w-5 h-5 text-brand-gold opacity-50 group-hover:opacity-100 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </div>
@@ -416,7 +372,7 @@
              class="investigation-link block bg-white rounded-xl shadow-sm p-4 group">
             <div class="flex items-center justify-between">
               <div>
-                <span class="text-xs font-semibold text-brand-orange uppercase tracking-wide">Part I</span>
+                <span class="text-xs font-semibold text-brand-orange uppercase tracking-wide">Part II</span>
                 <h4 class="text-brand-green-dark font-semibold group-hover:text-brand-gold transition mt-0.5">The ALPR Trap: America's Plate Reader Network</h4>
               </div>
               <svg class="w-5 h-5 text-brand-gold opacity-50 group-hover:opacity-100 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -503,9 +459,6 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <h3 class="font-semibold text-brand-gold mb-3">Editorial Inquiries</h3>
-            <p class="text-sm leading-relaxed mb-2">
-              <a href="mailto:editor@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline font-semibold">editor@restoring-democracy.org</a>
-            </p>
             <p class="text-sm leading-relaxed">
               Phone: <a href="tel:+17542936975" class="text-brand-orange hover:text-brand-gold hover:underline font-semibold">754-293-6975</a>
             </p>
@@ -538,10 +491,6 @@
         <p class="text-base">&copy; 2023-2026 Restoring Democracy's Promise. All rights reserved.</p>
         <span class="tooltip-text">This project is powered by receipts.</span>
       </div>
-
-      <p class="mt-3">
-        Contact: <a href="mailto:editor@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline font-semibold">editor@restoring-democracy.org</a>
-      </p>
       <p class="mt-2">
         Phone: <a href="tel:+17542936975" class="text-brand-orange hover:text-brand-gold hover:underline font-semibold">754-293-6975</a>
       </p>
@@ -554,5 +503,14 @@
     </div>
   </footer>
 
+  <script>
+  function shareThisPage() {
+    if (navigator.share) {
+      navigator.share({ title: document.title, url: window.location.href }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+    }
+  }
+  </script>
 </body>
 </html>

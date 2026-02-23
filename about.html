@@ -290,10 +290,16 @@
           <a href="index.html#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
           <a href="index.html#analytics" class="nav-link text-brand-sand text-sm">Analytics</a>
           <a href="about.html" class="nav-link text-brand-gold text-sm">About</a>
-          <a href="index.html#founder" class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="/journalists/" class="nav-link text-brand-sand text-sm">Team</a>
           <a href="index.html#standards" class="nav-link text-brand-sand text-sm">Standards</a>
           <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm">Substack</a>
           <a href="secure-tips.html" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+          <button onclick="shareThisPage()" title="Share this page" class="p-2 rounded-md text-brand-sand/80 hover:text-white transition-colors">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
           <a href="index.html#support" class="ml-2 bg-brand-gold text-brand-offblack text-sm font-bold py-2 px-5 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-md">Support Our Work</a>
         </div>
         <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false">
@@ -306,7 +312,7 @@
         <a href="index.html#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
         <a href="index.html#analytics" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
         <a href="about.html" class="block py-2.5 px-3 text-brand-gold text-sm font-medium rounded transition">About</a>
-        <a href="index.html#founder" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
+        <a href="/journalists/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
         <a href="index.html#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
         <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack ↗</a>
         <a href="secure-tips.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
@@ -475,6 +481,18 @@
       </div>
     </section>
 
+
+    <!-- ═══════════════ FUNDING TRANSPARENCY ═══════════════ -->
+    <section class="py-14 md:py-18 bg-brand-cream">
+      <div class="max-w-4xl mx-auto px-4 reveal">
+        <div class="section-card p-7 md:p-10">
+          <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark">Funding Transparency</h2>
+          <p class="mt-4 text-slate-700 text-base leading-relaxed">RDP is currently donor-supported and reader-funded through voluntary subscriptions. We accept no government funding, no advertising revenue, and no contributions that carry editorial conditions.</p>
+          <p class="mt-3 text-slate-700 text-base leading-relaxed">RDP is exploring 501(c)(3) non-profit status, and financial disclosures will be published annually once obtained.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══════════════ PRESS & MEDIA ═══════════════ -->
     <section class="py-14 md:py-18 bg-brand-cream">
       <div class="max-w-4xl mx-auto px-4 reveal">
@@ -588,7 +606,7 @@
           <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Organization</h4>
           <ul class="space-y-1.5 text-sm">
             <li><a href="about.html" class="text-brand-sand/80 hover:text-brand-gold transition">About RDP</a></li>
-            <li><a href="index.html#founder" class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
+            <li><a href="/journalists/" class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
             <li><a href="index.html#standards" class="text-brand-sand/80 hover:text-brand-gold transition">Standards &amp; Corrections</a></li>
             <li><a href="privacy-policy.html" class="text-brand-sand/80 hover:text-brand-gold transition">Privacy Policy</a></li>
             <li><a href="secure-tips.html" class="text-brand-sand/80 hover:text-brand-gold transition">Secure Tips</a></li>
@@ -613,6 +631,15 @@
   </footer>
 
   <script>
+
+    function shareThisPage() {
+      if (navigator.share) {
+        navigator.share({ title: document.title, url: window.location.href }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+      }
+    }
+
     // ── Navbar scroll ──
     const nav = document.querySelector('.nav-bar');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
