@@ -250,6 +250,12 @@
       <a href="/" class="text-brand-sand/80 hover:text-white text-sm font-medium transition-colors">Home</a>
       <a href="/about" class="text-brand-sand/80 hover:text-white text-sm font-medium transition-colors">About</a>
       <a href="/secure-tips" class="text-brand-sand/80 hover:text-white text-sm font-medium transition-colors">Secure Tips</a>
+      <button onclick="shareThisPage()" title="Share this page" class="p-2 rounded-md text-brand-sand/80 hover:text-white transition-colors" aria-label="Share this page">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+      </button>
     </div>
 
     <div class="relative max-w-4xl mx-auto z-10 pt-8">
@@ -553,6 +559,16 @@
       </p>
     </div>
   </footer>
+
+<script>
+  function shareThisPage() {
+    if (navigator.share) {
+      navigator.share({ title: document.title, url: window.location.href }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(window.location.href).catch(() => {});
+    }
+  }
+</script>
 
 </body>
 </html>
