@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Funds the Identity Backbone? — Restoring Democracy's Promise</title>
+    <meta name="description" content="An interactive exhibit mapping $4.89 billion in federal contracts from USCIS fee revenue to IBM, Palantir, Peraton, and the identity verification stack. Primary-source driven.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://restoring-democracy.org/funding-flow">
+    <meta property="og:title" content="Who Funds the Identity Backbone? | $4.89B in Federal Contracts Exposed">
+    <meta property="og:description" content="The $30M Palantir dashboard everyone talks about sits on top of a $279M IBM engine nobody sees. Interactive exhibit mapping the full contract stack.">
+    <meta property="og:image" content="https://restoring-democracy.org/assets/og/funding-flow-og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Restoring Democracy's Promise">
+    <meta property="article:publisher" content="https://restoring-democracy.org">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://restoring-democracy.org/funding-flow">
+    <meta name="twitter:title" content="Who Funds the Identity Backbone? | $4.89B in Federal Contracts Exposed">
+    <meta name="twitter:description" content="The $30M Palantir dashboard everyone talks about sits on top of a $279M IBM engine nobody sees. Interactive exhibit mapping the full contract stack.">
+    <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/funding-flow-og.png">
+    <meta name="twitter:image:alt" content="Concentric circles showing IBM $279M contract dwarfing Palantir $30M — the identity verification stack mapped">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/Square_logo_green.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/Square_logo_green.png">
+    <link rel="apple-touch-icon" href="/assets/Square_logo_green.png">
+    <meta name="theme-color" content="#071612">
+    <link rel="canonical" href="https://restoring-democracy.org/funding-flow">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Who Funds the Identity Backbone?",
+      "description": "An interactive exhibit mapping $4.89 billion in federal contracts from USCIS fee revenue to IBM, Palantir, Peraton, and the identity verification stack.",
+      "author": {
+        "@type": "Organization",
+        "name": "Restoring Democracy's Promise"
+      },
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "Restoring Democracy's Promise",
+        "url": "https://restoring-democracy.org",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://restoring-democracy.org/assets/Square_logo_green.png"
+        }
+      },
+      "isPartOf": {
+        "@type": "CreativeWorkSeries",
+        "name": "Warrantless Surveillance Series",
+        "position": "4"
+      },
+      "datePublished": "2026-02-19",
+      "dateModified": "2026-02-20",
+      "image": "https://restoring-democracy.org/assets/og/funding-flow-og.png",
+      "url": "https://restoring-democracy.org/funding-flow"
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QJ3L9CT4Z7');
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#2d5c4f',
+                        'brand-green-dark': '#24473e',
+                        'brand-orange': '#f4a261',
+                        'brand-gold': '#D4AF37',
+                        'brand-white': '#F6F7F8',
+                        'brand-offblack': '#161616',
+                        'brand-sand': '#e4d5b9',
+                        'dark-bg': '#071612',
+                        'card-bg': '#0b1f19',
+                        'border-color': '#1f3b33',
+                        'text-light': '#e7efe9',
+                        'accent-red': '#ef4444',
+                        'accent-blue': '#60a5fa',
+                        'accent-cyan': '#2dd4bf',
+                        'accent-emerald': '#10b981',
+                        'money-green': '#22c55e',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #071612;
+            color: #e7efe9;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-serif { font-family: 'Lora', serif; }
+
+        /* Scanline */
+        .scanline {
+            width: 100%; height: 2px;
+            background: rgba(45, 212, 191, 0.06);
+            position: fixed; z-index: 50;
+            animation: scan 10s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
+
+        /* Concentric circle animations */
+        .orbit-ring {
+            animation: orbit-pulse 4s ease-in-out infinite;
+        }
+        @keyframes orbit-pulse {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.35; }
+        }
+
+        .contract-circle {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .contract-circle:hover {
+            filter: brightness(1.3);
+        }
+        .contract-circle.active {
+            filter: brightness(1.4) drop-shadow(0 0 20px currentColor);
+        }
+
+        /* Money particle animation */
+        .money-particle {
+            animation: flow-down 3s linear infinite;
+            opacity: 0;
+        }
+        @keyframes flow-down {
+            0% { opacity: 0; transform: translateY(-20px); }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(20px); }
+        }
+
+        /* Data stream */
+        .data-stream { stroke-dasharray: 8; animation: dash 1.5s linear infinite; }
+        @keyframes dash { to { stroke-dashoffset: -16; } }
+
+        /* Flow pipe animations */
+        .flow-pipe {
+            stroke-dasharray: 12 6;
+            animation: pipe-flow 2s linear infinite;
+        }
+        @keyframes pipe-flow { to { stroke-dashoffset: -18; } }
+
+        /* Pulse effects */
+        .pulse-gold { animation: p-gold 2.5s infinite; }
+        @keyframes p-gold {
+            0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.6); }
+            70% { box-shadow: 0 0 0 18px rgba(212,175,55,0); }
+            100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
+        }
+        .pulse-green { animation: p-green 2.5s infinite; }
+        @keyframes p-green {
+            0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(34,197,94,0); }
+            100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+        }
+        .pulse-red { animation: p-red 2s infinite; }
+        @keyframes p-red {
+            0% { box-shadow: 0 0 0 0 rgba(239,68,68,0.6); }
+            70% { box-shadow: 0 0 0 12px rgba(239,68,68,0); }
+            100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+        }
+
+        /* Counter animation */
+        .counter-value {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Card hover */
+        .vendor-card {
+            transition: all 0.4s ease;
+            border: 1px solid rgba(31, 59, 51, 0.6);
+        }
+        .vendor-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(212,175,55,0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Tooltip for concentric */
+        .circle-tooltip {
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            position: absolute;
+            z-index: 30;
+        }
+        .circle-tooltip.show { opacity: 1; }
+
+        /* Footer tooltip */
+        .footer-tooltip { position: relative; cursor: pointer; }
+        .footer-tooltip .tooltip-text {
+            visibility: hidden; width: 220px;
+            background-color: #24473e; color: #f4a261;
+            text-align: center; border-radius: 8px;
+            padding: 7px 0; position: absolute; z-index: 1;
+            bottom: 120%; left: 50%; transform: translateX(-50%);
+            opacity: 0; transition: opacity 0.4s;
+            font-size: 1em; box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+        .footer-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b1f19; }
+        ::-webkit-scrollbar-thumb { background: #1f3b33; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2d5c4f; }
+
+        /* Flow diagram connector lines */
+        .connector { transition: all 0.4s ease; }
+        .connector:hover { stroke-width: 4; }
+
+        /* Accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+        }
+        .accordion-content.open {
+            max-height: 600px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Print styles */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: #fff !important; color: #000 !important; }
+            .scanline { display: none; }
+        }
+    </style>
+</head>
+
+<body class="overflow-x-hidden">
+    <div class="scanline"></div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="bg-card-bg border-b border-border-color sticky top-0 z-40 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="https://restoring-democracy.org" class="flex items-center group">
+                        <img src="/assets/Square_logo_transparent.png" alt="RDP Logo" class="h-8 w-8 mr-2 group-hover:opacity-80 transition-opacity">
+                        <span class="text-brand-gold font-bold text-lg tracking-tight group-hover:text-brand-orange transition-colors">RDP</span>
+                    </a>
+                    <span class="ml-3 text-slate-400 text-xs font-mono border-l border-slate-600 pl-3 hidden sm:inline">WARRANTLESS SURVEILLANCE SERIES // PART IV — FUNDING ARCHITECTURE</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hidden md:block">
+                        Return to Investigation <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                    <button onclick="shareExhibit()" class="text-slate-400 hover:text-white p-2 rounded-md transition-colors" title="Share this exhibit">
+                        <i class="fas fa-share-alt text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header class="relative bg-gradient-to-b from-brand-green-dark via-dark-bg to-dark-bg pt-16 pb-24 overflow-hidden">
+        <!-- Grid pattern background -->
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22none%22 stroke=%22white%22 stroke-width=%220.5%22/></svg>'); background-size: 40px 40px;"></div>
+        <!-- Gradient orbs -->
+        <div class="absolute top-20 left-10 w-[500px] h-[500px] rounded-full bg-accent-cyan/[0.04] blur-[120px]"></div>
+        <div class="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-brand-gold/[0.05] blur-[100px]"></div>
+
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-accent-cyan font-mono text-sm tracking-widest mb-4 uppercase">
+                <i class="fas fa-dollar-sign mr-1"></i> Evidence Exhibit // Part IV — Funding Architecture
+            </p>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-serif font-bold text-white mb-2 leading-[1.1]">
+                <span class="block">Who Funds America’s</span>
+                <span class="block text-brand-gold">Identity Infrastructure?</span>
+            </h1>
+            <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-300 leading-relaxed">
+                Not through annual congressional appropriations. Through immigrant application fees — and billions in federal contracts.
+            </p>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-200 leading-relaxed">
+                Most federal programs are funded through annual congressional budgets.<br>
+                This one isn’t.<br>
+                That changes how oversight works.
+            </p>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-300 leading-relaxed">
+                The U.S. government’s identity verification systems are financed through fee-based funding mechanisms and large-scale private vendor contracts. This exhibit shows how those funds flow — from immigration application fees to the contractors building and operating the system.
+            </p>
+            <div class="mt-8 flex justify-center flex-wrap gap-3 text-sm font-mono">
+                <span class="px-3 py-1.5 bg-slate-800 border border-slate-600 rounded text-slate-400">
+                    SOURCE: <span class="text-money-green">USASPENDING / FPDS</span>
+                </span>
+                <span class="px-3 py-1.5 bg-slate-800 border border-slate-600 rounded text-slate-400">
+                    TOTAL: <span class="text-accent-red">$4.89B+ (aggregate; methodology below)</span>
+                </span>
+                <span class="px-3 py-1.5 bg-slate-800 border border-slate-600 rounded text-slate-400">
+                    IBM – <span class="text-accent-blue">$279M contract (FALCON)</span>
+                </span>
+                <span class="px-3 py-1.5 bg-slate-800 border border-slate-600 rounded text-slate-400">
+                    Peraton – <span class="text-accent-cyan">$95M contract (HART)</span>
+                </span>
+                <span class="px-3 py-1.5 bg-slate-800 border border-slate-600 rounded text-slate-400">
+                    Palantir – <span class="text-brand-orange">$30M contract (ImmigrationOS)</span>
+                </span>
+            </div>
+            <p class="mt-3 text-xs text-slate-500 font-mono">
+                *Contract values reflect publicly reported DHS procurement ceiling amounts. See sourcing section for details.*
+            </p>
+            <div class="mt-8 flex justify-center flex-wrap gap-3">
+                <a href="#concentric" class="inline-flex items-center gap-2 bg-brand-gold text-dark-bg font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-brand-orange transition-all duration-300 hover:scale-105">
+                    <i class="fas fa-chart-pie"></i> View Contract Comparison
+                </a>
+                <a href="#flow" class="inline-flex items-center gap-2 bg-slate-800 border border-slate-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-700 transition-all duration-300">
+                    <i class="fas fa-project-diagram"></i> Trace the Money
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pb-12">
+
+        <!-- ===== KEY TAKEAWAYS ===== -->
+        <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10 reveal">
+            <div class="bg-slate-800/80 backdrop-blur-lg rounded-2xl border border-slate-700 p-6 md:p-8 shadow-2xl">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-lg bg-money-green/20 flex items-center justify-center">
+                        <i class="fas fa-key text-money-green"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">Key Takeaways</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="flex gap-3">
+                        <span class="mt-1.5 h-2.5 w-2.5 rounded-full bg-brand-gold flex-shrink-0"></span>
+                        <p class="text-slate-300 text-sm leading-relaxed"><span class="font-semibold text-white">The visible layer is the smallest.</span> Palantir's ImmigrationOS ($30M) is a dashboard. IBM's FALCON ($279M) is the engine. The full stack exceeds $4.89B.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="mt-1.5 h-2.5 w-2.5 rounded-full bg-accent-red flex-shrink-0"></span>
+                        <p class="text-slate-300 text-sm leading-relaxed"><span class="font-semibold text-white">Core operational logic is implemented within contractor-maintained systems; public visibility may be limited by redaction and incomplete public SOW fields.</span></p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="mt-1.5 h-2.5 w-2.5 rounded-full bg-money-green flex-shrink-0"></span>
+                        <p class="text-slate-300 text-sm leading-relaxed"><span class="font-semibold text-white">Fee-funded, not appropriated.</span> USCIS operations are largely fee-funded through the IEFA rather than annual appropriations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 reveal">
+            <details class="bg-slate-800/60 rounded-xl border border-slate-700 p-4">
+                <summary class="text-sm font-semibold text-white cursor-pointer">Data Scope &amp; Definitions</summary>
+                <ul class="mt-3 space-y-2 text-sm text-slate-300 list-disc list-inside">
+                    <li>Contract ceiling = "Base and All Options" (max potential over full term)</li>
+                    <li>Obligated = total obligations to date (USAspending)</li>
+                    <li>Outlays = cash disbursed to date (USAspending)</li>
+                    <li>Exact values: ceiling $277,940,473.76; obligated $92,648,677.23; outlays $41,745,521.31</li>
+                    <li>Values current as of 2026-01-14</li>
+                    <li><a href="https://www.usaspending.gov/search/?hash=de649d4517320ea7549987d74293ca75" target="_blank" rel="noopener noreferrer" class="text-accent-cyan hover:text-brand-gold underline">USAspending award for PIID 70SBUR24F00000103</a></li>
+                </ul>
+            </details>
+        </section>
+
+        <!-- ===== CONCENTRIC CIRCLES: THE COMPARISON ===== -->
+        <section id="concentric" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
+            <div class="text-center mb-4">
+                <p class="text-accent-cyan font-mono text-sm tracking-widest uppercase mb-2">Exhibit I</p>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-white">The Scale of the Leviathan</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                    Click each ring to see the contract details. The area of each circle is proportional to the contract value.
+                </p>
+            </div>
+
+            <div class="mt-8 bg-slate-800/60 rounded-2xl border border-slate-700 p-6 md:p-10 shadow-2xl relative overflow-hidden">
+                <!-- Ambient glow behind SVG -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="w-[500px] h-[500px] rounded-full bg-brand-gold/[0.03] blur-[80px]"></div>
+                </div>
+
+                <div class="flex flex-col lg:flex-row items-center gap-8">
+                    <!-- SVG Visualization -->
+                    <div class="flex-1 relative w-full" style="min-height: 480px;">
+                        <svg id="concentric-svg" viewBox="0 0 600 480" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <!-- Gradient for total stack -->
+                                <radialGradient id="grad-total" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.15"/>
+                                    <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.03"/>
+                                </radialGradient>
+                                <!-- Gradient for IBM -->
+                                <radialGradient id="grad-ibm" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.25"/>
+                                    <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:0.08"/>
+                                </radialGradient>
+                                <!-- Gradient for HART -->
+                                <radialGradient id="grad-hart" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" style="stop-color:#2dd4bf;stop-opacity:0.3"/>
+                                    <stop offset="100%" style="stop-color:#2dd4bf;stop-opacity:0.08"/>
+                                </radialGradient>
+                                <!-- Gradient for Palantir -->
+                                <radialGradient id="grad-palantir" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" style="stop-color:#f4a261;stop-opacity:0.5"/>
+                                    <stop offset="100%" style="stop-color:#f4a261;stop-opacity:0.15"/>
+                                </radialGradient>
+                                <!-- Glow filter -->
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="4" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                                <filter id="glow-strong">
+                                    <feGaussianBlur stdDeviation="8" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                            </defs>
+
+                            <!-- Orbit rings (decorative) -->
+                            <circle cx="300" cy="240" r="215" fill="none" stroke="#1f3b33" stroke-width="0.5" class="orbit-ring" style="animation-delay: 0s"/>
+                            <circle cx="300" cy="240" r="175" fill="none" stroke="#1f3b33" stroke-width="0.5" class="orbit-ring" style="animation-delay: 1s"/>
+                            <circle cx="300" cy="240" r="125" fill="none" stroke="#1f3b33" stroke-width="0.5" class="orbit-ring" style="animation-delay: 2s"/>
+
+                            <!-- Ring 4: Total Contract Mass $4.89B+ (outermost) -->
+                            <circle cx="300" cy="240" r="210" fill="url(#grad-total)" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3" opacity="0.7"
+                                    class="contract-circle" data-contract="total" filter="url(#glow)"/>
+                            <text x="300" y="52" text-anchor="middle" fill="#ef4444" font-family="JetBrains Mono" font-size="11" font-weight="700" opacity="0.9">TOTAL STACK: $4.89B+</text>
+
+                            <!-- Ring 3: IBM FALCON $279M -->
+                            <circle cx="300" cy="240" r="158" fill="url(#grad-ibm)" stroke="#60a5fa" stroke-width="2.5" opacity="0.85"
+                                    class="contract-circle" data-contract="ibm" filter="url(#glow)"/>
+
+                            <!-- Ring 2: HART / Peraton $95M -->
+                            <circle cx="300" cy="240" r="92" fill="url(#grad-hart)" stroke="#2dd4bf" stroke-width="2" opacity="0.85"
+                                    class="contract-circle" data-contract="hart" filter="url(#glow)"/>
+
+                            <!-- Ring 1: Palantir ImmigrationOS $30M (innermost) -->
+                            <circle cx="300" cy="240" r="52" fill="url(#grad-palantir)" stroke="#f4a261" stroke-width="2.5" opacity="0.95"
+                                    class="contract-circle" data-contract="palantir" filter="url(#glow)"/>
+
+                            <!-- Center dollar sign -->
+                            <text x="300" y="246" text-anchor="middle" fill="#f4a261" font-family="JetBrains Mono" font-size="28" font-weight="700" opacity="0.9">$</text>
+
+                            <!-- Labels (curved or placed) -->
+                            <!-- IBM label -->
+                            <text x="300" y="100" text-anchor="middle" fill="#60a5fa" font-family="JetBrains Mono" font-size="12" font-weight="700">IBM FALCON — $279M</text>
+                            <text x="300" y="115" text-anchor="middle" fill="#94a3b8" font-family="Inter" font-size="10">VIS / SAVE / E-Verify Engine</text>
+
+                            <!-- HART label -->
+                            <text x="480" y="200" text-anchor="start" fill="#2dd4bf" font-family="JetBrains Mono" font-size="11" font-weight="700">HART</text>
+                            <text x="480" y="215" text-anchor="start" fill="#94a3b8" font-family="Inter" font-size="10">Peraton — $95M</text>
+                            <text x="480" y="228" text-anchor="start" fill="#94a3b8" font-family="Inter" font-size="9">Biometric System</text>
+                            <line x1="392" y1="210" x2="475" y2="210" stroke="#2dd4bf" stroke-width="1" opacity="0.5" stroke-dasharray="3 2"/>
+
+                            <!-- Palantir label -->
+                            <text x="300" y="260" text-anchor="middle" fill="#f4a261" font-family="JetBrains Mono" font-size="10" font-weight="700">PALANTIR</text>
+                            <text x="300" y="274" text-anchor="middle" fill="#94a3b8" font-family="Inter" font-size="9">$30M — Dashboard</text>
+
+                            <!-- Scale annotation -->
+                            <line x1="50" y1="240" x2="50" y2="30" stroke="#64748b" stroke-width="1" opacity="0.5"/>
+                            <line x1="45" y1="240" x2="55" y2="240" stroke="#64748b" stroke-width="1" opacity="0.5"/>
+                            <line x1="45" y1="30" x2="55" y2="30" stroke="#64748b" stroke-width="1" opacity="0.5"/>
+                            <text x="44" y="140" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono" font-size="9" transform="rotate(-90, 44, 140)">AREA = CONTRACT VALUE</text>
+
+                            <!-- "Iceberg" annotation arrow -->
+                            <text x="300" y="460" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="11" font-style="italic">
+                                The headline is the smallest circle. The engine is everything around it.
+                            </text>
+                        </svg>
+                    </div>
+
+                    <!-- Detail Panel -->
+                    <div class="lg:w-80 w-full flex-shrink-0">
+                        <div id="detail-panel" class="bg-slate-900 rounded-xl border border-slate-700 overflow-hidden">
+                            <!-- Default state -->
+                            <div id="detail-default" class="p-6">
+                                <p class="text-sm text-brand-gold font-mono uppercase tracking-wider mb-3">
+                                    <i class="fas fa-mouse-pointer mr-1"></i> Interactive
+                                </p>
+                                <h3 class="text-xl font-bold text-white mb-3">Click a Ring</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    Select any concentric circle to reveal the contract details, vendor, scope, and what it builds inside the identity verification stack.
+                                </p>
+                                <div class="mt-4 space-y-2">
+                                    <div class="flex items-center gap-2 text-xs text-slate-500">
+                                        <span class="w-3 h-3 rounded-full bg-accent-red/40 border border-accent-red"></span> Total Stack ($4.89B+)
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs text-slate-500">
+                                        <span class="w-3 h-3 rounded-full bg-accent-blue/40 border border-accent-blue"></span> IBM FALCON ($279M)
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs text-slate-500">
+                                        <span class="w-3 h-3 rounded-full bg-accent-cyan/40 border border-accent-cyan"></span> HART / Peraton ($95M)
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs text-slate-500">
+                                        <span class="w-3 h-3 rounded-full bg-brand-orange/40 border border-brand-orange"></span> Palantir ImmigrationOS ($30M)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Palantir detail -->
+                            <div id="detail-palantir" class="p-6 hidden">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-brand-orange"></span>
+                                    <p class="text-sm text-brand-orange font-mono uppercase tracking-wider">The Dashboard</p>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white">Palantir — $30M</h3>
+                                <p class="text-brand-orange font-mono text-sm mt-1">ImmigrationOS</p>
+                                <div class="mt-4 space-y-3 text-sm text-slate-300">
+                                    <p><span class="font-semibold text-white">Awarded:</span> April 2025</p>
+                                    <p><span class="font-semibold text-white">Function:</span> Analytics dashboard and case-management interface. Fuses data from IRS, SSA, and local law enforcement for deportation pipeline visibility.</p>
+                                    <p><span class="font-semibold text-white">The tell:</span> This is the <em>user interface</em>, not the engine. Headlines focus here because it carries a famous name. But the decisions are made below.</p>
+                                </div>
+                                <div class="mt-4 p-3 bg-brand-orange/10 rounded-lg border border-brand-orange/30 text-xs text-brand-orange">
+                                    <i class="fas fa-info-circle mr-1"></i> Represents just <strong>0.6%</strong> of the total contract stack.
+                                </div>
+                            </div>
+
+                            <!-- IBM detail -->
+                            <div id="detail-ibm" class="p-6 hidden">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-accent-blue"></span>
+                                    <p class="text-sm text-accent-blue font-mono uppercase tracking-wider">The Engine</p>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white">IBM — $279M</h3>
+                                <p class="text-accent-blue font-mono text-sm mt-1">FALCON Task Order</p>
+                                <div class="mt-4 space-y-3 text-sm text-slate-300">
+                                    <p><span class="font-semibold text-white">Awarded:</span> May 2024</p>
+                                    <p><span class="font-semibold text-white">Function:</span> Builds and operates the <strong>Verification Information System (VIS)</strong> — the transaction engine behind E-Verify and SAVE. Creates the <strong>Person Centric Entity Resolution (PCER)</strong> microservice.</p>
+                                    <p><span class="font-semibold text-white">The tell:</span> PCER constructs persistent identity profiles — your <em>Golden Record</em>. This is where "verification" becomes "identity modeling."</p>
+                                </div>
+                                <div class="mt-4 p-3 bg-accent-blue/10 rounded-lg border border-accent-blue/30 text-xs text-accent-blue">
+                                    <i class="fas fa-exclamation-triangle mr-1"></i> <strong>9.3×</strong> larger than the Palantir contract. This is the verification backbone.
+                                </div>
+                            </div>
+
+                            <!-- HART detail -->
+                            <div id="detail-hart" class="p-6 hidden">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-accent-cyan"></span>
+                                    <p class="text-sm text-accent-cyan font-mono uppercase tracking-wider">The Memory</p>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white">Peraton — $95M</h3>
+                                <p class="text-accent-cyan font-mono text-sm mt-1">HART Biometric System</p>
+                                <div class="mt-4 space-y-3 text-sm text-slate-300">
+                                    <p><span class="font-semibold text-white">Operator:</span> Peraton (via Northrop Grumman IT acquisition)</p>
+                                    <p><span class="font-semibold text-white">Function:</span> Cloud-native biometric database on <strong>AWS GovCloud</strong>. Replaces legacy IDENT. Stores face, iris, fingerprint data — and maps <strong>"Relationship Patterns"</strong> between individuals.</p>
+                                    <p><span class="font-semibold text-white">The tell:</span> Once a verification system has <em>memory</em>, it stops being a lookup tool. It becomes a national gate.</p>
+                                </div>
+                                <div class="mt-4 p-3 bg-accent-cyan/10 rounded-lg border border-accent-cyan/30 text-xs text-accent-cyan">
+                                    <i class="fas fa-fingerprint mr-1"></i> Hosted on Amazon AWS GovCloud. Key biometric algorithms may be shielded from public records requests by vendor IP protections.
+                                </div>
+                            </div>
+
+                            <!-- Total detail -->
+                            <div id="detail-total" class="p-6 hidden">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-3 h-3 rounded-full bg-accent-red"></span>
+                                    <p class="text-sm text-accent-red font-mono uppercase tracking-wider">The Full Stack</p>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white">Total: $4.89B+</h3>
+                                <p class="text-accent-red font-mono text-sm mt-1">Combined Contract Mass</p>
+                                <div class="mt-4 space-y-3 text-sm text-slate-300">
+                                    <p><span class="font-semibold text-white">Includes:</span> FALCON (IBM), HART (Peraton), ImmigrationOS (Palantir), plus NEC facial recognition algorithms, AWS hosting, and additional Palantir Pentagon & Navy contracts.</p>
+                                    <p><span class="font-semibold text-white">Funded by:</span> IEFA (Immigration Examinations Fee Account) — immigrant application fees, not congressional appropriations.</p>
+                                    <p><span class="font-semibold text-white">The tell:</span> The sovereignty of American identity verification has been privatized. The core logic is owned by contractors and shielded by intellectual property law.</p>
+                                </div>
+                                <div class="mt-4 p-3 bg-accent-red/10 rounded-lg border border-accent-red/30 text-xs text-accent-red">
+                                    <i class="fas fa-gavel mr-1"></i> This contract stack was executed through procurement actions rather than a standalone authorizing vote on this integrated configuration.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ratio bar below -->
+                <div class="mt-8 pt-6 border-t border-slate-700">
+                    <p class="text-xs font-mono text-slate-500 uppercase tracking-wider mb-3 text-center">Proportional Contract Value</p>
+                    <div class="relative h-10 rounded-full overflow-hidden bg-slate-900 border border-slate-700">
+                        <div class="absolute inset-y-0 left-0 bg-gradient-to-r from-accent-red/40 to-accent-red/20 rounded-l-full" style="width: 100%;" title="Total: $4.89B+">
+                        </div>
+                        <div class="absolute inset-y-0 left-0 bg-gradient-to-r from-accent-blue/60 to-accent-blue/30 rounded-l-full" style="width: 5.7%;" title="IBM: $279M">
+                        </div>
+                        <div class="absolute inset-y-0 left-0 bg-gradient-to-r from-accent-cyan/60 to-accent-cyan/30 rounded-l-full" style="width: 1.94%;" title="HART: $95M">
+                        </div>
+                        <div class="absolute inset-y-0 left-0 bg-gradient-to-r from-brand-orange/80 to-brand-orange/40 rounded-l-full" style="width: 0.61%;" title="Palantir: $30M">
+                        </div>
+                        <!-- Labels inside bar -->
+                        <div class="absolute inset-0 flex items-center justify-between px-4">
+                            <span class="text-[10px] font-mono text-brand-orange font-bold z-10">$30M</span>
+                            <span class="text-[10px] font-mono text-slate-400 z-10">$4.89B+ →</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-2 text-[10px] font-mono text-slate-500">
+                        <span>Palantir: 0.6%</span>
+                        <span>IBM FALCON: 5.7%</span>
+                        <span>HART: 1.9%</span>
+                        <span>Remaining Stack: 91.8%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== THE FUNDING PIPELINE ===== -->
+        <section id="flow" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
+            <div class="text-center mb-4">
+                <p class="text-money-green font-mono text-sm tracking-widest uppercase mb-2">Exhibit II</p>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-white">Follow the Money</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                    Immigrant fees fund the system that verifies everyone. No congressional appropriation required.
+                </p>
+            </div>
+
+            <!-- Flow Diagram -->
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-5 gap-0 items-stretch">
+                <!-- Step 1: Fee Source -->
+                <div class="relative bg-slate-800 rounded-l-2xl md:rounded-l-2xl border border-slate-700 p-5 flex flex-col items-center justify-center text-center min-h-[180px]">
+                    <div class="w-14 h-14 rounded-full bg-money-green/20 flex items-center justify-center mb-3 pulse-green">
+                        <i class="fas fa-file-invoice-dollar text-2xl text-money-green"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">Applicant Fees</h4>
+                    <p class="text-xs text-slate-400 mt-1">Visa, green card, citizenship, and work-permit application fees paid by immigrants.</p>
+                    <div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-money-green text-xl">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="md:hidden my-2 text-money-green text-xl">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <!-- Step 2: IEFA -->
+                <div class="relative bg-slate-800 border border-slate-700 p-5 flex flex-col items-center justify-center text-center min-h-[180px]">
+                    <div class="w-14 h-14 rounded-full bg-brand-gold/20 flex items-center justify-center mb-3">
+                        <i class="fas fa-landmark text-2xl text-brand-gold"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">IEFA</h4>
+                    <p class="text-xs text-slate-400 mt-1">Immigration Examinations Fee Account. Self-funding mechanism — bypasses normal appropriations.</p>
+                    <div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-brand-gold text-xl">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="md:hidden my-2 text-brand-gold text-xl">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <!-- Step 3: USCIS Budget -->
+                <div class="relative bg-slate-800 border border-slate-700 p-5 flex flex-col items-center justify-center text-center min-h-[180px]">
+                    <div class="w-14 h-14 rounded-full bg-accent-blue/20 flex items-center justify-center mb-3">
+                        <i class="fas fa-sitemap text-2xl text-accent-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">USCIS / DHS</h4>
+                    <p class="text-xs text-slate-400 mt-1">IT modernization & operations accounts. Funds allocated internally to verification programs.</p>
+                    <div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-accent-blue text-xl">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="md:hidden my-2 text-accent-blue text-xl">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <!-- Step 4: Contract Vehicles -->
+                <div class="relative bg-slate-800 border border-slate-700 p-5 flex flex-col items-center justify-center text-center min-h-[180px]">
+                    <div class="w-14 h-14 rounded-full bg-accent-red/20 flex items-center justify-center mb-3">
+                        <i class="fas fa-file-contract text-2xl text-accent-red"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">Contract Vehicles</h4>
+                    <p class="text-xs text-slate-400 mt-1">EAGLE II, Alliant 2, IDIQs — task orders define scope and deliverables.</p>
+                    <div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-accent-red text-xl">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="md:hidden my-2 text-accent-red text-xl">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <!-- Step 5: Private Vendors -->
+                <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-r-2xl md:rounded-r-2xl border border-brand-gold/40 p-5 flex flex-col items-center justify-center text-center min-h-[180px]">
+                    <div class="w-14 h-14 rounded-full bg-brand-gold/20 flex items-center justify-center mb-3 pulse-gold">
+                        <i class="fas fa-building text-2xl text-brand-gold"></i>
+                    </div>
+                    <h4 class="font-bold text-brand-gold text-sm">Private Vendors</h4>
+                    <p class="text-xs text-slate-400 mt-1">IBM, Peraton, Palantir, NEC, Amazon. Own the logic, the biometrics, and the algorithms.</p>
+                </div>
+            </div>
+
+            <!-- Arrow annotation -->
+            <div class="mt-4 text-center">
+                <p class="text-xs font-mono text-slate-500 italic">
+                    Immigrants fund the system → the system verifies everyone → private vendors own the logic → you cannot audit the result.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== VENDOR CARDS ===== -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
+            <div class="text-center mb-4">
+                <p class="text-brand-gold font-mono text-sm tracking-widest uppercase mb-2">Exhibit III</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white">The Vendor Stack</h2>
+                <p class="mt-3 max-w-2xl mx-auto text-lg text-slate-400">
+                    Each layer of the identity backbone is owned by a different contractor. Together, they form a system no single agency — or FOIA request — can fully reveal.
+                </p>
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- IBM -->
+                <div class="vendor-card bg-slate-800/80 rounded-xl p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-accent-blue/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-microchip text-2xl text-accent-blue"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-white text-lg">IBM</h3>
+                                <span class="font-mono text-accent-blue text-sm font-bold">$279M</span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-mono mt-0.5">FALCON Task Order · Awarded May 2024</p>
+                            <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                                Builds and operates the <strong class="text-white">Verification Information System (VIS)</strong> — the central transaction engine behind E-Verify and SAVE. Creates the <strong class="text-white">Person Centric Entity Resolution (PCER)</strong> microservice that constructs persistent "Golden Records."
+                            </p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-blue/10 text-accent-blue border border-accent-blue/20">VIS Engine</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-blue/10 text-accent-blue border border-accent-blue/20">PCER</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-blue/10 text-accent-blue border border-accent-blue/20">E-Verify</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-blue/10 text-accent-blue border border-accent-blue/20">SAVE</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-blue/10 text-accent-blue border border-accent-blue/20">Golden Records</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peraton / HART -->
+                <div class="vendor-card bg-slate-800/80 rounded-xl p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-accent-cyan/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-fingerprint text-2xl text-accent-cyan"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-white text-lg">Peraton</h3>
+                                <span class="font-mono text-accent-cyan text-sm font-bold">$95M</span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-mono mt-0.5">HART Biometric System · via Northrop Grumman IT</p>
+                            <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                                Manages <strong class="text-white">HART (Homeland Advanced Recognition Technology)</strong> — the massive biometric database replacing IDENT. Cloud-native on <strong class="text-white">AWS GovCloud</strong>. Fuses face, iris, and fingerprint data. Maps <strong class="text-white">"Relationship Patterns"</strong> between individuals.
+                            </p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20">Biometrics</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20">Face/Iris/Print</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20">AWS GovCloud</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20">Social Graph</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Palantir -->
+                <div class="vendor-card bg-slate-800/80 rounded-xl p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-brand-orange/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-desktop text-2xl text-brand-orange"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-white text-lg">Palantir</h3>
+                                <span class="font-mono text-brand-orange text-sm font-bold">$30M</span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-mono mt-0.5">ImmigrationOS · Awarded April 2025</p>
+                            <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                                The <strong class="text-white">user interface</strong>, not the engine. Creates a digital twin of the immigration lifecycle, fusing data from IRS, SSA, and local police for deportation pipeline "near real-time visibility." <em>The dashboard everyone talks about.</em>
+                            </p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-brand-orange/10 text-brand-orange border border-brand-orange/20">Dashboard</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-brand-orange/10 text-brand-orange border border-brand-orange/20">Analytics</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-brand-orange/10 text-brand-orange border border-brand-orange/20">Case Mgmt</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-brand-orange/10 text-brand-orange border border-brand-orange/20">IRS/SSA Fusion</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEC + Amazon -->
+                <div class="vendor-card bg-slate-800/80 rounded-xl p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-accent-red/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-eye text-2xl text-accent-red"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-white text-lg">NEC + Amazon</h3>
+                                <span class="font-mono text-accent-red text-sm font-bold">Classified</span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-mono mt-0.5">Facial Recognition + Cloud Hosting</p>
+                            <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+                                <strong class="text-white">NEC Corporation</strong> provides the "black box" facial recognition algorithms powering HART. <strong class="text-white">Amazon (AWS)</strong> hosts the biometric data on GovCloud. Neither can be fully audited through public records requests.
+                            </p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-red/10 text-accent-red border border-accent-red/20">Facial Recognition</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-red/10 text-accent-red border border-accent-red/20">Black Box Algo</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-red/10 text-accent-red border border-accent-red/20">GovCloud</span>
+                                <span class="text-[10px] font-mono px-2 py-1 rounded bg-accent-red/10 text-accent-red border border-accent-red/20">IP Protected</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== THE STRUCTURAL FACT ===== -->
+        <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
+            <div class="bg-gradient-to-b from-accent-red/20 to-dark-bg p-8 md:p-12 rounded-2xl border border-accent-red/40 text-center shadow-2xl">
+                <p class="text-sm text-accent-red font-mono uppercase tracking-widest mb-6">The Privatization of Sovereignty</p>
+                <p class="text-xl md:text-3xl font-serif font-bold text-white leading-relaxed max-w-3xl mx-auto">
+                    The most dangerous feature of this stack is not its power, but its <span class="text-accent-red">ownership</span>. The core logic of American identity verification is now wrapped in the intellectual property rights of private vendors.
+                </p>
+                <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-accent-blue font-mono">IBM</p>
+                        <p class="text-xs text-slate-400 mt-1">Verification Logic</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-accent-cyan font-mono">Peraton</p>
+                        <p class="text-xs text-slate-400 mt-1">Biometric Keys</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-brand-orange font-mono">NEC</p>
+                        <p class="text-xs text-slate-400 mt-1">Facial Recognition</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-accent-red font-mono">Amazon</p>
+                        <p class="text-xs text-slate-400 mt-1">Data Hosting</p>
+                    </div>
+                </div>
+                <p class="mt-8 text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                    Key operational logic may be shielded by vendor intellectual property, limiting public oversight through traditional records processes.
+                </p>
+                <p class="mt-4 text-sm text-slate-500 italic max-w-xl mx-auto border-t border-slate-700 pt-4">
+                    <span class="text-brand-gold font-mono text-xs uppercase not-italic">Commentary:</span> You cannot FOIA an algorithm owned by Peraton. You cannot vote out the board of IBM.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== HOW TO READ THIS ===== -->
+        <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
+            <div class="bg-slate-800/60 rounded-2xl border border-slate-700 p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 rounded-lg bg-brand-gold/20 flex items-center justify-center">
+                        <i class="fas fa-balance-scale text-brand-gold"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">How to Read This Exhibit</h2>
+                </div>
+                <div class="space-y-4 text-slate-300 text-sm leading-relaxed">
+                    <div class="flex gap-3">
+                        <span class="text-brand-gold font-bold font-mono text-lg mt-[-2px]">1.</span>
+                        <p><span class="font-semibold text-white">Funding ≠ intent.</span> This page documents funding pathways and contract scope. It does not claim motive.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-brand-gold font-bold font-mono text-lg mt-[-2px]">2.</span>
+                        <p><span class="font-semibold text-white">Procurement ≠ capability</span> unless deliverables and scope establish it. Contract language defines what was purchased.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-brand-gold font-bold font-mono text-lg mt-[-2px]">3.</span>
+                        <p><span class="font-semibold text-white">Primary-source discipline.</span> Values are from USAspending, FPDS award records, congressional budget justifications, and DHS program documentation.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-brand-gold font-bold font-mono text-lg mt-[-2px]">4.</span>
+                        <p><span class="font-semibold text-white">Separate fact from inference.</span> Inferences are labeled. Documented procurement records are the evidentiary standard.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SERIES NAVIGATION ===== -->
+        <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
+            <div class="bg-slate-800/60 rounded-2xl border border-slate-700 p-6 md:p-8">
+                <h2 class="text-2xl font-serif font-bold text-white mb-6">Warrantless Surveillance Series</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" target="_blank" rel="noopener noreferrer"
+                       class="bg-slate-900 rounded-lg p-4 border border-slate-700 hover:border-brand-gold/40 transition-all group">
+                        <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part I</span>
+                        <h4 class="text-white font-semibold mt-1 group-hover:text-brand-gold transition">The ALPR Trap</h4>
+                    </a>
+                    <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" target="_blank" rel="noopener noreferrer"
+                       class="bg-slate-900 rounded-lg p-4 border border-slate-700 hover:border-brand-gold/40 transition-all group">
+                        <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part II</span>
+                        <h4 class="text-white font-semibold mt-1 group-hover:text-brand-gold transition">SAVE: The Database They Won't Name</h4>
+                    </a>
+                    <a href="/dream_machine"
+                       class="bg-slate-900 rounded-lg p-4 border border-slate-700 hover:border-brand-gold/40 transition-all group">
+                        <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part III — Interactive</span>
+                        <h4 class="text-white font-semibold mt-1 group-hover:text-brand-gold transition">Launch "Dream Machine" Exhibit</h4>
+                    </a>
+                    <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize" target="_blank" rel="noopener noreferrer"
+                       class="bg-slate-900 rounded-lg p-4 border-2 border-brand-gold/50 hover:border-brand-gold transition-all group relative">
+                        <span class="absolute top-2 right-2 text-[10px] font-mono bg-brand-gold text-dark-bg px-2 py-0.5 rounded font-bold">CURRENT</span>
+                        <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part IV — Full Investigation</span>
+                        <h4 class="text-white font-semibold mt-1 group-hover:text-brand-gold transition">The 26-State Pattern</h4>
+                    </a>
+                    <a href="/confidential-mou"
+                       class="bg-slate-900 rounded-lg p-4 border border-brand-orange/30 hover:border-brand-orange transition-all group">
+                        <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part IV — Interactive</span>
+                        <h4 class="text-white font-semibold mt-1 group-hover:text-brand-gold transition">Confidential MOU Exhibit</h4>
+                    </a>
+                    <a href="https://exposed1.substack.com/p/the-department-of-governance-by-algorithm" target="_blank" rel="noopener noreferrer"
+                       class="bg-slate-900 rounded-lg p-4 border border-slate-700 hover:border-brand-gold/40 transition-all group">
+                        <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part V</span>
+                        <h4 class="text-white font-semibold mt-1 group-hover:text-brand-gold transition">The DOGE Machine</h4>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== CTA ===== -->
+    <section class="py-16 bg-card-bg border-t border-border-color no-print">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h3 class="text-2xl font-serif font-bold text-white mb-4">This exhibit is part of the SAVE Infrastructure Series.</h3>
+            <p class="text-slate-400 mb-3">
+                If you want the full investigative breakdown behind this graphic — including sourcing, contract analysis, and policy implications —
+            </p>
+            <p class="text-slate-400 mb-8">
+                Join hundreds of readers tracking how Iowa policy connects to national identity systems.
+            </p>
+            <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center px-8 py-4 border-2 border-brand-gold text-lg font-bold rounded-lg text-brand-gold bg-transparent hover:bg-brand-gold hover:text-slate-900 transition-all duration-300 shadow-lg hover:shadow-brand-gold/30">
+                <i class="fas fa-book-open mr-3"></i>
+                Subscribe
+            </a>
+            <p class="text-slate-500 text-sm mt-6 font-mono">
+                Contract data sourced from USAspending.gov, FPDS, DHS program documentation, and court filings.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-brand-offblack text-brand-sand py-8 px-4">
+        <div class="max-w-4xl mx-auto text-center text-sm">
+            <img src="/assets/Square_logo_transparent.png" class="h-10 w-10 mx-auto mb-4" alt="Restoring Democracy Logo Icon">
+            <div class="footer-tooltip">
+                <p>&copy; 2023-2026 Restoring Democracy's Promise. All rights reserved.</p>
+                <span class="tooltip-text">This project is powered by receipts.</span>
+            </div>
+            <p class="mt-2">Contact: <a href="mailto:editor@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline">editor@restoring-democracy.org</a></p>
+            <p class="mt-4">
+                <a href="/privacy-policy" class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">Privacy Policy</a>
+            </p>
+            <p class="mt-4 text-xs font-mono text-slate-600">
+                GENERATED BY RDP RESEARCH DIVISION // WARRANTLESS SURVEILLANCE SERIES // FUNDING ARCHITECTURE EXHIBIT
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== Concentric Circle Interactivity =====
+        document.querySelectorAll('.contract-circle').forEach(circle => {
+            circle.addEventListener('click', function() {
+                const contract = this.dataset.contract;
+
+                // Remove active from all circles
+                document.querySelectorAll('.contract-circle').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+
+                // Hide all detail panels
+                document.querySelectorAll('#detail-panel > div').forEach(d => d.classList.add('hidden'));
+
+                // Show selected detail
+                const panel = document.getElementById('detail-' + contract);
+                if (panel) panel.classList.remove('hidden');
+            });
+        });
+
+        // Reset on clicking outside a contract circle
+        document.getElementById('concentric-svg').addEventListener('click', function(e) {
+            if (!e.target.classList.contains('contract-circle')) {
+                document.querySelectorAll('.contract-circle').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('#detail-panel > div').forEach(d => d.classList.add('hidden'));
+                document.getElementById('detail-default').classList.remove('hidden');
+            }
+        });
+
+        // ===== Scroll Reveal =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ===== Share =====
+        function shareExhibit() {
+            const shareData = {
+                title: 'Who Funds the Identity Backbone? — RDP Investigation',
+                text: 'The $30M Palantir dashboard sits on top of a $279M IBM engine. Total contract mass: $4.89B+. Interactive exhibit.',
+                url: window.location.href
+            };
+            if (navigator.share) {
+                navigator.share(shareData).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    const btn = document.querySelector('[onclick="shareExhibit()"]');
+                    if (btn) {
+                        btn.innerHTML = '<i class="fas fa-check text-lg text-money-green"></i>';
+                        setTimeout(() => { btn.innerHTML = '<i class="fas fa-share-alt text-lg"></i>'; }, 2000);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
