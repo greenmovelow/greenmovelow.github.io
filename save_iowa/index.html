@@ -215,7 +215,7 @@
         <span class="block text-parchment">Won't Name</span>
       </h1>
       <p class="mt-6 max-w-3xl mx-auto text-xl text-text-mid leading-relaxed">
-        Iowa reclassified your driver's license as <span class="text-rust font-semibold italic">"welfare,"</span> plugged every licensed Iowan into a federal immigration database built in 1986, and locked the state into a <span class="text-parchment font-semibold">20-year biometric data trade</span> with DHS. No legislation. No public hearing. No vote.
+        On your commute, at school pickup, in a clinic line, or before a job interview, routine records can be screened through a federal identity system Iowa residents cannot fully audit or correct.
       </p>
 
       <div class="mt-8 grid grid-cols-2 gap-2 text-xs md:text-sm md:flex md:justify-center md:gap-3 font-mono">
@@ -264,6 +264,19 @@
       </div>
     </section>
 
+    <!-- SYNTHESIS -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 reveal">
+      <div class="bg-vault-dark/70 rounded-xl border border-vault-border p-5 md:p-6">
+        <h2 class="text-lg md:text-xl font-serif font-bold text-text-warm">Synthesis (30 seconds)</h2>
+        <ul class="mt-4 space-y-2 text-sm text-text-mid">
+          <li class="flex gap-2"><span class="text-parchment">•</span><span>Local record capture becomes network-searchable across federal and partner systems.</span></li>
+          <li class="flex gap-2"><span class="text-parchment">•</span><span>Routing layers and opaque codes block end-to-end public audit trails.</span></li>
+          <li class="flex gap-2"><span class="text-parchment">•</span><span>Retention stretches far past “30 days” through downstream repository storage.</span></li>
+          <li class="flex gap-2"><span class="text-parchment">•</span><span>Commercial brokers plus state sharing make deletion functionally meaningless.</span></li>
+        </ul>
+      </div>
+    </section>
+
     <!-- ===== EXHIBIT I: THE THREE-TIER PIPELINE ===== -->
     <section id="pipeline" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
       <div class="text-center mb-4">
@@ -294,7 +307,7 @@
               <div class="mt-5 pt-5 border-t border-vault-border grid md:grid-cols-2 gap-5">
                 <div class="space-y-3 text-sm text-text-mid leading-relaxed">
                   <p><span class="font-semibold text-text-warm">Iowa DOT</span> maintains driver's license records for ~2.3 million Iowans: biometric-quality photos, current and previous addresses, dates of birth, and digitized signatures.</p>
-                  <p><span class="font-semibold text-text-warm">EO 15 directive:</span> DOT must "take all steps necessary" to provide direct electronic access to HHS. Not a narrow data query — an ongoing information feed.</p>
+                  <p><span class="font-semibold text-text-warm">EO 15 directive:</span> DOT must "take all steps necessary" to give HHS direct electronic access. This was built as a standing feed, not a one-time query.</p>
                   <p>Because Iowa links voter registration to DMV records, voter rolls flow into the same pipeline. Every registered voter is now a SAVE-screenable identity.</p>
                 </div>
                 <div class="bg-vault/60 rounded-lg p-4 border border-vault-border">
@@ -337,9 +350,9 @@
             <div class="expand-panel" id="detail-clearinghouse">
               <div class="mt-5 pt-5 border-t border-vault-border grid md:grid-cols-2 gap-5">
                 <div class="space-y-3 text-sm text-text-mid leading-relaxed">
-                  <p><span class="font-semibold text-text-warm">HHS Clearinghouse:</span> EO 15 created a new identity-verification hub inside the Iowa Department of Health & Human Services. All DOT data routes through this clearinghouse before reaching the federal SAVE system.</p>
-                  <p><span class="font-semibold text-text-warm">Nlets Backbone:</span> The settlement requires Iowa to provide DHS with "full use" of driver's license records via Nlets — a 50-state law enforcement data exchange that processes 290M+ DMV queries per year.</p>
-                  <p class="text-rust">This is the same Nlets backbone documented in <a href="/alpr-trap" class="underline underline-offset-2">The ALPR Trap</a>. The pipe carrying your plate data now also carries your license photo, signature, and address history.</p>
+                  <p><span class="font-semibold text-text-warm">HHS Clearinghouse:</span> EO 15 created an identity hub inside Iowa HHS. DOT records route through it before hitting SAVE.</p>
+                  <p><span class="font-semibold text-text-warm">Nlets Backbone:</span> The settlement gives DHS "full use" of Iowa license records through Nlets, the 50-state law-enforcement exchange processing 290M+ DMV queries yearly.</p>
+                  <p class="text-rust">This is the same Nlets backbone shown in <a href="/alpr-trap" class="underline underline-offset-2">Part II</a>. It now carries plate data, license photos, signatures, and address history.</p>
                 </div>
                 <div class="bg-vault/60 rounded-lg p-4 border border-vault-border">
                   <p class="text-xs font-mono text-parchment uppercase tracking-wider mb-3">The Closed Identity Loop</p>
@@ -385,8 +398,8 @@
             <div class="expand-panel" id="detail-federal">
               <div class="mt-5 pt-5 border-t border-vault-border grid md:grid-cols-2 gap-5">
                 <div class="space-y-3 text-sm text-text-mid leading-relaxed">
-                  <p><span class="font-semibold text-text-warm">SAVE</span> (Systematic Alien Verification for Entitlements) was created in 1986 to check immigrant eligibility for Medicaid and food stamps. It was never a citizenship database and was never designed as an elections tool. Congress never expanded it into one.</p>
-                  <p><span class="font-semibold text-text-warm">What SAVE now contains</span> — through internal DHS-SSA agreements, not legislation: Social Security Number records, citizenship markers, DMV identity data, driver's license photos, and facial-recognition-compatible metadata.</p>
+                  <p><span class="font-semibold text-text-warm">SAVE</span> began in 1986 to check immigrant eligibility for Medicaid and food stamps. It was not built as a citizenship or elections database, and Congress never expanded it into one.</p>
+                  <p><span class="font-semibold text-text-warm">What SAVE now contains</span> through internal DHS-SSA agreements: SSN records, citizenship markers, DMV identity data, license photos, and facial-recognition-ready metadata.</p>
                   <p><span class="font-semibold text-text-warm">Accessible to:</span> DHS, ICE, CBP, FBI, Secret Service, USCIS, and other federal agencies — all via the Nlets backbone, without warrants, subpoenas, or public reporting.</p>
                 </div>
                 <div class="bg-vault/60 rounded-lg p-4 border border-vault-border">
@@ -439,7 +452,7 @@
                 </div>
                 <div class="bg-rust-dim rounded-lg p-3 border border-rust/25">
                   <p class="text-xs font-mono text-rust uppercase tracking-wider mb-1">What Was Actually Built</p>
-                  <p class="text-sm text-text-warm">Section 2 mandated a "SAVE Clearinghouse" inside HHS. Directed DOT to open its full DMV database as an ongoing feed. Expanded SAVE checks to programs that never required immigration-status verification. Built the entire pipeline before anyone knew it existed.</p>
+                  <p class="text-sm text-text-warm">Section 2 created a "SAVE Clearinghouse" in HHS, ordered DOT to open DMV records as an ongoing feed, and expanded SAVE checks to programs that never needed immigration-status verification.</p>
                 </div>
               </div>
             </div>
@@ -456,7 +469,7 @@
             <div class="flex-grow">
               <h3 class="text-xl font-serif font-bold text-text-warm">The Distraction — Roberts Scandal Headlines</h3>
               <div class="mt-4 bg-vault/60 rounded-lg p-3 border border-vault-border">
-                <p class="text-sm text-text-mid leading-relaxed">The superintendent scandal dominated local and national coverage. Reporters never heard of SAVE, never read EO 15's technical directives. The idea of a statewide identity clearinghouse was normalized before anyone realized what it connected to. <span class="text-text-dim italic">Misdirection campaign: data flow uninterrupted.</span></p>
+                <p class="text-sm text-text-mid leading-relaxed">The superintendent scandal dominated coverage. Most reporting missed SAVE and EO 15's technical directives, while the statewide clearinghouse was normalized in the background. <span class="text-text-dim italic">Data flow continued uninterrupted.</span></p>
               </div>
             </div>
           </div>
@@ -478,7 +491,7 @@
                 </div>
                 <div class="bg-rust-dim rounded-lg p-3 border border-rust/25">
                   <p class="text-xs font-mono text-rust uppercase tracking-wider mb-1">What Was Actually Activated</p>
-                  <p class="text-sm text-text-warm">A 20-year data trade. Iowa gets SAVE access. DHS gets "full use" of every Iowa driver's license record via Nlets. Biometric photos, signatures, addresses — all flowing to ICE, CBP, FBI, and Secret Service. The pipeline EO 15 built in October was flipped on. Bird wasn't announcing a new tool. She was announcing the final stage of a system that had already been installed.</p>
+                  <p class="text-sm text-text-warm">A 20-year data trade: Iowa gets SAVE access; DHS gets "full use" of Iowa license records via Nlets. Photos, signatures, and addresses flow to federal agencies. October's pipeline went live in December.</p>
                 </div>
               </div>
             </div>
@@ -607,13 +620,13 @@
 
           <div class="mt-6 space-y-4 text-sm md:text-base text-text-mid leading-relaxed">
             <p>Imagine Mark, a 52-year-old warehouse supervisor in Ankeny. He goes to renew his license. Same office, same line. Only this time, the clerk frowns at the screen.</p>
-            <p>No one in that office wrote the code that flagged him. No one can see the SAVE record that tripped. No one can tell him whether it was a typo, an old data breach, or a status code that got flipped when Iowa fused its DMV and benefits records into a federal verification engine.</p>
-            <p>His CDL is in question. His job is suddenly at risk — not because a judge ruled anything, but because a database Iowa can't audit whispered that something about him <span class="text-rust font-semibold">doesn't match.</span></p>
+            <p>No one there wrote the code that flagged him. No one can see the SAVE record. No one can say whether it was a typo, stale data, or a flipped status code.</p>
+            <p>His CDL is in question. His job is at risk — not from a judge, but from a database Iowa cannot audit saying something <span class="text-rust font-semibold">doesn't match.</span></p>
           </div>
 
           <div class="mt-6 bg-vault/60 rounded-xl p-4 border border-vault-border">
             <p class="text-xs font-mono text-text-dim uppercase tracking-wider mb-3">Swap Mark for anyone</p>
-            <p class="text-sm text-text-mid leading-relaxed">An ER doctor in Iowa City whose hospital can't renew her license on time. A teacher in Cedar Rapids whose background check suddenly "needs review." A solo attorney in Council Bluffs whose bar renewal hits the same red code. Once the state treats every license as "welfare," everyone with letters after their name is standing in the same line.</p>
+            <p class="text-sm text-text-mid leading-relaxed">An ER doctor whose renewal stalls. A teacher whose check suddenly "needs review." A solo attorney whose bar renewal hits the same red code. When licenses become "welfare," everyone stands in that line.</p>
           </div>
 
           <div class="mt-6 p-5 bg-rust-dim rounded-xl border border-rust/25 text-center">
@@ -672,6 +685,19 @@
             <h4 class="text-text-warm font-semibold mt-1 group-hover:text-brand-gold transition">The Department of Governance by Algorithm: The Dream Machine</h4>
           </a>
         </div>
+      </div>
+    </section>
+    <!-- WHAT YOU CAN DO -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 mb-6 reveal">
+      <div class="bg-vault-dark/60 rounded-2xl border border-vault-border p-6 md:p-8">
+        <h2 class="text-2xl font-serif font-bold text-text-warm">What you can do locally</h2>
+        <ul class="mt-4 space-y-2 text-sm text-text-mid">
+          <li class="flex gap-2"><span class="text-parchment">•</span><span>Ask city retention policy and access audit logs.</span></li>
+          <li class="flex gap-2"><span class="text-parchment">•</span><span>Ask whether your city uses the National Lookup Tool.</span></li>
+          <li class="flex gap-2"><span class="text-parchment">•</span><span>Request MOUs with state repositories and fusion centers.</span></li>
+          <li class="flex gap-2"><span class="text-parchment">•</span><span>Demand public reports: query counts, hits, and sharing partners.</span></li>
+          <li class="flex gap-2"><span class="text-parchment">•</span><span>Push for strict time limits and case-based access rules.</span></li>
+        </ul>
       </div>
     </section>
   </main>
