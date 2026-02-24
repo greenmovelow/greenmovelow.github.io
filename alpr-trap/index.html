@@ -83,25 +83,24 @@
       theme: {
         extend: {
           colors: {
-            'steel': '#1e2a33',
-            'steel-light': '#2c3e50',
-            'steel-dark': '#151f27',
-            'steel-border': '#34495e',
-            'signal-red': '#e74c3c',
-            'signal-red-dim': 'rgba(231, 76, 60, 0.15)',
-            'grid-cyan': '#4fa3c4',
-            'grid-cyan-dim': 'rgba(79, 163, 196, 0.12)',
-            'text-off': '#e8ecef',
-            'text-mid': '#94a3b8',
-            'text-dim': '#64748b',
-            'gold-accent': '#d4a94d',
+            'steel': '#0F1821',
+            'steel-light': '#1A2A38',
+            'steel-dark': '#0B1117',
+            'steel-border': 'rgba(120, 160, 190, 0.18)',
+            'signal-red': '#C94A4A',
+            'signal-red-dim': 'rgba(201, 74, 74, 0.15)',
+            'grid-cyan': '#6A8FA7',
+            'grid-cyan-dim': 'rgba(106, 143, 167, 0.12)',
+            'text-off': '#D6E0E8',
+            'text-mid': '#A8B6C2',
+            'text-dim': '#7F93A1',
+            'gold-accent': '#9A8B62',
             'brand-green': '#2d5c4f',
             'brand-green-dark': '#24473e',
-            'brand-orange': '#f4a261',
+            'brand-orange': '#8b5a3c',
             'brand-gold': '#D4AF37',
             'brand-offblack': '#161616',
             'brand-sand': '#e4d5b9',
-            'paper': '#d9d4c7',
           },
           fontFamily: {
             'sans': ['Inter', 'sans-serif'],
@@ -114,10 +113,40 @@
   </script>
 
   <style>
+    :root {
+      --bg0: #0B1117;
+      --bg1: #0F1821;
+      --bg2: rgba(18, 28, 38, 0.92);
+      --line: rgba(120, 160, 190, 0.18);
+      --text0: #D6E0E8;
+      --text1: #A8B6C2;
+      --muted: #7F93A1;
+      --accentSteel: #2F4A5B;
+      --accentSteelHover: #3C5E73;
+      --signalRed: #C94A4A;
+      --shadow: 0 10px 30px rgba(0,0,0,.55);
+    }
+    html, body {
+      background: var(--bg0) !important;
+      color: var(--text1);
+    }
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #1e2a33;
-      color: #e8ecef;
+      position: relative;
+      min-height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(127, 147, 161, 0.03) 0.5px, transparent 0.8px),
+        linear-gradient(rgba(106, 143, 167, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(106, 143, 167, 0.08) 1px, transparent 1px);
+      background-size: 3px 3px, 72px 72px, 72px 72px;
+      opacity: 0.45;
     }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
     .font-serif { font-family: 'Lora', serif; }
@@ -125,7 +154,7 @@
     /* Scanline — cold cyan, very subtle */
     .scanline {
       width: 100%; height: 1px;
-      background: rgba(79, 163, 196, 0.04);
+      background: rgba(106, 143, 167, 0.05);
       position: fixed; z-index: 50;
       animation: scan 12s linear infinite;
       pointer-events: none;
@@ -135,22 +164,61 @@
     /* Grid overlay */
     .grid-bg {
       background-image:
-        linear-gradient(rgba(79, 163, 196, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(79, 163, 196, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(106, 143, 167, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(106, 143, 167, 0.03) 1px, transparent 1px);
       background-size: 60px 60px;
+    }
+
+    section { background: var(--bg1); }
+    h1, h2, h3, h4 { color: var(--text0); opacity: 1; }
+
+    nav, footer {
+      background: var(--bg1) !important;
+      border-color: var(--line) !important;
+      color: var(--text1);
+    }
+    p, li, span { color: inherit; }
+    .text-text-off { color: var(--text0) !important; }
+    .text-text-mid { color: var(--text1) !important; }
+    .text-text-dim { color: var(--muted) !important; }
+    .text-grid-cyan { color: #6A8FA7 !important; }
+    .text-signal-red { color: var(--signalRed) !important; }
+
+    .system-panel,
+    .tier-card,
+    .detail-panel > div,
+    .tier-card .bg-steel\/60 {
+      background: var(--bg2) !important;
+      border: 1px solid var(--line) !important;
+      border-radius: 8px !important;
+      box-shadow: var(--shadow);
     }
 
     /* Tier cards */
     .tier-card {
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
-      border: 1px solid rgba(52, 73, 94, 0.6);
+      border: 1px solid var(--line);
     }
     .tier-card:hover, .tier-card.active {
-      border-color: rgba(231, 76, 60, 0.5);
+      border-color: rgba(201, 74, 74, 0.5);
     }
     .tier-card.active {
-      box-shadow: 0 0 30px rgba(231, 76, 60, 0.1), inset 0 0 30px rgba(231, 76, 60, 0.03);
+      box-shadow: 0 0 30px rgba(201, 74, 74, 0.12), inset 0 0 30px rgba(201, 74, 74, 0.04);
+    }
+
+    .dossier-button {
+      background: #101B24;
+      border: 1px solid rgba(140, 180, 210, 0.22);
+      box-shadow: var(--shadow);
+    }
+    .dossier-button:hover {
+      background: var(--accentSteelHover);
+      color: var(--text0);
+    }
+    .dossier-button svg,
+    .dossier-button .signal {
+      color: var(--signalRed);
     }
 
     /* Red capture pulse */
@@ -158,8 +226,8 @@
       animation: p-red 3s ease-in-out infinite;
     }
     @keyframes p-red {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
-      50% { box-shadow: 0 0 0 8px rgba(231, 76, 60, 0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201, 74, 74, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(201, 74, 74, 0); }
     }
 
     /* Data flow animation */
@@ -231,8 +299,8 @@
     .tier-connector {
       width: 2px;
       background: linear-gradient(to bottom,
-        rgba(231, 76, 60, 0.4),
-        rgba(231, 76, 60, 0.1));
+        rgba(201, 74, 74, 0.4),
+        rgba(201, 74, 74, 0.1));
       position: relative;
       overflow: hidden;
     }
@@ -243,7 +311,7 @@
       left: 0;
       width: 2px;
       height: 10px;
-      background: #e74c3c;
+      background: var(--signalRed);
       animation: connector-flow 1.5s linear infinite;
     }
     @keyframes connector-flow {
@@ -269,7 +337,7 @@
     .footer-tooltip { position: relative; cursor: pointer; }
     .footer-tooltip .tooltip-text {
       visibility: hidden; width: 220px;
-      background-color: #24473e; color: #f4a261;
+      background-color: #12212b; color: var(--text0);
       text-align: center; border-radius: 8px;
       padding: 7px 0; position: absolute; z-index: 1;
       bottom: 120%; left: 50%; transform: translateX(-50%);
@@ -280,14 +348,14 @@
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #151f27; }
-    ::-webkit-scrollbar-thumb { background: #34495e; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #4fa3c4; }
+    ::-webkit-scrollbar-track { background: #0d151d; }
+    ::-webkit-scrollbar-thumb { background: #2f4a5b; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3c5e73; }
 
     /* Print */
     @media print {
       .no-print { display: none !important; }
-      body { background: #fff !important; color: #000 !important; }
+      body { background: var(--bg0) !important; color: var(--text1) !important; }
       .scanline { display: none; }
     }
 
@@ -295,12 +363,12 @@
     .plate-text {
       font-family: 'JetBrains Mono', monospace;
       letter-spacing: 0.15em;
-      text-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
+      text-shadow: 0 0 8px rgba(201, 74, 74, 0.4);
     }
   </style>
 </head>
 
-<body class="overflow-x-hidden grid-bg">
+<body class="overflow-x-hidden">
   <div class="scanline"></div>
 
   <!-- ===== NAV ===== -->
@@ -316,10 +384,10 @@
         </div>
         <div class="flex items-center space-x-4">
           <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" target="_blank" rel="noopener noreferrer"
-             class="text-text-mid hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hidden md:block">
+             class="text-text-mid hover:text-text-off px-3 py-2 rounded-md text-sm font-medium transition-colors hidden md:block">
             Read Full Investigation →
           </a>
-          <button onclick="shareExhibit()" class="text-text-dim hover:text-white px-2 py-2 rounded-md transition-colors inline-flex items-center gap-1" title="Share this exhibit" aria-label="Share this exhibit">
+          <button onclick="shareExhibit()" class="text-text-dim hover:text-text-off px-2 py-2 rounded-md transition-colors inline-flex items-center gap-1" title="Share this exhibit" aria-label="Share this exhibit">
             <span class="font-mono text-xs text-grid-cyan">&lt;</span>
             <span class="font-mono text-xs uppercase tracking-wide">Share</span>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
@@ -365,11 +433,11 @@
       </div>
 
       <div class="mt-8 flex justify-center flex-wrap gap-3">
-        <a href="#plate-flow" class="inline-flex items-center gap-2 bg-signal-red/90 text-white font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-signal-red transition-all duration-300 hover:scale-105">
+        <a href="#plate-flow" class="dossier-button inline-flex items-center gap-2 text-text-off font-bold px-6 py-3 rounded-lg transition-all duration-300">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
           Follow One Plate
         </a>
-        <a href="#architecture" class="inline-flex items-center gap-2 bg-steel-dark border border-steel-border text-text-off font-semibold px-6 py-3 rounded-lg hover:border-grid-cyan/50 transition-all duration-300">
+        <a href="#architecture" class="dossier-button inline-flex items-center gap-2 text-text-off font-semibold px-6 py-3 rounded-lg transition-all duration-300">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
           View the Architecture
         </a>
@@ -381,7 +449,7 @@
 
     <!-- ===== KEY FACTS STRIP ===== -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-4 relative z-10 reveal">
-      <div class="bg-steel-dark/80 backdrop-blur-lg rounded-xl border border-steel-border p-5 md:p-6 shadow-2xl">
+      <div class="system-panel backdrop-blur-lg p-5 md:p-6">
         <div class="flex items-center gap-2 mb-4">
           <div class="w-2 h-2 rounded-full bg-signal-red scan-flash"></div>
           <p class="text-xs font-mono text-text-dim uppercase tracking-widest">What the Architecture Does</p>
@@ -413,7 +481,7 @@
         </p>
       </div>
 
-      <div class="mt-8 bg-steel-dark/80 rounded-2xl border border-steel-border p-6 md:p-10 shadow-2xl overflow-hidden relative">
+      <div class="mt-8 system-panel p-6 md:p-10 overflow-hidden relative">
         <!-- Ambient -->
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div class="w-[400px] h-[400px] rounded-full bg-signal-red/[0.02] blur-[80px]"></div>
@@ -557,7 +625,7 @@
       <div class="mt-8 space-y-0">
 
         <!-- TIER 4: Federal Analytics (top of stack) -->
-        <div class="tier-card rounded-t-2xl bg-steel-dark p-5 md:p-7" data-tier="federal" onclick="toggleTier('federal')">
+        <div class="tier-card system-panel p-5 md:p-7" data-tier="federal" onclick="toggleTier('federal')">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-lg bg-signal-red/10 border border-signal-red/30 flex items-center justify-center flex-shrink-0">
@@ -599,7 +667,7 @@
         <div class="flex justify-center"><div class="tier-connector h-8"></div></div>
 
         <!-- TIER 3: State Hubs -->
-        <div class="tier-card bg-steel-dark p-5 md:p-7" data-tier="state" onclick="toggleTier('state')">
+        <div class="tier-card system-panel p-5 md:p-7" data-tier="state" onclick="toggleTier('state')">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-lg bg-signal-red/10 border border-signal-red/20 flex items-center justify-center flex-shrink-0">
@@ -645,7 +713,7 @@
         <div class="flex justify-center"><div class="tier-connector h-8"></div></div>
 
         <!-- TIER 2: Transport -->
-        <div class="tier-card bg-steel-dark p-5 md:p-7" data-tier="transport" onclick="toggleTier('transport')">
+        <div class="tier-card system-panel p-5 md:p-7" data-tier="transport" onclick="toggleTier('transport')">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-lg bg-grid-cyan/10 border border-grid-cyan/20 flex items-center justify-center flex-shrink-0">
@@ -700,7 +768,7 @@
         <div class="flex justify-center"><div class="tier-connector h-8"></div></div>
 
         <!-- TIER 1: Sensors (bottom) -->
-        <div class="tier-card rounded-b-2xl bg-steel-dark p-5 md:p-7" data-tier="sensors" onclick="toggleTier('sensors')">
+        <div class="tier-card system-panel p-5 md:p-7" data-tier="sensors" onclick="toggleTier('sensors')">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-lg bg-text-dim/10 border border-text-dim/20 flex items-center justify-center flex-shrink-0 pulse-red">
@@ -768,7 +836,7 @@
 
     <!-- ===== HOW TO READ ===== -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
-      <div class="bg-steel-dark/60 rounded-2xl border border-steel-border p-6 md:p-8">
+      <div class="system-panel p-6 md:p-8">
         <div class="flex items-center gap-3 mb-5">
           <div class="w-10 h-10 rounded-lg bg-grid-cyan/10 flex items-center justify-center">
             <svg class="w-5 h-5 text-grid-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
@@ -798,7 +866,7 @@
 
     <!-- ===== SERIES NAVIGATION ===== -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
-      <div class="bg-steel-dark/60 rounded-2xl border border-steel-border p-6 md:p-8">
+      <div class="system-panel p-6 md:p-8">
         <h2 class="text-2xl font-serif font-bold text-text-off mb-6">Leviathan Series</h2>
         <div class="space-y-4">
 
@@ -812,7 +880,7 @@
 
           <!-- Part II — CURRENT -->
           <div class="bg-steel rounded-lg p-4 border-2 border-signal-red/50 relative">
-            <span class="absolute top-2 right-2 text-[10px] font-mono bg-signal-red text-white px-2 py-0.5 rounded font-bold">CURRENT</span>
+            <span class="absolute top-2 right-2 text-[10px] font-mono bg-signal-red text-text-off px-2 py-0.5 rounded font-bold">CURRENT</span>
             <span class="text-signal-red text-xs font-mono font-bold uppercase">Part II</span>
             <h4 class="text-text-off font-semibold mt-1">The ALPR Trap</h4>
           </div>
@@ -849,14 +917,14 @@
   </main>
 
   <!-- ===== CTA ===== -->
-  <section class="py-16 bg-steel-dark border-t border-steel-border no-print">
+  <section class="py-16 border-t border-steel-border no-print">
     <div class="max-w-3xl mx-auto px-4 text-center">
       <h3 class="text-2xl font-serif font-bold text-text-off mb-4">Read the Full Investigation</h3>
       <p class="text-text-mid mb-8">
         This exhibit is a companion visualization. The complete investigation includes public-records evidence, contract language analysis, documented misuse cases, and the full data-flow architecture.
       </p>
       <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center justify-center px-8 py-4 border-2 border-signal-red text-lg font-bold rounded-lg text-signal-red bg-transparent hover:bg-signal-red hover:text-white transition-all duration-300 shadow-lg hover:shadow-signal-red/20">
+         class="dossier-button inline-flex items-center justify-center px-8 py-4 border text-lg font-bold rounded-lg text-text-off transition-all duration-300">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
         Read more here.
       </a>
@@ -867,7 +935,7 @@
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="bg-brand-offblack text-brand-sand py-8 px-4">
+  <footer class="py-8 px-4">
     <div class="max-w-4xl mx-auto text-center text-sm">
       <img src="/assets/Square_logo_transparent.png" class="h-10 w-10 mx-auto mb-4" alt="Restoring Democracy Logo Icon">
       <div class="footer-tooltip">
