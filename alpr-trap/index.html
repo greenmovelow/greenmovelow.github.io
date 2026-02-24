@@ -319,7 +319,9 @@
              class="text-text-mid hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hidden md:block">
             Read Full Investigation →
           </a>
-          <button onclick="shareExhibit()" class="text-text-dim hover:text-white p-2 rounded-md transition-colors" title="Share this exhibit">
+          <button onclick="shareExhibit()" class="text-text-dim hover:text-white px-2 py-2 rounded-md transition-colors inline-flex items-center gap-1" title="Share this exhibit" aria-label="Share this exhibit">
+            <span class="font-mono text-xs text-grid-cyan">&lt;</span>
+            <span class="font-mono text-xs uppercase tracking-wide">Share</span>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
           </button>
         </div>
@@ -794,52 +796,50 @@
       </div>
     </section>
 
-    <!-- ===== SERIES NAVIGATION (Bottom — Part II on top, Part V on bottom) ===== -->
+    <!-- ===== SERIES NAVIGATION ===== -->
     <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 reveal">
       <div class="bg-steel-dark/60 rounded-2xl border border-steel-border p-6 md:p-8">
-        <h2 class="text-2xl font-serif font-bold text-text-off mb-6">Warrantless Surveillance Series</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h2 class="text-2xl font-serif font-bold text-text-off mb-6">Leviathan Series</h2>
+        <div class="space-y-4">
+
+          <!-- Part I -->
+          <a href="https://exposed1.substack.com/p/the-performance-of-protection" target="_blank" rel="noopener noreferrer"
+             class="block bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+            <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part I</span>
+            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">Performance of Protection</h4>
+            <p class="text-text-mid text-sm mt-1">Read here</p>
+          </a>
 
           <!-- Part II — CURRENT -->
           <div class="bg-steel rounded-lg p-4 border-2 border-signal-red/50 relative">
             <span class="absolute top-2 right-2 text-[10px] font-mono bg-signal-red text-white px-2 py-0.5 rounded font-bold">CURRENT</span>
-            <span class="text-signal-red text-xs font-mono font-bold uppercase">Part II — Interactive</span>
+            <span class="text-signal-red text-xs font-mono font-bold uppercase">Part II</span>
             <h4 class="text-text-off font-semibold mt-1">The ALPR Trap</h4>
           </div>
 
           <!-- Part III -->
-          <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" target="_blank" rel="noopener noreferrer"
-             class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
-            <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part II</span>
+          <a href="https://restoring-democracy.org/save_iowa.html"
+             class="block bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+            <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part III</span>
             <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">SAVE: The Database They Won't Name</h4>
-          </a>
-
-          <!-- Part III -->
-          <a href="/dream_machine"
-             class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
-            <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part III — Interactive</span>
-            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">Launch "Dream Machine" Exhibit</h4>
+            <p class="text-text-mid text-sm mt-1">Iowa case study</p>
           </a>
 
           <!-- Part IV -->
-          <a href="https://exposed1.substack.com/p/dojs-confidential-save-mou-to-federalize" target="_blank" rel="noopener noreferrer"
-             class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+          <div class="bg-steel rounded-lg p-4 border border-steel-border">
             <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part IV</span>
-            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">DOJ's Confidential SAVE MOU</h4>
-          </a>
-
-          <!-- Part IV Interactive -->
-          <a href="/funding-flow"
-             class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
-            <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part IV — Interactive</span>
-            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">Funding Flow Exhibit</h4>
-          </a>
+            <h4 class="text-text-off font-semibold mt-1">The 26 State MOU</h4>
+            <div class="mt-2 space-y-1 text-sm">
+              <a href="https://restoring-democracy.org/confidential-mou" class="text-grid-cyan hover:text-brand-gold underline underline-offset-2">confidential-mou</a>
+              <a href="https://restoring-democracy.org/funding_flow" class="block text-grid-cyan hover:text-brand-gold underline underline-offset-2">funding_flow</a>
+            </div>
+          </div>
 
           <!-- Part V -->
-          <a href="https://exposed1.substack.com/p/the-department-of-governance-by-algorithm" target="_blank" rel="noopener noreferrer"
-             class="bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
+          <a href="https://restoring-democracy.org/dream_machine"
+             class="block bg-steel rounded-lg p-4 border border-steel-border hover:border-grid-cyan/40 transition-all group">
             <span class="text-brand-orange text-xs font-mono font-bold uppercase">Part V</span>
-            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">The DOGE Machine</h4>
+            <h4 class="text-text-off font-semibold mt-1 group-hover:text-brand-gold transition">The Department of Governance by Algorithm</h4>
           </a>
 
         </div>
@@ -858,7 +858,7 @@
       <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" target="_blank" rel="noopener noreferrer"
          class="inline-flex items-center justify-center px-8 py-4 border-2 border-signal-red text-lg font-bold rounded-lg text-signal-red bg-transparent hover:bg-signal-red hover:text-white transition-all duration-300 shadow-lg hover:shadow-signal-red/20">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-        Read Part II: The ALPR Trap
+        Read more here.
       </a>
       <p class="text-text-dim text-sm mt-6 font-mono">
         Sources: Texas DPS MOUs, HB 3109/SB 1499, Nlets documentation, public records requests, EFF/ACLU investigations.
