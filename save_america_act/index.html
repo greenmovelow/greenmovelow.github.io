@@ -218,6 +218,23 @@
             transform: translateY(-4px);
             box-shadow: 0 8px 30px rgba(212, 175, 55, 0.15);
         }
+
+        /* ── Subscribe CTA: compact exhibit note ── */
+        .subscribe-note {
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            background: rgba(212, 175, 55, 0.025);
+        }
+        .subscribe-note:hover {
+            border-color: rgba(212, 175, 55, 0.25);
+        }
+        .subscribe-note .sub-btn {
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+        .subscribe-note .sub-btn:hover {
+            background-color: rgba(212, 175, 55, 0.12);
+            border-color: rgba(212, 175, 55, 0.5);
+            color: #D4AF37;
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -289,6 +306,21 @@
     </div>
 
     <main class="py-12">
+
+        <!-- ── Subscribe CTA — compact exhibit note ── -->
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+            <div class="max-w-md mx-auto subscribe-note rounded px-5 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
+                <div class="min-w-0">
+                    <p class="text-[11px] font-mono text-brand-gold/80 uppercase tracking-widest leading-none mb-1">Follow the Investigation</p>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">This story is still unfolding. Subscribe for free for new evidence, updates, and future exhibits.</p>
+                </div>
+                <a href="https://exposed1.substack.com/subscribe"
+                   target="_blank" rel="noopener noreferrer"
+                   class="sub-btn self-start sm:self-center flex-shrink-0 text-[11px] font-semibold text-brand-gold/80 border border-brand-gold/25 rounded px-3 py-1 whitespace-nowrap hover:no-underline">
+                    Subscribe for free
+                </a>
+            </div>
+        </div>
 
         <!-- ═══════════════ TAB 1: THE SHIFT ═══════════════ -->
         <div id="overview" class="tab-content active">
@@ -715,7 +747,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <a href="https://restoring-democracy.org/save_iowa.html" class="series-card bg-slate-800 p-6 rounded-xl border border-slate-600 block no-underline">
                     <span class="text-xs font-mono text-brand-gold uppercase tracking-widest">Part III</span>
-                    <h4 class="text-lg font-serif font-bold text-white mt-2 mb-2">SAVE: The Database They Won’t Name</h4>
+                    <h4 class="text-lg font-serif font-bold text-white mt-2 mb-2">SAVE: The Database They Won't Name</h4>
                     <p class="text-sm text-slate-400">The benefits database now monitoring every licensed Iowan — and every driver.</p>
                     <span class="inline-block mt-3 text-brand-gold text-sm font-semibold">Explore the exhibit <i class="fas fa-arrow-right ml-1 text-xs"></i></span>
                 </a>
@@ -816,3 +848,4 @@
     </script>
 </body>
 </html>
+
