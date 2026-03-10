@@ -1,2 +1,19 @@
-# DISABLED (was looping): /funding_flow    /funding_flow.html    301!
-# DISABLED (was looping): /funding-flow    /funding_flow.html    301!
+# Legacy .html routes -> canonical folder routes
+/SAVE_Iowa.html          /save_iowa/             301!
+/save_iowa.html          /save_iowa/             301!
+/save_america_act.html   /save_america_act/      301!
+/dream_machine.html      /dream_machine/         301!
+/confidential-mou.html   /confidential_mou/      301!
+/save-iowa-exhibit.html  /save_backfill_ia/      301!
+/alpr-trap.html          /alpr-trap/             301!
+/journalists.html        /journalists/           301!
+
+# Normalize no-extension legacy aliases where needed
+/confidential-mou        /confidential_mou/      301!
+/dream_machine           /dream_machine/         301!
+/save_iowa               /save_iowa/             301!
+/save_america_act        /save_america_act/      301!
+/alpr-trap               /alpr-trap/             301!
+/voting_rights_ia        /save_backfill_ia/      301!
+/voting_rights_ia/       /save_backfill_ia/      301!
+/journalists             /journalists/           301!
