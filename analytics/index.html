@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RDP Analytics — Research & Methods Division | Restoring Democracy's Promise</title>
+  <meta name="description" content="RDP Analytics is the research and methods division of Restoring Democracy's Promise. We apply quantitative modeling, network analysis, and civic systems mapping to accountability journalism.">
+
+  <link rel="canonical" href="https://restoring-democracy.org/rdp-analytics/">
+  <meta name="robots" content="index,follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://restoring-democracy.org/rdp-analytics/">
+  <meta property="og:title" content="RDP Analytics — Research & Methods Division | Restoring Democracy's Promise">
+  <meta property="og:description" content="Quantitative modeling, network analysis, and civic systems mapping in service of accountability journalism.">
+  <meta property="og:image" content="https://restoring-democracy.org/assets/Square_logo_green.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://restoring-democracy.org/rdp-analytics/">
+  <meta name="twitter:title" content="RDP Analytics — Research & Methods Division | Restoring Democracy's Promise">
+  <meta name="twitter:description" content="Quantitative modeling, network analysis, and civic systems mapping in service of accountability journalism.">
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/Square_logo_green.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <link rel="apple-touch-icon" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <meta name="theme-color" content="#2d5c4f">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ResearchOrganization",
+    "name": "RDP Analytics",
+    "alternateName": "Restoring Democracy's Promise Analytics Division",
+    "url": "https://restoring-democracy.org/rdp-analytics/",
+    "description": "The research and methods division of Restoring Democracy's Promise, applying quantitative modeling and civic systems analysis to accountability journalism.",
+    "parentOrganization": {
+      "@type": "NewsMediaOrganization",
+      "name": "Restoring Democracy's Promise",
+      "url": "https://restoring-democracy.org/"
+    }
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QJ3L9CT4Z7');
+  </script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-green':      '#2d5c4f',
+            'brand-green-dark': '#24473e',
+            'brand-orange':     '#f4a261',
+            'brand-gold':       '#D4AF37',
+            'brand-white':      '#F6F7F8',
+            'brand-offblack':   '#161616',
+            'brand-sand':       '#e4d5b9',
+          },
+          fontFamily: {
+            'sans':  ['Inter', 'sans-serif'],
+            'serif': ['Lora', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── Copied verbatim from index.html ── */
+    .hero-gradient {
+      background: linear-gradient(135deg,
+        rgba(36, 71, 62, 0.95) 0%,
+        rgba(45, 92, 79, 0.90) 50%,
+        rgba(36, 71, 62, 0.85) 100%);
+    }
+    .feature-strip {
+      background: linear-gradient(to right,
+        rgba(212, 175, 55, 0.08) 0%,
+        rgba(244, 162, 97, 0.05) 100%);
+      border-left: 5px solid #D4AF37;
+    }
+    .section-divider {
+      border-bottom: 3px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 0.5rem;
+    }
+    .investigation-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .investigation-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+    .analytics-block {
+      background: linear-gradient(135deg,
+        rgba(22, 22, 22, 0.95) 0%,
+        rgba(36, 71, 62, 0.90) 100%);
+      border: 2px solid rgba(212, 175, 55, 0.4);
+    }
+    .action-strip {
+      background: linear-gradient(to bottom,
+        rgba(244, 162, 97, 0.12) 0%,
+        rgba(212, 175, 55, 0.08) 100%);
+    }
+    .footer-tooltip { position: relative; cursor: pointer; }
+    .footer-tooltip .tooltip-text {
+      visibility: hidden;
+      width: 220px;
+      background-color: #24473e;
+      color: #f4a261;
+      text-align: center;
+      border-radius: 8px;
+      padding: 7px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      font-size: 1em;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    }
+    .footer-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+    .statement-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #161616;
+      background: #f4a261;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+    }
+  </style>
+</head>
+
+<!-- Body identical to index.html -->
+<body class="bg-brand-green text-brand-white font-sans antialiased">
+<div class="flex flex-col min-h-screen">
+
+  <!-- ════════════════════════════════════════
+       HERO  — same structure & gradient as index
+  ════════════════════════════════════════ -->
+  <header class="relative text-center py-16 md:py-24 px-4 overflow-hidden">
+    <div class="absolute inset-0 hero-gradient"></div>
+    <div class="absolute top-0 left-0 w-96 h-96 bg-brand-gold opacity-5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-orange opacity-5 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-5xl mx-auto z-10">
+
+      <!-- Breadcrumb -->
+      <div class="mb-8 flex justify-center items-center gap-2">
+        <a href="/" class="text-brand-sand/70 hover:text-brand-gold transition text-sm font-semibold">
+          Restoring Democracy's Promise
+        </a>
+        <span class="text-brand-sand/30 text-sm">/</span>
+        <span class="text-brand-gold text-sm font-semibold">RDP Analytics</span>
+      </div>
+
+      <img src="/assets/Square_logo_transparent.png"
+           alt="Restoring Democracy's Promise Logo"
+           class="mx-auto mb-8 h-24 w-24 md:h-32 md:w-32 drop-shadow-2xl">
+
+      <h1 class="font-serif text-5xl md:text-7xl font-bold text-brand-gold tracking-tight leading-tight drop-shadow-lg">
+        RDP Analytics
+      </h1>
+      <p class="mt-5 text-xl md:text-2xl text-brand-orange italic font-semibold">
+        Research &amp; Methods Division
+      </p>
+
+      <p class="mt-8 max-w-3xl mx-auto text-brand-white text-lg md:text-xl leading-relaxed">
+        The quantitative and systems-analysis arm of Restoring Democracy's Promise&mdash;translating
+        public records, procurement data, and government filings into structured, verifiable
+        findings that accountability journalism can stand on.
+      </p>
+
+      <div class="mt-8 max-w-3xl mx-auto">
+        <p class="text-brand-sand text-base md:text-lg leading-relaxed">
+          <span class="font-bold text-brand-gold">Our approach:</span>
+          <span class="font-semibold">Evidence-first modeling</span> (primary documents, not narrative convenience)
+          and <span class="font-semibold">Transparent methodology</span>
+          <span class="opacity-90">(confidence levels, parameters, and sourcing always disclosed)</span>.
+        </p>
+
+        <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+          <a href="#capabilities"
+             class="inline-block bg-brand-gold text-brand-offblack font-bold py-3 px-8 rounded-full
+                    hover:bg-brand-orange transition-all duration-300 shadow-lg text-center transform hover:scale-105">
+            View Capabilities
+          </a>
+          <a href="#contact"
+             class="inline-block bg-brand-green-dark/80 text-brand-white font-bold py-3 px-8 rounded-full
+                    hover:bg-brand-green-dark transition-all duration-300 shadow-lg text-center
+                    border-2 border-brand-gold/30 transform hover:scale-105">
+            Licensing &amp; Contact
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="flex-grow">
+
+    <!-- ════════════════════════════════════════
+         § 1  WHAT WE DO
+         bg-brand-offblack — matches index Surveillance Series section
+    ════════════════════════════════════════ -->
+    <section class="py-12 md:py-16 bg-brand-offblack">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-8">
+          <span class="inline-block bg-brand-gold text-brand-offblack text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
+            Division Overview
+          </span>
+          <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-white">
+            What RDP Analytics Does
+          </h2>
+          <p class="mt-4 text-lg md:text-xl text-brand-sand max-w-4xl mx-auto leading-relaxed">
+            Investigative journalism produces stories. RDP Analytics produces the underlying methods
+            that make those stories verifiable&mdash;turning document stacks into structured models,
+            and models into interactive exhibits the public can navigate and audit.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+
+          <div class="feature-strip rounded-xl p-5 md:p-6">
+            <h3 class="font-serif text-xl font-bold text-brand-white mb-2">Evidence-First</h3>
+            <p class="text-brand-sand text-sm leading-relaxed">
+              Analysis begins with primary documents: statutes, MOUs, contracts, procurement records,
+              and court filings. Models are calibrated to the documentary record, not to narrative
+              convenience.
+            </p>
+          </div>
+
+          <div class="feature-strip rounded-xl p-5 md:p-6">
+            <h3 class="font-serif text-xl font-bold text-brand-white mb-2">Transparent Methodology</h3>
+            <p class="text-brand-sand text-sm leading-relaxed">
+              Confidence levels, model parameters, and data sources are disclosed. Findings are labeled:
+              confirmed, high-confidence, or inferred&mdash;never conflated.
+            </p>
+          </div>
+
+          <div class="feature-strip rounded-xl p-5 md:p-6">
+            <h3 class="font-serif text-xl font-bold text-brand-white mb-2">Adversarial Hardening</h3>
+            <p class="text-brand-sand text-sm leading-relaxed">
+              Every analysis is stress-tested against its strongest counterarguments before
+              publication. We write to survive hostile scrutiny.
+            </p>
+          </div>
+
+          <div class="feature-strip rounded-xl p-5 md:p-6">
+            <h3 class="font-serif text-xl font-bold text-brand-white mb-2">Reproducibility</h3>
+            <p class="text-brand-sand text-sm leading-relaxed">
+              Where methodologies can be shared without disclosing proprietary implementation, we
+              document them so other researchers can replicate our conclusions.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         § 2  CORE CAPABILITIES
+         bg-brand-white — matches index Investigations section
+    ════════════════════════════════════════ -->
+    <section id="capabilities" class="py-16 md:py-20 bg-brand-white text-brand-offblack">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-green-dark">Core Capabilities</h2>
+          <p class="mt-4 text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
+            Selected methods and tools applied across RDP's investigative reporting and analytics work.
+          </p>
+        </div>
+
+        <!-- Modeling row -->
+        <div class="mb-12">
+          <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark mb-6 section-divider">
+            Modeling &amp; Quantitative Analysis
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                State-Space Network Modeling
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                Bayesian-weighted state-space models that distribute structural responsibility across
+                actors in complex governance scenarios&mdash;quantifying influence without asserting
+                legal culpability.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                Anomaly Detection &amp; Timeline Analysis
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                Statistical and pattern-based detection of irregular sequences across agency actions,
+                procurement timelines, regulatory filings, and legislative records&mdash;flagging
+                deviations that warrant deeper investigation.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Network row -->
+        <div class="mb-12">
+          <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark mb-6 section-divider">
+            Network &amp; Financial Forensics
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                Network &amp; Influence Mapping
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                Graph-based visualization of organizational relationships, financial flows, and
+                inter-agency data pipelines built from procurement records, IRS filings, and
+                legislative histories.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                Shell-Entity &amp; Beneficial Ownership Tracing
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                Cross-referencing Form 990 schedules, state corporate registration data, and
+                USASpending.gov records to surface obscured financial relationships across
+                multi-layer structures.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                Civic Systems Architecture Analysis
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                End-to-end documentation of government data pipelines: inputs, transforms, outputs,
+                retention schedules, derivative uses, access authorities, and oversight gaps.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Publication row -->
+        <div>
+          <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark mb-6 section-divider">
+            Publication &amp; Evidence Infrastructure
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                Interactive Evidence Exhibits
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                Production-grade interactive exhibits that make complex, document-driven investigations
+                navigable by general audiences&mdash;without sacrificing analytical precision or
+                source transparency.
+              </p>
+              <a href="/dream_machine"
+                 class="mt-5 inline-block text-center bg-brand-green text-brand-white font-semibold py-3 px-6 rounded-full text-sm md:text-base shadow-md hover:bg-brand-green-dark transition-all duration-300">
+                Example: Dream Machine Exhibit &rarr;
+              </a>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                Federal Oversight Monitoring
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                Structured tracking of Inspector General office capacities, pending referrals, and
+                inter-agency reporting gaps, cross-referenced against legislative and executive
+                actions that modify oversight mandates&mdash;directly informing sourcing strategy
+                and claim confidence levels.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         § 3  PROVEN IN PRACTICE
+         bg-brand-green — matches index RDP Analytics section
+    ════════════════════════════════════════ -->
+    <section class="py-16 md:py-20 bg-brand-green">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-10">
+          <span class="inline-block bg-brand-gold text-brand-offblack text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
+            Selected Applications
+          </span>
+          <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-white">
+            Proven in Practice
+          </h2>
+          <p class="mt-4 text-lg md:text-xl text-brand-sand max-w-3xl mx-auto leading-relaxed">
+            Three examples of how RDP Analytics methods have been applied in published investigations.
+          </p>
+        </div>
+
+        <!-- Case 1: Shutdown Matrix — featured in analytics-block (same as index) -->
+        <div class="analytics-block rounded-2xl p-7 md:p-10 mb-6 shadow-2xl">
+          <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+            <!-- SVG diagram -->
+            <div class="flex-shrink-0 w-full lg:w-80 xl:w-96">
+              <p class="text-brand-sand text-xs uppercase tracking-widest font-bold mb-3 opacity-70">
+                Faction Responsibility Network
+              </p>
+              <div class="bg-brand-offblack/60 rounded-xl border border-brand-gold/20 p-4">
+                <svg viewBox="0 0 380 280" class="w-full" xmlns="http://www.w3.org/2000/svg"
+                     role="img" aria-label="Network diagram showing faction responsibility weighting for October 2025 government shutdown">
+                  <g stroke="rgba(228,213,185,0.20)" stroke-width="1.5" fill="none">
+                    <line x1="190" y1="140" x2="285" y2="75"/>
+                    <line x1="190" y1="140" x2="85"  y2="100"/>
+                    <line x1="190" y1="140" x2="75"  y2="185"/>
+                    <line x1="190" y1="140" x2="190" y2="240"/>
+                    <line x1="285" y1="75"  x2="300" y2="200"/>
+                    <line x1="85"  y1="100" x2="75"  y2="185"/>
+                    <line x1="300" y1="200" x2="190" y2="240"/>
+                  </g>
+                  <g stroke="rgba(212,175,55,0.55)" stroke-width="3.5" fill="none">
+                    <line x1="190" y1="140" x2="300" y2="200"/>
+                    <line x1="190" y1="140" x2="285" y2="75"/>
+                  </g>
+                  <circle cx="190" cy="140" r="29" fill="rgba(210,55,55,0.85)" stroke="#D4AF37" stroke-width="2.5"/>
+                  <text x="190" y="135" text-anchor="middle" fill="#fff" font-size="8.5" font-family="Inter,sans-serif" font-weight="700">Trump/</text>
+                  <text x="190" y="146" text-anchor="middle" fill="#fff" font-size="8.5" font-family="Inter,sans-serif" font-weight="700">Executive</text>
+                  <text x="190" y="158" text-anchor="middle" fill="#D4AF37" font-size="9" font-family="monospace" font-weight="600">41.5%</text>
+                  <circle cx="300" cy="200" r="22" fill="rgba(244,162,97,0.88)" stroke="#D4AF37" stroke-width="1.5"/>
+                  <text x="300" y="196" text-anchor="middle" fill="#161616" font-size="7" font-family="Inter,sans-serif" font-weight="700">HFC</text>
+                  <text x="300" y="207" text-anchor="middle" fill="#161616" font-size="8.5" font-family="monospace">35.0%</text>
+                  <circle cx="190" cy="240" r="18" fill="rgba(200,90,170,0.80)" stroke="rgba(212,175,55,0.4)" stroke-width="1.5"/>
+                  <text x="190" y="237" text-anchor="middle" fill="#fff" font-size="7" font-family="Inter,sans-serif" font-weight="600">H.GOP</text>
+                  <text x="190" y="248" text-anchor="middle" fill="#eee" font-size="8" font-family="monospace">30.0%</text>
+                  <circle cx="285" cy="75" r="16" fill="rgba(75,135,215,0.78)" stroke="rgba(212,175,55,0.3)" stroke-width="1.5"/>
+                  <text x="285" y="72" text-anchor="middle" fill="#fff" font-size="7" font-family="Inter,sans-serif" font-weight="600">H.Dems</text>
+                  <text x="285" y="83" text-anchor="middle" fill="#ddd" font-size="8" font-family="monospace">28.4%</text>
+                  <circle cx="85" cy="100" r="15" fill="rgba(90,190,155,0.75)" stroke="rgba(212,175,55,0.3)" stroke-width="1.5"/>
+                  <text x="85" y="97" text-anchor="middle" fill="#161616" font-size="6.5" font-family="Inter,sans-serif" font-weight="600">S.Dems</text>
+                  <text x="85" y="108" text-anchor="middle" fill="#333" font-size="8" font-family="monospace">25.0%</text>
+                  <circle cx="75" cy="185" r="15" fill="rgba(195,195,65,0.75)" stroke="rgba(212,175,55,0.3)" stroke-width="1.5"/>
+                  <text x="75" y="182" text-anchor="middle" fill="#161616" font-size="6.5" font-family="Inter,sans-serif" font-weight="600">S.GOP</text>
+                  <text x="75" y="193" text-anchor="middle" fill="#333" font-size="8" font-family="monospace">25.0%</text>
+                  <text x="6" y="270" fill="rgba(228,213,185,0.35)" font-size="6.5" font-family="monospace">
+                    Node size proportional to responsibility weight &bull; Edge thickness proportional to influence strength
+                  </text>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Text -->
+            <div class="flex-grow">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="bg-brand-orange text-brand-offblack text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                  Application 01
+                </span>
+                <span class="text-brand-sand text-sm">Governance Accountability</span>
+              </div>
+              <h3 class="font-serif text-2xl md:text-4xl font-bold text-brand-white mb-4 leading-tight">
+                Shutdown Accountability Matrix
+              </h3>
+              <p class="text-brand-sand text-base md:text-lg leading-relaxed mb-4">
+                When responsibility for a government shutdown is contested across multiple legislative
+                factions and the executive branch, polling alone cannot resolve the structural question.
+                The Shutdown Accountability Matrix applies our USG Baseline Model to distribute weighted
+                responsibility scores across actors based on procedural records, voting histories,
+                and inter-faction influence patterns.
+              </p>
+              <p class="text-brand-sand text-base leading-relaxed mb-6">
+                The October 2025 model (v1.3) assigned weighted scores across six actors, with a
+                41.5% structural responsibility share to the executive tier and 35.0% to the House
+                Freedom Caucus. Crucially: the model quantifies structural influence&mdash;not legal
+                blame. That distinction is stated explicitly in every output.
+              </p>
+              <div class="bg-brand-green-dark/60 border border-brand-gold/30 rounded-lg p-5">
+                <span class="text-brand-orange text-xs font-bold uppercase tracking-wide">Model Specification</span>
+                <p class="mt-2 text-brand-sand text-sm font-mono leading-relaxed">
+                  USG State-Space Network Algorithm (v1.3) &bull; Q3 2025 data window<br>
+                  95% CI &bull; Monte Carlo n=10,000 &bull; p &le; 0.05 &bull; Convergence: 42 epochs
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cases 2 & 3 — same card style as index series links -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <div class="bg-brand-green-dark/60 border border-brand-gold/30 rounded-xl p-6 hover:bg-brand-green-dark transition-all duration-300">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="bg-brand-orange text-brand-offblack text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                Application 02
+              </span>
+              <span class="text-brand-sand text-sm">Oversight Infrastructure</span>
+            </div>
+            <h3 class="font-serif text-xl md:text-2xl font-bold text-brand-white mb-3">
+              Federal Oversight Agency Monitoring
+            </h3>
+            <p class="text-brand-sand text-sm leading-relaxed mb-4">
+              Inspector General offices, GAO, and CIGIE constitute the federal government's primary
+              internal oversight infrastructure. RDP Analytics maintains structured tracking of IG
+              office capacities and inter-agency reporting gaps, cross-referenced against legislative
+              and executive actions that modify oversight mandates.
+            </p>
+            <p class="text-brand-sand text-sm leading-relaxed">
+              This monitoring layer directly informs sourcing strategy and claim confidence levels
+              across RDP's reporting. When oversight infrastructure is degraded, accountability for
+              the systems we cover diminishes in predictable, documentable ways.
+            </p>
+            <div class="mt-5 pt-4 border-t border-brand-gold/20">
+              <p class="text-brand-orange text-xs font-bold uppercase tracking-wide mb-1">Data Sources</p>
+              <p class="text-brand-sand text-xs">
+                CIGIE public reports &bull; GAO testimony &bull; Agency budget filings &bull; Congressional Record
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-brand-green-dark/60 border border-brand-gold/30 rounded-xl p-6 hover:bg-brand-green-dark transition-all duration-300">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="bg-brand-orange text-brand-offblack text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                Application 03
+              </span>
+              <span class="text-brand-sand text-sm">Financial Forensics</span>
+            </div>
+            <h3 class="font-serif text-xl md:text-2xl font-bold text-brand-white mb-3">
+              Shell-Entity &amp; Dark Money Network Tracing
+            </h3>
+            <p class="text-brand-sand text-sm leading-relaxed mb-4">
+              The Pincer Movement investigation required tracing financial flows through multi-layer
+              structures of donor-advised funds, 501(c)(4) pass-throughs, and LLC intermediaries.
+              RDP Analytics applied cross-source reconciliation across IRS Form 990 schedules, state
+              corporate registration data, and USASpending.gov records to reconstruct beneficial
+              relationships that no single source disclosed.
+            </p>
+            <div class="flex flex-col gap-2 mt-5">
+              <a href="/pincerfinancial.html"
+                 class="bg-brand-green-dark/60 border border-brand-gold/30 rounded-lg p-4 hover:bg-brand-green-dark transition-all duration-300 group flex justify-between items-center">
+                <span class="text-brand-orange text-xs font-bold uppercase tracking-wide">Financial Superhighway Exhibit</span>
+                <svg class="w-5 h-5 text-brand-gold opacity-60 group-hover:opacity-100 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+              <a href="/pincer-dataviz.html"
+                 class="bg-brand-green-dark/60 border border-brand-gold/30 rounded-lg p-4 hover:bg-brand-green-dark transition-all duration-300 group flex justify-between items-center">
+                <span class="text-brand-orange text-xs font-bold uppercase tracking-wide">Network Map Visualization</span>
+                <svg class="w-5 h-5 text-brand-gold opacity-60 group-hover:opacity-100 transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         § 4  WHO IT SERVES
+         bg-brand-white — matches index investigations
+    ════════════════════════════════════════ -->
+    <section class="py-16 md:py-20 bg-brand-white text-brand-offblack">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-green-dark">Who It Serves</h2>
+          <p class="mt-4 text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
+            RDP Analytics develops methods in service of the newsroom's own reporting. Where the
+            work has broader applicability, we engage selectively with aligned organizations.
+          </p>
+        </div>
+
+        <div class="mb-12">
+          <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark mb-6 section-divider">
+            Aligned Organizations &amp; Partners
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                Investigative Newsrooms
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                Organizations pursuing document-driven accountability reporting on government systems,
+                surveillance infrastructure, or financial networks where quantitative methods can
+                harden findings that records alone leave ambiguous.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                Civic Accountability Organizations
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                Nonprofits focused on democratic process, voter protection, and government transparency
+                that require technically rigorous analysis to support advocacy, litigation, or
+                public education work.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                Academic Research Partners
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                Researchers in political science, public administration, surveillance studies, or data
+                ethics who seek methodological collaboration or structured civic datasets derived
+                from primary government sources.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl shadow-lg p-6 flex flex-col border border-slate-200 investigation-card">
+              <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-green-dark">
+                Pro-Democracy Coalitions
+              </h4>
+              <p class="mt-3 text-slate-600 flex-grow leading-relaxed">
+                Organizations monitoring systemic threats to democratic infrastructure who need
+                structured, credible analysis that holds up to independent scrutiny and
+                legal review.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         § 5  LICENSING
+         bg-brand-green with analytics-block inset — mirrors index analytics section exactly
+    ════════════════════════════════════════ -->
+    <section class="py-16 md:py-20 bg-brand-green">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="analytics-block rounded-2xl p-8 md:p-12 shadow-2xl">
+          <div class="flex flex-col lg:flex-row items-center gap-8">
+            <div class="flex-grow">
+              <div class="flex items-center gap-3 mb-4">
+                <svg class="w-8 h-8 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-white">
+                  Licensing &amp; Collaboration
+                </h2>
+              </div>
+              <p class="text-brand-sand text-lg md:text-xl leading-relaxed">
+                All arrangements are reviewed for editorial independence implications before engagement.
+                RDP Analytics does not accept work that would constrain the newsroom's freedom to
+                investigate a contracting party or its affiliated organizations.
+              </p>
+              <p class="mt-4 text-brand-orange text-base italic">
+                Independence is not a feature we offer selectively. It is a condition of engagement.
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <div class="bg-brand-green-dark/60 border-2 border-brand-gold/40 rounded-xl p-6">
+                <p class="text-brand-sand text-sm uppercase tracking-wider font-bold mb-3">What We Offer</p>
+                <div class="space-y-2">
+                  <p class="text-brand-gold text-sm font-semibold">&rsaquo; Methodological licensing to aligned organizations</p>
+                  <p class="text-brand-gold text-sm font-semibold">&rsaquo; Custom civic systems analysis</p>
+                  <p class="text-brand-gold text-sm font-semibold">&rsaquo; Interactive exhibit development</p>
+                  <p class="text-brand-gold text-sm font-semibold">&rsaquo; Research consultation</p>
+                </div>
+                <div class="mt-4 pt-4 border-t border-brand-gold/20">
+                  <p class="text-brand-sand text-sm uppercase tracking-wider font-bold mb-2">What We Don't Do</p>
+                  <div class="space-y-2">
+                    <p class="text-brand-orange text-sm font-semibold">&rsaquo; Work with conflicted parties</p>
+                    <p class="text-brand-orange text-sm font-semibold">&rsaquo; Alter findings to fit a conclusion</p>
+                    <p class="text-brand-orange text-sm font-semibold">&rsaquo; License proprietary implementation</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         § 6  MISSION STATEMENT BANNER
+         bg-brand-green-dark — matches index mission section
+    ════════════════════════════════════════ -->
+    <section class="py-16 md:py-20 bg-brand-green-dark">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-gold">
+          We Investigate Systems of Power
+        </h2>
+        <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-brand-sand leading-relaxed">
+          We follow the money, map the networks, and document how policy becomes machinery&mdash;then
+          publish the underlying records so others can verify the work. This is oversight journalism
+          with an engineering mindset: measurable claims, transparent sourcing, and consequences
+          that outlive the news cycle.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         § 7  CONTACT
+         bg-brand-green — matches index subscribe section
+    ════════════════════════════════════════ -->
+    <section id="contact" class="py-16 md:py-20 bg-brand-green">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-orange">
+          Contact RDP Analytics
+        </h2>
+        <p class="mt-4 text-lg md:text-xl text-brand-sand">
+          Research collaboration, licensing inquiries, and methodological questions.
+        </p>
+
+        <a href="mailto:analytics@restoring-democracy.org"
+           class="mt-8 inline-block bg-brand-orange text-brand-offblack font-bold py-4 px-10 rounded-full text-lg shadow-2xl hover:bg-brand-gold hover:text-brand-green transition-all duration-300 transform hover:scale-105">
+          analytics@restoring-democracy.org &rarr;
+        </a>
+
+        <div class="mt-10 text-sm text-brand-sand opacity-95">
+          <span class="font-semibold text-brand-orange">Press &amp; Editorial:</span>
+          <a class="text-brand-orange hover:text-brand-gold hover:underline ml-1"
+             href="mailto:editor@restoring-democracy.org">editor@restoring-democracy.org</a>
+          &bull;
+          <a class="text-brand-orange hover:text-brand-gold hover:underline ml-1"
+             href="mailto:press@restoring-democracy.org">press@restoring-democracy.org</a>
+        </div>
+
+        <div class="mt-3 text-sm text-brand-sand opacity-95">
+          <span class="font-semibold text-brand-orange">Secure tips:</span>
+          Signal <span class="font-semibold">restoredemocracy.27</span> &bull;
+          <a class="text-brand-orange hover:text-brand-gold hover:underline"
+             href="mailto:restoringdemocracyspromise.scoop255@passmail.net">
+            restoringdemocracyspromise.scoop255@passmail.net
+          </a>
+          <div class="mt-2 opacity-90 text-xs">
+            Avoid sending sensitive material over standard email. Use Signal or Proton for confidential tips.
+          </div>
+        </div>
+
+        <div class="mt-10">
+          <a href="/"
+             class="inline-block bg-brand-green-dark/80 text-brand-white font-bold py-3 px-8 rounded-full
+                    hover:bg-brand-green-dark transition-all duration-300 shadow-lg
+                    border-2 border-brand-gold/30 transform hover:scale-105">
+            &larr; Return to Newsroom
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════════════════════════════════
+       FOOTER — identical to index.html
+  ════════════════════════════════════════ -->
+  <footer class="bg-brand-offblack text-brand-sand py-10 px-4">
+    <div class="max-w-4xl mx-auto text-center text-sm">
+      <img src="/assets/Square_logo_transparent.png" class="h-12 w-12 mx-auto mb-5" alt="Restoring Democracy Logo Icon">
+      <p class="mb-5 text-lg font-serif italic text-brand-gold">Engineering Precision Journalism</p>
+
+      <div class="footer-tooltip">
+        <p class="text-base">&copy; 2023&ndash;2025 Restoring Democracy's Promise. All rights reserved.</p>
+        <span class="tooltip-text">This project is powered by receipts.</span>
+      </div>
+
+      <p class="mt-3">
+        Contact: <a href="mailto:editor@restoring-democracy.org"
+                    class="text-brand-orange hover:text-brand-gold hover:underline font-semibold">
+          editor@restoring-democracy.org
+        </a>
+      </p>
+      <p class="mt-2">
+        Phone: <a href="tel:+17542936975"
+                  class="text-brand-orange hover:text-brand-gold hover:underline font-semibold">
+          754-293-6975
+        </a>
+      </p>
+      <p class="mt-5">
+        <a href="/privacy-policy.html"
+           class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">
+          Privacy Policy
+        </a>
+        &nbsp;&bull;&nbsp;
+        <a href="/"
+           class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">
+          Home
+        </a>
+        &nbsp;&bull;&nbsp;
+        <a href="/about.html"
+           class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">
+          About
+        </a>
+      </p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
