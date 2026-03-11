@@ -65,15 +65,17 @@
           colors: {
             'brand-green':      '#2d5c4f',
             'brand-green-dark': '#24473e',
+            'brand-green-darker': '#1a332c',
             'brand-orange':     '#f4a261',
             'brand-gold':       '#D4AF37',
             'brand-white':      '#F6F7F8',
             'brand-offblack':   '#161616',
             'brand-sand':       '#e4d5b9',
+            'brand-cream':      '#faf8f4',
           },
           fontFamily: {
-            'sans':  ['Inter', 'sans-serif'],
-            'serif': ['Lora', 'serif'],
+            'sans':  ['Inter', 'system-ui', 'sans-serif'],
+            'serif': ['Lora', 'Georgia', 'serif'],
           }
         }
       }
@@ -81,12 +83,28 @@
   </script>
 
   <style>
-    /* ── Copied verbatim from index.html ── */
-    .hero-gradient {
-      background: linear-gradient(135deg,
-        rgba(36, 71, 62, 0.95) 0%,
-        rgba(45, 92, 79, 0.90) 50%,
-        rgba(36, 71, 62, 0.85) 100%);
+    html { scroll-padding-top: 72px; }
+    .nav-bar { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: background-color 0.3s, box-shadow 0.3s; }
+    .nav-bar.scrolled { background-color: rgba(26, 51, 44, 0.97); box-shadow: 0 1px 12px rgba(0,0,0,0.25); }
+    .nav-link { position: relative; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s; }
+    .nav-link:hover { color: #D4AF37; }
+    .nav-link::after {
+      content: ''; position: absolute; left: 0; bottom: -0.35rem; width: 0; height: 2px;
+      background: #D4AF37; transition: width 0.25s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+    .hero-section {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, rgba(26,51,44,0.98) 0%, rgba(36,71,62,0.95) 45%, rgba(45,92,79,0.9) 100%);
+    }
+    .hero-section::before {
+      content: ''; position: absolute; top: -15%; right: -8%; width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 65%); pointer-events: none;
+    }
+    .hero-section::after {
+      content: ''; position: absolute; bottom: -10%; left: -5%; width: 450px; height: 450px;
+      background: radial-gradient(circle, rgba(244,162,97,0.03) 0%, transparent 65%); pointer-events: none;
     }
     .feature-strip {
       background: linear-gradient(to right,
@@ -147,37 +165,70 @@
       padding: 0.35rem 0.7rem;
       border-radius: 999px;
     }
+
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .mobile-menu.open { max-height: 500px; }
+
+    @media print { .nav-bar, .mobile-menu { display: none !important; } }
   </style>
 </head>
 
-<!-- Body identical to index.html -->
-<body class="bg-brand-green text-brand-white font-sans antialiased">
+<body class="bg-brand-cream text-brand-offblack font-sans antialiased">
 <div class="flex flex-col min-h-screen">
+
+  <!-- ═══════════════ NAVIGATION ═══════════════ -->
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-darker/90" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
+      <div class="flex items-center justify-between h-16 lg:h-[68px]">
+        <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
+          <img id="main-logo" src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise home" class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          <span class="hidden sm:inline text-brand-gold font-serif font-bold text-lg lg:text-xl tracking-tight group-hover:text-brand-orange transition-colors">Restoring Democracy's Promise</span>
+          <span class="sm:hidden text-brand-white font-serif font-bold text-base">RDP</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-7">
+          <a href="/#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
+          <a href="/analytics/" class="nav-link active text-brand-sand text-sm">Analytics</a>
+          <a href="/about.html" class="nav-link text-brand-sand text-sm">About</a>
+          <a href="/journalists/" class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="/#standards" class="nav-link text-brand-sand text-sm">Standards</a>
+          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm">Substack</a>
+          <a href="/secure-tips.html" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+          <button onclick="shareThisPage()" title="Share this page" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share this page">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
+          <a href="/#support" class="ml-2 bg-brand-gold text-brand-offblack text-sm font-bold py-2 px-5 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-md">Support Our Work</a>
+        </div>
+        <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-darker/98 border-t border-brand-gold/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 space-y-1">
+        <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
+        <a href="/analytics/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
+        <a href="/about.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
+        <a href="/journalists/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
+        <a href="/#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
+        <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack ↗</a>
+        <a href="/secure-tips.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
+        <div class="pt-2 pb-1"><a href="/#support" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">Support Our Work</a></div>
+      </div>
+    </div>
+  </nav>
+  <div class="h-16 lg:h-[68px]"></div>
 
   <!-- ════════════════════════════════════════
        HERO  — same structure & gradient as index
   ════════════════════════════════════════ -->
-  <header class="relative text-center py-16 md:py-24 px-4 overflow-hidden">
-    <div class="absolute inset-0 hero-gradient"></div>
-    <div class="absolute top-0 left-0 w-96 h-96 bg-brand-gold opacity-5 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-orange opacity-5 rounded-full blur-3xl"></div>
-
+  <header class="hero-section text-center pt-16 pb-24 md:pt-24 md:pb-32 lg:pt-28 lg:pb-36 px-4">
     <div class="relative max-w-5xl mx-auto z-10">
+      <img src="/assets/OG/Banner_RDP_Clear.png" alt="Restoring Democracy's Promise Logo" class="mx-auto mb-6 h-20 md:h-24 w-auto drop-shadow-2xl">
 
-      <!-- Breadcrumb -->
-      <div class="mb-8 flex justify-center items-center gap-2">
-        <a href="/" class="text-brand-sand/70 hover:text-brand-gold transition text-sm font-semibold">
-          Restoring Democracy's Promise
-        </a>
-        <span class="text-brand-sand/30 text-sm">/</span>
-        <span class="text-brand-gold text-sm font-semibold">RDP Analytics</span>
-      </div>
-
-      <img src="/assets/Square_logo_transparent.png"
-           alt="Restoring Democracy's Promise Logo"
-           class="mx-auto mb-8 h-24 w-24 md:h-32 md:w-32 drop-shadow-2xl">
-
-      <h1 class="font-serif text-5xl md:text-7xl font-bold text-brand-gold tracking-tight leading-tight drop-shadow-lg">
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brand-gold tracking-tight leading-[1.1]">
         RDP Analytics
       </h1>
       <p class="mt-5 text-xl md:text-2xl text-brand-orange italic font-semibold">
@@ -703,43 +754,70 @@
 
   </main>
 
-  <!-- ════════════════════════════════════════
-       FOOTER — identical to index.html
-  ════════════════════════════════════════ -->
+  <!-- ═══════════════ FOOTER ═══════════════ -->
   <footer class="bg-brand-offblack text-brand-sand py-10 px-4">
-    <div class="max-w-4xl mx-auto text-center text-sm">
-      <img src="/assets/Square_logo_transparent.png" class="h-12 w-12 mx-auto mb-5" alt="Restoring Democracy Logo Icon">
-      <p class="mb-5 text-lg font-serif italic text-brand-gold">Engineering Precision Journalism</p>
-
-      <div class="footer-tooltip">
-        <p class="text-base">&copy; 2023&ndash;2025 Restoring Democracy's Promise. All rights reserved.</p>
-        <span class="tooltip-text">This project is powered by receipts.</span>
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-1">
+          <img src="/assets/OG/Banner_RDP_Clear.png" class="h-10 w-auto mb-3" alt="RDP logo">
+          <p class="font-serif text-sm italic text-brand-gold">Quantifying the Truth</p>
+          <p class="text-xs text-brand-sand/50 mt-0.5">Engineering Precision Journalism</p>
+          <p class="mt-3 text-xs text-brand-sand/40">Independent · Evidence-driven · Document-first</p>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Investigations</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="/dream_machine.html" class="text-brand-sand/80 hover:text-brand-gold transition">The Dream Machine</a></li>
+            <li><a href="/iowa-doge-pension-privatize.html" class="text-brand-sand/80 hover:text-brand-gold transition">Pension Privatization</a></li>
+            <li><a href="/the-god-machine.html" class="text-brand-sand/80 hover:text-brand-gold transition">The God Machine</a></li>
+            <li><a href="/pincer-dataviz.html" class="text-brand-sand/80 hover:text-brand-gold transition">Pincer Movement</a></li>
+            <li><a href="/pincerfinancial.html" class="text-brand-sand/80 hover:text-brand-gold transition">Financial Superhighway</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Organization</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="/about.html" class="text-brand-sand/80 hover:text-brand-gold transition">About RDP</a></li>
+            <li><a href="/journalists/" class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
+            <li><a href="/#standards" class="text-brand-sand/80 hover:text-brand-gold transition">Standards &amp; Corrections</a></li>
+            <li><a href="/privacy-policy.html" class="text-brand-sand/80 hover:text-brand-gold transition">Privacy Policy</a></li>
+            <li><a href="/secure-tips.html" class="text-brand-sand/80 hover:text-brand-gold transition">Secure Tips</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Contact</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="mailto:webmaster@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition">webmaster@restoring-democracy.org</a></li>
+          </ul>
+        </div>
       </div>
-
-      <p class="mt-3">
-        Contact: <a href="mailto:webmaster@restoring-democracy.org"
-                    class="text-brand-orange hover:text-brand-gold hover:underline font-semibold">
-          webmaster@restoring-democracy.org
-        </a>
-      </p>
-      <p class="mt-5">
-        <a href="/privacy-policy.html"
-           class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">
-          Privacy Policy
-        </a>
-        &nbsp;&bull;&nbsp;
-        <a href="/"
-           class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">
-          Home
-        </a>
-        &nbsp;&bull;&nbsp;
-        <a href="/about.html"
-           class="text-brand-orange hover:text-brand-gold hover:underline text-base font-semibold">
-          About
-        </a>
-      </p>
+      <div class="border-t border-brand-sand/10 pt-6 text-center">
+        <div class="footer-tooltip inline-block">
+          <p class="text-xs text-brand-sand/50">&copy; 2023–2026 Restoring Democracy's Promise. All rights reserved.</p>
+          <span class="tooltip-text">This project is powered by receipts.</span>
+        </div>
+      </div>
     </div>
   </footer>
+
+  <script>
+    function shareThisPage() {
+      if (navigator.share) {
+        navigator.share({ title: document.title, url: window.location.href }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(window.location.href).catch(() => {});
+      }
+    }
+
+    const nav = document.querySelector('.nav-bar');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('mobile-menu');
+    toggle.addEventListener('click', () => { const open = menu.classList.toggle('open'); toggle.setAttribute('aria-expanded', open); });
+    menu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { menu.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }); });
+    let clickCount = 0, timer;
+    document.getElementById('main-logo').addEventListener('click', function(e) { e.preventDefault(); clickCount++; clearTimeout(timer); timer = setTimeout(() => { clickCount = 0; }, 1000); if (clickCount === 5) window.location.href = '/vault.html'; });
+  </script>
 
 </div>
 </body>
