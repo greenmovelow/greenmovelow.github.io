@@ -7,22 +7,22 @@
   <title>RDP Analytics — Research & Methods Division | Restoring Democracy's Promise</title>
   <meta name="description" content="RDP Analytics is the research and methods division of Restoring Democracy's Promise. We apply quantitative modeling, network analysis, and civic systems mapping to accountability journalism.">
 
-  <link rel="canonical" href="https://restoring-democracy.org/rdp-analytics/">
+  <link rel="canonical" href="https://restoring-democracy.org/analytics/">
   <meta name="robots" content="index,follow">
 
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://restoring-democracy.org/rdp-analytics/">
-  <meta property="og:title" content="RDP Analytics — Research & Methods Division | Restoring Democracy's Promise">
-  <meta property="og:description" content="Quantitative modeling, network analysis, and civic systems mapping in service of accountability journalism.">
-  <meta property="og:image" content="https://restoring-democracy.org/assets/Square_logo_green.png">
+  <meta property="og:url" content="https://restoring-democracy.org/analytics/">
+  <meta property="og:title" content="RDP Analytics | Research & Methods Division">
+  <meta property="og:description" content="Document-first modeling, auditable methods, and structured analysis in service of accountability journalism.">
+  <meta property="og:image" content="https://restoring-democracy.org/assets/og/RDP_Analytics_OG.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://restoring-democracy.org/rdp-analytics/">
-  <meta name="twitter:title" content="RDP Analytics — Research & Methods Division | Restoring Democracy's Promise">
-  <meta name="twitter:description" content="Quantitative modeling, network analysis, and civic systems mapping in service of accountability journalism.">
-  <meta name="twitter:image" content="https://restoring-democracy.org/assets/Square_logo_green.png">
+  <meta name="twitter:url" content="https://restoring-democracy.org/analytics/">
+  <meta name="twitter:title" content="RDP Analytics | Research & Methods Division">
+  <meta name="twitter:description" content="Document-first modeling, auditable methods, and structured analysis in service of accountability journalism.">
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/RDP_Analytics_OG.jpg">
 
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/rdp_logo_gold_on_green_bg.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/rdp_logo_gold_on_green_bg.png">
@@ -35,7 +35,7 @@
     "@type": "ResearchOrganization",
     "name": "RDP Analytics",
     "alternateName": "Restoring Democracy's Promise Analytics Division",
-    "url": "https://restoring-democracy.org/rdp-analytics/",
+    "url": "https://restoring-democracy.org/analytics/",
     "description": "The research and methods division of Restoring Democracy's Promise, applying quantitative modeling and civic systems analysis to accountability journalism.",
     "parentOrganization": {
       "@type": "NewsMediaOrganization",
@@ -215,6 +215,7 @@
         <a href="/#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
         <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack ↗</a>
         <a href="/secure-tips.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
+        <button onclick="shareThisPage()" class="w-full text-left py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition" aria-label="Share this page">Share This Page</button>
         <div class="pt-2 pb-1"><a href="/#support" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">Support Our Work</a></div>
       </div>
     </div>
@@ -801,12 +802,26 @@
   </footer>
 
   <script>
-    function shareThisPage() {
+    async function shareThisPage() {
+      const shareData = { title: document.title, url: window.location.href };
+
       if (navigator.share) {
-        navigator.share({ title: document.title, url: window.location.href }).catch(() => {});
-      } else {
-        navigator.clipboard.writeText(window.location.href).catch(() => {});
+        try {
+          await navigator.share(shareData);
+          return;
+        } catch (error) {
+          if (error && error.name === 'AbortError') return;
+        }
       }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          return;
+        } catch (error) {}
+      }
+
+      window.prompt('Copy this link:', window.location.href);
     }
 
     const nav = document.querySelector('.nav-bar');
@@ -815,8 +830,6 @@
     const menu = document.getElementById('mobile-menu');
     toggle.addEventListener('click', () => { const open = menu.classList.toggle('open'); toggle.setAttribute('aria-expanded', open); });
     menu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { menu.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }); });
-    let clickCount = 0, timer;
-    document.getElementById('main-logo').addEventListener('click', function(e) { e.preventDefault(); clickCount++; clearTimeout(timer); timer = setTimeout(() => { clickCount = 0; }, 1000); if (clickCount === 5) window.location.href = '/vault.html'; });
   </script>
 
 </div>
