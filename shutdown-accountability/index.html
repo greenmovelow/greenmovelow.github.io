@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shutdown Accountability Analysis — Analytical Exhibit | RDP Analytics</title>
+  <meta name="description" content="A state-space analysis of structurally weighted contribution within the October 2025 government shutdown dynamics, modeling faction-level accountability, procedural leverage, and downstream effects.">
+
+  <link rel="canonical" href="https://restoring-democracy.org/shutdown-accountability">
+  <meta name="robots" content="index,follow">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Restoring Democracy's Promise">
+  <meta property="og:url" content="https://restoring-democracy.org/shutdown-accountability">
+  <meta property="og:title" content="Shutdown Accountability Analysis | RDP Analytics">
+  <meta property="og:description" content="State-space analysis of structurally weighted contribution within the October 2025 shutdown dynamics.">
+  <meta property="og:image" content="https://restoring-democracy.org/assets/og/RDP_Analytics_OG.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shutdown Accountability Analysis | RDP Analytics">
+  <meta name="twitter:description" content="State-space analysis of structurally weighted contribution within the October 2025 shutdown dynamics.">
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/RDP_Analytics_OG.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <link rel="apple-touch-icon" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <meta name="theme-color" content="#0d1a12">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Shutdown Accountability Analysis",
+    "description": "A state-space analysis of structurally weighted contribution within the October 2025 shutdown dynamics.",
+    "author": { "@type": "Organization", "name": "RDP Analytics", "url": "https://restoring-democracy.org/analytics/" },
+    "publisher": { "@type": "NewsMediaOrganization", "name": "Restoring Democracy's Promise", "url": "https://restoring-democracy.org/" },
+    "datePublished": "2026-03-15"
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-QJ3L9CT4Z7');</script>
+
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          'brand-green':'#2d5c4f','brand-green-dark':'#24473e','brand-green-darker':'#1a332c',
+          'brand-orange':'#f4a261','brand-gold':'#D4AF37','brand-white':'#F6F7F8',
+          'brand-offblack':'#161616','brand-sand':'#e4d5b9','brand-cream':'#faf8f4',
+          'exhibit-dark':'#0d1a12','exhibit-panel':'#112218','exhibit-border':'#1e3a29',
+        },
+        fontFamily: {
+          'sans':['Inter','system-ui','sans-serif'],'serif':['Lora','Georgia','serif'],
+          'mono':['JetBrains Mono','monospace'],
+        }
+      }}
+    }
+  </script>
+
+  <style>
+    html{scroll-padding-top:72px}
+    .nav-bar{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background-color .3s,box-shadow .3s}
+    .nav-bar.scrolled{background-color:rgba(13,26,18,.97);box-shadow:0 1px 12px rgba(0,0,0,.4)}
+    .nav-link{position:relative;font-weight:500;letter-spacing:.01em;transition:color .2s}
+    .nav-link:hover{color:#D4AF37}
+    .nav-link::after{content:'';position:absolute;left:0;bottom:-.35rem;width:0;height:2px;background:#D4AF37;transition:width .25s ease}
+    .nav-link:hover::after,.nav-link.active::after{width:100%}
+    .mobile-menu{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .mobile-menu.open{max-height:500px}
+
+    .exhibit-hero{position:relative;overflow:hidden;background:linear-gradient(170deg,#070f0a 0%,#0d1a12 30%,#112218 55%,#0d1a12 80%,#070f0a 100%)}
+    .exhibit-hero::before{content:'';position:absolute;top:-10%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,.04) 0%,transparent 60%);pointer-events:none}
+
+    .dossier-label{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#f4a261;background:rgba(244,162,97,.1);border:1px solid rgba(244,162,97,.3);padding:.3rem .75rem;border-radius:3px}
+
+    .finding-row{display:flex;align-items:center;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid #1e3a29}
+    .finding-row:last-child{border-bottom:none}
+
+    .figure-card{background:#112218;border:1px solid #1e3a29;border-radius:1rem;overflow:hidden}
+    .figure-card img{width:100%;height:auto;display:block}
+    .figure-caption{padding:1rem 1.25rem;font-size:.85rem;color:#e4d5b9;opacity:.8}
+
+    .section-rule{border:none;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,55,.3),transparent);margin:3rem 0}
+    .footnote{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#94a3b8}
+
+    .footer-tooltip{position:relative;cursor:pointer}
+    .footer-tooltip .tooltip-text{visibility:hidden;width:220px;background-color:#24473e;color:#f4a261;text-align:center;border-radius:8px;padding:7px 0;position:absolute;z-index:1;bottom:120%;left:50%;transform:translateX(-50%);opacity:0;transition:opacity .4s;font-size:1em;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+    .footer-tooltip:hover .tooltip-text{visibility:visible;opacity:1}
+    @media print{.nav-bar,.mobile-menu{display:none!important}}
+  </style>
+</head>
+
+<body class="bg-exhibit-dark text-brand-sand font-sans antialiased">
+<div class="flex flex-col min-h-screen">
+
+  <!-- NAV -->
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-exhibit-dark/90" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
+      <div class="flex items-center justify-between h-16 lg:h-[68px]">
+        <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
+          <img src="/assets/Square_logo_transparent.png" alt="RDP home" class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          <span class="hidden sm:inline text-brand-gold font-serif font-bold text-lg lg:text-xl tracking-tight group-hover:text-brand-orange transition-colors">Restoring Democracy's Promise</span>
+          <span class="sm:hidden text-brand-white font-serif font-bold text-base">RDP</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-7">
+          <a href="/#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
+          <a href="/analytics/" class="nav-link text-brand-sand text-sm">Analytics</a>
+          <a href="/about.html" class="nav-link text-brand-sand text-sm">About</a>
+          <a href="/team/" class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm">Substack</a>
+          <a href="/secure-tips.html" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+          <button onclick="shareThisPage()" title="Share" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </button>
+        </div>
+        <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-exhibit-dark/98 border-t border-brand-gold/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 space-y-1">
+        <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
+        <a href="/analytics/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
+        <a href="/about.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
+        <a href="/team/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
+        <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack &#8599;</a>
+        <a href="/secure-tips.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
+      </div>
+    </div>
+  </nav>
+  <div class="h-16 lg:h-[68px]"></div>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <header class="exhibit-hero pt-16 pb-20 md:pt-24 md:pb-28 px-4">
+    <div class="relative max-w-4xl mx-auto z-10">
+      <div class="flex items-center gap-4 mb-6">
+        <a href="/analytics/" class="text-brand-sand/60 hover:text-brand-gold text-sm font-medium transition">&larr; RDP Analytics</a>
+        <span class="text-brand-sand/30">|</span>
+        <span class="dossier-label">Analytical Exhibit</span>
+      </div>
+
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-brand-gold tracking-tight leading-[1.1] mb-4">
+        Shutdown Accountability Analysis
+      </h1>
+      <p class="font-mono text-brand-sand/50 text-sm md:text-base tracking-wide mb-8">
+        STATE-SPACE ANALYSIS // OCTOBER 2025 GOVERNMENT SHUTDOWN
+      </p>
+
+      <p class="text-brand-sand text-lg md:text-xl leading-relaxed max-w-3xl mb-5">
+        RDP Analytics modeled the October 2025 shutdown at the faction and procedural levels to distinguish central drivers from peripheral actors&mdash;mapping who contributed most, through which mechanisms, and with what downstream effects.
+      </p>
+
+      <div class="bg-exhibit-panel/60 border border-brand-gold/20 rounded-lg px-5 py-4 max-w-3xl">
+        <p class="text-brand-sand/70 text-sm leading-relaxed italic">
+          In this model, accountability refers to structurally weighted contribution within the shutdown dynamics. It is a systems measure, not a moral or legal conclusion.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+
+    <!-- ═══════════════ TOP-LINE FINDINGS ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-dark">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-3">Modeled Accountability Shares</h2>
+        <p class="text-brand-sand/60 text-sm mb-8">Derived from state-space modeling of procedural dynamics, legislative sequencing, network influence, and public attribution data as one contextual input.</p>
+
+        <div class="bg-exhibit-panel border border-exhibit-border rounded-xl overflow-hidden">
+          <!-- Executive -->
+          <div class="finding-row px-5 md:px-6">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-red-500 flex-shrink-0"></span>
+              <span class="text-brand-white font-semibold text-sm md:text-base">Executive / Trump</span>
+            </div>
+            <span class="font-mono text-brand-gold font-bold text-lg md:text-xl">41.5%</span>
+          </div>
+          <!-- HFC -->
+          <div class="finding-row px-5 md:px-6">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-orange-500 flex-shrink-0"></span>
+              <span class="text-brand-white font-semibold text-sm md:text-base">House Freedom Caucus</span>
+            </div>
+            <span class="font-mono text-brand-gold font-bold text-lg md:text-xl">35.0%</span>
+          </div>
+          <!-- House GOP -->
+          <div class="finding-row px-5 md:px-6">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-pink-400 flex-shrink-0"></span>
+              <span class="text-brand-white font-semibold text-sm md:text-base">House GOP Leadership</span>
+            </div>
+            <span class="font-mono text-brand-gold font-bold text-lg md:text-xl">30.0%</span>
+          </div>
+          <!-- House Dems -->
+          <div class="finding-row px-5 md:px-6">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-blue-500 flex-shrink-0"></span>
+              <span class="text-brand-white font-semibold text-sm md:text-base">House Democrats</span>
+            </div>
+            <span class="font-mono text-brand-sand/70 font-bold text-lg md:text-xl">28.4%</span>
+          </div>
+          <!-- Senate Dems -->
+          <div class="finding-row px-5 md:px-6">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-emerald-500 flex-shrink-0"></span>
+              <span class="text-brand-white font-semibold text-sm md:text-base">Senate Democrats</span>
+            </div>
+            <span class="font-mono text-brand-sand/70 font-bold text-lg md:text-xl">25.0%</span>
+          </div>
+          <!-- Senate GOP -->
+          <div class="finding-row px-5 md:px-6">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-yellow-500 flex-shrink-0"></span>
+              <span class="text-brand-white font-semibold text-sm md:text-base">Senate GOP Leadership</span>
+            </div>
+            <span class="font-mono text-brand-sand/70 font-bold text-lg md:text-xl">25.0%</span>
+          </div>
+          <!-- Public Opinion -->
+          <div class="finding-row px-5 md:px-6">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-cyan-400 flex-shrink-0"></span>
+              <span class="text-brand-white font-semibold text-sm md:text-base">Public Opinion / External</span>
+            </div>
+            <span class="font-mono text-brand-sand/50 font-bold text-lg md:text-xl">15.0%</span>
+          </div>
+        </div>
+
+        <p class="footnote mt-4">Percentages reflect modeled structural contribution and may exceed 100% because multiple factions contribute to the same dynamics through overlapping mechanisms. Model outputs were cross-checked for directional consistency against contemporaneous public attribution data.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════ PROCEDURAL ACCOUNTABILITY MAP ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-panel">
+      <div class="max-w-5xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-3">Procedural Accountability Map</h2>
+        <p class="text-brand-sand text-base leading-relaxed mb-6 max-w-3xl">
+          This heatmap shows how congressional groups aligned with five major shutdown-driving tactics: blocking a clean CR, demanding health cuts, floor delays, whip pressure, and media amplification.
+        </p>
+
+        <div class="figure-card">
+          <img src="/assets/exhibits/shutdown-accountability/procedural-accountability-map.png"
+               alt="Procedural Accountability Map of Shutdown-Driving Actions, October 2025. Heatmap showing Freedom Caucus Core and MAGA-Aligned groups with highest involvement (level 3) across all tactics, while GOP Moderates and Democrats show minimal involvement."
+               loading="lazy">
+          <p class="figure-caption">
+            <strong>Figure 1:</strong> Procedural Accountability Map &mdash; Shutdown-driving actions by congressional group. Accountability levels: 0 = No Involvement, 1 = Low, 2 = Medium, 3 = High. Freedom Caucus Core shows maximum involvement across all tracked tactics.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ FACTION RESPONSIBILITY NETWORK ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-dark">
+      <div class="max-w-5xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-3">Faction Responsibility Network</h2>
+        <p class="text-brand-sand text-base leading-relaxed mb-6 max-w-3xl">
+          The procedural map above shows tactical alignment. This network diagram shows the broader picture: how accountability weight and influence were distributed across factions.
+        </p>
+
+        <div class="figure-card">
+          <img src="/assets/exhibits/shutdown-accountability/faction-responsibility-network.jpg"
+               alt="Faction Responsibility Network diagram showing Trump/Executive at 41.5% and House Freedom Caucus at 35.0% as the largest nodes, with strong influence edges connecting them. House GOP Leadership at 30.0%, House Democrats at 28.4%, Senate Democrats and Senate GOP Leadership both at 25.0%, and Public Opinion at 15.0%."
+               loading="lazy">
+          <p class="figure-caption">
+            <strong>Figure 2:</strong> Faction Responsibility Network &mdash; Government Shutdown, October 2025. Node size corresponds to weighted accountability share. Edge thickness reflects influence strength. Percentages reflect modeled structural contribution derived from state-space analysis.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CAUCUS LEVERAGE MATRIX ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-panel">
+      <div class="max-w-5xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-3">Shutdown Caucus Procedural Leverage Matrix</h2>
+        <p class="text-brand-sand text-base leading-relaxed mb-6 max-w-3xl">
+          At a more granular level, this matrix maps individual caucus members to specific procedural leverage tactics. Values reflect modeled leverage intensity for each member-tactic pair.
+        </p>
+
+        <div class="figure-card">
+          <img src="/assets/exhibits/shutdown-accountability/caucus-leverage-matrix.png"
+               alt="Shutdown Caucus Procedural Leverage Matrix showing six Freedom Caucus members (Andy Harris, Jim Jordan, Matt Gaetz, Lauren Boebert, Chip Roy, Andy Biggs) mapped against five procedural tactics. Most cells show leverage scores between 0.7 and 1.0, indicating concentrated procedural influence."
+               loading="lazy">
+          <p class="figure-caption">
+            <strong>Figure 3:</strong> Shutdown Caucus Procedural Leverage Matrix &mdash; CR stance, rules/floor tactics, and whip pressure analysis. Leverage intensity ranges from Low (light) to High (dark). Members with scores approaching 1.0 across multiple tactics indicate concentrated procedural influence within the shutdown dynamics.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SHUTDOWN CASCADE ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-dark">
+      <div class="max-w-5xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-3">The Shutdown Cascade</h2>
+        <p class="text-brand-sand text-base leading-relaxed mb-6 max-w-3xl">
+          This synthesis diagram traces how caucus actions cascaded through procedural gridlock into operational impacts and public sentiment shifts over the shutdown period.
+        </p>
+
+        <div class="figure-card">
+          <img src="/assets/exhibits/shutdown-accountability/shutdown-cascade.png"
+               alt="The Shutdown Cascade diagram showing four layers: Shutdown Caucus Actions (Day 1-3) flowing into Procedural Gridlock (Day 3-5), then Operational Impacts (Day 5-14) including WIC disruption, SNAP risk, TSA delays, and federal contractor stops, and finally Public Sentiment Drift (Day 14+) with shifting accountability attribution among voters, independent voter movement, and media narrative consolidation. An amplification feedback loop connects operational impacts back to caucus positioning."
+               loading="lazy">
+          <p class="figure-caption">
+            <strong>Figure 4:</strong> The Shutdown Cascade &mdash; from caucus action to public response. Illustrates how procedural tactics cascaded through operational systems into measurable public impacts and political feedback loops over four phases (Day 1&ndash;3 through Day 14+).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ WHY THIS MATTERS ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-panel">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-5">Why This Matters</h2>
+        <p class="text-brand-sand text-base md:text-lg leading-relaxed">
+          Conventional shutdown coverage treats institutional breakdown as diffuse chaos. This exhibit demonstrates that shutdown dynamics have structure: central drivers can be distinguished from peripheral actors, procedural leverage can be quantified, and downstream effects can be traced to specific mechanisms. The point is not a partisan verdict&mdash;it is to show that accountability within a government shutdown can be measured, documented, and subjected to scrutiny.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════ MODEL NOTE ═══════════════ -->
+    <section class="py-10 md:py-12 bg-exhibit-dark">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="bg-exhibit-panel border border-exhibit-border rounded-xl p-5 md:p-6 font-mono text-sm text-brand-sand/60 leading-relaxed">
+          <p class="text-brand-gold font-semibold mb-2">Model Reference</p>
+          <p>USG State-Space Network Algorithm (v1.3) &bull; Q3&ndash;Q4 2025 data window</p>
+          <p>Inputs: procedural records, network dynamics, legislative sequencing, public attribution data</p>
+          <p>Modeled structural attribution: Executive 41.5%, Opposition 28.4%, Shared/External 30.2%</p>
+          <p class="mt-2 text-brand-sand/40">Network: 7 nodes, 10 edges, density 0.476 &bull; Confidence: 92%</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ BOTTOM NAV ═══════════════ -->
+    <section class="py-12 bg-exhibit-dark">
+      <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/analytics/" class="inline-block bg-brand-green-dark/80 text-brand-white font-bold py-3 px-8 rounded-full hover:bg-brand-green-dark transition-all duration-300 shadow-lg border-2 border-brand-gold/30 transform hover:scale-105">
+          &larr; Back to RDP Analytics
+        </a>
+        <a href="/shutdown-analysis" class="inline-block bg-brand-green-dark/80 text-brand-white font-bold py-3 px-8 rounded-full hover:bg-brand-green-dark transition-all duration-300 shadow-lg border-2 border-brand-orange/30 transform hover:scale-105">
+          Oversight Vacuum Cascade &rarr;
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-offblack text-brand-sand py-10 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-1">
+          <img src="/assets/OG/Banner_RDP_Clear.png" class="h-10 w-auto mb-3" alt="RDP logo">
+          <p class="font-serif text-sm italic text-brand-gold">Quantifying the Truth</p>
+          <p class="text-xs text-brand-sand/50 mt-0.5">Engineering Precision Journalism</p>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Investigations</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="/dream_machine.html" class="text-brand-sand/80 hover:text-brand-gold transition">The Dream Machine</a></li>
+            <li><a href="/iowa-doge-pension-privatize.html" class="text-brand-sand/80 hover:text-brand-gold transition">Pension Privatization</a></li>
+            <li><a href="/the-god-machine.html" class="text-brand-sand/80 hover:text-brand-gold transition">The God Machine</a></li>
+            <li><a href="/pincer-dataviz.html" class="text-brand-sand/80 hover:text-brand-gold transition">Pincer Movement</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Organization</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="/about.html" class="text-brand-sand/80 hover:text-brand-gold transition">About RDP</a></li>
+            <li><a href="/team/" class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
+            <li><a href="/privacy-policy.html" class="text-brand-sand/80 hover:text-brand-gold transition">Privacy Policy</a></li>
+            <li><a href="/secure-tips.html" class="text-brand-sand/80 hover:text-brand-gold transition">Secure Tips</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Contact</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="mailto:analytics@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition">analytics@restoring-democracy.org</a></li>
+            <li><a href="mailto:webmaster@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition">webmaster@restoring-democracy.org</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-brand-sand/10 pt-6 text-center">
+        <div class="footer-tooltip inline-block">
+          <p class="text-xs text-brand-sand/50">&copy; 2023&ndash;2026 Restoring Democracy's Promise. All rights reserved.</p>
+          <span class="tooltip-text">This project is powered by receipts.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    async function shareThisPage(){const d={title:document.title,url:window.location.href};if(navigator.share){try{await navigator.share(d);return}catch(e){if(e.name==='AbortError')return}}if(navigator.clipboard&&navigator.clipboard.writeText){try{await navigator.clipboard.writeText(window.location.href);return}catch(e){}}window.prompt('Copy this link:',window.location.href)}
+    const nav=document.querySelector('.nav-bar');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)},{passive:true});
+    const toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('mobile-menu');toggle.addEventListener('click',()=>{const o=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',o)});menu.querySelectorAll('a').forEach(l=>{l.addEventListener('click',()=>{menu.classList.remove('open');toggle.setAttribute('aria-expanded','false')})});
+  </script>
+</div>
+</body>
+</html>
