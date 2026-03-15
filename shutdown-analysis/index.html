@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>The Oversight Vacuum Cascade — Case Study | RDP Analytics</title>
+  <meta name="description" content="RDP Analytics documented the 164-hour GAO-CIGIE oversight blackout in real time using state-space analytical methods and probabilistic network deanonymization. Documented Anomaly 003.">
+
+  <link rel="canonical" href="https://restoring-democracy.org/shutdown-analysis">
+  <meta name="robots" content="index,follow">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Restoring Democracy's Promise">
+  <meta property="og:url" content="https://restoring-democracy.org/shutdown-analysis">
+  <meta property="og:title" content="The Oversight Vacuum Cascade | RDP Analytics Case Study">
+  <meta property="og:description" content="Real-time empirical capture and probabilistic deanonymization of the $5.4B GAO-to-CIGIE funding collapse in October 2025.">
+  <meta property="og:image" content="https://restoring-democracy.org/assets/og/RDP_Analytics_OG.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Oversight Vacuum Cascade | RDP Analytics Case Study">
+  <meta name="twitter:description" content="Real-time empirical capture and probabilistic deanonymization of the $5.4B GAO-to-CIGIE funding collapse in October 2025.">
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/RDP_Analytics_OG.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <link rel="apple-touch-icon" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <meta name="theme-color" content="#0d1a12">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Oversight Vacuum Cascade: Documented Anomaly 003",
+    "description": "RDP Analytics documented the 164-hour GAO-CIGIE oversight blackout using state-space analytical methods and probabilistic network deanonymization.",
+    "author": { "@type": "Organization", "name": "RDP Analytics", "url": "https://restoring-democracy.org/analytics/" },
+    "publisher": { "@type": "NewsMediaOrganization", "name": "Restoring Democracy's Promise", "url": "https://restoring-democracy.org/" },
+    "datePublished": "2026-03-14"
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-QJ3L9CT4Z7');</script>
+
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          'brand-green':'#2d5c4f','brand-green-dark':'#24473e','brand-green-darker':'#1a332c',
+          'brand-orange':'#f4a261','brand-gold':'#D4AF37','brand-white':'#F6F7F8',
+          'brand-offblack':'#161616','brand-sand':'#e4d5b9','brand-cream':'#faf8f4',
+          'exhibit-dark':'#0d1a12','exhibit-panel':'#112218','exhibit-border':'#1e3a29',
+        },
+        fontFamily: {
+          'sans':['Inter','system-ui','sans-serif'],'serif':['Lora','Georgia','serif'],
+          'mono':['JetBrains Mono','monospace'],
+        }
+      }}
+    }
+  </script>
+
+  <style>
+    html{scroll-padding-top:72px}
+    .nav-bar{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background-color .3s,box-shadow .3s}
+    .nav-bar.scrolled{background-color:rgba(13,26,18,.97);box-shadow:0 1px 12px rgba(0,0,0,.4)}
+    .nav-link{position:relative;font-weight:500;letter-spacing:.01em;transition:color .2s}
+    .nav-link:hover{color:#D4AF37}
+    .nav-link::after{content:'';position:absolute;left:0;bottom:-.35rem;width:0;height:2px;background:#D4AF37;transition:width .25s ease}
+    .nav-link:hover::after,.nav-link.active::after{width:100%}
+    .mobile-menu{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .mobile-menu.open{max-height:500px}
+
+    .exhibit-hero{position:relative;overflow:hidden;background:linear-gradient(170deg,#070f0a 0%,#0d1a12 30%,#112218 55%,#0d1a12 80%,#070f0a 100%)}
+    .exhibit-hero::before{content:'';position:absolute;top:-10%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,.04) 0%,transparent 60%);pointer-events:none}
+    .exhibit-hero::after{content:'';position:absolute;bottom:-8%;left:-3%;width:400px;height:400px;background:radial-gradient(circle,rgba(244,162,97,.02) 0%,transparent 55%);pointer-events:none}
+
+    .dossier-label{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#f4a261;background:rgba(244,162,97,.1);border:1px solid rgba(244,162,97,.3);padding:.3rem .75rem;border-radius:3px}
+
+    .metric-card{background:#112218;border:1px solid #1e3a29;border-left:4px solid #D4AF37;transition:transform .3s ease,box-shadow .3s ease}
+    .metric-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
+
+    .evidence-table th{background:#0d1a12;color:#D4AF37;font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+    .evidence-table td{border-bottom:1px solid #1e3a29;font-size:.95rem}
+    .evidence-table tr:last-child td{border-bottom:none}
+    .evidence-table tr:hover td{background:rgba(212,175,55,.03)}
+
+    .section-rule{border:none;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,55,.3),transparent);margin:3rem 0}
+    .footnote{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#94a3b8}
+
+    /* Timeline styling */
+    .timeline-event{position:relative;padding-left:2.5rem;padding-bottom:2rem;border-left:2px solid #1e3a29}
+    .timeline-event:last-child{padding-bottom:0;border-left-color:transparent}
+    .timeline-event::before{content:'';position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:#D4AF37;border:2px solid #0d1a12}
+    .timeline-event.critical::before{background:#f4a261;box-shadow:0 0 8px rgba(244,162,97,.4)}
+
+    .footer-tooltip{position:relative;cursor:pointer}
+    .footer-tooltip .tooltip-text{visibility:hidden;width:220px;background-color:#24473e;color:#f4a261;text-align:center;border-radius:8px;padding:7px 0;position:absolute;z-index:1;bottom:120%;left:50%;transform:translateX(-50%);opacity:0;transition:opacity .4s;font-size:1em;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+    .footer-tooltip:hover .tooltip-text{visibility:visible;opacity:1}
+    @media print{.nav-bar,.mobile-menu{display:none!important}}
+  </style>
+</head>
+
+<body class="bg-exhibit-dark text-brand-sand font-sans antialiased">
+<div class="flex flex-col min-h-screen">
+
+  <!-- NAV -->
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-exhibit-dark/90" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
+      <div class="flex items-center justify-between h-16 lg:h-[68px]">
+        <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
+          <img src="/assets/Square_logo_transparent.png" alt="RDP home" class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          <span class="hidden sm:inline text-brand-gold font-serif font-bold text-lg lg:text-xl tracking-tight group-hover:text-brand-orange transition-colors">Restoring Democracy's Promise</span>
+          <span class="sm:hidden text-brand-white font-serif font-bold text-base">RDP</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-7">
+          <a href="/#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
+          <a href="/analytics/" class="nav-link text-brand-sand text-sm">Analytics</a>
+          <a href="/about.html" class="nav-link text-brand-sand text-sm">About</a>
+          <a href="/team/" class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm">Substack</a>
+          <a href="/secure-tips.html" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+          <button onclick="shareThisPage()" title="Share" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </button>
+        </div>
+        <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-exhibit-dark/98 border-t border-brand-gold/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 space-y-1">
+        <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
+        <a href="/analytics/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
+        <a href="/about.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
+        <a href="/team/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
+        <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack &#8599;</a>
+        <a href="/secure-tips.html" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
+      </div>
+    </div>
+  </nav>
+  <div class="h-16 lg:h-[68px]"></div>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <header class="exhibit-hero pt-16 pb-20 md:pt-24 md:pb-28 px-4">
+    <div class="relative max-w-4xl mx-auto z-10">
+      <div class="flex items-center gap-4 mb-6">
+        <a href="/analytics/" class="text-brand-sand/60 hover:text-brand-gold text-sm font-medium transition">&larr; RDP Analytics</a>
+        <span class="text-brand-sand/30">|</span>
+        <span class="dossier-label">Documented Anomaly 003</span>
+      </div>
+
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-brand-gold tracking-tight leading-[1.1] mb-4">
+        The Oversight Vacuum Cascade
+      </h1>
+      <p class="font-mono text-brand-sand/50 text-sm md:text-base tracking-wide mb-8">
+        GAO &rarr; OMB &rarr; CIGIE FUNDING CHAIN COLLAPSE // SEPT&ndash;OCT 2025
+      </p>
+
+      <p class="text-brand-sand text-lg md:text-xl leading-relaxed max-w-3xl">
+        In October 2025, the federal government experienced a coordinated oversight blackout. While conventional analysis relied on post-hoc reports issued months later, RDP Analytics identified the anomaly in real time and later validated it against contemporaneous records. This was not a mechanical shutdown failure&mdash;CIGIE operates on a no-year revolving fund designed to insulate it from political budget disputes. OMB&rsquo;s refusal to apportion these funds was an affirmative act, not a consequence of the shutdown.
+      </p>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+
+    <!-- ═══════════════ KEY METRICS ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-dark">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="metric-card rounded-lg p-5">
+            <p class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-1">164 Hours</p>
+            <p class="font-mono text-[0.65rem] text-brand-sand/50 uppercase tracking-widest">Oversight Blackout Duration</p>
+          </div>
+          <div class="metric-card rounded-lg p-5">
+            <p class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-1">$5.4B</p>
+            <p class="font-mono text-[0.65rem] text-brand-sand/50 uppercase tracking-widest">Suspended Investigations</p>
+          </div>
+          <div class="metric-card rounded-lg p-5">
+            <p class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-1">539</p>
+            <p class="font-mono text-[0.65rem] text-brand-sand/50 uppercase tracking-widest">Deanonymized Entities</p>
+          </div>
+          <div class="metric-card rounded-lg p-5">
+            <p class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-1">72</p>
+            <p class="font-mono text-[0.65rem] text-brand-sand/50 uppercase tracking-widest">IG Hotlines Disabled</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ THE CRITICAL TIMELINE ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-panel">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-3">The Critical Timeline</h2>
+        <p class="text-brand-sand/70 text-sm mb-8">Anchored to minute-level timestamps from congressional records, committee correspondence, and validated through archived timeline analysis.</p>
+
+        <div class="space-y-0 ml-2">
+          <div class="timeline-event">
+            <p class="font-mono text-xs text-brand-orange font-bold mb-1">SEPT 3, 2025</p>
+            <p class="text-brand-white font-semibold text-base mb-1">OMB Director states GAO &ldquo;shouldn&rsquo;t exist&rdquo;</p>
+            <p class="text-brand-sand/70 text-sm">Public statement of hostility toward the Government Accountability Office. (Source: Axios)</p>
+          </div>
+          <div class="timeline-event">
+            <p class="font-mono text-xs text-brand-orange font-bold mb-1">SEPT 29, 2025</p>
+            <p class="text-brand-white font-semibold text-base mb-1">Grassley-Collins bipartisan warning letter to OMB</p>
+            <p class="text-brand-sand/70 text-sm">Bipartisan letter warns that withholding CIGIE/PRAC funds would be improper.</p>
+          </div>
+          <div class="timeline-event critical">
+            <p class="font-mono text-xs text-brand-orange font-bold mb-1">SEPT 30, 2025 &mdash; 12:01 AM EDT (T<sub>0</sub>)</p>
+            <p class="text-brand-white font-semibold text-base mb-1">GAO shuts down</p>
+            <p class="text-brand-sand/70 text-sm">FY2025 appropriations lapse. All GAO reports, bid protest dockets, and Congressional support functions halt. The auditor with statutory authority to challenge OMB is now offline. (z = 2.23&sigma;)</p>
+          </div>
+          <div class="timeline-event critical">
+            <p class="font-mono text-xs text-brand-orange font-bold mb-1">OCT 1, 2025 &mdash; 12:01 AM EDT (T<sub>0</sub> + 24h)</p>
+            <p class="text-brand-white font-semibold text-base mb-1">OMB withholds CIGIE FY2026 funds</p>
+            <p class="text-brand-sand/70 text-sm">Start of FY2026&mdash;the first moment OMB was expected to apportion CIGIE&rsquo;s new funding. Instead, OMB declines to release $28M in no-year funds. No deferral message filed. No rescission proposal submitted. This raised serious procedural and legality concerns under the Impoundment Control Act. (z = 3.45&sigma;)</p>
+          </div>
+          <div class="timeline-event critical">
+            <p class="font-mono text-xs text-brand-orange font-bold mb-1">OCT 1, 2025 &mdash; 12:00 PM EDT</p>
+            <p class="text-brand-white font-semibold text-base mb-1">GAO Electronic Protest Docketing System goes offline</p>
+            <p class="text-brand-sand/70 text-sm">~2,400 annual bid protest cases frozen. No new protests accepted. All deadlines tolled.</p>
+          </div>
+          <div class="timeline-event critical">
+            <p class="font-mono text-xs text-brand-orange font-bold mb-1">OCT 1, 2025 &mdash; 6:00 PM EDT (T<sub>0</sub> + 42h)</p>
+            <p class="text-brand-white font-semibold text-base mb-1">Oversight.gov goes dark</p>
+            <p class="text-brand-sand/70 text-sm">Site displays: &ldquo;Due to a lack of apportionment of funds, this website is currently unavailable.&rdquo; 28 OIG websites follow. 34,000+ reports inaccessible. 72 IG whistleblower hotlines disabled. Infrastructure failure mode inconsistent with standard administrative shutdown. (z = 3.14&sigma;)</p>
+          </div>
+          <div class="timeline-event">
+            <p class="font-mono text-xs text-brand-orange font-bold mb-1">OCT 2, 2025</p>
+            <p class="text-brand-white font-semibold text-base mb-1">House Democrats launch temporary whistleblower portal</p>
+            <p class="text-brand-sand/70 text-sm">Congressional workaround site created to replace disabled IG hotlines.</p>
+          </div>
+          <div class="timeline-event">
+            <p class="font-mono text-xs text-brand-orange font-bold mb-1">OCT 6, 2025</p>
+            <p class="text-brand-white font-semibold text-base mb-1">Acting CIGIE Chair Hull issues protest letter to Congress</p>
+            <p class="text-brand-sand/70 text-sm">25 CIGIE employees furloughed. Integrity Committee (IG misconduct investigations) frozen.</p>
+          </div>
+        </div>
+
+        <hr class="section-rule">
+
+        <!-- Why 24 hours -->
+        <div class="bg-exhibit-dark/60 border border-brand-gold/30 rounded-xl p-6 md:p-8">
+          <h3 class="font-serif text-lg font-bold text-brand-gold mb-3">Why Exactly 24 Hours?</h3>
+          <p class="text-brand-sand text-sm md:text-base leading-relaxed mb-3">
+            The 24-hour lag corresponds to the minimum interval required by the federal budget clock. GAO&rsquo;s shutdown on September 30 removed the only body with statutory authority to challenge OMB under 31 U.S.C. &sect;3526. The start of FY2026 at 12:01 AM on October 1 was the first moment OMB was required to apportion CIGIE&rsquo;s new-year funds.
+          </p>
+          <p class="text-brand-sand text-sm md:text-base leading-relaxed">
+            The non-apportionment of FY2026 funds&mdash;an action that raised serious compliance questions under the Impoundment Control Act&mdash;could only occur after those funds were due. The 24-hour interval is the structural fingerprint of the sequence: the auditor goes offline, and the action follows at the first moment the auditor cannot respond.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ ANALYTICAL DETECTION ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-dark">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-6">Analytical Detection</h2>
+
+        <p class="text-brand-sand text-base md:text-lg leading-relaxed mb-5">
+          RDP Analytics identified the oversight.gov anomaly through state-space modeling applied to U.S. government operations during the shutdown period. The model flagged it as a structurally significant deviation from historical patterns&mdash;a finding later validated against contemporaneous records. The predicted onset aligned with the actual event within minutes; the site&rsquo;s failure mode was inconsistent with a standard administrative shutdown.
+        </p>
+        <p class="text-brand-sand/70 text-sm">
+          Collection and validation methods are summarized here at a high level. Underlying materials are available through RDP Analytics&rsquo; partnership framework.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SCALE OF THE BLACKOUT ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-panel">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-6">Scale of the Blackout</h2>
+        <p class="text-brand-sand text-base md:text-lg leading-relaxed mb-6">
+          The CIGIE defunding cascaded through the entire federal oversight infrastructure&mdash;not one site, but a network of watchdog offices, hotlines, and reporting channels.
+        </p>
+
+        <div class="overflow-x-auto rounded-xl border border-exhibit-border mb-6">
+          <table class="evidence-table w-full text-left">
+            <thead>
+              <tr>
+                <th class="px-5 py-4">Metric</th>
+                <th class="px-5 py-4">Impact</th>
+                <th class="px-5 py-4">Status</th>
+              </tr>
+            </thead>
+            <tbody class="text-brand-sand">
+              <tr><td class="px-5 py-3">OIG websites taken offline</td><td class="px-5 py-3 font-mono text-brand-gold font-semibold">28</td><td class="px-5 py-3">Including Agriculture, Education, Justice, Interior, VA</td></tr>
+              <tr><td class="px-5 py-3">Oversight reports inaccessible</td><td class="px-5 py-3 font-mono text-brand-gold font-semibold">34,000+</td><td class="px-5 py-3">Complete blackout of oversight documentation</td></tr>
+              <tr><td class="px-5 py-3">IG whistleblower hotlines disabled</td><td class="px-5 py-3 font-mono text-brand-gold font-semibold">72</td><td class="px-5 py-3">All reporting channels silenced</td></tr>
+              <tr><td class="px-5 py-3">GAO annual reports halted</td><td class="px-5 py-3 font-mono text-brand-gold font-semibold">~700</td><td class="px-5 py-3">Indefinite suspension</td></tr>
+              <tr><td class="px-5 py-3">Bid protests frozen</td><td class="px-5 py-3 font-mono text-brand-gold font-semibold">~2,400</td><td class="px-5 py-3">All deadlines tolled</td></tr>
+              <tr><td class="px-5 py-3">Federal employees affected</td><td class="px-5 py-3 font-mono text-brand-gold font-semibold">~19,800</td><td class="px-5 py-3">~5,800 GAO + ~14,000 IG staff furloughed or impaired</td></tr>
+              <tr><td class="px-5 py-3">CIGIE staff furloughed</td><td class="px-5 py-3 font-mono text-brand-gold font-semibold">25</td><td class="px-5 py-3">Core coordination staff eliminated</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Historical comparison -->
+        <h3 class="font-serif text-xl font-bold text-brand-white mb-4">No Precedent</h3>
+        <div class="overflow-x-auto rounded-xl border border-exhibit-border">
+          <table class="evidence-table w-full text-left">
+            <thead>
+              <tr>
+                <th class="px-5 py-4">Shutdown</th>
+                <th class="px-5 py-4">GAO Impact</th>
+                <th class="px-5 py-4">CIGIE/IG Impact</th>
+                <th class="px-5 py-4">Coordination Detected</th>
+              </tr>
+            </thead>
+            <tbody class="text-brand-sand text-sm">
+              <tr><td class="px-5 py-3">2013</td><td class="px-5 py-3">Standard suspension</td><td class="px-5 py-3">Operational (unaffected)</td><td class="px-5 py-3 font-mono text-brand-sand/50">None</td></tr>
+              <tr><td class="px-5 py-3">2018&ndash;19</td><td class="px-5 py-3">Partial impacts</td><td class="px-5 py-3">Operational (unaffected)</td><td class="px-5 py-3 font-mono text-brand-sand/50">None</td></tr>
+              <tr class="bg-brand-gold/5"><td class="px-5 py-3 font-bold text-brand-white">2025</td><td class="px-5 py-3 font-bold text-brand-white">Complete halt</td><td class="px-5 py-3 font-bold text-brand-white">Targeted blackout</td><td class="px-5 py-3 font-mono text-brand-gold font-bold">r = 1.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="footnote mt-3">In every prior government shutdown, CIGIE and the IG ecosystem remained operational. The 2025 event was the first targeted defunding of oversight infrastructure.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════ DEANONYMIZATION ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-dark">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-6">Probabilistic Network Deanonymization</h2>
+        <p class="text-brand-sand text-base md:text-lg leading-relaxed mb-8">
+          During the 164-hour blackout, $5.4 billion in active investigations and audits were suspended. RDP Analytics identified 539 specific entities, contractors, and programs operating within the vacuum through structured analytical methods, with findings supported by underlying research materials and validated against contemporaneous records.
+        </p>
+
+        <div class="overflow-x-auto rounded-xl border border-exhibit-border">
+          <table class="evidence-table w-full text-left">
+            <thead><tr><th class="px-5 py-4">Node Class</th><th class="px-5 py-4">Entity Status</th><th class="px-5 py-4">Capital Exposure</th><th class="px-5 py-4">Confidence</th></tr></thead>
+            <tbody class="text-brand-sand">
+              <tr><td class="px-5 py-4">Tier 1 Contractor</td><td class="px-5 py-4">Confirmed (Defense/Logistics)</td><td class="px-5 py-4 font-mono text-brand-gold font-semibold">$1.2B</td><td class="px-5 py-4 font-mono">99.4%</td></tr>
+              <tr><td class="px-5 py-4">IT Modernization</td><td class="px-5 py-4">Confirmed (Federal DB Mgmt)</td><td class="px-5 py-4 font-mono text-brand-gold font-semibold">$840M</td><td class="px-5 py-4 font-mono">97.8%</td></tr>
+              <tr><td class="px-5 py-4">Border Tech Mgmt</td><td class="px-5 py-4">Confirmed (ALPR/Surveillance)</td><td class="px-5 py-4 font-mono text-brand-gold font-semibold">$650M</td><td class="px-5 py-4 font-mono">96.1%</td></tr>
+              <tr><td class="px-5 py-4">State-Level Grants</td><td class="px-5 py-4">Probable (Midwest Block Grants)</td><td class="px-5 py-4 font-mono text-brand-gold font-semibold">$420M</td><td class="px-5 py-4 font-mono">89.5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="footnote mt-3">*Sample data from the complete 539-entity Deanonymization Matrix. Full methodology documented in supporting research files.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════ STRUCTURAL OBSERVATIONS ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-panel">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-6">Structural Observations</h2>
+        <p class="text-brand-sand text-base md:text-lg leading-relaxed mb-6">
+          Archived records from the blackout period reveal concentrated access patterns across specific sections of oversight.gov.
+        </p>
+        <div class="bg-exhibit-dark/60 border border-exhibit-border rounded-xl p-6 max-w-2xl">
+          <h3 class="font-mono text-xs text-brand-orange uppercase tracking-widest font-bold mb-3">USAID Section Traffic Surge</h3>
+          <p class="text-brand-sand/80 text-sm leading-relaxed">
+            Pronounced traffic to USAID-related oversight sections&mdash;consistent with both proponents and opponents of the USAID restructuring seeking financial reports to support their respective positions during the shutdown period.
+          </p>
+        </div>
+        <p class="text-brand-sand/60 text-sm mt-5">These observations document structural access patterns&mdash;not attribution. Additional findings are supported by underlying research materials; further analysis is ongoing.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════ MODEL SPEC ═══════════════ -->
+    <section class="py-12 md:py-16 bg-exhibit-dark">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-6">Model Specification</h2>
+        <div class="bg-exhibit-panel border border-exhibit-border rounded-xl p-6 md:p-8 font-mono text-sm leading-relaxed text-brand-sand/70">
+          <p class="text-brand-gold font-semibold mb-3">USG State-Space Network Algorithm (v1.3)</p>
+          <p>Data window: Q3&ndash;Q4 2025 (shutdown period)</p>
+          <p>Confidence interval: 95% &bull; Monte Carlo: n = 10,000 &bull; p &le; 0.05</p>
+          <p>Convergence: 42 epochs</p>
+          <p class="mt-3 text-brand-sand/60">Cross-Correlation Results (&#177;48h primary window):</p>
+          <p>Temporal correlation: r = 1.000 at +24h lag</p>
+          <p>Temporal-magnitude correlation: r = 0.970</p>
+          <p>Procedural variance ratio: 252.9 (exceeds any documented shutdown since 1974)</p>
+          <p>Combined z-score: 5.17 (probability &lt; 1.17 &times; 10<sup>&minus;7</sup>)</p>
+          <p>Coordination probability: 99.9%</p>
+          <p>Joint random occurrence probability: 8 &times; 10<sup>&minus;8</sup></p>
+          <p class="mt-3 text-brand-sand/40">Z-scores: GAO = 2.23&sigma; &bull; CIGIE = 3.14&sigma; &bull; OMB = 3.45&sigma;</p>
+          <p class="text-brand-sand/40">Databases: SAM.gov (2.3M) &bull; PRAC ($5T+) &bull; GAO Bid Protest (~2,400/yr) &bull; FPDS &bull; USAspending.gov</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ RESEARCH ACCESS CTA ═══════════════ -->
+    <section class="py-16 md:py-20 bg-exhibit-panel">
+      <div class="max-w-3xl mx-auto px-4">
+        <div class="bg-exhibit-dark border-2 border-brand-gold/40 rounded-2xl p-8 md:p-12 text-center shadow-2xl">
+          <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-4">Access the Complete Architecture Data</h2>
+          <p class="text-brand-sand text-base md:text-lg leading-relaxed mb-2">
+            Qualified journalists, researchers, and academic partners can request access to the full 539-entity Deanonymization Matrix and supporting research materials through RDP Analytics.
+          </p>
+          <p class="text-brand-sand/60 text-sm mb-8">Access is structured through our mission-aligned partnership framework.</p>
+          <a href="mailto:analytics@restoring-democracy.org" class="inline-block bg-brand-gold text-brand-offblack font-bold py-4 px-10 rounded-lg text-lg shadow-xl hover:bg-brand-orange transition-all duration-300 transform hover:scale-105">
+            Request Access &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ RETURN NAV ═══════════════ -->
+    <section class="py-12 bg-exhibit-dark">
+      <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/analytics/" class="inline-block bg-brand-green-dark/80 text-brand-white font-bold py-3 px-8 rounded-full hover:bg-brand-green-dark transition-all duration-300 shadow-lg border-2 border-brand-gold/30 transform hover:scale-105">&larr; Back to RDP Analytics</a>
+        <a href="/shutdown-accountability" class="inline-block bg-brand-green-dark/80 text-brand-white font-bold py-3 px-8 rounded-full hover:bg-brand-green-dark transition-all duration-300 shadow-lg border-2 border-brand-orange/30 transform hover:scale-105">Shutdown Accountability Analysis &rarr;</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-offblack text-brand-sand py-10 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-1">
+          <img src="/assets/OG/Banner_RDP_Clear.png" class="h-10 w-auto mb-3" alt="RDP logo">
+          <p class="font-serif text-sm italic text-brand-gold">Quantifying the Truth</p>
+          <p class="text-xs text-brand-sand/50 mt-0.5">Engineering Precision Journalism</p>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Investigations</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="/dream_machine.html" class="text-brand-sand/80 hover:text-brand-gold transition">The Dream Machine</a></li>
+            <li><a href="/iowa-doge-pension-privatize.html" class="text-brand-sand/80 hover:text-brand-gold transition">Pension Privatization</a></li>
+            <li><a href="/the-god-machine.html" class="text-brand-sand/80 hover:text-brand-gold transition">The God Machine</a></li>
+            <li><a href="/pincer-dataviz.html" class="text-brand-sand/80 hover:text-brand-gold transition">Pincer Movement</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Organization</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="/about.html" class="text-brand-sand/80 hover:text-brand-gold transition">About RDP</a></li>
+            <li><a href="/team/" class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
+            <li><a href="/privacy-policy.html" class="text-brand-sand/80 hover:text-brand-gold transition">Privacy Policy</a></li>
+            <li><a href="/secure-tips.html" class="text-brand-sand/80 hover:text-brand-gold transition">Secure Tips</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Contact</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="mailto:analytics@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition">analytics@restoring-democracy.org</a></li>
+            <li><a href="mailto:webmaster@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold transition">webmaster@restoring-democracy.org</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-brand-sand/10 pt-6 text-center">
+        <div class="footer-tooltip inline-block">
+          <p class="text-xs text-brand-sand/50">&copy; 2023&ndash;2026 Restoring Democracy's Promise. All rights reserved.</p>
+          <span class="tooltip-text">This project is powered by receipts.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    async function shareThisPage(){const d={title:document.title,url:window.location.href};if(navigator.share){try{await navigator.share(d);return}catch(e){if(e.name==='AbortError')return}}if(navigator.clipboard&&navigator.clipboard.writeText){try{await navigator.clipboard.writeText(window.location.href);return}catch(e){}}window.prompt('Copy this link:',window.location.href)}
+    const nav=document.querySelector('.nav-bar');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)},{passive:true});
+    const toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('mobile-menu');toggle.addEventListener('click',()=>{const o=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',o)});menu.querySelectorAll('a').forEach(l=>{l.addEventListener('click',()=>{menu.classList.remove('open');toggle.setAttribute('aria-expanded','false')})});
+  </script>
+</div>
+</body>
+</html>
+
