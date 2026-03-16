@@ -170,6 +170,28 @@
       <p class="text-brand-sand text-lg md:text-xl leading-relaxed max-w-3xl">
         In October 2025, the federal government experienced a coordinated oversight blackout. While conventional analysis relied on post-hoc reports issued months later, RDP Analytics identified the anomaly in real time and later validated it against contemporaneous records. This was not a mechanical shutdown failure&mdash;CIGIE operates on a no-year revolving fund designed to insulate it from political budget disputes. OMB&rsquo;s refusal to apportion these funds was an affirmative act, not a consequence of the shutdown.
       </p>
+
+      <div class="mt-8 md:mt-10 bg-exhibit-panel/70 border border-exhibit-border rounded-xl p-4 md:p-5">
+        <p class="font-mono text-[0.65rem] tracking-[0.18em] text-brand-sand/55 uppercase mb-2">Follow the Investigation</p>
+        <p class="text-brand-sand/85 text-sm md:text-base leading-relaxed mb-3 md:mb-4">
+          This analysis is part of an ongoing RDP Analytics series. Subscribe for future exhibits, evidence updates, and new findings.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-2.5 sm:items-center mb-3">
+          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-brand-gold/90 text-brand-offblack font-medium text-sm px-3.5 py-2 rounded-lg hover:bg-brand-gold transition-colors">
+            Subscribe for free
+          </a>
+          <button onclick="shareThisPage()" class="inline-flex items-center justify-center border border-brand-gold/30 text-brand-sand/90 text-sm font-medium px-4 py-2.5 rounded-lg hover:border-brand-gold/50 hover:text-brand-gold transition-colors">
+            Share this analysis
+          </button>
+        </div>
+        <div class="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <a href="#critical-timeline" class="shrink-0 px-3 py-1.5 rounded-full border border-exhibit-border text-brand-sand/75 text-xs font-mono uppercase tracking-wider hover:text-brand-gold hover:border-brand-gold/40 transition-colors">Timeline</a>
+          <a href="#scale-of-blackout" class="shrink-0 px-3 py-1.5 rounded-full border border-exhibit-border text-brand-sand/75 text-xs font-mono uppercase tracking-wider hover:text-brand-gold hover:border-brand-gold/40 transition-colors">Scale</a>
+          <a href="#network-deanonymization" class="shrink-0 px-3 py-1.5 rounded-full border border-exhibit-border text-brand-sand/75 text-xs font-mono uppercase tracking-wider hover:text-brand-gold hover:border-brand-gold/40 transition-colors">Network</a>
+          <a href="#model-specification" class="shrink-0 px-3 py-1.5 rounded-full border border-exhibit-border text-brand-sand/75 text-xs font-mono uppercase tracking-wider hover:text-brand-gold hover:border-brand-gold/40 transition-colors">Model</a>
+          <a href="#research-access" class="shrink-0 px-3 py-1.5 rounded-full border border-exhibit-border text-brand-sand/75 text-xs font-mono uppercase tracking-wider hover:text-brand-gold hover:border-brand-gold/40 transition-colors">Access</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -200,7 +222,7 @@
     </section>
 
     <!-- ═══════════════ THE CRITICAL TIMELINE ═══════════════ -->
-    <section class="py-12 md:py-16 bg-exhibit-panel">
+    <section id="critical-timeline" class="py-12 md:py-16 bg-exhibit-panel">
       <div class="max-w-4xl mx-auto px-4">
         <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-3">The Critical Timeline</h2>
         <p class="text-brand-sand/70 text-sm mb-8">Anchored to minute-level timestamps from congressional records, committee correspondence, and validated through archived timeline analysis.</p>
@@ -278,7 +300,7 @@
     </section>
 
     <!-- ═══════════════ SCALE OF THE BLACKOUT ═══════════════ -->
-    <section class="py-12 md:py-16 bg-exhibit-panel">
+    <section id="scale-of-blackout" class="py-12 md:py-16 bg-exhibit-panel">
       <div class="max-w-4xl mx-auto px-4">
         <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-6">Scale of the Blackout</h2>
         <p class="text-brand-sand text-base md:text-lg leading-relaxed mb-6">
@@ -330,7 +352,7 @@
     </section>
 
     <!-- ═══════════════ DEANONYMIZATION ═══════════════ -->
-    <section class="py-12 md:py-16 bg-exhibit-dark">
+    <section id="network-deanonymization" class="py-12 md:py-16 bg-exhibit-dark">
       <div class="max-w-4xl mx-auto px-4">
         <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-6">Probabilistic Network Deanonymization</h2>
         <p class="text-brand-sand text-base md:text-lg leading-relaxed mb-8">
@@ -370,7 +392,7 @@
     </section>
 
     <!-- ═══════════════ MODEL SPEC ═══════════════ -->
-    <section class="py-12 md:py-16 bg-exhibit-dark">
+    <section id="model-specification" class="py-12 md:py-16 bg-exhibit-dark">
       <div class="max-w-4xl mx-auto px-4">
         <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white mb-6">Model Specification</h2>
         <div class="bg-exhibit-panel border border-exhibit-border rounded-xl p-6 md:p-8 font-mono text-sm leading-relaxed text-brand-sand/70">
@@ -392,7 +414,7 @@
     </section>
 
     <!-- ═══════════════ RESEARCH ACCESS CTA ═══════════════ -->
-    <section class="py-16 md:py-20 bg-exhibit-panel">
+    <section id="research-access" class="py-16 md:py-20 bg-exhibit-panel">
       <div class="max-w-3xl mx-auto px-4">
         <div class="bg-exhibit-dark border-2 border-brand-gold/40 rounded-2xl p-8 md:p-12 text-center shadow-2xl">
           <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-4">Access the Complete Architecture Data</h2>
@@ -469,4 +491,3 @@
 </div>
 </body>
 </html>
-
