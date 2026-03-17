@@ -2,152 +2,116 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://restoring-democracy.org/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://restoring-democracy.org/about.html</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://restoring-democracy.org/save_america_act</loc>
-    <lastmod>2026-02-18</lastmod>
+    <loc>https://restoring-democracy.org/team/</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/dream_machine</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://restoring-democracy.org/analytics/</loc>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://restoring-democracy.org/shutdown-analysis/</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://restoring-democracy.org/shutdown-accountability/</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://restoring-democracy.org/alpr-trap</loc>
-    <lastmod>2026-03-11</lastmod>
+    <loc>https://restoring-democracy.org/save_america_act</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://restoring-democracy.org/funding_flow/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/save_iowa</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/confidential_mou</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/secure-tips.html</loc>
-    <lastmod>2026-02-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/privacy-policy.html</loc>
-    <lastmod>2026-02-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/assembly-line-unpacked.html</loc>
-    <lastmod>2026-02-11</lastmod>
+    <loc>https://restoring-democracy.org/dream_machine</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://restoring-democracy.org/iowa-doge-pension-privatize.html</loc>
-    <lastmod>2026-02-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/corrections.html</loc>
-    <lastmod>2026-02-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/assembly-line.html</loc>
-    <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/leviathan-grid.html</loc>
-    <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/pincer-dataviz.html</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://restoring-democracy.org/pincerfinancial.html</loc>
-    <lastmod>2026-02-10</lastmod>
+    <loc>https://restoring-democracy.org/secure-tips.html</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/privacy-policy.html</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/corrections.html</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/alpr-trap/</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/confidential-mou/</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/funding_flow/</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/save_iowa/</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/voting_rights_iowa/</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://restoring-democracy.org/the-god-machine.html</loc>
-    <lastmod>2025-10-31</lastmod>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://restoring-democracy.org/god-machine-flowchart.html</loc>
-    <lastmod>2025-10-31</lastmod>
+    <loc>https://restoring-democracy.org/pincerfinancial.html</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/credentialing-gap-dossier.html</loc>
-    <lastmod>2025-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/alpr-leviathan.html</loc>
-    <lastmod>2025-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://restoring-democracy.org/pincer-infographic.html</loc>
-    <lastmod>2025-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 </urlset>
