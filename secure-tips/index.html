@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Secure Tips | Restoring Democracy's Promise</title>
+  <meta name="description" content="How to share a secure tip with Restoring Democracy's Promise. Signal, secure email, and practical source-protection guidance.">
+
+  <link rel="canonical" href="https://restoring-democracy.org/secure-tips.html">
+  <meta name="robots" content="index,follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Restoring Democracy's Promise">
+  <meta property="og:url" content="https://restoring-democracy.org/secure-tips.html">
+  <meta property="og:title" content="Secure Tips | Restoring Democracy's Promise">
+  <meta property="og:description" content="Signal, secure email, and practical safety guidance for sources.">
+  <meta property="og:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Color.png">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Secure Tips | Restoring Democracy's Promise">
+  <meta name="twitter:description" content="Signal, secure email, and practical safety guidance for sources.">
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Color.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <link rel="apple-touch-icon" href="/assets/rdp_logo_gold_on_green_bg.png">
+  <meta name="theme-color" content="#1a332c">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Secure Tips — Restoring Democracy's Promise",
+    "url": "https://restoring-democracy.org/secure-tips.html",
+    "isPartOf": {"@type":"WebSite","name":"Restoring Democracy's Promise","url":"https://restoring-democracy.org/"},
+    "publisher": {"@type":"Organization","name":"Restoring Democracy's Promise","url":"https://restoring-democracy.org/"}
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QJ3L9CT4Z7');
+  </script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-green':        '#2d5c4f',
+            'brand-green-dark':   '#24473e',
+            'brand-green-darker': '#1a332c',
+            'brand-orange':       '#f4a261',
+            'brand-gold':         '#D4AF37',
+            'brand-white':        '#F6F7F8',
+            'brand-offblack':     '#161616',
+            'brand-sand':         '#e4d5b9',
+            'brand-cream':        '#faf8f4',
+          },
+          fontFamily: {
+            'sans':  ['Inter', 'system-ui', 'sans-serif'],
+            'serif': ['Lora', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: hidden; width: 100%; max-width: 100%; }
+    html { scroll-padding-top: 68px; }
+
+    .nav-bar {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    .nav-bar.scrolled {
+      background-color: rgba(26, 51, 44, 0.98);
+      box-shadow: 0 1px 16px rgba(0,0,0,0.35);
+    }
+    .nav-link { position: relative; font-weight: 500; transition: color 0.2s; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 2px; background: #D4AF37; transition: width 0.25s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: #D4AF37; }
+
+    /* Full-bleed dark gradient — same family as index hero */
+    body {
+      background: linear-gradient(160deg,
+        #0d1a15 0%, #111f1a 15%, #1a332c 35%, #24473e 60%, #2d5c4f 85%, #24473e 100%
+      );
+      min-height: 100vh;
+      color: #F6F7F8;
+    }
+
+    /* Decorative orbs (fixed so they don't scroll) */
+    .orb-tr {
+      position: fixed; top: -15%; right: -12%; z-index: 0;
+      width: 55vw; height: 55vw; max-width: 500px; max-height: 500px;
+      background: radial-gradient(circle, rgba(212,175,55,0.055) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .orb-bl {
+      position: fixed; bottom: -20%; left: -10%; z-index: 0;
+      width: 50vw; height: 50vw; max-width: 450px; max-height: 450px;
+      background: radial-gradient(circle, rgba(244,162,97,0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-lock {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: rgba(212,175,55,0.1);
+      border: 1.5px solid rgba(212,175,55,0.28);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.1rem;
+    }
+
+    .method-card {
+      background: rgba(26,51,44,0.65);
+      border: 1px solid rgba(212,175,55,0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 0.875rem;
+      transition: border-color 0.25s;
+      width: 100%; overflow: hidden;
+    }
+    .method-card:hover { border-color: rgba(212,175,55,0.42); }
+    .method-card.best { border-color: rgba(212,175,55,0.32); }
+
+    .signal-id {
+      font-family: ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(212,175,55,0.22);
+      border-radius: 0.5rem;
+      padding: 0.65rem 0.9rem;
+      color: #D4AF37;
+      font-size: 1rem;
+      font-weight: 600;
+      word-break: break-all;
+    }
+
+    .info-card {
+      background: rgba(26,51,44,0.5);
+      border: 1px solid rgba(212,175,55,0.14);
+      border-radius: 0.875rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: border-color 0.25s;
+      width: 100%; overflow: hidden;
+    }
+    .info-card:hover { border-color: rgba(212,175,55,0.32); }
+
+    .template-block {
+      background: rgba(0,0,0,0.42);
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 0.875rem;
+      font-family: ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace;
+      font-size: 0.8rem;
+      line-height: 1.75;
+      color: #e4d5b9;
+      padding: 1.1rem 1rem;
+      word-break: break-word;
+    }
+
+    .alert-box {
+      background: rgba(212,175,55,0.07);
+      border: 1px solid rgba(212,175,55,0.22);
+      border-left: 3px solid #D4AF37;
+      border-radius: 0 0.75rem 0.75rem 0;
+    }
+
+    .section-rule {
+      border: none;
+      border-top: 1px solid rgba(212,175,55,0.12);
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.6rem; letter-spacing: 0.12em;
+      text-transform: uppercase; font-weight: 700;
+      padding: 0.25rem 0.55rem; border-radius: 999px;
+    }
+
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .mobile-menu.open { max-height: 560px; }
+
+    .footer-tooltip { position: relative; cursor: default; }
+    .footer-tooltip .tooltip-text {
+      visibility: hidden; width: 190px; background: #24473e; color: #f4a261;
+      text-align: center; border-radius: 6px; padding: 5px 0;
+      position: absolute; z-index: 1; bottom: 120%; left: 50%;
+      transform: translateX(-50%); opacity: 0; transition: opacity 0.3s; font-size: 0.78em;
+    }
+    .footer-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+    @media print { .nav-bar, .mobile-menu, .orb-tr, .orb-bl { display: none !important; } }
+  </style>
+</head>
+
+<body class="font-sans antialiased">
+  <!-- Decorative orbs -->
+  <div class="orb-tr" aria-hidden="true"></div>
+  <div class="orb-bl" aria-hidden="true"></div>
+
+  <!-- ══ NAVIGATION ══ -->
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-darker/88"
+       role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
+      <div class="flex items-center justify-between h-16 lg:h-[68px]">
+
+        <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
+          <img id="main-logo" src="assets/Square_logo_transparent.png"
+               alt="Restoring Democracy's Promise home"
+               class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          <span class="hidden sm:inline text-brand-gold font-serif font-bold text-base lg:text-lg
+                       tracking-tight group-hover:text-brand-orange transition-colors">
+            Restoring Democracy's Promise
+          </span>
+          <span class="sm:hidden text-brand-white font-serif font-bold text-sm">RDP</span>
+        </a>
+
+        <div class="hidden lg:flex items-center gap-6">
+          <a href="/#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
+          <a href="/analytics/"      class="nav-link text-brand-sand text-sm">Analytics</a>
+          <a href="/about/"          class="nav-link text-brand-sand text-sm">About</a>
+          <a href="/team/"           class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="/#standards"      class="nav-link text-brand-sand text-sm">Standards</a>
+          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer"
+             class="nav-link text-brand-sand text-sm">Substack</a>
+          <a href="secure-tips.html" class="nav-link text-brand-gold text-sm">Secure Tips</a>
+          <button onclick="shareThisPage()" title="Share"
+                  class="p-2 rounded-md text-brand-sand/70 hover:text-brand-gold transition-colors"
+                  aria-label="Share this page">
+            <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
+          <a href="/#support"
+             class="ml-1 bg-brand-gold text-brand-offblack text-xs font-bold py-2 px-4 rounded-full
+                    hover:bg-brand-orange transition-all duration-200 shadow-md tracking-wide uppercase">
+            Support Our Work
+          </a>
+        </div>
+
+        <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition"
+                aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-darker/99 border-t border-brand-gold/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 space-y-0.5">
+        <a href="/"                class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Home</a>
+        <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
+        <a href="/analytics/"      class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
+        <a href="/about/"          class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
+        <a href="/team/"           class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
+        <a href="/#standards"      class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
+        <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer"
+           class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack ↗</a>
+        <a href="secure-tips.html" class="block py-2.5 px-3 text-brand-gold text-sm font-semibold rounded">Secure Tips</a>
+        <button onclick="shareThisPage()"
+                class="w-full text-left py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">
+          Share This Page
+        </button>
+        <div class="pt-2 pb-1">
+          <a href="/#support" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">
+            Support Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="h-16 lg:h-[68px]" aria-hidden="true"></div>
+
+  <!-- ══ HERO ══ -->
+  <header class="relative z-10 text-center pt-12 pb-10 md:pt-18 md:pb-14 px-4">
+    <div class="max-w-md mx-auto w-full">
+
+      <div class="hero-lock">
+        <svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor"
+             viewBox="0 0 24 24" stroke-width="1.75">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+
+      <h1 class="font-serif text-4xl sm:text-5xl font-bold text-brand-gold tracking-tight leading-tight">
+        Secure Tips
+      </h1>
+
+      <div class="w-12 h-px bg-brand-gold mx-auto mt-4 mb-4 opacity-50"></div>
+
+      <p class="text-brand-orange italic font-semibold text-lg">Sources are protected. Always.</p>
+
+      <p class="mt-4 text-brand-sand text-sm leading-relaxed px-2">
+        If you have documents, context, or first-hand information relevant to an investigation,
+        we welcome tips. Use the secure methods below.
+      </p>
+
+      <div class="alert-box mt-5 px-4 py-3 text-left mx-auto">
+        <p class="text-brand-sand text-sm leading-relaxed">
+          <span class="text-brand-gold font-semibold">Important:</span>
+          Avoid sensitive material over standard email, SMS, or workplace devices.
+          When in doubt, start with Signal.
+        </p>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="relative z-10">
+
+    <!-- §1 Contact Methods -->
+    <section class="px-4 pb-10">
+      <div class="max-w-md mx-auto w-full">
+
+        <div class="text-center mb-5">
+          <span class="badge bg-brand-gold text-brand-offblack">Recommended Contact Methods</span>
+        </div>
+
+        <div class="space-y-4">
+
+          <div class="method-card best p-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="badge bg-brand-gold text-brand-offblack">Best</span>
+              <span class="text-brand-sand/55 text-xs">End-to-end encrypted</span>
+            </div>
+            <h2 class="font-serif text-xl font-bold text-brand-white mb-2">Signal</h2>
+            <p class="text-brand-sand text-sm leading-relaxed mb-4">
+              Strong end-to-end encryption. Preferred first contact.
+              Enable disappearing messages for added protection.
+            </p>
+            <p class="text-brand-sand/55 text-xs uppercase tracking-wider font-bold mb-1.5">Signal ID</p>
+            <div class="signal-id">restoredemocracy.27</div>
+          </div>
+
+          <div class="method-card p-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="badge text-brand-sand border border-brand-gold/25" style="background:rgba(45,92,79,0.6)">Good</span>
+              <span class="text-brand-sand/55 text-xs">If Signal isn't available</span>
+            </div>
+            <h2 class="font-serif text-xl font-bold text-brand-white mb-2">Secure E-mail</h2>
+            <p class="text-brand-sand text-sm leading-relaxed mb-4">
+              Don't use a work account for sensitive material.
+              Proton Mail reduces metadata exposure.
+            </p>
+            <p class="text-brand-sand/55 text-xs uppercase tracking-wider font-bold mb-1.5">Secure Email</p>
+            <div class="bg-black/30 border border-brand-gold/20 rounded-lg px-3 py-2.5">
+              <a href="mailto:restoringdemocracyspromise.scoop255@passmail.net"
+                 class="text-brand-orange hover:text-brand-gold transition text-xs font-medium break-all leading-relaxed">
+                restoringdemocracyspromise.scoop255@passmail.net
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-rule max-w-md mx-auto mx-4">
+
+    <!-- §2 What's Helpful -->
+    <section class="px-4 py-10">
+      <div class="max-w-md mx-auto w-full">
+        <h2 class="font-serif text-2xl font-bold text-brand-gold mb-1">What's Helpful</h2>
+        <p class="text-brand-sand/65 text-sm mb-5">You don't need a perfect package.</p>
+
+        <div class="grid grid-cols-1 gap-3">
+          <div class="info-card p-4">
+            <p class="text-brand-gold text-xs font-bold uppercase tracking-wider mb-1">Primary Documents</p>
+            <p class="text-brand-sand text-sm">Emails, memos, contracts, policies, filings, meeting minutes.</p>
+          </div>
+          <div class="info-card p-4">
+            <p class="text-brand-gold text-xs font-bold uppercase tracking-wider mb-1">Key Names &amp; Agencies</p>
+            <p class="text-brand-sand text-sm">Who was involved and what role they played.</p>
+          </div>
+          <div class="info-card p-4">
+            <p class="text-brand-gold text-xs font-bold uppercase tracking-wider mb-1">Timeline</p>
+            <p class="text-brand-sand text-sm">When you saw it, when it started, when it changed.</p>
+          </div>
+          <div class="info-card p-4">
+            <p class="text-brand-gold text-xs font-bold uppercase tracking-wider mb-1">Where to Verify</p>
+            <p class="text-brand-sand text-sm">Public links, document locations, or records requests that exist.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-rule max-w-md mx-auto mx-4">
+
+    <!-- §3 Safety Notes -->
+    <section class="px-4 py-10">
+      <div class="max-w-md mx-auto w-full">
+        <h2 class="font-serif text-2xl font-bold text-brand-gold mb-1">Safety Notes</h2>
+        <p class="text-brand-sand/65 text-sm mb-5">Tell us your constraints up front.</p>
+
+        <div class="space-y-3">
+          <div class="info-card p-4">
+            <p class="text-brand-sand font-semibold text-sm mb-1">Avoid workplace devices</p>
+            <p class="text-brand-sand/70 text-sm">
+              Don't use a work phone, email, or laptop when contacting us about your employer
+              or a government entity.
+            </p>
+          </div>
+          <div class="info-card p-4">
+            <p class="text-brand-sand font-semibold text-sm mb-1">Minimize identifying details</p>
+            <p class="text-brand-sand/70 text-sm">
+              If you're worried about exposure, share documents first.
+              We'll ask follow-ups after verifying.
+            </p>
+          </div>
+          <div class="info-card p-4">
+            <p class="text-brand-sand font-semibold text-sm mb-1">Be careful with screenshots</p>
+            <p class="text-brand-sand/70 text-sm">
+              Screenshots can contain hidden metadata. Export or forward the underlying files when possible.
+            </p>
+          </div>
+          <div class="info-card p-4" style="border-color:rgba(244,162,97,0.22)">
+            <p class="text-brand-orange font-semibold text-sm mb-1">If it's urgent</p>
+            <p class="text-brand-sand/70 text-sm">
+              Signal first. Write
+              <span class="font-mono bg-black/30 text-brand-sand px-1.5 py-0.5 rounded text-xs border border-brand-gold/20">URGENT</span>
+              in the first line with a one-sentence summary.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-rule max-w-md mx-auto mx-4">
+
+    <!-- §4 Template -->
+    <section class="px-4 py-10">
+      <div class="max-w-md mx-auto w-full">
+        <h2 class="font-serif text-2xl font-bold text-brand-gold mb-1">One-Line Tip Template</h2>
+        <p class="text-brand-sand/65 text-sm mb-5">Copy into Signal to start:</p>
+        <div class="template-block">
+I have documents related to [topic/agency].<br>
+Timeframe: [dates].<br>
+What I can share: [description].<br>
+Risk level: [low / medium / high].
+        </div>
+        <p class="mt-4 text-brand-sand/50 text-xs leading-relaxed">
+          No tip is too small. No constraint is too complicated.
+        </p>
+      </div>
+    </section>
+
+    <!-- Subscribe strip -->
+    <section class="px-4 pb-14">
+      <div class="max-w-md mx-auto w-full">
+        <div class="bg-brand-green-dark/45 border border-brand-gold/15 rounded-xl p-5 text-center">
+          <p class="text-brand-sand text-sm mb-3">Follow our published investigations:</p>
+          <a href="https://exposed1.substack.com/subscribe" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-brand-gold text-brand-offblack font-bold py-2.5 px-7 rounded-full
+                    hover:bg-brand-orange transition-all duration-200 text-sm shadow-md">
+            Subscribe on Substack &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="relative z-10 bg-brand-offblack/88 border-t border-brand-gold/10
+                 text-brand-sand py-10 px-4" role="contentinfo">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-7">
+
+        <div class="col-span-2 md:col-span-1">
+          <img src="assets/OG/Banner_RDP_Clear.png" class="h-8 w-auto mb-2" alt="RDP logo">
+          <p class="font-serif text-xs italic text-brand-gold">Quantifying the Truth</p>
+          <p class="text-xs text-brand-sand/40 mt-0.5">Engineering Precision Journalism</p>
+          <p class="mt-2 text-xs text-brand-sand/28">Independent &middot; Evidence-driven &middot; Document-first</p>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/50 mb-2">Investigations</h4>
+          <ul class="space-y-1 text-xs">
+            <li><a href="dream_machine.html"               class="text-brand-sand/60 hover:text-brand-gold transition">The Dream Machine</a></li>
+            <li><a href="iowa-doge-pension-privatize.html" class="text-brand-sand/60 hover:text-brand-gold transition">Pension Privatization</a></li>
+            <li><a href="the-god-machine.html"             class="text-brand-sand/60 hover:text-brand-gold transition">The God Machine</a></li>
+            <li><a href="/pincer-dataviz.html"             class="text-brand-sand/60 hover:text-brand-gold transition">Pincer Movement</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/50 mb-2">Organization</h4>
+          <ul class="space-y-1 text-xs">
+            <li><a href="/about/"             class="text-brand-sand/60 hover:text-brand-gold transition">About RDP</a></li>
+            <li><a href="/analytics/"         class="text-brand-sand/60 hover:text-brand-gold transition">RDP Analytics</a></li>
+            <li><a href="/#standards"         class="text-brand-sand/60 hover:text-brand-gold transition">Standards</a></li>
+            <li><a href="privacy-policy.html" class="text-brand-sand/60 hover:text-brand-gold transition">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/50 mb-2">Contact</h4>
+          <ul class="space-y-1.5 text-xs">
+            <li>
+              <span class="text-brand-sand/38 block">General</span>
+              <a href="mailto:webmaster@restoring-democracy.org"
+                 class="text-brand-orange hover:text-brand-gold transition break-all">
+                webmaster@restoring-democracy.org
+              </a>
+            </li>
+            <li class="pt-1">
+              <span class="text-brand-sand/38 block">Signal</span>
+              <span class="font-mono text-brand-sand/75 text-xs">restoredemocracy.27</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="border-t border-white/6 pt-5 flex flex-col sm:flex-row items-center
+                  justify-between gap-2 text-xs text-brand-sand/30">
+        <div class="footer-tooltip">
+          <span>&copy; 2023&ndash;2026 Restoring Democracy's Promise. All rights reserved.</span>
+          <span class="tooltip-text">This project is powered by receipts.</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer"
+             class="hover:text-brand-gold transition">Substack &uarr;</a>
+          <a href="https://www.ire.org/" target="_blank" rel="noopener noreferrer"
+             class="hover:text-brand-gold transition">IRE Member</a>
+          <a href="privacy-policy.html" class="hover:text-brand-gold transition">Privacy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    async function shareThisPage() {
+      const d = { title: document.title, url: window.location.href };
+      if (navigator.share) {
+        try { await navigator.share(d); return; } catch(e) { if(e.name==='AbortError') return; }
+      }
+      if (navigator.clipboard?.writeText) {
+        try { await navigator.clipboard.writeText(window.location.href); return; } catch(e) {}
+      }
+      window.prompt('Copy this link:', window.location.href);
+    }
+
+    const nav = document.querySelector('.nav-bar');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+
+    const toggle = document.getElementById('mobile-toggle');
+    const menu   = document.getElementById('mobile-menu');
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    let n = 0, t;
+    document.getElementById('main-logo').addEventListener('click', e => {
+      e.preventDefault(); n++;
+      clearTimeout(t); t = setTimeout(() => { n = 0; }, 1000);
+      if (n === 5) window.location.href = 'vault.html';
+    });
+  </script>
+</body>
+</html>
