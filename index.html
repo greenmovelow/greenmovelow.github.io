@@ -107,7 +107,8 @@
   </script>
 
   <style>
-    /* ── Layout ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: hidden; max-width: 100%; }
     html { scroll-padding-top: 68px; }
 
     /* ── Navigation ── */
@@ -137,34 +138,73 @@
     .nav-link:hover::after { width: 100%; }
     .nav-link:hover { color: #D4AF37; }
 
-    /* ── Hero ── */
+    /* ── Hero — deeper gradient with more atmosphere ── */
     .hero-section {
-      background: linear-gradient(160deg, #111f1a 0%, #1a332c 30%, #24473e 60%, #2d5c4f 100%);
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,55,0.08) 0%, transparent 60%),
+        linear-gradient(165deg, #0d1a15 0%, #111f1a 20%, #1a332c 45%, #24473e 75%, #2d5c4f 100%);
       position: relative;
       overflow: hidden;
     }
     .hero-section::before {
       content: '';
-      position: absolute; top: -20%; right: -10%;
-      width: 600px; height: 600px;
+      position: absolute; top: -15%; right: -12%;
+      width: 70vw; height: 70vw; max-width: 700px; max-height: 700px;
       background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero-section::after {
       content: '';
-      position: absolute; bottom: -15%; left: -8%;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(244,162,97,0.04) 0%, transparent 65%);
+      position: absolute; bottom: -15%; left: -10%;
+      width: 60vw; height: 60vw; max-width: 580px; max-height: 580px;
+      background: radial-gradient(circle, rgba(244,162,97,0.05) 0%, transparent 65%);
       pointer-events: none;
     }
 
-    /* ── Credibility bar in hero ── */
-    .credibility-bar {
-      border-top: 1px solid rgba(212,175,55,0.2);
-      border-bottom: 1px solid rgba(212,175,55,0.2);
+    /* Subtle grain texture for editorial depth */
+    .hero-section .grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
     }
 
-    /* ── Feed / ticker ── */
+    /* ── Editorial ornament — center gold dot between hairlines ── */
+    .editorial-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      opacity: 0.55;
+    }
+    .editorial-mark .rule {
+      height: 1px;
+      width: 2.75rem;
+      background: linear-gradient(90deg, transparent, #D4AF37 50%, transparent);
+    }
+    .editorial-mark .rule.left { background: linear-gradient(90deg, transparent, #D4AF37); }
+    .editorial-mark .rule.right { background: linear-gradient(90deg, #D4AF37, transparent); }
+
+    /* ── Established marker ── */
+    .established {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 999px;
+      background: rgba(212,175,55,0.05);
+    }
+
+    /* ── Credibility strip ── */
+    .credibility-bar {
+      border-top: 1px solid rgba(212,175,55,0.18);
+      border-bottom: 1px solid rgba(212,175,55,0.18);
+    }
+
+    /* ── Feed ── */
     .feed-item {
       border-left: 3px solid transparent;
       transition: border-color 0.2s, background 0.2s;
@@ -292,7 +332,6 @@
     <div class="max-w-7xl mx-auto px-4 lg:px-6">
       <div class="flex items-center justify-between h-16 lg:h-[68px]">
 
-        <!-- Wordmark -->
         <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
           <img id="main-logo"
                src="assets/Square_logo_transparent.png"
@@ -304,7 +343,6 @@
           <span class="sm:hidden text-brand-white font-serif font-bold text-base">RDP</span>
         </a>
 
-        <!-- Desktop nav -->
         <div class="hidden lg:flex items-center gap-6">
           <a href="#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
           <a href="/analytics/"     class="nav-link text-brand-sand text-sm">Analytics</a>
@@ -330,7 +368,6 @@
           </a>
         </div>
 
-        <!-- Mobile toggle -->
         <button id="mobile-toggle"
                 class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition"
                 aria-label="Toggle navigation menu"
@@ -343,7 +380,6 @@
       </div>
     </div>
 
-    <!-- Mobile menu -->
     <div id="mobile-menu"
          class="mobile-menu lg:hidden bg-brand-green-darker/99 border-t border-brand-gold/10">
       <div class="max-w-7xl mx-auto px-4 py-3 space-y-0.5">
@@ -353,7 +389,7 @@
         <a href="/team/"          class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
         <a href="#standards"      class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
         <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer"
-           class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack ↗</a>
+           class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack &uarr;</a>
         <a href="secure-tips/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
         <button onclick="shareThisPage()"
                 class="w-full text-left py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">
@@ -371,59 +407,69 @@
   <div class="h-16 lg:h-[68px]" aria-hidden="true"></div>
 
   <!-- ══════════════════════════════════════════
-       HERO
+       HERO — editorial masthead style, no promotional CTAs
   ══════════════════════════════════════════ -->
-  <header class="hero-section pt-14 pb-16 md:pt-20 md:pb-24 lg:pt-24 lg:pb-28 px-4 text-center">
+  <header class="hero-section pt-16 pb-20 md:pt-24 md:pb-28 lg:pt-32 lg:pb-36 px-4 text-center">
+    <div class="grain" aria-hidden="true"></div>
+
     <div class="relative max-w-4xl mx-auto z-10">
 
+      <!-- Established eyebrow -->
+      <div class="mb-8 flex justify-center">
+        <span class="established text-xs text-brand-sand/70 tracking-[0.2em] uppercase font-semibold">
+          <svg class="w-2.5 h-2.5 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="6"/>
+          </svg>
+          Est.&nbsp;2023
+        </span>
+      </div>
+
+      <!-- Logo (slightly larger) -->
       <img src="assets/OG/Banner_RDP_Clear.png"
            alt="Restoring Democracy's Promise"
-           class="mx-auto mb-7 h-16 md:h-20 w-auto drop-shadow-2xl">
+           class="mx-auto mb-8 h-20 md:h-24 lg:h-28 w-auto drop-shadow-2xl">
 
+      <!-- Headline -->
       <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brand-gold
-                 tracking-tight leading-[1.08]">
+                 tracking-tight leading-[1.05]">
         Restoring Democracy's Promise
       </h1>
 
       <!-- Gold rule -->
-      <div class="w-20 h-0.5 bg-brand-gold mx-auto mt-6 mb-5 opacity-70"></div>
+      <div class="w-24 h-0.5 bg-brand-gold mx-auto mt-7 mb-5 opacity-70"></div>
 
-      <p class="text-lg md:text-xl text-brand-orange italic font-semibold">
+      <!-- Tagline -->
+      <p class="text-lg md:text-xl lg:text-2xl text-brand-orange italic font-semibold">
         Quantifying the Truth
       </p>
 
-      <p class="mt-5 text-base md:text-lg text-brand-sand leading-relaxed max-w-2xl mx-auto">
+      <!-- Elevator paragraph -->
+      <p class="mt-7 text-base md:text-lg text-brand-sand leading-relaxed max-w-2xl mx-auto">
         An independent investigative newsroom exposing the hidden machinery of power&mdash;through
         public records, proprietary analytical modeling, and document-driven accountability journalism.
       </p>
 
-      <!-- CTA row -->
-      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3">
-        <a href="#investigations"
-           class="inline-block bg-brand-gold text-brand-offblack font-bold py-3 px-7 rounded-full
-                  hover:bg-brand-orange transition-all duration-200 shadow-lg text-sm tracking-wide">
-          Explore Investigations
-        </a>
-        <a href="secure-tips/"
-           class="inline-block bg-transparent text-brand-sand font-semibold py-3 px-7 rounded-full
-                  border border-brand-gold/35 hover:border-brand-gold/70 hover:text-brand-gold
-                  transition-all duration-200 text-sm">
-          Submit a Secure Tip
-        </a>
+      <!-- Editorial ornament (replaces the pill buttons) -->
+      <div class="editorial-mark mt-12" aria-hidden="true">
+        <span class="rule left"></span>
+        <svg class="w-3 h-3 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span class="rule right"></span>
       </div>
 
-      <!-- Credibility strip -->
-      <div class="credibility-bar mt-10 py-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-brand-sand/60 tracking-wide uppercase">
+      <!-- Credibility strip — now the hero's closing beat -->
+      <div class="credibility-bar mt-12 py-5 flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-xs text-brand-sand/65 tracking-[0.14em] uppercase font-medium">
         <span>
-          Member&nbsp;·&nbsp;<a href="https://www.ire.org/" target="_blank" rel="noopener noreferrer"
-               class="text-brand-sand/80 hover:text-brand-gold transition font-semibold">
-            Investigative Reporters &amp; Editors (IRE)
+          Member&nbsp;&middot;&nbsp;<a href="https://www.ire.org/" target="_blank" rel="noopener noreferrer"
+               class="text-brand-sand hover:text-brand-gold transition font-semibold">
+            Investigative Reporters &amp; Editors
           </a>
         </span>
-        <span class="hidden sm:inline text-brand-gold/30">|</span>
-        <span>National in scope&nbsp;·&nbsp;Iowa field desk</span>
-        <span class="hidden sm:inline text-brand-gold/30">|</span>
-        <span>No advertising&nbsp;·&nbsp;No corporate sponsors</span>
+        <span class="hidden sm:inline text-brand-gold/25">|</span>
+        <span>National scope&nbsp;&middot;&nbsp;Iowa field desk</span>
+        <span class="hidden sm:inline text-brand-gold/25">|</span>
+        <span>No advertising&nbsp;&middot;&nbsp;No corporate sponsors</span>
       </div>
     </div>
   </header>
@@ -522,7 +568,6 @@
     <section class="flagship-section py-14 md:py-20" aria-label="Flagship investigation series">
       <div class="max-w-7xl mx-auto px-4 relative z-10">
 
-        <!-- Section header -->
         <div class="mb-10">
           <span class="badge bg-brand-gold text-brand-offblack mb-3">Flagship Investigation</span>
           <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-brand-white leading-tight mt-2">
@@ -534,7 +579,6 @@
           </p>
         </div>
 
-        <!-- Featured installment -->
         <div class="bg-brand-green-dark/55 border border-brand-gold/30 rounded-xl p-6 md:p-8 mb-5 shadow-xl">
           <div class="flex flex-col lg:flex-row gap-6 items-start">
             <div class="flex-grow">
@@ -557,18 +601,17 @@
                  target="_blank" rel="noopener noreferrer"
                  class="block text-center bg-brand-gold text-brand-offblack font-bold py-3 px-5 rounded-lg
                         shadow-lg hover:bg-brand-orange transition-all duration-200 text-sm">
-                Read Part V →
+                Read Part V &rarr;
               </a>
               <a href="dream_machine.html"
                  class="block text-center text-brand-gold font-semibold py-2.5 px-5 rounded-lg text-sm
                         border border-brand-gold/30 hover:border-brand-gold/70 hover:bg-brand-gold/10 transition-all duration-200">
-                ⚡ Interactive Exhibit
+                &#9889; Interactive Exhibit
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Series grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
           <a href="https://exposed1.substack.com/p/the-performance-of-protection"
@@ -597,7 +640,7 @@
               </a>
             </h4>
             <a href="/alpr-trap" class="inline-block mt-2 text-xs font-bold text-brand-gold hover:text-brand-orange transition">
-              ⚡ Interactive Exhibit →
+              &#9889; Interactive Exhibit &rarr;
             </a>
           </div>
 
@@ -611,7 +654,7 @@
               </a>
             </h4>
             <a href="/save_iowa" class="inline-block mt-2 text-xs font-bold text-brand-gold hover:text-brand-orange transition">
-              ⚡ Iowa Case Study →
+              &#9889; Iowa Case Study &rarr;
             </a>
           </div>
 
@@ -625,7 +668,7 @@
               </a>
             </h4>
             <a href="/funding_flow/" class="inline-block mt-2 text-xs font-bold text-brand-gold hover:text-brand-orange transition">
-              ⚡ Follow the Money →
+              &#9889; Follow the Money &rarr;
             </a>
           </div>
 
@@ -646,14 +689,12 @@
           </p>
         </div>
 
-        <!-- ── Governance & Formal Accountability ── -->
         <div class="mb-12">
           <h3 class="font-serif text-lg md:text-xl font-bold text-brand-green-dark mb-4 pb-2
                      border-b-2 border-brand-gold/25 tracking-tight">
             Governance &amp; Formal Accountability
           </h3>
 
-          <!-- Featured: IPERS Ethics Filing -->
           <div class="bg-brand-offblack rounded-xl p-6 md:p-8 mb-5 shadow-lg inv-card relative overflow-hidden">
             <span class="absolute top-0 right-0 badge bg-brand-gold text-brand-offblack
                          rounded-none rounded-bl-lg text-[0.58rem] py-1.5 px-3">
@@ -675,7 +716,7 @@
                  target="_blank" rel="noopener noreferrer"
                  class="flex-shrink-0 bg-brand-gold text-brand-offblack font-bold py-2.5 px-5 rounded-lg
                         text-sm shadow-md hover:bg-brand-orange transition-all duration-200">
-                Read Announcement →
+                Read Announcement &rarr;
               </a>
             </div>
           </div>
@@ -690,7 +731,7 @@
               <a href="https://exposed1.substack.com/p/the-dei-hoax-iowas-attorney-general"
                  target="_blank" rel="noopener noreferrer"
                  class="mt-4 text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                Read Investigation →
+                Read Investigation &rarr;
               </a>
             </div>
 
@@ -702,7 +743,7 @@
               </p>
               <a href="iowa-doge-pension-privatize.html"
                  class="mt-4 text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                Launch Interactive Investigation →
+                Launch Interactive Investigation &rarr;
               </a>
             </div>
 
@@ -714,13 +755,12 @@
               </p>
               <a href="the-god-machine.html"
                  class="mt-4 text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                Launch Interactive Report →
+                Launch Interactive Report &rarr;
               </a>
             </div>
           </div>
         </div>
 
-        <!-- ── Dark Money & Influence Networks ── -->
         <div>
           <h3 class="font-serif text-lg md:text-xl font-bold text-brand-green-dark mb-4 pb-2
                      border-b-2 border-brand-gold/25 tracking-tight">
@@ -735,7 +775,7 @@
               </p>
               <a href="/pincerfinancial.html"
                  class="mt-4 text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                Launch Interactive Timeline →
+                Launch Interactive Timeline &rarr;
               </a>
             </div>
 
@@ -747,7 +787,7 @@
               </p>
               <a href="/pincer-dataviz.html"
                  class="mt-4 text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                Launch Data Visualization →
+                Launch Data Visualization &rarr;
               </a>
             </div>
 
@@ -758,7 +798,7 @@
               </p>
               <a href="/pincer-infographic.html"
                  class="mt-4 text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                View Infographic →
+                View Infographic &rarr;
               </a>
             </div>
           </div>
@@ -785,7 +825,7 @@
           <div class="bg-brand-green/35 border border-brand-gold/15 rounded-xl p-6 md:p-7
                       hover:border-brand-gold/35 transition">
             <div class="flex items-center gap-3 mb-4">
-              <span class="w-9 h-9 bg-brand-gold/12 rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="w-9 h-9 bg-brand-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                 <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
@@ -807,7 +847,7 @@
           <div class="bg-brand-green/35 border border-brand-gold/15 rounded-xl p-6 md:p-7
                       hover:border-brand-gold/35 transition">
             <div class="flex items-center gap-3 mb-4">
-              <span class="w-9 h-9 bg-brand-gold/12 rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="w-9 h-9 bg-brand-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                 <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
@@ -824,7 +864,7 @@
               Proprietary technology &middot; Licensed to aligned civic organizations
             </p>
             <a href="/analytics/" class="mt-3 inline-block text-brand-gold text-sm font-semibold hover:text-brand-orange transition">
-              Explore RDP Analytics →
+              Explore RDP Analytics &rarr;
             </a>
           </div>
 
@@ -882,19 +922,19 @@
                 <div class="space-y-2.5">
                   <a href="/pincer-dataviz.html"
                      class="block text-brand-gold hover:text-brand-orange transition text-sm font-medium">
-                    Network Maps →
+                    Network Maps &rarr;
                   </a>
                   <a href="/pincerfinancial.html"
                      class="block text-brand-gold hover:text-brand-orange transition text-sm font-medium">
-                    Financial Timelines →
+                    Financial Timelines &rarr;
                   </a>
                   <a href="dream_machine.html"
                      class="block text-brand-gold hover:text-brand-orange transition text-sm font-medium">
-                    Systems Exhibits →
+                    Systems Exhibits &rarr;
                   </a>
                   <a href="/analytics/"
                      class="block text-brand-gold hover:text-brand-orange transition text-sm font-medium">
-                    Full Analytics Division →
+                    Full Analytics Division &rarr;
                   </a>
                 </div>
               </div>
@@ -923,7 +963,7 @@
             </p>
             <a href="/about/"
                class="mt-3 inline-block text-brand-gold text-xs font-semibold hover:text-brand-orange transition">
-              About RDP →
+              About RDP &rarr;
             </a>
           </div>
 
@@ -935,7 +975,7 @@
             </p>
             <a href="corrections.html"
                class="mt-3 inline-block text-brand-gold text-xs font-semibold hover:text-brand-orange transition">
-              Full Corrections Policy →
+              Full Corrections Policy &rarr;
             </a>
           </div>
 
@@ -978,7 +1018,7 @@
         <a href="https://exposed1.substack.com/subscribe" target="_blank" rel="noopener noreferrer"
            class="mt-6 inline-block bg-brand-gold text-brand-offblack font-bold py-3 px-8 rounded-full
                   hover:bg-brand-orange transition-all duration-200 shadow-lg text-sm">
-          Subscribe (Free or Paid) →
+          Subscribe (Free or Paid) &rarr;
         </a>
       </div>
     </section>
@@ -1026,7 +1066,7 @@
             <p class="text-slate-500 text-xs mb-3">Verify your voter registration is current and accurate.</p>
             <a href="https://vote.gov/" target="_blank" rel="noopener noreferrer"
                class="text-brand-green font-semibold text-xs hover:text-brand-green-dark transition">
-              Visit Vote.gov →
+              Visit Vote.gov &rarr;
             </a>
           </div>
 
@@ -1040,7 +1080,7 @@
             <p class="text-slate-500 text-xs mb-3">Get investigations delivered to your inbox.</p>
             <a href="https://exposed1.substack.com/subscribe" target="_blank" rel="noopener noreferrer"
                class="text-brand-orange font-semibold text-xs hover:text-brand-gold transition">
-              Subscribe Now →
+              Subscribe Now &rarr;
             </a>
           </div>
 
@@ -1054,7 +1094,7 @@
             <p class="text-slate-500 text-xs mb-3">Help expand our reach by sharing investigations.</p>
             <button onclick="shareThisPage()"
                     class="text-brand-gold font-semibold text-xs hover:text-brand-orange transition cursor-pointer">
-              Share This Site →
+              Share This Site &rarr;
             </button>
           </div>
 
@@ -1068,7 +1108,6 @@
     <section class="py-14 md:py-18 bg-brand-green">
       <div class="max-w-4xl mx-auto px-4">
 
-        <!-- Subscribe -->
         <div class="text-center mb-10">
           <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-orange">Stay Connected</h2>
           <p class="mt-3 text-brand-sand text-sm">
@@ -1077,11 +1116,10 @@
           <a href="https://exposed1.substack.com/subscribe" target="_blank" rel="noopener noreferrer"
              class="mt-5 inline-block bg-brand-orange text-brand-offblack font-bold py-3 px-8 rounded-full
                     shadow-xl hover:bg-brand-gold transition-all duration-200 text-sm">
-            Subscribe for Free →
+            Subscribe for Free &rarr;
           </a>
         </div>
 
-        <!-- Secure tips callout -->
         <div class="tips-bar rounded-xl p-6 md:p-7 text-center">
           <p class="text-brand-sand text-sm font-semibold mb-1">
             <span class="text-brand-orange">Secure Tips</span> &mdash; Sources are protected. Always.
@@ -1099,7 +1137,7 @@
           </p>
           <a href="secure-tips/"
              class="mt-4 inline-block text-brand-gold text-xs font-semibold hover:text-brand-orange transition">
-            Secure Tips Guide →
+            Secure Tips Guide &rarr;
           </a>
         </div>
 
@@ -1115,7 +1153,6 @@
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
 
-        <!-- Brand column -->
         <div class="md:col-span-1">
           <img src="assets/OG/Banner_RDP_Clear.png" class="h-9 w-auto mb-3" alt="RDP logo">
           <p class="font-serif text-xs italic text-brand-gold">Quantifying the Truth</p>
@@ -1125,7 +1162,6 @@
           </p>
         </div>
 
-        <!-- Investigations -->
         <div>
           <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/60 mb-3">Investigations</h4>
           <ul class="space-y-1.5 text-sm">
@@ -1137,19 +1173,17 @@
           </ul>
         </div>
 
-        <!-- Organization -->
         <div>
           <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/60 mb-3">Organization</h4>
           <ul class="space-y-1.5 text-sm">
-            <li><a href="/about/"          class="text-brand-sand/70 hover:text-brand-gold transition">About RDP</a></li>
-            <li><a href="/team/"           class="text-brand-sand/70 hover:text-brand-gold transition">Team</a></li>
-            <li><a href="/analytics/"      class="text-brand-sand/70 hover:text-brand-gold transition">RDP Analytics</a></li>
-            <li><a href="#standards"       class="text-brand-sand/70 hover:text-brand-gold transition">Standards &amp; Corrections</a></li>
+            <li><a href="/about/"             class="text-brand-sand/70 hover:text-brand-gold transition">About RDP</a></li>
+            <li><a href="/team/"              class="text-brand-sand/70 hover:text-brand-gold transition">Team</a></li>
+            <li><a href="/analytics/"         class="text-brand-sand/70 hover:text-brand-gold transition">RDP Analytics</a></li>
+            <li><a href="#standards"          class="text-brand-sand/70 hover:text-brand-gold transition">Standards &amp; Corrections</a></li>
             <li><a href="privacy-policy.html" class="text-brand-sand/70 hover:text-brand-gold transition">Privacy Policy</a></li>
           </ul>
         </div>
 
-        <!-- Contact -->
         <div>
           <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/60 mb-3">Contact</h4>
           <ul class="space-y-2 text-sm">
@@ -1177,7 +1211,7 @@
             <li class="pt-1">
               <a href="secure-tips/"
                  class="text-brand-gold hover:text-brand-orange transition font-semibold text-xs uppercase tracking-wide">
-                Secure Tips →
+                Secure Tips &rarr;
               </a>
             </li>
           </ul>
@@ -1194,7 +1228,7 @@
         </div>
         <div class="flex items-center gap-4">
           <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer"
-             class="text-xs text-brand-sand/50 hover:text-brand-gold transition">Substack ↗</a>
+             class="text-xs text-brand-sand/50 hover:text-brand-gold transition">Substack &uarr;</a>
           <a href="https://www.ire.org/" target="_blank" rel="noopener noreferrer"
              class="text-xs text-brand-sand/50 hover:text-brand-gold transition">IRE Member</a>
           <a href="privacy-policy.html"
@@ -1205,11 +1239,7 @@
     </div>
   </footer>
 
-  <!-- ══════════════════════════════════════════
-       SCRIPTS
-  ══════════════════════════════════════════ -->
   <script>
-    /* Share API */
     async function shareThisPage() {
       const shareData = { title: document.title, url: window.location.href };
       if (navigator.share) {
@@ -1223,13 +1253,11 @@
       window.prompt('Copy this link:', window.location.href);
     }
 
-    /* Nav scroll state */
     const nav = document.querySelector('.nav-bar');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 20);
     }, { passive: true });
 
-    /* Mobile menu */
     const toggle = document.getElementById('mobile-toggle');
     const menu   = document.getElementById('mobile-menu');
     toggle.addEventListener('click', () => {
@@ -1243,7 +1271,6 @@
       });
     });
 
-    /* Easter egg: 5 logo clicks → vault */
     let clickCount = 0, clickTimer;
     document.getElementById('main-logo').addEventListener('click', function(e) {
       e.preventDefault();
@@ -1255,3 +1282,4 @@
   </script>
 </body>
 </html>
+
