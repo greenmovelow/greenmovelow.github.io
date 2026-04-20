@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
 
+# Exclude hidden/utility and non-page content from indexing
+Disallow: /vault.html
+Disallow: /LICENSE
+Disallow: /_redirects
+Disallow: /*.md$
+Disallow: /*.pdf$
+Disallow: /*.PDF$
+Disallow: /assets/
+
 Sitemap: https://restoring-democracy.org/sitemap.xml
