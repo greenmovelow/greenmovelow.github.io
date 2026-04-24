@@ -8,6 +8,8 @@ Disallow: /_redirects
 Disallow: /*.md$
 Disallow: /*.pdf$
 Disallow: /*.PDF$
+Allow: /assets/og/
+Allow: /assets/OG/
 Disallow: /assets/
 
 Sitemap: https://restoring-democracy.org/sitemap.xml
