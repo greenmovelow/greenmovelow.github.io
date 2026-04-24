@@ -1,3 +1,10 @@
+# Social preview crawlers
+User-agent: Twitterbot
+Allow: /assets/og/
+Allow: /assets/OG/
+Disallow:
+
+# Default crawler policy
 User-agent: *
 Allow: /
 
@@ -11,5 +18,7 @@ Disallow: /*.PDF$
 Allow: /assets/og/
 Allow: /assets/OG/
 Disallow: /assets/
+Allow: /assets/og/
+Allow: /assets/OG/
 
 Sitemap: https://restoring-democracy.org/sitemap.xml
