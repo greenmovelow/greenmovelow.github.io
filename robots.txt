@@ -17,7 +17,8 @@ Disallow: /*.pdf$
 Disallow: /*.PDF$
 Allow: /assets/og/
 Allow: /assets/OG/
-Disallow: /assets/
+Allow: /assets/rdp_logo_gold_on_green_bg.png
+Allow: /assets/Square_logo_green.png
 Allow: /assets/og/
 Allow: /assets/OG/
 
