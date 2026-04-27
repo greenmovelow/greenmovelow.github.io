@@ -1,25 +1,19 @@
-# Social preview crawlers
-User-agent: Twitterbot
-Allow: /assets/og/
-Allow: /assets/OG/
-Disallow:
-
 # Default crawler policy
 User-agent: *
 Allow: /
 
 # Exclude hidden/utility and non-page content from indexing
+Disallow: /assets/
 Disallow: /vault.html
 Disallow: /LICENSE
 Disallow: /_redirects
 Disallow: /*.md$
 Disallow: /*.pdf$
 Disallow: /*.PDF$
-Allow: /assets/og/
-Allow: /assets/OG/
+
+# Allow only search-result identity assets while /assets/ remains broadly blocked
+Allow: /favicon.ico
 Allow: /assets/rdp_logo_gold_on_green_bg.png
 Allow: /assets/Square_logo_green.png
-Allow: /assets/og/
-Allow: /assets/OG/
 
 Sitemap: https://restoring-democracy.org/sitemap.xml
