@@ -111,48 +111,15 @@
   }
   </script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/rdp-tailwind.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap"></noscript>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-QJ3L9CT4Z7');</script>
-
-  <script>
-    tailwind.config = {
-      theme: { extend: {
-        colors: {
-          'ipers-dark':    '#07101e',
-          'ipers-panel':   '#0d1a2e',
-          'ipers-deep':    '#050c17',
-          'ipers-border':  '#1c2d47',
-          'ipers-gold':    '#c8a43c',
-          'ipers-gold-lt': '#e0c060',
-          'ipers-blue':    '#4a7fa5',
-          'ipers-blue-lt': '#6ba3c8',
-          'ipers-red':     '#c24b4b',
-          'ipers-red-lt':  '#e05a5a',
-          'ipers-sand':    '#cec9c0',
-          'ipers-sand-dim':'#8a9bb0',
-          'brand-green':   '#2d5c4f',
-          'brand-green-dark':'#24473e',
-          'brand-green-darker':'#1a332c',
-          'brand-orange':  '#f4a261',
-          'brand-gold':    '#D4AF37',
-          'brand-offblack':'#161616',
-          'brand-sand':    '#e4d5b9',
-        },
-        fontFamily: {
-          'sans':  ['Inter','system-ui','sans-serif'],
-          'serif': ['Lora','Georgia','serif'],
-          'mono':  ['JetBrains Mono','monospace'],
-        }
-      }}
-    }
-  </script>
-
-  <style>
+<style>
     html { scroll-padding-top: 68px; }
 
     /* ── SUBSCRIBE BAR ── */

@@ -45,10 +45,11 @@
   <meta name="twitter:title" content="Corrections &amp; Updates | Restoring Democracy's Promise" />
   <meta name="twitter:description" content="How RDP handles corrections, clarifications, updates, and data revisions. Transparent, timestamped, no stealth edits." />
   <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Color.png" />
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/assets/css/rdp-tailwind.css">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap"></noscript>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -87,29 +88,6 @@
     "url": "https://restoring-democracy.org/"
   }
   </script>
-  
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'brand-green': '#2d5c4f',
-            'brand-green-dark': '#24473e',
-            'brand-orange': '#f4a261',
-            'brand-gold': '#D4AF37',
-            'brand-white': '#F6F7F8',
-            'brand-offblack': '#161616',
-            'brand-sand': '#e4d5b9'
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            serif: ['Lora', 'serif']
-          }
-        }
-      }
-    };
-  </script>
-
   <style>
     .hero-section {
       position: relative;
