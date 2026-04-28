@@ -1,0 +1,14 @@
+{
+  "name": "restoring-democracy-org",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i ./assets/css/tailwind-input.css -o ./assets/css/rdp-tailwind.css --minify",
+    "check:css": "python scripts/css_smoke_check.py",
+    "check:metadata": "python scripts/metadata_audit.py",
+    "validate": "npm run check:css && npm run check:metadata"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.14"
+  }
+}
