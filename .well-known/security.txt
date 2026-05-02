@@ -2,7 +2,6 @@ Contact: mailto:editor@restoring-democracy.org
 Contact: mailto:administrator@restoring-democracy.org
 Contact: mailto:webmaster@restoring-democracy.org
 Contact: mailto:analytics@restoring-democracy.org
-Contact: mailto:pamela@restoring-democracy.org
 Contact: mailto:alex@restoring-democracy.org
 Preferred-Languages: en
 Policy: https://restoring-democracy.org/security-policy
