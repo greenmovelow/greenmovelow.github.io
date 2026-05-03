@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b1512">
+<meta name="description" content="Iowa's plate-reader bill adds guardrails — and shields the records that would show how the system is used. An RDP investigative exhibit on SF 2284 and amendment H-8452.">
+
+<!-- Open Graph / Twitter — placeholder paths; replace with final assets in Codex -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Iowa's ALPR &quot;Reform&quot; Bill Would Regulate Plate Readers — and Hide the Logs">
+<meta property="og:description" content="The bill requires the government to create the accountability record — then prevents the public from seeing it.">
+<meta property="og:url" content="https://restoring-democracy.org/iowa-alpr-reform/">
+<meta property="og:image" content="/assets/og/Iowa_ALPR_OG.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Iowa's ALPR &quot;Reform&quot; Bill — RDP Exhibit">
+<meta name="twitter:description" content="A reform package on the surface. A surveillance architecture underneath.">
+<meta name="twitter:image" content="/assets/og/Iowa_ALPR_OG.png">
+
+<!-- Favicons — placeholder paths -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/rdp_logo_gold_on_green_bg.png">
+<link rel="apple-touch-icon" href="/assets/rdp_logo_gold_on_green_bg.png">
+
+<title>Iowa's ALPR "Reform" Bill — Restoring Democracy's Promise</title>
+
+<!-- RDP brand typefaces -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ════════════════════════════════════════════════════
+     RDP Investigative Exhibit — Iowa ALPR
+     Two-tone civic-investigative palette
+     • Base: deep green-teal / charcoal
+     • Accent: amber gold (primary), cyan (data), coral-red (concealment)
+     ════════════════════════════════════════════════════ */
+
+  :root {
+    /* — Base surfaces — */
+    --bg:           #0b1512;
+    --bg-deep:      #070d0b;
+    --bg-elev-1:    #0e1a16;
+    --bg-elev-2:    #122019;
+    --bg-warm:      #131c17;
+
+    /* — Hairlines — */
+    --border:        rgba(228, 213, 185, 0.09);
+    --border-strong: rgba(228, 213, 185, 0.18);
+    --border-gold:   rgba(212, 175, 55, 0.32);
+    --border-cyan:   rgba(56, 189, 198, 0.28);
+    --border-red:    rgba(210, 65, 65, 0.32);
+
+    /* — Accents (RDP-aligned) — */
+    --gold:        #c49839;
+    --gold-lt:     #d4af37;   /* matches RDP brand-gold */
+    --gold-warm:   #e0b84a;
+    --cyan:        #38bdc6;
+    --cyan-soft:   #6ed3d9;
+    --red:         #d24141;
+    --red-lt:      #e36a6a;
+    --green-mid:   #2d5c4f;   /* matches RDP brand-green */
+    --green-glow:  #3c6e50;
+
+    /* — Text — */
+    --text:        #f0ede6;
+    --text-soft:   #d8d2c4;
+    --text-mid:    #b3ada1;
+    --muted:       #8a9e96;
+    --label:       #6f8a7d;
+
+    /* — Type — */
+    --font-serif: 'Lora', 'Georgia', 'Times New Roman', serif;
+    --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:  'JetBrains Mono', 'SF Mono', 'Consolas', 'Courier New', monospace;
+
+    /* — Layout — */
+    --max-w:  520px;
+    --pad:    20px;
+    --radius: 6px;
+
+    /* — Motion — */
+    --ease: cubic-bezier(.4,.14,.3,1);
+  }
+
+  /* ── RESET ───────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    font-feature-settings: "kern" 1, "ss01" 1;
+  }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+  ::selection { background: rgba(212, 175, 55, 0.28); color: var(--text); }
+
+  /* — Page-wide subtle blueprint grid (very faint, decorative only) — */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(56, 189, 198, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 189, 198, 0.018) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body > * { position: relative; z-index: 1; }
+
+  /* ── LAYOUT HELPERS ──────────────────────────────── */
+  .page-col {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
+  .section { padding: 56px 0; }
+  .section--tight { padding: 36px 0; }
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  /* ════════════════════════════════════════════════════
+     NAV
+     ════════════════════════════════════════════════════ */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(8, 14, 12, 0.86);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px var(--pad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    min-width: 0;
+  }
+  /* Logo placeholder: replace src with /assets/Square_logo_transparent.png in production */
+  .nav-logo-img {
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--green-mid), var(--bg-elev-2));
+    border: 1px solid var(--border-gold);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .nav-logo-img svg { width: 18px; height: 18px; }
+  .nav-wordmark {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--gold-lt);
+    font-weight: 700;
+  }
+  .nav-wordmark-long {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-mid);
+    letter-spacing: 0.06em;
+    margin-left: 4px;
+  }
+  @media (min-width: 420px) {
+    .nav-wordmark-long { display: inline; }
+  }
+
+  .nav-share {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    transition: border-color 0.2s var(--ease), color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  .nav-share:hover, .nav-share:focus-visible {
+    color: var(--gold-lt);
+    border-color: var(--border-gold);
+    background: rgba(212, 175, 55, 0.06);
+  }
+  .nav-share svg { width: 13px; height: 13px; }
+
+  /* ════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════ */
+  .hero-wrap {
+    position: relative;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(45, 92, 79, 0.22), transparent 60%),
+      linear-gradient(178deg, #0e1d18 0%, var(--bg) 60%, var(--bg-deep) 100%);
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-wrap::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(56, 189, 198, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 189, 198, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.18) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.18) 100%);
+  }
+  .hero-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+  }
+  .hero {
+    position: relative;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 48px var(--pad) 44px;
+  }
+
+  .exhibit-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    padding: 6px 10px 6px 8px;
+    background: rgba(56, 189, 198, 0.06);
+    border: 1px solid var(--border-cyan);
+    border-radius: 3px;
+  }
+  .exhibit-label-dot {
+    width: 6px; height: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px var(--cyan);
+    animation: dot-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes dot-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.55; }
+  }
+
+  .hero-series {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-size: 33px;
+    font-weight: 600;
+    line-height: 1.16;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 8px;
+    text-wrap: pretty;
+  }
+  .hero h1 .accent { color: var(--gold-warm); font-style: italic; }
+  .hero-dek {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text-soft);
+    line-height: 1.6;
+    margin-top: 18px;
+    margin-bottom: 26px;
+    text-wrap: pretty;
+  }
+  .hero-byline {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-byline-rule {
+    flex: 1; height: 1px; background: var(--border);
+  }
+
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 7px;
+    margin-bottom: 22px;
+  }
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 9px;
+    border-radius: 2px;
+    border: 1px solid;
+    font-weight: 500;
+  }
+  .hero-tag--gold { border-color: var(--border-gold); color: var(--gold-lt); background: rgba(212,175,55,0.06); }
+  .hero-tag--cyan { border-color: var(--border-cyan); color: var(--cyan);     background: rgba(56,189,198,0.06); }
+  .hero-tag--red  { border-color: var(--border-red);  color: var(--red-lt);   background: rgba(210,65,65,0.06); }
+
+  /* ── BILL STATUS TRACKER ─────────────────────────── */
+  .tracker {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 16px 16px;
+    margin-top: 8px;
+  }
+  .tracker-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--gold-lt);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tracker-steps {
+    display: flex;
+    gap: 0;
+    align-items: flex-start;
+  }
+  .tracker-step {
+    flex: 1;
+    text-align: center;
+    min-width: 0;
+  }
+  .tracker-step-node {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    border: 1.5px solid;
+    transition: all 0.3s var(--ease);
+  }
+  .tracker-step--done .tracker-step-node    { background: var(--green-glow); border-color: var(--green-glow); }
+  .tracker-step--current .tracker-step-node { background: var(--gold); border-color: var(--gold-lt); box-shadow: 0 0 10px rgba(212,175,55,0.8); animation: pulse-gold 2s ease-in-out infinite; }
+  .tracker-step--pending .tracker-step-node { background: transparent; border-color: var(--label); }
+  .tracker-step-name {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    color: var(--label);
+    letter-spacing: 0.06em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+  .tracker-step--done .tracker-step-name    { color: var(--text-mid); }
+  .tracker-step--current .tracker-step-name { color: var(--gold-lt); font-weight: 700; }
+  .tracker-connector {
+    flex: 0.6;
+    height: 1px;
+    background: var(--border);
+    margin-top: 5px;
+  }
+  .tracker-connector--done { background: var(--green-glow); }
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 8px rgba(212,175,55,0.6); }
+    50%      { box-shadow: 0 0 16px rgba(212,175,55,0.9), 0 0 32px rgba(212,175,55,0.25); }
+  }
+
+  /* ── STATUS BANNER ───────────────────────────────── */
+  .status-banner {
+    border: 1px solid var(--border-gold);
+    background:
+      linear-gradient(135deg, rgba(212,175,55,0.06), rgba(212,175,55,0.02));
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 14px 16px 14px 14px;
+    margin-top: 18px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .status-banner-icon {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--gold-lt);
+    flex-shrink: 0;
+    margin-top: 1px;
+    line-height: 1;
+  }
+  .status-banner-text {
+    font-size: 13px;
+    color: #c8b888;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .status-banner-text strong {
+    font-style: normal;
+    color: var(--gold-warm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+    font-style: normal;
+  }
+
+  /* ════════════════════════════════════════════════════
+     SECTION LABELS
+     ════════════════════════════════════════════════════ */
+  .s-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .s-label::before {
+    content: '';
+    width: 18px; height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .s-label--cyan { color: var(--cyan); }
+  .s-label--gold { color: var(--gold-lt); }
+  .s-label--red  { color: var(--red-lt); }
+
+  .section-lede {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 22px;
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  /* ════════════════════════════════════════════════════
+     THESIS
+     ════════════════════════════════════════════════════ */
+  .thesis-section {
+    padding: 48px 0;
+    background:
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+  }
+  .thesis-pull {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text);
+    border-left: 3px solid var(--gold);
+    padding: 4px 0 4px 18px;
+    margin-bottom: 22px;
+    text-wrap: pretty;
+  }
+  .thesis-pull strong { color: var(--gold-warm); font-weight: 600; }
+  .thesis-body {
+    font-size: 15.5px;
+    color: var(--text-soft);
+    line-height: 1.75;
+    text-wrap: pretty;
+  }
+  .thesis-body + .thesis-body { margin-top: 14px; }
+
+  /* ════════════════════════════════════════════════════
+     SUBSCRIBE CARD — embedded, editorial
+     Placed near top, after thesis
+     ════════════════════════════════════════════════════ */
+  .subscribe-section { padding: 8px 0 48px; }
+  .subscribe-card {
+    position: relative;
+    background:
+      linear-gradient(160deg, rgba(212,175,55,0.05), rgba(56,189,198,0.02) 60%, transparent),
+      var(--bg-elev-1);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    padding: 24px 20px 22px;
+    overflow: hidden;
+  }
+  .subscribe-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: var(--radius);
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.35), rgba(56,189,198,0.15) 50%, transparent 75%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .subscribe-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    color: var(--gold-lt);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .subscribe-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold-lt);
+    box-shadow: 0 0 8px var(--gold);
+  }
+  .subscribe-card h3 {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.32;
+    color: var(--text);
+    margin-bottom: 12px;
+    text-wrap: pretty;
+  }
+  .subscribe-card p {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 18px;
+    text-wrap: pretty;
+  }
+  .subscribe-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%;
+    padding: 13px 20px;
+    background: transparent;
+    color: var(--gold-lt);
+    border: 1px solid var(--border-gold);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: all 0.25s var(--ease);
+  }
+  .subscribe-btn:hover, .subscribe-btn:focus-visible {
+    background: rgba(212,175,55,0.08);
+    border-color: var(--gold);
+    color: var(--gold-warm);
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.08);
+  }
+  .subscribe-btn-arrow { transition: transform 0.25s var(--ease); }
+  .subscribe-btn:hover .subscribe-btn-arrow { transform: translateX(3px); }
+  .subscribe-fineprint {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--label);
+    margin-top: 14px;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  /* ════════════════════════════════════════════════════
+     TWO LAYERS — INTERACTIVE
+     ════════════════════════════════════════════════════ */
+  .layers-tabs {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+  }
+  .layers-tab {
+    flex: 1;
+    padding: 13px 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    background: var(--bg-elev-1);
+    color: var(--muted);
+    transition: all 0.2s var(--ease);
+    border-bottom: 2px solid transparent;
+    font-weight: 600;
+  }
+  .layers-tab:hover { color: var(--text-soft); }
+  .layers-tab.active-visible {
+    background: rgba(56,189,198,0.08);
+    color: var(--cyan);
+    border-bottom-color: var(--cyan);
+  }
+  .layers-tab.active-hidden {
+    background: rgba(210,65,65,0.08);
+    color: var(--red-lt);
+    border-bottom-color: var(--red);
+  }
+  .layers-tab-indicator {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-right: 7px;
+    vertical-align: middle;
+    background: var(--label);
+    transition: all 0.2s;
+  }
+  .layers-tab.active-visible .layers-tab-indicator { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+  .layers-tab.active-hidden  .layers-tab-indicator { background: var(--red-lt); box-shadow: 0 0 8px var(--red); }
+
+  .layers-panel {
+    display: none;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    background: var(--bg-elev-1);
+    padding: 18px 14px;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .layers-panel.active { display: flex; }
+
+  .layer-item {
+    padding: 14px 14px;
+    border-radius: 4px;
+    border-left: 3px solid;
+    background: rgba(0,0,0,0.22);
+    transition: background 0.2s;
+  }
+  .layer-item:hover { background: rgba(0,0,0,0.32); }
+  .layer-item--visible { border-color: var(--cyan); }
+  .layer-item--hidden  { border-color: var(--red); }
+  .layer-item-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    font-weight: 600;
+  }
+  .layer-item--visible .layer-item-label { color: var(--cyan); }
+  .layer-item--hidden  .layer-item-label { color: var(--red-lt); }
+  .layer-item-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.35;
+  }
+  .layer-item-body {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.65;
+  }
+  .layer-item-body em { color: var(--text-soft); font-style: italic; }
+
+  /* ════════════════════════════════════════════════════
+     PIPELINE FLOW
+     ════════════════════════════════════════════════════ */
+  .pipeline-steps {
+    display: flex;
+    flex-direction: column;
+    margin-top: 22px;
+  }
+  .pipeline-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: 26px;
+  }
+  .pipeline-step:last-child { padding-bottom: 0; }
+  .pipeline-step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 36px;
+  }
+  .pipeline-step-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    background: var(--bg);
+  }
+  .pipeline-step-line {
+    width: 1px;
+    flex: 1;
+    min-height: 18px;
+    margin-top: 4px;
+  }
+  .pipeline-step--active  .pipeline-step-num { border: 1.5px solid var(--cyan);  color: var(--cyan); box-shadow: inset 0 0 12px rgba(56,189,198,0.12); }
+  .pipeline-step--warning .pipeline-step-num { border: 1.5px solid var(--gold);  color: var(--gold-lt); box-shadow: inset 0 0 12px rgba(212,175,55,0.12); }
+  .pipeline-step--danger  .pipeline-step-num { border: 1.5px solid var(--red);   color: var(--red-lt); box-shadow: inset 0 0 12px rgba(210,65,65,0.14); }
+  .pipeline-step--active  .pipeline-step-line { background: linear-gradient(180deg, rgba(56,189,198,0.4), rgba(56,189,198,0.1)); }
+  .pipeline-step--warning .pipeline-step-line { background: linear-gradient(180deg, rgba(212,175,55,0.35), rgba(212,175,55,0.1)); }
+  .pipeline-step--danger  .pipeline-step-line { background: linear-gradient(180deg, rgba(210,65,65,0.35), rgba(210,65,65,0.1)); }
+  .pipeline-step-content { padding-top: 6px; flex: 1; min-width: 0; }
+  .pipeline-step-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+  .pipeline-step-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+  .pipeline-step-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-top: 9px;
+    font-weight: 600;
+  }
+  .tag--public { background: rgba(56,189,198,0.1);  color: var(--cyan);    border: 1px solid var(--border-cyan); }
+  .tag--sealed { background: rgba(210,65,65,0.1);   color: var(--red-lt);  border: 1px solid var(--border-red); }
+  .tag--shared { background: rgba(212,175,55,0.1);  color: var(--gold-lt); border: 1px solid var(--border-gold); }
+
+  /* — Scan line effect — */
+  .scan-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0.35;
+    animation: scan 4.5s linear infinite;
+    margin: 26px 0 0;
+  }
+  @keyframes scan {
+    0%, 100% { opacity: 0; }
+    20%, 80% { opacity: 0.4; }
+  }
+
+  /* ════════════════════════════════════════════════════
+     EVIDENCE CARDS
+     ════════════════════════════════════════════════════ */
+  .evidence-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-elev-1);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  .evidence-card:hover { border-color: var(--border-strong); background: var(--bg-elev-2); }
+  .evidence-card.expanded {
+    border-color: var(--border-gold);
+    background: var(--bg-elev-2);
+  }
+  .evidence-card-header {
+    padding: 16px 16px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .evidence-card-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--label);
+    flex-shrink: 0;
+    padding-top: 2px;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .evidence-card.expanded .evidence-card-num { color: var(--gold-lt); }
+  .evidence-card-main { flex: 1; min-width: 0; }
+  .evidence-card-type {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--label);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .evidence-card.expanded .evidence-card-type { color: var(--gold); }
+  .evidence-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+    text-wrap: pretty;
+  }
+  .evidence-card-chevron {
+    color: var(--label);
+    font-size: 12px;
+    transition: transform 0.3s var(--ease), color 0.2s;
+    flex-shrink: 0;
+    padding-top: 4px;
+  }
+  .evidence-card.expanded .evidence-card-chevron { transform: rotate(180deg); color: var(--gold-lt); }
+  .evidence-card-body {
+    display: none;
+    padding: 0 16px 14px 44px;
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.72;
+    text-wrap: pretty;
+  }
+  .evidence-card-body p + p { margin-top: 10px; }
+  .evidence-card.expanded .evidence-card-body { display: block; }
+  .evidence-card-footer {
+    padding: 12px 16px 14px 44px;
+    display: none;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .evidence-card.expanded .evidence-card-footer { display: flex; }
+  .evidence-card-meta {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--label);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECRECY CLAUSE HIGHLIGHT ─────────────────────── */
+  .secrecy-card {
+    background:
+      linear-gradient(135deg, rgba(210,65,65,0.07), rgba(210,65,65,0.02));
+    border: 1px solid var(--border-red);
+    border-left: 3px solid var(--red);
+    border-radius: 0 4px 4px 0;
+    padding: 16px 14px;
+    margin: 14px 0;
+  }
+  .secrecy-card-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-lt);
+    margin-bottom: 9px;
+    font-weight: 600;
+  }
+  .secrecy-card-text {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: #d4a8a8;
+    line-height: 1.7;
+  }
+  .secrecy-card-text strong {
+    color: var(--text);
+    background: rgba(210,65,65,0.18);
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  /* ════════════════════════════════════════════════════
+     COMPARISON GRID
+     ════════════════════════════════════════════════════ */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 22px;
+  }
+  .comparison-col { background: var(--bg-elev-1); }
+  .comparison-col-header {
+    padding: 14px 12px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .comparison-col-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  .col-public .comparison-col-label { color: var(--cyan); }
+  .col-hidden .comparison-col-label { color: var(--red-lt); }
+  .comparison-col-title {
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .col-public .comparison-col-title { color: var(--cyan-soft); }
+  .col-hidden .comparison-col-title { color: #e09494; }
+  .comparison-item {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12.5px;
+    color: var(--text-mid);
+    line-height: 1.55;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .comparison-item:last-child { border-bottom: none; }
+  .comparison-item-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .col-public .comparison-item-dot { background: var(--cyan); }
+  .col-hidden .comparison-item-dot { background: var(--red-lt); }
+
+  /* ════════════════════════════════════════════════════
+     KEY TAKEAWAYS
+     ════════════════════════════════════════════════════ */
+  .takeaway {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .takeaway:first-child { border-top: 1px solid var(--border); }
+  .takeaway-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+  .takeaway-dot--gold  { background: var(--gold-lt); box-shadow: 0 0 10px rgba(212,175,55,0.55); }
+  .takeaway-dot--red   { background: var(--red-lt);  box-shadow: 0 0 10px rgba(210,65,65,0.55); }
+  .takeaway-dot--cyan  { background: var(--cyan);    box-shadow: 0 0 10px rgba(56,189,198,0.55); }
+  .takeaway-dot--white { background: var(--text); }
+  .takeaway-text {
+    font-size: 14.5px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+  .takeaway-text strong { color: var(--gold-warm); font-weight: 600; }
+
+  /* ════════════════════════════════════════════════════
+     QUOTE BLOCK
+     ════════════════════════════════════════════════════ */
+  .quote-block {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    background: var(--bg-elev-1);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 22px 20px;
+    margin: 28px 0;
+    position: relative;
+  }
+  .quote-block::before {
+    content: '"';
+    position: absolute;
+    top: 4px; left: 12px;
+    font-family: var(--font-serif);
+    font-size: 36px;
+    color: var(--gold);
+    opacity: 0.25;
+    line-height: 1;
+  }
+  .quote-block-text {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 11px;
+    margin-left: 22px;
+    text-wrap: pretty;
+  }
+  .quote-block-attr {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--gold-lt);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-left: 22px;
+    font-weight: 600;
+  }
+
+  /* ════════════════════════════════════════════════════
+     CONTINUE-INVESTIGATION CARD (bottom)
+     Quieter than subscribe, editorial continuation
+     ════════════════════════════════════════════════════ */
+  .continue-section {
+    padding: 56px 0 48px;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 100%, rgba(45,92,79,0.15), transparent 60%),
+      var(--bg);
+  }
+  .continue-card {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    padding: 26px 20px;
+    text-align: left;
+  }
+  .continue-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: inline-flex; align-items: center; gap: 7px;
+    font-weight: 600;
+  }
+  .continue-eyebrow-icon {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold-lt);
+  }
+  .continue-card h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 12px;
+    text-wrap: pretty;
+  }
+  .continue-card p {
+    font-size: 14.5px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 22px;
+    text-wrap: pretty;
+  }
+  .continue-primary {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%;
+    padding: 16px 18px;
+    background: var(--gold);
+    color: #1a1a1a;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
+    transition: all 0.2s var(--ease);
+    box-shadow: 0 4px 16px rgba(212,175,55,0.18);
+  }
+  .continue-primary:hover, .continue-primary:focus-visible {
+    background: var(--gold-warm);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(212,175,55,0.28);
+  }
+  .continue-primary svg { transition: transform 0.2s var(--ease); }
+  .continue-primary:hover svg { transform: translateX(4px); }
+
+  .continue-secondary {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    width: 100%;
+    padding: 13px 18px;
+    background: transparent;
+    color: var(--text-mid);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.2s var(--ease);
+  }
+  .continue-secondary:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* ════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════ */
+  .footer {
+    background: var(--bg-deep);
+    border-top: 1px solid var(--border);
+    padding: 44px var(--pad) 32px;
+  }
+  .footer-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+  .footer-logo {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 14px;
+  }
+  .footer-logo-img {
+    width: 38px; height: 38px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--green-mid), var(--bg-elev-2));
+    border: 1px solid var(--border-gold);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .footer-logo-img svg { width: 22px; height: 22px; }
+  .footer-brand {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    color: var(--text);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .footer-tagline {
+    font-family: var(--font-serif);
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--gold-lt);
+    margin-bottom: 3px;
+  }
+  .footer-tagline2 {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--label);
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+  .footer-nav-group { margin-bottom: 24px; }
+  .footer-nav-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 11px;
+    font-weight: 600;
+  }
+  .footer-nav-links { display: flex; flex-direction: column; gap: 9px; }
+  .footer-nav-link {
+    font-size: 13.5px;
+    color: var(--text-mid);
+    transition: color 0.2s;
+  }
+  .footer-nav-link:hover { color: var(--text); }
+  .footer-sources {
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-sources-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .footer-sources-list {
+    font-size: 11.5px;
+    color: var(--label);
+    line-height: 1.85;
+    font-family: var(--font-mono);
+  }
+  .footer-copy {
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--label);
+    opacity: 0.85;
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+
+  /* ════════════════════════════════════════════════════
+     RESPONSIVE
+     ════════════════════════════════════════════════════ */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 28px; }
+    .tracker-step-name { font-size: 7.5px; }
+    .comparison-col-title { font-size: 11.5px; }
+    .continue-card h3 { font-size: 21px; }
+    .subscribe-card h3 { font-size: 18px; }
+  }
+  @media (min-width: 540px) {
+    :root { --pad: 28px; }
+    .hero h1 { font-size: 38px; }
+    .thesis-pull { font-size: 24px; }
+    .subscribe-card h3 { font-size: 22px; }
+    .continue-card h3 { font-size: 26px; }
+    .hero { padding-top: 60px; padding-bottom: 56px; }
+  }
+
+  /* — Reduced motion — */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+
+  /* — Focus states — */
+  :focus-visible {
+    outline: 2px solid var(--gold-lt);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .layers-tab:focus-visible {
+    outline-offset: -2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════ NAV -->
+<nav class="nav" role="navigation" aria-label="Exhibit navigation">
+  <a href="https://restoring-democracy.org" class="nav-logo" aria-label="Return to Restoring Democracy's Promise">
+    <!--
+      LOGO PLACEHOLDER
+      Replace this inline SVG mark with the production RDP logo:
+        <img src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise" class="nav-logo-img">
+      The SVG below is a neutral placeholder mark, NOT the official RDP logo.
+    -->
+    <span class="nav-logo-img" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="8.5" stroke="#d4af37" stroke-width="1.4"/>
+        <circle cx="12" cy="12" r="3" fill="#d4af37" opacity="0.85"/>
+        <path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3" stroke="#d4af37" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span class="nav-wordmark">RDP</span>
+    <span class="nav-wordmark-long">// Exhibit</span>
+  </a>
+  <button class="nav-share" id="share-btn" aria-label="Share this exhibit">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="18" cy="5"  r="3"/>
+      <circle cx="6"  cy="12" r="3"/>
+      <circle cx="18" cy="19" r="3"/>
+      <line x1="8.59"  y1="13.51" x2="15.42" y2="17.49"/>
+      <line x1="15.41" y1="6.51"  x2="8.59"  y2="10.49"/>
+    </svg>
+    Share
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════ HERO -->
+<header class="hero-wrap">
+  <div class="hero">
+    <div class="exhibit-label">
+      <span class="exhibit-label-dot" aria-hidden="true"></span>
+      Evidence Exhibit // Leviathan Series
+    </div>
+
+    <div class="hero-series">Warrantless Surveillance — ALPR Architecture</div>
+
+    <h1>Iowa's ALPR <span class="accent">"Reform"</span> Bill Would Regulate Plate Readers — and <span class="accent">Hide the Logs</span></h1>
+
+    <p class="hero-dek">A bill sold as oversight requires the records that would reveal misuse — then quietly classifies those same records as confidential under Iowa Code 22.7.</p>
+
+    <div class="hero-byline">
+      <span>By Timothy C. Tucker</span>
+      <span class="hero-byline-rule" aria-hidden="true"></span>
+      <span>May 3, 2026</span>
+    </div>
+
+    <div class="hero-tags" role="list">
+      <span class="hero-tag hero-tag--gold" role="listitem">SF 2284</span>
+      <span class="hero-tag hero-tag--cyan" role="listitem">Iowa Legislature · 2026</span>
+      <span class="hero-tag hero-tag--red" role="listitem">Iowa Code 22.7</span>
+    </div>
+
+    <!-- Bill status tracker -->
+    <div class="tracker" role="region" aria-label="Bill status tracker">
+      <div class="tracker-label">⬡ Bill Status — SF 2284 + H-8452</div>
+      <div class="tracker-steps">
+        <div class="tracker-step tracker-step--done">
+          <div class="tracker-step-node" aria-hidden="true"></div>
+          <div class="tracker-step-name">Senate<br>Passed</div>
+        </div>
+        <div class="tracker-connector tracker-connector--done" aria-hidden="true"></div>
+        <div class="tracker-step tracker-step--done">
+          <div class="tracker-step-node" aria-hidden="true"></div>
+          <div class="tracker-step-name">House<br>Amended</div>
+        </div>
+        <div class="tracker-connector tracker-connector--done" aria-hidden="true"></div>
+        <div class="tracker-step tracker-step--current" aria-current="step">
+          <div class="tracker-step-node" aria-hidden="true"></div>
+          <div class="tracker-step-name">Awaiting<br>Concurrence</div>
+        </div>
+        <div class="tracker-connector" aria-hidden="true"></div>
+        <div class="tracker-step tracker-step--pending">
+          <div class="tracker-step-node" aria-hidden="true"></div>
+          <div class="tracker-step-name">Final<br>Vote</div>
+        </div>
+        <div class="tracker-connector" aria-hidden="true"></div>
+        <div class="tracker-step tracker-step--pending">
+          <div class="tracker-step-node" aria-hidden="true"></div>
+          <div class="tracker-step-name">Governor<br>Signature</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="status-banner" role="status">
+      <div class="status-banner-icon" aria-hidden="true">⚑</div>
+      <div class="status-banner-text">
+        <strong>Moving target</strong>
+        As of May 3, 2026, SF 2284's ALPR language has not appeared on the latest House floor agenda. The bill remains where controversial bills often sit at end of session — waiting for leadership, leverage, and the next procedural opening.
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════ THESIS -->
+<section class="thesis-section">
+  <div class="page-col">
+    <div class="s-label s-label--gold">Core Thesis</div>
+    <div class="thesis-pull">The bill requires the government to <strong>create the accountability record</strong> — then prevents the public from <strong>seeing it</strong>.</div>
+    <p class="thesis-body">Iowa lawmakers promised to "rein in" license-plate readers. What the final package may deliver instead is a statewide ALPR system with official blessing, expanded data-sharing channels with law enforcement and insurance companies — and a statutory clause that locks the only logs that could prove misuse from public view.</p>
+    <p class="thesis-body">That is why this bill has to be read in two layers: a visible reform layer that reassures the public, and an infrastructure layer that protects the system.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════ SUBSCRIBE CARD (top placement) -->
+<section class="subscribe-section" aria-label="Support independent investigative journalism">
+  <div class="page-col">
+    <div class="subscribe-card">
+      <div class="subscribe-eyebrow">Support the Watchdog Work</div>
+      <h3>If this infrastructure worries you, help us keep mapping it.</h3>
+      <p>Restoring Democracy's Promise tracks the hidden systems connecting surveillance, immigration enforcement, election administration, and public power. Subscribe to support independent, source-driven journalism — before these tools become too normalized to question.</p>
+      <a href="https://exposed1.substack.com/subscribe" class="subscribe-btn" target="_blank" rel="noopener">
+        Subscribe to RDP
+        <span class="subscribe-btn-arrow" aria-hidden="true">→</span>
+      </a>
+      <p class="subscribe-fineprint">Independent reporting · Public-interest evidence · No billionaire permission slip</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════ TWO LAYERS INTERACTIVE -->
+<section class="section">
+  <div class="page-col">
+    <div class="s-label s-label--cyan">Interactive — The Two Layers</div>
+    <p class="section-lede">The bill operates on two simultaneous layers. Toggle between them to see what's visible to the public — and what isn't.</p>
+
+    <div class="layers-tabs" role="tablist">
+      <button class="layers-tab active-visible" id="tab-visible" role="tab" aria-selected="true" aria-controls="panel-visible" onclick="switchLayer('visible')">
+        <span class="layers-tab-indicator" aria-hidden="true"></span>Visible Reform Layer
+      </button>
+      <button class="layers-tab" id="tab-hidden" role="tab" aria-selected="false" aria-controls="panel-hidden" onclick="switchLayer('hidden')">
+        <span class="layers-tab-indicator" aria-hidden="true"></span>Hidden Infrastructure
+      </button>
+    </div>
+
+    <div class="layers-panel active" id="panel-visible" role="tabpanel" aria-labelledby="tab-visible">
+      <div class="layer-item layer-item--visible">
+        <div class="layer-item-label">Provision</div>
+        <div class="layer-item-title">Local Ordinance Requirement</div>
+        <div class="layer-item-body">Cities must pass an ordinance before deploying ALPRs, naming approved vendors and the job classifications authorized to run searches.</div>
+      </div>
+      <div class="layer-item layer-item--visible">
+        <div class="layer-item-label">Provision</div>
+        <div class="layer-item-title">Facial Recognition Ban</div>
+        <div class="layer-item-body">All ALPR systems must operate without facial-recognition capability. Limited in practice — ALPRs are plate-recognition systems, not facial ones. The real fight is over location data and logs.</div>
+      </div>
+      <div class="layer-item layer-item--visible">
+        <div class="layer-item-label">Provision</div>
+        <div class="layer-item-title">30-Day Raw Data Deletion</div>
+        <div class="layer-item-body">Plate images and associated data must be purged after 30 days — unless copied into a separate case file. The exception matters.</div>
+      </div>
+      <div class="layer-item layer-item--visible">
+        <div class="layer-item-label">Provision</div>
+        <div class="layer-item-title">Mandatory Audit Trails</div>
+        <div class="layer-item-body">Each ALPR search must log officer name, call number, and reason for search. Agencies audit logs every four months — but the public will never see those audit results.</div>
+      </div>
+    </div>
+
+    <div class="layers-panel" id="panel-hidden" role="tabpanel" aria-labelledby="tab-hidden" hidden>
+      <div class="layer-item layer-item--hidden">
+        <div class="layer-item-label">Hidden Mechanism</div>
+        <div class="layer-item-title">Statewide Normalization Engine</div>
+        <div class="layer-item-body">Requiring ordinances and a DPS vendor list doesn't limit ALPRs — it standardizes them. A patchwork of private contracts becomes a state-sanctioned network, politically easier to expand.</div>
+      </div>
+      <div class="layer-item layer-item--hidden">
+        <div class="layer-item-label">Hidden Mechanism</div>
+        <div class="layer-item-title">Broad Data-Sharing Channels</div>
+        <div class="layer-item-body">The bill authorizes sharing plate data with any "peace officer or law-enforcement agency" (including federal), contractors on public-safety tasks, and — explicitly — insurance companies and the National Insurance Crime Bureau.</div>
+      </div>
+      <div class="layer-item layer-item--hidden">
+        <div class="layer-item-label">Hidden Mechanism — H-8452</div>
+        <div class="layer-item-title">Iowa Code 22.7 Secrecy Clause</div>
+        <div class="layer-item-body">A single sentence inserted at end of session: <em>"A search log maintained pursuant to this subsection is a confidential record under section 22.7."</em> Agencies can deny public-records requests by default. Audits still happen — internally. The public never sees the results.</div>
+      </div>
+      <div class="layer-item layer-item--hidden">
+        <div class="layer-item-label">Hidden Mechanism</div>
+        <div class="layer-item-title">Vendor Access Exceptions</div>
+        <div class="layer-item-body">The bill bars agencies from conveying historical location data to vendors — except when anonymized, when needed for operation, security, testing, or improvement, or for technical support. Those exceptions cover most normal vendor operations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════ PIPELINE FLOW -->
+<section class="section">
+  <div class="page-col">
+    <div class="s-label s-label--cyan">Data Flow Architecture</div>
+    <p class="section-lede">How a license plate scan travels through the SF 2284 system — and where oversight disappears.</p>
+    <div class="scan-line" aria-hidden="true"></div>
+
+    <div class="pipeline-steps">
+      <div class="pipeline-step pipeline-step--active">
+        <div class="pipeline-step-left">
+          <div class="pipeline-step-num">1</div>
+          <div class="pipeline-step-line"></div>
+        </div>
+        <div class="pipeline-step-content">
+          <div class="pipeline-step-title">Plate Captured</div>
+          <div class="pipeline-step-desc">An ALPR camera photographs your plate. Timestamp, GPS coordinates, and image stored automatically. No officer decision required at this stage.</div>
+          <span class="pipeline-step-tag tag--public">Automated</span>
+        </div>
+      </div>
+      <div class="pipeline-step pipeline-step--active">
+        <div class="pipeline-step-left">
+          <div class="pipeline-step-num">2</div>
+          <div class="pipeline-step-line"></div>
+        </div>
+        <div class="pipeline-step-content">
+          <div class="pipeline-step-title">Hotlist Query</div>
+          <div class="pipeline-step-desc">Plate checked against warrant lists, law-enforcement databases, and insurance fraud registries in real time.</div>
+          <span class="pipeline-step-tag tag--public">Real-time</span>
+        </div>
+      </div>
+      <div class="pipeline-step pipeline-step--warning">
+        <div class="pipeline-step-left">
+          <div class="pipeline-step-num">3</div>
+          <div class="pipeline-step-line"></div>
+        </div>
+        <div class="pipeline-step-content">
+          <div class="pipeline-step-title">Data Shared</div>
+          <div class="pipeline-step-desc">Match or no-match, data can be copied to a case file and shared with any peace officer, federal agency, contractor, or insurance organization under the bill's broad sharing rules.</div>
+          <span class="pipeline-step-tag tag--shared">Shared Broadly</span>
+        </div>
+      </div>
+      <div class="pipeline-step pipeline-step--danger">
+        <div class="pipeline-step-left">
+          <div class="pipeline-step-num">4</div>
+          <div class="pipeline-step-line"></div>
+        </div>
+        <div class="pipeline-step-content">
+          <div class="pipeline-step-title">Search Logged — Then Sealed</div>
+          <div class="pipeline-step-desc">The search is recorded with officer name, reason, and case number. Under H-8452, that log is immediately classified as a confidential record under Iowa Code 22.7. The person searched cannot see it without litigation.</div>
+          <span class="pipeline-step-tag tag--sealed">Iowa Code 22.7 — Confidential</span>
+        </div>
+      </div>
+      <div class="pipeline-step pipeline-step--danger">
+        <div class="pipeline-step-left">
+          <div class="pipeline-step-num">5</div>
+        </div>
+        <div class="pipeline-step-content">
+          <div class="pipeline-step-title">Audit Conducted — Never Published</div>
+          <div class="pipeline-step-desc">Agencies audit logs every four months. S-5192 originally required publishing results online. H-8452 removed that requirement. Internal accountability only. Public accountability: zero.</div>
+          <span class="pipeline-step-tag tag--sealed">Internal Only</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════ EVIDENCE CARDS -->
+<section class="section">
+  <div class="page-col">
+    <div class="s-label s-label--gold">Evidence Cards — Key Mechanisms</div>
+    <p class="section-lede">Tap any card to expand the full mechanism.</p>
+
+    <!-- Card 1 -->
+    <div class="evidence-card expanded">
+      <div class="evidence-card-header" onclick="toggleCard(this.parentElement)" role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard(this.parentElement);}">
+        <div class="evidence-card-num">01</div>
+        <div class="evidence-card-main">
+          <div class="evidence-card-type">Mechanism — Secrecy Clause</div>
+          <div class="evidence-card-title">The Single Sentence That Locks the Logs</div>
+        </div>
+        <div class="evidence-card-chevron" aria-hidden="true">▾</div>
+      </div>
+      <div class="evidence-card-body">
+        <p>Amendment H-8452 added one sentence to the logging section of SF 2284:</p>
+        <div class="secrecy-card">
+          <div class="secrecy-card-label">⚠ Statutory Text — H-8452</div>
+          <div class="secrecy-card-text">"A search log maintained pursuant to this subsection is a <strong>confidential record under section 22.7</strong>."</div>
+        </div>
+        <p>Iowa Code 22.7 is the state's enumerated list of records agencies "shall keep confidential" — covering medical records and investigative materials. Once placed there, public-records requests can be denied by default. Before this bill, agencies could still fight over ALPR logs case by case. H-8452 hands them a statutory shield to refuse disclosure altogether.</p>
+      </div>
+      <div class="evidence-card-footer">
+        <div class="evidence-card-meta">Source: H-8452 Amendment</div>
+        <div class="evidence-card-meta">Iowa Code § 22.7</div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="evidence-card">
+      <div class="evidence-card-header" onclick="toggleCard(this.parentElement)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard(this.parentElement);}">
+        <div class="evidence-card-num">02</div>
+        <div class="evidence-card-main">
+          <div class="evidence-card-type">Mechanism — Data Sharing</div>
+          <div class="evidence-card-title">Insurance Companies Get Plate Data. Permanently.</div>
+        </div>
+        <div class="evidence-card-chevron" aria-hidden="true">▾</div>
+      </div>
+      <div class="evidence-card-body">
+        <p>The House amendment explicitly authorizes sharing plate data with insurance carriers, the National Insurance Crime Bureau, and "insurance support organizations" for fraud investigations, vehicle recovery, or claims adjudication.</p>
+        <p>There are no clear deletion or minimization requirements attached to this sharing. Commercial industries gain access to government-collected surveillance data with limited strings attached.</p>
+        <div class="quote-block" style="margin: 14px 0 4px;">
+          <div class="quote-block-text">Municipalities are licensing Iowans' data to private, third-party vendors that are sharing it around the world. Iowans are losing control over their data in ways that are unnecessary to advancing public safety goals.</div>
+          <div class="quote-block-attr">Becca Eastwood — ACLU of Iowa Policy Director</div>
+        </div>
+      </div>
+      <div class="evidence-card-footer">
+        <div class="evidence-card-meta">Source: S-5192 Amendment</div>
+        <div class="evidence-card-meta">ACLU of Iowa</div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="evidence-card">
+      <div class="evidence-card-header" onclick="toggleCard(this.parentElement)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard(this.parentElement);}">
+        <div class="evidence-card-num">03</div>
+        <div class="evidence-card-main">
+          <div class="evidence-card-type">Mechanism — Normalization</div>
+          <div class="evidence-card-title">A Patchwork Becomes a State-Sanctioned Network</div>
+        </div>
+        <div class="evidence-card-chevron" aria-hidden="true">▾</div>
+      </div>
+      <div class="evidence-card-body">
+        <p>Requiring local ordinances and a DPS vendor list doesn't limit ALPRs — it standardizes them. Before SF 2284, police could deploy Flock Safety or similar systems with minimal public input and hold data indefinitely.</p>
+        <p>After SF 2284, those same systems get official state blessing through the DPS approval process. Two-year vendor cycles and approved lists make it politically and practically easier to scale up, not down. The patchwork becomes infrastructure.</p>
+      </div>
+      <div class="evidence-card-footer">
+        <div class="evidence-card-meta">Source: SF 2284 / S-5192</div>
+        <div class="evidence-card-meta">DPS Vendor Framework</div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="evidence-card">
+      <div class="evidence-card-header" onclick="toggleCard(this.parentElement)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard(this.parentElement);}">
+        <div class="evidence-card-num">04</div>
+        <div class="evidence-card-main">
+          <div class="evidence-card-type">Mechanism — Vendor Exceptions</div>
+          <div class="evidence-card-title">The "No Vendor Access" Rule That Permits Vendor Access</div>
+        </div>
+        <div class="evidence-card-chevron" aria-hidden="true">▾</div>
+      </div>
+      <div class="evidence-card-body">
+        <p>The bill bars agencies from conveying "historical location information" to a plate-reader vendor — except when:</p>
+        <ul style="margin: 10px 0 10px 18px; color: var(--text-mid); font-size: 13px; line-height: 1.85;">
+          <li>The data have been anonymized or "redacted"</li>
+          <li>The vendor needs historical data for operation, security, testing, or improvement</li>
+          <li>The vendor provides technical support</li>
+        </ul>
+        <p>Those three exceptions describe routine vendor operations. The rule as written permits the access it purports to restrict.</p>
+      </div>
+      <div class="evidence-card-footer">
+        <div class="evidence-card-meta">Source: H-8452 Amendment</div>
+        <div class="evidence-card-meta">Vendor Access Provisions</div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="evidence-card">
+      <div class="evidence-card-header" onclick="toggleCard(this.parentElement)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard(this.parentElement);}">
+        <div class="evidence-card-num">05</div>
+        <div class="evidence-card-main">
+          <div class="evidence-card-type">Mechanism — Process</div>
+          <div class="evidence-card-title">End-of-Session Darkness: When Bills Get Their Worst Amendments</div>
+        </div>
+        <div class="evidence-card-chevron" aria-hidden="true">▾</div>
+      </div>
+      <div class="evidence-card-body">
+        <p>The secrecy amendment emerged during the final days of Iowa's 2026 session — as lawmakers debated bills past midnight. Both chambers recessed, reconvened, and stood at ease repeatedly in the early hours.</p>
+        <p>It was in this window that H-8452 was filed. A 16-item amendment that — among tweaks to mobile unit caps and signage — classified search logs as confidential under Iowa law. Major surveillance architecture decisions made when public attention is lowest.</p>
+      </div>
+      <div class="evidence-card-footer">
+        <div class="evidence-card-meta">Source: Iowa Legislature</div>
+        <div class="evidence-card-meta">End of Session — 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════ COMPARISON GRID -->
+<section class="section">
+  <div class="page-col">
+    <div class="s-label s-label--cyan">The Transparency Gap</div>
+    <p style="font-family: var(--font-serif); font-size: 16px; color: var(--text); font-weight: 500; margin-bottom: 6px; line-height: 1.45; font-style: italic;">What the public can see — and what it cannot.</p>
+    <p class="section-lede" style="margin-bottom: 0;">Under SF 2284 as amended by H-8452.</p>
+
+    <div class="comparison-grid">
+      <div class="comparison-col col-public">
+        <div class="comparison-col-header">
+          <div class="comparison-col-label">Public Can See</div>
+          <div class="comparison-col-title">The Visible Layer</div>
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-item-dot" aria-hidden="true"></div>
+          That ALPRs are deployed in their city
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-item-dot" aria-hidden="true"></div>
+          Which vendors are DPS-approved
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-item-dot" aria-hidden="true"></div>
+          The ordinance authorizing use
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-item-dot" aria-hidden="true"></div>
+          That audits happen every 4 months
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-item-dot" aria-hidden="true"></div>
+          The general rules about deletion timelines
+        </div>
+      </div>
+      <div class="comparison-col col-hidden">
+        <div class="comparison-col-header">
+          <div class="comparison-col-label">Public Cannot See</div>
+          <div class="comparison-col-title">The Hidden Layer</div>
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-item-dot" aria-hidden="true"></div>
+          Who was searched and why
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-item-dot" aria-hidden="true"></div>
+          How often their plate was searched
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-item-dot" aria-hidden="true"></div>
+          Whether a search triggered a stop
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-item-dot" aria-hidden="true"></div>
+          Audit results and findings
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-item-dot" aria-hidden="true"></div>
+          What data was shared with insurers
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════ KEY TAKEAWAYS -->
+<section class="section">
+  <div class="page-col">
+    <div class="s-label s-label--gold">Key Takeaways</div>
+
+    <div class="takeaway">
+      <div class="takeaway-dot takeaway-dot--gold" aria-hidden="true"></div>
+      <div class="takeaway-text"><strong>The visible layer is not the full system.</strong> Reform provisions are real but structurally constrained by exceptions that preserve the surveillance architecture.</div>
+    </div>
+    <div class="takeaway">
+      <div class="takeaway-dot takeaway-dot--red" aria-hidden="true"></div>
+      <div class="takeaway-text"><strong>The only accountability records are sealed by law.</strong> H-8452 classifies search logs as confidential under Iowa Code 22.7, turning internal audits into a closed loop the public cannot enter.</div>
+    </div>
+    <div class="takeaway">
+      <div class="takeaway-dot takeaway-dot--cyan" aria-hidden="true"></div>
+      <div class="takeaway-text"><strong>Insurance companies are an explicit beneficiary.</strong> The bill names insurance carriers and the NICB as authorized recipients of ALPR data — with no clear deletion requirements.</div>
+    </div>
+    <div class="takeaway">
+      <div class="takeaway-dot takeaway-dot--gold" aria-hidden="true"></div>
+      <div class="takeaway-text"><strong>The patchwork becomes permanent infrastructure.</strong> State-level vendor approval doesn't limit the system — it gives it official legitimacy and a scalable framework to grow.</div>
+    </div>
+    <div class="takeaway">
+      <div class="takeaway-dot takeaway-dot--white" aria-hidden="true"></div>
+      <div class="takeaway-text">The fix is available: remove the 22.7 confidentiality sentence, restore online audit publishing, narrow sharing definitions, add warrant requirements for out-of-state and federal sharing. None of those things are currently in the bill.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════ CLOSING QUOTE -->
+<section class="section--tight">
+  <div class="page-col">
+    <div class="quote-block">
+      <div class="quote-block-text">A privacy bill that doesn't address private vendors isn't a privacy bill. It is a half measure.</div>
+      <div class="quote-block-attr">Rep. Ryan Weldon (R-Ankeny) — Iowa House</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ CONTINUE THE INVESTIGATION -->
+<section class="continue-section">
+  <div class="page-col">
+    <div class="continue-card">
+      <div class="continue-eyebrow">
+        <span class="continue-eyebrow-icon" aria-hidden="true"></span>
+        Companion Exhibit · Full Story Available
+      </div>
+      <h3>Continue the investigation.</h3>
+      <p>This exhibit is a companion piece to the full Restoring Democracy's Promise article — with additional legislative context, sourcing, and analysis of what real ALPR reform would require.</p>
+
+      <a href="https://exposed1.substack.com/p/iowas-alpr-reform-bill-would-regulate" class="continue-primary" target="_blank" rel="noopener">
+        <span>Read the Full Article</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+
+      <a href="https://restoring-democracy.org" class="continue-secondary">
+        ← Return to Restoring Democracy's Promise
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <!--
+        LOGO PLACEHOLDER (footer)
+        Replace with: <img src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise" class="footer-logo-img">
+      -->
+      <span class="footer-logo-img" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="8.5" stroke="#d4af37" stroke-width="1.4"/>
+          <circle cx="12" cy="12" r="3" fill="#d4af37" opacity="0.85"/>
+          <path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3" stroke="#d4af37" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <div>
+        <div class="footer-brand">Restoring Democracy's<br>Promise</div>
+      </div>
+    </div>
+    <div class="footer-tagline">Quantifying the Truth</div>
+    <div class="footer-tagline2">Engineering Precision Journalism</div>
+
+    <div class="footer-nav-group">
+      <div class="footer-nav-label">Investigations</div>
+      <div class="footer-nav-links">
+        <a href="https://exposed1.substack.com/p/iowas-alpr-reform-bill-would-regulate" class="footer-nav-link" target="_blank" rel="noopener">The ALPR "Reform" Bill</a>
+        <a href="https://exposed1.substack.com/p/the-alpr-trap-how-americas-plate" class="footer-nav-link" target="_blank" rel="noopener">The ALPR Trap (Part I)</a>
+        <a href="https://exposed1.substack.com" class="footer-nav-link" target="_blank" rel="noopener">Warrantless Surveillance Series</a>
+        <a href="https://restoring-democracy.org/dream_machine" class="footer-nav-link">Dream Machine Exhibit</a>
+      </div>
+    </div>
+
+    <div class="footer-nav-group">
+      <div class="footer-nav-label">Organization</div>
+      <div class="footer-nav-links">
+        <a href="https://restoring-democracy.org/about.html" class="footer-nav-link">About RDP</a>
+        <a href="https://restoring-democracy.org/analytics/" class="footer-nav-link">RDP Analytics</a>
+        <a href="https://restoring-democracy.org/secure-tips.html" class="footer-nav-link">Secure Tips</a>
+        <a href="https://restoring-democracy.org/privacy-policy.html" class="footer-nav-link">Privacy Policy</a>
+      </div>
+    </div>
+
+    <div class="footer-nav-group">
+      <div class="footer-nav-label">Contact</div>
+      <div class="footer-nav-links">
+        <a href="mailto:webmaster@restoring-democracy.org" class="footer-nav-link" style="color: var(--gold-lt);">webmaster@restoring-democracy.org</a>
+      </div>
+    </div>
+
+    <div class="footer-sources">
+      <div class="footer-sources-label">Primary Sources</div>
+      <div class="footer-sources-list">
+        Iowa Legislature. SF 2284 (2026).<br>
+        Iowa Legislature. House Amendment S-5192 to SF 2284.<br>
+        Iowa Legislature. Senate Amendment H-8452 to S-5192.<br>
+        Iowa Public Radio. Sostaric, K. (April 17, 2026).<br>
+        ACLU of Iowa &amp; UI Tech. Law Clinic. ALPRs Are Tracking You (2025).<br>
+        Tucker, T.C. The ALPR Trap. RDP (2025).
+      </div>
+    </div>
+
+    <div class="footer-copy">© 2023–2026 Restoring Democracy's Promise · All rights reserved</div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════ JS -->
+<script>
+  // ── Two-layer tab switching ─────────────────────────
+  function switchLayer(which) {
+    const tabVisible    = document.getElementById('tab-visible');
+    const tabHidden     = document.getElementById('tab-hidden');
+    const panelVisible  = document.getElementById('panel-visible');
+    const panelHidden   = document.getElementById('panel-hidden');
+
+    if (which === 'visible') {
+      tabVisible.className = 'layers-tab active-visible';
+      tabHidden.className  = 'layers-tab';
+      tabVisible.setAttribute('aria-selected', 'true');
+      tabHidden.setAttribute('aria-selected',  'false');
+      panelVisible.classList.add('active');
+      panelVisible.removeAttribute('hidden');
+      panelHidden.classList.remove('active');
+      panelHidden.setAttribute('hidden', '');
+    } else {
+      tabHidden.className  = 'layers-tab active-hidden';
+      tabVisible.className = 'layers-tab';
+      tabHidden.setAttribute('aria-selected',  'true');
+      tabVisible.setAttribute('aria-selected', 'false');
+      panelHidden.classList.add('active');
+      panelHidden.removeAttribute('hidden');
+      panelVisible.classList.remove('active');
+      panelVisible.setAttribute('hidden', '');
+    }
+  }
+
+  // ── Evidence card expand/collapse ───────────────────
+  function toggleCard(card) {
+    const wasExpanded = card.classList.contains('expanded');
+    document.querySelectorAll('.evidence-card').forEach(c => {
+      c.classList.remove('expanded');
+      const hdr = c.querySelector('.evidence-card-header');
+      if (hdr) hdr.setAttribute('aria-expanded', 'false');
+    });
+    if (!wasExpanded) {
+      card.classList.add('expanded');
+      const hdr = card.querySelector('.evidence-card-header');
+      if (hdr) hdr.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  // ── Share button (Web Share API + clipboard fallback) ─
+  document.getElementById('share-btn').addEventListener('click', async () => {
+    const shareData = {
+      title: document.title,
+      text: "Iowa's ALPR \"Reform\" Bill Would Regulate Plate Readers — and Hide the Logs",
+      url: window.location.href
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        return;
+      }
+    } catch (err) {
+      if (err && err.name === 'AbortError') return;
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(window.location.href);
+        const btn = document.getElementById('share-btn');
+        const original = btn.innerHTML;
+        btn.innerHTML = '<span style="color: var(--gold-lt); letter-spacing: 0.14em;">✓ Link Copied</span>';
+        setTimeout(() => { btn.innerHTML = original; }, 1800);
+        return;
+      }
+    } catch (err) { /* fall through */ }
+    window.prompt('Copy this link:', window.location.href);
+  });
+</script>
+
+</body>
+</html>
