@@ -196,13 +196,9 @@
   .nav-logo-img {
     width: 32px; height: 32px;
     border-radius: 6px;
-    background: linear-gradient(135deg, var(--green-mid), var(--bg-elev-2));
-    border: 1px solid var(--border-gold);
-    display: flex; align-items: center; justify-content: center;
+    object-fit: contain;
     flex-shrink: 0;
-    overflow: hidden;
   }
-  .nav-logo-img svg { width: 18px; height: 18px; }
   .nav-wordmark {
     font-family: var(--font-mono);
     font-size: 12px;
@@ -1150,12 +1146,9 @@
   .footer-logo-img {
     width: 38px; height: 38px;
     border-radius: 6px;
-    background: linear-gradient(135deg, var(--green-mid), var(--bg-elev-2));
-    border: 1px solid var(--border-gold);
-    display: flex; align-items: center; justify-content: center;
+    object-fit: contain;
     flex-shrink: 0;
   }
-  .footer-logo-img svg { width: 22px; height: 22px; }
   .footer-brand {
     font-family: var(--font-mono);
     font-size: 11.5px;
@@ -1279,7 +1272,10 @@
 <!-- ═══════════════════════════════════════════════════ NAV -->
 <nav class="nav" role="navigation" aria-label="Exhibit navigation">
   <a href="https://restoring-democracy.org/" class="nav-logo" aria-label="Return to Restoring Democracy's Promise">
-    <img src="/assets/Square_logo_transparent.webp" alt="Restoring Democracy's Promise" class="nav-logo-img">
+    <picture>
+      <source srcset="/assets/Square_logo_transparent.webp" type="image/webp">
+      <img src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise" class="nav-logo-img">
+    </picture>
     <span class="nav-wordmark">RDP</span>
     <span class="nav-wordmark-long">// Exhibit</span>
   </a>
@@ -1784,7 +1780,10 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-logo">
-      <img src="/assets/Square_logo_transparent.webp" alt="Restoring Democracy's Promise" class="footer-logo-img">
+      <picture>
+        <source srcset="/assets/Square_logo_transparent.webp" type="image/webp">
+        <img src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise" class="footer-logo-img">
+      </picture>
       <div>
         <div class="footer-brand">Restoring Democracy's<br>Promise</div>
       </div>
