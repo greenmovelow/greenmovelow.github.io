@@ -121,6 +121,7 @@
     /* — Layout — */
     --max-w:  520px;
     --pad:    20px;
+    --rail-w: 920px;
     --radius: 6px;
 
     /* — Motion — */
@@ -161,10 +162,9 @@
 
   /* ── LAYOUT HELPERS ──────────────────────────────── */
   .page-col {
-    max-width: var(--max-w);
-    margin: 0 auto;
-    padding-left: var(--pad);
-    padding-right: var(--pad);
+    width: min(100% - 2rem, var(--rail-w));
+    margin-inline: auto;
+    box-sizing: border-box;
   }
   .section { padding: 56px 0; }
   .section--tight { padding: 36px 0; }
@@ -184,7 +184,12 @@
     backdrop-filter: saturate(140%) blur(14px);
     -webkit-backdrop-filter: saturate(140%) blur(14px);
     border-bottom: 1px solid var(--border);
-    padding: 12px var(--pad);
+    padding: 12px 0;
+  }
+  .nav-inner {
+    width: min(100% - 2rem, var(--rail-w));
+    margin-inline: auto;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -267,9 +272,10 @@
   }
   .hero {
     position: relative;
-    max-width: var(--max-w);
-    margin: 0 auto;
-    padding: 48px var(--pad) 44px;
+    width: min(100% - 2rem, var(--rail-w));
+    margin-inline: auto;
+    box-sizing: border-box;
+    padding: 48px 0 44px;
   }
 
   .exhibit-label {
@@ -1146,7 +1152,7 @@
     width: 100%;
   }
   .footer-inner {
-    width: min(100% - 2rem, 960px);
+    width: min(100% - 2rem, var(--rail-w));
     margin-inline: auto;
     box-sizing: border-box;
   }
@@ -1248,23 +1254,17 @@
       --wide-w: 1120px;
       --desktop-pad: 48px;
     }
-    .hero {
-      max-width: var(--wide-w);
-      padding-left: var(--desktop-pad);
-      padding-right: var(--desktop-pad);
-    }
     .tracker,
     .status-banner {
       max-width: 760px;
     }
     .divider { max-width: var(--wide-w); }
     .footer-inner {
-      width: min(100% - 2rem, 960px);
+      width: min(100% - 2rem, var(--rail-w));
     }
   }
 
   @media (min-width: 540px) {
-    :root { --pad: 28px; }
     .hero h1 { font-size: 38px; }
     .thesis-pull { font-size: 24px; }
     .subscribe-card h3 { font-size: 22px; }
@@ -1303,6 +1303,7 @@
 
 <!-- ═══════════════════════════════════════════════════ NAV -->
 <nav class="nav" role="navigation" aria-label="Exhibit navigation">
+  <div class="nav-inner">
   <a href="https://restoring-democracy.org/" class="nav-logo" aria-label="Return to Restoring Democracy's Promise">
     <picture>
       <source srcset="/assets/Square_logo_transparent.webp" type="image/webp">
@@ -1321,6 +1322,7 @@
     </svg>
     Share
   </button>
+  </div>
 </nav>
 
 <!-- ═══════════════════════════════════════════════════ HERO -->
