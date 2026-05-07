@@ -122,6 +122,8 @@
     --max-w:  520px;
     --pad:    20px;
     --rail-w: 920px;
+    --alpr-rail: 920px;
+    --alpr-gutter: clamp(1rem, 4vw, 3rem);
     --radius: 6px;
 
     /* — Motion — */
@@ -162,7 +164,7 @@
 
   /* ── LAYOUT HELPERS ──────────────────────────────── */
   .page-col {
-    width: min(100% - 2rem, var(--rail-w));
+    width: min(100% - (var(--alpr-gutter) * 2), var(--alpr-rail));
     margin-inline: auto;
     box-sizing: border-box;
   }
@@ -187,7 +189,7 @@
     padding: 12px 0;
   }
   .nav-inner {
-    width: min(100% - 2rem, var(--rail-w));
+    width: min(100% - (var(--alpr-gutter) * 2), var(--alpr-rail));
     margin-inline: auto;
     box-sizing: border-box;
     display: flex;
@@ -272,7 +274,7 @@
   }
   .hero {
     position: relative;
-    width: min(100% - 2rem, var(--rail-w));
+    width: min(100% - (var(--alpr-gutter) * 2), var(--alpr-rail));
     margin-inline: auto;
     box-sizing: border-box;
     padding: 48px 0 44px;
@@ -1152,7 +1154,7 @@
     width: 100%;
   }
   .footer-inner {
-    width: min(100% - 2rem, var(--rail-w));
+    width: min(100% - (var(--alpr-gutter) * 2), var(--alpr-rail));
     margin-inline: auto;
     box-sizing: border-box;
   }
@@ -1260,7 +1262,7 @@
     }
     .divider { max-width: var(--wide-w); }
     .footer-inner {
-      width: min(100% - 2rem, var(--rail-w));
+      width: min(100% - (var(--alpr-gutter) * 2), var(--alpr-rail));
     }
   }
 
