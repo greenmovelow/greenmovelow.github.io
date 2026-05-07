@@ -184,7 +184,12 @@
     backdrop-filter: saturate(140%) blur(14px);
     -webkit-backdrop-filter: saturate(140%) blur(14px);
     border-bottom: 1px solid var(--border);
-    padding: 12px var(--pad);
+    padding: 12px 0;
+  }
+  .nav-inner {
+    width: min(100% - 2rem, 920px);
+    margin-inline: auto;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1146,7 +1151,7 @@
     width: 100%;
   }
   .footer-inner {
-    width: min(100% - 2rem, 960px);
+    width: min(100% - 2rem, 920px);
     margin-inline: auto;
     box-sizing: border-box;
   }
@@ -1259,7 +1264,7 @@
     }
     .divider { max-width: var(--wide-w); }
     .footer-inner {
-      width: min(100% - 2rem, 960px);
+      width: min(100% - 2rem, 920px);
     }
   }
 
@@ -1303,6 +1308,7 @@
 
 <!-- ═══════════════════════════════════════════════════ NAV -->
 <nav class="nav" role="navigation" aria-label="Exhibit navigation">
+  <div class="nav-inner">
   <a href="https://restoring-democracy.org/" class="nav-logo" aria-label="Return to Restoring Democracy's Promise">
     <picture>
       <source srcset="/assets/Square_logo_transparent.webp" type="image/webp">
@@ -1321,6 +1327,7 @@
     </svg>
     Share
   </button>
+  </div>
 </nav>
 
 <!-- ═══════════════════════════════════════════════════ HERO -->
