@@ -1145,8 +1145,11 @@
     padding: 44px var(--pad) 32px;
   }
   .footer-inner {
+    width: min(calc(100% - (var(--pad) * 2)), var(--max-w));
     max-width: var(--max-w);
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
   }
   .footer-logo {
     display: flex; align-items: center; gap: 12px;
@@ -1255,8 +1258,9 @@
     .status-banner {
       max-width: 760px;
     }
-    .divider,
+    .divider { max-width: var(--wide-w); }
     .footer-inner {
+      width: min(calc(100% - (var(--desktop-pad) * 2)), var(--wide-w));
       max-width: var(--wide-w);
     }
   }
