@@ -122,6 +122,8 @@
     --max-w:  520px;
     --pad:    20px;
     --rail-w: 920px;
+    --alpr-rail: 920px;
+    --alpr-gutter: clamp(1rem, 4vw, 3rem);
     --radius: 6px;
 
     /* — Motion — */
@@ -162,7 +164,7 @@
 
   /* ── LAYOUT HELPERS ──────────────────────────────── */
   .page-col {
-    width: min(100% - 2rem, var(--rail-w));
+    width: min(100% - (var(--alpr-gutter) * 2), var(--alpr-rail));
     margin-inline: auto;
     box-sizing: border-box;
   }
@@ -187,7 +189,7 @@
     padding: 12px 0;
   }
   .nav-inner {
-    width: min(100% - 2rem, var(--rail-w));
+    width: min(100% - (var(--alpr-gutter) * 2), var(--alpr-rail));
     margin-inline: auto;
     box-sizing: border-box;
     display: flex;
@@ -272,10 +274,11 @@
   }
   .hero {
     position: relative;
-    width: min(100% - 2rem, var(--rail-w));
+    width: min(100% - (var(--alpr-gutter) * 2), var(--alpr-rail));
     margin-inline: auto;
     box-sizing: border-box;
     padding: 48px 0 44px;
+    text-align: center;
   }
 
   .exhibit-label {
@@ -334,7 +337,7 @@
     text-wrap: pretty;
   }
   .hero-byline {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
     font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.1em;
@@ -345,12 +348,14 @@
     border-bottom: 1px solid var(--border);
   }
   .hero-byline-rule {
-    flex: 1; height: 1px; background: var(--border);
+    flex: 0 1 120px; height: 1px; background: var(--border);
+    max-width: 120px;
   }
 
   .hero-tags {
     display: flex; flex-wrap: wrap; gap: 7px;
     margin-bottom: 22px;
+    justify-content: center;
   }
   .hero-tag {
     font-family: var(--font-mono);
@@ -373,6 +378,7 @@
     border-radius: var(--radius);
     padding: 18px 16px 16px;
     margin-top: 8px;
+    margin-inline: auto;
   }
   .tracker-label {
     font-family: var(--font-mono);
@@ -443,6 +449,7 @@
     border-radius: 0 var(--radius) var(--radius) 0;
     padding: 14px 16px 14px 14px;
     margin-top: 18px;
+    margin-inline: auto;
     display: flex; gap: 12px; align-items: flex-start;
   }
   .status-banner-icon {
@@ -1152,12 +1159,15 @@
     width: 100%;
   }
   .footer-inner {
-    width: min(100% - 2rem, var(--rail-w));
+    width: min(100% - (var(--alpr-gutter) * 2), 720px);
     margin-inline: auto;
+    text-align: center;
     box-sizing: border-box;
   }
   .footer-logo {
     display: flex; align-items: center; gap: 12px;
+    justify-content: center;
+    margin-inline: auto;
     margin-bottom: 14px;
   }
   .footer-logo-img {
@@ -1190,7 +1200,7 @@
     margin-bottom: 32px;
     text-transform: uppercase;
   }
-  .footer-nav-group { margin-bottom: 24px; }
+  .footer-nav-group { margin-bottom: 24px; margin-inline: auto; }
   .footer-nav-label {
     font-family: var(--font-mono);
     font-size: 9px;
@@ -1200,7 +1210,7 @@
     margin-bottom: 11px;
     font-weight: 600;
   }
-  .footer-nav-links { display: flex; flex-direction: column; gap: 9px; }
+  .footer-nav-links { display: flex; flex-direction: column; gap: 9px; align-items: center; }
   .footer-nav-link {
     font-size: 13.5px;
     color: var(--text-mid);
@@ -1210,6 +1220,7 @@
   .footer-sources {
     padding-top: 24px;
     border-top: 1px solid var(--border);
+    margin-inline: auto;
   }
   .footer-sources-label {
     font-family: var(--font-mono);
@@ -1225,6 +1236,7 @@
     color: var(--label);
     line-height: 1.85;
     font-family: var(--font-mono);
+    margin-inline: auto;
   }
   .footer-copy {
     margin-top: 26px;
@@ -1260,7 +1272,7 @@
     }
     .divider { max-width: var(--wide-w); }
     .footer-inner {
-      width: min(100% - 2rem, var(--rail-w));
+      width: min(100% - (var(--alpr-gutter) * 2), 720px);
     }
   }
 
