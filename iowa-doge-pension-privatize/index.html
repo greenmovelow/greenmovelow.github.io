@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="msapplication-TileColor" content="#2d5c4f">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#2d5c4f">
+    <title>Interactive Investigation: The Iowa Pension Proposal</title>
+    <meta name="description" content="An interactive analysis of the Iowa DOGE Task Force's pension proposal and its national connections.">
+    <link rel="canonical" href="https://restoring-democracy.org/iowa-doge-pension-privatize" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Restoring Democracy's Promise" />
+    <meta property="og:url" content="https://restoring-democracy.org/iowa-doge-pension-privatize" />
+    <meta property="og:title" content="Interactive Investigation: The Iowa Pension Proposal" />
+    <meta property="og:description" content="An interactive analysis of the Iowa DOGE Task Force's pension proposal and its national connections." />
+    <meta property="og:image" content="https://restoring-democracy.org/assets/og/iowa-doge-pension-privatize-og.jpg" />
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://restoring-democracy.org/iowa-doge-pension-privatize" />
+    <meta name="twitter:title" content="Interactive Investigation: The Iowa Pension Proposal" />
+    <meta name="twitter:description" content="An interactive analysis of the Iowa DOGE Task Force's pension proposal and its national connections." />
+    <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/iowa-doge-pension-privatize-og.jpg" />
+<link rel="stylesheet" href="/assets/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Teko', sans-serif; letter-spacing: 0.5px; }
+
+        /* Navigation Styles from Template */
+        .nav-link.active-nav { color: #d97706; /* amber-600 */ }
+        .desktop-nav-link.active-nav { border-bottom-color: #d97706; }
+        .desktop-nav-link.inactive-nav { border-bottom-color: transparent; }
+        .mobile-nav-link.active-nav { background-color: #fffbeb; /* amber-50 */ }
+
+        /* Card & Chart Styles from New Page */
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e2e8f0; /* slate-200 */
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #d97706; /* amber-600 */
+            transition: width 1.5s ease-in-out;
+            width: 0%;
+        }
+
+        .investigation-link {
+            display: inline-flex;
+            align-items: center;
+            color: #b45309;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .investigation-link:hover,
+        .investigation-link:focus-visible {
+            color: #92400e;
+            border-bottom-color: #f59e0b;
+        }
+    </style>
+
+  <meta property="og:locale" content="en_US" />
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="/" title="Return to Homepage">
+                        <img src="assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise Logo" class="h-8 w-8">
+                    </a>
+                    <a href="/" class="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline hidden sm:block">
+                        &larr; Return to Homepage
+                    </a>
+                </div>            
+                <div class="hidden md:block">
+                    <div id="desktop-nav-links" class="ml-10 flex items-baseline space-x-4">
+                        <a href="https://exposed1.substack.com/p/exclusive-doge-pension-privatize" target="_blank" rel="noopener noreferrer" class="investigation-link px-3 py-2 rounded-md text-sm">Read the Investigation ↗</a>
+                        <a href="#conflict" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">The Conflict</a>
+                        <a href="#payday" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">The Payday</a>
+                        <a href="#blueprint" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">The Blueprint</a>
+                        <a href="#players" class="nav-link desktop-nav-link px-3 py-2 rounded-md text-sm font-medium border-b-2 transition-all duration-300">The Players</a>
+                    </div>
+                </div>
+
+                <div class="-mr-2 flex md:hidden">
+                    <button id="mobile-menu-button" type="button" class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-100 focus:ring-amber-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div id="mobile-nav-links" class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="https://exposed1.substack.com/p/exclusive-doge-pension-privatize" target="_blank" rel="noopener noreferrer" class="investigation-link block px-3 py-2 rounded-md text-base">Read the Investigation ↗</a>
+                </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full">
+        
+        <section id="conflict" class="mb-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight">A CONFLICT OF INTEREST AT THE CORE</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">The investigation reveals a state task force member is a top executive at a financial firm that stands to gain millions from the very pension changes her committee recommended.</p>
+            </div>
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="font-semibold text-2xl text-slate-900">THE TASK FORCE MEMBER</h3>
+                    <p class="mt-2 text-slate-600"><strong class="text-slate-800">Kathy Kay</strong>, Executive VP at <strong class="text-slate-800">Principal Financial Group</strong>, was appointed by the Governor to the Iowa DOGE Task Force.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-200">
+                        <p class="text-sm text-slate-500">Her Role: To advise on "government efficiency."</p>
+                    </div>
+                </div>
+                <div class="text-center text-5xl font-extrabold text-amber-500 hidden md:block">&rarr;</div>
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="font-semibold text-2xl text-slate-900">THE RECOMMENDATION</h3>
+                    <p class="mt-2 text-slate-600">The DOGE Task Force recommended eliminating the state's pension plan (IPERS) for new hires and replacing it with a <strong class="text-slate-800">401(k)-style plan</strong>.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-200">
+                        <p class="text-sm text-slate-500">The Product: Principal Financial Group is a major seller of 401(k) plans.</p>
+                    </div>
+                </div>
+            </div>
+             <div class="mt-8 text-center">
+                <p class="text-slate-600">This section introduces the central conflict. A state official is in a position to create a captive, state-mandated market for the financial products her company sells. The investigation found no public record of this conflict being disclosed or managed.</p>
+            </div>
+        </section>
+
+        <hr class="border-slate-200 my-16">
+
+        <section id="payday" class="mb-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl md:text-7xl font-bold tracking-tight text-slate-900">QUANTIFYING THE POTENTIAL WINDFALL</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">Financial modeling, based on public data, projects the creation of a new $143 million market for management fees over 10 years. Explore how much Principal Financial could gain.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="grid md:grid-cols-3 gap-6 items-center">
+                    <div class="md:col-span-1">
+                        <h3 class="font-semibold text-2xl text-slate-900">PRINCIPAL'S MARKET SHARE</h3>
+                        <p class="text-sm text-slate-600 mt-1">Given its dominant position in Iowa, Principal is poised to capture a significant share of this new market. Use the slider to see how their potential earnings change.</p>
+                        <input id="marketShareSlider" type="range" min="0" max="2" value="1" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer mt-4">
+                        <div class="flex justify-between text-xs text-slate-500 mt-1">
+                            <span>20% (Low)</span>
+                            <span>30% (Mid)</span>
+                            <span>45% (High)</span>
+                        </div>
+                        <div class="mt-6 p-4 bg-amber-50 rounded-lg text-center">
+                            <p class="text-lg text-amber-800">Projected 10-Year Gain:</p>
+                            <p id="principalGain" class="text-4xl font-bold text-amber-700 mt-1">$42.9 Million</p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <div class="chart-container">
+                            <canvas id="financialsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="mt-8 text-center">
+                <p class="text-slate-600">This interactive chart visualizes the financial stakes. The projections are based on a conservative model using IPERS data on new hires, average salaries, and contribution rates. By interacting with the model, you can see how different market scenarios translate into tens of millions of dollars for a single company with an insider on the task force.</p>
+            </div>
+        </section>
+
+        <hr class="border-slate-200 my-16">
+
+        <section id="blueprint" class="mb-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl md:text-7xl font-bold tracking-tight text-slate-900">A NATIONAL BLUEPRINT, EXECUTED LOCALLY</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">The Iowa proposal wasn't created in a vacuum. A computational analysis reveals it's a structural copy of model legislation from a national conservative group, ALEC.</p>
+            </div>
+            <div class="max-w-4xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-lg">
+                <h3 class="text-center font-semibold text-3xl text-slate-900 mb-6">POLICY DNA: IOWA VS. ALEC MODEL</h3>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-slate-700">Structural Similarity</span>
+                            <span id="structuralValue" class="text-sm font-medium text-slate-700">51.4%</span>
+                        </div>
+                        <div class="progress-bar-container h-4">
+                            <div id="structuralBar" class="progress-bar flex items-center justify-center text-white text-xs font-bold"></div>
+                        </div>
+                        <p class="text-sm text-slate-500 mt-2">The core policy architecture—the "what" and "how" of the reform—is a near-perfect match to the ALEC template.</p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-slate-700">Textual (Word-for-Word) Similarity</span>
+                            <span id="textualValue" class="text-sm font-medium text-slate-700">4.0%</span>
+                        </div>
+                        <div class="progress-bar-container h-4">
+                            <div id="textualBar" class="progress-bar flex items-center justify-center text-white text-xs font-bold" style="background-color: #fbbf24;"></div>
+                        </div>
+                        <p class="text-sm text-slate-500 mt-2">The language used was different, providing a veneer of originality and "plausible deniability."</p>
+                    </div>
+                </div>
+                 <div class="mt-8 text-center">
+                    <p class="text-slate-600">This comparison is the key to understanding the strategy. The Iowa plan wasn't just *influenced* by ALEC; it was an *implementation* of their playbook. This "policy laundering" allows a national agenda to be presented as a homegrown Iowa solution.</p>
+                </div>
+            </div>
+        </section>
+        
+        <hr class="border-slate-200 my-16">
+
+        <section id="players" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl md:text-7xl font-bold tracking-tight text-slate-900">KEY PLAYERS & ACCOUNTABILITY</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">The task force was overwhelmingly composed of business interests, with no representation for public employees. This led to predictable outcomes and a subsequent crisis of accountability.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-center font-semibold text-3xl text-slate-900 mb-4">TASK FORCE COMPOSITION</h3>
+                    <div class="chart-container" style="height: 300px; max-height: 300px;">
+                        <canvas id="compositionChart"></canvas>
+                    </div>
+                     <p class="text-sm text-slate-500 mt-4 text-center">This chart shows the professional background of the task force members. The imbalance highlights how the interests of 400,000+ Iowans in the IPERS system were not represented in the room where its future was being decided.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-center font-semibold text-3xl text-slate-900 mb-4">PROFILES IN THE INVESTIGATION</h3>
+                    <div class="space-y-4">
+                        <div class="card p-4 border border-slate-200 rounded-lg">
+                            <h4 class="font-semibold text-xl text-slate-800">Governor Kim Reynolds</h4>
+                            <p class="text-sm text-slate-600 mt-1">Appointed the business-heavy task force and gave it its mandate. Has remained silent on the controversy, despite being the architect of the process.</p>
+                        </div>
+                        <div class="card p-4 border border-slate-200 rounded-lg">
+                            <h4 class="font-semibold text-xl text-slate-800">Kathy Kay (Principal Financial)</h4>
+                            <p class="text-sm text-slate-600 mt-1">The conflicted task force member. Her presence links the policy recommendation directly to a corporate entity that stands to profit.</p>
+                        </div>
+                        <div class="card p-4 border border-slate-200 rounded-lg">
+                            <h4 class="font-semibold text-xl text-slate-800">Reynolds Cramer (Fareway CEO)</h4>
+                            <p class="text-sm text-slate-600 mt-1">Chaired the subcommittee credited with the IPERS proposal. After public backlash, he denied involvement in an email, stating, "I am not involved with the committee making recommendations on IPERS." This created an accountability crisis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-slate-800 text-slate-300 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm">
+            <button id="share-page-button" type="button" class="inline-flex items-center gap-2 text-amber-300 hover:text-amber-200 font-medium transition-colors mb-2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-4 w-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 8.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm12 7.5a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-12 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-1.95-1.125 8.4-4.5m0 0 8.4 4.5" />
+                </svg>
+                Share this page
+            </button>
+            <p>This interactive is based on the investigative report "EXCLUSIVE: Iowa Task Force Member's Firm Stands to Gain $42.9 Million."</p>
+            <p class="text-slate-400 mt-1">Data sourced from public records and the original manuscript.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Mobile Menu Setup from Template ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const desktopNavLinksContainer = document.getElementById('desktop-nav-links');
+            const mobileNavLinksContainer = document.getElementById('mobile-nav-links');
+            const sharePageButton = document.getElementById('share-page-button');
+
+            const desktopLinks = desktopNavLinksContainer.querySelectorAll('a');
+            const existingMobileInvestigationLink = mobileNavLinksContainer.querySelector('.investigation-link');
+            mobileNavLinksContainer.innerHTML = '';
+            if (existingMobileInvestigationLink) {
+                mobileNavLinksContainer.appendChild(existingMobileInvestigationLink);
+            }
+            desktopLinks.forEach(link => {
+                if (!link.classList.contains('nav-link')) {
+                    return;
+                }
+                const mobileLink = link.cloneNode(true);
+                mobileLink.className = 'nav-link mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-amber-700 hover:bg-amber-50';
+                mobileNavLinksContainer.appendChild(mobileLink);
+            });
+
+            if (sharePageButton) {
+                sharePageButton.addEventListener('click', async () => {
+                    const shareData = {
+                        title: document.title,
+                        text: 'Interactive Investigation: The Iowa Pension Proposal',
+                        url: window.location.href
+                    };
+
+                    if (navigator.share) {
+                        try {
+                            await navigator.share(shareData);
+                            return;
+                        } catch (error) {
+                            if (error.name === 'AbortError') {
+                                return;
+                            }
+                        }
+                    }
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(window.location.href);
+                        sharePageButton.textContent = 'Link copied!';
+                        setTimeout(() => {
+                            sharePageButton.innerHTML = `
+                                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-4 w-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 8.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm12 7.5a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-12 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-1.95-1.125 8.4-4.5m0 0 8.4 4.5" />
+                                </svg>
+                                Share this page
+                            `;
+                        }, 1800);
+                    }
+                });
+            }
+
+            mobileMenuButton.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.toggle('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', String(!isHidden));
+                hamburgerIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+            
+            // --- Navigation Logic for Active States & Scrolling ---
+            const allNavLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.4 };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        allNavLinks.forEach(link => {
+                            link.classList.toggle('active-nav', link.getAttribute('href') === `#${id}`);
+                            link.classList.toggle('inactive-nav', link.getAttribute('href') !== `#${id}`);
+                        });
+                        if (id === 'blueprint') {
+                            animateProgressBars();
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => sectionObserver.observe(section));
+
+            document.querySelector('body').addEventListener('click', (e) => {
+                if (e.target.matches('.nav-link')) {
+                    e.preventDefault();
+                    const targetId = e.target.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                         targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                         window.history.pushState(null, null, targetId); // Manually update hash without jump
+                    }
+                    if (mobileMenu.classList.contains('hidden') === false) {
+                       mobileMenuButton.click(); 
+                    }
+                }
+            });
+
+            // --- Chart & Interaction Logic from New Page ---
+            const financialData = {
+                labels: ['Total 10-Year Fee Market', "Principal's Share"],
+                totalMarket: 143,
+                shares: [20, 30, 45]
+            };
+            const compositionData = {
+                labels: ['Business Sector Representatives', 'Public Sector / Employee Representatives'],
+                data: [80, 0]
+            };
+            let financialChart, compositionChart;
+
+            const marketShareSlider = document.getElementById('marketShareSlider');
+            const principalGainEl = document.getElementById('principalGain');
+
+            function updateFinancials(shareIndex) {
+                const sharePercent = financialData.shares[shareIndex];
+                const principalGain = (financialData.totalMarket * (sharePercent / 100)).toFixed(1);
+                principalGainEl.textContent = `$${principalGain} Million`;
+                if (financialChart) {
+                    financialChart.data.datasets[0].data = [financialData.totalMarket, principalGain];
+                    financialChart.update();
+                }
+            }
+
+            function createFinancialsChart() {
+                const ctx = document.getElementById('financialsChart').getContext('2d');
+                financialChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: financialData.labels,
+                        datasets: [{
+                            label: 'Projected Gain (in Millions)',
+                            data: [financialData.totalMarket, (financialData.totalMarket * (financialData.shares[1] / 100))],
+                            backgroundColor: ['rgba(100, 116, 139, 0.6)', 'rgba(217, 119, 6, 0.6)'],
+                            borderColor: ['rgb(100, 116, 139)', 'rgb(217, 119, 6)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { callbacks: { label: (context) => `$${context.raw.toFixed(1)} Million` } }
+                        },
+                        scales: { x: { beginAtZero: true, title: { display: true, text: 'Amount in Millions ($)' } } }
+                    }
+                });
+            }
+
+            function createCompositionChart() {
+                const ctx = document.getElementById('compositionChart').getContext('2d');
+                compositionChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: compositionData.labels,
+                        datasets: [{
+                            label: 'Task Force Composition',
+                            data: compositionData.data,
+                            backgroundColor: ['rgba(217, 119, 6, 0.6)', 'rgba(203, 213, 225, 0.6)'],
+                            borderColor: ['rgb(217, 119, 6)', 'rgb(203, 213, 225)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom' },
+                            tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw}%` } }
+                        }
+                    }
+                });
+            }
+            
+            marketShareSlider.addEventListener('input', (e) => {
+                updateFinancials(parseInt(e.target.value));
+            });
+
+            const animateProgressBars = () => {
+                const structuralBar = document.getElementById('structuralBar');
+                const textualBar = document.getElementById('textualBar');
+                if (structuralBar.style.width !== '51.4%') { // Animate only once
+                    structuralBar.style.width = '51.4%';
+                    textualBar.style.width = '4.0%';
+                }
+            };
+
+            // Initial setup
+            createFinancialsChart();
+            createCompositionChart();
+            updateFinancials(1); 
+        });
+    </script>
+</body>
+</html>
