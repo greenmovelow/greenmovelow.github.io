@@ -2,3 +2,6 @@
 # DISABLED (was looping): /funding-flow    /funding_flow.html    301!
 # /journalists /team/ 301!
 # /about /about/ 301!
+
+/credentialing-gap-dossier.html  /credentialing-gap-dossier/  301!
+/credentialing-gap-dossier      /credentialing-gap-dossier/  301!
