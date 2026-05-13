@@ -1,47 +1,49 @@
-# Restoring Democracy's Promise
+# Restoring Democracy’s Promise
 
-This repository contains the source code for [**restoring-democracy.org**](https://restoring-democracy.org/ "null"), the official web presence for the investigative journalism project, **Restoring Democracy's Promise**.
+This repository contains the source code for [Restoring Democracy’s Promise](https://restoring-democracy.org/), the public website for an independent investigative journalism newsroom.
 
-## Project Mission
+## About the Website
 
-Restoring Democracy’s Promise is a newsroom founded on a simple premise: to restore democratic accountability through irrefutable, evidence-driven investigations. We trace the money, map the influence, and expose the hidden machinery of power that shapes American policy from the shadows. This website serves as the front door to our work.
+Restoring Democracy’s Promise is built as a static newsroom and exhibit platform that publishes accountability reporting, evidence collections, and reader-facing investigation hubs.
 
-## Website Features
+The site is designed to support:
 
-The site is composed of three key components:
+- Independent investigative journalism
+- Interactive investigation pages that help readers follow money, influence, and chronology
+- Source-forward dossiers that foreground documents, records, and citations
+- Substack integration for subscriber updates, publication distribution, and audience continuity
 
-1. **Main Landing Page (`index.html`):** A professional landing page that introduces the project's mission, features our flagship investigation, and provides clear calls-to-action for readers to subscribe and get involved.
-    
-2. **Interactive Financial Report (`pincerfinancial.html`):** A deep-dive, interactive data visualization that maps the "Sustained Financial Superhighway" of the Marble Freedom Trust network. It allows users to explore the flow of hundreds of millions of dollars through various entities over multiple fiscal years.
-    
-3. **The Editor's Vault (`vault.html`):** A hidden "Easter egg" page for engaged followers, rewarding exploration and hinting at future investigations.
-    
+## Platform Architecture
 
-## Technology Stack
+The website prioritizes reliability, speed, and editorial clarity through a simple static stack and production-grade delivery infrastructure.
 
-This is a modern, static website built for speed, security, and accessibility.
+- Static site implementation using HTML, CSS, and vanilla JavaScript
+- Clean directory routes for readable, shareable URLs
+- Netlify deployment with GitHub-backed continuous publishing workflows
+- Cloudflare services for DNS, caching, TLS, and security controls
 
-- **Framework:** None. Just clean, semantic HTML5.
-    
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/ "null") for a professional, responsive, utility-first design.
-    
-- **Interactivity:** Vanilla JavaScript for the interactive timeline and UI elements, with [Chart.js](https://www.chartjs.org/ "null") for data visualization.
-    
-- **Deployment:** Hosted on [Netlify](https://www.netlify.com/ "null") and connected to this GitHub repository for continuous deployment. Every change pushed to the `main` branch is automatically deployed to the live site.
-    
+## Editorial Standards
 
-## Data Source
+Restoring Democracy’s Promise follows a source-first editorial approach:
 
-The financial data, organizational relationships, and narrative context for the interactive visualization are derived from the "Final Report: The MFT-DonorsTrust Financial Artery," a meta-journalistic investigative piece based on primary source analysis of tax filings and secondary source reporting.
+- Claims are grounded in verifiable records and attributable reporting
+- Investigation pages are structured for transparency and reader review
+- Corrections and updates are handled to preserve factual integrity over time
+- Published materials are organized to maximize traceability from narrative to source
 
-## Contact & Feedback
+## Contact and Secure Communications
 
-For questions, feedback, or tips, please contact the editor at [webmaster@restoring-democracy.org](mailto:webmaster@restoring-democracy.org "null").
+For public updates, project information, and publication access, use the official website:
 
-## License
+- https://restoring-democracy.org/
 
-The code in this repository is licensed under the MIT License. See the [LICENSE](https://www.google.com/search?q=LICENSE "null") file for more details.
+For sensitive outreach, source submissions, or secure contact options, use the contact pathways provided on the public website.
+
+## Licensing
+
+- Code in this repository is licensed under the MIT License unless otherwise noted.
+- Editorial content, reporting, graphics, logos, and brand materials remain copyrighted and are not covered by the MIT License.
 
 ## Copyright
 
-© 2023-2025 Restoring Democracy’s Promise. All rights reserved.
+© 2023–2026 Restoring Democracy’s Promise. All rights reserved.
