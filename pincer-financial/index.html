@@ -30,7 +30,7 @@
 
   <link rel="canonical" href="https://restoring-democracy.org/pincer-financial/" />
 <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/vendor/chartjs/chart.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Teko:wght@600&display=swap" rel="stylesheet">
@@ -441,7 +441,7 @@
             // MFT Chart Logic
             let mftChartInstance = null;
             function renderMftChart() {
-                if (mftChartInstance) return;
+                if (!window.Chart || mftChartInstance) return;
                 const ctx = document.getElementById('mftGrantsChart').getContext('2d');
                 mftChartInstance = new Chart(ctx, {
                     type: 'bar',

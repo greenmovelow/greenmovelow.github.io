@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#2d5c4f">
     <title>THE PINCER MOVEMENT: An Interactive Dossier | Restoring Democracy's Promise</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/vendor/chartjs/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
@@ -510,8 +510,8 @@
                       tabContentContainer.innerHTML = `<div id="${tabName}" class="tab-pane"><h4 class="text-3xl mb-4">${content.title}</h4>${content.content}</div>`;
 
                       if (tabName === 'checkmate') {
-                          const tacticsCtx = document.getElementById('tacticsChart').getContext('2d');
-                          new Chart(tacticsCtx, { type: 'bar', data: { labels: ['Voter Registrations Challenged (GA)', 'Registrations Removed'], datasets: [{ label: 'Number of Voters', data: [63000, 630], backgroundColor: ['#4A5568', '#E53E3E'], borderWidth: 1 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: 'Effectiveness of Mass Voter Challenges', font: { size: 16 } } } } });
+                          const tacticsCtx = document.getElementById('tacticsChart')?.getContext('2d');
+                          if (window.Chart && tacticsCtx) new Chart(tacticsCtx, { type: 'bar', data: { labels: ['Voter Registrations Challenged (GA)', 'Registrations Removed'], datasets: [{ label: 'Number of Voters', data: [63000, 630], backgroundColor: ['#4A5568', '#E53E3E'], borderWidth: 1 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: 'Effectiveness of Mass Voter Challenges', font: { size: 16 } } } } });
                       }
                  };
                  tabsContainer.addEventListener('click', (e) => {

@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#2d5c4f">
     <title>The God Machine: An RDP Investigation | Restoring Democracy's Promise</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/vendor/chartjs/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
@@ -468,8 +468,8 @@
         }
 
         // --- Chart.js ---
-        const ctx = document.getElementById('credentialsChart').getContext('2d');
-        new Chart(ctx, {
+        const ctx = document.getElementById('credentialsChart')?.getContext('2d');
+        if (window.Chart && ctx) new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['NSCA Chaplain', 'Licensed Counselor'],

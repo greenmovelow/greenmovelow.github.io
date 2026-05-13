@@ -69,7 +69,7 @@
     }
     </script>
 <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/vendor/chartjs/chart.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@600&display=swap" rel="stylesheet">
@@ -464,8 +464,8 @@
             }
 
             function createFinancialsChart() {
-                const ctx = document.getElementById('financialsChart').getContext('2d');
-                financialChart = new Chart(ctx, {
+                const ctx = document.getElementById('financialsChart')?.getContext('2d');
+                if (window.Chart && ctx) financialChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: financialData.labels,
@@ -489,8 +489,8 @@
             }
 
             function createCompositionChart() {
-                const ctx = document.getElementById('compositionChart').getContext('2d');
-                compositionChart = new Chart(ctx, {
+                const ctx = document.getElementById('compositionChart')?.getContext('2d');
+                if (window.Chart && ctx) compositionChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
                         labels: compositionData.labels,

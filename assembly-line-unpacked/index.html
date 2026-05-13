@@ -59,7 +59,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/vendor/chartjs/chart.umd.min.js"></script>
 
     <style>
 
@@ -749,7 +749,7 @@
 
             const ctx = document.getElementById(chartId);
 
-            if (ctx) {
+            if (window.Chart && ctx) {
 
                 const existingChart = Chart.getChart(chartId);
 
