@@ -465,8 +465,8 @@
             }
 
             function createFinancialsChart() {
-                const ctx = document.getElementById('financialsChart').getContext('2d');
-                if (window.Chart && ctx) { financialChart = new Chart(ctx, {
+                const chartEl = document.getElementById('financialsChart');
+                if (window.Chart && chartEl) { financialChart = new Chart(chartEl.getContext('2d'), {
                     type: 'bar',
                     data: {
                         labels: financialData.labels,
@@ -487,12 +487,11 @@
                         scales: { x: { beginAtZero: true, title: { display: true, text: 'Amount in Millions ($)' } } }
                     }
                 }); }
-                }
             }
 
             function createCompositionChart() {
-                const ctx = document.getElementById('compositionChart').getContext('2d');
-                if (window.Chart && ctx) { compositionChart = new Chart(ctx, {
+                const chartEl = document.getElementById('compositionChart');
+                if (window.Chart && chartEl) { compositionChart = new Chart(chartEl.getContext('2d'), {
                     type: 'doughnut',
                     data: {
                         labels: compositionData.labels,
@@ -512,7 +511,6 @@
                         }
                     }
                 }); }
-                }
             }
             
             marketShareSlider.addEventListener('input', (e) => {

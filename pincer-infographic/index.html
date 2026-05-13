@@ -328,8 +328,9 @@
             }
         };
         
-        const cabinetTiesCtx = document.getElementById('cabinetTiesChart');
-        if (cabinetTiesCtx) {
+        const cabinetTiesEl = document.getElementById('cabinetTiesChart');
+        if (window.Chart && cabinetTiesEl) {
+            const cabinetTiesCtx = cabinetTiesEl.getContext('2d');
             new Chart(cabinetTiesCtx, {
                 type: 'doughnut',
                 data: {
@@ -365,8 +366,9 @@
             });
         }
         
-        const cnAdherenceCtx = document.getElementById('cnAdherenceChart');
-        if (cnAdherenceCtx) {
+        const cnAdherenceEl = document.getElementById('cnAdherenceChart');
+        if (window.Chart && cnAdherenceEl) {
+            const cnAdherenceCtx = cnAdherenceEl.getContext('2d');
             new Chart(cnAdherenceCtx, {
                 type: 'bar',
                 data: {

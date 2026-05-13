@@ -468,7 +468,9 @@
         }
 
         // --- Chart.js ---
-        const ctx = document.getElementById('credentialsChart').getContext('2d');
+        const chartEl = document.getElementById('credentialsChart');
+        if (window.Chart && chartEl) {
+        const ctx = chartEl.getContext('2d');
         new Chart(ctx, {
             type: 'bar',
             data: {
@@ -513,6 +515,7 @@
                 }
             }
         });
+        }
 
         // -- SHARE BUTTON SCRIPT ADDED HERE --
         const shareButton = document.getElementById('share-button');

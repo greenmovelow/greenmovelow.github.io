@@ -429,7 +429,7 @@
                     step.style.opacity = isActive ? '1' : '0.5';
                     step.classList.toggle('border-blue-700', isActive);
                     step.classList.toggle('border-slate-200', !isActive);
-                }); }
+                });
                 dafNextBtn.textContent = dafStep > 2 ? "Reset" : "Next Step";
             }
             updateDafSteps();
@@ -442,7 +442,9 @@
             let mftChartInstance = null;
             function renderMftChart() {
                 if (mftChartInstance) return;
-                const ctx = document.getElementById('mftGrantsChart').getContext('2d');
+                const chartEl = document.getElementById('mftGrantsChart');
+                if (!(window.Chart && chartEl)) return;
+                const ctx = chartEl.getContext('2d');
                 mftChartInstance = new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -465,8 +467,7 @@
                         },
                         scales: { y: { beginAtZero: true, title: { display: true, text: 'Grant Amount (in Millions USD)' } } }
                     }
-                }); }
-                }
+                });
             }
 
             // Interactive Timeline Logic

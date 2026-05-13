@@ -471,8 +471,7 @@
                         </div>
                     `;
                     container.appendChild(group);
-                }); }
-                }
+                });
             }
             
             function initSectionObserver() {
@@ -485,17 +484,16 @@
                                 const bars = document.querySelectorAll('#interactive-stats .stat-bar-foreground');
                                 bars.forEach(bar => {
                                     bar.style.width = `${bar.dataset.value}%`;
-                                }); }
+                                });
                             }
                             observer.unobserve(entry.target);
                         }
-                    }); }
+                    });
                 }, { threshold: 0.1 });
 
                 sections.forEach(section => {
                     observer.observe(section);
-                }); }
-                }
+                });
             }
 
             function initTacticsChart() {
@@ -508,20 +506,23 @@
                           button.classList.toggle('border-accent-red', button.dataset.tab === tabName);
                           button.classList.toggle('text-gray-400', button.dataset.tab !== tabName);
                           button.classList.toggle('border-transparent', button.dataset.tab !== tabName);
-                      }); }
+                      });
                       
                       const content = tabContentData[tabName];
                       tabContentContainer.innerHTML = `<div id="${tabName}" class="tab-pane"><h4 class="text-3xl mb-4">${content.title}</h4>${content.content}</div>`;
 
                       if (tabName === 'checkmate') {
-                          const tacticsCtx = document.getElementById('tacticsChart').getContext('2d');
-                          if (window.Chart && tacticsCtx) { new Chart(tacticsCtx, { type: 'bar', data: { labels: ['Voter Registrations Challenged (GA)', 'Registrations Removed'], datasets: [{ label: 'Number of Voters', data: [63000, 630], backgroundColor: ['#4A5568', '#E53E3E'], borderWidth: 1 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: 'Effectiveness of Mass Voter Challenges', font: { size: 16 } } } } }); }
+                          const tacticsEl = document.getElementById('tacticsChart');
+                          if (window.Chart && tacticsEl) {
+                              const tacticsCtx = tacticsEl.getContext('2d');
+                              new Chart(tacticsCtx, { type: 'bar', data: { labels: ['Voter Registrations Challenged (GA)', 'Registrations Removed'], datasets: [{ label: 'Number of Voters', data: [63000, 630], backgroundColor: ['#4A5568', '#E53E3E'], borderWidth: 1 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: 'Effectiveness of Mass Voter Challenges', font: { size: 16 } } } } });
+                          }
                       }
                  };
                  tabsContainer.addEventListener('click', (e) => {
                       const button = e.target.closest('.tab-button');
                       if (button) setActiveTab(button.dataset.tab);
-                 }); }
+                 });
                  setActiveTab('steeplechase');
             }
 
@@ -533,9 +534,8 @@
                         if (targetElement) {
                             targetElement.scrollIntoView({ behavior: 'smooth' });
                         }
-                    }); }
-                }); }
-                }
+                    });
+                });
             }
 
             safeInit("Timeline Builder", buildTimeline);
