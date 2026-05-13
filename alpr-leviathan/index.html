@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#2d5c4f">
     <title>Surveillance Leviathan: The Palantir-ALPR Pipeline | Restoring Democracy's Promise</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/vendor/chartjs/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
@@ -260,7 +260,7 @@
                     navigateTo(hash);
                     window.history.pushState(null, null, hash);
                 });
-            });
+                });
 
             if (window.location.hash) { navigateTo(window.location.hash); } else { navigateTo('#overview'); }
 
@@ -273,7 +273,7 @@
                         detail.classList.toggle('hidden', detail.id.split('-')[1] !== stepNum);
                     });
                 });
-            });
+                });
 
             tabButtons.forEach(button => {
                 button.addEventListener('click', () => {
@@ -284,7 +284,7 @@
                         content.classList.toggle('hidden', content.id !== tabId);
                     });
                 });
-            });
+                });
 
             const createScaleChart = () => {
                 const ctx = document.getElementById('scaleChart')?.getContext('2d');
@@ -327,7 +327,7 @@
                         }
                     }
                 });
-            };
+                };
             createScaleChart();
 
             const shareButton = document.getElementById('share-button');
@@ -349,7 +349,7 @@
                         navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!'));
                     }
                 });
-            }
+                }
         });
     </script>
 </body>

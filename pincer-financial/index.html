@@ -30,7 +30,7 @@
 
   <link rel="canonical" href="https://restoring-democracy.org/pincer-financial/" />
 <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/vendor/chartjs/chart.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Teko:wght@600&display=swap" rel="stylesheet">
@@ -365,12 +365,12 @@
                 const hash = window.location.hash || '#summary';
                 sections.forEach(section => {
                     section.classList.toggle('active', '#' + section.id === hash);
-                });
+                }); }
                 
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.toggle('active-nav', link.getAttribute('href') === hash);
                     link.classList.toggle('inactive-nav', link.getAttribute('href') !== hash);
-                });
+                }); }
 
                 if (hash === '#key-players') renderMftChart();
                 if (hash === '#timeline') initTimeline();
@@ -429,7 +429,7 @@
                     step.style.opacity = isActive ? '1' : '0.5';
                     step.classList.toggle('border-blue-700', isActive);
                     step.classList.toggle('border-slate-200', !isActive);
-                });
+                }); }
                 dafNextBtn.textContent = dafStep > 2 ? "Reset" : "Next Step";
             }
             updateDafSteps();
@@ -465,7 +465,8 @@
                         },
                         scales: { y: { beginAtZero: true, title: { display: true, text: 'Grant Amount (in Millions USD)' } } }
                     }
-                });
+                }); }
+                }
             }
 
             // Interactive Timeline Logic

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>document.documentElement.classList.add('js');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -27,7 +28,7 @@
     <meta name="theme-color" content="#2d5c4f">
     <title>Infographic: The Pincer Movement | Restoring Democracy's Promise</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/vendor/chartjs/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -66,11 +67,16 @@
             border-left: 5px solid #00B4D8;
         }
         .content-section {
-            opacity: 0;
-            transform: translateY(20px);
+            opacity: 1;
+            transform: none;
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .content-section.is-visible {
+        .js .content-section {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .js .content-section.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -393,6 +399,7 @@
 
         // Section fade-in observer
         const sections = document.querySelectorAll('.content-section');
+        if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -405,6 +412,9 @@
         sections.forEach(section => {
             observer.observe(section);
         });
+        } else {
+            sections.forEach(section => section.classList.add('is-visible'));
+        }
     </script>
 
 </body>
