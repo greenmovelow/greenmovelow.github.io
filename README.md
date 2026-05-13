@@ -1,48 +1,77 @@
 # Restoring Democracy’s Promise
 
-This repository contains the source code for [Restoring Democracy’s Promise](https://restoring-democracy.org/), the public website for an independent investigative journalism newsroom.
+This repository contains the source code for [restoring-democracy.org](https://restoring-democracy.org/), the official web presence for **Restoring Democracy’s Promise**, an independent investigative journalism and civic accountability project.
 
-## About the Website
+Restoring Democracy’s Promise publishes evidence-driven reporting, interactive exhibits, public-records analysis, and systems-level investigations focused on democracy, surveillance, public finance, immigration, education, and the hidden machinery of political power.
 
-Restoring Democracy’s Promise is built as a static newsroom and exhibit platform that publishes accountability reporting, evidence collections, and reader-facing investigation hubs.
+## Project Mission
 
-The site is designed to support:
+Restoring Democracy’s Promise exists to restore democratic accountability through rigorous, source-forward investigations.
 
-- Independent investigative journalism
-- Interactive investigation pages that help readers follow money, influence, and chronology
-- Source-forward dossiers that foreground documents, records, and citations
-- Substack integration for subscriber updates, publication distribution, and audience continuity
+We trace money, map influence, document institutional failure, and explain how power operates across government, private industry, courts, data systems, and political networks. The site serves as the public front door for our reporting, exhibits, source dossiers, and reader engagement.
 
-## Platform Architecture
+## Website Structure
 
-The website prioritizes reliability, speed, and editorial clarity through a simple static stack and production-grade delivery infrastructure.
+The site is a static newsroom and exhibit platform built around clean, durable public routes.
 
-- Static site implementation using HTML, CSS, and vanilla JavaScript
-- Clean directory routes for readable, shareable URLs
-- Netlify deployment with GitHub-backed continuous publishing workflows
-- Cloudflare services for DNS, caching, TLS, and security controls
+Key components include:
+
+1. **Main Landing Page**
+   - Introduces the project, its mission, and current investigative priorities.
+   - Directs readers to featured investigations, public exhibits, Substack reporting, and contact channels.
+
+2. **Interactive Investigation Pages**
+   - Standalone public exhibits built around specific reporting threads.
+   - These pages may include timelines, diagrams, document links, source notes, and explanatory graphics.
+
+3. **Source-Forward Dossiers**
+   - Public-facing pages that organize evidence, records, filings, and supporting material behind major investigations.
+   - These are designed to make complex systems easier for readers, journalists, policymakers, and watchdogs to inspect.
+
+4. **Reader and Press Contact Infrastructure**
+   - Dedicated contact paths for press inquiries, corrections, secure tips, and public feedback.
+
+5. **Substack Integration**
+   - Long-form reporting is published through Restoring Democracy’s Promise on Substack, while this site provides durable exhibit pages, landing pages, navigation, and supporting public infrastructure.
+
+## Technology Stack
+
+This is a modern static website built for speed, readability, security, and long-term maintainability.
+
+- **Framework:** None. The site uses clean HTML, CSS, and vanilla JavaScript.
+- **Styling:** Custom CSS with responsive layouts and page-specific styling where needed.
+- **Interactivity:** Vanilla JavaScript for exhibit behavior, timelines, cards, and lightweight data presentation.
+- **Deployment:** Hosted through Netlify and connected to this GitHub repository for continuous deployment.
+- **Edge / DNS / Security:** Uses Cloudflare for DNS, caching, TLS, and related edge configuration.
+- **Routing:** Public pages use clean directory routes where possible, with redirects maintained for older legacy paths.
 
 ## Editorial Standards
 
-Restoring Democracy’s Promise follows a source-first editorial approach:
+Restoring Democracy’s Promise emphasizes:
 
-- Claims are grounded in verifiable records and attributable reporting
-- Investigation pages are structured for transparency and reader review
-- Corrections and updates are handled to preserve factual integrity over time
-- Published materials are organized to maximize traceability from narrative to source
+- primary documents whenever possible;
+- clear separation between evidence, analysis, and opinion;
+- transparent sourcing;
+- careful correction of errors;
+- public-interest framing;
+- accessible explanations of complex systems;
+- protection of sensitive sources and vulnerable communities.
 
-## Contact and Secure Communications
+This repository contains website infrastructure. Published reporting, source notes, and exhibits may include editorial content subject to additional copyright protections.
 
-For public updates, project information, and publication access, use the official website:
+## Contact
 
-- https://restoring-democracy.org/
+For press inquiries, tips, corrections, or feedback, use the contact information provided at:
 
-For sensitive outreach, source submissions, or secure contact options, use the contact pathways provided on the public website.
+[https://restoring-democracy.org/](https://restoring-democracy.org/)
 
-## Licensing
+For sensitive matters, use the secure contact options listed on the site.
 
-- Code in this repository is licensed under the MIT License unless otherwise noted.
-- Editorial content, reporting, graphics, logos, and brand materials remain copyrighted and are not covered by the MIT License.
+## License
+
+Unless otherwise noted, the website code in this repository is licensed under the MIT License. See the `LICENSE` file for details.
+
+Editorial content, reporting, graphics, logos, brand materials, and published investigative work are © Restoring Democracy’s Promise and may not be reused without permission unless separately licensed or quoted under applicable fair-use principles.
 
 ## Copyright
 
