@@ -1,1 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journalism Archive | Restoring Democracy's Promise</title>
+  <meta name="description" content="Investigations Archive from Restoring Democracy’s Promise: evidence-driven reporting on democracy, surveillance, state power, and the machinery behind public decisions.">
+  <link rel="canonical" href="https://restoring-democracy.org/journalism/" />
+  <meta name="robots" content="index,follow">
 
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Restoring Democracy's Promise" />
+  <meta property="og:url" content="https://restoring-democracy.org/journalism/" />
+  <meta property="og:title" content="Journalism Archive | Restoring Democracy's Promise" />
+  <meta property="og:description" content="Evidence-driven reporting on democracy, surveillance, state power, and the machinery behind public decisions." />
+  <meta property="og:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Color.png" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://restoring-democracy.org/journalism/" />
+  <meta name="twitter:title" content="Journalism Archive | Restoring Democracy's Promise" />
+  <meta name="twitter:description" content="Evidence-driven reporting on democracy, surveillance, state power, and the machinery behind public decisions." />
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Color.png" />
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .hero-section{background:linear-gradient(160deg,#1a332c 0%,#24473e 40%,#2d5c4f 100%)}
+    .archive-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:.9rem;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+    .mobile-menu{max-height:0;overflow:hidden;transition:max-height .35s ease}.mobile-menu.open{max-height:480px}
+  </style>
+</head>
+<body class="bg-brand-cream text-brand-offblack font-sans antialiased">
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-darker/90" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
+      <div class="flex items-center justify-between h-16 lg:h-[68px]">
+        <a href="/" class="flex items-center gap-3 group">
+          <img src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise home" width="54" height="54" class="h-9 w-9 lg:h-10 lg:w-10">
+          <span class="hidden sm:inline text-brand-gold font-serif font-bold text-base lg:text-lg">Restoring Democracy's Promise</span>
+          <span class="sm:hidden text-brand-white font-serif font-bold text-base">RDP</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-6">
+          <a href="/journalism/" class="nav-link text-brand-gold text-sm">Journalism</a>
+          <a href="/analytics/" class="nav-link text-brand-sand text-sm">Analytics</a>
+          <a href="/about/" class="nav-link text-brand-sand text-sm">About</a>
+          <a href="/team/" class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+        </div>
+        <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-darker/99 border-t border-brand-gold/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 space-y-1">
+        <a href="/journalism/" class="block py-2.5 px-3 text-brand-gold text-sm font-medium">Journalism</a>
+        <a href="/analytics/" class="block py-2.5 px-3 text-brand-sand text-sm font-medium">Analytics</a>
+        <a href="/about/" class="block py-2.5 px-3 text-brand-sand text-sm font-medium">About</a>
+        <a href="/team/" class="block py-2.5 px-3 text-brand-sand text-sm font-medium">Team</a>
+        <a href="/secure-tips/" class="block py-2.5 px-3 text-brand-sand text-sm font-medium">Secure Tips</a>
+      </div>
+    </div>
+  </nav>
+  <div class="h-16 lg:h-[68px]" aria-hidden="true"></div>
+
+  <header class="hero-section py-16 md:py-20 px-4 text-center">
+    <div class="max-w-4xl mx-auto">
+      <p class="text-brand-sand/80 uppercase text-xs tracking-[0.18em]">Journalism Desk</p>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-bold text-brand-gold">Investigations Archive</h1>
+      <p class="mt-5 text-brand-sand text-base md:text-lg max-w-3xl mx-auto">Evidence-driven reporting on democracy, surveillance, state power, and the machinery behind public decisions.</p>
+    </div>
+  </header>
+
+  <main id="main-content" class="max-w-6xl mx-auto px-4 py-12 space-y-10">
+    <section aria-labelledby="featured-investigations">
+      <h2 id="featured-investigations" class="font-serif text-2xl font-bold text-brand-green-dark mb-5">Featured Investigations</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <article class="archive-card p-6">
+          <h3 class="font-serif text-xl font-bold text-brand-green-dark">The Cross and the Capitol</h3>
+          <p class="mt-2 text-slate-700 text-sm">A five-part investigation into Iowa’s church-to-statehouse pipeline.</p>
+          <a href="/cross-and-capitol/" class="mt-4 inline-block text-brand-green font-semibold text-sm">Open series hub &rarr;</a>
+        </article>
+        <article class="archive-card p-6">
+          <h3 class="font-serif text-xl font-bold text-brand-green-dark">The Pincer Movement</h3>
+          <p class="mt-2 text-slate-700 text-sm">Network mapping and financial architecture behind coordinated influence campaigns.</p>
+          <a href="https://exposed1.substack.com/p/exclusive-the-pincer-movement" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-brand-green font-semibold text-sm">Read investigation &rarr;</a>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="foundational-series"><h2 id="foundational-series" class="font-serif text-2xl font-bold text-brand-green-dark">Foundational Series</h2><p class="mt-2 text-slate-700">Long-form reporting series establishing evidence baselines for continuing investigations.</p></section>
+    <section aria-labelledby="latest-substack"><h2 id="latest-substack" class="font-serif text-2xl font-bold text-brand-green-dark">Latest from Substack</h2><p class="mt-2 text-slate-700">Follow live publication updates on <a class="text-brand-green font-semibold" href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer">RDP on Substack</a>.</p></section>
+    <section aria-labelledby="evidence-exhibits"><h2 id="evidence-exhibits" class="font-serif text-2xl font-bold text-brand-green-dark">Evidence Exhibits</h2><p class="mt-2 text-slate-700">Document sets, visual evidence boards, and public-records exhibits tied to newsroom work.</p></section>
+  </main>
+
+  <footer class="bg-brand-green-darker text-brand-sand py-10 px-4 border-t border-brand-gold/15">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-4 text-sm">
+      <p>&copy; 2026 Restoring Democracy's Promise.</p>
+      <div class="flex gap-4"><a href="/about/" class="hover:text-brand-gold">About</a><a href="/corrections/" class="hover:text-brand-gold">Corrections</a><a href="/privacy-policy/" class="hover:text-brand-gold">Privacy</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const btn=document.getElementById('mobile-toggle');const menu=document.getElementById('mobile-menu');btn?.addEventListener('click',()=>{const open=menu.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');});
+  </script>
+</body>
+</html>
