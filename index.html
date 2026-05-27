@@ -1181,38 +1181,58 @@
       const key = 'rdp_newsletter_cta_dismissed_until';
       const dismissForMs = 21 * 24 * 60 * 60 * 1000;
       let shown = false;
+      let timerId;
+
+      const getStoredDismissedUntil = () => {
+        try {
+          return Number(localStorage.getItem(key));
+        } catch (error) {
+          return NaN;
+        }
+      };
+
+      const setStoredDismissedUntil = (value) => {
+        try {
+          localStorage.setItem(key, String(value));
+        } catch (error) {}
+      };
 
       const isDismissed = () => {
-        const stored = Number(localStorage.getItem(key));
+        const stored = getStoredDismissedUntil();
         return Number.isFinite(stored) && stored > Date.now();
+      };
+
+      const teardownTriggers = () => {
+        window.removeEventListener('scroll', onScroll);
+        clearTimeout(timerId);
       };
 
       const showCta = () => {
         if (shown || isDismissed()) return;
         shown = true;
         cta.classList.add('is-visible');
+        teardownTriggers();
       };
 
       const dismissCta = () => {
-        localStorage.setItem(key, String(Date.now() + dismissForMs));
         cta.classList.remove('is-visible');
+        shown = true;
+        teardownTriggers();
+        setStoredDismissedUntil(Date.now() + dismissForMs);
       };
 
       if (isDismissed()) return;
-
-      closeBtn.addEventListener('click', dismissCta);
-      setTimeout(showCta, 12000);
 
       const onScroll = () => {
         const doc = document.documentElement;
         const maxScroll = doc.scrollHeight - window.innerHeight;
         if (maxScroll <= 0) return;
         const depth = window.scrollY / maxScroll;
-        if (depth >= 0.35) {
-          showCta();
-          window.removeEventListener('scroll', onScroll);
-        }
+        if (depth >= 0.35) showCta();
       };
+
+      closeBtn.addEventListener('click', dismissCta);
+      timerId = setTimeout(showCta, 12000);
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
