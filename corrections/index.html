@@ -89,6 +89,16 @@
   </script>
   
   <style>
+
+    html { scroll-padding-top: 72px; }
+    .nav-bar { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: background-color 0.3s, box-shadow 0.3s; }
+    .nav-bar.scrolled { background-color: rgba(26, 51, 44, 0.97); box-shadow: 0 1px 12px rgba(0,0,0,0.25); }
+    .nav-link { position: relative; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.25s ease; }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link:hover { color: #D4AF37; }
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .mobile-menu.open { max-height: 500px; }
     .hero-section {
       position: relative;
       overflow: hidden;
@@ -178,19 +188,43 @@
 </head>
 
 <body class="bg-brand-white text-brand-offblack font-sans antialiased">
-  <header class="bg-brand-green-dark py-4 px-4 shadow-md">
-    <div class="max-w-5xl mx-auto flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3 group">
-        <img src="/assets/Square_logo_transparent.png" alt="RDP Logo" class="h-9 w-9" />
-        <span class="font-serif text-brand-gold font-bold text-lg group-hover:text-brand-orange transition">
-          Restoring Democracy's Promise
-        </span>
-      </a>
-      <a href="/" class="text-brand-sand text-sm hover:text-brand-orange transition font-medium">
-        &larr; Back to Home
-      </a>
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-darker/90" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
+      <div class="flex items-center justify-between h-16 lg:h-[68px]">
+        <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
+          <img id="main-logo" src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise home" class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          <span class="hidden sm:inline text-brand-gold font-serif font-bold text-lg lg:text-xl tracking-tight group-hover:text-brand-orange transition-colors">Restoring Democracy's Promise</span>
+          <span class="sm:hidden text-brand-white font-serif font-bold text-base">RDP</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-7">
+          <a href="/#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
+          <a href="/analytics/" class="nav-link text-brand-sand text-sm">Analytics</a>
+          <a href="/about/" class="nav-link text-brand-sand text-sm">About</a>
+          <a href="/team/" class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="/#standards" class="nav-link text-brand-sand text-sm">Standards</a>
+          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm">Substack</a>
+          <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+          <a href="/#support" class="ml-2 bg-brand-gold text-brand-offblack text-sm font-bold py-2 px-5 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-md">Support Our Work</a>
+        </div>
+        <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
     </div>
-  </header>
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-darker/98 border-t border-brand-gold/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 space-y-1">
+        <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
+        <a href="/analytics/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
+        <a href="/about/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
+        <a href="/team/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
+        <a href="/#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
+        <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack ↗</a>
+        <a href="/secure-tips/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
+        <div class="pt-2 pb-1"><a href="/#support" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">Support Our Work</a></div>
+      </div>
+    </div>
+  </nav>
+  <div class="h-16 lg:h-[68px]"></div>
 
   <section class="hero-section py-12 md:py-16 px-4">
     <div class="relative max-w-3xl mx-auto text-center z-10">
@@ -391,5 +425,23 @@
       </p>
     </div>
   </footer>
+
+  <script>
+    const nav = document.querySelector('.nav-bar');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('mobile-menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }));
+    }
+  </script>
+
 </body>
 </html>
