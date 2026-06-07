@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <!-- ===== SEO / SOCIAL ===== -->
   <title>Bird Thanked Iowa. The Money Came From Washington.</title>
   <meta name="description" content="Iowa records show one Washington-based RAGA Super PAC supplied most of Brenna Bird&rsquo;s May 2026 fundraising, with additional transfers confirmed after the filing closed.">
   <meta name="robots" content="index,follow">
 
-  <!-- TODO (Codex): set canonical to the live URL after deployment -->
   <link rel="canonical" href="https://restoring-democracy.org/infographics/bird-raga-money-trail/">
 
   <meta property="og:type" content="article">
@@ -17,10 +16,9 @@
   <meta property="og:url" content="https://restoring-democracy.org/infographics/bird-raga-money-trail/">
   <meta property="og:title" content="Bird Thanked Iowa. The Money Came From Washington.">
   <meta property="og:description" content="Iowa records show one Washington-based RAGA Super PAC supplied most of Brenna Bird's May 2026 fundraising, with additional transfers confirmed after the filing closed.">
-  <!-- TODO (Codex): add 1200x630 og-image.png to this folder before launch -->
   <meta property="og:image" content="https://restoring-democracy.org/infographics/bird-raga-money-trail/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="721">
   <meta property="og:locale" content="en_US">
 
   <meta name="twitter:card" content="summary_large_image">
@@ -29,6 +27,9 @@
   <meta name="twitter:image" content="https://restoring-democracy.org/infographics/bird-raga-money-trail/og-image.png">
 
   <meta name="theme-color" content="#2d5c4f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/assets/rdp_logo_gold_on_green_bg.png">
 
   <script type="application/ld+json">
@@ -38,6 +39,12 @@
     "headline": "Bird Thanked Iowa. The Money Came From Washington.",
     "description": "Iowa records show one Washington-based RAGA Super PAC supplied most of Brenna Bird's May 2026 fundraising, with additional transfers confirmed after the filing closed.",
     "datePublished": "2026-06-07",
+    "dateModified": "2026-06-07",
+    "image": "https://restoring-democracy.org/infographics/bird-raga-money-trail/og-image.png",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://restoring-democracy.org/infographics/bird-raga-money-trail/"
+    },
     "author": { "@type": "Person", "name": "Timothy C. Tucker" },
     "publisher": {
       "@type": "NewsMediaOrganization",
@@ -115,7 +122,7 @@
     .wrap{ width:100%; max-width:var(--measure); margin-inline:auto; padding-inline:20px; }
     .wrap-wide{ width:100%; max-width:var(--wide); margin-inline:auto; padding-inline:20px; }
 
-    .module{ padding-block:clamp(3rem, 7vw, 5.5rem); border-top:1px solid var(--hairline-2); }
+    .module{ padding-block:clamp(3rem, 7vw, 5.5rem); border-top:1px solid var(--hairline-2); scroll-margin-top:118px; }
     .module:first-of-type{ border-top:0; }
 
     .kicker{
@@ -144,6 +151,7 @@
       position:sticky; top:0; z-index:100;
       background:rgba(255,255,255,0.92); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
       border-bottom:1px solid var(--hairline);
+      padding-top:env(safe-area-inset-top);
     }
     .masthead-inner{
       max-width:var(--wide); margin-inline:auto; padding:.7rem 20px;
@@ -163,6 +171,41 @@
     }
     .btn-share:hover{ border-color:var(--green); background:var(--surface); }
     .btn-share svg{ width:15px; height:15px; }
+    .exhibit-nav{ border-top:1px solid var(--hairline-2); }
+    .exhibit-nav-inner{
+      max-width:var(--wide); margin-inline:auto; padding:.45rem 20px;
+      display:flex; align-items:center; gap:.25rem; overflow-x:auto; scrollbar-width:none;
+    }
+    .exhibit-nav-inner::-webkit-scrollbar{ display:none; }
+    .exhibit-nav a{
+      flex:0 0 auto; padding:.25rem .48rem; border-radius:6px; color:var(--muted);
+      font-family:var(--mono); font-size:.66rem; font-weight:600; letter-spacing:.02em; text-decoration:none;
+    }
+    .exhibit-nav a:hover{ color:var(--green-dark); background:var(--surface); }
+    .mobile-exhibit-nav{ display:none; }
+
+    @media (max-width:720px){
+      .module{ scroll-margin-top:126px; }
+      .desktop-exhibit-nav{ display:none; }
+      .mobile-exhibit-nav{ display:block; position:relative; }
+      .mobile-exhibit-nav > summary{
+        cursor:pointer; list-style:none; padding:.55rem 20px; color:var(--green);
+        font-family:var(--mono); font-size:.72rem; font-weight:600; letter-spacing:.04em;
+        display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      }
+      .mobile-exhibit-nav > summary::-webkit-details-marker{ display:none; }
+      .mobile-exhibit-nav > summary::after{ content:"+"; color:var(--orange-ink); font-size:1rem; line-height:1; }
+      .mobile-exhibit-nav[open] > summary::after{ content:"\2212"; }
+      .mobile-exhibit-links{
+        display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.25rem;
+        padding:.25rem 20px .8rem; border-top:1px solid var(--hairline-2); background:rgba(255,255,255,.98);
+      }
+      .mobile-exhibit-links a{ min-width:0; padding:.48rem .55rem; font-size:.7rem; }
+      .mobile-exhibit-links .read-story{
+        grid-column:1 / -1; margin-top:.25rem; background:var(--green); color:#fff; text-align:center;
+      }
+      .mobile-exhibit-links .read-story:hover{ background:var(--green-dark); color:#fff; }
+    }
 
     /* ---------- Hero ---------- */
     .hero{ padding-block:clamp(3.2rem, 9vw, 6rem); }
@@ -377,8 +420,24 @@
     .btn-ghost{ background:transparent; color:var(--green); border:1px solid var(--hairline); }
     .btn-ghost:hover{ border-color:var(--green); background:var(--bg); }
 
+    .mid-cta{
+      max-width:var(--wide); margin:0 auto clamp(3rem, 7vw, 5.5rem); padding:0 20px;
+    }
+    .mid-cta-card{
+      position:relative; overflow:hidden; background:var(--surface); border:1px solid var(--hairline);
+      border-left:5px solid var(--green); border-radius:14px; padding:clamp(1.35rem, 4vw, 2rem);
+    }
+    .mid-cta-card::before{
+      content:""; position:absolute; width:8px; height:8px; border-radius:50%; background:var(--orange); top:1.3rem; right:1.3rem;
+    }
+    .mid-cta-card h2{ font-size:clamp(1.4rem, 3.5vw, 1.85rem); }
+    .mid-cta-card p{ margin:.65rem 0 0; color:var(--muted); max-width:65ch; }
+    .mid-cta-card .support-note{ font-family:var(--mono); font-size:.7rem; letter-spacing:.02em; }
+    .mid-cta-card .cta-row{ margin-top:1.25rem; }
+    .mid-cta-card .btn{ padding:.7rem 1.15rem; font-size:.9rem; }
+
     /* ---------- Footer ---------- */
-    footer.site{ background:var(--ink); color:#cdd8d2; padding:2.4rem 20px; }
+    footer.site{ background:var(--ink); color:#cdd8d2; padding:2.4rem 20px calc(2.4rem + env(safe-area-inset-bottom)); }
     footer.site .f-inner{ max-width:var(--wide); margin-inline:auto; display:flex; flex-wrap:wrap; gap:1rem 2rem; align-items:center; justify-content:space-between; }
     footer.site .f-brand{ font-family:var(--serif); font-weight:700; color:#fff; }
     footer.site .f-tag{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:#8aa399; text-transform:uppercase; }
@@ -429,12 +488,38 @@
         <span id="share-label">Share</span>
       </button>
     </div>
+    <nav class="exhibit-nav desktop-exhibit-nav" aria-label="Exhibit sections">
+      <div class="exhibit-nav-inner">
+        <a href="#overview">Overview</a>
+        <a href="#pre-primary-share">80.24%</a>
+        <a href="#transfers">Transfers</a>
+        <a href="#donor-concentration">Donors</a>
+        <a href="#structure">Structure</a>
+        <a href="#mar-a-lago">Mar-a-Lago</a>
+        <a href="#fall-reservation">Fall Buy</a>
+        <a href="#sources">Sources</a>
+      </div>
+    </nav>
+    <details class="exhibit-nav mobile-exhibit-nav">
+      <summary>Exhibit sections</summary>
+      <nav class="mobile-exhibit-links" aria-label="Exhibit sections">
+        <a href="#overview">Overview</a>
+        <a href="#pre-primary-share">80.24%</a>
+        <a href="#transfers">Transfers</a>
+        <a href="#donor-concentration">Donors</a>
+        <a href="#structure">Structure</a>
+        <a href="#mar-a-lago">Mar-a-Lago</a>
+        <a href="#fall-reservation">Fall Buy</a>
+        <a href="#sources">Sources</a>
+        <a class="read-story" href="https://exposed1.substack.com/p/bird-thanked-iowa-the-money-came" target="_blank" rel="noopener noreferrer" aria-label="Read the full investigation in a new tab">Read story</a>
+      </nav>
+    </details>
   </header>
 
   <main id="main">
 
     <!-- ===================== MODULE 0 — HERO ===================== -->
-    <section class="module hero" aria-labelledby="hero-h">
+    <section id="overview" class="module hero" aria-labelledby="hero-h">
       <div class="wrap">
         <p class="kicker">RDP Investigation <span class="dot">&bull;</span> Campaign Finance</p>
         <h1 id="hero-h">Bird Thanked Iowa.<br>The Money Came From Washington.</h1>
@@ -449,7 +534,7 @@
     </section>
 
     <!-- ===================== MODULE 1 — DONUT ===================== -->
-    <section class="module" aria-labelledby="m1-h">
+    <section id="pre-primary-share" class="module" aria-labelledby="m1-h">
       <div class="wrap-wide">
         <p class="kicker">The Pre-Primary Share</p>
         <h2 id="m1-h" class="module-title">Who funded Bird&rsquo;s May 2026 reporting period?</h2>
@@ -517,7 +602,7 @@
     </section>
 
     <!-- ===================== MODULE 2 — TRANSFERS ===================== -->
-    <section class="module" aria-labelledby="m2-h">
+    <section id="transfers" class="module" aria-labelledby="m2-h">
       <div class="wrap-wide">
         <p class="kicker">Beyond the Report</p>
         <h2 id="m2-h" class="module-title">Three transfers, one Super PAC, $3.525&nbsp;million.</h2>
@@ -569,7 +654,7 @@
     </section>
 
     <!-- ===================== MODULE 3 — DONOR CONCENTRATION ===================== -->
-    <section class="module" aria-labelledby="m3-h">
+    <section id="donor-concentration" class="module" aria-labelledby="m3-h">
       <div class="wrap-wide">
         <p class="kicker">The Other 19.76%</p>
         <h2 id="m3-h" class="module-title">Even the portion not from RAGA was concentrated.</h2>
@@ -651,8 +736,20 @@
       </div>
     </section>
 
+    <aside class="mid-cta" aria-labelledby="mid-cta-title">
+      <div class="mid-cta-card">
+        <h2 id="mid-cta-title">Follow the money with RDP.</h2>
+        <p>Independent, records-based journalism depends on readers. Read the full investigation, subscribe for future reporting, or share this exhibit with someone following Iowa politics.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://exposed1.substack.com/p/bird-thanked-iowa-the-money-came" target="_blank" rel="noopener noreferrer" aria-label="Read the full investigation in a new tab">Read the full investigation</a>
+          <a class="btn btn-ghost" href="https://exposed1.substack.com/subscribe" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to Restoring Democracy's Promise in a new tab">Subscribe</a>
+        </div>
+        <p class="support-note">Restoring Democracy&rsquo;s Promise is reader-supported investigative journalism.</p>
+      </div>
+    </aside>
+
     <!-- ===================== MODULE 4 — GOVERNANCE FLOW ===================== -->
-    <section class="module" aria-labelledby="m4-h">
+    <section id="structure" class="module" aria-labelledby="m4-h">
       <div class="wrap-wide">
         <p class="kicker">The Structure Behind the Money</p>
         <h2 id="m4-h" class="module-title">The structure behind the money.</h2>
@@ -746,7 +843,7 @@
     </section>
 
     <!-- ===================== MODULE 5 — MAR-A-LAGO CONTEXT CARD (optional) ===================== -->
-    <section class="module" aria-labelledby="m5-h">
+    <section id="mar-a-lago" class="module" aria-labelledby="m5-h">
       <div class="wrap">
         <p class="kicker">Event Context</p>
         <h2 id="m5-h" class="module-title">A November fundraiser at Mar-a-Lago.</h2>
@@ -782,7 +879,7 @@
     </section>
 
     <!-- ===================== MODULE 6 — FALL RESERVATION ===================== -->
-    <section class="module stat-band" aria-labelledby="m6-h">
+    <section id="fall-reservation" class="module stat-band" aria-labelledby="m6-h">
       <div class="wrap-wide">
         <p class="kicker">The Fall Reservation</p>
         <h2 id="m6-h" class="module-title">Already reserved for the fall.</h2>
@@ -794,7 +891,7 @@
     </section>
 
     <!-- ===================== MODULE 7 — SOURCES / CTA ===================== -->
-    <section class="module sources-band" aria-labelledby="m7-h">
+    <section id="sources" class="module sources-band" aria-labelledby="m7-h">
       <div class="wrap-wide">
         <p class="kicker">Sources &amp; Method</p>
         <h2 id="m7-h" class="module-title">How we know this.</h2>
@@ -816,8 +913,7 @@
         </p>
 
         <div class="cta-row">
-          <!-- TODO (Codex): replace with the exact published article URL once live -->
-          <a class="btn btn-primary" href="https://exposed1.substack.com/" rel="noopener">Read the full investigation &rarr;</a>
+          <a class="btn btn-primary" href="https://exposed1.substack.com/p/bird-thanked-iowa-the-money-came" target="_blank" rel="noopener noreferrer" aria-label="Read the full investigation in a new tab">Read the full investigation &rarr;</a>
           <a class="btn btn-ghost" href="/">Return to restoring-democracy.org</a>
         </div>
       </div>
@@ -857,6 +953,12 @@
     /* ---------- Share button ---------- */
     var shareBtn = document.getElementById('share-btn');
     var shareLabel = document.getElementById('share-label');
+    var mobileExhibitNav = document.querySelector('.mobile-exhibit-nav');
+    if (mobileExhibitNav){
+      mobileExhibitNav.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){ mobileExhibitNav.removeAttribute('open'); });
+      });
+    }
     if (shareBtn){
       shareBtn.addEventListener('click', function(){
         var data = { title: document.title, url: window.location.href };
