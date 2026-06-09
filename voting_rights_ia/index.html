@@ -59,9 +59,6 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -83,7 +80,7 @@
     html { font-size: 16px; scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--brand-offblack);
       color: var(--brand-white);
       line-height: 1.6;
@@ -92,8 +89,8 @@
     }
 
     /* ── Utility ── */
-    .font-serif { font-family: 'Lora', serif; }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .font-serif { font-family: Georgia, Cambria, 'Times New Roman', serif; }
+    .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
     .container { max-width: 960px; margin: 0 auto; padding: 0 1.25rem; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
 
@@ -138,7 +135,7 @@
     }
     .site-header .logo-group img { height: 36px; width: 36px; }
     .site-header .logo-group span {
-      font-family: 'Lora', serif;
+      font-family: Georgia, Cambria, 'Times New Roman', serif;
       font-weight: 700;
       font-size: 0.95rem;
       color: var(--brand-gold);
@@ -222,7 +219,7 @@
     }
 
     .hero h1 {
-      font-family: 'Lora', serif;
+      font-family: Georgia, Cambria, 'Times New Roman', serif;
       font-size: clamp(2rem, 5.5vw, 3.2rem);
       font-weight: 700;
       line-height: 1.15;
@@ -311,7 +308,7 @@
       margin-bottom: 1rem;
     }
     .section-title {
-      font-family: 'Lora', serif;
+      font-family: Georgia, Cambria, 'Times New Roman', serif;
       font-size: clamp(1.6rem, 4vw, 2.2rem);
       font-weight: 700;
       color: var(--brand-white);
@@ -369,7 +366,7 @@
       box-shadow: 0 0 0 5px rgba(231,76,60,0.2);
     }
     .tl-date {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 0.75rem;
       font-weight: 600;
       color: var(--brand-gold);
@@ -409,7 +406,7 @@
       border-radius: 50%;
     }
     .stat-number {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: clamp(3.5rem, 10vw, 5.5rem);
       font-weight: 800;
       color: var(--brand-red-soft);
@@ -418,7 +415,7 @@
     }
     .stat-number .pct { font-size: 0.55em; vertical-align: super; }
     .stat-label {
-      font-family: 'Lora', serif;
+      font-family: Georgia, Cambria, 'Times New Roman', serif;
       font-size: 1.2rem;
       color: var(--brand-sand);
       margin-top: 0.75rem;
@@ -460,7 +457,7 @@
       justify-content: center;
     }
     .donut-chart .center-label .big {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 2rem;
       font-weight: 800;
       color: var(--brand-red-soft);
@@ -617,7 +614,7 @@
       margin: 2rem 0;
     }
     .quote-block blockquote {
-      font-family: 'Lora', serif;
+      font-family: Georgia, Cambria, 'Times New Roman', serif;
       font-size: 1.05rem;
       font-style: italic;
       color: var(--brand-white);
@@ -626,7 +623,7 @@
     .quote-block cite {
       display: block;
       font-style: normal;
-      font-family: 'Inter', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: 0.78rem;
       color: var(--brand-orange);
       margin-top: 0.75rem;
@@ -657,7 +654,7 @@
       user-select: none;
     }
     .q-num {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 0.75rem;
       font-weight: 700;
       color: var(--brand-offblack);
@@ -708,7 +705,7 @@
       margin: 2.5rem 0;
     }
     .callout-card h3 {
-      font-family: 'Lora', serif;
+      font-family: Georgia, Cambria, 'Times New Roman', serif;
       font-size: 1.35rem;
       font-weight: 700;
       color: var(--brand-gold);
@@ -770,7 +767,7 @@
       align-items: center;
       justify-content: flex-end;
       padding-right: 0.75rem;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 0.72rem;
       font-weight: 700;
       color: var(--brand-offblack);
@@ -797,7 +794,7 @@
     }
     .cta-section .container { position: relative; z-index: 2; }
     .cta-section h2 {
-      font-family: 'Lora', serif;
+      font-family: Georgia, Cambria, 'Times New Roman', serif;
       font-size: clamp(1.6rem, 4vw, 2.2rem);
       font-weight: 700;
       color: var(--brand-gold);
@@ -832,7 +829,7 @@
     }
     .site-footer img { height: 32px; width: 32px; margin: 0 auto 0.75rem; opacity: 0.8; }
     .site-footer .tagline {
-      font-family: 'Lora', serif;
+      font-family: Georgia, Cambria, 'Times New Roman', serif;
       font-style: italic;
       font-size: 0.85rem;
       color: var(--brand-gold);
@@ -1292,7 +1289,7 @@
       <p style="font-size:1.05rem; color:var(--brand-sand); line-height:1.7; margin-top:1rem;">
         Election law debates often focus on ballots — but this debate is about <strong style="color:var(--brand-white)">databases</strong>. Iowa's bills would transform voter eligibility into a question of cross-agency identity matching. Infrastructure persists; error rates compound.
       </p>
-      <p style="font-family:'Lora',serif; font-size:1.15rem; color:var(--brand-orange); margin-top:1.5rem; font-weight:700;">
+      <p style="font-family:Georgia, Cambria, 'Times New Roman', serif; font-size:1.15rem; color:var(--brand-orange); margin-top:1.5rem; font-weight:700;">
         The machine is built. It is not yet fully legalized.<br>The window to unplug it is closing.
       </p>
     </div>
