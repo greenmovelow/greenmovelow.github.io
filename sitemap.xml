@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://restoring-democracy.org/</loc></url>
+  <url>
+    <loc>https://restoring-democracy.org/</loc>
+    <lastmod>2026-06-07</lastmod>
+  </url>
 
   <url><loc>https://restoring-democracy.org/about/</loc></url>
   <url><loc>https://restoring-democracy.org/alpr-trap/</loc></url>
@@ -11,6 +14,10 @@
   <url><loc>https://restoring-democracy.org/dream_machine/</loc></url>
   <url><loc>https://restoring-democracy.org/funding_flow/</loc></url>
   <url><loc>https://restoring-democracy.org/ipers-wiggins/</loc></url>
+  <url>
+    <loc>https://restoring-democracy.org/infographics/bird-raga-money-trail/</loc>
+    <lastmod>2026-06-07</lastmod>
+  </url>
   <url><loc>https://restoring-democracy.org/save_america_act/</loc></url>
   <url><loc>https://restoring-democracy.org/save_iowa/</loc></url>
   <url><loc>https://restoring-democracy.org/secure-tips/</loc></url>
