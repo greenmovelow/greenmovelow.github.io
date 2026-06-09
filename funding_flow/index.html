@@ -84,9 +84,6 @@
 
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 
     <!-- GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
@@ -99,12 +96,12 @@
 
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background-color: #071612;
             color: #e7efe9;
         }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        .font-serif { font-family: 'Lora', serif; }
+        .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+        .font-serif { font-family: Georgia, Cambria, 'Times New Roman', serif; }
 
         /* Scanline */
         .scanline {
@@ -448,7 +445,7 @@
                             <!-- Ring 4: Total Contract Mass $4.89B+ (outermost) -->
                             <circle cx="300" cy="240" r="210" fill="url(#grad-total)" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3" opacity="0.7"
                                     class="contract-circle" data-contract="total" filter="url(#glow)"/>
-                            <text x="300" y="52" text-anchor="middle" fill="#ef4444" font-family="JetBrains Mono" font-size="11" font-weight="700" opacity="0.9">TOTAL STACK: $4.89B+</text>
+                            <text x="300" y="52" text-anchor="middle" fill="#ef4444" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700" opacity="0.9">TOTAL STACK: $4.89B+</text>
 
                             <!-- Ring 3: IBM FALCON $279M -->
                             <circle cx="300" cy="240" r="158" fill="url(#grad-ibm)" stroke="#60a5fa" stroke-width="2.5" opacity="0.85"
@@ -463,31 +460,31 @@
                                     class="contract-circle" data-contract="palantir" filter="url(#glow)"/>
 
                             <!-- Center dollar sign -->
-                            <text x="300" y="246" text-anchor="middle" fill="#f4a261" font-family="JetBrains Mono" font-size="28" font-weight="700" opacity="0.9">$</text>
+                            <text x="300" y="246" text-anchor="middle" fill="#f4a261" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="28" font-weight="700" opacity="0.9">$</text>
 
                             <!-- Labels (curved or placed) -->
                             <!-- IBM label -->
-                            <text x="300" y="100" text-anchor="middle" fill="#60a5fa" font-family="JetBrains Mono" font-size="12" font-weight="700">IBM FALCON — $279M</text>
-                            <text x="300" y="115" text-anchor="middle" fill="#94a3b8" font-family="Inter" font-size="10">VIS / SAVE / E-Verify Engine</text>
+                            <text x="300" y="100" text-anchor="middle" fill="#60a5fa" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12" font-weight="700">IBM FALCON — $279M</text>
+                            <text x="300" y="115" text-anchor="middle" fill="#94a3b8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10">VIS / SAVE / E-Verify Engine</text>
 
                             <!-- HART label -->
-                            <text x="480" y="200" text-anchor="start" fill="#2dd4bf" font-family="JetBrains Mono" font-size="11" font-weight="700">HART</text>
-                            <text x="480" y="215" text-anchor="start" fill="#94a3b8" font-family="Inter" font-size="10">Peraton — $95M</text>
-                            <text x="480" y="228" text-anchor="start" fill="#94a3b8" font-family="Inter" font-size="9">Biometric System</text>
+                            <text x="480" y="200" text-anchor="start" fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700">HART</text>
+                            <text x="480" y="215" text-anchor="start" fill="#94a3b8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10">Peraton — $95M</text>
+                            <text x="480" y="228" text-anchor="start" fill="#94a3b8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9">Biometric System</text>
                             <line x1="392" y1="210" x2="475" y2="210" stroke="#2dd4bf" stroke-width="1" opacity="0.5" stroke-dasharray="3 2"/>
 
                             <!-- Palantir label -->
-                            <text x="300" y="260" text-anchor="middle" fill="#f4a261" font-family="JetBrains Mono" font-size="10" font-weight="700">PALANTIR</text>
-                            <text x="300" y="274" text-anchor="middle" fill="#94a3b8" font-family="Inter" font-size="9">$30M — Dashboard</text>
+                            <text x="300" y="260" text-anchor="middle" fill="#f4a261" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="10" font-weight="700">PALANTIR</text>
+                            <text x="300" y="274" text-anchor="middle" fill="#94a3b8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9">$30M — Dashboard</text>
 
                             <!-- Scale annotation -->
                             <line x1="50" y1="240" x2="50" y2="30" stroke="#64748b" stroke-width="1" opacity="0.5"/>
                             <line x1="45" y1="240" x2="55" y2="240" stroke="#64748b" stroke-width="1" opacity="0.5"/>
                             <line x1="45" y1="30" x2="55" y2="30" stroke="#64748b" stroke-width="1" opacity="0.5"/>
-                            <text x="44" y="140" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono" font-size="9" transform="rotate(-90, 44, 140)">AREA = CONTRACT VALUE</text>
+                            <text x="44" y="140" text-anchor="middle" fill="#64748b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="9" transform="rotate(-90, 44, 140)">AREA = CONTRACT VALUE</text>
 
                             <!-- "Iceberg" annotation arrow -->
-                            <text x="300" y="460" text-anchor="middle" fill="#64748b" font-family="Inter" font-size="11" font-style="italic">
+                            <text x="300" y="460" text-anchor="middle" fill="#64748b" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-style="italic">
                                 The headline is the smallest circle. The engine is everything around it.
                             </text>
                         </svg>

@@ -112,9 +112,6 @@
   </script>
 
   <link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-QJ3L9CT4Z7');</script>
@@ -152,7 +149,7 @@
     /* ── FILING STAMP ── */
     .filing-stamp {
       display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: .65rem;
       letter-spacing: .14em;
       text-transform: uppercase;
@@ -164,7 +161,7 @@
     }
     .court-stamp {
       display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: .6rem;
       letter-spacing: .12em;
       text-transform: uppercase;
@@ -215,7 +212,7 @@
     .share-btn:hover { border-color: rgba(200,164,60,.5); color: #c8a43c; }
 
     /* ── EVIDENCE TABLE ── */
-    .ev-table th { background: #050c17; color: #c8a43c; font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
+    .ev-table th { background: #050c17; color: #c8a43c; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
     .ev-table td { border-bottom: 1px solid #1c2d47; }
     .ev-table tr:last-child td { border-bottom: none; }
     .ev-table tr:hover td { background: rgba(200,164,60,.02); }
@@ -228,7 +225,7 @@
     .fade-up { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    .footnote { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:#4a5568; }
+    .footnote { font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:.7rem; color:#4a5568; }
     .editor-note { font-style: italic; color: #8a9bb0; font-size: .85rem; border-left: 3px solid #1c2d47; padding-left: .75rem; }
 
     @media print { .nav-bar, .subscribe-bar, .mobile-menu { display:none!important; } }

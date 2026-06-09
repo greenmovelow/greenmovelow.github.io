@@ -10,7 +10,7 @@ Custom Styles from The God Machine Project
 body {
     background-color: #0A2239; /* primary-navy-blue from reference */
     color: #E0E1DD;
-    font-family: 'Inter', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 .container-content {
     max-width: 960px;
@@ -18,7 +18,7 @@ body {
     padding: 20px;
 }
 h1, h2, h3 {
-    font-family: 'Lora', serif;
+    font-family: Georgia, Cambria, 'Times New Roman', serif;
     color: #D4AF37; /* brand-gold */
     border-bottom: 1px solid #415A77;
     padding-bottom: 8px;
