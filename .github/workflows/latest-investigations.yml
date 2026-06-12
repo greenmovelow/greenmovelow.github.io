@@ -38,8 +38,21 @@ jobs:
             echo "No feed changes."
             exit 0
           fi
+
           git config user.name "rdp-feed-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add latest-investigations.json
           git commit -m "chore: update latest investigations feed"
-          git push
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if git rebase origin/main && git push; then
+              exit 0
+            fi
+            status=$?
+            git rebase --abort || true
+            sleep $((attempt * 5))
+          done
+
+          echo "Failed to rebase and push latest-investigations.json after 3 attempts." >&2
+          exit ${status:-1}
