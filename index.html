@@ -30,6 +30,7 @@
   <meta name="description" content="Independent investigative journalism on surveillance, election systems, immigration, public corruption, and democratic accountability.">
 
   <link rel="canonical" href="https://restoring-democracy.org/" />
+  <link rel="alternate" type="application/rss+xml" title="RDP — The Investigations Desk" href="https://investigations.restoring-democracy.org/feed">
   <meta name="robots" content="index,follow">
 
   <meta property="og:type" content="website" />
@@ -96,6 +97,17 @@
   </script>
 
   <style>
+    .feed-rail { scrollbar-width: none; }
+    .feed-rail::-webkit-scrollbar { display: none; }
+    .feed-card { transition: border-color 0.2s, transform 0.2s; }
+    .feed-card:hover { border-color: rgba(212, 175, 55, 0.5); transform: translateY(-2px); }
+    .pulse-dot { animation: rdp-pulse 2s ease-in-out infinite; }
+    .gold-glow { box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.25), 0 8px 30px -12px rgba(212, 175, 55, 0.4); }
+    @keyframes rdp-pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 6px #22d3ee; }
+      50% { opacity: 0.5; box-shadow: 0 0 14px #22d3ee; }
+    }
+    @media (prefers-reduced-motion: reduce) { .pulse-dot { animation: none; } }
     .newsletter-cta {
       position: fixed;
       right: 1rem;
@@ -193,8 +205,15 @@
           <a href="/about/"         class="nav-link text-brand-sand text-sm">About</a>
           <a href="/team/"          class="nav-link text-brand-sand text-sm">Team</a>
           <a href="#standards"      class="nav-link text-brand-sand text-sm">Standards</a>
-          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer"
-             class="nav-link text-brand-sand text-sm">Substack</a>
+          <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer"
+             class="nav-link text-brand-sand text-sm">Investigations Desk</a>
+          <a href="https://investigations.restoring-democracy.org/feed" target="_blank" rel="noopener noreferrer"
+             class="p-2 rounded-md text-brand-sand/70 hover:text-brand-gold transition-colors"
+             aria-label="RSS feed" title="RSS feed">
+            <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.18 17.82a2.18 2.18 0 1 0 0-4.36 2.18 2.18 0 0 0 0 4.36ZM4 11.06A8.94 8.94 0 0 1 12.94 20h-2.4A6.54 6.54 0 0 0 4 13.46v-2.4Zm0-4.06A13 13 0 0 1 17 20h-2.4A10.6 10.6 0 0 0 4 9.4V7Z"/>
+            </svg>
+          </a>
           <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
           <button onclick="shareThisPage()" title="Share this page"
                   class="p-2 rounded-md text-brand-sand/70 hover:text-brand-gold transition-colors"
@@ -232,8 +251,15 @@
         <a href="/about/"         class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
         <a href="/team/"          class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
         <a href="#standards"      class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
-        <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer"
-           class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack &uarr;</a>
+        <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer"
+           class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations Desk &uarr;</a>
+        <a href="https://investigations.restoring-democracy.org/feed" target="_blank" rel="noopener noreferrer"
+           class="flex items-center gap-2 py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.18 17.82a2.18 2.18 0 1 0 0-4.36 2.18 2.18 0 0 0 0 4.36ZM4 11.06A8.94 8.94 0 0 1 12.94 20h-2.4A6.54 6.54 0 0 0 4 13.46v-2.4Zm0-4.06A13 13 0 0 1 17 20h-2.4A10.6 10.6 0 0 0 4 9.4V7Z"/>
+          </svg>
+          RSS Feed
+        </a>
         <a href="/secure-tips/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
         <button onclick="shareThisPage()"
                 class="w-full text-left py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">
@@ -257,6 +283,12 @@
     <div class="grain" aria-hidden="true"></div>
 
     <div class="relative max-w-4xl mx-auto z-10">
+
+      <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer"
+         class="mb-7 inline-flex items-center gap-2 text-xs tracking-widest uppercase text-cyan-400 hover:text-brand-gold transition">
+        <span class="pulse-dot w-2 h-2 rounded-full bg-cyan-400" aria-hidden="true"></span>
+        New home &mdash; our longform now lives at investigations.restoring-democracy.org
+      </a>
 
       <!-- Established eyebrow -->
       <div class="mb-8 flex justify-center">
@@ -303,13 +335,27 @@
         Public records. Data analysis. Document-first reporting.
       </p>
 
-      <!-- Editorial ornament (replaces the pill buttons) -->
-      <div class="editorial-mark mt-12" aria-hidden="true">
-        <span class="rule left"></span>
-        <svg class="w-3 h-3 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="3"/>
-        </svg>
-        <span class="rule right"></span>
+      <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer"
+           class="gold-glow inline-flex items-center justify-center gap-2 bg-brand-gold text-brand-offblack font-bold py-3 px-7 rounded-full hover:bg-brand-orange transition-all duration-200 text-sm">
+          Visit The Investigations Desk &rarr;
+        </a>
+        <a href="#support"
+           class="inline-flex items-center justify-center border border-brand-sand/30 text-brand-sand font-semibold py-3 px-7 rounded-full hover:border-brand-gold hover:text-brand-gold transition text-sm">
+          Support Our Work
+        </a>
+      </div>
+      <div class="mt-5 flex flex-wrap items-center justify-center gap-3 text-xs">
+        <a href="https://investigations.restoring-democracy.org/feed" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 text-brand-orange hover:text-brand-gold transition font-semibold tracking-wide">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.18 17.82a2.18 2.18 0 1 0 0-4.36 2.18 2.18 0 0 0 0 4.36ZM4 11.06A8.94 8.94 0 0 1 12.94 20h-2.4A6.54 6.54 0 0 0 4 13.46v-2.4Zm0-4.06A13 13 0 0 1 17 20h-2.4A10.6 10.6 0 0 0 4 9.4V7Z"/>
+          </svg>
+          SUBSCRIBE VIA RSS
+        </a>
+        <span class="text-brand-sand/30" aria-hidden="true">/</span>
+        <a href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer"
+           class="text-brand-sand/75 hover:text-brand-gold transition">Email newsletter &rarr;</a>
       </div>
 
     </div>
@@ -320,127 +366,47 @@
     <!-- ══════════════════════════════════════════
          LATEST PUBLICATIONS FEED
     ══════════════════════════════════════════ -->
-    <section class="bg-brand-offblack border-b border-brand-gold/15" aria-label="Latest publications">
-      <div class="max-w-7xl mx-auto px-4 py-5">
-        <div class="flex items-start gap-4 lg:gap-6">
-          <div class="flex-shrink-0 pt-0.5">
-            <span class="badge bg-brand-orange text-brand-offblack">Latest</span>
+    <section class="bg-brand-offblack border-b border-brand-gold/15" aria-labelledby="latest-heading">
+      <div class="max-w-7xl mx-auto px-4 py-8 md:py-10">
+        <div class="flex items-end justify-between gap-4 mb-5">
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 id="latest-heading" class="text-xs uppercase tracking-widest font-bold text-brand-gold">Latest</h2>
+              <span id="feed-status" class="text-xs uppercase tracking-wide text-brand-sand/45">&middot; recent</span>
+            </div>
+            <p class="mt-1 text-sm text-brand-sand/65">Newest from The Investigations Desk</p>
           </div>
-          <div class="flex-grow min-w-0 divide-y divide-white/5">
-
-            <a href="https://exposed1.substack.com/p/bird-thanked-iowa-the-money-came"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-06-07">Jun 7</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Bird Thanked Iowa; The Money Came From Washington
-              </span>
-              <span class="badge bg-brand-orange text-brand-offblack flex-shrink-0 hidden md:inline ml-auto">NEW</span>
-            </a>
-
-            <a href="https://exposed1.substack.com/p/a-resignation-is-not-an-audit-why"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-05-19">May 19</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                A Resignation Is Not an Audit: Why Iowa Still Owes IPERS Members Answers
-              </span>
-              <span class="badge bg-brand-gold/20 text-brand-gold flex-shrink-0 hidden md:inline ml-auto">INVESTIGATION</span>
-            </a>
-
-            <a href="https://exposed1.substack.com/p/the-dexter-disinformation-playbook"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-05-16">May 16</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                The Dexter Disinformation Playbook: Why a $35k Audit Wasn&rsquo;t a &ldquo;Bookkeeping Error&rdquo;
-              </span>
-              <span class="badge bg-brand-gold/20 text-brand-gold flex-shrink-0 hidden md:inline ml-auto">INVESTIGATION</span>
-            </a>
-
-            <a href="https://exposed1.substack.com/p/iowa-handed-over-the-voter-data-the"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-05-07">May 7</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Iowa Handed Over the Voter Data &mdash; The Legal Blueprint Was Already There
-              </span>
-              <span class="badge bg-brand-gold/20 text-brand-gold flex-shrink-0 hidden md:inline ml-auto">INVESTIGATION</span>
-            </a>
-
-            <a href="https://exposed1.substack.com/p/iowas-alpr-reform-bill-would-regulate"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-05-03">May 3</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Iowa&rsquo;s ALPR &ldquo;Reform&rdquo; Bill Would Regulate Plate Readers &mdash; and Hide the Logs
-              </span>
-              <span class="badge bg-blue-900/40 text-blue-300 flex-shrink-0 hidden md:inline ml-auto">Analysis</span>
-            </a>
-
-            <a href="https://exposed1.substack.com/p/newly-obtained-amended-ipers-lawsuit"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-04-06">Apr 6</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Newly Obtained Amended IPERS Lawsuit Expands Allegations
-              </span>
-              <span class="badge bg-brand-gold/20 text-brand-gold flex-shrink-0 hidden md:inline ml-auto">Investigation</span>
-            </a>
-
-            <a href="https://exposed1.substack.com/p/rdp-analytics-is-now-live"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-03-15">Mar 15</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Announcement: RDP Analytics Is Now Live
-              </span>
-              <span class="badge bg-brand-orange/20 text-brand-orange flex-shrink-0 hidden md:inline ml-auto">Announcement</span>
-            </a>
-
-            <a href="https://exposed1.substack.com/p/from-state-of-the-union-to-state"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-02-27">Feb 27</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                From State of the Union to State Statute: How Iowa Is Wiring the SAVE America Act into Law
-              </span>
-              <span class="badge bg-blue-900/40 text-blue-300 flex-shrink-0 hidden md:inline ml-auto">Analysis</span>
-            </a>
-
-            <a href="https://exposed1.substack.com/p/the-save-america-act-from-voter-verification"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-02-18">Feb 18</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                The SAVE America Act: From Voter Verification to Identity Infrastructure
-              </span>
-              <span class="badge bg-brand-gold/20 text-brand-gold flex-shrink-0 hidden md:inline ml-auto">Investigation</span>
-            </a>
-
-            <a href="https://exposed1.substack.com/p/iowas-new-alpr-bill-is-a-start-but"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-02-08">Feb 8</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Iowa's New ALPR Bill Is a Start&mdash;But It Doesn't Stop the Data
-              </span>
-              <span class="badge bg-blue-900/40 text-blue-300 flex-shrink-0 hidden md:inline ml-auto">Analysis</span>
-            </a>
-
-            <a href="https://exposed1.substack.com/p/when-did-armed-federal-raids-become"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-02-02">Feb 2</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Statement: When Did Armed Federal Raids Become Normal in Minnesota?
-              </span>
-              <span class="badge bg-brand-orange/20 text-brand-orange flex-shrink-0 hidden md:inline ml-auto">Statement</span>
-            </a>
-
-
-          </div>
+          <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer"
+             class="hidden sm:inline-block text-sm font-semibold text-brand-gold hover:text-brand-orange transition">All investigations &rarr;</a>
         </div>
+
+        <div id="latest-feed" class="feed-rail flex gap-3 overflow-x-auto pb-2" data-source="cached">
+          <a href="https://exposed1.substack.com/p/bird-thanked-iowa-the-money-came" target="_blank" rel="noopener noreferrer" class="feed-card flex-shrink-0 w-64 bg-brand-green-dark/60 border border-brand-gold/15 rounded-xl p-4">
+            <time class="block text-xs uppercase tracking-wider text-brand-orange mb-2" datetime="2026-06-07">Jun 7</time>
+            <span class="block text-sm text-brand-sand font-semibold leading-snug">Bird Thanked Iowa; The Money Came From Washington</span>
+          </a>
+          <a href="https://exposed1.substack.com/p/a-resignation-is-not-an-audit-why" target="_blank" rel="noopener noreferrer" class="feed-card flex-shrink-0 w-64 bg-brand-green-dark/60 border border-brand-gold/15 rounded-xl p-4">
+            <time class="block text-xs uppercase tracking-wider text-brand-orange mb-2" datetime="2026-05-19">May 19</time>
+            <span class="block text-sm text-brand-sand font-semibold leading-snug">A Resignation Is Not an Audit: Why Iowa Still Owes IPERS Members Answers</span>
+          </a>
+          <a href="https://exposed1.substack.com/p/the-dexter-disinformation-playbook" target="_blank" rel="noopener noreferrer" class="feed-card flex-shrink-0 w-64 bg-brand-green-dark/60 border border-brand-gold/15 rounded-xl p-4">
+            <time class="block text-xs uppercase tracking-wider text-brand-orange mb-2" datetime="2026-05-16">May 16</time>
+            <span class="block text-sm text-brand-sand font-semibold leading-snug">The Dexter Disinformation Playbook: Why a $35k Audit Wasn&rsquo;t a &ldquo;Bookkeeping Error&rdquo;</span>
+          </a>
+          <a href="https://exposed1.substack.com/p/iowa-handed-over-the-voter-data-the" target="_blank" rel="noopener noreferrer" class="feed-card flex-shrink-0 w-64 bg-brand-green-dark/60 border border-brand-gold/15 rounded-xl p-4">
+            <time class="block text-xs uppercase tracking-wider text-brand-orange mb-2" datetime="2026-05-07">May 7</time>
+            <span class="block text-sm text-brand-sand font-semibold leading-snug">Iowa Handed Over the Voter Data &mdash; The Legal Blueprint Was Already There</span>
+          </a>
+          <a href="https://exposed1.substack.com/p/iowas-alpr-reform-bill-would-regulate" target="_blank" rel="noopener noreferrer" class="feed-card flex-shrink-0 w-64 bg-brand-green-dark/60 border border-brand-gold/15 rounded-xl p-4">
+            <time class="block text-xs uppercase tracking-wider text-brand-orange mb-2" datetime="2026-05-03">May 3</time>
+            <span class="block text-sm text-brand-sand font-semibold leading-snug">Iowa&rsquo;s ALPR &ldquo;Reform&rdquo; Bill Would Regulate Plate Readers &mdash; and Hide the Logs</span>
+          </a>
+          <a href="https://exposed1.substack.com/p/newly-obtained-amended-ipers-lawsuit" target="_blank" rel="noopener noreferrer" class="feed-card flex-shrink-0 w-64 bg-brand-green-dark/60 border border-brand-gold/15 rounded-xl p-4">
+            <time class="block text-xs uppercase tracking-wider text-brand-orange mb-2" datetime="2026-04-06">Apr 6</time>
+            <span class="block text-sm text-brand-sand font-semibold leading-snug">Newly Obtained Amended IPERS Lawsuit Expands Allegations</span>
+          </a>
+        </div>
+        <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer" class="sm:hidden mt-4 inline-block text-sm font-semibold text-brand-gold">All investigations &rarr;</a>
       </div>
     </section>
 
@@ -778,7 +744,7 @@
             <p class="mt-3 text-brand-gold text-xs font-semibold uppercase tracking-wider">
               Structural accountability over partisan framing
             </p>
-            <a href="https://exposed1.substack.com/" target="_blank" rel="noopener noreferrer"
+            <a href="https://investigations.restoring-democracy.org/" target="_blank" rel="noopener noreferrer"
                class="mt-3 inline-block text-brand-gold text-sm font-semibold hover:text-brand-orange transition">
               Explore RDP Journalism &rarr;
             </a>
@@ -955,7 +921,7 @@
           and the analytical tools that make civic oversight scalable. RDP accepts no advertising,
           no corporate sponsorships, and no government funding.
         </p>
-        <a href="https://exposed1.substack.com/subscribe" target="_blank" rel="noopener noreferrer"
+        <a href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer"
            class="mt-6 inline-block bg-brand-gold text-brand-offblack font-bold py-3 px-8 rounded-full
                   hover:bg-brand-orange transition-all duration-200 shadow-lg text-sm">
           Subscribe (Free or Paid) &rarr;
@@ -1018,7 +984,7 @@
             </svg>
             <h3 class="font-serif text-base font-bold text-brand-green-dark mb-1">Subscribe for Updates</h3>
             <p class="text-slate-500 text-xs mb-3">Get investigations delivered to your inbox.</p>
-            <a href="https://exposed1.substack.com/subscribe" target="_blank" rel="noopener noreferrer"
+            <a href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer"
                class="text-brand-orange font-semibold text-xs hover:text-brand-gold transition">
               Subscribe Now &rarr;
             </a>
@@ -1030,12 +996,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
             </svg>
-            <h3 class="font-serif text-base font-bold text-brand-green-dark mb-1">Share Our Work</h3>
-            <p class="text-slate-500 text-xs mb-3">Help expand our reach by sharing investigations.</p>
-            <button onclick="shareThisPage()"
-                    class="text-brand-gold font-semibold text-xs hover:text-brand-orange transition cursor-pointer">
-              Share This Site &rarr;
-            </button>
+            <h3 class="font-serif text-base font-bold text-brand-green-dark mb-1">Follow via RSS</h3>
+            <p class="text-slate-500 text-xs mb-3">Pull every new investigation into your reader.</p>
+            <a href="https://investigations.restoring-democracy.org/feed" target="_blank" rel="noopener noreferrer"
+               class="text-brand-gold font-semibold text-xs hover:text-brand-orange transition">
+              Copy RSS Feed &rarr;
+            </a>
           </div>
 
         </div>
@@ -1053,7 +1019,7 @@
           <p class="mt-3 text-brand-sand text-sm">
             Subscribe to get our latest investigations delivered directly to you.
           </p>
-          <a href="https://exposed1.substack.com/subscribe" target="_blank" rel="noopener noreferrer"
+          <a href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer"
              class="mt-5 inline-block bg-brand-gold text-brand-offblack font-bold py-3 px-8 rounded-full
                     shadow-xl hover:bg-brand-sand transition-all duration-200 text-sm">
             Subscribe for Free &rarr;
@@ -1111,6 +1077,7 @@
         <div>
           <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/60 mb-3">Organization</h4>
           <ul class="space-y-1.5 text-sm">
+            <li><a href="https://investigations.restoring-democracy.org/" target="_blank" rel="noopener noreferrer" class="text-brand-gold hover:text-brand-orange transition">Investigations Desk &uarr;</a></li>
             <li><a href="/about/"             class="text-brand-sand/70 hover:text-brand-gold transition">About RDP</a></li>
             <li><a href="/team/"              class="text-brand-sand/70 hover:text-brand-gold transition">Team</a></li>
             <li><a href="/analytics/"         class="text-brand-sand/70 hover:text-brand-gold transition">RDP Analytics</a></li>
@@ -1148,8 +1115,13 @@
           <span class="tooltip-text">This project is powered by receipts.</span>
         </div>
         <div class="flex items-center gap-4">
-          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer"
-             class="text-xs text-brand-sand/50 hover:text-brand-gold transition">Substack &uarr;</a>
+          <a href="https://investigations.restoring-democracy.org/" target="_blank" rel="noopener noreferrer"
+             class="text-xs text-brand-sand/50 hover:text-brand-gold transition">Investigations Desk &uarr;</a>
+          <a href="https://investigations.restoring-democracy.org/feed" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-1 text-xs text-brand-sand/50 hover:text-brand-gold transition">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.18 17.82a2.18 2.18 0 1 0 0-4.36 2.18 2.18 0 0 0 0 4.36ZM4 11.06A8.94 8.94 0 0 1 12.94 20h-2.4A6.54 6.54 0 0 0 4 13.46v-2.4Zm0-4.06A13 13 0 0 1 17 20h-2.4A10.6 10.6 0 0 0 4 9.4V7Z"/></svg>
+            RSS
+          </a>
           <a href="/privacy-policy/"
              class="text-xs text-brand-sand/50 hover:text-brand-gold transition">Privacy</a>
         </div>
@@ -1163,7 +1135,7 @@
     <button id="newsletter-cta-close" class="newsletter-cta__close" aria-label="Dismiss newsletter sign up">&times;</button>
     <h2 class="newsletter-cta__title">Don't miss the next investigation.</h2>
     <p class="newsletter-cta__body">Get RDP's free newsletter for evidence drops, accountability reporting, and new investigations.</p>
-    <a class="newsletter-cta__button" href="https://exposed1.substack.com/subscribe" target="_blank" rel="noopener noreferrer">Sign Up Free</a>
+    <a class="newsletter-cta__button" href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer">Sign Up Free</a>
   </aside>
 
   <script>
@@ -1269,6 +1241,73 @@
       clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
       if (clickCount === 5) window.location.href = 'vault.html';
     });
+  </script>
+
+  <script>
+    (function enhanceLatestFeed() {
+      var feedUrl = 'https://investigations.restoring-democracy.org/feed';
+      var list = document.getElementById('latest-feed');
+      var status = document.getElementById('feed-status');
+      if (!list || !window.fetch || !window.DOMParser) return;
+
+      function text(node, selector) {
+        var match = node.querySelector(selector);
+        return match ? match.textContent.trim() : '';
+      }
+
+      fetch(feedUrl, { cache: 'no-store' })
+        .then(function (response) {
+          if (!response.ok) throw new Error('Feed unavailable');
+          return response.text();
+        })
+        .then(function (xml) {
+          var documentXml = new DOMParser().parseFromString(xml, 'application/xml');
+          if (documentXml.querySelector('parsererror')) throw new Error('Invalid feed');
+          var items = Array.prototype.slice.call(documentXml.querySelectorAll('item')).slice(0, 6);
+          if (!items.length) throw new Error('Empty feed');
+
+          var cards = document.createDocumentFragment();
+          items.forEach(function (item) {
+            var href = text(item, 'link');
+            var title = text(item, 'title') || 'Untitled';
+            var published = text(item, 'pubDate');
+            var parsedUrl;
+            try { parsedUrl = new URL(href); } catch (error) { return; }
+            if (parsedUrl.protocol !== 'https:' && parsedUrl.protocol !== 'http:') return;
+
+            var card = document.createElement('a');
+            card.href = parsedUrl.href;
+            card.target = '_blank';
+            card.rel = 'noopener noreferrer';
+            card.className = 'feed-card flex-shrink-0 w-64 bg-brand-green-dark/60 border border-brand-gold/15 rounded-xl p-4';
+
+            var date = document.createElement('time');
+            date.className = 'block text-xs uppercase tracking-wider text-brand-orange mb-2';
+            if (published) {
+              var value = new Date(published);
+              if (!isNaN(value.getTime())) {
+                date.dateTime = value.toISOString();
+                date.textContent = value.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+              }
+            }
+
+            var headline = document.createElement('span');
+            headline.className = 'block text-sm text-brand-sand font-semibold leading-snug';
+            headline.textContent = title;
+            card.appendChild(date);
+            card.appendChild(headline);
+            cards.appendChild(card);
+          });
+
+          if (!cards.childNodes.length) throw new Error('No usable items');
+          list.replaceChildren(cards);
+          list.dataset.source = 'live';
+          if (status) status.textContent = '· live feed';
+        })
+        .catch(function () {
+          /* Static fallback remains visible when CORS, network, or parsing blocks the feed. */
+        });
+    })();
   </script>
 </body>
 </html>
