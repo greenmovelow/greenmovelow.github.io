@@ -37,6 +37,22 @@ MAX_CATEGORY_LEN = 40
 MAX_BYTES = 2_000_000
 TIMEOUT_SECONDS = 15
 
+CATEGORY_ALIASES = {
+    "investigation": "Investigation",
+    "investigations": "Investigation",
+    "analysis": "Analysis",
+    "statement": "Statement",
+    "statements": "Statement",
+    "announcement": "Announcement",
+    "announcements": "Announcement",
+    "dispatch": "Dispatch",
+    "dispatches": "Dispatch",
+    "field note": "Dispatch",
+    "field notes": "Dispatch",
+    "update": "Dispatch",
+    "updates": "Dispatch",
+}
+
 TAG_RE = re.compile(r"<[^>]*>")
 
 
@@ -48,6 +64,21 @@ def strip_text(value: str | None, limit: int) -> str:
     value = html.unescape(value)
     value = re.sub(r"\s+", " ", value).strip()
     return value[:limit]
+
+
+def normalize_category(value: str) -> str | None:
+    """Map a sanitized RSS category or tag to a canonical RDP category."""
+    key = strip_text(value, MAX_CATEGORY_LEN).lower()
+    return CATEGORY_ALIASES.get(key)
+
+
+def select_category(values) -> str:
+    """Return the first recognized category anywhere in the item tags."""
+    for value in values:
+        normalized = normalize_category(value or "")
+        if normalized:
+            return normalized
+    return "Investigation"
 
 
 def normalize_link(raw: str) -> str | None:
@@ -99,7 +130,8 @@ def main() -> int:
                 date_label = f"{parsed:%b} {parsed.day}"
             except (TypeError, ValueError):
                 pass
-        category = strip_text(item.findtext("category"), MAX_CATEGORY_LEN) or "Investigation"
+        category_values = [category.text or "" for category in item.findall("category")]
+        category = select_category(category_values)
         items.append(
             {
                 "title": title,
