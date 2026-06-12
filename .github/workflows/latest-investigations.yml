@@ -1,0 +1,58 @@
+name: Update latest investigations feed
+
+# Fetches the Investigations Desk RSS feed on a schedule and commits a
+# sanitized static latest-investigations.json when (and only when) the
+# content changed. Netlify redeploys automatically on the commit.
+
+on:
+  schedule:
+    - cron: "23 */3 * * *"   # every 3 hours, off the hour to avoid load spikes
+  workflow_dispatch: {}       # allow manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: latest-investigations
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build latest-investigations.json
+        run: python scripts/build_latest_investigations.py
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- latest-investigations.json; then
+            echo "No feed changes."
+            exit 0
+          fi
+
+          git config user.name "rdp-feed-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add latest-investigations.json
+          git commit -m "chore: update latest investigations feed"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if git rebase origin/main && git push; then
+              exit 0
+            fi
+            status=$?
+            git rebase --abort || true
+            sleep $((attempt * 5))
+          done
+
+          echo "Failed to rebase and push latest-investigations.json after 3 attempts." >&2
+          exit ${status:-1}
