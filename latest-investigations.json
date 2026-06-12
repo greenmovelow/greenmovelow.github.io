@@ -9,17 +9,17 @@
       "category": "Investigation"
     },
     {
-      "title": "A Resignation Is Not an Audit: Why Iowa Still Owes IPERS Members Answers",
+      "title": "A Resignation Is Not an Audit: Why Iowa Still Owes its Public Employees Answers",
       "link": "https://investigations.restoring-democracy.org/p/a-resignation-is-not-an-audit-why",
       "date": "2026-05-19",
       "dateLabel": "May 19",
       "category": "Investigation"
     },
     {
-      "title": "The Dexter Disinformation Playbook: Why a $35k Audit Wasn't a \"Bookkeeping Error\"",
+      "title": "The Dexter Disinformation Playbook: Why a $35k Audit Wasn’t a \"Bookkeeping Error\"",
       "link": "https://investigations.restoring-democracy.org/p/the-dexter-disinformation-playbook",
-      "date": "2026-05-16",
-      "dateLabel": "May 16",
+      "date": "2026-05-17",
+      "dateLabel": "May 17",
       "category": "Investigation"
     },
     {
@@ -30,32 +30,39 @@
       "category": "Investigation"
     },
     {
-      "title": "Iowa's ALPR \"Reform\" Bill Would Regulate Plate Readers — and Hide the Logs",
+      "title": "Iowa’s ALPR “Reform” Bill Would Regulate Plate Readers — and Hide the Logs",
       "link": "https://investigations.restoring-democracy.org/p/iowas-alpr-reform-bill-would-regulate",
       "date": "2026-05-03",
       "dateLabel": "May 3",
-      "category": "Analysis"
-    },
-    {
-      "title": "Newly Obtained Amended IPERS Lawsuit Expands Allegations",
-      "link": "https://investigations.restoring-democracy.org/p/newly-obtained-amended-ipers-lawsuit",
-      "date": "2026-04-06",
-      "dateLabel": "Apr 6",
       "category": "Investigation"
     },
     {
-      "title": "Announcement: RDP Analytics Is Now Live",
+      "title": "Newly Obtained Amended IPERS Lawsuit Expands Allegations on Risk, Fees, and Benchmarking",
+      "link": "https://investigations.restoring-democracy.org/p/newly-obtained-amended-ipers-lawsuit",
+      "date": "2026-04-07",
+      "dateLabel": "Apr 7",
+      "category": "Investigation"
+    },
+    {
+      "title": "RDP Analytics Is Now Live",
       "link": "https://investigations.restoring-democracy.org/p/rdp-analytics-is-now-live",
-      "date": "2026-03-15",
-      "dateLabel": "Mar 15",
-      "category": "Announcement"
+      "date": "2026-03-16",
+      "dateLabel": "Mar 16",
+      "category": "Investigation"
+    },
+    {
+      "title": "When War Tests Democracy",
+      "link": "https://investigations.restoring-democracy.org/p/when-war-tests-democracy",
+      "date": "2026-03-13",
+      "dateLabel": "Mar 13",
+      "category": "Investigation"
     },
     {
       "title": "From State of the Union to State Statute: How Iowa Is Wiring the SAVE America Act into Law",
       "link": "https://investigations.restoring-democracy.org/p/from-state-of-the-union-to-state",
       "date": "2026-02-27",
       "dateLabel": "Feb 27",
-      "category": "Analysis"
+      "category": "Investigation"
     },
     {
       "title": "The SAVE America Act: From Voter Verification to Identity Infrastructure",
@@ -65,11 +72,11 @@
       "category": "Investigation"
     },
     {
-      "title": "Statement: When Did Armed Federal Raids Become Normal in Minnesota?",
-      "link": "https://investigations.restoring-democracy.org/p/when-did-armed-federal-raids-become",
-      "date": "2026-02-02",
-      "dateLabel": "Feb 2",
-      "category": "Statement"
+      "title": "Iowa’s New ALPR Bill Is a Start — But It Doesn’t Stop the Data",
+      "link": "https://investigations.restoring-democracy.org/p/iowas-new-alpr-bill-is-a-start-but",
+      "date": "2026-02-08",
+      "dateLabel": "Feb 8",
+      "category": "Investigation"
     }
   ]
 }
