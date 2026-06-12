@@ -1,0 +1,4 @@
+# Netlify custom headers
+# Cache the feed JSON at CDN/browser for 15 min, serve stale while revalidating.
+/latest-investigations.json
+  Cache-Control: public, max-age=900, stale-while-revalidate=3600
