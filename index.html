@@ -161,6 +161,11 @@
     .rdp-pulse{animation:rdpPulse 2s ease-in-out infinite}
     @keyframes rdpPulse{0%,100%{opacity:1;box-shadow:0 0 5px #22d3ee}50%{opacity:.45;box-shadow:0 0 11px #22d3ee}}
     @media(prefers-reduced-motion:reduce){.rdp-pulse{animation:none}}
+    /* Latest feed — lead (newest) row polish */
+    .feed-lead { padding-top: .3rem; padding-bottom: .7rem; }
+    .feed-lead .feed-title { font-size: .98rem; line-height: 1.3; font-weight: 700; color: #f6f1e6; }
+    .feed-lead:hover .feed-title { color: #d4af37; }
+    @media (min-width: 768px) { .feed-lead .feed-title { font-size: 1.05rem; } }
   </style>
 
 </head>
@@ -193,7 +198,7 @@
         </a>
 
         <div class="hidden lg:flex items-center gap-6">
-          <a href="#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
+          <a href="#investigations" class="nav-link text-brand-sand text-sm">Featured Work</a>
           <a href="/analytics/"     class="nav-link text-brand-sand text-sm">Analytics</a>
           <a href="/about/"         class="nav-link text-brand-sand text-sm">About</a>
           <a href="/team/"          class="nav-link text-brand-sand text-sm">Team</a>
@@ -240,7 +245,7 @@
     <div id="mobile-menu"
          class="mobile-menu lg:hidden bg-brand-green-darker/99 border-t border-brand-gold/10">
       <div class="max-w-7xl mx-auto px-4 py-3 space-y-0.5">
-        <a href="#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
+        <a href="#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Featured Work</a>
         <a href="/analytics/"     class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
         <a href="/about/"         class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
         <a href="/team/"          class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
@@ -379,9 +384,9 @@
 
             <a href="https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came"
                target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
+               class="feed-item feed-lead flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-06-07">Jun 7</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 Bird Thanked Iowa; The Money Came From Washington
               </span>
               <span class="badge bg-brand-orange text-brand-offblack flex-shrink-0 hidden md:inline ml-auto">NEW</span>
@@ -391,37 +396,34 @@
                target="_blank" rel="noopener noreferrer"
                class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-05-19">May 19</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 A Resignation Is Not an Audit: Why Iowa Still Owes IPERS Members Answers
               </span>
-              <span class="badge bg-brand-gold/20 text-brand-gold flex-shrink-0 hidden md:inline ml-auto">INVESTIGATION</span>
             </a>
 
             <a href="https://investigations.restoring-democracy.org/p/the-dexter-disinformation-playbook"
                target="_blank" rel="noopener noreferrer"
                class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-05-16">May 16</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 The Dexter Disinformation Playbook: Why a $35k Audit Wasn&rsquo;t a &ldquo;Bookkeeping Error&rdquo;
               </span>
-              <span class="badge bg-brand-gold/20 text-brand-gold flex-shrink-0 hidden md:inline ml-auto">INVESTIGATION</span>
             </a>
 
             <a href="https://investigations.restoring-democracy.org/p/iowa-handed-over-the-voter-data-the"
                target="_blank" rel="noopener noreferrer"
                class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-05-07">May 7</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 Iowa Handed Over the Voter Data &mdash; The Legal Blueprint Was Already There
               </span>
-              <span class="badge bg-brand-gold/20 text-brand-gold flex-shrink-0 hidden md:inline ml-auto">INVESTIGATION</span>
             </a>
 
             <a href="https://investigations.restoring-democracy.org/p/iowas-alpr-reform-bill-would-regulate"
                target="_blank" rel="noopener noreferrer"
                class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-05-03">May 3</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 Iowa&rsquo;s ALPR &ldquo;Reform&rdquo; Bill Would Regulate Plate Readers &mdash; and Hide the Logs
               </span>
               <span class="badge bg-blue-900/40 text-blue-300 flex-shrink-0 hidden md:inline ml-auto">Analysis</span>
@@ -431,17 +433,16 @@
                target="_blank" rel="noopener noreferrer"
                class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-04-06">Apr 6</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 Newly Obtained Amended IPERS Lawsuit Expands Allegations
               </span>
-              <span class="badge bg-brand-gold/20 text-brand-gold flex-shrink-0 hidden md:inline ml-auto">Investigation</span>
             </a>
 
             <a href="https://investigations.restoring-democracy.org/p/rdp-analytics-is-now-live"
                target="_blank" rel="noopener noreferrer"
                class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-03-15">Mar 15</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 Announcement: RDP Analytics Is Now Live
               </span>
               <span class="badge bg-brand-orange/20 text-brand-orange flex-shrink-0 hidden md:inline ml-auto">Announcement</span>
@@ -451,7 +452,7 @@
                target="_blank" rel="noopener noreferrer"
                class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-02-27">Feb 27</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 From State of the Union to State Statute: How Iowa Is Wiring the SAVE America Act into Law
               </span>
               <span class="badge bg-blue-900/40 text-blue-300 flex-shrink-0 hidden md:inline ml-auto">Analysis</span>
@@ -461,17 +462,16 @@
                target="_blank" rel="noopener noreferrer"
                class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-02-18">Feb 18</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 The SAVE America Act: From Voter Verification to Identity Infrastructure
               </span>
-              <span class="badge bg-brand-gold/20 text-brand-gold flex-shrink-0 hidden md:inline ml-auto">Investigation</span>
             </a>
 
             <a href="https://investigations.restoring-democracy.org/p/iowas-new-alpr-bill-is-a-start-but"
                target="_blank" rel="noopener noreferrer"
                class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-02-08">Feb 8</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 Iowa's New ALPR Bill Is a Start&mdash;But It Doesn't Stop the Data
               </span>
               <span class="badge bg-blue-900/40 text-blue-300 flex-shrink-0 hidden md:inline ml-auto">Analysis</span>
@@ -481,7 +481,7 @@
                target="_blank" rel="noopener noreferrer"
                class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
               <time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="2026-02-02">Feb 2</time>
-              <span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
+              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
                 Statement: When Did Armed Federal Raids Become Normal in Minnesota?
               </span>
               <span class="badge bg-brand-orange/20 text-brand-orange flex-shrink-0 hidden md:inline ml-auto">Statement</span>
@@ -1346,12 +1346,10 @@
       var list = document.getElementById('latest-feed');
       var statusEl = document.getElementById('feed-status');
       if (!list || !('fetch' in window)) return;
-      var BADGES = { 'investigation': 'bg-brand-gold/20 text-brand-gold',
-                     'analysis': 'bg-blue-900/40 text-blue-300',
+      var BADGES = { 'analysis': 'bg-blue-900/40 text-blue-300',
                      'announcement': 'bg-brand-orange/20 text-brand-orange',
                      'statement': 'bg-brand-orange/20 text-brand-orange' };
       function esc(s){ var p=document.createElement('span'); p.textContent=String(s); return p.innerHTML; }
-      function badgeClass(c){ var k=String(c||'').toLowerCase().trim(); return BADGES[k]||'bg-brand-gold/20 text-brand-gold'; }
       fetch(ENDPOINT)
         .then(function (r){ if(!r.ok) throw 0; return r.json(); })
         .then(function (data){
@@ -1360,14 +1358,20 @@
               && typeof it.link === 'string' && it.link.indexOf(LINK_PREFIX) === 0;
           }).slice(0, 11);
           if (!items.length) throw 0;
-          var rows = items.map(function (it){
+          var rows = items.map(function (it, index){
             var dt = typeof it.date === 'string' ? it.date.slice(0, 10) : '';
             var label = typeof it.dateLabel === 'string' ? it.dateLabel : '';
+            var category = String(it.category||'').toLowerCase().trim();
+            var badge = index === 0
+              ? '<span class="badge bg-brand-orange text-brand-offblack flex-shrink-0 hidden md:inline ml-auto">NEW</span>'
+              : (BADGES[category]
+                ? '<span class="badge '+BADGES[category]+' flex-shrink-0 hidden md:inline ml-auto">'+esc(it.category)+'</span>'
+                : '');
             return '<a href="'+esc(it.link)+'" target="_blank" rel="noopener noreferrer"'
-              + ' class="feed-item flex items-baseline gap-3 py-2.5 rounded group">'
+              + ' class="feed-item'+(index === 0 ? ' feed-lead' : '')+' flex items-baseline gap-3 py-2.5 rounded group">'
               + '<time class="text-xs text-brand-sand/45 flex-shrink-0 tabular-nums w-14" datetime="'+esc(dt)+'">'+esc(label)+'</time>'
-              + '<span class="text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">'+esc(it.title)+'</span>'
-              + '<span class="badge '+badgeClass(it.category)+' flex-shrink-0 hidden md:inline ml-auto">'+esc(it.category||'Investigation')+'</span>'
+              + '<span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">'+esc(it.title)+'</span>'
+              + badge
               + '</a>';
           }).join('');
           rows += '<div class="py-2.5"><a href="https://investigations.restoring-democracy.org"'
