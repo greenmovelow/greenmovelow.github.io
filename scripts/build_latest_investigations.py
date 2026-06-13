@@ -53,6 +53,8 @@ CATEGORY_ALIASES = {
     "updates": "Dispatch",
 }
 
+DISTINCTIVE_CATEGORIES = {"Analysis", "Statement", "Announcement", "Dispatch"}
+
 TAG_RE = re.compile(r"<[^>]*>")
 
 
@@ -73,10 +75,10 @@ def normalize_category(value: str) -> str | None:
 
 
 def select_category(values) -> str:
-    """Return the first recognized category anywhere in the item tags."""
+    """Prefer the first distinctive category found anywhere in the item tags."""
     for value in values:
         normalized = normalize_category(value or "")
-        if normalized:
+        if normalized in DISTINCTIVE_CATEGORIES:
             return normalized
     return "Investigation"
 

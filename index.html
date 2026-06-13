@@ -1368,7 +1368,7 @@
               : '';
             var badge = categoryBadge
               + (index === 0
-                ? '<span class="badge bg-brand-orange text-brand-offblack flex-shrink-0 hidden md:inline'+(categoryBadge ? '' : ' ml-auto')+'">NEW</span>'
+                ? '<span class="badge bg-brand-orange text-brand-offblack flex-shrink-0 hidden md:inline '+(categoryBadge ? 'ml-2' : 'ml-auto')+'">NEW</span>'
                 : '');
             return '<a href="'+esc(it.link)+'" target="_blank" rel="noopener noreferrer"'
               + ' class="feed-item'+(index === 0 ? ' feed-lead' : '')+' flex items-baseline gap-3 py-2.5 rounded group">'
