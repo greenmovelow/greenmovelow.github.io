@@ -1348,7 +1348,8 @@
       if (!list || !('fetch' in window)) return;
       var BADGES = { 'analysis': 'bg-blue-900/40 text-blue-300',
                      'announcement': 'bg-brand-orange/20 text-brand-orange',
-                     'statement': 'bg-brand-orange/20 text-brand-orange' };
+                     'statement': 'bg-brand-orange/20 text-brand-orange',
+                     'dispatch': 'bg-brand-gold/20 text-brand-gold' };
       function esc(s){ var p=document.createElement('span'); p.textContent=String(s); return p.innerHTML; }
       fetch(ENDPOINT)
         .then(function (r){ if(!r.ok) throw 0; return r.json(); })
@@ -1362,10 +1363,12 @@
             var dt = typeof it.date === 'string' ? it.date.slice(0, 10) : '';
             var label = typeof it.dateLabel === 'string' ? it.dateLabel : '';
             var category = String(it.category||'').toLowerCase().trim();
-            var badge = index === 0
-              ? '<span class="badge bg-brand-orange text-brand-offblack flex-shrink-0 hidden md:inline ml-auto">NEW</span>'
-              : (BADGES[category]
-                ? '<span class="badge '+BADGES[category]+' flex-shrink-0 hidden md:inline ml-auto">'+esc(it.category)+'</span>'
+            var categoryBadge = BADGES[category]
+              ? '<span class="badge '+BADGES[category]+' flex-shrink-0 hidden md:inline ml-auto">'+esc(it.category)+'</span>'
+              : '';
+            var badge = categoryBadge
+              + (index === 0
+                ? '<span class="badge bg-brand-orange text-brand-offblack flex-shrink-0 hidden md:inline '+(categoryBadge ? 'ml-2' : 'ml-auto')+'">NEW</span>'
                 : '');
             return '<a href="'+esc(it.link)+'" target="_blank" rel="noopener noreferrer"'
               + ' class="feed-item'+(index === 0 ? ' feed-lead' : '')+' flex items-baseline gap-3 py-2.5 rounded group">'
