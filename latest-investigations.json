@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Iowa’s $46 Billion Pension Fund Paid Its CIO “Exceptional” Performance Pay — No One Will Say Why",
+      "link": "https://investigations.restoring-democracy.org/p/iowas-46-billion-pension-fund-paid",
+      "date": "2026-06-13",
+      "dateLabel": "Jun 13",
+      "category": "Investigation"
+    },
+    {
       "title": "Bird Thanked Iowa; The Money Came From Washington",
       "link": "https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came",
       "date": "2026-06-07",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/the-save-america-act-from-voter-verification",
       "date": "2026-02-18",
       "dateLabel": "Feb 18",
-      "category": "Investigation"
-    },
-    {
-      "title": "Iowa’s New ALPR Bill Is a Start — But It Doesn’t Stop the Data",
-      "link": "https://investigations.restoring-democracy.org/p/iowas-new-alpr-bill-is-a-start-but",
-      "date": "2026-02-08",
-      "dateLabel": "Feb 8",
       "category": "Investigation"
     }
   ]
