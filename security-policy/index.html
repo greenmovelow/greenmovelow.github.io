@@ -1,1 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <meta name="msapplication-config" content="/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#2d5c4f">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#2d5c4f">
+
+  <title>Security &amp; Vulnerability Disclosure Policy | Restoring Democracy's Promise</title>
+  <meta name="description" content="How to report a security vulnerability to Restoring Democracy's Promise. Our coordinated disclosure policy: scope, safe harbor, researcher guidelines, and what to expect.">
+
+  <link rel="canonical" href="https://restoring-democracy.org/security-policy/" />
+  <meta name="robots" content="index,follow">
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Restoring Democracy's Promise" />
+  <meta property="og:url" content="https://restoring-democracy.org/security-policy/" />
+  <meta property="og:title" content="Security &amp; Vulnerability Disclosure Policy | Restoring Democracy's Promise" />
+  <meta property="og:description" content="How to report a security vulnerability to Restoring Democracy's Promise: scope, safe harbor, researcher guidelines, and what to expect." />
+  <meta property="og:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Color.png" />
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Restoring Democracy's Promise preview card on a green background">
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://restoring-democracy.org/security-policy/" />
+  <meta name="twitter:title" content="Security &amp; Vulnerability Disclosure Policy | Restoring Democracy's Promise" />
+  <meta name="twitter:description" content="How to report a security vulnerability to Restoring Democracy's Promise: scope, safe harbor, researcher guidelines, and what to expect." />
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Color.png" />
+  <meta name="twitter:image:alt" content="Restoring Democracy's Promise preview card on a green background">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "Security & Vulnerability Disclosure Policy | Restoring Democracy's Promise",
+        "url": "https://restoring-democracy.org/security-policy/",
+        "description": "Coordinated vulnerability disclosure policy for Restoring Democracy's Promise: how to report, scope, safe harbor, and researcher guidelines.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Restoring Democracy's Promise",
+          "alternateName": "RDP",
+          "url": "https://restoring-democracy.org/"
+        },
+        "publisher": { "@id": "https://restoring-democracy.org/#organization" },
+        "about": { "@id": "https://restoring-democracy.org/#organization" }
+      },
+      {
+        "@type": "NewsMediaOrganization",
+        "@id": "https://restoring-democracy.org/#organization",
+        "name": "Restoring Democracy's Promise",
+        "alternateName": "RDP",
+        "url": "https://restoring-democracy.org/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://restoring-democracy.org/assets/og/Banner_RDP_Color.png"
+        },
+        "foundingDate": "2023",
+        "memberOf": {
+          "@type": "Organization",
+          "name": "Investigative Reporters and Editors",
+          "url": "https://www.ire.org/"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QJ3L9CT4Z7');
+  </script>
+
+  <style>
+    html { scroll-padding-top: 72px; }
+    ::selection { background: rgba(212,175,55,0.25); color: #161616; }
+    .skip-link {
+      position: absolute; top: -100%; left: 50%; transform: translateX(-50%);
+      background: #D4AF37; color: #161616; font-weight: 700; font-size: 0.875rem;
+      padding: 0.5rem 1.5rem; border-radius: 0 0 0.5rem 0.5rem; z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+    :focus-visible { outline: 2px solid #D4AF37; outline-offset: 2px; border-radius: 2px; }
+    .nav-bar { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: background-color 0.3s, box-shadow 0.3s; }
+    .nav-bar.scrolled { background-color: rgba(26, 51, 44, 0.97); box-shadow: 0 1px 12px rgba(0,0,0,0.25); }
+    .nav-link { position: relative; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.25s ease; }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link:hover { color: #D4AF37; }
+    .hero-section {
+      background: linear-gradient(160deg, #1a332c 0%, #24473e 35%, #2d5c4f 60%, #24473e 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-section::before {
+      content: ''; position: absolute; top: -15%; right: -8%; width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 65%); pointer-events: none;
+    }
+    .hero-section::after {
+      content: ''; position: absolute; bottom: -10%; left: -5%; width: 450px; height: 450px;
+      background: radial-gradient(circle, rgba(244,162,97,0.03) 0%, transparent 65%); pointer-events: none;
+    }
+    .hero-grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .hero-enter { opacity: 0; transform: translateY(14px); animation: heroUp 0.65s ease forwards; }
+    .hero-d1 { animation-delay: 0.05s; }
+    .hero-d2 { animation-delay: 0.18s; }
+    .hero-d3 { animation-delay: 0.32s; }
+    .hero-d4 { animation-delay: 0.46s; }
+    @keyframes heroUp { to { opacity: 1; transform: translateY(0); } }
+    .rule-gold { border-top: 3px solid #D4AF37; }
+    .section-card {
+      background: #fff; border-radius: 1rem; border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .mission-card {
+      background: rgba(36, 71, 62, 0.5); border: 1.5px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(6px); transition: border-color 0.3s;
+    }
+    .mission-card:hover { border-color: rgba(212, 175, 55, 0.45); }
+    .approach-card {
+      background: #fff; border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 0.75rem; transition: border-color 0.25s;
+    }
+    .approach-card:hover { border-color: rgba(45,92,79,0.3); }
+    .badge {
+      display: inline-block; font-size: 0.65rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 700; padding: 0.3rem 0.65rem; border-radius: 999px;
+    }
+    .policy-list { margin: 0; padding: 0; list-style: none; }
+    .policy-list li { position: relative; padding-left: 1.6rem; margin-bottom: 0.85rem; line-height: 1.6; }
+    .policy-list li::before {
+      content: ''; position: absolute; left: 0; top: 0.55rem; width: 0.5rem; height: 0.5rem;
+      border-radius: 999px; background: #D4AF37;
+    }
+    .policy-list.dark li { color: #e4d5b9; }
+    .mono-label { font-family: ui-monospace, "JetBrains Mono", SFMono-Regular, Menlo, monospace; }
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .mobile-menu.open { max-height: 500px; }
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top {
+      position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 40;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(36,71,62,0.92); border: 1.5px solid rgba(212,175,55,0.35);
+      color: #D4AF37; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+      backdrop-filter: blur(8px); cursor: pointer;
+    }
+    .back-to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .back-to-top:hover { background: rgba(36,71,62,1); border-color: #D4AF37; }
+    .footer-tooltip { position: relative; cursor: pointer; }
+    .footer-tooltip .tooltip-text {
+      visibility: hidden; width: 200px; background: #24473e; color: #f4a261;
+      text-align: center; border-radius: 6px; padding: 6px 0;
+      position: absolute; z-index: 1; bottom: 120%; left: 50%; transform: translateX(-50%);
+      opacity: 0; transition: opacity 0.3s; font-size: 0.85em; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .footer-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+    @media print {
+      .nav-bar, .mobile-menu, .back-to-top, .skip-link { display: none !important; }
+      .hero-section { background: #24473e !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+
+</head>
+<body class="bg-brand-cream text-brand-offblack font-sans antialiased">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-darker/90" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
+      <div class="flex items-center justify-between h-16 lg:h-[68px]">
+        <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
+          <img id="main-logo" src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise home" class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          <span class="hidden sm:inline text-brand-gold font-serif font-bold text-lg lg:text-xl tracking-tight group-hover:text-brand-orange transition-colors">Restoring Democracy's Promise</span>
+          <span class="sm:hidden text-brand-white font-serif font-bold text-base">RDP</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-7">
+          <a href="/#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
+          <a href="/analytics/" class="nav-link text-brand-sand text-sm">Analytics</a>
+          <a href="/about/" class="nav-link text-brand-sand text-sm">About</a>
+          <a href="/team/" class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="/#standards" class="nav-link text-brand-sand text-sm">Standards</a>
+          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm">Substack</a>
+          <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+          <a href="/#support" class="ml-2 bg-brand-gold text-brand-offblack text-sm font-bold py-2 px-5 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-md">Support Our Work</a>
+        </div>
+        <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-darker/98 border-t border-brand-gold/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 space-y-1">
+        <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
+        <a href="/analytics/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
+        <a href="/about/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
+        <a href="/team/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
+        <a href="/#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
+        <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack ↗</a>
+        <a href="/secure-tips/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
+        <div class="pt-2 pb-1"><a href="/#support" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">Support Our Work</a></div>
+      </div>
+    </div>
+  </nav>
+  <div class="h-16 lg:h-[68px]"></div>
+
+  <header class="hero-section text-center pt-16 pb-24 md:pt-24 md:pb-32 lg:pt-28 lg:pb-36 px-4">
+    <div class="hero-grain"></div>
+    <div class="relative max-w-4xl mx-auto z-10">
+      <img src="/assets/og/Banner_RDP_Clear.png" alt="Restoring Democracy's Promise logo" class="mx-auto mb-6 h-20 md:h-24 w-auto drop-shadow-2xl hero-enter hero-d1">
+      <p class="mono-label text-brand-gold/80 text-xs md:text-sm tracking-[0.2em] uppercase hero-enter hero-d1">Responsible Disclosure</p>
+      <h1 class="mt-3 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brand-gold tracking-tight leading-[1.1] hero-enter hero-d2">Security &amp; Vulnerability Disclosure Policy</h1>
+      <div class="rule-gold max-w-24 mx-auto mt-6 mb-5 hero-enter hero-d2"></div>
+      <p class="text-xl md:text-2xl text-brand-orange italic font-semibold hero-enter hero-d3">Coordinated disclosure for security researchers acting in good faith.</p>
+      <p class="mt-5 text-base md:text-lg text-brand-sand leading-relaxed max-w-3xl mx-auto hero-enter hero-d3">If you believe you have found a security vulnerability in our systems, we want to hear from you. This policy explains how to report it, what is in scope, and the protections we extend to researchers who follow it.</p>
+      <div class="mt-10 hero-enter hero-d4" aria-live="polite">
+        <button id="share-policy" type="button" class="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-green-dark/55 px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-brand-sand hover:border-brand-gold hover:text-brand-gold transition-colors duration-200">
+          <span aria-hidden="true">🔗</span>
+          Share this page
+        </button>
+        <p id="share-status" class="mt-2 min-h-[1.25rem] text-xs text-brand-sand/80"></p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Commitment -->
+    <section class="py-16 md:py-20 bg-brand-green-dark">
+      <div class="max-w-4xl mx-auto px-4 reveal">
+        <div class="mission-card rounded-xl p-7 md:p-10">
+          <span class="badge bg-brand-orange text-brand-offblack mb-4">Our Commitment</span>
+          <p class="text-brand-sand text-base md:text-lg leading-relaxed">Restoring Democracy's Promise depends on the integrity of its systems and the trust of its readers and sources. We welcome good-faith security research and treat every credible report seriously. This page explains how to report a security vulnerability in our systems, what you can expect from us in return, and the protections we extend to researchers who act in good faith.</p>
+          <div class="mt-6 rounded-lg border border-brand-gold/30 bg-brand-green-darker/50 p-5">
+            <p class="text-brand-sand text-sm md:text-base leading-relaxed"><span class="font-bold text-brand-gold">This channel is for security vulnerabilities only.</span> If you have confidential information or documents for an investigation, do <em>not</em> use this page. Please use our <a href="/secure-tips/" class="text-brand-orange hover:text-brand-gold underline decoration-dotted underline-offset-2 transition">Secure Tips</a> channel, which is designed to protect sources.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to report -->
+    <section class="py-16 md:py-20 bg-brand-cream">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="mb-9 reveal">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-green-dark">How to Report</h2>
+          <p class="mt-3 text-base md:text-lg text-slate-600 leading-relaxed">Send security reports by email to <a href="mailto:security@restoring-democracy.org" class="text-brand-green font-semibold hover:text-brand-green-dark underline decoration-dotted underline-offset-2">security@restoring-democracy.org</a>. The authoritative, machine-readable list of contacts is published in our <a href="/.well-known/security.txt" class="text-brand-green font-semibold hover:text-brand-green-dark underline decoration-dotted underline-offset-2">security.txt</a>.</p>
+        </div>
+        <div class="section-card p-7 md:p-8 reveal">
+          <p class="text-slate-700 text-base leading-relaxed mb-4">To help us validate and resolve the issue quickly, please include where you can:</p>
+          <ul class="policy-list text-slate-700 text-base">
+            <li>The affected URL, page, or component.</li>
+            <li>A clear description of the issue and its potential impact.</li>
+            <li>Step-by-step instructions to reproduce it.</li>
+            <li>A proof of concept, screenshots, or relevant request/response details.</li>
+            <li>How you would like to be credited, or whether you prefer to remain anonymous.</li>
+          </ul>
+          <p class="mt-5 text-slate-600 text-sm leading-relaxed">Please report promptly after discovery and give us a reasonable opportunity to respond before any public disclosure. If your report contains sensitive details and you require encryption, say so in a first contact and we will arrange a secure channel.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scope -->
+    <section class="py-16 md:py-20 bg-brand-cream border-t border-slate-200/80">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="text-center mb-10 reveal">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-green-dark">Scope</h2>
+          <p class="mt-3 text-base md:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">This policy covers the systems we operate directly. Services we rely on but do not control are handled by their own providers.</p>
+        </div>
+        <div class="grid gap-5 md:grid-cols-2 reveal">
+          <div class="section-card p-6 md:p-7 border-2 border-brand-green/20">
+            <span class="badge bg-brand-green text-brand-white mb-3">In Scope</span>
+            <ul class="policy-list text-slate-700 text-sm md:text-base">
+              <li>The public website at <span class="font-semibold">restoring-democracy.org</span>, including its exhibits and infographics.</li>
+              <li>Our published static assets and configuration served from that domain.</li>
+            </ul>
+          </div>
+          <div class="section-card p-6 md:p-7">
+            <span class="badge bg-brand-orange text-brand-offblack mb-3">Out of Scope</span>
+            <ul class="policy-list text-slate-700 text-sm md:text-base">
+              <li><span class="font-semibold">investigations.restoring-democracy.org</span> — our newsletter and articles are hosted by Substack; report issues there to Substack.</li>
+              <li><span class="font-semibold">Third-party platforms</span> we rely on — including Cloudflare, Netlify, Substack, Zoho Mail, Tally, and GitHub. Report vulnerabilities in those services to the respective provider.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safe harbor -->
+    <section class="py-16 md:py-20 bg-brand-green">
+      <div class="max-w-4xl mx-auto px-4 reveal">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-gold text-center mb-10">Safe Harbor</h2>
+        <div class="mission-card rounded-xl p-7 md:p-10">
+          <p class="text-brand-sand text-base md:text-lg leading-relaxed">We will not pursue or support legal action against researchers who, in good faith, discover and report vulnerabilities in accordance with this policy. We consider security research conducted consistent with these guidelines to be authorized, and we will work with you to understand and resolve the issue promptly.</p>
+          <p class="mt-5 text-brand-sand text-base md:text-lg leading-relaxed">If a third party initiates legal action against you for activity carried out in good-faith compliance with this policy, we will make it known that your conduct was authorized. If you are ever unsure whether a specific action is permitted, ask us first.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section class="py-16 md:py-20 bg-brand-cream">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="text-center mb-10 reveal">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-green-dark">Guidelines for Researchers</h2>
+          <p class="mt-3 text-base md:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">Good-faith research protects our readers and sources as much as our systems. We ask that you follow these rules of engagement.</p>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3 reveal">
+          <div class="approach-card p-6">
+            <h3 class="font-serif text-lg font-bold text-brand-green-dark">Do no harm</h3>
+            <p class="mt-3 text-slate-700 text-sm leading-relaxed">Avoid privacy violations, data loss, and service disruption. Access only data that belongs to you or to test accounts you control — never access, modify, or destroy anyone else's data.</p>
+          </div>
+          <div class="approach-card p-6">
+            <h3 class="font-serif text-lg font-bold text-brand-green-dark">No disruptive testing</h3>
+            <p class="mt-3 text-slate-700 text-sm leading-relaxed">Do not run denial-of-service tests, high-volume automated scanning, brute-force attacks, spam, social engineering of our staff or readers, or any attempt at physical access to our infrastructure.</p>
+          </div>
+          <div class="approach-card p-6">
+            <h3 class="font-serif text-lg font-bold text-brand-green-dark">Coordinate disclosure</h3>
+            <p class="mt-3 text-slate-700 text-sm leading-relaxed">Give us a reasonable opportunity to remediate before disclosing publicly, coordinate timing with us, and comply with all applicable laws throughout your research.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What to expect -->
+    <section class="py-16 md:py-20 bg-white border-y border-slate-200">
+      <div class="max-w-4xl mx-auto px-4 reveal">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-green-dark text-center mb-3">What to Expect From Us</h2>
+        <p class="text-center text-slate-600 text-base md:text-lg max-w-2xl mx-auto mb-9 leading-relaxed">We are an independent newsroom, not a large security team — but we take disclosure seriously and will engage with you directly.</p>
+        <div class="section-card p-7 md:p-8">
+          <ul class="policy-list text-slate-700 text-base">
+            <li>We will acknowledge credible reports as promptly as we can, typically within a few business days.</li>
+            <li>We will keep you reasonably informed as we validate the issue and work toward a fix.</li>
+            <li>With your permission, we are glad to credit your contribution publicly; if you prefer to stay anonymous, we will respect that.</li>
+            <li>We do not operate a paid bug-bounty program, but we genuinely value and acknowledge responsible disclosure.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Non-qualifying -->
+    <section class="py-16 md:py-20 bg-brand-cream">
+      <div class="max-w-4xl mx-auto px-4 reveal">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark">Reports That Usually Do Not Qualify</h2>
+        <p class="mt-3 text-slate-600 text-base leading-relaxed mb-6">We operate a static, document-first website. The following generally are not treated as actionable on their own, absent a demonstrated, exploitable impact:</p>
+        <div class="section-card p-7 md:p-8">
+          <ul class="policy-list text-slate-700 text-base">
+            <li>Findings from automated scanners without a working proof of concept.</li>
+            <li>Missing or misconfigured security headers, or other best-practice recommendations, without a concrete exploit.</li>
+            <li>Rate-limiting or brute-force observations without demonstrated impact.</li>
+            <li>Clickjacking on pages without sensitive actions; self-XSS; or issues requiring unlikely user interaction or end-of-life browsers.</li>
+            <li>Social engineering, physical attacks, and denial-of-service.</li>
+            <li>Vulnerabilities in third-party platforms (see <span class="font-semibold">Scope</span>).</li>
+          </ul>
+          <p class="mt-5 text-slate-600 text-sm leading-relaxed">If you are unsure whether something qualifies, report it anyway and let us assess it. We would rather hear about a borderline issue than miss a real one.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Source protection -->
+    <section class="py-16 md:py-20 bg-brand-green-dark">
+      <div class="max-w-4xl mx-auto px-4 reveal">
+        <div class="mission-card rounded-xl p-7 md:p-10">
+          <span class="badge bg-brand-gold text-brand-offblack mb-4">Source Protection</span>
+          <p class="text-brand-sand text-base md:text-lg leading-relaxed">We are a newsroom. If, in the course of your research, you encounter anything that appears to be confidential source material, unpublished reporting, or personal data, stop immediately. Do not access, copy, or retain it, and notify us at once. Protecting sources is paramount, and we will treat that discretion as a core part of good-faith conduct.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Effective date / housekeeping -->
+    <section class="py-12 md:py-16 bg-white border-t border-slate-200">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5 text-center md:text-left">
+          <div>
+            <p class="mono-label text-xs uppercase tracking-[0.14em] text-slate-400">Effective</p>
+            <p class="mt-1 text-slate-700 text-sm">June 14, 2026 &middot; We may revise this policy; the current version governs.</p>
+          </div>
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <a href="/.well-known/security.txt" class="inline-flex items-center gap-2 rounded-full border border-brand-green/30 px-5 py-2.5 text-sm font-semibold text-brand-green hover:bg-brand-green hover:text-white transition">security.txt</a>
+            <a href="/secure-tips/" class="inline-flex items-center gap-2 rounded-full bg-brand-green px-5 py-2.5 text-sm font-bold text-white shadow-md hover:bg-brand-green-dark transition">Secure Tips for Sources <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path></svg>
+  </button>
+
+  <footer class="bg-brand-offblack text-brand-sand py-10 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-1">
+          <img src="/assets/og/Banner_RDP_Clear.png" class="h-10 w-auto mb-3" alt="RDP logo">
+          <p class="font-serif text-sm italic text-brand-gold">Quantifying the Truth</p>
+          <p class="text-xs text-brand-sand/50 mt-0.5">Engineering Precision Journalism</p>
+          <p class="mt-3 text-xs text-brand-sand/40">Independent · Evidence-driven · Document-first</p>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Investigations</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="/dream_machine/" class="text-brand-sand/80 hover:text-brand-gold transition">The Dream Machine</a></li>
+            <li><a href="/iowa-doge-pension-privatize/" class="text-brand-sand/80 hover:text-brand-gold transition">Pension Privatization</a></li>
+            <li><a href="/the-god-machine/" class="text-brand-sand/80 hover:text-brand-gold transition">The God Machine</a></li>
+            <li><a href="/pincer-dataviz/" class="text-brand-sand/80 hover:text-brand-gold transition">Pincer Movement</a></li>
+            <li><a href="/pincer-financial/" class="text-brand-sand/80 hover:text-brand-gold transition">Financial Superhighway</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Organization</h4>
+          <ul class="space-y-1.5 text-sm">
+            <li><a href="/about/" class="text-brand-sand/80 hover:text-brand-gold transition">About Restoring Democracy's Promise</a></li>
+            <li><a href="/team/" class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
+            <li><a href="/#standards" class="text-brand-sand/80 hover:text-brand-gold transition">Standards &amp; Corrections</a></li>
+            <li><a href="/privacy-policy/" class="text-brand-sand/80 hover:text-brand-gold transition">Privacy Policy</a></li>
+            <li><a href="/security-policy/" class="text-brand-sand/80 hover:text-brand-gold transition">Security Policy</a></li>
+            <li><a href="/secure-tips/" class="text-brand-sand/80 hover:text-brand-gold transition">Secure Tips</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Contact</h4>
+          <p class="text-sm text-brand-sand/80">Webmaster &amp; General Inquiries</p>
+          <a href="mailto:webmaster@restoring-democracy.org" class="mt-2 inline-block text-brand-orange hover:text-brand-gold transition">webmaster@restoring-democracy.org</a>
+          <p class="mt-4 text-sm text-brand-sand/80">Security Reports</p>
+          <a href="mailto:security@restoring-democracy.org" class="mt-1 inline-block text-brand-orange hover:text-brand-gold transition">security@restoring-democracy.org</a>
+        </div>
+      </div>
+      <div class="border-t border-brand-sand/10 pt-6 text-center">
+        <div class="footer-tooltip inline-block">
+          <p class="text-xs text-brand-sand/50">&copy; 2023–2026 Restoring Democracy's Promise. All rights reserved.</p>
+          <span class="tooltip-text">This project is powered by receipts.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector('.nav-bar');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('mobile-menu');
+    toggle.addEventListener('click', () => { const open = menu.classList.toggle('open'); toggle.setAttribute('aria-expanded', open); });
+    menu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { menu.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }); });
+    const ro = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => { btt.classList.toggle('show', window.scrollY > 600); }, { passive: true });
+    btt.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    const shareButton = document.getElementById('share-policy');
+    const shareStatus = document.getElementById('share-status');
+    if (shareButton && shareStatus) {
+      shareButton.addEventListener('click', async () => {
+        const shareData = { title: document.title, text: "Security & Vulnerability Disclosure Policy — Restoring Democracy's Promise", url: window.location.href };
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+            shareStatus.textContent = 'Shared successfully.';
+            return;
+          }
+          await navigator.clipboard.writeText(window.location.href);
+          shareStatus.textContent = 'Link copied to clipboard.';
+        } catch (error) {
+          shareStatus.textContent = 'Unable to share right now. You can copy the URL from your browser bar.';
+        }
+      });
+    }
+    let clickCount = 0, timer;
+    document.getElementById('main-logo').addEventListener('click', function(e) {
+      e.preventDefault(); clickCount++; clearTimeout(timer);
+      timer = setTimeout(() => { clickCount = 0; }, 1000);
+      if (clickCount === 5) window.location.href = '/vault.html';
+    });
+  </script>
+</body>
+</html>
 
