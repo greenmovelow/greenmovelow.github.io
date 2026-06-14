@@ -1,10 +1,8 @@
-Contact: mailto:administrator@restoring-democracy.org
 Contact: mailto:webmaster@restoring-democracy.org
-Contact: mailto:press@restoring-democracy.org
-Contact: mailto:analytics@restoring-democracy.org
+Contact: mailto:administrator@restoring-democracy.org
 Expires: 2027-06-01T00:00:00Z
 Preferred-Languages: en
 Canonical: https://restoring-democracy.org/.well-known/security.txt
-Policy: https://restoring-democracy.org/security-policy
+Policy: https://restoring-democracy.org/security-policy/
 Acknowledgments: https://restoring-democracy.org/about/
 Hiring: https://restoring-democracy.org/analytics/
