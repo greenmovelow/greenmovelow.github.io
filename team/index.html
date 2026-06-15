@@ -53,43 +53,15 @@
 <link rel="stylesheet" href="/assets/css/styles.css">
 
   <style>
-    html { scroll-padding-top: 72px; }
-    .nav-bar { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: background-color 0.3s, box-shadow 0.3s; }
-    .nav-bar.scrolled { background-color: rgba(26, 51, 44, 0.96) !important; box-shadow: 0 4px 20px rgba(0,0,0,0.26); }
-    .nav-link { position: relative; text-decoration: none; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s; }
-    .nav-link::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.25s ease; }
-    .nav-link:hover::after { width: 100%; }
-    .hero-section {
-      background: linear-gradient(140deg, rgba(22,22,22,0.98) 0%, rgba(30,55,48,0.96) 42%, rgba(36,71,62,0.94) 100%);
-      position: relative; overflow: hidden;
-    }
-    .hero-section::before {
-      content: ''; position: absolute; top: -15%; right: -8%; width: 550px; height: 550px;
-      background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 65%); pointer-events: none;
-    }
-    .hero-section::after {
-      content: ''; position: absolute; bottom: -10%; left: -5%; width: 450px; height: 450px;
-      background: radial-gradient(circle, rgba(244,162,97,0.03) 0%, transparent 65%); pointer-events: none;
-    }
-    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-    .mobile-menu.open { max-height: 500px; }
     .section-divider::after {
       content: ''; display: block; width: 72px; height: 3px; margin-top: 12px; background: #D4AF37; border-radius: 2px;
     }
-    .footer-tooltip { position: relative; cursor: pointer; }
-    .footer-tooltip .tooltip-text {
-      visibility: hidden; width: 200px; background: #24473e; color: #f4a261;
-      text-align: center; border-radius: 6px; padding: 6px 0;
-      position: absolute; z-index: 1; bottom: 120%; left: 50%; transform: translateX(-50%);
-      opacity: 0; transition: opacity 0.3s; font-size: 0.85em; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-    .footer-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
   </style>
 
 </head>
 <body class="bg-brand-cream text-brand-offblack font-sans antialiased">
 
-  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-darker/90" role="navigation" aria-label="Main navigation">
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-dark" role="navigation" aria-label="Main navigation">
     <div class="max-w-7xl mx-auto px-4 lg:px-6">
       <div class="flex items-center justify-between h-16 lg:h-[68px]">
         <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
@@ -105,6 +77,7 @@
           <a href="/#standards" class="nav-link text-brand-sand text-sm">Standards</a>
           <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm">Substack</a>
           <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+          <a href="/#support" class="ml-2 bg-brand-gold text-brand-offblack text-sm font-bold py-2 px-5 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-md">Support Our Work</a>
         </div>
         <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,7 +85,7 @@
           </svg>
         </button>
       </div>
-      <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-darker/95 border-t border-brand-sand/20">
+      <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-dark border-t border-brand-sand/20">
         <div class="py-3 space-y-1">
           <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
           <a href="/analytics/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
@@ -121,6 +94,7 @@
           <a href="/#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
           <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Substack</a>
           <a href="/secure-tips/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
+          <div class="pt-2 pb-1"><a href="/#support" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">Support Our Work</a></div>
         </div>
       </div>
     </div>

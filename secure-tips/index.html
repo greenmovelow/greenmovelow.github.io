@@ -70,27 +70,6 @@
   </script>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { overflow-x: hidden; width: 100%; max-width: 100%; }
-    html { scroll-padding-top: 68px; }
-
-    .nav-bar {
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: background-color 0.3s, box-shadow 0.3s;
-    }
-    .nav-bar.scrolled {
-      background-color: rgba(26, 51, 44, 0.98);
-      box-shadow: 0 1px 16px rgba(0,0,0,0.35);
-    }
-    .nav-link { position: relative; font-weight: 500; transition: color 0.2s; }
-    .nav-link::after {
-      content: ''; position: absolute; bottom: -3px; left: 0;
-      width: 0; height: 2px; background: #D4AF37; transition: width 0.25s ease;
-    }
-    .nav-link:hover::after { width: 100%; }
-    .nav-link:hover { color: #D4AF37; }
-
     /* Full-bleed dark gradient — same family as index hero */
     body {
       background: linear-gradient(160deg,
@@ -188,19 +167,6 @@
       padding: 0.25rem 0.55rem; border-radius: 999px;
     }
 
-    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-    .mobile-menu.open { max-height: 560px; }
-
-    .footer-tooltip { position: relative; cursor: default; }
-    .footer-tooltip .tooltip-text {
-      visibility: hidden; width: 190px; background: #24473e; color: #f4a261;
-      text-align: center; border-radius: 6px; padding: 5px 0;
-      position: absolute; z-index: 1; bottom: 120%; left: 50%;
-      transform: translateX(-50%); opacity: 0; transition: opacity 0.3s; font-size: 0.78em;
-    }
-    .footer-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
-
-
     @media (min-width: 900px) {
       .secure-hero-shell,
       .secure-section-shell {
@@ -246,7 +212,7 @@
   <div class="orb-bl" aria-hidden="true"></div>
 
   <!-- ══ NAVIGATION ══ -->
-  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-darker/88"
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-dark"
        role="navigation" aria-label="Main navigation">
     <div class="max-w-7xl mx-auto px-4 lg:px-6">
       <div class="flex items-center justify-between h-16 lg:h-[68px]">
@@ -297,7 +263,7 @@
       </div>
     </div>
 
-    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-darker/99 border-t border-brand-gold/10">
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-dark border-t border-brand-gold/10">
       <div class="max-w-7xl mx-auto px-4 py-3 space-y-0.5">
         <a href="/"                class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Home</a>
         <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
@@ -513,7 +479,7 @@ Risk level: [low / medium / high].
   </main>
 
   <!-- ══ FOOTER ══ -->
-  <footer class="relative z-10 bg-brand-offblack/88 border-t border-brand-gold/10
+  <footer class="relative z-10 bg-brand-offblack border-t border-brand-gold/10
                  text-brand-sand py-10 px-4" role="contentinfo">
     <div class="max-w-4xl mx-auto">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-7">

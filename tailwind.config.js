@@ -6,6 +6,18 @@ module.exports = {
     './assets/**/*.js',
     './**/*.js',
   ],
+  // Utility classes injected at runtime by the homepage #latest-feed script
+  // (built as strings in index.html), so the content scanner can't see them.
+  safelist: [
+    'bg-blue-900/40',
+    'text-blue-300',
+    'bg-brand-orange',
+    'bg-brand-orange/20',
+    'text-brand-orange',
+    'bg-brand-gold/20',
+    'text-brand-gold',
+    'text-brand-offblack',
+  ],
   theme: {
     extend: {
       colors: {

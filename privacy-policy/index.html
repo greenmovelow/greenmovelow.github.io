@@ -95,99 +95,24 @@
   <link rel="stylesheet" href="/assets/css/styles.css">
 
   <style>
-
-    html { scroll-padding-top: 72px; }
-    .nav-bar { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: background-color 0.3s, box-shadow 0.3s; }
-    .nav-bar.scrolled { background-color: rgba(26, 51, 44, 0.97); box-shadow: 0 1px 12px rgba(0,0,0,0.25); }
-    .nav-link { position: relative; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s; }
-    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.25s ease; }
-    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-    .nav-link:hover { color: #D4AF37; }
-    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-    .mobile-menu.open { max-height: 500px; }
-    .hero-section {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(160deg, #1a332c 0%, #24473e 35%, #2d5c4f 60%, #24473e 100%);
-    }
-
-    .hero-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.08) 0%, transparent 55%);
-      pointer-events: none;
-    }
-
-    .hero-section::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 75% 40%, rgba(244, 162, 97, 0.06) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
     .policy-body h2 {
       font-family: 'Lora', Georgia, Cambria, 'Times New Roman', serif;
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: #2d5c4f;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
+      font-weight: 700; font-size: 1.5rem; color: #2d5c4f;
+      margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem;
       border-bottom: 2px solid rgba(212, 175, 55, 0.3);
     }
-
     .policy-body h3 {
       font-family: 'Lora', Georgia, Cambria, 'Times New Roman', serif;
-      font-weight: 600;
-      font-size: 1.15rem;
-      color: #24473e;
-      margin-top: 1.75rem;
-      margin-bottom: 0.75rem;
+      font-weight: 600; font-size: 1.15rem; color: #24473e;
+      margin-top: 1.75rem; margin-bottom: 0.75rem;
     }
-
-    .policy-body p {
-      margin-bottom: 1rem;
-      line-height: 1.75;
-      color: #334155;
-    }
-
-    .policy-body ul {
-      list-style: disc;
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .policy-body ul li {
-      margin-bottom: 0.5rem;
-      line-height: 1.65;
-      color: #334155;
-    }
-
-    .policy-body a {
-      color: #2d5c4f;
-      font-weight: 600;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-
-    .policy-body a:hover {
-      color: #D4AF37;
-    }
-
-    .policy-toc a {
-      color: #2d5c4f;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .policy-toc a:hover {
-      color: #D4AF37;
-      text-decoration: underline;
-    }
-
+    .policy-body p { margin-bottom: 1rem; line-height: 1.75; color: #334155; }
+    .policy-body ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+    .policy-body ul li { margin-bottom: 0.5rem; line-height: 1.65; color: #334155; }
+    .policy-body a { color: #2d5c4f; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+    .policy-body a:hover { color: #D4AF37; }
+    .policy-toc a { color: #2d5c4f; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .policy-toc a:hover { color: #D4AF37; text-decoration: underline; }
     .source-callout {
       background: linear-gradient(135deg, rgba(45, 92, 79, 0.06) 0%, rgba(212, 175, 55, 0.04) 100%);
       border-left: 4px solid #D4AF37;
@@ -197,7 +122,7 @@
 </head>
 
 <body class="bg-brand-white text-brand-offblack font-sans antialiased">
-  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-darker/90" role="navigation" aria-label="Main navigation">
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-dark" role="navigation" aria-label="Main navigation">
     <div class="max-w-7xl mx-auto px-4 lg:px-6">
       <div class="flex items-center justify-between h-16 lg:h-[68px]">
         <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
@@ -220,7 +145,7 @@
         </button>
       </div>
     </div>
-    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-darker/90 border-t border-brand-gold/10">
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-dark border-t border-brand-gold/10">
       <div class="max-w-7xl mx-auto px-4 py-3 space-y-1">
         <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
         <a href="/analytics/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
