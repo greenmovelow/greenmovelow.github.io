@@ -3,6 +3,7 @@
 <head>
   <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/rdp-analytics-logo-1200.webp" type="image/webp">
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +41,7 @@
   <meta property="og:url" content="https://restoring-democracy.org/analytics/" />
   <meta property="og:title" content="RDP Analytics | Restoring Democracy's Promise" />
   <meta property="og:description" content="RDP Analytics applies investigative methods, statistical modeling, and cross-domain pattern analysis to public-interest questions too complex for conventional reporting alone." />
-  <meta property="og:image" content="https://restoring-democracy.org/assets/og/RDP_Analytics_OG_new.png" />
+  <meta property="og:image" content="https://restoring-democracy.org/assets/og/RDP_Analytics_OG.jpg" />
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="RDP Analytics | Research & Methods Division">
@@ -50,7 +51,7 @@
   <meta name="twitter:url" content="https://restoring-democracy.org/analytics/" />
   <meta name="twitter:title" content="RDP Analytics | Restoring Democracy's Promise" />
   <meta name="twitter:description" content="RDP Analytics applies investigative methods, statistical modeling, and cross-domain pattern analysis to public-interest questions too complex for conventional reporting alone." />
-  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/RDP_Analytics_OG_new.png" />
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/RDP_Analytics_OG.jpg" />
   <meta name="twitter:image:alt" content="RDP Analytics | Research & Methods Division">
 <script type="application/ld+json">
   {
@@ -151,149 +152,46 @@
   </script>
 
   <style>
-    html { scroll-padding-top: 72px; }
-    .nav-bar { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: background-color 0.3s, box-shadow 0.3s; }
-    .nav-bar.scrolled { background-color: rgba(26, 51, 44, 0.97); box-shadow: 0 1px 12px rgba(0,0,0,0.25); }
-    .nav-link { position: relative; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s; }
-    .nav-link:hover { color: #D4AF37; }
-    .nav-link::after {
-      content: ''; position: absolute; left: 0; bottom: -0.35rem; width: 0; height: 2px;
-      background: #D4AF37; transition: width 0.25s ease;
-    }
-    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-
-    .hero-section {
-      position: relative; overflow: hidden;
-      background: linear-gradient(160deg,
-        #1a332c 0%,
-        #1f3d34 18%,
-        #24473e 35%,
-        #2d5c4f 55%,
-        #24473e 78%,
-        #1a332c 100%);
-    }
-    .hero-section::before {
-      content: ''; position: absolute; top: -12%; right: -6%; width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 60%); pointer-events: none;
-    }
-    .hero-section::after {
-      content: ''; position: absolute; bottom: -8%; left: -4%; width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(244,162,97,0.04) 0%, transparent 55%); pointer-events: none;
-    }
     .feature-strip {
-      background: linear-gradient(to right,
-        rgba(212, 175, 55, 0.08) 0%,
-        rgba(244, 162, 97, 0.05) 100%);
+      background: linear-gradient(to right, rgba(212, 175, 55, 0.08) 0%, rgba(244, 162, 97, 0.05) 100%);
       border-left: 5px solid #D4AF37;
     }
-    .section-divider {
-      border-bottom: 3px solid rgba(212, 175, 55, 0.3);
-      padding-bottom: 0.5rem;
-    }
-    .investigation-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .investigation-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    }
+    .section-divider { border-bottom: 3px solid rgba(212, 175, 55, 0.3); padding-bottom: 0.5rem; }
+    .investigation-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .investigation-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); }
     .analytics-block {
-      background: linear-gradient(135deg,
-        rgba(22, 22, 22, 0.95) 0%,
-        rgba(36, 71, 62, 0.90) 100%);
+      background: linear-gradient(135deg, rgba(22, 22, 22, 0.95) 0%, rgba(36, 71, 62, 0.90) 100%);
       border: 2px solid rgba(212, 175, 55, 0.4);
     }
     .action-strip {
-      background: linear-gradient(to bottom,
-        rgba(244, 162, 97, 0.12) 0%,
-        rgba(212, 175, 55, 0.08) 100%);
+      background: linear-gradient(to bottom, rgba(244, 162, 97, 0.12) 0%, rgba(212, 175, 55, 0.08) 100%);
     }
-    .footer-tooltip { position: relative; cursor: pointer; }
-    .footer-tooltip .tooltip-text {
-      visibility: hidden;
-      width: 220px;
-      background-color: #24473e;
-      color: #f4a261;
-      text-align: center;
-      border-radius: 8px;
-      padding: 7px 0;
-      position: absolute;
-      z-index: 1;
-      bottom: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 0.4s;
-      font-size: 1em;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-    }
-    .footer-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
     .statement-badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 800;
-      color: #161616;
-      background: #f4a261;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
+      display: inline-block; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      font-weight: 800; color: #161616; background: #f4a261; padding: 0.35rem 0.7rem; border-radius: 999px;
     }
-
-    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-    .mobile-menu.open { max-height: 500px; }
-
-    /* Pillar card numbering */
     .pillar-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
-      background: #D4AF37;
-      color: #161616;
-      font-weight: 800;
-      font-size: 1rem;
-      flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #D4AF37; color: #161616;
+      font-weight: 800; font-size: 1rem; flex-shrink: 0;
     }
-
-    /* Featured case study highlight */
     .case-study-featured {
-      background: linear-gradient(135deg,
-        rgba(22, 22, 22, 0.97) 0%,
-        rgba(36, 71, 62, 0.92) 100%);
-      border: 2px solid rgba(212, 175, 55, 0.5);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, rgba(22, 22, 22, 0.97) 0%, rgba(36, 71, 62, 0.92) 100%);
+      border: 2px solid rgba(212, 175, 55, 0.5); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
     .jump-nav {
-      background: rgba(22, 22, 22, 0.2);
-      border: 1px solid rgba(212, 175, 55, 0.22);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(22, 22, 22, 0.2); border: 1px solid rgba(212, 175, 55, 0.22);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     }
     .jump-nav-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 3rem;
-      border-radius: 999px;
-      border: 1px solid rgba(212, 175, 55, 0.22);
-      background: rgba(26, 51, 44, 0.55);
-      color: #f6f7f8;
-      font-size: 0.95rem;
-      font-weight: 600;
+      display: flex; align-items: center; justify-content: center; min-height: 3rem;
+      border-radius: 999px; border: 1px solid rgba(212, 175, 55, 0.22); background: rgba(26, 51, 44, 0.55);
+      color: #f6f7f8; font-size: 0.95rem; font-weight: 600;
       transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
-    .jump-nav-link:hover,
-    .jump-nav-link:focus-visible {
-      background: rgba(36, 71, 62, 0.88);
-      border-color: rgba(212, 175, 55, 0.45);
-      color: #D4AF37;
-      outline: none;
+    .jump-nav-link:hover, .jump-nav-link:focus-visible {
+      background: rgba(36, 71, 62, 0.88); border-color: rgba(212, 175, 55, 0.45); color: #D4AF37; outline: none;
     }
-
-    @media print { .nav-bar, .mobile-menu { display: none !important; } }
   </style>
 
 </head>
@@ -302,7 +200,7 @@
 <div class="flex flex-col min-h-screen">
 
   <!-- ═══════════════ NAVIGATION ═══════════════ -->
-  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-darker/90" role="navigation" aria-label="Main navigation">
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-dark" role="navigation" aria-label="Main navigation">
     <div class="max-w-7xl mx-auto px-4 lg:px-6">
       <div class="flex items-center justify-between h-16 lg:h-[68px]">
         <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
@@ -331,7 +229,7 @@
         </button>
       </div>
     </div>
-    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-darker/98 border-t border-brand-gold/10">
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-dark border-t border-brand-gold/10">
       <div class="max-w-7xl mx-auto px-4 py-3 space-y-1">
         <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
         <a href="/analytics/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
@@ -352,15 +250,17 @@
   ════════════════════════════════════════ -->
   <header class="hero-section text-center pt-16 pb-24 md:pt-24 md:pb-32 lg:pt-28 lg:pb-36 px-4">
     <div class="relative max-w-5xl mx-auto z-10">
-      <img src="/assets/og/Banner_RDP_Clear.png" alt="Restoring Democracy's Promise Logo" class="mx-auto mb-6 h-20 md:h-24 w-auto drop-shadow-2xl">
+      <picture>
+        <source media="(max-width:640px)" srcset="/assets/rdp-analytics-logo-600.webp" type="image/webp">
+        <source srcset="/assets/rdp-analytics-logo-1200.webp" type="image/webp">
+        <img src="/assets/rdp-analytics-logo-1200.png" width="1200" height="476" alt="RDP Analytics" class="mx-auto mb-6 w-full max-w-[440px] drop-shadow-2xl" style="height:auto">
+      </picture>
 
       <span class="inline-block bg-brand-gold text-brand-offblack text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-5">
         Advanced Investigative Capabilities
       </span>
 
-      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brand-gold tracking-tight leading-[1.1]">
-        RDP Analytics
-      </h1>
+      <h1 class="sr-only">RDP Analytics — Research &amp; Methods Division</h1>
       <p class="mt-5 text-xl md:text-2xl text-brand-orange italic font-semibold">
         Research &amp; Methods Division
       </p>
