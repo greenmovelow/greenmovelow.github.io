@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -22,9 +25,9 @@
   <link rel="manifest" href="/manifest.json">
 
   <meta name="msapplication-config" content="/browserconfig.xml">
-  <meta name="msapplication-TileColor" content="#2d5c4f">
+  <meta name="msapplication-TileColor" content="#24473e">
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-  <meta name="theme-color" content="#2d5c4f">
+  <meta name="theme-color" content="#24473e">
 
   <title>The Lawsuit Iowa Still Hasn't Answered in Public | Restoring Democracy's Promise</title>
   <meta name="description" content="A document-driven exhibit of the amended Rich Wiggins filing in Polk County, outlining allegations involving IPERS risk reporting, benchmarking, fees, and bonus requests. These are allegations in a court filing, not proven facts.">
@@ -149,7 +152,7 @@
     /* ── FILING STAMP ── */
     .filing-stamp {
       display: inline-block;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: .65rem;
       letter-spacing: .14em;
       text-transform: uppercase;
@@ -161,7 +164,7 @@
     }
     .court-stamp {
       display: inline-block;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: .6rem;
       letter-spacing: .12em;
       text-transform: uppercase;
@@ -212,7 +215,7 @@
     .share-btn:hover { border-color: rgba(200,164,60,.5); color: #c8a43c; }
 
     /* ── EVIDENCE TABLE ── */
-    .ev-table th { background: #050c17; color: #c8a43c; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
+    .ev-table th { background: #050c17; color: #c8a43c; font-family:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
     .ev-table td { border-bottom: 1px solid #1c2d47; }
     .ev-table tr:last-child td { border-bottom: none; }
     .ev-table tr:hover td { background: rgba(200,164,60,.02); }
@@ -225,7 +228,7 @@
     .fade-up { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    .footnote { font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:.7rem; color:#4a5568; }
+    .footnote { font-family:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:.7rem; color:#4a5568; }
     .editor-note { font-style: italic; color: #8a9bb0; font-size: .85rem; border-left: 3px solid #1c2d47; padding-left: .75rem; }
 
     @media print { .nav-bar, .subscribe-bar, .mobile-menu { display:none!important; } }

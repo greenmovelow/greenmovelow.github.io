@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -22,9 +25,9 @@
   <link rel="manifest" href="/manifest.json">
 
   <meta name="msapplication-config" content="/browserconfig.xml">
-  <meta name="msapplication-TileColor" content="#2d5c4f">
+  <meta name="msapplication-TileColor" content="#24473e">
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-  <meta name="theme-color" content="#2d5c4f">
+  <meta name="theme-color" content="#24473e">
 
   <title>Restoring Democracy's Promise | Investigative Journalism</title>
   <meta name="description" content="Independent investigative journalism on surveillance, election systems, immigration, public corruption, and democratic accountability.">
@@ -280,7 +283,7 @@
       <div class="mb-6 flex justify-center">
         <a href="https://investigations.restoring-democracy.org"
            class="inline-flex items-center gap-2 hover:opacity-80 transition"
-           style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#22d3ee;">
+           style="font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#22d3ee;">
           <span class="w-1.5 h-1.5 rounded-full rdp-pulse" style="background:#22d3ee;flex-shrink:0;"></span>
           Longform now lives at investigations.restoring-democracy.org
         </a>
@@ -345,7 +348,7 @@
       <div class="mt-4 flex justify-center items-center gap-4">
         <a href="https://investigations.restoring-democracy.org/feed"
            class="inline-flex items-center gap-1.5 text-brand-orange hover:text-brand-gold transition"
-           style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">
+           style="font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">
           <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.18 17.82a2.18 2.18 0 1 0 0-4.36 2.18 2.18 0 0 0 0 4.36ZM4 11.06A8.94 8.94 0 0 1 12.94 20h-2.4A6.54 6.54 0 0 0 4 13.46v-2.4Zm0-4.06A13 13 0 0 1 17 20h-2.4A10.6 10.6 0 0 0 4 9.4V7Z"/></svg>
           Subscribe via RSS
         </a>
@@ -378,7 +381,7 @@
         <div class="flex items-start gap-4 lg:gap-6">
           <div class="flex-shrink-0 pt-0.5 flex flex-col items-start gap-1.5">
             <span class="badge bg-brand-orange text-brand-offblack">Latest</span>
-            <span id="feed-status" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,241,230,.3);">&middot; recent</span>
+            <span id="feed-status" style="font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,241,230,.3);">&middot; recent</span>
           </div>
           <div id="latest-feed" class="flex-grow min-w-0 divide-y divide-white/5">
 
@@ -489,7 +492,7 @@
             <div class="py-2.5">
               <a href="https://investigations.restoring-democracy.org"
                  class="text-brand-gold/70 hover:text-brand-gold transition"
-                 style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;">
+                 style="font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;">
                 All investigations at The Investigations Desk &rarr;
               </a>
             </div>
@@ -1379,7 +1382,7 @@
           }).join('');
           rows += '<div class="py-2.5"><a href="https://investigations.restoring-democracy.org"'
             + ' class="text-brand-gold/70 hover:text-brand-gold transition"'
-            + ' style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;">'
+            + ' style="font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;">'
             + 'All investigations at The Investigations Desk \u2192</a></div>';
           list.innerHTML = rows;
           if (statusEl) statusEl.innerHTML = '&middot; live feed';

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -22,15 +25,15 @@
     <link rel="manifest" href="/manifest.json">
 
     <meta name="msapplication-config" content="/browserconfig.xml">
-    <meta name="msapplication-TileColor" content="#2d5c4f">
+    <meta name="msapplication-TileColor" content="#24473e">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#2d5c4f">
+    <meta name="theme-color" content="#24473e">
     <title>The Pincer Movement Infographic | Restoring Democracy's Promise</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background-color: #0D1B2A;
             color: #E0E1DD;
         }
@@ -292,7 +295,7 @@
                 labels: {
                     color: '#E0E1DD',
                     font: {
-                        family: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+                        family: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
                     }
                 }
             },
@@ -301,21 +304,21 @@
                     title: tooltipTitleCallback
                 },
                 titleFont: {
-                    family: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+                    family: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
                 },
                 bodyFont: {
-                     family: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+                     family: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
                 }
             }
         };
 
         const defaultScales = {
              x: {
-                ticks: { color: '#778DA9', font: { family: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" } },
+                ticks: { color: '#778DA9', font: { family: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" } },
                 grid: { color: 'rgba(119, 141, 169, 0.2)' }
             },
             y: {
-                ticks: { color: '#778DA9', font: { family: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" } },
+                ticks: { color: '#778DA9', font: { family: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" } },
                 grid: { color: 'rgba(119, 141, 169, 0.2)' }
             }
         };
@@ -346,7 +349,7 @@
                             labels: {
                                 color: '#E0E1DD',
                                 font: {
-                                    family: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                                    family: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
                                     size: 14
                                 }
                             }
@@ -382,8 +385,8 @@
                     maintainAspectRatio: false,
                     plugins: defaultPlugins,
                     scales: {
-                        x: { stacked: true, ticks: { color: '#778DA9', font: { family: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" } }, grid: { display: false } },
-                        y: { stacked: true, ticks: { color: '#778DA9', callback: value => value + '%', font: { family: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" } }, grid: { color: 'rgba(119, 141, 169, 0.2)' } }
+                        x: { stacked: true, ticks: { color: '#778DA9', font: { family: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" } }, grid: { display: false } },
+                        y: { stacked: true, ticks: { color: '#778DA9', callback: value => value + '%', font: { family: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" } }, grid: { color: 'rgba(119, 141, 169, 0.2)' } }
                     }
                 }
             });

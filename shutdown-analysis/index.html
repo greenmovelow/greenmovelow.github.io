@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -22,9 +25,9 @@
   <link rel="manifest" href="/manifest.json">
 
   <meta name="msapplication-config" content="/browserconfig.xml">
-  <meta name="msapplication-TileColor" content="#2d5c4f">
+  <meta name="msapplication-TileColor" content="#24473e">
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-  <meta name="theme-color" content="#2d5c4f">
+  <meta name="theme-color" content="#24473e">
 
   <title>The Oversight Vacuum Cascade | RDP Analytics</title>
   <meta name="description" content="RDP Analytics documented the 164-hour GAO-CIGIE oversight blackout in real time using state-space analytical methods and probabilistic network deanonymization. Documented Anomaly 003.">
@@ -80,18 +83,18 @@
     .exhibit-hero::before{content:'';position:absolute;top:-10%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,.04) 0%,transparent 60%);pointer-events:none}
     .exhibit-hero::after{content:'';position:absolute;bottom:-8%;left:-3%;width:400px;height:400px;background:radial-gradient(circle,rgba(244,162,97,.02) 0%,transparent 55%);pointer-events:none}
 
-    .dossier-label{display:inline-block;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#f4a261;background:rgba(244,162,97,.1);border:1px solid rgba(244,162,97,.3);padding:.3rem .75rem;border-radius:3px}
+    .dossier-label{display:inline-block;font-family:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#f4a261;background:rgba(244,162,97,.1);border:1px solid rgba(244,162,97,.3);padding:.3rem .75rem;border-radius:3px}
 
     .metric-card{background:#112218;border:1px solid #1e3a29;border-left:4px solid #D4AF37;transition:transform .3s ease,box-shadow .3s ease}
     .metric-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
 
-    .evidence-table th{background:#0d1a12;color:#D4AF37;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+    .evidence-table th{background:#0d1a12;color:#D4AF37;font-family:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
     .evidence-table td{border-bottom:1px solid #1e3a29;font-size:.95rem}
     .evidence-table tr:last-child td{border-bottom:none}
     .evidence-table tr:hover td{background:rgba(212,175,55,.03)}
 
     .section-rule{border:none;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,55,.3),transparent);margin:3rem 0}
-    .footnote{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;font-size:.75rem;color:#94a3b8}
+    .footnote{font-family:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;font-size:.75rem;color:#94a3b8}
 
     /* Timeline styling */
     .timeline-event{position:relative;padding-left:2.5rem;padding-bottom:2rem;border-left:2px solid #1e3a29}
