@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -22,9 +25,9 @@
     <link rel="manifest" href="/manifest.json">
 
     <meta name="msapplication-config" content="/browserconfig.xml">
-    <meta name="msapplication-TileColor" content="#2d5c4f">
+    <meta name="msapplication-TileColor" content="#24473e">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#2d5c4f">
+    <meta name="theme-color" content="#24473e">
     <title>Who Funds the Identity Backbone? | Restoring Democracy's Promise</title>
     <meta name="description" content="An interactive exhibit mapping $4.89 billion in federal contracts from USCIS fee revenue to IBM, Palantir, Peraton, and the identity verification stack. Primary-source driven.">
 
@@ -96,12 +99,12 @@
 
     <style>
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background-color: #071612;
             color: #e7efe9;
         }
-        .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
-        .font-serif { font-family: Georgia, Cambria, 'Times New Roman', serif; }
+        .font-mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+        .font-serif { font-family: 'Lora', Georgia, Cambria, 'Times New Roman', serif; }
 
         /* Scanline */
         .scanline {
@@ -445,7 +448,7 @@
                             <!-- Ring 4: Total Contract Mass $4.89B+ (outermost) -->
                             <circle cx="300" cy="240" r="210" fill="url(#grad-total)" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3" opacity="0.7"
                                     class="contract-circle" data-contract="total" filter="url(#glow)"/>
-                            <text x="300" y="52" text-anchor="middle" fill="#ef4444" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700" opacity="0.9">TOTAL STACK: $4.89B+</text>
+                            <text x="300" y="52" text-anchor="middle" fill="#ef4444" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700" opacity="0.9">TOTAL STACK: $4.89B+</text>
 
                             <!-- Ring 3: IBM FALCON $279M -->
                             <circle cx="300" cy="240" r="158" fill="url(#grad-ibm)" stroke="#60a5fa" stroke-width="2.5" opacity="0.85"
@@ -460,31 +463,31 @@
                                     class="contract-circle" data-contract="palantir" filter="url(#glow)"/>
 
                             <!-- Center dollar sign -->
-                            <text x="300" y="246" text-anchor="middle" fill="#f4a261" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="28" font-weight="700" opacity="0.9">$</text>
+                            <text x="300" y="246" text-anchor="middle" fill="#f4a261" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="28" font-weight="700" opacity="0.9">$</text>
 
                             <!-- Labels (curved or placed) -->
                             <!-- IBM label -->
-                            <text x="300" y="100" text-anchor="middle" fill="#60a5fa" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12" font-weight="700">IBM FALCON — $279M</text>
-                            <text x="300" y="115" text-anchor="middle" fill="#94a3b8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10">VIS / SAVE / E-Verify Engine</text>
+                            <text x="300" y="100" text-anchor="middle" fill="#60a5fa" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12" font-weight="700">IBM FALCON — $279M</text>
+                            <text x="300" y="115" text-anchor="middle" fill="#94a3b8" font-family="'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10">VIS / SAVE / E-Verify Engine</text>
 
                             <!-- HART label -->
-                            <text x="480" y="200" text-anchor="start" fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700">HART</text>
-                            <text x="480" y="215" text-anchor="start" fill="#94a3b8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10">Peraton — $95M</text>
-                            <text x="480" y="228" text-anchor="start" fill="#94a3b8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9">Biometric System</text>
+                            <text x="480" y="200" text-anchor="start" fill="#2dd4bf" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700">HART</text>
+                            <text x="480" y="215" text-anchor="start" fill="#94a3b8" font-family="'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10">Peraton — $95M</text>
+                            <text x="480" y="228" text-anchor="start" fill="#94a3b8" font-family="'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9">Biometric System</text>
                             <line x1="392" y1="210" x2="475" y2="210" stroke="#2dd4bf" stroke-width="1" opacity="0.5" stroke-dasharray="3 2"/>
 
                             <!-- Palantir label -->
-                            <text x="300" y="260" text-anchor="middle" fill="#f4a261" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="10" font-weight="700">PALANTIR</text>
-                            <text x="300" y="274" text-anchor="middle" fill="#94a3b8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9">$30M — Dashboard</text>
+                            <text x="300" y="260" text-anchor="middle" fill="#f4a261" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="10" font-weight="700">PALANTIR</text>
+                            <text x="300" y="274" text-anchor="middle" fill="#94a3b8" font-family="'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9">$30M — Dashboard</text>
 
                             <!-- Scale annotation -->
                             <line x1="50" y1="240" x2="50" y2="30" stroke="#64748b" stroke-width="1" opacity="0.5"/>
                             <line x1="45" y1="240" x2="55" y2="240" stroke="#64748b" stroke-width="1" opacity="0.5"/>
                             <line x1="45" y1="30" x2="55" y2="30" stroke="#64748b" stroke-width="1" opacity="0.5"/>
-                            <text x="44" y="140" text-anchor="middle" fill="#64748b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="9" transform="rotate(-90, 44, 140)">AREA = CONTRACT VALUE</text>
+                            <text x="44" y="140" text-anchor="middle" fill="#64748b" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="9" transform="rotate(-90, 44, 140)">AREA = CONTRACT VALUE</text>
 
                             <!-- "Iceberg" annotation arrow -->
-                            <text x="300" y="460" text-anchor="middle" fill="#64748b" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-style="italic">
+                            <text x="300" y="460" text-anchor="middle" fill="#64748b" font-family="'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-style="italic">
                                 The headline is the smallest circle. The engine is everything around it.
                             </text>
                         </svg>

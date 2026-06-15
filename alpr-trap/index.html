@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -22,9 +25,9 @@
   <link rel="manifest" href="/manifest.json">
 
   <meta name="msapplication-config" content="/browserconfig.xml">
-  <meta name="msapplication-TileColor" content="#2d5c4f">
+  <meta name="msapplication-TileColor" content="#24473e">
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-  <meta name="theme-color" content="#2d5c4f">
+  <meta name="theme-color" content="#24473e">
   <title>The ALPR Trap | Restoring Democracy's Promise</title>
   <meta name="description" content="An interactive exhibit mapping how local license-plate readers feed a nationwide financial-surveillance architecture. 20 billion reads per month. 49 states. No vote.">
 
@@ -95,12 +98,12 @@
 
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background-color: #1e2a33;
       color: #e8ecef;
     }
-    .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
-    .font-serif { font-family: Georgia, Cambria, 'Times New Roman', serif; }
+    .font-mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .font-serif { font-family: 'Lora', Georgia, Cambria, 'Times New Roman', serif; }
 
     /* Scanline — cold cyan, very subtle */
     .scanline {
@@ -290,7 +293,7 @@
 
     /* Plate text styling */
     .plate-text {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       letter-spacing: 0.15em;
       text-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
     }
