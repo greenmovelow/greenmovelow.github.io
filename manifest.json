@@ -3,7 +3,7 @@
   "short_name": "RDP",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#2d5c4f",
+  "background_color": "#24473e",
   "theme_color": "#24473e",
   "icons": [
     {
@@ -34,6 +34,11 @@
     {
       "src": "/android-icon-192x192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-icon-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
