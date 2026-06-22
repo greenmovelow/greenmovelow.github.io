@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- ===== SEO / SOCIAL ===== -->
+  <title>The $25,000 Question: IPERS CIO Performance Pay | RDP</title>
+  <meta name="description" content="A public-records exhibit showing three years of $25,000 &lsquo;Exceptional Job Performance Pay&rsquo; entries at Iowa&rsquo;s $46 billion public pension fund.">
+  <meta name="robots" content="index,follow">
+
+  <link rel="canonical" href="https://restoring-democracy.org/infographics/ipers-cio-performance-pay/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Restoring Democracy's Promise">
+  <meta property="og:url" content="https://restoring-democracy.org/infographics/ipers-cio-performance-pay/">
+  <meta property="og:title" content="The $25,000 Question: IPERS CIO Performance Pay">
+  <meta property="og:description" content="A public-records exhibit showing three years of $25,000 'Exceptional Job Performance Pay' entries at Iowa's $46 billion public pension fund.">
+  <meta property="og:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Gen3_Gold_Aperture_1536.png">
+  <meta property="og:image:width" content="1536">
+  <meta property="og:image:height" content="857">
+  <meta property="og:image:alt" content="Restoring Democracy's Promise — public-records investigation">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The $25,000 Question: IPERS CIO Performance Pay">
+  <meta name="twitter:description" content="A public-records exhibit showing three years of $25,000 'Exceptional Job Performance Pay' entries at Iowa's $46 billion public pension fund.">
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Gen3_Gold_Aperture_1536.png">
+  <meta name="twitter:image:alt" content="Restoring Democracy's Promise — public-records investigation">
+
+  <meta name="theme-color" content="#24473e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/assets/rdp_logo_gold_on_green_bg.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The $25,000 Question: IPERS CIO Performance Pay",
+    "description": "A public-records exhibit showing three years of $25,000 'Exceptional Job Performance Pay' entries at Iowa's $46 billion public pension fund.",
+    "datePublished": "2026-06-21",
+    "dateModified": "2026-06-21",
+    "image": "https://restoring-democracy.org/assets/og/Banner_RDP_Gen3_Gold_Aperture_1536.png",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://restoring-democracy.org/infographics/ipers-cio-performance-pay/"
+    },
+    "author": { "@type": "Organization", "name": "Restoring Democracy's Promise" },
+    "publisher": {
+      "@type": "NewsMediaOrganization",
+      "name": "Restoring Democracy's Promise",
+      "url": "https://restoring-democracy.org/"
+    },
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <style>
+    /* ============================================================
+       RDP — IPERS CIO Performance Pay Exhibit
+       "The $25,000 Question"
+       Premium palette: deep green + gold + cream, amber as a
+       restrained secondary alert/accent only.
+       Self-contained: no external fonts, no CDNs, no trackers.
+       ============================================================ */
+
+    :root{
+      --green:        #2d5c4f;   /* brand-green */
+      --green-dark:   #24473e;   /* brand-green-dark (matches site nav/footer) */
+      --green-darker: #1a332c;   /* brand-green-darker */
+      --green-mid:    #5c8a7a;
+      --gold:         #c9a227;   /* exhibit gold (accent within the infographic) */
+      --gold-brand:   #D4AF37;   /* site brand-gold — used for the unified wordmark */
+      --gold-deep:    #8a6d10;   /* darker gold for small text where contrast matters */
+      --sand:         #e4d5b9;   /* brand-sand — footer/nav text on dark green */
+      --orange:       #f4a261;   /* brand-orange — site hover accent */
+      --amber:        #d98324;   /* secondary alert/accent only */
+      --amber-ink:    #a65a14;   /* darker amber for small text */
+      --ink:          #1f2421;
+      --muted:        #5c6b64;
+      --cream:        #faf6ec;   /* cream / off-white surface */
+      --cream-deep:   #f1e9d6;
+      --bg:           #ffffff;
+      --neutral:      #d8d3c4;
+      --neutral-deep: #b3ad9c;
+      --hairline:     rgba(31,36,33,0.12);
+      --hairline-2:   rgba(31,36,33,0.07);
+
+      --serif: 'Lora', Georgia, Cambria, 'Times New Roman', serif;
+      --sans:  'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      --measure: 720px;   /* text column */
+      --wide:    900px;   /* card column */
+    }
+
+    *,*::before,*::after{ box-sizing:border-box; }
+
+    html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:var(--sans);
+      font-size:18px;
+      line-height:1.6;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    img{ max-width:100%; height:auto; display:block; }
+
+    .tnum{ font-variant-numeric: tabular-nums lining-nums; font-feature-settings:"tnum" 1,"lnum" 1; }
+
+    a{ color:var(--green); text-underline-offset:2px; }
+    a:hover{ color:var(--green-dark); }
+
+    .skip-link{
+      position:absolute; left:-9999px; top:0; z-index:200;
+      background:var(--green); color:#fff; padding:.6rem 1rem; border-radius:0 0 8px 0;
+      font-family:var(--sans); font-weight:600;
+    }
+    .skip-link:focus{ left:0; }
+
+    :focus-visible{ outline:3px solid var(--gold); outline-offset:2px; border-radius:3px; }
+
+    /* ---------- Layout helpers ---------- */
+    .wrap{ width:100%; max-width:var(--measure); margin-inline:auto; padding-inline:20px; }
+    .wrap-wide{ width:100%; max-width:var(--wide); margin-inline:auto; padding-inline:20px; }
+
+    .module{ padding-block:clamp(2.8rem, 7vw, 5rem); border-top:1px solid var(--hairline-2); scroll-margin-top:84px; }
+    .module:first-of-type{ border-top:0; }
+
+    .kicker{
+      font-family:var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+      color:var(--green); font-weight:600; margin:0 0 .9rem;
+    }
+    .kicker .dot{ color:var(--gold-deep); }
+
+    h1,h2,h3{ font-family:var(--serif); color:var(--ink); line-height:1.12; font-weight:700; margin:0; }
+    h2.module-title{ font-size:clamp(1.6rem, 4.2vw, 2.35rem); letter-spacing:-0.01em; }
+    .subhead{ color:var(--muted); font-size:1.02rem; margin:.7rem 0 0; max-width:62ch; }
+
+    .interp{
+      font-family:var(--serif); font-style:italic; font-size:1.12rem; color:var(--ink);
+      border-left:3px solid var(--gold); padding-left:1rem; margin:1.6rem 0 0; max-width:60ch;
+    }
+
+    .source{
+      font-family:var(--mono); font-size:.74rem; color:var(--muted); letter-spacing:.01em;
+      margin:1.4rem 0 0; line-height:1.55;
+    }
+    .source::before{ content:"SOURCE  "; color:var(--green); font-weight:600; }
+
+    /* ---------- Global RDP nav (unified emblem + wordmark, matches main site) ---------- */
+    .site-nav{
+      position:sticky; top:0; z-index:100;
+      background:var(--green-dark);
+      border-bottom:1px solid rgba(212,175,55,0.15);
+      padding-top:env(safe-area-inset-top);
+    }
+    .site-nav-inner{
+      max-width:1120px; margin-inline:auto; padding:0 20px; height:64px;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .brand{ display:flex; align-items:center; gap:.6rem; text-decoration:none; flex:0 0 auto; }
+    .brand img{ height:38px; width:38px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.3)); }
+    .brand .wordmark{
+      font-family:var(--serif); font-weight:700; font-size:1.15rem; letter-spacing:-0.01em;
+      color:var(--gold-brand); transition:color .2s; line-height:1;
+    }
+    .brand:hover .wordmark{ color:var(--orange); }
+
+    .nav-links{ display:flex; align-items:center; gap:1.35rem; }
+    .nav-links a{ color:var(--sand); font-size:.86rem; text-decoration:none; font-weight:500; transition:color .2s; }
+    .nav-links a:hover{ color:var(--gold-brand); }
+    .nav-links a.desk{ color:var(--gold-brand); font-weight:600; display:inline-flex; align-items:center; gap:.25rem; }
+    .nav-links a.desk:hover{ color:var(--sand); }
+    .nav-links a.desk svg{ width:11px; height:11px; }
+    .nav-share{
+      background:none; border:0; color:rgba(228,213,185,0.7); cursor:pointer;
+      padding:.4rem; display:inline-flex; align-items:center; transition:color .2s;
+    }
+    .nav-share:hover{ color:var(--gold-brand); }
+    .nav-share svg{ width:18px; height:18px; }
+    .nav-support{
+      background:var(--gold-brand); color:#161616; font-size:.72rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:.04em; padding:.55rem 1.05rem; border-radius:999px;
+      text-decoration:none; box-shadow:0 2px 6px rgba(0,0,0,.2); transition:background .2s;
+    }
+    .nav-support:hover{ background:var(--orange); color:#161616; }
+
+    .nav-toggle{
+      list-style:none; background:none; border:0; color:var(--sand); padding:.4rem; cursor:pointer;
+      display:inline-flex; align-items:center;
+    }
+    .nav-toggle::-webkit-details-marker{ display:none; }
+    .nav-toggle svg{ width:24px; height:24px; }
+
+    /* Mobile menu (details/summary, no JS dependency for open/close) */
+    .nav-mobile{ display:none; }
+    .nav-mobile-links{
+      position:absolute; left:0; right:0; top:100%;
+      background:var(--green-dark); border-top:1px solid rgba(212,175,55,0.12);
+      box-shadow:0 12px 24px rgba(0,0,0,.25);
+      padding:.5rem 20px .9rem; display:flex; flex-direction:column; gap:.1rem;
+    }
+    .nav-mobile-links a{ color:var(--sand); text-decoration:none; font-size:.92rem; font-weight:500; padding:.65rem .25rem; border-radius:6px; }
+    .nav-mobile-links a:hover{ color:var(--gold-brand); }
+    .nav-mobile-links a.desk{ color:var(--gold-brand); font-weight:600; }
+    .nav-mobile-links .nav-support{ text-align:center; margin-top:.5rem; }
+
+    @media (max-width:900px){
+      .nav-links{ display:none; }
+      .nav-mobile{ display:block; }
+    }
+
+    /* ---------- Exhibit section sub-nav ---------- */
+    .exhibit-nav{ background:rgba(255,255,255,0.92); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-bottom:1px solid var(--hairline); }
+    .exhibit-nav-inner{
+      max-width:1120px; margin-inline:auto; padding:.45rem 20px;
+      display:flex; align-items:center; gap:.25rem; overflow-x:auto; scrollbar-width:none;
+    }
+    .exhibit-nav-inner::-webkit-scrollbar{ display:none; }
+    .exhibit-nav a{
+      flex:0 0 auto; padding:.25rem .48rem; border-radius:6px; color:var(--muted);
+      font-family:var(--mono); font-size:.66rem; font-weight:600; letter-spacing:.02em; text-decoration:none;
+    }
+    .exhibit-nav a:hover{ color:var(--green-dark); background:var(--cream); }
+    .mobile-exhibit-nav{ display:none; }
+
+    @media (max-width:720px){
+      .module{ scroll-margin-top:84px; }
+      .desktop-exhibit-nav{ display:none; }
+      .mobile-exhibit-nav{ display:block; position:relative; background:rgba(255,255,255,0.92); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-bottom:1px solid var(--hairline); }
+      .mobile-exhibit-nav > summary{
+        cursor:pointer; list-style:none; padding:.55rem 20px; color:var(--green);
+        font-family:var(--mono); font-size:.72rem; font-weight:600; letter-spacing:.04em;
+        display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      }
+      .mobile-exhibit-nav > summary::-webkit-details-marker{ display:none; }
+      .mobile-exhibit-nav > summary::after{ content:"+"; color:var(--gold-deep); font-size:1rem; line-height:1; }
+      .mobile-exhibit-nav[open] > summary::after{ content:"\2212"; }
+      .mobile-exhibit-links{
+        display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.25rem;
+        padding:.25rem 20px .8rem; border-top:1px solid var(--hairline-2); background:rgba(255,255,255,.98);
+      }
+      .mobile-exhibit-links a{ min-width:0; padding:.48rem .55rem; font-size:.7rem; }
+      .mobile-exhibit-links .read-story{
+        grid-column:1 / -1; margin-top:.25rem; background:var(--green); color:#fff; text-align:center;
+      }
+      .mobile-exhibit-links .read-story:hover{ background:var(--green-dark); color:#fff; }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{
+      position:relative; padding-block:clamp(3rem, 9vw, 5.5rem);
+      background:
+        radial-gradient(1200px 380px at 100% -10%, rgba(201,162,39,0.10), transparent 60%),
+        linear-gradient(180deg, var(--cream) 0%, var(--bg) 100%);
+      border-top:0;
+    }
+    .hero .kicker{ margin-bottom:1.1rem; color:var(--gold-deep); }
+    .hero h1{
+      font-size:clamp(2.5rem, 9vw, 4.2rem); letter-spacing:-0.02em; line-height:1.02; max-width:14ch;
+      color:var(--green-dark);
+    }
+    .hero h1 .accent{ color:var(--gold-deep); }
+    .hero .standfirst{
+      font-family:var(--serif); font-size:clamp(1.12rem, 2.6vw, 1.4rem); color:var(--muted);
+      margin:1.2rem 0 0; max-width:52ch; line-height:1.45;
+    }
+
+    /* hero number cards */
+    .stat-cards{
+      display:grid; grid-template-columns:1fr; gap:.9rem; margin:2rem 0 0;
+    }
+    @media (min-width:640px){ .stat-cards{ grid-template-columns:repeat(3,1fr); } }
+    .stat-card{
+      background:var(--bg); border:1px solid var(--hairline); border-top:4px solid var(--gold);
+      border-radius:14px; padding:1.4rem 1.3rem;
+    }
+    .stat-card .num{
+      font-family:var(--serif); font-weight:700; color:var(--green-dark);
+      font-size:clamp(2rem, 7vw, 2.6rem); line-height:1; letter-spacing:-0.02em;
+    }
+    .stat-card .num small{ font-size:.55em; color:var(--gold-deep); font-weight:700; }
+    .stat-card .lbl{ color:var(--muted); font-size:.95rem; margin-top:.55rem; line-height:1.4; }
+
+    /* hero buttons */
+    .hero-cta{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2rem; }
+
+    /* ---------- Buttons ---------- */
+    .btn{
+      display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; font-weight:600;
+      padding:.85rem 1.5rem; border-radius:10px; font-size:1rem; line-height:1.2;
+      transition:background .2s, border-color .2s, color .2s, transform .05s;
+    }
+    .btn:active{ transform:translateY(1px); }
+    .btn-primary{ background:var(--green); color:#fff; }
+    .btn-primary:hover{ background:var(--green-dark); color:#fff; }
+    .btn-gold{ background:var(--gold); color:#33270a; }
+    .btn-gold:hover{ background:#b8941f; color:#2a2008; }
+    .btn-ghost{ background:transparent; color:var(--green); border:1px solid var(--hairline); }
+    .btn-ghost:hover{ border-color:var(--green); background:var(--cream); }
+    .btn svg{ width:18px; height:18px; flex:0 0 auto; }
+
+    /* ---------- Inline subscribe CTA ---------- */
+    .sub-cta{ max-width:var(--wide); margin:0 auto; padding:0 20px; }
+    .sub-cta-card{
+      position:relative; overflow:hidden; background:var(--green); color:#fff;
+      border-radius:16px; padding:clamp(1.4rem, 4vw, 2rem);
+      display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.2rem;
+    }
+    .sub-cta-card::before{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:radial-gradient(420px 160px at 100% 0%, rgba(201,162,39,0.28), transparent 70%);
+    }
+    .sub-cta-card .sc-text{ position:relative; max-width:46ch; }
+    .sub-cta-card h2{ color:#fff; font-size:clamp(1.25rem,3.4vw,1.7rem); }
+    .sub-cta-card p{ margin:.5rem 0 0; color:#dCEAE3; font-size:.98rem; }
+    .sub-cta-card .btn{ position:relative; }
+
+    /* ---------- Timeline (Section 1) ---------- */
+    .timeline{ margin-top:1.8rem; display:grid; grid-template-columns:1fr; gap:.8rem; }
+    @media (min-width:760px){ .timeline{ grid-template-columns:repeat(5,1fr); gap:.7rem; } }
+    .yr-card{
+      background:var(--cream); border:1px solid var(--hairline); border-radius:12px;
+      padding:1.1rem 1.1rem 1.2rem; display:flex; flex-direction:column; gap:.5rem;
+    }
+    .yr-card .yr{ font-family:var(--mono); font-weight:700; font-size:1.05rem; color:var(--green-dark); letter-spacing:.02em; }
+    .yr-card .amt{ font-family:var(--serif); font-weight:700; font-size:1.55rem; line-height:1; color:var(--gold-deep); }
+    .yr-card .amt.none{ color:var(--neutral-deep); font-size:1.05rem; }
+    .yr-card .note{ font-size:.82rem; color:var(--muted); line-height:1.4; margin-top:auto; }
+    .yr-card.flagged{ border-color:var(--gold); border-left:4px solid var(--gold); background:var(--bg); }
+    .yr-card.partial{ border-style:dashed; }
+    .yr-card .tag{
+      font-family:var(--mono); font-size:.62rem; letter-spacing:.06em; text-transform:uppercase;
+      font-weight:600; color:var(--gold-deep);
+    }
+    .yr-card .tag.muted{ color:var(--neutral-deep); }
+
+    /* ---------- Two-column record grid (Section 2) ---------- */
+    .rec-grid{ display:grid; grid-template-columns:1fr; gap:1.1rem; margin-top:1.8rem; }
+    @media (min-width:720px){ .rec-grid{ grid-template-columns:1fr 1fr; } }
+    .rec-col{ background:var(--cream); border:1px solid var(--hairline); border-radius:14px; padding:1.4rem 1.4rem 1.5rem; }
+    .rec-col.confirmed{ border-top:4px solid var(--green); }
+    .rec-col.open{ border-top:4px solid var(--amber); }
+    .rec-col h3{
+      font-family:var(--mono); font-size:.78rem; text-transform:uppercase; letter-spacing:.07em;
+      font-weight:600; margin:0 0 .9rem;
+    }
+    .rec-col.confirmed h3{ color:var(--green); }
+    .rec-col.open h3{ color:var(--amber-ink); }
+    .rec-list{ list-style:none; margin:0; padding:0; }
+    .rec-list li{ position:relative; padding:.55rem 0 .55rem 1.9rem; border-bottom:1px solid var(--hairline-2); font-size:.98rem; }
+    .rec-list li:last-child{ border-bottom:0; }
+    .rec-list li::before{ position:absolute; left:0; top:.55rem; font-family:var(--mono); font-weight:700; font-size:1rem; }
+    .rec-col.confirmed .rec-list li::before{ content:"\2713"; color:var(--green); }
+    .rec-col.open .rec-list li::before{ content:"?"; color:var(--amber-ink); }
+
+    /* ---------- Ruler problem (Section 3) ---------- */
+    .ruler-card{
+      background:var(--green-dark); color:#fff; border-radius:18px; overflow:hidden;
+      margin-top:1.8rem; padding:clamp(1.5rem,5vw,2.4rem);
+    }
+    .ruler-figs{ display:grid; grid-template-columns:1fr; gap:1rem; }
+    @media (min-width:620px){ .ruler-figs{ grid-template-columns:1fr 1fr auto; align-items:center; } }
+    .ruler-fig .v{ font-family:var(--serif); font-weight:700; font-size:clamp(2.1rem,8vw,2.9rem); line-height:1; color:var(--gold); }
+    .ruler-fig .k{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:#bcd0c8; margin-top:.4rem; }
+    .ruler-margin{ text-align:left; }
+    @media (min-width:620px){ .ruler-margin{ text-align:right; } }
+    .ruler-margin .v{ color:#fff; }
+    .ruler-margin .v small{ font-size:.5em; color:var(--gold); display:block; font-family:var(--mono); letter-spacing:.04em; margin-top:.3rem; }
+    /* visual bar comparison */
+    .ruler-bar-wrap{ margin-top:1.8rem; }
+    .ruler-bar-row{ display:flex; align-items:center; gap:.8rem; margin:.55rem 0; }
+    .ruler-bar-row .rl{ font-family:var(--mono); font-size:.74rem; color:#cfe0d8; width:8.5em; flex:0 0 auto; }
+    .ruler-bar-row .track{ flex:1 1 auto; height:14px; border-radius:7px; background:rgba(255,255,255,.14); overflow:hidden; }
+    .ruler-bar-row .track .fill{ height:100%; border-radius:7px; }
+    .ruler-bar-row .rv{ font-family:var(--mono); font-weight:600; font-size:.82rem; width:4.2em; flex:0 0 auto; text-align:right; }
+    .ruler-pullquote{
+      font-family:var(--serif); font-style:italic; font-size:clamp(1.2rem,3.6vw,1.55rem); line-height:1.4;
+      color:#fff; margin:1.8rem 0 0; padding-left:1.1rem; border-left:3px solid var(--gold); max-width:48ch;
+    }
+    .ruler-card .source{ color:#bcd0c8; margin-top:1.4rem; }
+    .ruler-card .source::before{ color:var(--gold); }
+
+    /* ---------- Closed door flow (Section 4) ---------- */
+    .flow{ margin-top:1.8rem; display:flex; flex-direction:column; gap:.2rem; }
+    .flow-node{
+      display:flex; align-items:center; gap:.9rem;
+      background:var(--cream); border:1px solid var(--hairline); border-radius:12px; padding:.95rem 1.1rem;
+    }
+    .flow-node .ix{
+      flex:0 0 auto; width:2rem; height:2rem; border-radius:50%; display:grid; place-items:center;
+      font-family:var(--mono); font-weight:700; font-size:.85rem; background:var(--green); color:#fff;
+    }
+    .flow-node .ftext{ font-weight:600; color:var(--ink); }
+    .flow-node .ftext small{ display:block; font-weight:400; font-size:.82rem; color:var(--muted); margin-top:.15rem; }
+    .flow-node.closed{ border-left:4px solid var(--amber); }
+    .flow-node.closed .ix{ background:var(--amber); color:#33270a; }
+    .flow-node.open-q{ border-left:4px solid var(--gold); background:var(--bg); }
+    .flow-node.open-q .ix{ background:var(--gold); color:#33270a; }
+    .flow-arrow{ text-align:center; color:var(--green-mid); font-size:1.1rem; line-height:1; padding:.15rem 0; }
+
+    /* ---------- Why this matters (Section 5) ---------- */
+    .matters{ background:var(--cream); }
+    .matters .lead{
+      font-family:var(--serif); font-size:clamp(1.2rem,3.2vw,1.5rem); line-height:1.45; color:var(--ink);
+      max-width:60ch; margin:1.2rem 0 0;
+    }
+    .matters .lead b{ color:var(--green-dark); }
+
+    /* ---------- See the Receipts (Section 6) ---------- */
+    .receipts{ background:var(--green); color:#fff; }
+    .receipts .kicker{ color:var(--gold); }
+    .receipts h2.module-title{ color:#fff; }
+    .receipts .subhead{ color:#dCEAE3; }
+    .receipts .doc-note{
+      font-family:var(--mono); font-size:.82rem; line-height:1.6; color:#cfe0d8;
+      background:rgba(0,0,0,0.16); border:1px solid rgba(255,255,255,0.14); border-radius:10px;
+      padding:.85rem 1rem; margin:1.4rem 0 0; max-width:62ch;
+    }
+    .receipts .doc-note b{ color:var(--gold); }
+    .receipts .cta-row{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.6rem; }
+    .receipts .btn-ghost{ color:#fff; border-color:rgba(255,255,255,0.4); }
+    .receipts .btn-ghost:hover{ border-color:#fff; background:rgba(255,255,255,0.08); }
+
+    /* ---------- Method / redaction note (Section 7) ---------- */
+    .method-band{ background:var(--cream-deep); border-top:1px solid var(--hairline); }
+    .method-note{
+      font-size:.96rem; color:var(--ink); line-height:1.6; max-width:70ch; margin:1rem 0 0;
+      background:var(--bg); border:1px solid var(--hairline); border-left:4px solid var(--gold);
+      border-radius:10px; padding:1.1rem 1.2rem;
+    }
+
+    /* ---------- Footer (unified RDP footer, matches main site) ---------- */
+    footer.site{
+      background:var(--green-dark); color:var(--sand);
+      border-top:1px solid rgba(212,175,55,0.15);
+      padding:3rem 20px calc(2.2rem + env(safe-area-inset-bottom));
+    }
+    footer.site .f-inner{ max-width:1120px; margin-inline:auto; }
+    footer.site .f-grid{ display:grid; grid-template-columns:1fr; gap:2rem; margin-bottom:2rem; }
+    @media (min-width:760px){ footer.site .f-grid{ grid-template-columns:1.4fr 1fr 1fr; } }
+    footer.site .f-logo{ height:36px; width:auto; margin-bottom:.6rem; }
+    footer.site .f-tagline{ font-family:var(--serif); font-style:italic; font-size:.8rem; color:var(--gold-brand); margin:0; }
+    footer.site .f-sub{ font-family:var(--mono); font-size:.72rem; letter-spacing:.04em; color:rgba(228,213,185,0.45); text-transform:uppercase; margin:.25rem 0 0; }
+    footer.site .f-note{ font-size:.78rem; color:rgba(228,213,185,0.4); margin:.8rem 0 0; line-height:1.5; }
+    footer.site h4{ font-family:var(--sans); font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:rgba(228,213,185,0.6); margin:0 0 .8rem; }
+    footer.site ul{ list-style:none; margin:0; padding:0; }
+    footer.site li{ margin:.45rem 0; font-size:.9rem; }
+    footer.site a{ color:rgba(228,213,185,0.7); text-decoration:none; transition:color .2s; }
+    footer.site a:hover{ color:var(--gold-brand); }
+    footer.site a.desk{ color:var(--gold-brand); font-weight:600; }
+    footer.site a.tip{ color:var(--gold-brand); font-weight:600; font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; }
+    footer.site .f-bar{
+      border-top:1px solid rgba(255,255,255,0.08); padding-top:1.4rem;
+      display:flex; flex-wrap:wrap; gap:.8rem 1.4rem; align-items:center; justify-content:space-between;
+    }
+    footer.site .f-copy{ font-size:.76rem; color:rgba(228,213,185,0.4); margin:0; }
+    footer.site .f-bar-links{ display:flex; gap:1.2rem; }
+    footer.site .f-bar-links a{ font-size:.76rem; color:rgba(228,213,185,0.5); }
+
+    /* ---------- Entrance motion (one-time, completes to visible; reduced-motion safe) ---------- */
+    @media (prefers-reduced-motion: no-preference){
+      .reveal{ animation: rdpFadeUp .6s ease both; }
+    }
+    @keyframes rdpFadeUp{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+
+    .visually-hidden{
+      position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===================== GLOBAL RDP NAV (unified emblem + wordmark) ===================== -->
+  <header class="site-nav" role="banner">
+    <div class="site-nav-inner">
+      <a class="brand" href="/" aria-label="Restoring Democracy's Promise — home">
+        <img src="/assets/Square_logo_transparent.png" alt="" width="38" height="38" decoding="async">
+        <span class="wordmark">RDP</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="/#investigations">Featured Work</a>
+        <a href="/analytics/">Analytics</a>
+        <a href="/about/">About</a>
+        <a href="/team/">Team</a>
+        <a class="desk" href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer">Investigations Desk
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <a href="/secure-tips/">Secure Tips</a>
+        <button id="share-btn" class="nav-share" type="button" aria-label="Share this page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          <span id="share-label" class="visually-hidden">Share</span>
+        </button>
+        <a class="nav-support" href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer">Support Our Work</a>
+      </nav>
+
+      <details class="nav-mobile" id="nav-mobile">
+        <summary class="nav-toggle" aria-label="Toggle navigation menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </summary>
+        <div class="nav-mobile-links">
+          <a href="/#investigations">Featured Work</a>
+          <a href="/analytics/">Analytics</a>
+          <a href="/about/">About</a>
+          <a href="/team/">Team</a>
+          <a class="desk" href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer">Investigations Desk &#8599;</a>
+          <a href="/secure-tips/">Secure Tips</a>
+          <a class="nav-support" href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer">Support Our Work</a>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <nav class="exhibit-nav desktop-exhibit-nav" aria-label="Exhibit sections">
+      <div class="exhibit-nav-inner">
+        <a href="#overview">Overview</a>
+        <a href="#receipt">Payroll Receipt</a>
+        <a href="#record">What the Record Shows</a>
+        <a href="#ruler">The Ruler Problem</a>
+        <a href="#closed-door">Closed Door</a>
+        <a href="#why">Why It Matters</a>
+        <a href="#receipts">See the Receipts</a>
+        <a href="#method">Method</a>
+      </div>
+    </nav>
+    <details class="exhibit-nav mobile-exhibit-nav">
+      <summary>Exhibit sections</summary>
+      <nav class="mobile-exhibit-links" aria-label="Exhibit sections">
+        <a href="#overview">Overview</a>
+        <a href="#receipt">Payroll Receipt</a>
+        <a href="#record">The Record</a>
+        <a href="#ruler">Ruler Problem</a>
+        <a href="#closed-door">Closed Door</a>
+        <a href="#why">Why It Matters</a>
+        <a href="#receipts">See Receipts</a>
+        <a href="#method">Method</a>
+        <a class="read-story" href="https://investigations.restoring-democracy.org/p/iowas-46-billion-pension-fund-paid" target="_blank" rel="noopener noreferrer" aria-label="Read the full story in a new tab">Read story</a>
+      </nav>
+    </details>
+
+  <main id="main">
+
+    <!-- ===================== HERO ===================== -->
+    <section id="overview" class="module hero" aria-labelledby="hero-h">
+      <div class="wrap-wide">
+        <p class="kicker">Public Records Exhibit</p>
+        <h1 id="hero-h">The <span class="accent">$25,000</span> Question</h1>
+        <p class="standfirst">Three years. Three $25,000 &ldquo;Exceptional Job Performance Pay&rdquo; entries for the CIO. RDP asked why. No one will say.</p>
+
+        <div class="stat-cards reveal">
+          <div class="stat-card">
+            <div class="num tnum">$46<small>B</small></div>
+            <div class="lbl">Iowa public pension fund (IPERS)</div>
+          </div>
+          <div class="stat-card">
+            <div class="num tnum">$25,000 <small>&times;3</small></div>
+            <div class="lbl">&ldquo;Exceptional Job Performance Pay&rdquo; entries for the CIO</div>
+          </div>
+          <div class="stat-card">
+            <div class="num tnum">2023&ndash;2025</div>
+            <div class="lbl">Years the payments appear in the payroll record</div>
+          </div>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://investigations.restoring-democracy.org/p/iowas-46-billion-pension-fund-paid" target="_blank" rel="noopener noreferrer" aria-label="Read the full story in a new tab">
+            Read the Full Story
+          </a>
+          <a class="btn btn-gold" href="/assets/docs/ipers/ipers-payroll-orr-response-2026-redacted.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download the payroll records PDF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download the Payroll Records
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SUBSCRIBE / SUPPORT CTA ===================== -->
+    <aside class="sub-cta" aria-labelledby="sub-cta-title">
+      <div class="sub-cta-card reveal">
+        <div class="sc-text">
+          <h2 id="sub-cta-title">Support public-records reporting that follows the paper trail.</h2>
+          <p>Independent, document-driven journalism on how Iowa&rsquo;s public institutions account for public money.</p>
+        </div>
+        <a class="btn btn-gold" href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to Restoring Democracy's Promise in a new tab">Subscribe to RDP</a>
+      </div>
+    </aside>
+
+    <!-- ===================== SECTION 1 — THE PAYROLL RECEIPT ===================== -->
+    <section id="receipt" class="module" aria-labelledby="m1-h">
+      <div class="wrap-wide">
+        <p class="kicker">Section 1 <span class="dot">&bull;</span> The Record</p>
+        <h2 id="m1-h" class="module-title">The Payroll Receipt</h2>
+        <p class="subhead">
+          DAS produced a five-page payroll-data response for the named IPERS officials in RDP&rsquo;s open-records request &mdash; one page per year from 2022 through the partial 2026 payroll. An &ldquo;Exceptional Job Performance Pay&rdquo; column appears in the response for 2023, 2024, and 2025, each time showing $25,000 for the Chief Investment Officer.
+        </p>
+
+        <ol class="timeline reveal" aria-label="Exceptional Job Performance Pay shown in the IPERS payroll record, by year">
+          <li class="yr-card">
+            <span class="yr">2022</span>
+            <span class="amt none tnum">&mdash;</span>
+            <span class="tag muted">No column shown</span>
+            <span class="note">No &ldquo;Exceptional Job Performance Pay&rdquo; entry appears for the CIO.</span>
+          </li>
+          <li class="yr-card flagged">
+            <span class="yr">2023</span>
+            <span class="amt tnum">$25,000</span>
+            <span class="tag">Exceptional Pay</span>
+            <span class="note">Labeled &ldquo;Exceptional Job Performance Pay&rdquo; for the CIO.</span>
+          </li>
+          <li class="yr-card flagged">
+            <span class="yr">2024</span>
+            <span class="amt tnum">$25,000</span>
+            <span class="tag">Exceptional Pay</span>
+            <span class="note">Same label, same amount for the CIO.</span>
+          </li>
+          <li class="yr-card flagged">
+            <span class="yr">2025</span>
+            <span class="amt tnum">$25,000</span>
+            <span class="tag">Exceptional Pay</span>
+            <span class="note">Same label, same amount for the CIO.</span>
+          </li>
+          <li class="yr-card partial">
+            <span class="yr">2026</span>
+            <span class="amt none tnum">Partial</span>
+            <span class="tag muted">Through 5/08/26 pp</span>
+            <span class="note">Partial-year page; covers the payroll period through May 8, 2026.</span>
+          </li>
+        </ol>
+
+        <p class="interp">The same label, the same $25,000, three years running &mdash; and then a partial-year page where the column does not appear.</p>
+        <p class="source">Payroll-data response produced by Iowa DAS under Iowa open-records law (compensation tables, 2022&ndash;partial 2026).</p>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 2 — WHAT THE RECORD SHOWS ===================== -->
+    <section id="record" class="module" aria-labelledby="m2-h">
+      <div class="wrap-wide">
+        <p class="kicker">Section 2 <span class="dot">&bull;</span> The Boundary</p>
+        <h2 id="m2-h" class="module-title">What the Record Shows</h2>
+        <p class="subhead">The payroll record confirms the payments. It does not explain the rationale.</p>
+
+        <div class="rec-grid reveal">
+          <div class="rec-col confirmed">
+            <h3>Confirmed by records</h3>
+            <ul class="rec-list">
+              <li>The payments were real.</li>
+              <li>They were labeled &ldquo;Exceptional Job Performance Pay.&rdquo;</li>
+              <li>The amount was $25,000 in each listed year.</li>
+              <li>The label appears for the CIO in 2023, 2024, and 2025.</li>
+            </ul>
+          </div>
+          <div class="rec-col open">
+            <h3>Still unanswered</h3>
+            <ul class="rec-list">
+              <li>Who approved the award?</li>
+              <li>What scorecard was used?</li>
+              <li>Was the benchmark independently validated?</li>
+              <li>Why was the public board record silent?</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="interp">The records confirm what was paid and what it was called. They do not explain how the award was decided &mdash; the public still has not been shown the scorecard.</p>
+        <p class="source">DAS produced the payroll response, but the response did not include the approval rationale, scorecard, benchmark analysis, or performance criteria.</p>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 3 — THE RULER PROBLEM ===================== -->
+    <section id="ruler" class="module" aria-labelledby="m3-h">
+      <div class="wrap-wide">
+        <p class="kicker">Section 3 <span class="dot">&bull;</span> The Benchmark</p>
+        <h2 id="m3-h" class="module-title">The Ruler Problem</h2>
+        <p class="subhead">Performance pay implies a measurement. For FY2025, the reported margin over the policy benchmark was very thin.</p>
+
+        <div class="ruler-card reveal">
+          <div class="ruler-figs">
+            <div class="ruler-fig">
+              <div class="v tnum">9.87%</div>
+              <div class="k">Reported investment return (FY2025)</div>
+            </div>
+            <div class="ruler-fig">
+              <div class="v tnum">9.85%</div>
+              <div class="k">Policy benchmark (FY2025)</div>
+            </div>
+            <div class="ruler-fig ruler-margin">
+              <div class="v tnum">0.02<small>percentage points</small></div>
+              <div class="k">Margin over benchmark</div>
+            </div>
+          </div>
+
+          <div class="ruler-bar-wrap" role="img" aria-label="The FY2025 reported return of 9.87 percent is 0.02 percentage points above the 9.85 percent policy benchmark.">
+            <div class="ruler-bar-row">
+              <span class="rl">Return</span>
+              <span class="track"><span class="fill" style="width:98.7%;background:var(--gold)"></span></span>
+              <span class="rv tnum">9.87%</span>
+            </div>
+            <div class="ruler-bar-row">
+              <span class="rl">Benchmark</span>
+              <span class="track"><span class="fill" style="width:98.5%;background:var(--green-mid)"></span></span>
+              <span class="rv tnum">9.85%</span>
+            </div>
+          </div>
+
+          <p class="ruler-pullquote">&ldquo;When the difference between beating the market and trailing it is that thin, the question becomes: who&rsquo;s holding the ruler?&rdquo;</p>
+
+          <p class="source">IPERS-reported FY2025 investment return (9.87%) against the reported policy benchmark (9.85%). A 0.02-point margin is not, on its own, evidence of anything &mdash; it is the reason the benchmark itself matters.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 4 — CLOSED DOOR / OPEN QUESTION ===================== -->
+    <section id="closed-door" class="module" aria-labelledby="m4-h">
+      <div class="wrap-wide">
+        <p class="kicker">Section 4 <span class="dot">&bull;</span> The Path</p>
+        <h2 id="m4-h" class="module-title">Closed Door, Open Question</h2>
+        <p class="subhead">How public money reaches a performance label &mdash; and where the public explanation goes missing.</p>
+
+        <ol class="flow reveal" aria-label="The path from public money to an unexplained performance award">
+          <li class="flow-node"><span class="ix">1</span><span class="ftext">Public money<small>Iowans&rsquo; contributions and tax-supported pension funding</small></span></li>
+          <li class="flow-arrow" aria-hidden="true">&darr;</li>
+          <li class="flow-node"><span class="ix">2</span><span class="ftext">Public pension fund<small>IPERS, the $46&nbsp;billion statewide system</small></span></li>
+          <li class="flow-arrow" aria-hidden="true">&darr;</li>
+          <li class="flow-node"><span class="ix">3</span><span class="ftext">Performance label<small>&ldquo;Exceptional Job Performance Pay&rdquo; &mdash; $25,000 per listed year</small></span></li>
+          <li class="flow-arrow" aria-hidden="true">&darr;</li>
+          <li class="flow-node closed"><span class="ix">4</span><span class="ftext">Closed-session evaluation<small>Executive performance is reviewed outside the public record</small></span></li>
+          <li class="flow-arrow" aria-hidden="true">&darr;</li>
+          <li class="flow-node open-q"><span class="ix">5</span><span class="ftext">No public scorecard located<small>The public board record does not explain how the award was decided</small></span></li>
+        </ol>
+
+        <p class="interp">The payroll record confirms the payments. It does not explain the rationale. RDP sought it &mdash; interview questions to relevant officials went unanswered, and DAS priced broader research and compilation at substantial fees. As of publication, no one has provided the public explanation for why these payments were awarded. The question remains: who approved the award, under what criteria, and against what benchmark?</p>
+        <p class="source">Iowa DAS payroll response. The public record does not explain the approval rationale, scorecard, or criteria behind the payments; no public scorecard for the award was located.</p>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 5 — WHY THIS MATTERS ===================== -->
+    <section id="why" class="module matters" aria-labelledby="m5-h">
+      <div class="wrap">
+        <p class="kicker">Section 5 <span class="dot">&bull;</span> The Stakes</p>
+        <h2 id="m5-h" class="module-title">Why This Matters</h2>
+        <p class="lead">
+          This is not about whether one executive deserved compensation. It is about whether a public pension system can <b>explain how performance pay is awarded</b> when the benchmark, risk oversight, and approval trail are not fully visible to the public.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 6 — SEE THE RECEIPTS ===================== -->
+    <section id="receipts" class="module receipts" aria-labelledby="m6-h">
+      <div class="wrap-wide">
+        <p class="kicker">Section 6 <span class="dot">&bull;</span> The Documents</p>
+        <h2 id="m6-h" class="module-title">See the Receipts</h2>
+        <p class="subhead">Read the public record for yourself. The compensation fields are intact.</p>
+
+        <p class="doc-note">
+          RDP redacted only internal employee identification numbers. <b>No substantive compensation fields were redacted.</b>
+        </p>
+
+        <div class="cta-row">
+          <a class="btn btn-gold" href="/assets/docs/ipers/ipers-payroll-orr-response-2026-redacted.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download the redacted payroll open-records response PDF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download the Redacted Payroll ORR Response
+          </a>
+          <a class="btn btn-ghost" href="https://investigations.restoring-democracy.org/p/iowas-46-billion-pension-fund-paid" target="_blank" rel="noopener noreferrer" aria-label="Read the full story in a new tab">Read the Full Story</a>
+          <a class="btn btn-ghost" href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer" aria-label="Subscribe for future IPERS reporting in a new tab">Subscribe for future IPERS reporting</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 7 — METHOD / REDACTION NOTE ===================== -->
+    <section id="method" class="module method-band" aria-labelledby="m7-h">
+      <div class="wrap">
+        <p class="kicker">Section 7 <span class="dot">&bull;</span> Method</p>
+        <h2 id="m7-h" class="module-title">Method &amp; Redaction Note</h2>
+        <p class="method-note">
+          This exhibit is based on payroll data produced by the Iowa Department of Administrative Services (DAS) in response to RDP&rsquo;s open-records request. RDP is publishing the redacted payroll response so readers can review the source record. Only internal employee identification numbers were redacted. No substantive compensation fields were redacted. RDP does not publish internal reporting notes, source-protection materials, or investigative work product.
+        </p>
+        <p class="source">Payroll / compensation tables produced by Iowa DAS under Iowa open-records law. Figures and labels are reproduced as they appear in the released record. The payroll response confirms three $25,000 &ldquo;Exceptional Job Performance Pay&rdquo; entries for the CIO in 2023, 2024, and 2025; it does not explain the approval rationale, scorecard, or criteria behind those payments.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER (unified RDP footer) ===================== -->
+  <footer class="site" role="contentinfo">
+    <div class="f-inner">
+      <div class="f-grid">
+
+        <div>
+          <picture>
+            <source srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.webp" type="image/webp">
+            <img class="f-logo" src="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.png" loading="lazy" decoding="async" width="1536" height="857" alt="Restoring Democracy's Promise logo">
+          </picture>
+          <p class="f-tagline">Quantifying the Truth</p>
+          <p class="f-sub">Engineering Precision Journalism</p>
+          <p class="f-note">Independent &middot; Evidence-driven &middot; Document-first</p>
+        </div>
+
+        <div>
+          <h4>Organization</h4>
+          <ul>
+            <li><a class="desk" href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer">The Investigations Desk &#8599;</a></li>
+            <li><a href="/about/">About RDP</a></li>
+            <li><a href="/team/">Team</a></li>
+            <li><a href="/analytics/">RDP Analytics</a></li>
+            <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>
+              <span class="f-note" style="margin:0;">General &amp; Webmaster</span><br>
+              <a href="mailto:webmaster@restoring-democracy.org">webmaster@restoring-democracy.org</a>
+            </li>
+            <li style="margin-top:.7rem;"><a class="tip" href="/secure-tips/">Secure Tips &rarr;</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="f-bar">
+        <p class="f-copy">&copy; 2023&ndash;2026 Restoring Democracy&rsquo;s Promise. All rights reserved.</p>
+        <div class="f-bar-links">
+          <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer">Investigations Desk &#8599;</a>
+          <a href="/privacy-policy/">Privacy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    'use strict';
+
+    /* ---------- Mobile exhibit nav: close on selection ---------- */
+    var mobileExhibitNav = document.querySelector('.mobile-exhibit-nav');
+    if (mobileExhibitNav){
+      mobileExhibitNav.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){ mobileExhibitNav.removeAttribute('open'); });
+      });
+    }
+
+    /* ---------- Share button ---------- */
+    var shareBtn = document.getElementById('share-btn');
+    var shareLabel = document.getElementById('share-label');
+    if (shareBtn){
+      shareBtn.addEventListener('click', function(){
+        var data = { title: document.title, url: window.location.href };
+        if (navigator.share){
+          navigator.share(data).catch(function(){});
+        } else if (navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(window.location.href).then(function(){
+            if (shareLabel){ var t = shareLabel.textContent; shareLabel.textContent = 'Copied'; setTimeout(function(){ shareLabel.textContent = t; }, 1600); }
+          }).catch(function(){ window.prompt('Copy this link:', window.location.href); });
+        } else {
+          window.prompt('Copy this link:', window.location.href);
+        }
+      });
+    }
+  })();
+  </script>
+
+</body>
+</html>
