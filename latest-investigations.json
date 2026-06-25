@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "A Court Struck Down Trump’s Voter‑Screening System. Iowa Had Already Signed On — Twice.",
+      "link": "https://investigations.restoring-democracy.org/p/a-court-struck-down-trumps-voterscreening",
+      "date": "2026-06-25",
+      "dateLabel": "Jun 25",
+      "category": "Investigation"
+    },
+    {
       "title": "Iowa’s $46 Billion Pension Fund Paid Its CIO “Exceptional” Performance Pay — No One Will Say Why",
       "link": "https://investigations.restoring-democracy.org/p/iowas-46-billion-pension-fund-paid",
       "date": "2026-06-13",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/from-state-of-the-union-to-state",
       "date": "2026-02-27",
       "dateLabel": "Feb 27",
-      "category": "Investigation"
-    },
-    {
-      "title": "The SAVE America Act: From Voter Verification to Identity Infrastructure",
-      "link": "https://investigations.restoring-democracy.org/p/the-save-america-act-from-voter-verification",
-      "date": "2026-02-18",
-      "dateLabel": "Feb 18",
       "category": "Investigation"
     }
   ]
