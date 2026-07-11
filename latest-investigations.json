@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "DHS Built a Four-State SAVE Workaround After a Judge Struck Down the 2025 System",
+      "link": "https://investigations.restoring-democracy.org/p/dhs-built-a-four-state-save-workaround",
+      "date": "2026-07-11",
+      "dateLabel": "Jul 11",
+      "category": "Investigation"
+    },
+    {
       "title": "A Court Struck Down Trump’s Voter‑Screening System. Iowa Had Already Signed On Twice.",
       "link": "https://investigations.restoring-democracy.org/p/a-court-struck-down-trumps-voterscreening",
       "date": "2026-06-25",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/when-war-tests-democracy",
       "date": "2026-03-13",
       "dateLabel": "Mar 13",
-      "category": "Investigation"
-    },
-    {
-      "title": "From State of the Union to State Statute: How Iowa Is Wiring the SAVE America Act into Law",
-      "link": "https://investigations.restoring-democracy.org/p/from-state-of-the-union-to-state",
-      "date": "2026-02-27",
-      "dateLabel": "Feb 27",
       "category": "Investigation"
     }
   ]
