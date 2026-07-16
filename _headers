@@ -10,3 +10,11 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Content-Security-Policy: default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; script-src 'none'; style-src 'self'; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'
+
+/resources/reference/archive/access/index.html
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+  Cache-Control: no-store, max-age=0
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; script-src 'none'; style-src 'self'; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'
