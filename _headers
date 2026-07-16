@@ -2,3 +2,11 @@
 # Cache the feed JSON at CDN/browser for 15 min, serve stale while revalidating.
 /latest-investigations.json
   Cache-Control: public, max-age=900, stale-while-revalidate=3600
+
+/resources/reference/archive/access/
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+  Cache-Control: no-store, max-age=0
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; script-src 'none'; style-src 'self'; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'
