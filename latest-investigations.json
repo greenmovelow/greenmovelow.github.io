@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Trump’s 278,000 Claim Rests on Two Searches the Government Has Not Explained",
+      "link": "https://investigations.restoring-democracy.org/p/trumps-278000-claim-rests-on-two",
+      "date": "2026-07-19",
+      "dateLabel": "Jul 19",
+      "category": "Investigation"
+    },
+    {
       "title": "DHS Built a Four-State SAVE Workaround After a Judge Struck Down the 2025 System",
       "link": "https://investigations.restoring-democracy.org/p/dhs-built-a-four-state-save-workaround",
       "date": "2026-07-11",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/rdp-analytics-is-now-live",
       "date": "2026-03-16",
       "dateLabel": "Mar 16",
-      "category": "Investigation"
-    },
-    {
-      "title": "When War Tests Democracy",
-      "link": "https://investigations.restoring-democracy.org/p/when-war-tests-democracy",
-      "date": "2026-03-13",
-      "dateLabel": "Mar 13",
       "category": "Investigation"
     }
   ]
