@@ -1,36 +1,85 @@
 # Analytics / Tracking Audit
 
-Audit date: 2026-06-22
+Migration date: 2026-07-24
 
-## Summary
+## Migration result
 
-Google Analytics / Google Tag Manager (`G-QJ3L9CT4Z7`) snippets remain on a subset of public HTML pages. No Plausible, Umami, Microsoft Clarity, Hotjar, Fathom, or `google-analytics.com` library references were found in public page markup. This audit does not remove any analytics code.
+The sitewide migration from Google Analytics 4 to GoatCounter is complete in repository HTML. Active GA4 code, including measurement ID `G-QJ3L9CT4Z7`, Google Tag Manager analytics loaders and resource hints, `dataLayer` initialization, and `gtag()` initialization/configuration, was removed.
 
-## Findings
+The audit classifies all 41 repository HTML files: 35 eligible public pages contain exactly one GoatCounter snippet, and 6 pages are deliberately excluded. No eligible page has a duplicate snippet. GoatCounter uses the browser-tested official `https://gc.zgo.at/count.js` script and `https://restoring-democracy.goatcounter.com/count` endpoint.
 
-| File | Line(s) | Provider | Snippet found |
-| --- | ---: | --- | --- |
-| `about/index.html` | 130-137 | Google Analytics / Google Tag Manager | `preconnect` and `dns-prefetch` to `www.googletagmanager.com`; `gtag/js?id=G-QJ3L9CT4Z7`; `dataLayer`; `gtag('config', 'G-QJ3L9CT4Z7')` |
-| `alpr-trap/index.html` | 91-96 | Google Analytics / Google Tag Manager | `gtag/js?id=G-QJ3L9CT4Z7`; `dataLayer`; `gtag('config', 'G-QJ3L9CT4Z7')` |
-| `analytics/index.html` | 146-153 | Google Analytics / Google Tag Manager | `preconnect` and `dns-prefetch` to `www.googletagmanager.com`; `gtag/js?id=G-QJ3L9CT4Z7`; `dataLayer`; `gtag('config', 'G-QJ3L9CT4Z7')` |
-| `cross-and-capitol/index.html` | 52-57 | Google Analytics / Google Tag Manager | `gtag/js?id=G-QJ3L9CT4Z7`; `dataLayer`; `gtag('config', 'G-QJ3L9CT4Z7')` |
-| `funding_flow/index.html` | 92-97 | Google Analytics / Google Tag Manager | `gtag/js?id=G-QJ3L9CT4Z7`; `dataLayer`; `gtag('config', 'G-QJ3L9CT4Z7')` |
-| `index.html` | 95-102 | Google Analytics / Google Tag Manager | `preconnect` and `dns-prefetch` to `www.googletagmanager.com`; `gtag/js?id=G-QJ3L9CT4Z7`; `dataLayer`; `gtag('config', 'G-QJ3L9CT4Z7')` |
-| `iowa-alpr-reform/index.html` | 1296-1301 | Google Analytics / Google Tag Manager | `gtag/js?id=G-QJ3L9CT4Z7`; `dataLayer`; `gtag('config', 'G-QJ3L9CT4Z7')` |
-| `ipers-wiggins/index.html` | 119-120 | Google Analytics / Google Tag Manager | `gtag/js?id=G-QJ3L9CT4Z7`; inline `dataLayer` / `gtag('config','G-QJ3L9CT4Z7')` |
-| `save_iowa/index.html` | 72-73 | Google Analytics / Google Tag Manager | `gtag/js?id=G-QJ3L9CT4Z7`; inline `dataLayer` / `gtag('config','G-QJ3L9CT4Z7')` |
-| `secure-tips/index.html` | 64-71 | Google Analytics / Google Tag Manager | `preconnect` and `dns-prefetch` to `www.googletagmanager.com`; `gtag/js?id=G-QJ3L9CT4Z7`; `dataLayer`; `gtag('config', 'G-QJ3L9CT4Z7')` |
-| `security-policy/index.html` | 97-104 | Google Analytics / Google Tag Manager | `preconnect` and `dns-prefetch` to `www.googletagmanager.com`; `gtag/js?id=G-QJ3L9CT4Z7`; `dataLayer`; `gtag('config', 'G-QJ3L9CT4Z7')` |
-| `shutdown-accountability/index.html` | 66-67 | Google Analytics / Google Tag Manager | `gtag/js?id=G-QJ3L9CT4Z7`; inline `dataLayer` / `gtag('config','G-QJ3L9CT4Z7')` |
-| `shutdown-analysis/index.html` | 68-69 | Google Analytics / Google Tag Manager | `gtag/js?id=G-QJ3L9CT4Z7`; inline `dataLayer` / `gtag('config','G-QJ3L9CT4Z7')` |
+## Eligible public pages (35)
 
-## Non-tracking keyword matches reviewed
+- `index.html`
+- `about/index.html`
+- `alpr-leviathan/index.html`
+- `alpr-trap/index.html`
+- `analytics/index.html`
+- `assembly-line/index.html`
+- `assembly-line-unpacked/index.html`
+- `confidential_mou/index.html`
+- `corrections/index.html`
+- `credentialing-gap/index.html`
+- `credentialing-gap-dossier/index.html`
+- `cross-and-capitol/index.html`
+- `dream_machine/index.html`
+- `funding_flow/index.html`
+- `god-machine-flowchart/index.html`
+- `infographics/bird-raga-money-trail/index.html`
+- `infographics/ipers-cio-performance-pay/index.html`
+- `infographics/save-four-state-settlement/index.html`
+- `iowa-alpr-reform/index.html`
+- `iowa-doge-pension-privatize/index.html`
+- `ipers-wiggins/index.html`
+- `journalism/index.html`
+- `leviathan-grid/index.html`
+- `pincer-dataviz/index.html`
+- `pincer-financial/index.html`
+- `pincer-infographic/index.html`
+- `privacy-policy/index.html`
+- `save_america_act/index.html`
+- `save_iowa/index.html`
+- `security-policy/index.html`
+- `shutdown-accountability/index.html`
+- `shutdown-analysis/index.html`
+- `team/index.html`
+- `the-god-machine/index.html`
+- `voting_rights_ia/index.html`
 
-The audit search also matched ordinary prose using terms like "plausible" or "implications" and privacy-policy language mentioning advertising pixels. Those are not active analytics scripts or pixels.
+## Deliberately excluded pages (6)
 
-## Prepared removal plan for a follow-up privacy branch
+- `secure-tips/index.html` — source-contact and source-intake page; no analytics.
+- `resources/reference/records/status/index.html` — restricted-status page whose strict CSP intentionally sets `script-src 'none'`; no analytics and no CSP change.
+- `go/save_backfill_ia/index.html` — redirect-only forwarding page; no analytics.
+- `go/when-war-tests-democracy/index.html` — redirect-only forwarding page; no analytics.
+- `vault.html` — operational-security/canary page; no analytics.
+- `journalism/cross-and-capitol/index.html` — empty, one-byte non-content placeholder; no analytics.
 
-1. Remove all Google Analytics / gtag loader scripts and inline `dataLayer` / `gtag()` snippets.
-2. Remove `preconnect` and `dns-prefetch` hints to `www.googletagmanager.com`.
-3. Update privacy and analytics page copy if the site no longer uses analytics.
-4. Validate no remaining tracker matches, no broken layouts, and no browser console errors.
+## Exclusion principles
+
+Analytics are excluded from:
+
+- `secure-tips/**` and any authentication, administration, upload, submission, source-intake, confidential-source, or similarly sensitive operational route;
+- `resources/reference/records/status/**` and any page whose CSP intentionally uses `script-src 'none'`;
+- `go/**`, immediate redirects, forwarding-only pages, and other non-content routes;
+- `vault.html`, canaries, tripwires, honeypots, decoys, and security-test pages;
+- 404/error pages;
+- pages marked `noindex`, `nofollow`, `noarchive`, or otherwise intentionally hidden;
+- temporary test fixtures and empty placeholders.
+
+A security-related word in a public article slug is not itself an exclusion. Ordinary public, substantive, indexable pages—including `security-policy/index.html` and `confidential_mou/index.html`—receive GoatCounter.
+
+## Automated verification
+
+`scripts/audit_analytics.py` recursively checks every repository HTML file against the readable route configuration near the top of the script. It confirms:
+
+- active GA4 implementation code is absent;
+- all 35 eligible pages contain exactly one GoatCounter snippet immediately before `</body>`;
+- no eligible page contains a duplicate GoatCounter snippet;
+- all 6 excluded pages contain no GoatCounter;
+- `secure-tips/**` and `resources/reference/records/status/**` contain no analytics;
+- `go/**` redirect pages and `vault.html` contain no analytics.
+
+## CSP deployment note
+
+Cloudflare CSP support was changed and browser-tested separately; Cloudflare configuration and repository `_headers` rules are outside this migration PR. Google domains should remain temporarily allowed in the Cloudflare CSP until the merged deployment is browser-verified. After verification confirms GoatCounter succeeds and no Google Analytics requests occur, the operator can remove the Google domains manually.

@@ -165,7 +165,7 @@
       <h1 class="font-serif text-4xl md:text-5xl font-bold text-brand-gold tracking-tight">Privacy Policy</h1>
       <p class="mt-4 text-brand-sand text-lg">How we collect, use, and protect your information</p>
       <p class="mt-3 text-brand-sand/80 text-sm">
-        Effective Date: February 10, 2026 &nbsp;·&nbsp; Last Updated: April 26, 2026
+        Effective Date: February 10, 2026 &nbsp;·&nbsp; Last Updated: July 24, 2026
       </p>
     </div>
   </section>
@@ -237,9 +237,8 @@
       </p>
       <p>
         Our analytics are used for aggregate measurement only. We may review information such as page
-        views, referring websites, approximate geographic region, device type, browser type, and general
-        engagement patterns. We do not use analytics for advertising, retargeting, political targeting,
-        voter profiling, or individual reader surveillance.
+        readership, referring websites, and broad technical usage patterns. We do not use analytics for
+        advertising, retargeting, political targeting, voter profiling, or individual reader surveillance.
       </p>
       <p>
         We do not maintain a separate internal database of individual visitor browsing histories or use
@@ -250,7 +249,7 @@
         infrastructure providers and third-party services:
       </p>
       <ul>
-        <li><strong>Analytics:</strong> We use Google Analytics to measure aggregate website traffic and readership patterns.</li>
+        <li><strong>Analytics:</strong> We use GoatCounter for limited aggregate measurement of page readership, referrals, and broad technical usage patterns on ordinary public content pages.</li>
         <li><strong>Server logs and security:</strong> Our hosting and security providers, such as GitHub Pages and Cloudflare, may process standard technical data such as IP address, browser type, user agent, and pages requested for site delivery, performance, abuse prevention, and security.</li>
         <li><strong>Third-party asset requests:</strong> Our site may load certain assets, such as CSS/JS libraries and fonts, from third parties including Tailwind CDN and Google Fonts. Those providers may receive standard technical request data when your browser loads those resources.</li>
       </ul>
@@ -286,7 +285,7 @@
       <p>We rely on a limited number of third-party services to operate. Each has its own privacy policy governing data they process:</p>
       <ul>
         <li><strong>Substack</strong> (<a href="https://substack.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>) — Hosts our newsletter and manages subscriber email addresses.</li>
-        <li><strong>Google Analytics</strong> — Provides aggregate website traffic measurement, including page views, referral sources, approximate region, device/browser information, and general engagement data. We do not use Google Analytics for advertising, retargeting, or individual reader profiling.</li>
+        <li><strong>GoatCounter</strong> — Provides limited aggregate measurement of page readership, referrals, and broad technical usage patterns. We do not use analytics for advertising, retargeting, political targeting, voter profiling, or individual-reader surveillance.</li>
         <li><strong>GitHub Pages / Cloudflare</strong> — Hosts our website and provides content delivery and security services.</li>
         <li><strong>Tailwind CSS (self-hosted)</strong> — Serves site styling from local static assets.</li>
       </ul>
@@ -300,12 +299,12 @@
         trackers. We do use limited analytics to measure aggregate website traffic and improve the site.
       </p>
       <p>
-        Google Analytics may use cookies or similar technologies to help distinguish visits and generate
-        aggregate reports. We use this information to understand readership patterns, not to identify
-        individual readers.
+        We do not load GoatCounter on secure-tip, confidential-source, restricted-status, canary,
+        redirect-only, or similarly sensitive operational pages. Blocking GoatCounter must not interfere
+        with reading the website; the published content does not depend on the analytics script.
       </p>
       <ul>
-        <li><strong>Analytics cookies:</strong> Used for aggregate traffic measurement and site improvement.</li>
+        <li><strong>Aggregate analytics:</strong> Used for limited readership measurement and site improvement on ordinary public content pages.</li>
         <li><strong>Security cookies:</strong> Infrastructure providers such as Cloudflare may use cookies or similar mechanisms to protect the site from abuse, bots, and DDoS attacks.</li>
         <li><strong>No advertising tracking:</strong> We do not use retargeting pixels, social media tracking pixels, or advertising networks.</li>
       </ul>
@@ -436,5 +435,11 @@
     }
   </script>
 
+  <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
+  <script
+    data-goatcounter="https://restoring-democracy.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+  </script>
 </body>
 </html>

@@ -70,8 +70,6 @@
 
   <link rel="stylesheet" href="/assets/css/styles.css">
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-QJ3L9CT4Z7');</script>
 
   <style>
     html{scroll-padding-top:72px}
@@ -430,5 +428,11 @@
     const toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('mobile-menu');toggle.addEventListener('click',()=>{const o=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',o)});menu.querySelectorAll('a').forEach(l=>{l.addEventListener('click',()=>{menu.classList.remove('open');toggle.setAttribute('aria-expanded','false')})});
   </script>
 </div>
+  <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
+  <script
+    data-goatcounter="https://restoring-democracy.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+  </script>
 </body>
 </html>
