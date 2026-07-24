@@ -127,15 +127,6 @@
 
   <link rel="stylesheet" href="/assets/css/styles.css">
 
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ3L9CT4Z7"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QJ3L9CT4Z7');
-  </script>
 
 
 </head>
@@ -412,6 +403,12 @@
       timer = setTimeout(() => { clickCount = 0; }, 1000);
       if (clickCount === 5) window.location.href = '/vault.html';
     });
+  </script>
+  <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
+  <script
+    data-goatcounter="https://restoring-democracy.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
   </script>
 </body>
 </html>
