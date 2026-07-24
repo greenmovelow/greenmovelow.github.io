@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+  <link rel="preload" as="image" type="image/webp"
+        href="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.webp"
+        imagesrcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_320.webp 320w, /assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.webp 640w"
+        imagesizes="(min-width:1024px) 200px, (min-width:768px) 172px, 143px"
+        fetchpriority="high">
   <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -163,8 +168,9 @@
       .newsletter-cta__body { font-size: 0.84rem; }
       .newsletter-cta__button { font-size: 0.75rem; padding: 0.5rem 0.7rem; }
     }
-    .rdp-pulse{animation:rdpPulse 2s ease-in-out infinite}
-    @keyframes rdpPulse{0%,100%{opacity:1;box-shadow:0 0 5px #22d3ee}50%{opacity:.45;box-shadow:0 0 11px #22d3ee}}
+    /* Pulse only opacity (GPU-composited); keep a static glow so no per-frame repaint. */
+    .rdp-pulse{box-shadow:0 0 8px #22d3ee;animation:rdpPulse 2s ease-in-out infinite}
+    @keyframes rdpPulse{0%,100%{opacity:1}50%{opacity:.45}}
     @media(prefers-reduced-motion:reduce){.rdp-pulse{animation:none}}
     /* Latest feed — lead (newest) row polish */
     .feed-lead { padding-top: .3rem; padding-bottom: .7rem; }
@@ -186,13 +192,16 @@
       <div class="flex items-center justify-between h-16 lg:h-[68px]">
 
         <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
-          <img id="main-logo"
-               src="/assets/Square_logo_transparent.png"
-               alt="Restoring Democracy's Promise home"
-               width="54"
-               height="54"
-               decoding="async"
-               class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          <picture>
+            <source srcset="/assets/Square_logo_transparent_80.webp" type="image/webp">
+            <img id="main-logo"
+                 src="/assets/Square_logo_transparent.png"
+                 alt="Restoring Democracy's Promise home"
+                 width="54"
+                 height="54"
+                 decoding="async"
+                 class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          </picture>
           <span class="text-brand-gold font-serif font-bold text-base lg:text-lg tracking-tight group-hover:text-brand-orange transition-colors leading-tight">RDP</span>
         </a>
 
@@ -297,8 +306,10 @@
 
       <!-- Logo (slightly larger) -->
       <picture>
-        <source srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.webp" type="image/webp">
-        <img src="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.png"
+        <source type="image/webp"
+                srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_320.webp 320w, /assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.webp 640w"
+                sizes="(min-width:1024px) 200px, (min-width:768px) 172px, 143px">
+        <img src="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.png"
              alt="Restoring Democracy's Promise logo"
              width="1536"
              height="857"
@@ -1145,8 +1156,8 @@
 
         <div class="md:col-span-1">
           <picture>
-            <source srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.webp" type="image/webp">
-            <img src="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.png" loading="lazy" decoding="async" class="h-9 w-auto mb-3" alt="Restoring Democracy's Promise logo" width="1536" height="857">
+            <source srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.webp" type="image/webp">
+            <img src="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.png" loading="lazy" decoding="async" class="h-9 w-auto mb-3" alt="Restoring Democracy's Promise logo" width="1536" height="857">
           </picture>
           <p class="font-serif text-xs italic text-brand-gold">Quantifying the Truth</p>
           <p class="text-xs text-brand-sand/45 mt-0.5">Engineering Precision Journalism</p>
@@ -1294,6 +1305,8 @@
 
       const teardownTriggers = () => {
         window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', recomputeMax);
+        window.removeEventListener('load', recomputeMax);
         clearTimeout(timerId);
       };
 
@@ -1313,17 +1326,24 @@
 
       if (isDismissed()) return;
 
+      // Cache the scroll extent so the scroll handler never reads layout
+      // (scrollHeight/innerHeight) per-frame, which forces reflow. Recompute
+      // only when the viewport or content size can change (resize, load).
+      let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const recomputeMax = () => {
+        maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      };
+
       const onScroll = () => {
-        const doc = document.documentElement;
-        const maxScroll = doc.scrollHeight - window.innerHeight;
         if (maxScroll <= 0) return;
-        const depth = window.scrollY / maxScroll;
-        if (depth >= 0.35) showCta();
+        if (window.scrollY / maxScroll >= 0.35) showCta();
       };
 
       closeBtn.addEventListener('click', dismissCta);
       timerId = setTimeout(showCta, 12000);
       window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', recomputeMax, { passive: true });
+      window.addEventListener('load', recomputeMax, { passive: true });
     })();
 
     let clickCount = 0, clickTimer;
