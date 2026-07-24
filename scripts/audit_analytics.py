@@ -24,6 +24,13 @@ EXCLUDED_FILES: dict[str, str] = {
 
 GOAT_ATTRIBUTE = 'data-goatcounter="https://restoring-democracy.goatcounter.com/count"'
 GOAT_SCRIPT = "https://gc.zgo.at/count.js"
+GOAT_BEFORE_BODY = re.compile(
+    r'<script\b'
+    r'(?=[^>]*\bdata-goatcounter="https://restoring-democracy\.goatcounter\.com/count")'
+    r'(?=[^>]*\bsrc="https://gc\.zgo\.at/count\.js")'
+    r'[^>]*>\s*</script>\s*</body>',
+    re.IGNORECASE | re.DOTALL,
+)
 LEGACY_PATTERNS: dict[str, re.Pattern[str]] = {
     "GA4 measurement ID": re.compile(r"G-QJ3L9CT4Z7", re.I),
     "Google Tag Manager analytics loader": re.compile(r"googletagmanager\.com/gtag", re.I),
@@ -84,8 +91,7 @@ def main() -> int:
                 )
             if goat_count == 1:
                 # The canonical snippet must be the final element before </body>.
-                tail = markup[markup.index(GOAT_ATTRIBUTE):]
-                if not re.search(r"</script>\s*</body>", tail, re.I):
+                if not GOAT_BEFORE_BODY.search(markup):
                     violations.append(f"{relative}: GoatCounter is not immediately before </body>")
 
         if goat_count:
