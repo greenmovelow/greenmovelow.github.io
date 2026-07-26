@@ -165,7 +165,7 @@
       <h1 class="font-serif text-4xl md:text-5xl font-bold text-brand-gold tracking-tight">Privacy Policy</h1>
       <p class="mt-4 text-brand-sand text-lg">How we collect, use, and protect your information</p>
       <p class="mt-3 text-brand-sand/80 text-sm">
-        Effective Date: February 10, 2026 &nbsp;·&nbsp; Last Updated: July 24, 2026
+        Effective Date: February 10, 2026 &nbsp;·&nbsp; Last Updated: July 25, 2026
       </p>
     </div>
   </section>
@@ -249,9 +249,10 @@
         infrastructure providers and third-party services:
       </p>
       <ul>
-        <li><strong>Analytics:</strong> We use GoatCounter for limited aggregate measurement of page readership, referrals, and broad technical usage patterns on ordinary public content pages.</li>
-        <li><strong>Server logs and security:</strong> Our hosting and security providers, such as GitHub Pages and Cloudflare, may process standard technical data such as IP address, browser type, user agent, and pages requested for site delivery, performance, abuse prevention, and security.</li>
-        <li><strong>Third-party asset requests:</strong> Our site may load certain assets, such as CSS/JS libraries and fonts, from third parties including Tailwind CDN and Google Fonts. Those providers may receive standard technical request data when your browser loads those resources.</li>
+        <li><strong>Aggregate analytics:</strong> RDP uses GoatCounter for limited aggregate measurement of page readership, referring websites, and broad technical usage patterns on ordinary public-content pages. GoatCounter does not place cookies or persistent identifiers in a reader's browser, and RDP does not use it to construct individual browsing histories.</li>
+        <li><strong>Site delivery and security:</strong> Netlify and Cloudflare may process technical information such as IP address, requested URL, referral information, browser or device characteristics, user agent, traffic patterns, and security-event information to deliver the site, maintain performance, prevent abuse, and respond to attacks.</li>
+        <li><strong>Cloudflare Precursor:</strong> When enabled, Cloudflare may inject a client-side security script that evaluates technical and session-level behavioral signals to distinguish legitimate readers from automated activity. The results may update security state stored in Cloudflare's <code>cf_clearance</code> cookie. RDP uses this processing for website security, bot detection, and abuse prevention—not advertising, political targeting, or reader profiling.</li>
+        <li><strong>External services:</strong> The site's primary fonts, stylesheets, and visual assets are self-hosted. A third party may receive ordinary technical request information when a visitor deliberately opens an external subscription page, contact form, video, social-media page, or other linked service.</li>
       </ul>
 
       <h3>3.3 Information We Do Not Collect</h3>
@@ -259,7 +260,7 @@
         <li>We do not require account creation to read our investigations.</li>
         <li>We do not use advertising trackers, retargeting pixels, or data brokers.</li>
         <li>We do not collect financial or payment information through our website (donations, if any, are processed through third-party platforms with their own privacy policies).</li>
-        <li>We do not use fingerprinting technologies to identify individual visitors.</li>
+        <li>RDP does not use browser fingerprinting or behavioral information to identify readers, build persistent reader profiles, target advertising, or track people across websites. Cloudflare may process technical and session-level signals solely to deliver and protect the site and detect bots, abuse, fraud, or security threats.</li>
       </ul>
 
       <h2 id="how-we-use">4. How We Use Your Information</h2>
@@ -284,39 +285,67 @@
       <h2 id="third-party">6. Third-Party Services</h2>
       <p>We rely on a limited number of third-party services to operate. Each has its own privacy policy governing data they process:</p>
       <ul>
-        <li><strong>Substack</strong> (<a href="https://substack.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>) — Hosts our newsletter and manages subscriber email addresses.</li>
-        <li><strong>GoatCounter</strong> — Provides limited aggregate measurement of page readership, referrals, and broad technical usage patterns. We do not use analytics for advertising, retargeting, political targeting, voter profiling, or individual-reader surveillance.</li>
-        <li><strong>GitHub Pages / Cloudflare</strong> — Hosts our website and provides content delivery and security services.</li>
-        <li><strong>Tailwind CSS (self-hosted)</strong> — Serves site styling from local static assets.</li>
+        <li><strong>Substack</strong> (<a href="https://substack.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>) — Provides newsletter hosting and subscription management.</li>
+        <li><strong>GoatCounter</strong> (<a href="https://www.goatcounter.com/help/privacy" target="_blank" rel="noopener noreferrer">privacy information</a>) — Provides cookieless aggregate readership measurement without advertising or cross-site tracking.</li>
+        <li><strong>Netlify</strong> (<a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">privacy policy</a>) — Provides static website hosting and deployment infrastructure.</li>
+        <li><strong>GitHub</strong> (<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">privacy statement</a>) — Hosts RDP's public source-code repository and connects with Netlify for website deployment. Ordinary visits to the published website do not normally require a direct request to GitHub.</li>
+        <li><strong>Cloudflare</strong> (<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">privacy policy</a>) — Provides content delivery, traffic management, DDoS mitigation, bot detection, challenges, and other security services, including Precursor.</li>
+        <li><strong>Tailwind CSS and brand fonts</strong> — These are self-hosted static assets, not third-party runtime services.</li>
       </ul>
       <p>
         We select service providers carefully and limit our use of third-party tools. We do not integrate social media tracking pixels, advertising networks, or data enrichment services.
       </p>
 
       <h2 id="cookies">7. Cookies &amp; Tracking Technologies</h2>
+      <p>The technologies most relevant to this policy are summarized below:</p>
+      <dl class="grid gap-3 mb-6" aria-label="Privacy technology summary">
+        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+          <dt class="font-bold text-brand-green-dark">GoatCounter</dt>
+          <dd class="text-slate-700 mt-1"><strong>Purpose:</strong> Aggregate readership measurement</dd>
+          <dd class="text-slate-700 mt-1"><strong>How it operates on this site:</strong> Cookieless aggregate measurement</dd>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+          <dt class="font-bold text-brand-green-dark">Cloudflare security cookies</dt>
+          <dd class="text-slate-700 mt-1"><strong>Purpose:</strong> Site delivery, bot and attack prevention</dd>
+          <dd class="text-slate-700 mt-1"><strong>How it operates on this site:</strong> Necessary for site delivery and security</dd>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+          <dt class="font-bold text-brand-green-dark">Substack</dt>
+          <dd class="text-slate-700 mt-1"><strong>Purpose:</strong> Newsletter subscription when chosen by visitor</dd>
+          <dd class="text-slate-700 mt-1"><strong>How it operates on this site:</strong> Applies after the visitor chooses to visit or subscribe</dd>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+          <dt class="font-bold text-brand-green-dark">External contact forms</dt>
+          <dd class="text-slate-700 mt-1"><strong>Purpose:</strong> Communication initiated by visitor</dd>
+          <dd class="text-slate-700 mt-1"><strong>How it operates on this site:</strong> Applies after the visitor chooses to open or submit the form</dd>
+        </div>
+      </dl>
       <p>
-        We do not use advertising pixels, retargeting pixels, data broker scripts, or cross-site advertising
-        trackers. We do use limited analytics to measure aggregate website traffic and improve the site.
+        RDP does not use advertising cookies, advertising pixels, retargeting pixels, data broker scripts,
+        or cross-site tracking pixels. GoatCounter provides limited aggregate readership measurement and
+        does not set cookies or persistent identifiers in a reader's browser.
       </p>
       <p>
-        We do not load GoatCounter on secure-tip, confidential-source, restricted-status, canary,
-        redirect-only, or similarly sensitive operational pages. Blocking GoatCounter must not interfere
-        with reading the website; the published content does not depend on the analytics script.
+        GoatCounter is limited to ordinary public-content pages and is not loaded on sensitive
+        source-protection or other operational pages. Blocking GoatCounter must not interfere with
+        reading the website; published content does not depend on the analytics script.
       </p>
       <ul>
-        <li><strong>Aggregate analytics:</strong> Used for limited readership measurement and site improvement on ordinary public content pages.</li>
-        <li><strong>Security cookies:</strong> Infrastructure providers such as Cloudflare may use cookies or similar mechanisms to protect the site from abuse, bots, and DDoS attacks.</li>
+        <li><strong>Aggregate analytics:</strong> GoatCounter is used for limited readership measurement and site improvement on ordinary public-content pages. It does not create persistent reader profiles.</li>
+        <li><strong>Security cookies and session verification:</strong> Cloudflare may set strictly necessary cookies, including <code>cf_clearance</code>, to record security verification, prevent repeated challenges, detect automated abuse, and protect the website. When Precursor is enabled, Cloudflare may periodically reassess session-level signals and update this security state during a visit. These mechanisms are used for security and site delivery, not advertising.</li>
+        <li><strong>Independent security layer:</strong> Cloudflare security processing may operate on Cloudflare-proxied pages even where GoatCounter is intentionally disabled.</li>
         <li><strong>No advertising tracking:</strong> We do not use retargeting pixels, social media tracking pixels, or advertising networks.</li>
       </ul>
       <p>
-        <strong>Your choices:</strong> You can block or delete cookies through your browser settings. You may also use privacy tools or browser extensions to limit analytics requests. Blocking analytics should not prevent you from reading our investigations.
+        <strong>Your choices:</strong> You can block or delete cookies through your browser settings. You may also use privacy tools or browser extensions to limit analytics requests. Blocking GoatCounter does not prevent access to published journalism. Blocking required Cloudflare security mechanisms may cause you to receive a challenge or may prevent a suspicious or unverifiable request from reaching the site.
       </p>
 
       <h2 id="data-retention">8. Data Retention</h2>
       <ul>
         <li><strong>Newsletter data:</strong> We retain your email address for as long as you are subscribed. You may unsubscribe at any time using the link at the bottom of any newsletter, and your address will be removed from our active mailing list.</li>
-        <li><strong>Server/security logs:</strong> Hosting and security providers may retain logs under their own retention policies and settings. We do not maintain a separate, centralized database of visitor browsing history.</li>
-        <li><strong>Correspondence:</strong> We retain emails, tips, and messages for as long as they are relevant to active reporting or ongoing investigations, and securely delete them when they are no longer needed.</li>
+        <li><strong>GoatCounter statistics:</strong> GoatCounter stores aggregate readership statistics rather than persistent reader profiles.</li>
+        <li><strong>Cloudflare security information:</strong> RDP does not maintain a separate database containing individual Precursor behavioral-event streams. Cloudflare retains security logs and metadata under Cloudflare's settings, contractual terms, and retention practices.</li>
+        <li><strong>Correspondence:</strong> We minimize retention of emails, tips, and messages, keeping them only for as long as they are relevant to active reporting or ongoing investigations and securely deleting them when they are no longer needed.</li>
         <li><strong>Source communications:</strong> Communications from confidential sources are handled with the highest level of care. We store such communications using encrypted methods and retain them only as long as necessary to support the relevant investigation.</li>
       </ul>
 
