@@ -250,7 +250,7 @@
       </p>
       <ul>
         <li><strong>Aggregate analytics:</strong> RDP uses GoatCounter for limited aggregate measurement of page readership, referring websites, and broad technical usage patterns on ordinary public-content pages. GoatCounter does not place cookies or persistent identifiers in a reader's browser, and RDP does not use it to construct individual browsing histories.</li>
-        <li><strong>Site delivery and security:</strong> GitHub Pages and Cloudflare may process technical information such as IP address, requested URL, referral information, browser or device characteristics, user agent, traffic patterns, and security-event information to deliver the site, maintain performance, prevent abuse, and respond to attacks.</li>
+        <li><strong>Site delivery and security:</strong> Netlify and Cloudflare may process technical information such as IP address, requested URL, referral information, browser or device characteristics, user agent, traffic patterns, and security-event information to deliver the site, maintain performance, prevent abuse, and respond to attacks.</li>
         <li><strong>Cloudflare Precursor:</strong> When enabled, Cloudflare may inject a client-side security script that evaluates technical and session-level behavioral signals to distinguish legitimate readers from automated activity. The results may update security state stored in Cloudflare's <code>cf_clearance</code> cookie. RDP uses this processing for website security, bot detection, and abuse prevention—not advertising, political targeting, or reader profiling.</li>
         <li><strong>External services:</strong> The site's primary fonts, stylesheets, and visual assets are self-hosted. A third party may receive ordinary technical request information when a visitor deliberately opens an external subscription page, contact form, video, social-media page, or other linked service.</li>
       </ul>
@@ -287,7 +287,8 @@
       <ul>
         <li><strong>Substack</strong> (<a href="https://substack.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>) — Provides newsletter hosting and subscription management.</li>
         <li><strong>GoatCounter</strong> (<a href="https://www.goatcounter.com/help/privacy" target="_blank" rel="noopener noreferrer">privacy information</a>) — Provides cookieless aggregate readership measurement without advertising or cross-site tracking.</li>
-        <li><strong>GitHub Pages</strong> (<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">privacy statement</a>) — Provides static website hosting.</li>
+        <li><strong>Netlify</strong> (<a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">privacy policy</a>) — Provides static website hosting and deployment infrastructure.</li>
+        <li><strong>GitHub</strong> (<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">privacy statement</a>) — Hosts RDP's public source-code repository and connects with Netlify for website deployment. Ordinary visits to the published website do not normally require a direct request to GitHub.</li>
         <li><strong>Cloudflare</strong> (<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">privacy policy</a>) — Provides content delivery, traffic management, DDoS mitigation, bot detection, challenges, and other security services, including Precursor.</li>
         <li><strong>Tailwind CSS and brand fonts</strong> — These are self-hosted static assets, not third-party runtime services.</li>
       </ul>
@@ -301,22 +302,22 @@
         <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
           <dt class="font-bold text-brand-green-dark">GoatCounter</dt>
           <dd class="text-slate-700 mt-1"><strong>Purpose:</strong> Aggregate readership measurement</dd>
-          <dd class="text-slate-700 mt-1"><strong>Consent status stated by RDP:</strong> Cookieless; no advertising tracking</dd>
+          <dd class="text-slate-700 mt-1"><strong>How it operates on this site:</strong> Cookieless aggregate measurement</dd>
         </div>
         <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
           <dt class="font-bold text-brand-green-dark">Cloudflare security cookies</dt>
           <dd class="text-slate-700 mt-1"><strong>Purpose:</strong> Site delivery, bot and attack prevention</dd>
-          <dd class="text-slate-700 mt-1"><strong>Consent status stated by RDP:</strong> Strictly necessary security</dd>
+          <dd class="text-slate-700 mt-1"><strong>How it operates on this site:</strong> Necessary for site delivery and security</dd>
         </div>
         <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
           <dt class="font-bold text-brand-green-dark">Substack</dt>
           <dd class="text-slate-700 mt-1"><strong>Purpose:</strong> Newsletter subscription when chosen by visitor</dd>
-          <dd class="text-slate-700 mt-1"><strong>Consent status stated by RDP:</strong> Governed by Substack on its site</dd>
+          <dd class="text-slate-700 mt-1"><strong>How it operates on this site:</strong> Applies after the visitor chooses to visit or subscribe</dd>
         </div>
         <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
           <dt class="font-bold text-brand-green-dark">External contact forms</dt>
           <dd class="text-slate-700 mt-1"><strong>Purpose:</strong> Communication initiated by visitor</dd>
-          <dd class="text-slate-700 mt-1"><strong>Consent status stated by RDP:</strong> Governed by the linked provider</dd>
+          <dd class="text-slate-700 mt-1"><strong>How it operates on this site:</strong> Applies after the visitor chooses to open or submit the form</dd>
         </div>
       </dl>
       <p>
@@ -325,9 +326,9 @@
         does not set cookies or persistent identifiers in a reader's browser.
       </p>
       <p>
-        We do not load GoatCounter on secure-tip, confidential-source, restricted-status, canary,
-        redirect-only, or similarly sensitive operational pages. Blocking GoatCounter must not interfere
-        with reading the website; the published content does not depend on the analytics script.
+        GoatCounter is limited to ordinary public-content pages and is not loaded on sensitive
+        source-protection or other operational pages. Blocking GoatCounter must not interfere with
+        reading the website; published content does not depend on the analytics script.
       </p>
       <ul>
         <li><strong>Aggregate analytics:</strong> GoatCounter is used for limited readership measurement and site improvement on ordinary public-content pages. It does not create persistent reader profiles.</li>
