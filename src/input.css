@@ -154,49 +154,10 @@ html { scroll-padding-top: 68px; }
 
 /* ── Hero ── */
 .hero-section {
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,55,0.08) 0%, transparent 60%),
-    linear-gradient(165deg, #0d1a15 0%, #111f1a 20%, #1a332c 45%, #24473e 75%, #2d5c4f 100%);
+  background: linear-gradient(165deg, #0d1a15 0%, #111f1a 20%, #1a332c 45%, #24473e 75%, #2d5c4f 100%);
   position: relative;
   overflow: hidden;
 }
-.hero-section::before {
-  content: '';
-  position: absolute; top: -15%; right: -12%;
-  width: 70vw; height: 70vw; max-width: 700px; max-height: 700px;
-  background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 65%);
-  pointer-events: none;
-}
-.hero-section::after {
-  content: '';
-  position: absolute; bottom: -15%; left: -10%;
-  width: 60vw; height: 60vw; max-width: 580px; max-height: 580px;
-  background: radial-gradient(circle, rgba(244,162,97,0.05) 0%, transparent 65%);
-  pointer-events: none;
-}
-.hero-section .grain {
-  position: absolute;
-  inset: 0;
-  opacity: 0.04;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-}
-
-.editorial-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.85rem;
-  opacity: 0.55;
-}
-.editorial-mark .rule {
-  height: 1px;
-  width: 2.75rem;
-  background: linear-gradient(90deg, transparent, #D4AF37 50%, transparent);
-}
-.editorial-mark .rule.left { background: linear-gradient(90deg, transparent, #D4AF37); }
-.editorial-mark .rule.right { background: linear-gradient(90deg, #D4AF37, transparent); }
 
 .established {
   display: inline-flex;
