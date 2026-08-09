@@ -135,7 +135,7 @@
       font-family:var(--sans);
       font-size:17px;
       line-height:1.6;
-      overflow-x:hidden;
+      overflow-x:clip;   /* clip, not hidden: hidden would break position:sticky below */
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
     }
@@ -746,53 +746,88 @@
     .fy-col li{ margin-bottom:.25rem; }
 
     /* ============================================================
-       LIVE RESULT BAR — pinned to the TOP of the viewport
+       CALCULATOR WORKBENCH + FROZEN RESULT PANE
 
-       The reader manipulates the controls far below the full result card. The
-       live award has to travel with them, and it belongs at the top: the
-       bottom of a phone is thumb space, slider space and browser chrome.
+       An Excel-style freeze pane. The compact result is `position: sticky`
+       inside a bounded workbench that holds the controls, so it pins itself
+       above whatever the reader is adjusting and releases naturally once the
+       controls end. Sticky keeps it in normal flow, so unlike a fixed overlay
+       it cannot sit on top of a control the reader is using.
        ============================================================ */
-    .live-bar{
-      position:fixed; top:0; left:0; right:0; z-index:120;
-      width:100%; margin:0; text-align:left; cursor:pointer;
-      background:rgba(9,15,18,0.97);
-      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-      border:0; border-bottom:1px solid var(--gold-line);
-      padding:.62rem 16px; padding-top:calc(.62rem + env(safe-area-inset-top));
-      display:flex; align-items:center; justify-content:space-between; gap:.85rem;
-      font-family:var(--sans); color:var(--ink);
-      transform:translateY(-102%); transition:transform .22s ease;
-    }
-    .live-bar.on{ transform:none; }
-    .live-bar:not(.on){ pointer-events:none; }
-    @media (prefers-reduced-motion: reduce){ .live-bar{ transition:none; } }
+    .workbench{ position:relative; }
 
-    .lb-main{ display:flex; flex-direction:column; min-width:0; }
-    .lb-k{
-      font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    .freeze-pane{
+      position:sticky; top:0; z-index:60;
+      margin:1.5rem 0 0;
+      background:rgba(11,18,21,0.97);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      border:1px solid var(--gold-line); border-radius:12px;
+      padding:.6rem .8rem .55rem;
+      padding-top:calc(.6rem + env(safe-area-inset-top));
+      box-shadow:0 10px 24px -18px rgba(0,0,0,0.95);
+    }
+    .fp-row{
+      display:flex; align-items:center; justify-content:space-between; gap:.8rem;
+    }
+    .fp-main{ display:flex; flex-direction:column; min-width:0; }
+    .fp-k{
+      font-size:.58rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
       color:var(--muted); line-height:1.3; white-space:nowrap;
     }
-    .lb-v{
-      font-family:var(--mono); font-weight:700; font-size:1.3rem; line-height:1.15;
+    .fp-v{
+      font-family:var(--mono); font-weight:700; font-size:1.32rem; line-height:1.15;
       color:var(--gold-bright); white-space:nowrap;
     }
-    .lb-side{
-      flex:none; text-align:right; max-width:12.5rem;
-      font-size:.66rem; line-height:1.35; color:var(--muted);
-      font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+    .fp-side{
+      flex:none; text-align:right; max-width:11.5rem;
+      font-size:.62rem; line-height:1.35; color:var(--muted);
+      font-weight:700; letter-spacing:.08em; text-transform:uppercase;
     }
-    .lb-side b{
-      display:block; font-family:var(--mono); font-size:.95rem; font-weight:700;
+    .fp-side b{
+      display:block; font-family:var(--mono); font-size:.92rem; font-weight:700;
       color:var(--gold-bright); letter-spacing:0; text-transform:none;
     }
-    /* When the ceiling binds, the calculated figure is the neutral one and the
+    /* When the ceiling binds the calculated figure is the neutral one and the
        payable figure carries the incentive-gold. Both stay on screen. */
-    .live-bar[data-state="capped"] .lb-v{ color:var(--ink); }
-    .live-bar[data-state="ineligible"] .lb-v{ color:var(--ink-2); }
-    .live-bar[data-state="invalid"] .lb-v{
-      font-family:var(--sans); font-size:.92rem; color:var(--alert); white-space:normal;
+    .freeze-pane[data-state="capped"] .fp-v{ color:var(--ink); }
+    .freeze-pane[data-state="ineligible"] .fp-v{ color:var(--ink-2); }
+    .freeze-pane[data-state="invalid"] .fp-v{
+      font-family:var(--sans); font-size:.9rem; color:var(--alert); white-space:normal;
     }
-    .live-bar[data-state="invalid"]{ border-bottom-color:rgba(224,137,74,0.55); }
+    .freeze-pane[data-state="invalid"]{ border-color:rgba(224,137,74,0.55); }
+
+    /* Compact mirror of the main gauge. Decorative: every value it encodes is
+       stated in the text beside it, so it carries no meaning on its own. */
+    .fp-gauge{ margin-top:.45rem; }
+    .fp-track{
+      position:relative; height:9px; border-radius:4px;
+      background:var(--surface-2); border:1px solid var(--line); overflow:hidden;
+    }
+    .fp-fill{
+      position:absolute; top:0; bottom:0; left:0; width:0;
+      background:linear-gradient(90deg, #b98c22 0%, var(--gold) 70%, var(--gold-bright) 100%);
+      transition:width .3s cubic-bezier(.22,.61,.36,1);
+    }
+    .fp-over{
+      position:absolute; top:0; bottom:0; width:0;
+      background-image:repeating-linear-gradient(135deg,
+        rgba(224,137,74,0.9) 0 4px, rgba(224,137,74,0.3) 4px 8px);
+      transition:width .3s cubic-bezier(.22,.61,.36,1), left .3s cubic-bezier(.22,.61,.36,1);
+    }
+    .fp-cap{
+      position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--ceiling);
+      transition:left .3s cubic-bezier(.22,.61,.36,1);
+    }
+    .freeze-pane[data-state="invalid"] .fp-track{ opacity:.35; }
+    @media (prefers-reduced-motion: reduce){
+      .fp-fill,.fp-over,.fp-cap{ transition:none; }
+    }
+
+    @media (min-width:560px){
+      .fp-k{ font-size:.62rem; }
+      .fp-v{ font-size:1.5rem; }
+      .fp-side{ font-size:.66rem; max-width:14rem; }
+    }
 
     /* ============================================================
        FOOTER
@@ -954,6 +989,33 @@
       <!-- Screen-reader live region for the calculated award -->
       <div class="visually-hidden" aria-live="polite" aria-atomic="true" id="live-region"></div>
 
+      <!-- ===================== CALCULATOR WORKBENCH =====================
+           Everything the reader turns lives inside this container, with the
+           frozen result pane pinned to its top. When the workbench ends, the
+           pane releases - a freeze pane while editing cells, not a permanent
+           site header. -->
+      <div class="workbench">
+
+      <!-- Frozen live result. Mirrors the full result card above from the same
+           calculated object; the dedicated live region announces changes, so
+           nothing here is a second aria-live source. -->
+      <div class="freeze-pane" id="freeze-pane" data-state="uncapped">
+        <div class="fp-row">
+          <span class="fp-main">
+            <span class="fp-k" id="fp-label">Hypothetical award</span>
+            <span class="fp-v tnum" id="fp-value">$22,560</span>
+          </span>
+          <span class="fp-side tnum" id="fp-status">90% of $25,000 cap</span>
+        </div>
+        <div class="fp-gauge" aria-hidden="true">
+          <div class="fp-track">
+            <div class="fp-fill" id="fp-fill"></div>
+            <div class="fp-over" id="fp-over"></div>
+            <div class="fp-cap" id="fp-cap"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- ===================== CONTROL 1 — PERSONNEL RATING ===================== -->
       <section class="control" aria-labelledby="c1-h">
         <div class="control-head">
@@ -1105,6 +1167,8 @@
         </div>
       </details>
 
+      </div><!-- /.workbench -->
+
       <!-- ===================== THRESHOLD EXPLORER ===================== -->
       <section class="threshold" aria-labelledby="thresh-h">
         <span class="control-num">Threshold Explorer</span>
@@ -1253,20 +1317,6 @@
     </div>
   </main>
 
-  <!-- ===================== LIVE RESULT BAR (top) =====================
-       Appears once the full result card scrolls out of view, so the award
-       stays visible while the reader works the controls below it. The inner
-       spans are hidden from assistive technology because the dedicated live
-       region already announces every change. -->
-  <button type="button" class="live-bar" id="live-bar" data-state="uncapped"
-          aria-label="View the full calculation result" aria-hidden="true" tabindex="-1">
-    <span class="lb-main" aria-hidden="true">
-      <span class="lb-k" id="lb-k">Hypothetical award</span>
-      <span class="lb-v tnum" id="lb-v">$22,560</span>
-    </span>
-    <span class="lb-side tnum" id="lb-side" aria-hidden="true">90% of $25,000 cap</span>
-  </button>
-
   <!-- ===================== FOOTER ===================== -->
   <footer class="site">
     <div class="wrap">
@@ -1389,7 +1439,8 @@
      'w-ind','w-pub','w-priv','weights-total','weights-warning','positions-table',
      'thresh-figure','thresh-label','thresh-label-val','thresh-mark','thresh-salary',
      'thresh-reached','thresh-caption','thresh-track',
-     'live-region','live-bar','lb-k','lb-v','lb-side','ladder-grid','weights-rows',
+     'live-region','freeze-pane','fp-label','fp-value','fp-status',
+     'fp-fill','fp-over','fp-cap','ladder-grid','weights-rows',
      'copy-btn','copy-status','reset-btn','reset-btn-2','story-link','math-drawer'
     ].forEach(function(id){ el[id] = document.getElementById(id); });
 
@@ -1601,7 +1652,8 @@
         el['result-sub'].innerHTML = 'Set the component weights to total 100%.';
         setGauge(0, 0, E.PLAN.perPersonCap * 1.4);
         el['what-changed'].textContent = 'The component weights do not total 100%, so no result is calculated.';
-        setLiveBar('invalid', 'Result unavailable', 'Weights must total 100%', '');
+        setFreezePane('invalid', 'Result unavailable', 'Weights must total 100%', '');
+        setFreezeGauge(0, 0, E.PLAN.perPersonCap * 1.4);
         renderBenchmark();
         renderLadder(null);
         previous.award = null;
@@ -1630,6 +1682,7 @@
       // Gauge: fixed headroom above the ceiling unless the calculation runs past it.
       var axisMax = Math.max(r.cap * 1.4, r.calculatedAward * 1.08);
       setGauge(payable, r.calculatedAward, axisMax);
+      setFreezeGauge(payable, r.calculatedAward, axisMax);
 
       el['what-changed'].textContent = buildSentence(r);
       renderBenchmark();
@@ -1637,24 +1690,37 @@
       renderLadder(r);
 
       if (!r.eligible){
-        setLiveBar('ineligible', 'Hypothetical award', money(0), 'Not eligible');
+        setFreezePane('ineligible', 'Hypothetical award', money(0), 'Not eligible');
       } else if (capped){
         /* Both numbers stay on screen: the point of the exhibit is that the
            calculation crossed the ceiling, not merely that the cap exists. */
-        setLiveBar('capped', 'Calculated', money(r.calculatedAward),
-                   'Payable<b>' + money(payable) + '</b>Cap applies');
+        setFreezePane('capped', 'Calculated', money(r.calculatedAward),
+                      'Payable<b>' + money(payable) + '</b>Cap applies');
       } else {
-        setLiveBar('uncapped', 'Hypothetical award', money(payable),
-                   Math.round((payable / r.cap) * 100) + '% of ' + money(r.cap) + ' cap');
+        setFreezePane('uncapped', 'Hypothetical award', money(payable),
+                      Math.round((payable / r.cap) * 100) + '% of ' + money(r.cap) + ' cap');
       }
     }
 
-    /* ---------- Live result bar (top of viewport) ---------- */
-    function setLiveBar(stateName, label, value, side){
-      el['live-bar'].setAttribute('data-state', stateName);
-      el['lb-k'].textContent = label;
-      el['lb-v'].textContent = value;
-      el['lb-side'].innerHTML = side;
+    /* ---------- Frozen result pane ----------
+       A mirror of the full result card, driven by the same calculated object.
+       No second calculation, and no second live region. */
+    function setFreezePane(stateName, label, value, status){
+      el['freeze-pane'].setAttribute('data-state', stateName);
+      el['fp-label'].textContent = label;
+      el['fp-value'].textContent = value;
+      el['fp-status'].innerHTML = status;
+    }
+
+    /* The compact gauge uses the same scale as the main one, so the two read
+       consistently as the reader scrolls between them. */
+    function setFreezeGauge(payable, calculated, axisMax){
+      var capPct = (E.PLAN.perPersonCap / axisMax) * 100;
+      el['fp-fill'].style.width = ((payable / axisMax) * 100).toFixed(2) + '%';
+      el['fp-over'].style.left = capPct.toFixed(2) + '%';
+      el['fp-over'].style.width =
+        Math.max(0, ((calculated - E.PLAN.perPersonCap) / axisMax) * 100).toFixed(2) + '%';
+      el['fp-cap'].style.left = capPct.toFixed(2) + '%';
     }
 
     /* ---------- Payout schedule: highlight the rung actually applied ---------- */
@@ -1985,40 +2051,8 @@
       }
     });
 
-    /* ---------- Live result bar ----------
-       Shown only once the full result card has scrolled off the TOP of the
-       viewport, so it never duplicates a result the reader can already see. */
-    function setBarVisible(on){
-      var bar = el['live-bar'];
-      if (bar.classList.contains('on') === on){ return; }
-      bar.classList.toggle('on', on);
-      if (on){
-        bar.removeAttribute('aria-hidden');
-        bar.tabIndex = 0;
-      } else {
-        bar.setAttribute('aria-hidden', 'true');
-        bar.tabIndex = -1;
-      }
-    }
-
-    if ('IntersectionObserver' in window){
-      var observer = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          setBarVisible(!entry.isIntersecting && entry.boundingClientRect.top < 0);
-        });
-      }, { threshold: 0 });
-      /* Observe the headline figure rather than the whole card: the reader
-         loses sight of the number long before the card's last paragraph
-         leaves the screen, and the number is the thing that must travel. */
-      observer.observe(el['result-figure']);
-    }
-
-    el['live-bar'].addEventListener('click', function(){
-      el.result.scrollIntoView({
-        behavior: reduceMotion.matches ? 'auto' : 'smooth',
-        block: 'start'
-      });
-    });
+    /* The frozen pane needs no scroll observer: `position: sticky` inside the
+       workbench handles pinning and release on its own. */
 
     /* ========================================================================
        INIT

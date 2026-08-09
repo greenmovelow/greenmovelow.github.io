@@ -472,9 +472,16 @@ console.log('\nSTATIC CONTENT — exhibit source language');
   mustNotContain('avoids "0% investment return"', '0% investment return');
   mustNotContain('avoids "0% return"', '0% return');
 
-  // The bottom sticky readout is gone; the top live bar replaced it.
+  // The result is an Excel-style freeze pane inside a bounded workbench:
+  // no bottom sticky readout, and no fixed-overlay live bar either.
   mustNotContain('bottom sticky readout removed', 'sticky-readout');
-  mustContain('top live result bar present', 'id="live-bar"');
+  mustNotContain('fixed-overlay live bar removed', 'id="live-bar"');
+  mustNotContain('scroll observer machinery removed', 'IntersectionObserver');
+  mustContain('frozen result pane present', 'id="freeze-pane"');
+  mustContain('bounded calculator workbench present', 'class="workbench"');
+  mustContain('pane is sticky, not fixed', 'position:sticky');
+  // A clipped body would break position:sticky for the pane.
+  mustNotContain('body does not use overflow-x:hidden', 'overflow-x:hidden');
 }
 
 /* --------------------------------------------------------------------------- */

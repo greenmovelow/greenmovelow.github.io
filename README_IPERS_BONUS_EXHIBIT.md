@@ -282,41 +282,64 @@ listed investment-officer and Executive Officer 2 classifications).
 
 ---
 
-## The live result bar
+## The frozen result pane
 
 On a phone the full result card sits above the controls, so a reader who scrolls
 down to the personnel lever would otherwise have to scroll back up to see what
 changed. That defeats the point of an interactive explainer.
 
-A compact live-result bar is pinned to the **top** of the viewport. The bottom
-of a phone is thumb space, slider space and browser chrome; the result belongs at
-the top.
+The fix is an **Excel-style freeze pane**. A compact result sits at the top of a
+bounded `.workbench` container that holds every control, and is
+`position: sticky; top: 0`. It pins itself above whatever the reader is
+adjusting and releases naturally once the controls end — a freeze pane while
+editing cells, not a permanent site header.
 
-- It stays hidden while the headline figure is on screen, and appears once that
-  figure scrolls off the top. It is triggered by the figure rather than by the
-  whole card, because the reader loses the number well before the card's last
-  paragraph leaves the screen.
-- It updates on every rating, market, salary, maximum-incentive, and weight
-  change.
-- Tapping it scrolls back to the full result and gauge (`prefers-reduced-motion`
-  respected). Nothing essential requires the tap.
+```
+<div class="workbench">
+    <div class="freeze-pane"> live figure + compact gauge </div>
+    1 — Personnel rating
+    2 — Public-market excess
+    3 — Private-market excess
+    Show the math
+    Advanced: change the hypothetical employee
+</div>          <-- pane releases here; Threshold Explorer and methodology follow
+```
+
+Why sticky rather than a fixed overlay: a sticky element stays in normal
+document flow, so it cannot sit on top of a control the reader is using. The
+earlier implementation was a `position: fixed` bar revealed by an
+IntersectionObserver once the headline figure scrolled away; that produced a
+visible hand-off between two result displays and risked covering the controls.
+Both the observer and the fixed bar are gone — there is no scroll-state
+JavaScript left in the exhibit.
+
+One caveat worth recording: `overflow-x: hidden` on `body` would break
+`position: sticky` for descendants, so the page uses `overflow-x: clip`
+instead. A test asserts this, because reintroducing `hidden` would silently
+unpin the pane.
+
+The pane mirrors the full result card from the same calculated object — no
+second calculation, no second live region. It carries a compact gauge with the
+$25,000 ceiling marked, so the reader watches the amount move against the
+ceiling rather than just watching a number change.
 
 States, all verified in the browser at 390×844:
 
 | State | Rendering | Height |
 | --- | --- | --- |
-| Uncapped | `Hypothetical award · $22,560 · 90% of $25,000 cap` | 57 px |
-| Capped | `Calculated $30,080` beside `Payable $25,000 · Cap applies` | 70 px |
-| Ineligible | `Hypothetical award · $0 · Not eligible` | 57 px |
-| Invalid weights | `Result unavailable · Weights must total 100%` | 57 px |
+| Uncapped | `Hypothetical award · $22,560 · 90% of $25,000 cap`, fill stopping short of the ceiling tick | 73 px |
+| Capped | `Calculated $30,080` beside `Payable $25,000 · Cap applies`, gauge visibly crossing the ceiling into hatched overflow | 83 px |
+| Ineligible | `Hypothetical award · $0 · Not eligible`, empty gauge | 73 px |
+| Invalid weights | `Result unavailable · Weights must total 100%`, gauge dimmed and empty | 65 px |
 
 The capped state keeps **both** numbers on screen. The explanatory point is that
 the calculation crossed the ceiling, so showing only $25,000 would hide the
-story.
+story. The invalid state shows no gauge fill at all rather than a misleading
+bar.
 
-There is no bottom sticky readout; it was removed in favour of this bar.
-
----
+The compact gauge is `aria-hidden`: every value it encodes is stated in the text
+beside it, so it carries no meaning of its own and adds nothing for a screen
+reader to repeat.
 
 ## URL scenario parameters
 
@@ -387,7 +410,7 @@ panel, the methodology drawer, the threshold explorer, and the tests together.
 
 ## Verification
 
-`node scripts/test_ipers_incentive_engine.js` — **190 assertions, all passing.**
+`node scripts/test_ipers_incentive_engine.js` — **195 assertions, all passing.**
 
 | Case | Inputs | Expected raw | Expected payable | Result |
 | --- | --- | --- | --- | --- |
@@ -408,9 +431,15 @@ page.
 
 Browser verification (headless Chromium) at 360×800, 390×844, 430×932, 768×1024
 and 1440×900, plus a 844×390 landscape check: no horizontal overflow, no clipped
-text, no tap target under 44px, no console errors from page code, live bar
-correct in all four states, bar hidden while the figure is on screen and visible
-once it is not, and no overlap with the personnel lever.
+text, no tap target under 44px, no console errors from page code, and the freeze
+pane correct in all four states.
+
+Freeze-pane behaviour specifically: the pane pins at `top: 0` while the
+workbench overlaps the top of the viewport and scrolls away with it afterwards;
+it never overlaps the personnel lever or a market slider; a focused control is
+never hidden behind it; and the result stays visible and live through rating
+changes, both market sliders, and advanced salary edits without any upward
+scrolling.
 
 ---
 
