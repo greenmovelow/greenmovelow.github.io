@@ -4,7 +4,7 @@
 
    Every number below is traceable to the IPERS Investment Team Incentive
    Compensation Plan for FY2025, as produced to RDP under Iowa Code ch. 22 and
-   as described in "The Formula Behind the $25,000: What Iowa's Next Governor
+   as reported in "The Formula Behind the $25,000: What Iowa's Next Governor
    Inherits" (RDP, Aug. 9, 2026).
 
    This engine models HYPOTHETICAL outcomes permitted by the published formula.
@@ -22,6 +22,28 @@
   root.IPERSIncentiveEngine = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
+
+  /* --------------------------------------------------------------------------
+     THE PUBLISHED PAYOUT SCHEDULE (FY2025)
+
+     Twenty printed rungs. Each 0.01% of total excess return adds five
+     percentage points of payout, reaching 100% at 0.20%. Anything above 0.20%
+     pays what 0.20% pays.
+
+     This is a LOOKUP TABLE, not a continuous function. The plan's own worked
+     example settles the point: a total excess of 0.054% is reported as a 25%
+     award, which is the 0.05% rung. A continuous reading would have produced
+     27%. See WORKED_EXAMPLE below.
+     ------------------------------------------------------------------------ */
+
+  var PAYOUT_SCHEDULE = [];
+  for (var i = 1; i <= 20; i++) {
+    PAYOUT_SCHEDULE.push({
+      basisPoints: i,
+      excessPct: i / 100,                       // 0.01 .. 0.20 (percentage points)
+      factor: Math.round(i * 5) / 100           // 0.05 .. 1.00
+    });
+  }
 
   /* --------------------------------------------------------------------------
      PUBLISHED PLAN CONSTANTS (FY2025)
@@ -43,10 +65,7 @@
        20 basis points of excess return above the applicable benchmark. */
     marketGoalBasisPoints: 20,
 
-    /* The payout ladder: each basis point of excess return adds five
-       percentage points of payout factor, reaching 100% at 20 basis points.
-       Anything above 20 basis points pays what 20 basis points pays. */
-    payoutFactorPerBasisPoint: 0.05,
+    payoutSchedule: PAYOUT_SCHEDULE,
     maxPayoutFactor: 1.00,
 
     /* Chief Investment Officer, FY2025. */
@@ -63,19 +82,106 @@
     perPersonCap: 25000
   };
 
-  /* Maximum incentive percentages the FY2025 plan assigns by position. The
-     plan's public/private weightings for the non-CIO classifications are not
-     modeled here, so these are documentation only — not selectable presets. */
-  var PUBLISHED_MAXIMUMS_BY_POSITION = [
-    { title: 'Chief Investment Officer', maxIncentivePct: 0.50, modeled: true },
-    { title: 'Head of Strategy', maxIncentivePct: 0.50, modeled: false },
-    { title: 'Senior investment officers', maxIncentivePct: 0.30, modeled: false },
-    { title: 'Other listed investment-officer and Executive Officer 2 classifications', maxIncentivePct: 0.20, modeled: false }
+  /* --------------------------------------------------------------------------
+     THE PLAN'S OWN WORKED EXAMPLE (FY2025)
+
+     Reproduced here as data so the test suite can assert against it directly.
+     This example is the controlling evidence for two things: that the
+     components are weighted into a single TOTAL EXCESS before the payout
+     schedule is consulted, and that the schedule is read as discrete rungs.
+     ------------------------------------------------------------------------ */
+
+  var WORKED_EXAMPLE = {
+    label: 'Senior RIO - A',
+    tenure: '> 3 Years',
+
+    /* Component values after the plan's multi-year tenure calculation. */
+    individualExcessPct: 0.15,
+    publicExcessPct: 0.00,
+    privateExcessPct: 0.12,
+
+    weightIndividual: 0.20,
+    weightPublic: 0.60,
+    weightPrivate: 0.20,
+
+    /* As printed in the plan. */
+    totalExcessPct: 0.054,
+    payoutFactor: 0.25,
+    salary: 170000,
+    maxIncentivePct: 0.25,
+    calculatedAward: 10625,
+    budgetLimit: 25000,
+    finalAward: 10625,
+
+    /* The annual excess figures the example feeds into its tenure-weighted
+       calculation include negative years. Recorded here because the exhibit
+       must not claim the plan is silent about negative excess. */
+    annualPublicExcessPct:  [0.10, -0.05, -0.10],
+    annualPrivateExcessPct: [0.30, -0.10,  0.20]
+  };
+
+  /* --------------------------------------------------------------------------
+     PUBLISHED COMPONENT WEIGHTS BY ROW (FY2025)
+
+     The plan publishes weights for every listed row. Several employees share a
+     job classification while carrying different public/private splits, so a
+     generic title does not map one-to-one onto a single weighting. That is why
+     the exhibit offers only the CIO as a named preset — not because the other
+     weights are unpublished.
+     ------------------------------------------------------------------------ */
+
+  var PUBLISHED_WEIGHT_ROWS = [
+    { title: 'Chief Investment Officer',   individual: 0.20, public: 0.40, private: 0.40, preset: true },
+    { title: 'Head of Strategy',           individual: 0.20, public: 0.60, private: 0.20, preset: false },
+    { title: 'Senior RIO',                 individual: 0.20, public: 0.60, private: 0.20, preset: false },
+    { title: 'Senior RIO',                 individual: 0.20, public: 0.20, private: 0.60, preset: false },
+    { title: 'Senior RIO',                 individual: 0.20, public: 0.40, private: 0.40, preset: false },
+    { title: 'Retirement Investment Officer', individual: 0.20, public: 0.20, private: 0.60, preset: false },
+    { title: 'Retirement Investment Officer', individual: 0.20, public: 0.60, private: 0.20, preset: false },
+    { title: 'Retirement Investment Officer', individual: 0.20, public: 0.60, private: 0.20, preset: false },
+    { title: 'Executive Officer 2',        individual: 0.50, public: 0.25, private: 0.25, preset: false }
   ];
+
+  /* Maximum incentive percentages the plan assigns by position. */
+  var PUBLISHED_MAXIMUMS_BY_POSITION = [
+    { title: 'Chief Investment Officer', maxIncentivePct: 0.50 },
+    { title: 'Head of Strategy', maxIncentivePct: 0.50 },
+    { title: 'Senior investment officers', maxIncentivePct: 0.30 },
+    { title: 'Other listed investment-officer and Executive Officer 2 classifications', maxIncentivePct: 0.20 }
+  ];
+
+  /* --------------------------------------------------------------------------
+     WHAT THE PRIVATE-MARKET COMPONENT CONTAINS
+
+     Private markets are not private equity. Private equity is one private-
+     market asset class; it was inside the FY2024 private-market excess
+     calculation and is excluded from the FY2025 one.
+     ------------------------------------------------------------------------ */
+
+  var PRIVATE_MARKET_COMPOSITION = {
+    fy2024: [
+      { assetClass: 'Private Equity', weight: 0.20, benchmark: 'Russell 3000 + 300 bp' },
+      { assetClass: 'Private Credit', weight: 0.40, benchmark: 'S&P/LSTA Leveraged Loan Index + 100 bp' },
+      { assetClass: 'Private Real Assets', weight: 0.40, benchmark: 'NCREIF ODCE Net' }
+    ],
+    fy2025: [
+      { assetClass: 'Private Credit', weight: 0.50 },
+      { assetClass: 'Private Real Assets', weight: 0.50 }
+    ],
+    fy2025PrivateEquityExcluded: true,
+    fy2025PlanLanguage: 'The Private Equity portfolio for IPERS are not included in excess considerations.'
+  };
 
   /* --------------------------------------------------------------------------
      COMPONENT FUNCTIONS
      ------------------------------------------------------------------------ */
+
+  /* Weighting three components produces values such as 3.0000000000000004.
+     Rounding to a sane precision before any rung lookup keeps floating-point
+     noise from dropping a total onto the rung below. */
+  function normalizeBasisPoints(bp) {
+    return Math.round(Number(bp) * 1e6) / 1e6;
+  }
 
   /**
    * Basis points credited to the annual performance evaluation.
@@ -90,77 +196,91 @@
   }
 
   /**
-   * The published payout ladder, expressed as a factor (0.05 = 5%).
-   * Input is excess return over the applicable benchmark, in basis points.
+   * The published payout schedule, read as discrete rungs.
+   * Input is TOTAL excess return, in basis points, after weighting.
    *
-   * Negative excess is NOT modeled: the published plan does not establish how
-   * excess below zero enters this table, so the controls are constrained to
-   * source-supported values beginning at 0.00%. Passing a negative value
-   * throws rather than silently flooring or extrapolating the ladder.
+   * Between two printed rungs the calculator uses the LOWER published rung.
+   * That is the only reading consistent with the plan's own worked example,
+   * in which a 0.054% total excess is reported as a 25% award — the 0.05%
+   * rung. The produced plan does not separately state a general rounding rule,
+   * so this is an exhibit convention anchored to that example, not a rule
+   * IPERS expressly published.
+   *
+   * Negative totals are not modeled: see the note on negative excess in the
+   * README. Passing one throws rather than extrapolating the schedule below
+   * zero or silently flooring the result.
    */
-  function getMarketPayoutFactor(excessBasisPoints) {
-    var bp = Number(excessBasisPoints);
-    if (!isFinite(bp)) { throw new Error('Excess return must be a finite number of basis points.'); }
-    if (bp < 0) { throw new Error('Negative-excess treatment is not modeled: the published plan does not specify how it enters the payout table.'); }
-    return Math.min(bp * PLAN.payoutFactorPerBasisPoint, PLAN.maxPayoutFactor);
+  function getMarketPayoutFactor(totalExcessBasisPoints) {
+    var bp = Number(totalExcessBasisPoints);
+    if (!isFinite(bp)) { throw new Error('Total excess must be a finite number of basis points.'); }
+    if (bp < 0) {
+      throw new Error('Negative total excess is not modeled: the produced plan does not establish how a negative blended total enters the payout schedule.');
+    }
+
+    var rung = Math.floor(normalizeBasisPoints(bp));
+    if (rung < 1) { return 0; }
+    if (rung >= PLAN.marketGoalBasisPoints) { return PLAN.maxPayoutFactor; }
+    return PAYOUT_SCHEDULE[rung - 1].factor;
   }
 
   /**
-   * "Anything above 20 basis points pays what 20 basis points pays."
-   * Applied per market component before weighting.
+   * The printed rung the payout factor was actually read from, for display.
+   * Returns null below the first rung.
    */
-  function clampToMarketGoal(excessBasisPoints) {
-    return Math.min(Math.max(Number(excessBasisPoints), 0), PLAN.marketGoalBasisPoints);
+  function getAppliedRung(totalExcessBasisPoints) {
+    var bp = normalizeBasisPoints(totalExcessBasisPoints);
+    if (bp < 1) { return null; }
+    var rung = Math.min(Math.floor(bp), PLAN.marketGoalBasisPoints);
+    return PAYOUT_SCHEDULE[rung - 1];
+  }
+
+  /** True when the total falls between printed rungs and was rounded down. */
+  function isBetweenRungs(totalExcessBasisPoints) {
+    var bp = normalizeBasisPoints(totalExcessBasisPoints);
+    if (bp >= PLAN.marketGoalBasisPoints) { return false; }
+    return bp !== Math.floor(bp);
   }
 
   /* The three weighted contributions, each expressed in basis points of the
-     blended total. Keeping them as separate named functions mirrors the way
-     the plan describes the components as separately calculated. */
+     total excess. Named separately because the plan describes the public and
+     private components as separately calculated before they are combined. */
 
   function calculateWeightedIndividualComponent(individualBasisPoints, weightIndividual) {
-    return individualBasisPoints * weightIndividual;
+    return normalizeBasisPoints(individualBasisPoints * weightIndividual);
   }
 
   function calculateWeightedPublicComponent(publicExcessBasisPoints, weightPublic) {
-    return clampToMarketGoal(publicExcessBasisPoints) * weightPublic;
+    return normalizeBasisPoints(publicExcessBasisPoints * weightPublic);
   }
 
   function calculateWeightedPrivateComponent(privateExcessBasisPoints, weightPrivate) {
-    return clampToMarketGoal(privateExcessBasisPoints) * weightPrivate;
+    return normalizeBasisPoints(privateExcessBasisPoints * weightPrivate);
   }
 
   /**
-   * The blended total, in basis points — the figure the article describes as
-   * what the components "contribute to the blended total."
+   * TOTAL EXCESS, in basis points — the figure the plan's worked example
+   * labels "Total Excess" before reading the payout schedule.
    */
   function calculateBlendedResult(weightedIndividualBp, weightedPublicBp, weightedPrivateBp) {
-    return weightedIndividualBp + weightedPublicBp + weightedPrivateBp;
+    return normalizeBasisPoints(weightedIndividualBp + weightedPublicBp + weightedPrivateBp);
   }
 
-  /**
-   * The maximum incentive amount: a percentage of base salary.
-   */
+  /** The maximum incentive amount: a percentage of base salary. */
   function calculateMaximumIncentive(salary, maxIncentivePct) {
     return salary * maxIncentivePct;
   }
 
-  /**
-   * The payout factor is applied against the maximum incentive amount.
-   */
+  /** The payout factor is applied against the maximum incentive amount. */
   function calculateRawAward(maximumIncentive, payoutFactor) {
     return maximumIncentive * payoutFactor;
   }
 
-  /**
-   * A rating below "Meets Expectations" disqualifies an employee outright.
-   */
+  /** A rating below "Meets Expectations" disqualifies an employee outright. */
   function applyEligibility(rating, award) {
     return getIndividualBasisPoints(rating) === null ? 0 : award;
   }
 
-  /**
-   * The resulting award is constrained by the per-person ceiling.
-   */
+  /** The resulting award is constrained by the per-person ceiling. */
   function applyDollarCap(award, cap) {
     return Math.min(award, cap);
   }
@@ -196,17 +316,17 @@
     var individualBp = getIndividualBasisPoints(rating);
     var eligible = individualBp !== null;
 
-    var publicBpUsed = clampToMarketGoal(input.publicExcessBp);
-    var privateBpUsed = clampToMarketGoal(input.privateExcessBp);
-    var publicClamped = Number(input.publicExcessBp) > PLAN.marketGoalBasisPoints;
-    var privateClamped = Number(input.privateExcessBp) > PLAN.marketGoalBasisPoints;
+    var publicBp = Number(input.publicExcessBp);
+    var privateBp = Number(input.privateExcessBp);
 
     var weightedIndividualBp = calculateWeightedIndividualComponent(eligible ? individualBp : 0, wInd);
-    var weightedPublicBp = calculateWeightedPublicComponent(publicBpUsed, wPub);
-    var weightedPrivateBp = calculateWeightedPrivateComponent(privateBpUsed, wPriv);
+    var weightedPublicBp = calculateWeightedPublicComponent(publicBp, wPub);
+    var weightedPrivateBp = calculateWeightedPrivateComponent(privateBp, wPriv);
 
     var blendedBp = calculateBlendedResult(weightedIndividualBp, weightedPublicBp, weightedPrivateBp);
     var payoutFactor = getMarketPayoutFactor(blendedBp);
+    var appliedRung = getAppliedRung(blendedBp);
+    var betweenRungs = isBetweenRungs(blendedBp);
 
     var maximumIncentive = calculateMaximumIncentive(salary, maxIncentivePct);
     var rawAward = calculateRawAward(maximumIncentive, payoutFactor);
@@ -220,15 +340,18 @@
       weightsTotal: weightsTotal,
 
       individualBp: individualBp,
-      publicBpUsed: publicBpUsed,
-      privateBpUsed: privateBpUsed,
-      publicClamped: publicClamped,
-      privateClamped: privateClamped,
+      publicBp: publicBp,
+      privateBp: privateBp,
 
       weightedIndividualBp: weightedIndividualBp,
       weightedPublicBp: weightedPublicBp,
       weightedPrivateBp: weightedPrivateBp,
+
+      /* blendedBp is the plan's "Total Excess", in basis points. */
       blendedBp: blendedBp,
+      appliedRung: appliedRung,
+      betweenRungs: betweenRungs,
+      atPlateau: normalizeBasisPoints(blendedBp) >= PLAN.marketGoalBasisPoints,
 
       payoutFactor: payoutFactor,
       maximumIncentive: maximumIncentive,
@@ -245,9 +368,9 @@
   }
 
   /**
-   * The base salary at which the given rating reaches the ceiling with zero
-   * market excess. Returns null when the payout factor is zero (no threshold
-   * exists) or when the employee is not eligible.
+   * The base salary at which the given rating reaches the ceiling with both
+   * market components exactly matching their benchmarks. Returns null when the
+   * payout factor is zero (no threshold exists) or the employee is not eligible.
    */
   function calculateCapThresholdSalary(input) {
     var individualBp = getIndividualBasisPoints(input.rating);
@@ -266,10 +389,17 @@
 
   return {
     PLAN: PLAN,
+    PAYOUT_SCHEDULE: PAYOUT_SCHEDULE,
+    WORKED_EXAMPLE: WORKED_EXAMPLE,
+    PUBLISHED_WEIGHT_ROWS: PUBLISHED_WEIGHT_ROWS,
     PUBLISHED_MAXIMUMS_BY_POSITION: PUBLISHED_MAXIMUMS_BY_POSITION,
+    PRIVATE_MARKET_COMPOSITION: PRIVATE_MARKET_COMPOSITION,
+
+    normalizeBasisPoints: normalizeBasisPoints,
     getIndividualBasisPoints: getIndividualBasisPoints,
     getMarketPayoutFactor: getMarketPayoutFactor,
-    clampToMarketGoal: clampToMarketGoal,
+    getAppliedRung: getAppliedRung,
+    isBetweenRungs: isBetweenRungs,
     calculateWeightedIndividualComponent: calculateWeightedIndividualComponent,
     calculateWeightedPublicComponent: calculateWeightedPublicComponent,
     calculateWeightedPrivateComponent: calculateWeightedPrivateComponent,

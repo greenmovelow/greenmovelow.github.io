@@ -544,6 +544,16 @@
     }
     .dial-caption strong{ color:var(--ink-2); font-weight:600; }
 
+    /* What the private-market component actually contains, stated on the
+       control itself so a reader never has to open the methodology to learn
+       that private markets are not private equity. */
+    .composition-note{
+      margin:.35rem 0 .5rem; padding:.5rem .65rem; border-radius:9px;
+      background:var(--slate-dim); border:1px solid var(--slate-line);
+      font-size:.78rem; line-height:1.45; color:var(--ink-2);
+    }
+    .composition-note strong{ color:var(--slate-bright); font-weight:700; }
+
     /* ============================================================
        DRAWERS (show the math, advanced, methodology)
        ============================================================ */
@@ -628,6 +638,7 @@
       padding:.4rem 0; border-bottom:1px solid var(--line-soft);
     }
     .positions-table li span:last-child{ font-family:var(--mono); color:var(--ink-2); flex:none; }
+    .positions-table li em{ color:var(--gold); font-style:normal; font-size:.75rem; }
 
     /* ============================================================
        THRESHOLD EXPLORER
@@ -718,37 +729,77 @@
     }
     .ladder div b{ display:block; color:var(--slate-bright); font-size:.78rem; }
     .ladder div span{ color:var(--muted); }
+    .ladder div.applied{ border-color:var(--gold-line); background:var(--gold-dim); }
+    .ladder div.applied b{ color:var(--gold-bright); }
+
+    .fy-compare{ display:grid; grid-template-columns:1fr; gap:.7rem; margin:.6rem 0 .8rem; }
+    @media (min-width:420px){ .fy-compare{ grid-template-columns:1fr 1fr; } }
+    .fy-col{
+      background:var(--surface-2); border:1px solid var(--line-soft);
+      border-radius:10px; padding:.7rem .8rem;
+    }
+    .fy-col h4{
+      margin:0 0 .4rem; font-family:var(--mono); font-size:.74rem; letter-spacing:.08em;
+      color:var(--slate-bright);
+    }
+    .fy-col ul{ margin:0; padding-left:1rem; font-size:.8rem; }
+    .fy-col li{ margin-bottom:.25rem; }
 
     /* ============================================================
-       STICKY MINI READOUT (mobile)
+       LIVE RESULT BAR — pinned to the TOP of the viewport
+
+       The reader manipulates the controls far below the full result card. The
+       live award has to travel with them, and it belongs at the top: the
+       bottom of a phone is thumb space, slider space and browser chrome.
        ============================================================ */
-    .sticky-readout{
-      position:fixed; left:0; right:0; bottom:0; z-index:80;
-      background:rgba(10,16,19,0.96); border-top:1px solid var(--gold-line);
-      backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-      padding:.6rem 18px calc(.6rem + env(safe-area-inset-bottom));
-      display:flex; align-items:center; justify-content:space-between; gap:1rem;
-      transform:translateY(110%); transition:transform .25s ease;
+    .live-bar{
+      position:fixed; top:0; left:0; right:0; z-index:120;
+      width:100%; margin:0; text-align:left; cursor:pointer;
+      background:rgba(9,15,18,0.97);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      border:0; border-bottom:1px solid var(--gold-line);
+      padding:.62rem 16px; padding-top:calc(.62rem + env(safe-area-inset-top));
+      display:flex; align-items:center; justify-content:space-between; gap:.85rem;
+      font-family:var(--sans); color:var(--ink);
+      transform:translateY(-102%); transition:transform .22s ease;
     }
-    .sticky-readout.on{ transform:none; }
-    .sticky-readout .k{
-      font-size:.64rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
-      color:var(--muted); display:block;
+    .live-bar.on{ transform:none; }
+    .live-bar:not(.on){ pointer-events:none; }
+    @media (prefers-reduced-motion: reduce){ .live-bar{ transition:none; } }
+
+    .lb-main{ display:flex; flex-direction:column; min-width:0; }
+    .lb-k{
+      font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--muted); line-height:1.3; white-space:nowrap;
     }
-    .sticky-readout .v{
-      font-family:var(--mono); font-weight:700; font-size:1.28rem; color:var(--gold-bright);
-      display:block; line-height:1.15;
+    .lb-v{
+      font-family:var(--mono); font-weight:700; font-size:1.3rem; line-height:1.15;
+      color:var(--gold-bright); white-space:nowrap;
     }
-    .sticky-readout .note{ font-size:.68rem; color:var(--muted); text-align:right; max-width:11rem; }
-    @media (prefers-reduced-motion: reduce){ .sticky-readout{ transition:none; } }
-    @media (min-width:900px){ .sticky-readout{ display:none; } }
+    .lb-side{
+      flex:none; text-align:right; max-width:12.5rem;
+      font-size:.66rem; line-height:1.35; color:var(--muted);
+      font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+    }
+    .lb-side b{
+      display:block; font-family:var(--mono); font-size:.95rem; font-weight:700;
+      color:var(--gold-bright); letter-spacing:0; text-transform:none;
+    }
+    /* When the ceiling binds, the calculated figure is the neutral one and the
+       payable figure carries the incentive-gold. Both stay on screen. */
+    .live-bar[data-state="capped"] .lb-v{ color:var(--ink); }
+    .live-bar[data-state="ineligible"] .lb-v{ color:var(--ink-2); }
+    .live-bar[data-state="invalid"] .lb-v{
+      font-family:var(--sans); font-size:.92rem; color:var(--alert); white-space:normal;
+    }
+    .live-bar[data-state="invalid"]{ border-bottom-color:rgba(224,137,74,0.55); }
 
     /* ============================================================
        FOOTER
        ============================================================ */
     footer.site{
       background:#0a1013; border-top:1px solid var(--line);
-      padding:2.2rem 0 6rem; margin-top:3rem;
+      padding:2.2rem 0 3rem; margin-top:3rem;
     }
     footer.site .f-tagline{
       font-family:var(--serif); color:var(--gold); font-size:1.05rem; margin:.3rem 0 .1rem;
@@ -770,7 +821,6 @@
     footer.site .f-bar-links a{ font-size:.75rem; margin-left:1rem; }
     @media (min-width:700px){
       .footer-cols{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2rem; }
-      footer.site{ padding-bottom:3rem; }
     }
   </style>
 </head>
@@ -838,7 +888,7 @@
       </section>
 
       <!-- ===================== RESULT — the centrepiece ===================== -->
-      <section class="result" id="result" data-capped="false" aria-labelledby="result-label">
+      <section class="result" id="result" data-capped="false" aria-labelledby="result-label" style="scroll-margin-top:12px">
         <h2 class="result-label" id="result-label">Hypothetical Calculated Award</h2>
         <p class="result-figure tnum" id="result-figure">$22,560</p>
         <p class="result-sub" id="result-sub"><span class="em">90%</span> of the $25,000 ceiling</p>
@@ -909,7 +959,7 @@
         <div class="control-head">
           <span class="control-num">1 &mdash; Personnel Rating</span>
           <h2 id="c1-h">Annual performance evaluation</h2>
-          <p class="control-note">The plan allocates 20% of the CIO&rsquo;s calculation to this rating &mdash; the only partially subjective component in the formula.</p>
+          <p class="control-note">The plan assigns 20% of the CIO&rsquo;s calculation to the annual personnel evaluation.</p>
         </div>
 
         <div class="lever" id="lever" data-pos="1" role="radiogroup" aria-labelledby="c1-h">
@@ -939,7 +989,7 @@
         <div class="control-head">
           <span class="control-num market">2 &mdash; Public-Market Excess</span>
           <h2 id="c2-h">Public-market excess return</h2>
-          <p class="control-note">Excess return above the applicable benchmark. The plan&rsquo;s goal is 20 basis points; public and private components are calculated separately.</p>
+          <p class="control-note">Excess return above the applicable benchmark. The plan&rsquo;s goal is 20 basis points (0.20%); public and private components are calculated separately.</p>
         </div>
 
         <div class="dial">
@@ -947,7 +997,7 @@
             <span class="big tnum" id="public-display">0.00%</span>
             <span class="factor" id="public-factor">No positive excess assumed</span>
           </p>
-          <input type="range" id="public-slider" min="0" max="21" step="1" value="0"
+          <input type="range" id="public-slider" min="0" max="20" step="1" value="0"
                  aria-label="Public-market excess return over the applicable benchmark"
                  aria-valuetext="0.00 percent — exactly matches benchmark">
           <div class="ticks" id="public-ticks"></div>
@@ -960,7 +1010,11 @@
         <div class="control-head">
           <span class="control-num market">3 &mdash; Private-Market Excess</span>
           <h2 id="c3-h">Private-market excess return</h2>
-          <p class="control-note">Calculated separately from the public-market component, against its own applicable benchmark, then weighted into the same blended total.</p>
+          <p class="composition-note">
+            <strong>FY2025: Private Credit + Private Real Assets.</strong>
+            Private equity is excluded from this calculation.
+          </p>
+          <p class="control-note">Calculated separately from the public-market component, against its own applicable benchmark, then weighted into the same total excess.</p>
         </div>
 
         <div class="dial">
@@ -968,7 +1022,7 @@
             <span class="big tnum" id="private-display">0.00%</span>
             <span class="factor" id="private-factor">No positive excess assumed</span>
           </p>
-          <input type="range" id="private-slider" min="0" max="21" step="1" value="0"
+          <input type="range" id="private-slider" min="0" max="20" step="1" value="0"
                  aria-label="Private-market excess return over the applicable benchmark"
                  aria-valuetext="0.00 percent — exactly matches benchmark">
           <div class="ticks" id="private-ticks"></div>
@@ -1033,9 +1087,14 @@
           </div>
 
           <div class="field">
+            <span class="field-label">Published component weights (FY2025 plan)</span>
+            <ul class="positions-table" id="weights-rows"></ul>
+            <p class="field-hint">The plan publishes weights for every listed row. Several employees share the same job classification while carrying different public/private allocations, so a title alone does not identify a weighting &mdash; which is why only the Chief Investment Officer is offered as a named preset. Enter any row&rsquo;s weights above to model it.</p>
+          </div>
+
+          <div class="field">
             <span class="field-label">Maximum incentive by position (FY2025 plan)</span>
             <ul class="positions-table" id="positions-table"></ul>
-            <p class="field-hint">Only the Chief Investment Officer is offered as a preset. The plan&rsquo;s public- and private-market weightings for the other classifications are not modeled here, so a single universal preset is not implied for any other title.</p>
           </div>
 
           <div class="btn-row" style="margin-top:1.2rem">
@@ -1101,19 +1160,33 @@
           </div>
 
           <div class="method-block">
-            <h3>Market payout ladder</h3>
-            <p>The plan sets one goal across public and private portfolios alike: 20 basis points of excess return above benchmark. Each basis point of excess return adds five percentage points of payout factor.</p>
-            <div class="ladder">
-              <div><b>0.01%</b><span>5%</span></div>
-              <div><b>0.02%</b><span>10%</span></div>
-              <div><b>0.03%</b><span>15%</span></div>
-              <div><b>0.04%</b><span>20%</span></div>
-              <div><b>0.05%</b><span>25%</span></div>
-              <div><b>0.10%</b><span>50%</span></div>
-              <div><b>0.15%</b><span>75%</span></div>
-              <div><b>0.20%</b><span>100%</span></div>
-            </div>
-            <p style="margin-top:.7rem">The ladder stops at 0.20%: anything above 20 basis points pays what 20 basis points pays.</p>
+            <h3>The published payout schedule</h3>
+            <p>The plan sets one goal across public and private portfolios alike: 20 basis points (0.20%) of excess return above benchmark. The plan prints a schedule of twenty rungs against that goal, each 0.01% of <em>total</em> excess worth five percentage points of payout.</p>
+            <div class="ladder" id="ladder-grid"></div>
+            <p style="margin-top:.7rem">The schedule stops at 0.20%: anything above it pays what 0.20% pays.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>How the components combine</h3>
+            <p>Each component&rsquo;s basis points are multiplied by its weight, the three weighted contributions are summed into a single <strong>total excess</strong>, and the published schedule is read against that total. The plan&rsquo;s own worked example establishes this order of operations.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>The plan&rsquo;s worked example</h3>
+            <p>The FY2025 plan contains a worked example for a Senior RIO with more than three years&rsquo; tenure, weighted 20% individual / 60% public / 20% private. After the plan&rsquo;s tenure calculation the components are 0.15% individual, 0.00% public and 0.12% private.</p>
+            <ul>
+              <li>Total excess: <strong>0.054%</strong></li>
+              <li>Award from the payout scale: <strong>25%</strong></li>
+              <li>Annual base salary $170,000 &times; a 25% maximum salary multiplier = $42,500</li>
+              <li>Calculated bonus: 25% &times; $42,500 = <strong>$10,625</strong></li>
+              <li>Budget limit $25,000; final award <strong>$10,625</strong></li>
+            </ul>
+            <p>That example is what settles how the schedule is read. A total excess of 0.054% pays the 0.05% rung&rsquo;s 25%, not the 27% a continuously interpolated line would give.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>Between the printed rungs</h3>
+            <p><strong>Exhibit implementation:</strong> between printed payout rungs, the calculator uses the lower published rung, consistent with IPERS&rsquo;s worked example in which 0.054% maps to the 0.05% / 25% rung. The produced plan does not separately state a general rounding rule, so this is a convention anchored to that example rather than a rule IPERS expressly published. Where it applies, the exhibit says so on the calculation itself.</p>
           </div>
 
           <div class="method-block">
@@ -1128,8 +1201,27 @@
           </div>
 
           <div class="method-block">
-            <h3>How the components combine</h3>
-            <p>Each component&rsquo;s basis points are multiplied by its weight and summed into a blended total, and the published ladder is applied to that blended figure. The exhibit clamps each market component at the plan&rsquo;s 20-basis-point goal before weighting, because the plan states that anything above 20 basis points pays what 20 basis points pays. Within that constraint, weighting the components and then applying the ladder gives the same result as applying the ladder to each component and then weighting them.</p>
+            <h3>What the private-market component contains</h3>
+            <p>Private markets are not private equity. Private equity is one private-market asset class. It sat inside the FY2024 private-market excess calculation and is excluded from the FY2025 one; the FY2025 plan states that &ldquo;the Private Equity portfolio for IPERS are not included in excess considerations.&rdquo;</p>
+            <div class="fy-compare">
+              <div class="fy-col">
+                <h4>FY2024</h4>
+                <ul>
+                  <li>Private Equity &mdash; 20%</li>
+                  <li>Private Credit &mdash; 40%</li>
+                  <li>Private Real Assets &mdash; 40%</li>
+                </ul>
+              </div>
+              <div class="fy-col">
+                <h4>FY2025</h4>
+                <ul>
+                  <li>Private Equity &mdash; excluded</li>
+                  <li>Private Credit &mdash; 50%</li>
+                  <li>Private Real Assets &mdash; 50%</li>
+                </ul>
+              </div>
+            </div>
+            <p>The produced records do not establish why the change was made or who authorised it, and this exhibit does not speculate. Private-equity performance reported after the FY2025 incentive period does not establish a reason either.</p>
           </div>
 
           <div class="method-block limitation">
@@ -1139,8 +1231,15 @@
           </div>
 
           <div class="method-block">
-            <h3>Negative market excess</h3>
-            <p>Negative market-excess treatment is not modeled unless explicitly supported by the published plan. The plan&rsquo;s payout schedule begins at zero excess and climbs; it does not establish how excess return below the benchmark enters the table. The market controls in this exhibit therefore begin at 0.00%, which means the applicable investment component exactly matches its benchmark.</p>
+            <h3>Negative excess and the multi-year layer</h3>
+            <p>The FY2025 plan&rsquo;s worked example shows positive and negative annual excess returns feeding a multi-year tenure-weighted calculation &mdash; public-market years of +0.10%, &minus;0.05% and &minus;0.10%, and private-market years of +0.30%, &minus;0.10% and +0.20%. Negative annual returns are plainly contemplated by the plan.</p>
+            <p>This exhibit does not reconstruct that historical layer. Its public- and private-market controls represent the market-excess component <em>after</em> any applicable multi-year or tenure calculation, which is the figure that enters the weighting.</p>
+            <p>What the produced plan does not establish is how a negative <em>total</em> excess would be read against a payout schedule whose lowest printed rung is 0.01%. The controls therefore begin at 0.00% &mdash; the point at which the applicable investment component exactly matches its benchmark &mdash; and the exhibit does not extrapolate the schedule below it.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>Why only the CIO is a preset</h3>
+            <p>The FY2025 plan publishes the component weights for each listed row. Several employees share the same job classification while carrying different public/private allocations, so a generic job title does not identify one weighting. Because the produced plan does not give a reader-safe one-to-one mapping from a title to every row, this exhibit uses only the Chief Investment Officer as a named preset. The published rows are listed in the advanced drawer as documentary information.</p>
           </div>
 
           <div class="method-block">
@@ -1154,14 +1253,19 @@
     </div>
   </main>
 
-  <!-- ===================== STICKY MINI READOUT ===================== -->
-  <div class="sticky-readout" id="sticky-readout" aria-hidden="true">
-    <span>
-      <span class="k">Hypothetical calculated award</span>
-      <span class="v tnum" id="sticky-value">$22,560</span>
+  <!-- ===================== LIVE RESULT BAR (top) =====================
+       Appears once the full result card scrolls out of view, so the award
+       stays visible while the reader works the controls below it. The inner
+       spans are hidden from assistive technology because the dedicated live
+       region already announces every change. -->
+  <button type="button" class="live-bar" id="live-bar" data-state="uncapped"
+          aria-label="View the full calculation result" aria-hidden="true" tabindex="-1">
+    <span class="lb-main" aria-hidden="true">
+      <span class="lb-k" id="lb-k">Hypothetical award</span>
+      <span class="lb-v tnum" id="lb-v">$22,560</span>
     </span>
-    <span class="note" id="sticky-note">90% of the $25,000 ceiling</span>
-  </div>
+    <span class="lb-side tnum" id="lb-side" aria-hidden="true">90% of $25,000 cap</span>
+  </button>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="site">
@@ -1233,7 +1337,9 @@
       wPriv: 40
     };
 
-    var ABOVE_GOAL_POS = 21;   // the "0.20%+" detent
+    /* Slider positions are whole basis points, 0 through the plan's 20 bp goal.
+       Every position therefore lands on a printed rung of the payout schedule. */
+    var MAX_POS = E.PLAN.marketGoalBasisPoints;   // 20
     var state = Object.assign({}, DEFAULTS);
 
     /* ========================================================================
@@ -1256,7 +1362,14 @@
       return (rounded === 1 ? '1 basis point' : rounded + ' basis points');
     }
     function excessLabel(pos){
-      return pos >= ABOVE_GOAL_POS ? 'Above 0.20%' : (pos / 100).toFixed(2) + '%';
+      return (pos / 100).toFixed(2) + '%';
+    }
+
+    /* Total excess, printed the way the plan's worked example prints it. */
+    function totalExcessLabel(bp){
+      var pctValue = bp / 100;
+      var s = pctValue.toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
+      return (s === '' || s === '0' ? '0' : s) + '%';
     }
 
     /* ========================================================================
@@ -1276,7 +1389,7 @@
      'w-ind','w-pub','w-priv','weights-total','weights-warning','positions-table',
      'thresh-figure','thresh-label','thresh-label-val','thresh-mark','thresh-salary',
      'thresh-reached','thresh-caption','thresh-track',
-     'live-region','sticky-readout','sticky-value','sticky-note',
+     'live-region','live-bar','lb-k','lb-v','lb-side','ladder-grid','weights-rows',
      'copy-btn','copy-status','reset-btn','reset-btn-2','story-link','math-drawer'
     ].forEach(function(id){ el[id] = document.getElementById(id); });
 
@@ -1317,15 +1430,15 @@
       var v = parseFloat(raw);
       if (!isFinite(v) || v < 0){ return fallback; }
       var bp = Math.round(v * 100);
-      return bp > 20 ? ABOVE_GOAL_POS : clamp(bp, 0, 20);
+      return clamp(bp, 0, MAX_POS);
     }
 
     function scenarioUrl(){
       var p = new URLSearchParams();
       p.set('salary', String(state.salary));
       p.set('rating', state.rating);
-      p.set('public', state.publicPos >= ABOVE_GOAL_POS ? '0.21' : (state.publicPos / 100).toFixed(2));
-      p.set('private', state.privatePos >= ABOVE_GOAL_POS ? '0.21' : (state.privatePos / 100).toFixed(2));
+      p.set('public', (state.publicPos / 100).toFixed(2));
+      p.set('private', (state.privatePos / 100).toFixed(2));
       p.set('max', String(state.maxPct));
       p.set('wi', String(state.wInd));
       p.set('wpub', String(state.wPub));
@@ -1360,11 +1473,11 @@
 
     function buildTicks(container){
       var labelled = { 0:'0.00', 1:'0.01', 2:'0.02', 3:'0.03', 4:'0.04', 5:'0.05',
-                       10:'0.10', 15:'0.15', 21:'0.20+' };
-      var narrowOnly = { 0:true, 5:true, 10:true, 15:true, 21:true };
+                       10:'0.10', 15:'0.15', 20:'0.20' };
+      var narrowOnly = { 0:true, 5:true, 10:true, 15:true, 20:true };
       var html = '';
-      for (var i = 0; i <= ABOVE_GOAL_POS; i++){
-        var left = (i / ABOVE_GOAL_POS) * 100;
+      for (var i = 0; i <= MAX_POS; i++){
+        var left = (i / MAX_POS) * 100;
         var label = labelled[i];
         var classes = 'tick' + (label ? ' major' : '') + (label && !narrowOnly[i] ? ' hide-narrow' : '');
         html += '<span class="' + classes + '" style="left:' + left.toFixed(3) + '%">' +
@@ -1419,8 +1532,8 @@
       el['rating-bp'].textContent = r.individualBp === null ? 'Not eligible' : r.individualBp + ' basis points';
 
       // Market dials
-      renderDial('public', state.publicPos);
-      renderDial('private', state.privatePos);
+      renderDial('public', state.publicPos, r.weightedPublicBp, state.wPub);
+      renderDial('private', state.privatePos, r.weightedPrivateBp, state.wPriv);
 
       // Advanced
       el['salary-input'].value = String(state.salary);
@@ -1441,7 +1554,10 @@
       el['weights-total'].style.color = (total === 100) ? 'var(--muted)' : 'var(--alert)';
     }
 
-    function renderDial(which, pos){
+    /* The payout schedule is read against the TOTAL excess, not against each
+       component, so a component's readout reports what it contributes to that
+       total rather than a payout factor of its own. */
+    function renderDial(which, pos, weightedBp, weightPct){
       var slider = el[which + '-slider'];
       var display = el[which + '-display'];
       var factorTag = el[which + '-factor'];
@@ -1449,24 +1565,20 @@
 
       slider.value = String(pos);
       setFill(slider);
-
-      var usedBp = Math.min(pos, 20);
-      var factor = E.getMarketPayoutFactor(usedBp);
       display.textContent = excessLabel(pos);
 
       if (pos === 0){
-        factorTag.textContent = 'No positive excess assumed';
-        caption.innerHTML = '<strong>0.00% = exactly matches benchmark</strong>';
-        slider.setAttribute('aria-valuetext', '0.00 percent — exactly matches the applicable benchmark; no positive excess assumed');
-      } else if (pos >= ABOVE_GOAL_POS){
-        factorTag.textContent = '100% payout factor';
-        caption.innerHTML = '<strong>Above 0.20%</strong> — the ladder stops at the plan&rsquo;s 20-basis-point goal, so this is counted as 0.20%.';
-        slider.setAttribute('aria-valuetext', 'Above 0.20 percent — counted as 0.20 percent, a 100 percent payout factor');
+        factorTag.textContent = 'No positive excess return assumed';
+        caption.innerHTML = '<strong>0.00% = exactly matches the applicable benchmark</strong>';
+        slider.setAttribute('aria-valuetext',
+          '0.00 percent — exactly matches the applicable benchmark; no positive excess return assumed');
       } else {
-        factorTag.textContent = pct(factor) + ' payout factor';
-        caption.innerHTML = '<strong>' + excessLabel(pos) + '</strong> above the applicable benchmark — ' +
-                            pct(factor) + ' payout factor on the published ladder.';
-        slider.setAttribute('aria-valuetext', excessLabel(pos) + ' above the applicable benchmark, a ' + pct(factor) + ' payout factor');
+        factorTag.textContent = 'Adds ' + bpShort(weightedBp) + ' to the total excess';
+        caption.innerHTML = '<strong>' + excessLabel(pos) + '</strong> above the applicable benchmark &mdash; weighted at ' +
+                            weightPct + '%, this adds ' + bpShort(weightedBp) + ' to the total excess.';
+        slider.setAttribute('aria-valuetext',
+          excessLabel(pos) + ' above the applicable benchmark, weighted at ' + weightPct +
+          ' percent, adding ' + bpShort(weightedBp) + ' to the total excess');
       }
     }
 
@@ -1489,9 +1601,9 @@
         el['result-sub'].innerHTML = 'Set the component weights to total 100%.';
         setGauge(0, 0, E.PLAN.perPersonCap * 1.4);
         el['what-changed'].textContent = 'The component weights do not total 100%, so no result is calculated.';
-        el['sticky-value'].textContent = 'Unavailable';
-        el['sticky-note'].textContent = 'Weights must total 100%';
+        setLiveBar('invalid', 'Result unavailable', 'Weights must total 100%', '');
         renderBenchmark();
+        renderLadder(null);
         previous.award = null;
         return;
       }
@@ -1522,11 +1634,38 @@
       el['what-changed'].textContent = buildSentence(r);
       renderBenchmark();
 
-      el['sticky-value'].textContent = money(payable);
-      el['sticky-note'].textContent = !r.eligible
-        ? 'Not eligible under the published plan'
-        : (capped ? 'Calculated ' + money(r.calculatedAward) + ' — ceiling applies'
-                  : Math.round((payable / r.cap) * 100) + '% of the ' + money(r.cap) + ' ceiling');
+      renderLadder(r);
+
+      if (!r.eligible){
+        setLiveBar('ineligible', 'Hypothetical award', money(0), 'Not eligible');
+      } else if (capped){
+        /* Both numbers stay on screen: the point of the exhibit is that the
+           calculation crossed the ceiling, not merely that the cap exists. */
+        setLiveBar('capped', 'Calculated', money(r.calculatedAward),
+                   'Payable<b>' + money(payable) + '</b>Cap applies');
+      } else {
+        setLiveBar('uncapped', 'Hypothetical award', money(payable),
+                   Math.round((payable / r.cap) * 100) + '% of ' + money(r.cap) + ' cap');
+      }
+    }
+
+    /* ---------- Live result bar (top of viewport) ---------- */
+    function setLiveBar(stateName, label, value, side){
+      el['live-bar'].setAttribute('data-state', stateName);
+      el['lb-k'].textContent = label;
+      el['lb-v'].textContent = value;
+      el['lb-side'].innerHTML = side;
+    }
+
+    /* ---------- Payout schedule: highlight the rung actually applied ---------- */
+    function renderLadder(r){
+      var applied = (r && r.weightsValid && r.eligible && r.appliedRung)
+        ? r.appliedRung.basisPoints : null;
+      el['ladder-grid'].innerHTML = E.PAYOUT_SCHEDULE.map(function(rung){
+        var on = rung.basisPoints === applied ? ' class="applied"' : '';
+        return '<div' + on + '><b>' + rung.excessPct.toFixed(2) + '%</b><span>' +
+               Math.round(rung.factor * 100) + '%</span></div>';
+      }).join('');
     }
 
     function setGauge(payable, calculated, axisMax){
@@ -1597,10 +1736,22 @@
       if (state.publicPos > 0){ parts.push('public-market excess'); }
       if (state.privatePos > 0){ parts.push('private-market excess'); }
       var subject = parts.length === 2 ? 'Positive public- and private-market excess add' : 'Positive ' + parts[0] + ' adds';
+
+      var head = subject + ' to the personnel component under the plan’s weighted formula, for a total excess of ' +
+                 totalExcessLabel(r.blendedBp) + '.';
+
+      /* The schedule is a set of printed rungs. Between them the award does not
+         move, and saying so is the honest reading of the plan's own example. */
+      var rung = r.appliedRung
+        ? ' That reads the ' + r.appliedRung.excessPct.toFixed(2) + '% rung of the published schedule, a ' +
+          pct(r.appliedRung.factor) + ' payout factor.'
+        : ' That falls below the schedule’s first printed rung of 0.01%, so no payout factor applies.';
+
       var tail = r.capBinds
         ? ' The calculated award crosses the ' + money(r.cap) + ' payment ceiling; ' + money(r.payableAward) + ' is payable under the FY2025 cap.'
         : ' The calculated award reaches ' + Math.round((r.payableAward / r.cap) * 100) + '% of the ' + money(r.cap) + ' ceiling.';
-      return subject + ' to the personnel component under the plan’s weighted formula.' + tail;
+
+      return head + rung + tail;
     }
 
     /* ---------- Show the math ---------- */
@@ -1625,12 +1776,19 @@
 
       rows.push(['Individual rating', r.individualBp + ' bp', '']);
       rows.push(['Weighted contribution', r.individualBp + ' bp × ' + state.wInd + '% = ' + bpShort(r.weightedIndividualBp), 'step']);
-      rows.push(['Public-market excess', excessLabel(state.publicPos) + ' (' + bpShort(r.publicBpUsed) + ' counted)', '']);
-      rows.push(['Weighted contribution', bpShort(r.publicBpUsed) + ' × ' + state.wPub + '% = ' + bpShort(r.weightedPublicBp), 'step']);
-      rows.push(['Private-market excess', excessLabel(state.privatePos) + ' (' + bpShort(r.privateBpUsed) + ' counted)', '']);
-      rows.push(['Weighted contribution', bpShort(r.privateBpUsed) + ' × ' + state.wPriv + '% = ' + bpShort(r.weightedPrivateBp), 'step']);
-      rows.push(['Blended total', bpShort(r.blendedBp) + ' = ' + (r.blendedBp / 100).toFixed(4).replace(/0+$/,'').replace(/\.$/,'') + '%', 'step']);
-      rows.push(['Published payout factor', pct(r.payoutFactor), 'step']);
+      rows.push(['Public-market excess', excessLabel(state.publicPos), '']);
+      rows.push(['Weighted contribution', bpShort(r.publicBp) + ' × ' + state.wPub + '% = ' + bpShort(r.weightedPublicBp), 'step']);
+      rows.push(['Private-market excess', excessLabel(state.privatePos), '']);
+      rows.push(['Weighted contribution', bpShort(r.privateBp) + ' × ' + state.wPriv + '% = ' + bpShort(r.weightedPrivateBp), 'step']);
+      rows.push(['Total excess', bpShort(r.blendedBp) + ' = ' + totalExcessLabel(r.blendedBp), 'step']);
+
+      if (r.appliedRung){
+        rows.push(['Payout schedule rung applied',
+                   r.appliedRung.excessPct.toFixed(2) + '% → ' + pct(r.appliedRung.factor), 'step']);
+      } else {
+        rows.push(['Payout schedule rung applied', 'below the 0.01% rung → 0%', 'step']);
+      }
+
       rows.push(['Maximum incentive', state.maxPct + '% of ' + money(state.salary) + ' = ' + money(r.maximumIncentive), '']);
       rows.push(['Calculated hypothetical award',
                  pct(r.payoutFactor) + ' × ' + money(r.maximumIncentive) + ' = ' + money(r.calculatedAward), '']);
@@ -1644,10 +1802,15 @@
         notes.push('The calculated result of ' + money(r.calculatedAward) + ' crosses the ' + money(r.cap) +
                    ' per-person ceiling, so ' + money(r.payableAward) + ' is payable under the FY2025 cap.');
       }
-      if (r.publicClamped || r.privateClamped){
-        notes.push('Excess above 0.20% is counted as 0.20%: anything above the plan’s 20-basis-point goal pays what 20 basis points pays.');
+      if (r.betweenRungs){
+        notes.push('A total excess of ' + totalExcessLabel(r.blendedBp) +
+                   ' falls between printed rungs, so the calculator uses the lower published rung (' +
+                   r.appliedRung.excessPct.toFixed(2) + '%). That follows IPERS’s own worked example, in which a 0.054% total excess pays the 0.05% rung’s 25%. The produced plan does not separately state a general rounding rule.');
       }
-      notes.push('Public- and private-market performance are calculated separately before being weighted into the blended total.');
+      if (r.atPlateau){
+        notes.push('At or above 0.20% the schedule pays 100%: anything above the plan’s 20-basis-point goal pays what 20 basis points pays.');
+      }
+      notes.push('Public- and private-market performance are calculated separately, then weighted into the single total excess the schedule is read against.');
       el['math-note'].textContent = notes.join(' ');
     }
 
@@ -1822,15 +1985,40 @@
       }
     });
 
-    /* ---------- Sticky readout ---------- */
+    /* ---------- Live result bar ----------
+       Shown only once the full result card has scrolled off the TOP of the
+       viewport, so it never duplicates a result the reader can already see. */
+    function setBarVisible(on){
+      var bar = el['live-bar'];
+      if (bar.classList.contains('on') === on){ return; }
+      bar.classList.toggle('on', on);
+      if (on){
+        bar.removeAttribute('aria-hidden');
+        bar.tabIndex = 0;
+      } else {
+        bar.setAttribute('aria-hidden', 'true');
+        bar.tabIndex = -1;
+      }
+    }
+
     if ('IntersectionObserver' in window){
       var observer = new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
-          el['sticky-readout'].classList.toggle('on', !entry.isIntersecting && entry.boundingClientRect.top < 0);
+          setBarVisible(!entry.isIntersecting && entry.boundingClientRect.top < 0);
         });
       }, { threshold: 0 });
-      observer.observe(el.result);
+      /* Observe the headline figure rather than the whole card: the reader
+         loses sight of the number long before the card's last paragraph
+         leaves the screen, and the number is the thing that must travel. */
+      observer.observe(el['result-figure']);
     }
+
+    el['live-bar'].addEventListener('click', function(){
+      el.result.scrollIntoView({
+        behavior: reduceMotion.matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    });
 
     /* ========================================================================
        INIT
@@ -1839,10 +2027,19 @@
     buildTicks(el['public-ticks']);
     buildTicks(el['private-ticks']);
 
-    // Published maximum-incentive percentages by position (documentation only).
+    // Published maximum-incentive percentages by position.
     el['positions-table'].innerHTML = E.PUBLISHED_MAXIMUMS_BY_POSITION.map(function(p){
-      return '<li><span>' + p.title + (p.modeled ? '' : ' <em>(not modeled)</em>') + '</span><span>' +
+      return '<li><span>' + p.title + '</span><span>' +
              Math.round(p.maxIncentivePct * 100) + '%</span></li>';
+    }).join('');
+
+    // Published component weights, row by row. Repeated titles with different
+    // splits are exactly why no generic title preset is offered.
+    el['weights-rows'].innerHTML = E.PUBLISHED_WEIGHT_ROWS.map(function(row){
+      var w = Math.round(row.individual * 100) + ' / ' + Math.round(row.public * 100) +
+              ' / ' + Math.round(row.private * 100);
+      return '<li><span>' + row.title + (row.preset ? ' <em>(preset)</em>' : '') +
+             '</span><span>' + w + '</span></li>';
     }).join('');
 
     // Editorial links.
