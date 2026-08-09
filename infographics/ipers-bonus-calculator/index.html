@@ -1236,8 +1236,8 @@
           </div>
 
           <div class="method-block">
-            <h3>The plan&rsquo;s worked example</h3>
-            <p>The FY2025 plan contains a worked example for a Senior RIO with more than three years&rsquo; tenure, weighted 20% individual / 60% public / 20% private. After the plan&rsquo;s tenure calculation the components are 0.15% individual, 0.00% public and 0.12% private.</p>
+            <h3>The plans&rsquo; worked example</h3>
+            <p>The plans contain a worked example for a Senior RIO with more than three years&rsquo; tenure, weighted 20% individual / 60% public / 20% private. After the plan&rsquo;s tenure calculation the components are 0.15% individual, 0.00% public and 0.12% private. The same example, with the same figures, appears in all three plans IPERS produced &mdash; FY2023/4, FY2024 and FY2025.</p>
             <ul>
               <li>Total excess: <strong>0.054%</strong></li>
               <li>Award from the payout scale: <strong>25%</strong></li>
@@ -1250,7 +1250,7 @@
 
           <div class="method-block">
             <h3>Between the printed rungs</h3>
-            <p><strong>Exhibit implementation:</strong> between printed payout rungs, the calculator uses the lower published rung, consistent with IPERS&rsquo;s worked example in which 0.054% maps to the 0.05% / 25% rung. The produced plan does not separately state a general rounding rule, so this is a convention anchored to that example rather than a rule IPERS expressly published. Where it applies, the exhibit says so on the calculation itself.</p>
+            <p><strong>Exhibit implementation:</strong> between printed payout rungs, the calculator uses the lower published rung, consistent with IPERS&rsquo;s worked example in which 0.054% maps to the 0.05% / 25% rung. That example recurs unchanged in the FY2023/4, FY2024 and FY2025 plans, so the treatment is consistent across every plan version IPERS produced. None of them separately states a general rounding rule, and because the three repeat the same figures rather than supplying different intermediate values, they do not independently establish one. The lower-rung reading therefore remains a convention derived from that example rather than a rule IPERS expressly published. Where it applies, the exhibit says so on the calculation itself.</p>
           </div>
 
           <div class="method-block">
@@ -1296,7 +1296,7 @@
 
           <div class="method-block">
             <h3>Negative excess and the multi-year layer</h3>
-            <p>The FY2025 plan&rsquo;s worked example shows positive and negative annual excess returns feeding a multi-year tenure-weighted calculation &mdash; public-market years of +0.10%, &minus;0.05% and &minus;0.10%, and private-market years of +0.30%, &minus;0.10% and +0.20%. Negative annual returns are plainly contemplated by the plan.</p>
+            <p>The plans&rsquo; worked example shows positive and negative annual excess returns feeding a multi-year tenure-weighted calculation &mdash; public-market years of +0.10%, &minus;0.05% and &minus;0.10%, and private-market years of +0.30%, &minus;0.10% and +0.20%. Negative annual returns are plainly contemplated by the plan.</p>
             <p>This exhibit does not reconstruct that historical layer. Its public- and private-market controls represent the market-excess component <em>after</em> any applicable multi-year or tenure calculation, which is the figure that enters the weighting.</p>
             <p>What the produced plan does not establish is how a negative <em>total</em> excess would be read against a payout schedule whose lowest printed rung is 0.01%. The controls therefore begin at 0.00% &mdash; the point at which the applicable investment component exactly matches its benchmark &mdash; and the exhibit does not extrapolate the schedule below it.</p>
           </div>
@@ -1871,7 +1871,7 @@
       if (r.betweenRungs){
         notes.push('A total excess of ' + totalExcessLabel(r.blendedBp) +
                    ' falls between printed rungs, so the calculator uses the lower published rung (' +
-                   r.appliedRung.excessPct.toFixed(2) + '%). That follows IPERS’s own worked example, in which a 0.054% total excess pays the 0.05% rung’s 25%. The produced plan does not separately state a general rounding rule.');
+                   r.appliedRung.excessPct.toFixed(2) + '%). That follows IPERS’s own worked example, in which a 0.054% total excess pays the 0.05% rung’s 25% — an example that recurs unchanged in the FY2023/4, FY2024 and FY2025 plans. None of them separately states a general rounding rule.');
       }
       if (r.atPlateau){
         notes.push('At or above 0.20% the schedule pays 100%: anything above the plan’s 20-basis-point goal pays what 20 basis points pays.');

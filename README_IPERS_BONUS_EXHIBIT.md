@@ -101,11 +101,12 @@ Inherits*](https://investigations.restoring-democracy.org/p/the-formula-behind-t
 
 ---
 
-## The plan's own worked example — and what it settles
+## The plans' own worked example — and what it settles
 
-The FY2025 plan contains a worked example. It is the single most useful piece of
-evidence in the document, because it pins down two things the payout table alone
-leaves open.
+The plans contain a worked example. It is the single most useful piece of
+evidence in the documents, because it pins down two things the payout table
+alone leaves open. The same example, with the same figures, appears in **all
+three plans IPERS produced** — FY2023/4, FY2024 and FY2025.
 
 ```
 Employee                Senior RIO - A          Tenure  > 3 Years
@@ -133,17 +134,24 @@ award, which is the 0.05% rung. Continuous interpolation (5.4 basis points × 5
 percentage points) would give 27%.
 
 This example is the keystone test in the suite. It is asserted against the
-values printed in the plan, not against whatever the engine happens to produce.
+values printed in the plans, not against whatever the engine happens to produce.
 
 ### Between the printed rungs
 
 **Exhibit implementation:** between printed payout rungs, the calculator uses
 the **lower published rung**, consistent with IPERS's worked example in which
-0.054% maps to the 0.05% / 25% rung. The produced plan does not separately state
-a general rounding rule, so this is a convention anchored to that example rather
-than a rule IPERS expressly published. It is labelled as such in the exhibit's
-methodology drawer, and the "show the math" panel says so explicitly whenever a
-total lands between rungs.
+0.054% maps to the 0.05% / 25% rung.
+
+That example recurs unchanged across the FY2023/4, FY2024 and FY2025 plans, so
+the treatment is consistent in every version IPERS produced rather than resting
+on a single document. It still does not amount to a stated rule: none of the
+three separately states a general rounding or flooring convention, and because
+they repeat the same figures rather than supplying different intermediate
+values, the repetition corroborates consistency without independently
+establishing a general rule. The lower-rung reading therefore remains a
+convention derived from that example rather than one IPERS expressly published.
+It is labelled as such in the exhibit's methodology drawer, and the "show the
+math" panel says so explicitly whenever a total lands between rungs.
 
 The engine does **not** compute `payoutFactor = basisPoints × 0.05` for
 arbitrary fractional totals. Doing so would contradict the plan's own example.
@@ -217,7 +225,7 @@ payout factors — the schedule is read once, against the total.
 
 ### Negative excess
 
-The plan's worked example contains negative annual excess returns: public-market
+The plans' worked example contains negative annual excess returns: public-market
 years of +0.10%, −0.05% and −0.10%, and private-market years of +0.30%, −0.10%
 and +0.20%. Negative annual returns are plainly contemplated by the plan, and
 the exhibit does not claim otherwise.
@@ -448,10 +456,13 @@ scrolling.
 These are open against the source material, not defects in the implementation.
 
 1. **The general between-rung rule.** The worked example fixes one case
-   (0.054% → the 0.05% rung). The produced plan does not state a general
-   rounding rule, so the lower-rung convention is an exhibit implementation
-   anchored to that example, disclosed as such. Evidence of a different general
-   rule would change the implementation.
+   (0.054% → the 0.05% rung), and recurs unchanged in all three produced plans,
+   so the treatment is at least consistent across versions. None of them states
+   a general rounding rule, and because the three repeat the same figures rather
+   than supplying different intermediate values, they corroborate consistency
+   without establishing a rule. The lower-rung convention therefore remains an
+   exhibit implementation derived from that example, disclosed as such. Evidence
+   of a different general rule would change the implementation.
 2. **Rounding of the final dollar figure.** The plan does not state whether
    awards are rounded, truncated, or paid to the cent. The exhibit rounds to the
    nearest dollar for display and records the precise figures ($22,560.15,
@@ -473,9 +484,9 @@ These are open against the source material, not defects in the implementation.
    personnel-records exemption at Iowa Code § 22.7(11), which is why this is a
    hypothetical exhibit rather than a reconstruction.
 
-The FY2025 plan document itself is not committed to this repository, so the
-constants in `engine.js` are the transcription point for anyone checking the
-figures against the produced records.
+The plan documents are not committed to this repository, so the constants in
+`engine.js` are the transcription point for anyone checking the figures against
+the produced records.
 
 ---
 

@@ -30,10 +30,11 @@
      percentage points of payout, reaching 100% at 0.20%. Anything above 0.20%
      pays what 0.20% pays.
 
-     This is a LOOKUP TABLE, not a continuous function. The plan's own worked
+     This is a LOOKUP TABLE, not a continuous function. The plans' own worked
      example settles the point: a total excess of 0.054% is reported as a 25%
      award, which is the 0.05% rung. A continuous reading would have produced
-     27%. See WORKED_EXAMPLE below.
+     27%. The same example appears in all three produced plans - FY2023/4,
+     FY2024 and FY2025. See WORKED_EXAMPLE below.
      ------------------------------------------------------------------------ */
 
   var PAYOUT_SCHEDULE = [];
@@ -83,12 +84,15 @@
   };
 
   /* --------------------------------------------------------------------------
-     THE PLAN'S OWN WORKED EXAMPLE (FY2025)
+     THE PLANS' OWN WORKED EXAMPLE
 
      Reproduced here as data so the test suite can assert against it directly.
      This example is the controlling evidence for two things: that the
      components are weighted into a single TOTAL EXCESS before the payout
      schedule is consulted, and that the schedule is read as discrete rungs.
+
+     The same example, with the same figures, appears in all three plans IPERS
+     produced under Iowa Code ch. 22: FY2023/4, FY2024 and FY2025.
      ------------------------------------------------------------------------ */
 
   var WORKED_EXAMPLE = {
@@ -200,11 +204,15 @@
    * Input is TOTAL excess return, in basis points, after weighting.
    *
    * Between two printed rungs the calculator uses the LOWER published rung.
-   * That is the only reading consistent with the plan's own worked example,
+   * That is the only reading consistent with the plans' own worked example,
    * in which a 0.054% total excess is reported as a 25% award — the 0.05%
-   * rung. The produced plan does not separately state a general rounding rule,
-   * so this is an exhibit convention anchored to that example, not a rule
-   * IPERS expressly published.
+   * rung. The example recurs unchanged in the FY2023/4, FY2024 and FY2025
+   * plans, so the treatment is consistent across every produced version. None
+   * of them separately states a general rounding rule, and because the three
+   * repeat the same figures rather than supplying different intermediate
+   * values they do not independently establish one; this remains an exhibit
+   * convention derived from that example, not a rule IPERS expressly
+   * published.
    *
    * Negative totals are not modeled: see the note on negative excess in the
    * README. Passing one throws rather than extrapolating the schedule below
