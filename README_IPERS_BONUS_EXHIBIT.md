@@ -64,7 +64,8 @@ exhibit — the page ships its own inline stylesheet and does not link
 
 Every value below comes from the IPERS Investment Team Incentive Compensation
 Plan for FY2025, produced to RDP under Iowa Code chapter 22 and reported in
-*The Formula Behind the $25,000: What Iowa's Next Governor Inherits*
+[*The Formula Behind the $25,000: What Iowa's Next Governor
+Inherits*](https://investigations.restoring-democracy.org/p/the-formula-behind-the-25000-what)
 (Aug. 9, 2026).
 
 ### Constants
@@ -245,13 +246,13 @@ carry the same wording and should be changed together.
 `index.html`, under `EDITORIAL CONFIGURATION`:
 
 ```js
-var ARTICLE_URL = 'https://investigations.restoring-democracy.org/';
+var ARTICLE_URL = 'https://investigations.restoring-democracy.org/p/the-formula-behind-the-25000-what';
 var PLAN_DOCUMENT_URL = null;
 ```
 
-- `ARTICLE_URL` drives the "Read the Investigation" button. **Set this to the
-  article's permalink once the story is published** — it currently points at the
-  publication's front page.
+- `ARTICLE_URL` drives the "Read the Investigation" button, and is mirrored in
+  the static `href` on `#story-link` so the button still works if the script
+  fails to load. Change both together.
 - `PLAN_DOCUMENT_URL` is optional. Leave it `null` and no "View the Plan" button
   renders. Set it to a path such as
   `/assets/docs/ipers/ipers-incentive-plan-fy2025.pdf` (or an image crop of the
