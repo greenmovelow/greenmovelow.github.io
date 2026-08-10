@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- ===== SEO / SOCIAL ===== -->
+  <title>How IPERS's Bonus Formula Moves | Interactive Exhibit | RDP</title>
+  <meta name="description" content="An interactive exhibit on IPERS's published FY2025 incentive-compensation formula. Adjust the personnel rating and market performance to see what the formula permits. Hypothetical outcomes only &mdash; not a reconstruction of any employee&rsquo;s actual award.">
+  <meta name="robots" content="index,follow">
+
+  <link rel="canonical" href="https://restoring-democracy.org/infographics/ipers-bonus-calculator/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Restoring Democracy's Promise">
+  <meta property="og:url" content="https://restoring-democracy.org/infographics/ipers-bonus-calculator/">
+  <meta property="og:title" content="How IPERS's Bonus Formula Moves">
+  <meta property="og:description" content="Adjust the personnel rating and market performance to see what IPERS&rsquo;s published FY2025 formula permits.">
+  <meta property="og:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Gen3_Gold_Aperture_1536.png">
+  <meta property="og:image:width" content="1536">
+  <meta property="og:image:height" content="857">
+  <meta property="og:image:alt" content="Restoring Democracy's Promise">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How IPERS's Bonus Formula Moves">
+  <meta name="twitter:description" content="Adjust the personnel rating and market performance to see what IPERS&rsquo;s published FY2025 formula permits.">
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Gen3_Gold_Aperture_1536.png">
+
+  <meta name="theme-color" content="#0d1417">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/assets/rdp_logo_gold_on_green_bg.png">
+
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "How IPERS's Bonus Formula Moves",
+    "applicationCategory": "EducationalApplication",
+    "description": "An interactive exhibit modelling hypothetical outcomes permitted by the IPERS Investment Team Incentive Compensation Plan for FY2025.",
+    "operatingSystem": "Any",
+    "url": "https://restoring-democracy.org/infographics/ipers-bonus-calculator/",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Organization", "name": "Restoring Democracy's Promise" },
+    "publisher": {
+      "@type": "NewsMediaOrganization",
+      "name": "Restoring Democracy's Promise",
+      "url": "https://restoring-democracy.org/"
+    }
+  }
+  </script>
+
+  <style>
+    /* ============================================================
+       RDP — IPERS Hypothetical Incentive-Compensation Calculator
+       "How IPERS's Bonus Formula Moves"
+
+       Mobile-first. Dark charcoal / deep slate ground.
+       Warm gold  = incentive-payment elements.
+       Muted slate blue = benchmark / market-performance controls.
+       Self-contained: no CDNs, no frameworks, no trackers beyond the
+       site-standard aggregate counter.
+       ============================================================ */
+
+    /* ---------- Fonts (local, same files the rest of the site uses) ---------- */
+    @font-face{ font-family:'Inter'; font-style:normal; font-weight:400; font-display:swap;
+      src:url('/assets/fonts/inter-v20-latin-regular.woff2') format('woff2'); }
+    @font-face{ font-family:'Inter'; font-style:normal; font-weight:600; font-display:swap;
+      src:url('/assets/fonts/inter-v20-latin-600.woff2') format('woff2'); }
+    @font-face{ font-family:'Inter'; font-style:normal; font-weight:700; font-display:swap;
+      src:url('/assets/fonts/inter-v20-latin-700.woff2') format('woff2'); }
+    @font-face{ font-family:'Lora'; font-style:normal; font-weight:700; font-display:swap;
+      src:url('/assets/fonts/lora-v37-latin-700.woff2') format('woff2'); }
+    @font-face{ font-family:'JetBrains Mono'; font-style:normal; font-weight:400; font-display:swap;
+      src:url('/assets/fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2'); }
+    @font-face{ font-family:'JetBrains Mono'; font-style:normal; font-weight:700; font-display:swap;
+      src:url('/assets/fonts/jetbrains-mono-v24-latin-700.woff2') format('woff2'); }
+
+    :root{
+      --bg:          #0d1417;   /* deep charcoal, faint blue-green cast */
+      --bg-grid:     rgba(140,175,170,0.045);
+      --surface:     #141f24;
+      --surface-2:   #1a272d;
+      --surface-3:   #223138;
+      --line:        rgba(190,215,210,0.14);
+      --line-soft:   rgba(190,215,210,0.08);
+
+      --ink:         #eff3f2;
+      --ink-2:       #cfdcd9;
+      --muted:       #97a9a7;
+      --muted-2:     #7d908e;
+
+      --gold:        #d9a93a;   /* incentive-payment elements */
+      --gold-bright: #f0c869;
+      --gold-dim:    rgba(217,169,58,0.16);
+      --gold-line:   rgba(217,169,58,0.42);
+
+      --slate:       #7fa2bd;   /* benchmark / market controls */
+      --slate-bright:#a6c3da;
+      --slate-dim:   rgba(127,162,189,0.16);
+      --slate-line:  rgba(127,162,189,0.40);
+
+      --ceiling:     #ece5d5;   /* the payment ceiling marker */
+      --green:       #4e8f7c;   /* RDP brand green, lifted for dark ground */
+      --alert:       #e0894a;
+
+      --serif:'Lora', Georgia, Cambria, 'Times New Roman', serif;
+      --sans:'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      --measure: 640px;
+      --radius: 14px;
+      --tap: 44px;
+    }
+
+    *,*::before,*::after{ box-sizing:border-box; }
+
+    html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+    body{
+      margin:0;
+      background-color:var(--bg);
+      /* Restrained financial-analysis grid texture. */
+      background-image:
+        linear-gradient(var(--bg-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+      background-size: 34px 34px, 34px 34px;
+      background-attachment: fixed;
+      color:var(--ink);
+      font-family:var(--sans);
+      font-size:17px;
+      line-height:1.6;
+      overflow-x:clip;   /* clip, not hidden: hidden would break position:sticky below */
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    img{ max-width:100%; height:auto; display:block; }
+    .tnum{ font-variant-numeric: tabular-nums lining-nums; font-feature-settings:"tnum" 1,"lnum" 1; }
+
+    a{ color:var(--gold-bright); text-underline-offset:3px; }
+    a:hover{ color:var(--gold); }
+
+    :focus-visible{ outline:3px solid var(--gold-bright); outline-offset:3px; border-radius:4px; }
+
+    .skip-link{
+      position:absolute; left:-9999px; top:0; z-index:300;
+      background:var(--gold); color:#14100a; padding:.7rem 1.1rem;
+      border-radius:0 0 8px 0; font-weight:700;
+    }
+    .skip-link:focus{ left:0; }
+
+    .visually-hidden{
+      position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+    }
+
+    .wrap{ width:100%; max-width:var(--measure); margin-inline:auto; padding-inline:18px; }
+
+    /* ============================================================
+       SITE NAV (dark variant of the standard RDP header)
+       ============================================================ */
+    .site-nav{
+      position:relative; z-index:60;
+      background:#0a1013; border-bottom:1px solid var(--line);
+    }
+    .site-nav-inner{
+      max-width:1100px; margin-inline:auto; padding:.65rem 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .brand{ display:flex; align-items:center; gap:.55rem; text-decoration:none; }
+    .brand img{ width:34px; height:34px; }
+    .wordmark{
+      font-family:var(--serif); font-weight:700; font-size:1.15rem;
+      letter-spacing:.06em; color:var(--gold);
+    }
+    .nav-links{ display:none; gap:1.1rem; align-items:center; }
+    .nav-links a{
+      color:var(--ink-2); text-decoration:none; font-size:.86rem; font-weight:600;
+    }
+    .nav-links a:hover{ color:var(--gold-bright); }
+    .nav-support{
+      background:var(--gold); color:#14100a !important; padding:.45rem .8rem;
+      border-radius:8px; font-weight:700 !important;
+    }
+    .nav-mobile summary{
+      list-style:none; cursor:pointer; color:var(--ink-2);
+      min-width:var(--tap); min-height:var(--tap);
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid var(--line); border-radius:10px;
+    }
+    .nav-mobile summary::-webkit-details-marker{ display:none; }
+    .nav-mobile svg{ width:22px; height:22px; stroke-width:2; }
+    .nav-mobile-links{
+      position:absolute; left:0; right:0; background:#0a1013;
+      border-bottom:1px solid var(--line); padding:.5rem 18px 1rem;
+      display:flex; flex-direction:column;
+    }
+    .nav-mobile-links a{
+      color:var(--ink-2); text-decoration:none; font-weight:600; font-size:.95rem;
+      padding:.7rem 0; border-bottom:1px solid var(--line-soft); min-height:var(--tap);
+      display:flex; align-items:center;
+    }
+    @media (min-width:900px){
+      .nav-links{ display:flex; }
+      .nav-mobile{ display:none; }
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    main{ padding-bottom:5rem; }
+
+    .hero{ padding:2.2rem 0 1.4rem; }
+    .kicker{
+      margin:0 0 .8rem; font-size:.72rem; font-weight:700; letter-spacing:.19em;
+      text-transform:uppercase; color:var(--gold);
+      display:flex; align-items:center; gap:.6rem;
+    }
+    .kicker::after{ content:""; flex:1; height:1px; background:var(--gold-line); }
+
+    h1{
+      font-family:var(--serif); font-weight:700;
+      font-size:clamp(1.85rem, 8.2vw, 3rem); line-height:1.1;
+      margin:0 0 .8rem; letter-spacing:-0.015em;
+    }
+    .deck{
+      font-size:clamp(1.02rem, 3.6vw, 1.18rem); color:var(--ink-2);
+      margin:0 0 1rem; max-width:34em;
+    }
+    .method-line{
+      font-size:.83rem; color:var(--muted); margin:0;
+      padding-left:.85rem; border-left:2px solid var(--line);
+      max-width:34em;
+    }
+
+    /* ---------- Preset card ---------- */
+    .preset{
+      margin-top:1.6rem; background:var(--surface);
+      border:1px solid var(--line); border-radius:var(--radius);
+      padding:1.1rem 1.1rem 1.2rem;
+    }
+    .preset-title{
+      margin:0 0 .8rem; font-size:.74rem; font-weight:700; letter-spacing:.16em;
+      text-transform:uppercase; color:var(--gold);
+    }
+    .preset-rows{ display:grid; gap:.55rem; margin-bottom:1rem; }
+    .preset-row{
+      display:flex; align-items:baseline; justify-content:space-between; gap:.8rem;
+      border-bottom:1px dashed var(--line-soft); padding-bottom:.5rem;
+    }
+    .preset-row:last-child{ border-bottom:0; padding-bottom:0; }
+    .preset-row dt{ font-size:.88rem; color:var(--muted); margin:0; }
+    .preset-row dd{ margin:0; font-family:var(--mono); font-size:.95rem; color:var(--ink); font-weight:700; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+      min-height:var(--tap); padding:.7rem 1.05rem; border-radius:10px;
+      font-family:var(--sans); font-size:.9rem; font-weight:700; letter-spacing:.03em;
+      text-decoration:none; cursor:pointer; border:1px solid transparent;
+      transition:background-color .18s ease, border-color .18s ease, color .18s ease;
+    }
+    .btn-gold{ background:var(--gold); color:#14100a; }
+    .btn-gold:hover{ background:var(--gold-bright); color:#14100a; }
+    .btn-ghost{ background:transparent; color:var(--ink-2); border-color:var(--line); }
+    .btn-ghost:hover{ border-color:var(--gold-line); color:var(--gold-bright); }
+    .btn-row{ display:flex; flex-wrap:wrap; gap:.6rem; }
+
+    /* ============================================================
+       RESULT PANEL — the centrepiece
+       ============================================================ */
+    .result{
+      margin-top:1.6rem;
+      background:linear-gradient(180deg, #17242a 0%, #131e23 100%);
+      border:1px solid var(--gold-line); border-radius:var(--radius);
+      padding:1.3rem 1.05rem 1.4rem;
+      box-shadow:0 0 0 1px rgba(217,169,58,0.06), 0 18px 44px -28px rgba(0,0,0,0.9);
+    }
+    .result-label{
+      margin:0 0 .35rem; font-size:.71rem; font-weight:700; letter-spacing:.17em;
+      text-transform:uppercase; color:var(--gold);
+    }
+    .result-figure{
+      font-family:var(--mono); font-weight:700;
+      font-size:clamp(2.6rem, 13.5vw, 4.1rem); line-height:1;
+      letter-spacing:-0.02em; color:var(--gold-bright);
+      margin:0; word-break:break-word;
+    }
+    .result-sub{
+      margin:.55rem 0 0; font-size:.95rem; color:var(--ink-2); font-weight:600;
+    }
+    .result-sub .em{ color:var(--gold-bright); }
+
+    /* Capped state: calculated vs payable */
+    .capped-pair{
+      display:none; grid-template-columns:1fr; gap:.75rem;
+      margin-top:1rem; padding-top:1rem; border-top:1px solid var(--line);
+    }
+    .result[data-capped="true"] .capped-pair{ display:grid; }
+    .cap-cell .cap-k{
+      margin:0 0 .2rem; font-size:.68rem; font-weight:700; letter-spacing:.15em;
+      text-transform:uppercase; color:var(--muted);
+    }
+    .cap-cell .cap-v{
+      margin:0; font-family:var(--mono); font-weight:700; font-size:1.5rem; line-height:1.1;
+    }
+    .cap-cell.calculated .cap-v{ color:var(--ink); }
+    .cap-cell.payable .cap-v{ color:var(--gold-bright); }
+    @media (min-width:420px){ .capped-pair{ grid-template-columns:1fr 1fr; } }
+
+    /* ---------- Gauge ---------- */
+    .gauge{ margin-top:1.35rem; }
+    .gauge-caplabel-row{ position:relative; height:1.35rem; }
+    .gauge-caplabel{
+      position:absolute; top:0; transform:translateX(-50%);
+      font-family:var(--mono); font-size:.66rem; font-weight:700; letter-spacing:.06em;
+      color:var(--ceiling); white-space:nowrap;
+      transition:left .45s cubic-bezier(.22,.61,.36,1);
+    }
+    .gauge-track{
+      position:relative; height:34px; border-radius:6px;
+      background:var(--surface-2); border:1px solid var(--line);
+      overflow:hidden;
+    }
+    .gauge-fill{
+      position:absolute; top:0; bottom:0; left:0;
+      background:linear-gradient(90deg, #b98c22 0%, var(--gold) 70%, var(--gold-bright) 100%);
+      transition:width .45s cubic-bezier(.22,.61,.36,1);
+    }
+    .gauge-over{
+      position:absolute; top:0; bottom:0; width:0;
+      /* Hatching, so the "beyond the ceiling" segment is not distinguished by colour alone. */
+      background-image:repeating-linear-gradient(135deg,
+        rgba(224,137,74,0.85) 0 5px, rgba(224,137,74,0.28) 5px 10px);
+      border-left:2px solid var(--ceiling);
+      transition:width .45s cubic-bezier(.22,.61,.36,1), left .45s cubic-bezier(.22,.61,.36,1);
+    }
+    .gauge-capline{
+      position:absolute; top:-4px; bottom:-4px; width:2px; background:var(--ceiling);
+      transition:left .45s cubic-bezier(.22,.61,.36,1);
+    }
+    .gauge-axis{
+      display:flex; justify-content:space-between; margin-top:.4rem;
+      font-family:var(--mono); font-size:.68rem; color:var(--muted-2);
+    }
+    .gauge-legend{
+      display:flex; flex-wrap:wrap; gap:.5rem .95rem; margin-top:.7rem;
+      font-size:.72rem; color:var(--muted);
+    }
+    .gauge-legend span{ display:inline-flex; align-items:center; gap:.35rem; }
+    .swatch{ width:14px; height:10px; border-radius:2px; flex:none; }
+    .swatch.payable{ background:var(--gold); }
+    .swatch.over{ background-image:repeating-linear-gradient(135deg,
+        rgba(224,137,74,0.9) 0 4px, rgba(224,137,74,0.3) 4px 8px); }
+    .swatch.ceiling{ width:3px; height:13px; background:var(--ceiling); border-radius:1px; }
+
+    @media (prefers-reduced-motion: reduce){
+      .gauge-fill,.gauge-over,.gauge-capline,.gauge-caplabel{ transition:none; }
+    }
+
+    /* ---------- What changed ---------- */
+    .whatchanged{
+      margin-top:1.25rem; padding-top:1.1rem; border-top:1px solid var(--line);
+    }
+    .whatchanged h2{
+      margin:0 0 .45rem; font-size:.71rem; font-weight:700; letter-spacing:.16em;
+      text-transform:uppercase; color:var(--muted);
+    }
+    .whatchanged p{ margin:0; font-size:1rem; color:var(--ink); line-height:1.55; }
+
+    /* ---------- Benchmark callout ---------- */
+    .benchmark{
+      margin-top:1.2rem; border-radius:12px; padding:.95rem 1rem;
+      border:1px solid var(--slate-line); background:var(--slate-dim);
+    }
+    .benchmark[data-state="matched"]{
+      border-color:var(--gold-line); background:var(--gold-dim);
+    }
+    .benchmark-title{
+      margin:0 0 .35rem; display:flex; align-items:flex-start; gap:.5rem;
+      font-size:.73rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--slate-bright);
+    }
+    .benchmark[data-state="matched"] .benchmark-title{ color:var(--gold-bright); }
+    .benchmark-title svg{ width:16px; height:16px; flex:none; margin-top:.05rem; }
+    .benchmark p{ margin:0; font-size:.9rem; color:var(--ink-2); }
+
+    /* ---------- Ineligible notice ---------- */
+    .notice{
+      margin-top:1.1rem; border-radius:12px; padding:.9rem 1rem;
+      border:1px solid rgba(224,137,74,0.45); background:rgba(224,137,74,0.10);
+      font-size:.9rem; color:var(--ink-2);
+    }
+    .notice[hidden]{ display:none; }
+    .notice strong{ color:var(--alert); }
+
+    /* ============================================================
+       CONTROLS
+       ============================================================ */
+    .control{
+      margin-top:1.5rem; background:var(--surface); border:1px solid var(--line);
+      border-radius:var(--radius); padding:1.1rem 1.05rem 1.2rem;
+    }
+    .control-head{ margin-bottom:.9rem; }
+    .control-num{
+      font-family:var(--mono); font-size:.72rem; font-weight:700; letter-spacing:.14em;
+      color:var(--gold); text-transform:uppercase;
+    }
+    .control-num.market{ color:var(--slate-bright); }
+    .control h2{
+      font-family:var(--sans); font-size:1.12rem; font-weight:700;
+      margin:.25rem 0 .3rem; letter-spacing:.01em;
+    }
+    .control-note{ margin:0; font-size:.85rem; color:var(--muted); }
+
+    /* ---------- Personnel lever (three-position selector) ---------- */
+    .lever{
+      position:relative; margin-top:.3rem;
+      background:var(--surface-2); border:1px solid var(--line);
+      border-radius:12px; padding:5px;
+      display:grid; grid-template-columns:repeat(3, 1fr); gap:0;
+    }
+    .lever-knob{
+      position:absolute; top:5px; bottom:5px; left:5px;
+      width:calc((100% - 10px) / 3);
+      background:linear-gradient(180deg, #2f4148 0%, #26363c 100%);
+      border:1px solid var(--gold-line); border-radius:9px;
+      box-shadow:0 2px 10px -4px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.06);
+      transition:transform .28s cubic-bezier(.34,1.3,.5,1);
+      pointer-events:none;
+    }
+    .lever[data-pos="1"] .lever-knob{ transform:translateX(100%); }
+    .lever[data-pos="2"] .lever-knob{ transform:translateX(200%); }
+    @media (prefers-reduced-motion: reduce){ .lever-knob{ transition:none; } }
+
+    .lever-opt{
+      position:relative; z-index:1; background:none; border:0; cursor:pointer;
+      min-height:58px; padding:.5rem .15rem; border-radius:9px; overflow:hidden;
+      font-family:var(--sans); color:var(--muted); text-transform:uppercase;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.18rem;
+    }
+    .lever-opt[aria-checked="true"]{ color:var(--ink); }
+    .lever-opt .lever-mark{
+      width:7px; height:7px; border-radius:50%; background:var(--muted-2); flex:none;
+    }
+    .lever-opt[aria-checked="true"] .lever-mark{ background:var(--gold-bright); }
+    .lever-opt:focus-visible{ outline:3px solid var(--gold-bright); outline-offset:-1px; }
+    /* Two-line labels keep the full wording legible inside a third of a 360px screen. */
+    .lever-main{
+      display:block; font-size:.75rem; font-weight:700; letter-spacing:.02em; line-height:1.1;
+    }
+    .lever-sub{
+      display:block; font-size:.58rem; font-weight:600; letter-spacing:.05em;
+      line-height:1.1; color:var(--muted-2);
+    }
+    .lever-opt[aria-checked="true"] .lever-sub{ color:var(--ink-2); }
+    @media (min-width:430px){
+      .lever-main{ font-size:.82rem; }
+      .lever-sub{ font-size:.64rem; }
+    }
+
+    .lever-readout{
+      margin-top:.85rem; display:flex; align-items:baseline; justify-content:space-between;
+      gap:.8rem; flex-wrap:wrap;
+      padding:.7rem .85rem; border-radius:10px;
+      background:var(--surface-2); border:1px solid var(--line-soft);
+    }
+    .lever-readout .k{ font-size:.8rem; color:var(--muted); }
+    .lever-readout .v{ font-family:var(--mono); font-weight:700; font-size:1rem; color:var(--gold-bright); }
+
+    /* ---------- Market dial (range slider) ---------- */
+    .dial{ margin-top:.5rem; }
+    .dial-value{
+      display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap; margin-bottom:.65rem;
+    }
+    .dial-value .big{
+      font-family:var(--mono); font-weight:700; font-size:1.9rem; line-height:1;
+      color:var(--slate-bright);
+    }
+    .dial-value .factor{
+      font-family:var(--mono); font-size:.82rem; font-weight:700;
+      color:var(--ink-2); background:var(--slate-dim);
+      border:1px solid var(--slate-line); border-radius:999px; padding:.2rem .6rem;
+    }
+
+    input[type="range"]{
+      -webkit-appearance:none; appearance:none;
+      width:100%; height:var(--tap); background:transparent; margin:0; cursor:pointer;
+    }
+    input[type="range"]::-webkit-slider-runnable-track{
+      height:10px; border-radius:5px;
+      background:linear-gradient(90deg, var(--slate) var(--fill,0%), var(--surface-3) var(--fill,0%));
+      border:1px solid var(--line);
+    }
+    input[type="range"]::-moz-range-track{
+      height:10px; border-radius:5px; background:var(--surface-3); border:1px solid var(--line);
+    }
+    input[type="range"]::-moz-range-progress{ height:10px; border-radius:5px; background:var(--slate); }
+    input[type="range"]::-webkit-slider-thumb{
+      -webkit-appearance:none; appearance:none;
+      width:30px; height:30px; margin-top:-11px; border-radius:50%;
+      background:linear-gradient(180deg,#e8eff4 0%,#b9cbd8 100%);
+      border:2px solid var(--slate-bright);
+      box-shadow:0 3px 10px -3px rgba(0,0,0,.9);
+    }
+    input[type="range"]::-moz-range-thumb{
+      width:26px; height:26px; border-radius:50%;
+      background:linear-gradient(180deg,#e8eff4 0%,#b9cbd8 100%);
+      border:2px solid var(--slate-bright);
+      box-shadow:0 3px 10px -3px rgba(0,0,0,.9);
+    }
+    input[type="range"].gold-track::-webkit-slider-runnable-track{
+      background:linear-gradient(90deg, var(--gold) var(--fill,0%), var(--surface-3) var(--fill,0%));
+    }
+    input[type="range"].gold-track::-moz-range-progress{ background:var(--gold); }
+    input[type="range"].gold-track::-webkit-slider-thumb{ border-color:var(--gold-bright); }
+    input[type="range"].gold-track::-moz-range-thumb{ border-color:var(--gold-bright); }
+
+    .ticks{
+      position:relative; height:26px; margin-top:-2px;
+      /* Ticks align with the slider thumb centre: inset by half the thumb width. */
+      margin-inline:15px;
+    }
+    .tick{ position:absolute; top:0; transform:translateX(-50%); }
+    .tick i{
+      display:block; width:1px; height:5px; background:var(--line); margin-inline:auto;
+    }
+    .tick.major i{ height:8px; background:var(--slate-line); }
+    .tick b{
+      display:block; font-family:var(--mono); font-size:.62rem; font-weight:400;
+      color:var(--muted-2); margin-top:.2rem; white-space:nowrap;
+    }
+    /* Narrow screens keep every tick mark but drop the crowded labels. */
+    .tick.hide-narrow b{ display:none; }
+    @media (min-width:430px){ .tick.hide-narrow b{ display:block; } }
+
+    .dial-caption{
+      margin:.55rem 0 0; font-size:.82rem; color:var(--muted);
+    }
+    .dial-caption strong{ color:var(--ink-2); font-weight:600; }
+
+    /* What the private-market component actually contains, stated on the
+       control itself so a reader never has to open the methodology to learn
+       that private markets are not private equity. */
+    .composition-note{
+      margin:.35rem 0 .5rem; padding:.5rem .65rem; border-radius:9px;
+      background:var(--slate-dim); border:1px solid var(--slate-line);
+      font-size:.78rem; line-height:1.45; color:var(--ink-2);
+    }
+    .composition-note strong{ color:var(--slate-bright); font-weight:700; }
+
+    /* ============================================================
+       DRAWERS (show the math, advanced, methodology)
+       ============================================================ */
+    details.drawer{
+      margin-top:1.5rem; background:var(--surface);
+      border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+    }
+    details.drawer > summary{
+      list-style:none; cursor:pointer; min-height:var(--tap);
+      padding:1rem 1.05rem; display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      font-size:.78rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
+      color:var(--ink-2);
+    }
+    details.drawer > summary::-webkit-details-marker{ display:none; }
+    details.drawer > summary::after{
+      content:""; flex:none; width:10px; height:10px;
+      border-right:2px solid var(--gold); border-bottom:2px solid var(--gold);
+      transform:rotate(45deg) translate(-2px,-2px); transition:transform .2s ease;
+    }
+    details.drawer[open] > summary::after{ transform:rotate(-135deg) translate(-2px,-2px); }
+    details.drawer > summary:hover{ color:var(--gold-bright); }
+    .drawer-body{ padding:0 1.05rem 1.25rem; }
+
+    /* ---------- Show the math ---------- */
+    .math-list{ list-style:none; margin:0; padding:0; }
+    .math-list li{
+      display:flex; align-items:baseline; justify-content:space-between; gap:.9rem;
+      padding:.55rem 0; border-bottom:1px solid var(--line-soft);
+      font-size:.88rem;
+    }
+    .math-list li .k{ color:var(--muted); }
+    .math-list li .v{ font-family:var(--mono); font-weight:700; color:var(--ink); text-align:right; }
+    /* On narrow screens the expressions break badly beside their labels, so stack them. */
+    @media (max-width:459px){
+      .math-list li{ flex-direction:column; align-items:flex-start; gap:.2rem; }
+      .math-list li .v{ text-align:left; }
+    }
+    .math-list li.step .v{ color:var(--slate-bright); }
+    .math-list li.total{
+      border-bottom:0; border-top:1px solid var(--gold-line); margin-top:.35rem; padding-top:.75rem;
+    }
+    .math-list li.total .k{ color:var(--gold); font-weight:700; text-transform:uppercase;
+      letter-spacing:.1em; font-size:.72rem; }
+    .math-list li.total .v{ color:var(--gold-bright); font-size:1.15rem; }
+    .math-note{ margin:.9rem 0 0; font-size:.79rem; color:var(--muted-2); line-height:1.5; }
+
+    /* ---------- Advanced controls ---------- */
+    .field{ margin-bottom:1.15rem; }
+    .field:last-child{ margin-bottom:0; }
+    .field > label, .field .field-label{
+      display:block; font-size:.78rem; font-weight:700; letter-spacing:.09em;
+      text-transform:uppercase; color:var(--muted); margin-bottom:.45rem;
+    }
+    .field-hint{ margin:.35rem 0 0; font-size:.78rem; color:var(--muted-2); }
+    input[type="number"], input[type="text"]{
+      width:100%; min-height:var(--tap); padding:.55rem .7rem;
+      background:var(--surface-2); border:1px solid var(--line); border-radius:9px;
+      color:var(--ink); font-family:var(--mono); font-size:1rem; font-weight:700;
+    }
+    input[type="number"]:focus, input[type="text"]:focus{ border-color:var(--gold-line); }
+    .weights-grid{ display:grid; grid-template-columns:1fr; gap:.8rem; }
+    @media (min-width:400px){ .weights-grid{ grid-template-columns:repeat(3,1fr); } }
+    .weights-grid .field > label{ font-size:.7rem; letter-spacing:.06em; }
+    .weights-grid input[type="number"]{ font-size:.95rem; }
+    .weights-total{
+      margin-top:.85rem; font-size:.84rem; font-family:var(--mono); color:var(--muted);
+    }
+    .weights-warning{
+      margin-top:.7rem; padding:.75rem .85rem; border-radius:10px;
+      border:1px solid rgba(224,137,74,0.5); background:rgba(224,137,74,0.10);
+      font-size:.85rem; color:var(--ink-2);
+    }
+    .weights-warning[hidden]{ display:none; }
+    .weights-warning strong{ color:var(--alert); }
+
+    .positions-table{
+      margin-top:.4rem; list-style:none; padding:0;
+      font-size:.82rem; color:var(--muted);
+    }
+    .positions-table li{
+      display:flex; justify-content:space-between; gap:.8rem;
+      padding:.4rem 0; border-bottom:1px solid var(--line-soft);
+    }
+    .positions-table li span:last-child{ font-family:var(--mono); color:var(--ink-2); flex:none; }
+    .positions-table li em{ color:var(--gold); font-style:normal; font-size:.75rem; }
+
+    /* ============================================================
+       THRESHOLD EXPLORER
+       ============================================================ */
+    .threshold{
+      margin-top:1.5rem; background:var(--surface); border:1px solid var(--line);
+      border-radius:var(--radius); padding:1.1rem 1.05rem 1.3rem;
+    }
+    .threshold h2{ font-size:1.12rem; margin:.25rem 0 .5rem; }
+    .thresh-figure{
+      font-family:var(--mono); font-weight:700; font-size:2rem; color:var(--gold-bright);
+      margin:.9rem 0 0; line-height:1;
+    }
+    .thresh-viz{ margin-top:1.4rem; }
+    .thresh-marklabel-row{ position:relative; height:2.5rem; }
+    .thresh-marklabel{
+      position:absolute; top:0; transform:translateX(-50%); text-align:center;
+      white-space:nowrap; transition:left .45s cubic-bezier(.22,.61,.36,1);
+    }
+    .thresh-marklabel .lbl{
+      display:block; font-size:.62rem; font-weight:700; letter-spacing:.11em;
+      text-transform:uppercase; color:var(--gold);
+    }
+    .thresh-marklabel .val{
+      display:block; font-family:var(--mono); font-size:.75rem; font-weight:700; color:var(--ink);
+    }
+    .thresh-marklabel .arrow{ display:block; color:var(--gold); font-size:.8rem; line-height:1; }
+    .thresh-track{
+      position:relative; height:14px; border-radius:4px;
+      background:var(--surface-2); border:1px solid var(--line);
+    }
+    .thresh-reached{
+      position:absolute; top:0; bottom:0; right:0; border-radius:0 3px 3px 0;
+      background:linear-gradient(90deg, rgba(217,169,58,0.25), rgba(217,169,58,0.55));
+      transition:left .45s cubic-bezier(.22,.61,.36,1);
+    }
+    .thresh-mark{
+      position:absolute; top:-5px; bottom:-5px; width:2px; background:var(--gold);
+      transition:left .45s cubic-bezier(.22,.61,.36,1);
+    }
+    .thresh-salary{
+      position:absolute; top:-9px; width:12px; height:12px; border-radius:50%;
+      background:var(--ceiling); border:2px solid var(--bg);
+      transform:translateX(-50%); transition:left .45s cubic-bezier(.22,.61,.36,1);
+    }
+    .thresh-axis{
+      display:flex; justify-content:space-between; margin-top:.45rem;
+      font-family:var(--mono); font-size:.65rem; color:var(--muted-2);
+    }
+    .thresh-caption{ margin:1.1rem 0 0; font-size:.88rem; color:var(--ink-2); }
+    .thresh-legend{
+      display:flex; flex-wrap:wrap; gap:.45rem .95rem; margin-top:.8rem;
+      font-size:.72rem; color:var(--muted);
+    }
+    .thresh-legend span{ display:inline-flex; align-items:center; gap:.35rem; }
+    .dot-ceiling{ width:9px; height:9px; border-radius:50%; background:var(--ceiling); flex:none; }
+    .bar-gold{ width:3px; height:12px; background:var(--gold); flex:none; }
+    @media (prefers-reduced-motion: reduce){
+      .thresh-reached,.thresh-mark,.thresh-salary,.thresh-marklabel{ transition:none; }
+    }
+
+    /* ============================================================
+       METHODOLOGY
+       ============================================================ */
+    .method-block{ margin-bottom:1.3rem; }
+    .method-block:last-child{ margin-bottom:0; }
+    .method-block h3{
+      font-size:.74rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--gold); margin:0 0 .5rem;
+    }
+    .method-block p{ margin:0 0 .6rem; font-size:.89rem; color:var(--ink-2); line-height:1.6; }
+    .method-block p:last-child{ margin-bottom:0; }
+    .method-block ul{ margin:0; padding-left:1.15rem; font-size:.89rem; color:var(--ink-2); }
+    .method-block li{ margin-bottom:.4rem; }
+    .limitation{
+      border-left:3px solid var(--alert); padding:.15rem 0 .15rem .9rem;
+      background:rgba(224,137,74,0.06); border-radius:0 8px 8px 0;
+    }
+    .limitation h3{ color:var(--alert); }
+
+    .ladder{
+      display:grid; grid-template-columns:repeat(auto-fill, minmax(78px, 1fr));
+      gap:.4rem; margin-top:.3rem;
+    }
+    .ladder div{
+      background:var(--surface-2); border:1px solid var(--line-soft); border-radius:8px;
+      padding:.45rem .3rem; text-align:center; font-family:var(--mono); font-size:.72rem;
+    }
+    .ladder div b{ display:block; color:var(--slate-bright); font-size:.78rem; }
+    .ladder div span{ color:var(--muted); }
+    .ladder div.applied{ border-color:var(--gold-line); background:var(--gold-dim); }
+    .ladder div.applied b{ color:var(--gold-bright); }
+
+    .fy-compare{ display:grid; grid-template-columns:1fr; gap:.7rem; margin:.6rem 0 .8rem; }
+    @media (min-width:420px){ .fy-compare{ grid-template-columns:1fr 1fr; } }
+    .fy-col{
+      background:var(--surface-2); border:1px solid var(--line-soft);
+      border-radius:10px; padding:.7rem .8rem;
+    }
+    .fy-col h4{
+      margin:0 0 .4rem; font-family:var(--mono); font-size:.74rem; letter-spacing:.08em;
+      color:var(--slate-bright);
+    }
+    .fy-col ul{ margin:0; padding-left:1rem; font-size:.8rem; }
+    .fy-col li{ margin-bottom:.25rem; }
+
+    /* ============================================================
+       CALCULATOR WORKBENCH + FROZEN RESULT PANE
+
+       An Excel-style freeze pane. The compact result is `position: sticky`
+       inside a bounded workbench that holds the controls, so it pins itself
+       above whatever the reader is adjusting and releases naturally once the
+       controls end. Sticky keeps it in normal flow, so unlike a fixed overlay
+       it cannot sit on top of a control the reader is using.
+       ============================================================ */
+    .workbench{ position:relative; }
+
+    .freeze-pane{
+      position:sticky; top:0; z-index:60;
+      margin:1.5rem 0 0;
+      background:rgba(11,18,21,0.97);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      border:1px solid var(--gold-line); border-radius:12px;
+      padding:.6rem .8rem .55rem;
+      padding-top:calc(.6rem + env(safe-area-inset-top));
+      box-shadow:0 10px 24px -18px rgba(0,0,0,0.95);
+    }
+    .fp-row{
+      display:flex; align-items:center; justify-content:space-between; gap:.8rem;
+    }
+    .fp-main{ display:flex; flex-direction:column; min-width:0; }
+    .fp-k{
+      font-size:.58rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+      color:var(--muted); line-height:1.3; white-space:nowrap;
+    }
+    .fp-v{
+      font-family:var(--mono); font-weight:700; font-size:1.32rem; line-height:1.15;
+      color:var(--gold-bright); white-space:nowrap;
+    }
+    .fp-side{
+      flex:none; text-align:right; max-width:11.5rem;
+      font-size:.62rem; line-height:1.35; color:var(--muted);
+      font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    }
+    .fp-side b{
+      display:block; font-family:var(--mono); font-size:.92rem; font-weight:700;
+      color:var(--gold-bright); letter-spacing:0; text-transform:none;
+    }
+    /* When the ceiling binds the calculated figure is the neutral one and the
+       payable figure carries the incentive-gold. Both stay on screen. */
+    .freeze-pane[data-state="capped"] .fp-v{ color:var(--ink); }
+    .freeze-pane[data-state="ineligible"] .fp-v{ color:var(--ink-2); }
+    .freeze-pane[data-state="invalid"] .fp-v{
+      font-family:var(--sans); font-size:.9rem; color:var(--alert); white-space:normal;
+    }
+    .freeze-pane[data-state="invalid"]{ border-color:rgba(224,137,74,0.55); }
+
+    /* Compact mirror of the main gauge. Decorative: every value it encodes is
+       stated in the text beside it, so it carries no meaning on its own. */
+    .fp-gauge{ margin-top:.45rem; }
+    .fp-track{
+      position:relative; height:9px; border-radius:4px;
+      background:var(--surface-2); border:1px solid var(--line); overflow:hidden;
+    }
+    .fp-fill{
+      position:absolute; top:0; bottom:0; left:0; width:0;
+      background:linear-gradient(90deg, #b98c22 0%, var(--gold) 70%, var(--gold-bright) 100%);
+      transition:width .3s cubic-bezier(.22,.61,.36,1);
+    }
+    .fp-over{
+      position:absolute; top:0; bottom:0; width:0;
+      background-image:repeating-linear-gradient(135deg,
+        rgba(224,137,74,0.9) 0 4px, rgba(224,137,74,0.3) 4px 8px);
+      transition:width .3s cubic-bezier(.22,.61,.36,1), left .3s cubic-bezier(.22,.61,.36,1);
+    }
+    .fp-cap{
+      position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--ceiling);
+      transition:left .3s cubic-bezier(.22,.61,.36,1);
+    }
+    .freeze-pane[data-state="invalid"] .fp-track{ opacity:.35; }
+    @media (prefers-reduced-motion: reduce){
+      .fp-fill,.fp-over,.fp-cap{ transition:none; }
+    }
+
+    @media (min-width:560px){
+      .fp-k{ font-size:.62rem; }
+      .fp-v{ font-size:1.5rem; }
+      .fp-side{ font-size:.66rem; max-width:14rem; }
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer.site{
+      background:#0a1013; border-top:1px solid var(--line);
+      padding:2.2rem 0 3rem; margin-top:3rem;
+    }
+    footer.site .f-tagline{
+      font-family:var(--serif); color:var(--gold); font-size:1.05rem; margin:.3rem 0 .1rem;
+    }
+    footer.site .f-sub{ font-size:.82rem; color:var(--muted); margin:0 0 1.2rem; }
+    footer.site h4{
+      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--muted); margin:0 0 .6rem;
+    }
+    footer.site ul{ list-style:none; margin:0 0 1.4rem; padding:0; }
+    footer.site li{ margin-bottom:.5rem; }
+    footer.site a{ color:var(--ink-2); text-decoration:none; font-size:.9rem; }
+    footer.site a:hover{ color:var(--gold-bright); }
+    footer.site .f-bar{
+      border-top:1px solid var(--line-soft); margin-top:1rem; padding-top:1rem;
+      display:flex; flex-wrap:wrap; gap:.6rem 1.2rem; justify-content:space-between;
+    }
+    footer.site .f-copy{ font-size:.75rem; color:var(--muted-2); margin:0; }
+    footer.site .f-bar-links a{ font-size:.75rem; margin-left:1rem; }
+    @media (min-width:700px){
+      .footer-cols{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to the calculator</a>
+
+  <!-- ===================== GLOBAL RDP NAV ===================== -->
+  <header class="site-nav" role="banner">
+    <div class="site-nav-inner">
+      <a class="brand" href="/" aria-label="Restoring Democracy's Promise — home">
+        <img src="/assets/Square_logo_transparent.png" alt="" width="34" height="34" decoding="async">
+        <span class="wordmark">RDP</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="/#investigations">Featured Work</a>
+        <a href="/analytics/">Analytics</a>
+        <a href="/about/">About</a>
+        <a href="/team/">Team</a>
+        <a href="/secure-tips/">Secure Tips</a>
+        <a class="nav-support" href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer">Support Our Work</a>
+      </nav>
+
+      <details class="nav-mobile">
+        <summary aria-label="Toggle navigation menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </summary>
+        <div class="nav-mobile-links">
+          <a href="/#investigations">Featured Work</a>
+          <a href="/analytics/">Analytics</a>
+          <a href="/about/">About</a>
+          <a href="/team/">Team</a>
+          <a href="/secure-tips/">Secure Tips</a>
+          <a href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer">Support Our Work</a>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+
+      <!-- ===================== HERO ===================== -->
+      <section class="hero" aria-labelledby="hero-h">
+        <p class="kicker">Interactive Exhibit</p>
+        <h1 id="hero-h">How IPERS&rsquo;s Bonus Formula Moves</h1>
+        <p class="deck">Adjust the personnel rating and market performance to see what IPERS&rsquo;s published FY2025 formula permits.</p>
+        <p class="method-line">This models hypothetical outcomes under the published plan. It does not reconstruct any employee&rsquo;s actual award.</p>
+
+        <!-- ---------- Preset card ---------- -->
+        <div class="preset">
+          <h2 class="preset-title">2025 CIO Example</h2>
+          <dl class="preset-rows">
+            <div class="preset-row"><dt>Salary</dt><dd class="tnum">$300,802</dd></div>
+            <div class="preset-row"><dt>Maximum incentive</dt><dd class="tnum">50% of salary</dd></div>
+            <div class="preset-row"><dt>Payment ceiling</dt><dd class="tnum">$25,000</dd></div>
+          </dl>
+          <div class="btn-row">
+            <button type="button" class="btn btn-gold" id="reset-btn">Reset to 2025 CIO</button>
+            <a class="btn btn-ghost" id="story-link" href="https://investigations.restoring-democracy.org/p/the-formula-behind-the-25000-what" target="_blank" rel="noopener noreferrer">Read the Investigation</a>
+            <!-- Optional: a "View the Plan" button appears here when PLAN_DOCUMENT_URL is set. -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== RESULT — the centrepiece ===================== -->
+      <section class="result" id="result" data-capped="false" aria-labelledby="result-label" style="scroll-margin-top:12px">
+        <h2 class="result-label" id="result-label">Hypothetical Calculated Award</h2>
+        <p class="result-figure tnum" id="result-figure">$22,560</p>
+        <p class="result-sub" id="result-sub"><span class="em">90%</span> of the $25,000 ceiling</p>
+
+        <div class="capped-pair">
+          <div class="cap-cell calculated">
+            <p class="cap-k">Calculated</p>
+            <p class="cap-v tnum" id="calc-value">&mdash;</p>
+          </div>
+          <div class="cap-cell payable">
+            <p class="cap-k">Payable under FY2025 cap</p>
+            <p class="cap-v tnum" id="payable-value">&mdash;</p>
+          </div>
+        </div>
+
+        <!-- Gauge -->
+        <div class="gauge">
+          <div class="gauge-caplabel-row">
+            <span class="gauge-caplabel" id="gauge-caplabel" style="left:71.4%">$25,000 ceiling</span>
+          </div>
+          <div class="gauge-track" id="gauge-track" role="img" aria-label="Gauge of the hypothetical calculated award against the $25,000 payment ceiling.">
+            <div class="gauge-fill" id="gauge-fill" style="width:64.5%"></div>
+            <div class="gauge-over" id="gauge-over" style="left:71.4%; width:0"></div>
+            <div class="gauge-capline" id="gauge-capline" style="left:71.4%"></div>
+          </div>
+          <div class="gauge-axis">
+            <span>$0</span>
+            <span id="gauge-axis-max">$35,000</span>
+          </div>
+          <p class="gauge-legend">
+            <span><i class="swatch payable" aria-hidden="true"></i> Payable amount</span>
+            <span><i class="swatch over" aria-hidden="true"></i> Calculated beyond the ceiling</span>
+            <span><i class="swatch ceiling" aria-hidden="true"></i> $25,000 payment ceiling</span>
+          </p>
+        </div>
+
+        <!-- Ineligible notice -->
+        <p class="notice" id="ineligible-notice" hidden>
+          <strong>Not eligible.</strong> Under the published plan, an employee who fails to meet expectations is not eligible for incentive compensation.
+        </p>
+
+        <!-- Invalid-weights notice -->
+        <p class="notice" id="weights-notice" hidden>
+          <strong>Result unavailable.</strong> The three component weights must total 100%. Adjust them in the advanced drawer below.
+        </p>
+
+        <!-- What changed -->
+        <div class="whatchanged">
+          <h2>What changed?</h2>
+          <p id="what-changed">&mdash;</p>
+        </div>
+
+        <!-- Benchmark callout -->
+        <div class="benchmark" id="benchmark" data-state="matched">
+          <p class="benchmark-title" id="benchmark-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
+            <span id="benchmark-heading">No investment outperformance assumed</span>
+          </p>
+          <p id="benchmark-text">Both investment components are set to exactly match their applicable benchmarks.</p>
+        </div>
+      </section>
+
+      <!-- Screen-reader live region for the calculated award -->
+      <div class="visually-hidden" aria-live="polite" aria-atomic="true" id="live-region"></div>
+
+      <!-- ===================== CALCULATOR WORKBENCH =====================
+           Everything the reader turns lives inside this container, with the
+           frozen result pane pinned to its top. When the workbench ends, the
+           pane releases - a freeze pane while editing cells, not a permanent
+           site header. -->
+      <div class="workbench">
+
+      <!-- Frozen live result. Mirrors the full result card above from the same
+           calculated object; the dedicated live region announces changes, so
+           nothing here is a second aria-live source. -->
+      <div class="freeze-pane" id="freeze-pane" data-state="uncapped">
+        <div class="fp-row">
+          <span class="fp-main">
+            <span class="fp-k" id="fp-label">Hypothetical award</span>
+            <span class="fp-v tnum" id="fp-value">$22,560</span>
+          </span>
+          <span class="fp-side tnum" id="fp-status">90% of $25,000 cap</span>
+        </div>
+        <div class="fp-gauge" aria-hidden="true">
+          <div class="fp-track">
+            <div class="fp-fill" id="fp-fill"></div>
+            <div class="fp-over" id="fp-over"></div>
+            <div class="fp-cap" id="fp-cap"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== CONTROL 1 — PERSONNEL RATING ===================== -->
+      <section class="control" aria-labelledby="c1-h">
+        <div class="control-head">
+          <span class="control-num">1 &mdash; Personnel Rating</span>
+          <h2 id="c1-h">Annual performance evaluation</h2>
+          <p class="control-note">The plan assigns 20% of the CIO&rsquo;s calculation to the annual personnel evaluation.</p>
+        </div>
+
+        <div class="lever" id="lever" data-pos="1" role="radiogroup" aria-labelledby="c1-h">
+          <span class="lever-knob" aria-hidden="true"></span>
+          <button type="button" class="lever-opt" role="radio" id="rating-fails" data-rating="fails" aria-checked="false" tabindex="-1" aria-label="Fails to Meet Expectations">
+            <span class="lever-mark" aria-hidden="true"></span>
+            <span class="lever-main">Fails</span><span class="lever-sub">to meet</span>
+          </button>
+          <button type="button" class="lever-opt" role="radio" id="rating-meets" data-rating="meets" aria-checked="true" tabindex="0" aria-label="Meets Expectations">
+            <span class="lever-mark" aria-hidden="true"></span>
+            <span class="lever-main">Meets</span><span class="lever-sub">expectations</span>
+          </button>
+          <button type="button" class="lever-opt" role="radio" id="rating-exceeds" data-rating="exceeds" aria-checked="false" tabindex="-1" aria-label="Exceeds Expectations">
+            <span class="lever-mark" aria-hidden="true"></span>
+            <span class="lever-main">Exceeds</span><span class="lever-sub">expectations</span>
+          </button>
+        </div>
+
+        <p class="lever-readout">
+          <span class="k" id="rating-name">Meets Expectations</span>
+          <span class="v" id="rating-bp">15 basis points</span>
+        </p>
+      </section>
+
+      <!-- ===================== CONTROL 2 — PUBLIC-MARKET EXCESS ===================== -->
+      <section class="control" aria-labelledby="c2-h">
+        <div class="control-head">
+          <span class="control-num market">2 &mdash; Public-Market Excess</span>
+          <h2 id="c2-h">Public-market excess return</h2>
+          <p class="control-note">Excess return above the applicable benchmark. The plan&rsquo;s goal is 20 basis points (0.20%); public and private components are calculated separately.</p>
+        </div>
+
+        <div class="dial">
+          <p class="dial-value">
+            <span class="big tnum" id="public-display">0.00%</span>
+            <span class="factor" id="public-factor">No positive excess assumed</span>
+          </p>
+          <input type="range" id="public-slider" min="0" max="20" step="1" value="0"
+                 aria-label="Public-market excess return over the applicable benchmark"
+                 aria-valuetext="0.00 percent — exactly matches benchmark">
+          <div class="ticks" id="public-ticks"></div>
+          <p class="dial-caption" id="public-caption"><strong>0.00% = exactly matches benchmark</strong></p>
+        </div>
+      </section>
+
+      <!-- ===================== CONTROL 3 — PRIVATE-MARKET EXCESS ===================== -->
+      <section class="control" aria-labelledby="c3-h">
+        <div class="control-head">
+          <span class="control-num market">3 &mdash; Private-Market Excess</span>
+          <h2 id="c3-h">Private-market excess return</h2>
+          <p class="composition-note">
+            <strong>FY2025: Private Credit + Private Real Assets.</strong>
+            Private equity is excluded from this calculation.
+          </p>
+          <p class="control-note">Calculated separately from the public-market component, against its own applicable benchmark, then weighted into the same total excess.</p>
+        </div>
+
+        <div class="dial">
+          <p class="dial-value">
+            <span class="big tnum" id="private-display">0.00%</span>
+            <span class="factor" id="private-factor">No positive excess assumed</span>
+          </p>
+          <input type="range" id="private-slider" min="0" max="20" step="1" value="0"
+                 aria-label="Private-market excess return over the applicable benchmark"
+                 aria-valuetext="0.00 percent — exactly matches benchmark">
+          <div class="ticks" id="private-ticks"></div>
+          <p class="dial-caption" id="private-caption"><strong>0.00% = exactly matches benchmark</strong></p>
+        </div>
+      </section>
+
+      <!-- ===================== SHOW THE MATH ===================== -->
+      <details class="drawer" id="math-drawer">
+        <summary>Show the math</summary>
+        <div class="drawer-body">
+          <ul class="math-list" id="math-list"></ul>
+          <p class="math-note" id="math-note"></p>
+        </div>
+      </details>
+
+      <!-- ===================== ADVANCED ===================== -->
+      <details class="drawer" id="advanced-drawer">
+        <summary>Advanced: change the hypothetical employee</summary>
+        <div class="drawer-body">
+
+          <div class="field">
+            <label for="salary-input">Base salary</label>
+            <input type="number" id="salary-input" min="75000" max="500000" step="1" value="300802"
+                   inputmode="numeric" aria-describedby="salary-hint">
+            <input type="range" id="salary-slider" class="gold-track" min="75000" max="500000" step="1000" value="300802"
+                   aria-label="Base salary, slider">
+            <p class="field-hint" id="salary-hint">$75,000 to $500,000. The 2025 CIO salary in the state payroll record is $300,802.</p>
+          </div>
+
+          <div class="field">
+            <label for="maxpct-input">Maximum incentive as a share of base salary</label>
+            <p class="dial-value" style="margin-bottom:.45rem">
+              <span class="big tnum" id="maxpct-display" style="color:var(--gold-bright)">50%</span>
+              <span class="factor" id="maxpct-dollars" style="color:var(--ink-2); background:var(--gold-dim); border-color:var(--gold-line)">$150,401</span>
+            </p>
+            <input type="range" id="maxpct-input" class="gold-track" min="10" max="50" step="1" value="50"
+                   aria-valuetext="50 percent of base salary">
+            <p class="field-hint">The FY2025 plan sets 50% for the CIO. Other published maximums appear below.</p>
+          </div>
+
+          <div class="field">
+            <span class="field-label">Component weights</span>
+            <div class="weights-grid">
+              <div class="field" style="margin:0">
+                <label for="w-ind">Individual</label>
+                <input type="number" id="w-ind" min="0" max="100" step="1" value="20" inputmode="numeric">
+              </div>
+              <div class="field" style="margin:0">
+                <label for="w-pub">Public market</label>
+                <input type="number" id="w-pub" min="0" max="100" step="1" value="40" inputmode="numeric">
+              </div>
+              <div class="field" style="margin:0">
+                <label for="w-priv">Private market</label>
+                <input type="number" id="w-priv" min="0" max="100" step="1" value="40" inputmode="numeric">
+              </div>
+            </div>
+            <p class="weights-total tnum" id="weights-total">Total: 100%</p>
+            <p class="weights-warning" id="weights-warning" hidden>
+              <strong>Weights must total 100%.</strong> The calculated award is unavailable until the three component weights sum to 100%.
+            </p>
+          </div>
+
+          <div class="field">
+            <span class="field-label">Published component weights (FY2025 plan)</span>
+            <ul class="positions-table" id="weights-rows"></ul>
+            <p class="field-hint">The plan publishes weights for every listed row. Several employees share the same job classification while carrying different public/private allocations, so a title alone does not identify a weighting &mdash; which is why only the Chief Investment Officer is offered as a named preset. Enter any row&rsquo;s weights above to model it.</p>
+          </div>
+
+          <div class="field">
+            <span class="field-label">Maximum incentive by position (FY2025 plan)</span>
+            <ul class="positions-table" id="positions-table"></ul>
+          </div>
+
+          <div class="btn-row" style="margin-top:1.2rem">
+            <button type="button" class="btn btn-ghost" id="copy-btn">Copy this scenario</button>
+            <button type="button" class="btn btn-ghost" id="reset-btn-2">Reset to 2025 CIO</button>
+          </div>
+          <p class="field-hint" id="copy-status" role="status">Copies a link that reproduces the current inputs. Nothing is sent anywhere &mdash; the exhibit runs entirely in your browser.</p>
+        </div>
+      </details>
+
+      </div><!-- /.workbench -->
+
+      <!-- ===================== THRESHOLD EXPLORER ===================== -->
+      <section class="threshold" aria-labelledby="thresh-h">
+        <span class="control-num">Threshold Explorer</span>
+        <h2 id="thresh-h">When does &ldquo;Exceeds&rdquo; hit the cap?</h2>
+        <p class="control-note">The base salary at which an &ldquo;Exceeds Expectations&rdquo; rating reaches the $25,000 ceiling with both market components exactly matching their benchmarks.</p>
+
+        <p class="thresh-figure tnum" id="thresh-figure">$250,000</p>
+
+        <div class="thresh-viz">
+          <div class="thresh-marklabel-row">
+            <span class="thresh-marklabel" id="thresh-label" style="left:41.2%">
+              <span class="lbl">Cap threshold</span>
+              <span class="val tnum" id="thresh-label-val">$250,000</span>
+              <span class="arrow" aria-hidden="true">&#9660;</span>
+            </span>
+          </div>
+          <div class="thresh-track" role="img" id="thresh-track"
+               aria-label="Salary scale from $75,000 to $500,000 marking the cap threshold and the current salary.">
+            <div class="thresh-reached" id="thresh-reached" style="left:41.2%"></div>
+            <div class="thresh-mark" id="thresh-mark" style="left:41.2%"></div>
+            <div class="thresh-salary" id="thresh-salary" style="left:53.1%"></div>
+          </div>
+          <div class="thresh-axis">
+            <span>$75K</span><span>$150K</span><span>$250K</span><span>$350K</span><span>$500K</span>
+          </div>
+          <p class="thresh-legend">
+            <span><i class="bar-gold" aria-hidden="true"></i> Cap threshold</span>
+            <span><i class="dot-ceiling" aria-hidden="true"></i> Current salary in the calculator</span>
+          </p>
+        </div>
+
+        <p class="thresh-caption" id="thresh-caption">At a 50% maximum incentive, an &ldquo;Exceeds Expectations&rdquo; personnel rating reaches a $25,000 ceiling at a $250,000 salary even with zero positive market excess.</p>
+      </section>
+
+      <!-- ===================== METHODOLOGY ===================== -->
+      <details class="drawer" id="method-drawer">
+        <summary>How this is calculated</summary>
+        <div class="drawer-body">
+
+          <div class="method-block">
+            <h3>Source</h3>
+            <p>IPERS Investment Team Incentive Compensation Plan for FY2025, produced to Restoring Democracy&rsquo;s Promise under Iowa Code chapter 22 in response to a request filed June 3, 2026, and reported in <em>The Formula Behind the $25,000: What Iowa&rsquo;s Next Governor Inherits</em> (Aug. 9, 2026).</p>
+          </div>
+
+          <div class="method-block">
+            <h3>Salary</h3>
+            <p>$300,802 &mdash; the chief investment officer&rsquo;s 2025 salary in the state payroll record produced by the Iowa Department of Administrative Services.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>Personnel rating</h3>
+            <p>Footnote 1 of the plan assigns basis-point values to the annual performance evaluation: &ldquo;Meets Expectations&rdquo; counts as 15 basis points (0.15%); &ldquo;Exceeds Expectations&rdquo; counts as 20 basis points (0.20%). Anything below &ldquo;meets&rdquo; disqualifies an employee from incentive compensation outright.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>The published payout schedule</h3>
+            <p>The plan sets one goal across public and private portfolios alike: 20 basis points (0.20%) of excess return above benchmark. The plan prints a schedule of twenty rungs against that goal, each 0.01% of <em>total</em> excess worth five percentage points of payout.</p>
+            <div class="ladder" id="ladder-grid"></div>
+            <p style="margin-top:.7rem">The schedule stops at 0.20%: anything above it pays what 0.20% pays.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>How the components combine</h3>
+            <p>Each component&rsquo;s basis points are multiplied by its weight, the three weighted contributions are summed into a single <strong>total excess</strong>, and the published schedule is read against that total. The plan&rsquo;s own worked example establishes this order of operations.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>The plans&rsquo; worked example</h3>
+            <p>The plans contain a worked example for a Senior RIO with more than three years&rsquo; tenure, weighted 20% individual / 60% public / 20% private. After the plan&rsquo;s tenure calculation the components are 0.15% individual, 0.00% public and 0.12% private. The same example, with the same figures, appears in all three plans IPERS produced &mdash; FY2023/4, FY2024 and FY2025.</p>
+            <ul>
+              <li>Total excess: <strong>0.054%</strong></li>
+              <li>Award from the payout scale: <strong>25%</strong></li>
+              <li>Annual base salary $170,000 &times; a 25% maximum salary multiplier = $42,500</li>
+              <li>Calculated bonus: 25% &times; $42,500 = <strong>$10,625</strong></li>
+              <li>Budget limit $25,000; final award <strong>$10,625</strong></li>
+            </ul>
+            <p>That example is what settles how the schedule is read. A total excess of 0.054% pays the 0.05% rung&rsquo;s 25%, not the 27% a continuously interpolated line would give.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>Between the printed rungs</h3>
+            <p><strong>Exhibit implementation:</strong> between printed payout rungs, the calculator uses the lower published rung, consistent with IPERS&rsquo;s worked example in which 0.054% maps to the 0.05% / 25% rung. That example recurs unchanged in the FY2023/4, FY2024 and FY2025 plans, so the treatment is consistent across every plan version IPERS produced. None of them separately states a general rounding rule, and because the three repeat the same figures rather than supplying different intermediate values, they do not independently establish one. The lower-rung reading therefore remains a convention derived from that example rather than a rule IPERS expressly published. Where it applies, the exhibit says so on the calculation itself.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>CIO weights and ceiling</h3>
+            <ul>
+              <li>Individual performance evaluation: 20%</li>
+              <li>Public market: 40%</li>
+              <li>Private market: 40%</li>
+              <li>Maximum incentive: 50% of base salary</li>
+              <li>Per-person payment ceiling for FY2025: $25,000, assigned by the chief executive through the budget process &mdash; not set by statute</li>
+            </ul>
+          </div>
+
+          <div class="method-block">
+            <h3>What the private-market component contains</h3>
+            <p>Private markets are not private equity. Private equity is one private-market asset class. It sat inside the FY2024 private-market excess calculation and is excluded from the FY2025 one; the FY2025 plan states that &ldquo;the Private Equity portfolio for IPERS are not included in excess considerations.&rdquo;</p>
+            <div class="fy-compare">
+              <div class="fy-col">
+                <h4>FY2024</h4>
+                <ul>
+                  <li>Private Equity &mdash; 20%</li>
+                  <li>Private Credit &mdash; 40%</li>
+                  <li>Private Real Assets &mdash; 40%</li>
+                </ul>
+              </div>
+              <div class="fy-col">
+                <h4>FY2025</h4>
+                <ul>
+                  <li>Private Equity &mdash; excluded</li>
+                  <li>Private Credit &mdash; 50%</li>
+                  <li>Private Real Assets &mdash; 50%</li>
+                </ul>
+              </div>
+            </div>
+            <p>The produced records do not establish why the change was made or who authorised it, and this exhibit does not speculate. Private-equity performance reported after the FY2025 incentive period does not establish a reason either.</p>
+          </div>
+
+          <div class="method-block limitation">
+            <h3>Important limitation</h3>
+            <p>IPERS did not produce the CIO&rsquo;s individual evaluation ratings or award worksheets. This exhibit therefore shows hypothetical outcomes permitted by the published formula; it does not establish how any actual award was calculated.</p>
+            <p>Requests for evaluation scorecards and criteria were met with citations to the personnel-records exemption at Iowa Code &sect; 22.7(11).</p>
+          </div>
+
+          <div class="method-block">
+            <h3>Negative excess and the multi-year layer</h3>
+            <p>The plans&rsquo; worked example shows positive and negative annual excess returns feeding a multi-year tenure-weighted calculation &mdash; public-market years of +0.10%, &minus;0.05% and &minus;0.10%, and private-market years of +0.30%, &minus;0.10% and +0.20%. Negative annual returns are plainly contemplated by the plan.</p>
+            <p>This exhibit does not reconstruct that historical layer. Its public- and private-market controls represent the market-excess component <em>after</em> any applicable multi-year or tenure calculation, which is the figure that enters the weighting.</p>
+            <p>What the produced plan does not establish is how a negative <em>total</em> excess would be read against a payout schedule whose lowest printed rung is 0.01%. The controls therefore begin at 0.00% &mdash; the point at which the applicable investment component exactly matches its benchmark &mdash; and the exhibit does not extrapolate the schedule below it.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>Why only the CIO is a preset</h3>
+            <p>The FY2025 plan publishes the component weights for each listed row. Several employees share the same job classification while carrying different public/private allocations, so a generic job title does not identify one weighting. Because the produced plan does not give a reader-safe one-to-one mapping from a title to every row, this exhibit uses only the Chief Investment Officer as a named preset. The published rows are listed in the advanced drawer as documentary information.</p>
+          </div>
+
+          <div class="method-block">
+            <h3>Rounding</h3>
+            <p>Dollar figures are rounded to the nearest dollar for display; the arithmetic is carried at full precision. The 2025 CIO example calculates to $22,560.15 at &ldquo;Meets Expectations&rdquo; and $30,080.20 at &ldquo;Exceeds Expectations&rdquo; before the ceiling is applied.</p>
+          </div>
+
+        </div>
+      </details>
+
+    </div>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site">
+    <div class="wrap">
+      <div class="footer-cols">
+        <div>
+          <p class="f-tagline">Quantifying the Truth</p>
+          <p class="f-sub">Engineering Precision Journalism</p>
+        </div>
+        <div>
+          <h4>Organization</h4>
+          <ul>
+            <li><a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer">The Investigations Desk &#8599;</a></li>
+            <li><a href="/about/">About RDP</a></li>
+            <li><a href="/team/">Team</a></li>
+            <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:webmaster@restoring-democracy.org">webmaster@restoring-democracy.org</a></li>
+            <li><a href="/secure-tips/">Secure Tips &rarr;</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="f-bar">
+        <p class="f-copy">&copy; 2023&ndash;2026 Restoring Democracy&rsquo;s Promise. All rights reserved.</p>
+        <div class="f-bar-links">
+          <a href="/privacy-policy/">Privacy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="engine.js"></script>
+  <script>
+  (function(){
+    'use strict';
+
+    var E = window.IPERSIncentiveEngine;
+
+    /* ========================================================================
+       EDITORIAL CONFIGURATION
+       Change these two constants to point the exhibit at the story and, if the
+       plan document is published as an asset, at the plan itself.
+       ====================================================================== */
+
+    /* Full URL of the accompanying article. */
+    var ARTICLE_URL = 'https://investigations.restoring-democracy.org/p/the-formula-behind-the-25000-what';
+
+    /* Path to the FY2025 plan PDF or an image crop of it. Leave as null when no
+       such asset is published; the "View the Plan" button then does not render.
+       Example: '/assets/docs/ipers/ipers-incentive-plan-fy2025.pdf' */
+    var PLAN_DOCUMENT_URL = null;
+
+    /* ========================================================================
+       STATE
+       ====================================================================== */
+
+    var DEFAULTS = {
+      rating: 'meets',
+      salary: E.PLAN.cio.salary,
+      maxPct: 50,          // percent of base salary
+      publicPos: 0,        // slider position, 0..21 (21 = above the 0.20% goal)
+      privatePos: 0,
+      wInd: 20,
+      wPub: 40,
+      wPriv: 40
+    };
+
+    /* Slider positions are whole basis points, 0 through the plan's 20 bp goal.
+       Every position therefore lands on a printed rung of the payout schedule. */
+    var MAX_POS = E.PLAN.marketGoalBasisPoints;   // 20
+    var state = Object.assign({}, DEFAULTS);
+
+    /* ========================================================================
+       FORMATTERS
+       ====================================================================== */
+
+    var usd = new Intl.NumberFormat('en-US', {
+      style:'currency', currency:'USD', maximumFractionDigits:0
+    });
+    function money(v){ return usd.format(Math.round(v)); }
+
+    /* Payout factors are exact multiples of 5% on the published ladder, but
+       floating-point weighting leaves values like 0.15000000000000002. Round to
+       two decimal places of a percent and drop trailing zeros. */
+    function pct(v){
+      return (Math.round(v * 10000) / 100) + '%';
+    }
+    function bpLabel(bp){
+      var rounded = Math.round(bp * 100) / 100;
+      return (rounded === 1 ? '1 basis point' : rounded + ' basis points');
+    }
+    function excessLabel(pos){
+      return (pos / 100).toFixed(2) + '%';
+    }
+
+    /* Total excess, printed the way the plan's worked example prints it. */
+    function totalExcessLabel(bp){
+      var pctValue = bp / 100;
+      var s = pctValue.toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
+      return (s === '' || s === '0' ? '0' : s) + '%';
+    }
+
+    /* ========================================================================
+       ELEMENTS
+       ====================================================================== */
+
+    var el = {};
+    ['result','result-figure','result-sub','calc-value','payable-value',
+     'gauge-fill','gauge-over','gauge-capline','gauge-caplabel','gauge-axis-max',
+     'ineligible-notice','weights-notice','what-changed',
+     'benchmark','benchmark-heading','benchmark-text',
+     'lever','rating-name','rating-bp',
+     'public-slider','public-display','public-factor','public-caption','public-ticks',
+     'private-slider','private-display','private-factor','private-caption','private-ticks',
+     'math-list','math-note',
+     'salary-input','salary-slider','maxpct-input','maxpct-display','maxpct-dollars',
+     'w-ind','w-pub','w-priv','weights-total','weights-warning','positions-table',
+     'thresh-figure','thresh-label','thresh-label-val','thresh-mark','thresh-salary',
+     'thresh-reached','thresh-caption','thresh-track',
+     'live-region','freeze-pane','fp-label','fp-value','fp-status',
+     'fp-fill','fp-over','fp-cap','ladder-grid','weights-rows',
+     'copy-btn','copy-status','reset-btn','reset-btn-2','story-link','math-drawer'
+    ].forEach(function(id){ el[id] = document.getElementById(id); });
+
+    var levelOptions = Array.prototype.slice.call(el.lever.querySelectorAll('[role="radio"]'));
+
+    /* ========================================================================
+       URL PARAMETERS
+       ====================================================================== */
+
+    function clamp(v, lo, hi){ return Math.min(Math.max(v, lo), hi); }
+
+    function readUrl(){
+      var p = new URLSearchParams(window.location.search);
+      if (!p.toString()) { return; }
+
+      var rating = (p.get('rating') || '').toLowerCase();
+      if (rating === 'meets' || rating === 'exceeds' || rating === 'fails'){ state.rating = rating; }
+
+      var salary = parseFloat(p.get('salary'));
+      if (isFinite(salary)){ state.salary = Math.round(clamp(salary, 75000, 500000)); }
+
+      var maxPct = parseFloat(p.get('max'));
+      if (isFinite(maxPct)){ state.maxPct = Math.round(clamp(maxPct, 10, 50)); }
+
+      state.publicPos = readExcessParam(p.get('public'), state.publicPos);
+      state.privatePos = readExcessParam(p.get('private'), state.privatePos);
+
+      /* Weights keep their parsed precision. The live inputs accept decimals,
+         and scenarioUrl() serialises them verbatim, so rounding here would
+         turn a copied 33.3 / 33.3 / 33.4 link into an invalid 99% total. */
+      [['wi','wInd'],['wpub','wPub'],['wpriv','wPriv']].forEach(function(pair){
+        var v = parseFloat(p.get(pair[0]));
+        if (isFinite(v)){ state[pair[1]] = clamp(v, 0, 100); }
+      });
+    }
+
+    /* Excess parameters are percentage points: 0, 0.04, 0.2. A value above the
+       plan's 0.20% goal lands on the "0.20%+" detent. */
+    function readExcessParam(raw, fallback){
+      if (raw === null || raw === ''){ return fallback; }
+      var v = parseFloat(raw);
+      if (!isFinite(v) || v < 0){ return fallback; }
+      var bp = Math.round(v * 100);
+      return clamp(bp, 0, MAX_POS);
+    }
+
+    function scenarioUrl(){
+      var p = new URLSearchParams();
+      p.set('salary', String(state.salary));
+      p.set('rating', state.rating);
+      p.set('public', (state.publicPos / 100).toFixed(2));
+      p.set('private', (state.privatePos / 100).toFixed(2));
+      p.set('max', String(state.maxPct));
+      p.set('wi', String(state.wInd));
+      p.set('wpub', String(state.wPub));
+      p.set('wpriv', String(state.wPriv));
+      return window.location.origin + window.location.pathname + '?' + p.toString();
+    }
+
+    /* ========================================================================
+       NUMBER ROLL
+       ====================================================================== */
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var rollHandles = {};
+
+    function rollTo(node, key, from, to, format){
+      if (rollHandles[key]){ cancelAnimationFrame(rollHandles[key]); }
+      if (reduceMotion.matches || from === to){ node.textContent = format(to); return; }
+      var start = null, duration = 420;
+      function frame(ts){
+        if (start === null){ start = ts; }
+        var t = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - t, 3);
+        node.textContent = format(from + (to - from) * eased);
+        if (t < 1){ rollHandles[key] = requestAnimationFrame(frame); }
+      }
+      rollHandles[key] = requestAnimationFrame(frame);
+    }
+
+    /* ========================================================================
+       TICKS
+       ====================================================================== */
+
+    function buildTicks(container){
+      var labelled = { 0:'0.00', 1:'0.01', 2:'0.02', 3:'0.03', 4:'0.04', 5:'0.05',
+                       10:'0.10', 15:'0.15', 20:'0.20' };
+      var narrowOnly = { 0:true, 5:true, 10:true, 15:true, 20:true };
+      var html = '';
+      for (var i = 0; i <= MAX_POS; i++){
+        var left = (i / MAX_POS) * 100;
+        var label = labelled[i];
+        var classes = 'tick' + (label ? ' major' : '') + (label && !narrowOnly[i] ? ' hide-narrow' : '');
+        html += '<span class="' + classes + '" style="left:' + left.toFixed(3) + '%">' +
+                '<i></i>' + (label ? '<b>' + label + '</b>' : '') + '</span>';
+      }
+      container.innerHTML = html;
+    }
+
+    /* ========================================================================
+       RENDER
+       ====================================================================== */
+
+    var previous = { award: null, threshold: null };
+
+    function currentInput(){
+      return {
+        rating: state.rating,
+        salary: state.salary,
+        maxIncentivePct: state.maxPct / 100,
+        publicExcessBp: state.publicPos,
+        privateExcessBp: state.privatePos,
+        weightIndividual: state.wInd / 100,
+        weightPublic: state.wPub / 100,
+        weightPrivate: state.wPriv / 100,
+        cap: E.PLAN.perPersonCap
+      };
+    }
+
+    function render(){
+      var input = currentInput();
+      var r = E.calculate(input);
+
+      renderControls(r);
+      renderResult(r);
+      renderMath(r, input);
+      renderThreshold(input);
+      announce(r);
+    }
+
+    /* ---------- Controls ---------- */
+    function renderControls(r){
+      // Personnel lever
+      var index = { fails:0, meets:1, exceeds:2 }[state.rating];
+      el.lever.setAttribute('data-pos', String(index));
+      levelOptions.forEach(function(btn, i){
+        var on = i === index;
+        btn.setAttribute('aria-checked', on ? 'true' : 'false');
+        btn.tabIndex = on ? 0 : -1;
+      });
+      var names = { fails:'Fails to Meet Expectations', meets:'Meets Expectations', exceeds:'Exceeds Expectations' };
+      el['rating-name'].textContent = names[state.rating];
+      el['rating-bp'].textContent = r.individualBp === null ? 'Not eligible' : r.individualBp + ' basis points';
+
+      // Market dials
+      renderDial('public', state.publicPos, r.weightedPublicBp, state.wPub);
+      renderDial('private', state.privatePos, r.weightedPrivateBp, state.wPriv);
+
+      // Advanced
+      setFieldValue(el['salary-input'], String(state.salary));
+      el['salary-slider'].value = String(state.salary);
+      setFill(el['salary-slider']);
+      el['maxpct-input'].value = String(state.maxPct);
+      el['maxpct-input'].setAttribute('aria-valuetext', state.maxPct + ' percent of base salary');
+      setFill(el['maxpct-input']);
+      el['maxpct-display'].textContent = state.maxPct + '%';
+      el['maxpct-dollars'].textContent = money(r.maximumIncentive);
+      setFieldValue(el['w-ind'], String(state.wInd));
+      setFieldValue(el['w-pub'], String(state.wPub));
+      setFieldValue(el['w-priv'], String(state.wPriv));
+
+      /* Validity comes from the engine so the warning can never disagree with
+         the calculation; the printed total is rounded only to keep
+         floating-point noise out of the label. */
+      var total = Math.round((state.wInd + state.wPub + state.wPriv) * 1e6) / 1e6;
+      el['weights-total'].textContent = 'Total: ' + total + '%';
+      el['weights-warning'].hidden = r.weightsValid;
+      el['weights-total'].style.color = r.weightsValid ? 'var(--muted)' : 'var(--alert)';
+    }
+
+    /* Writing to a focused number field mid-entry rewrites what the reader is
+       typing. Partial input is left alone and committed on blur instead. */
+    function setFieldValue(node, value){
+      if (document.activeElement === node){ return; }
+      node.value = value;
+    }
+
+    /* The payout schedule is read against the TOTAL excess, not against each
+       component, so a component's readout reports what it contributes to that
+       total rather than a payout factor of its own. */
+    function renderDial(which, pos, weightedBp, weightPct){
+      var slider = el[which + '-slider'];
+      var display = el[which + '-display'];
+      var factorTag = el[which + '-factor'];
+      var caption = el[which + '-caption'];
+
+      slider.value = String(pos);
+      setFill(slider);
+      display.textContent = excessLabel(pos);
+
+      if (pos === 0){
+        factorTag.textContent = 'No positive excess return assumed';
+        caption.innerHTML = '<strong>0.00% = exactly matches the applicable benchmark</strong>';
+        slider.setAttribute('aria-valuetext',
+          '0.00 percent — exactly matches the applicable benchmark; no positive excess return assumed');
+      } else {
+        factorTag.textContent = 'Adds ' + bpShort(weightedBp) + ' to the total excess';
+        caption.innerHTML = '<strong>' + excessLabel(pos) + '</strong> above the applicable benchmark &mdash; weighted at ' +
+                            weightPct + '%, this adds ' + bpShort(weightedBp) + ' to the total excess.';
+        slider.setAttribute('aria-valuetext',
+          excessLabel(pos) + ' above the applicable benchmark, weighted at ' + weightPct +
+          ' percent, adding ' + bpShort(weightedBp) + ' to the total excess');
+      }
+    }
+
+    /* Paints the filled portion of a range track in WebKit. */
+    function setFill(slider){
+      var min = parseFloat(slider.min), max = parseFloat(slider.max);
+      var frac = (parseFloat(slider.value) - min) / (max - min);
+      slider.style.setProperty('--fill', (frac * 100).toFixed(2) + '%');
+    }
+
+    /* ---------- Result ---------- */
+    function renderResult(r){
+      var valid = r.weightsValid;
+      el['weights-notice'].hidden = valid;
+      el['ineligible-notice'].hidden = !(valid && !r.eligible);
+
+      if (!valid){
+        el.result.setAttribute('data-capped', 'false');
+        el['result-figure'].textContent = 'Unavailable';
+        el['result-sub'].innerHTML = 'Set the component weights to total 100%.';
+        setGauge(0, 0, E.PLAN.perPersonCap * 1.4);
+        el['what-changed'].textContent = 'The component weights do not total 100%, so no result is calculated.';
+        setFreezePane('invalid', 'Result unavailable', 'Weights must total 100%', '');
+        setFreezeGauge(0, 0, E.PLAN.perPersonCap * 1.4);
+        renderBenchmark();
+        renderLadder(null);
+        previous.award = null;
+        return;
+      }
+
+      var payable = r.payableAward;
+      var capped = r.capBinds;
+      el.result.setAttribute('data-capped', capped ? 'true' : 'false');
+
+      var from = previous.award === null ? payable : previous.award;
+      rollTo(el['result-figure'], 'award', from, payable, money);
+      previous.award = payable;
+
+      if (!r.eligible){
+        el['result-sub'].innerHTML = 'Not eligible for incentive compensation';
+      } else if (capped){
+        el['result-sub'].innerHTML = 'The calculated amount crosses the <span class="em">$25,000</span> payment ceiling';
+        el['calc-value'].textContent = money(r.calculatedAward);
+        el['payable-value'].textContent = money(payable);
+      } else {
+        var share = Math.round((payable / r.cap) * 100);
+        el['result-sub'].innerHTML = '<span class="em">' + share + '%</span> of the ' + money(r.cap) + ' ceiling';
+      }
+
+      // Gauge: fixed headroom above the ceiling unless the calculation runs past it.
+      var axisMax = Math.max(r.cap * 1.4, r.calculatedAward * 1.08);
+      setGauge(payable, r.calculatedAward, axisMax);
+      setFreezeGauge(payable, r.calculatedAward, axisMax);
+
+      el['what-changed'].textContent = buildSentence(r);
+      renderBenchmark();
+
+      renderLadder(r);
+
+      if (!r.eligible){
+        setFreezePane('ineligible', 'Hypothetical award', money(0), 'Not eligible');
+      } else if (capped){
+        /* Both numbers stay on screen: the point of the exhibit is that the
+           calculation crossed the ceiling, not merely that the cap exists. */
+        setFreezePane('capped', 'Calculated', money(r.calculatedAward),
+                      'Payable<b>' + money(payable) + '</b>Cap applies');
+      } else {
+        setFreezePane('uncapped', 'Hypothetical award', money(payable),
+                      Math.round((payable / r.cap) * 100) + '% of ' + money(r.cap) + ' cap');
+      }
+    }
+
+    /* ---------- Frozen result pane ----------
+       A mirror of the full result card, driven by the same calculated object.
+       No second calculation, and no second live region. */
+    function setFreezePane(stateName, label, value, status){
+      el['freeze-pane'].setAttribute('data-state', stateName);
+      el['fp-label'].textContent = label;
+      el['fp-value'].textContent = value;
+      el['fp-status'].innerHTML = status;
+    }
+
+    /* The compact gauge uses the same scale as the main one, so the two read
+       consistently as the reader scrolls between them. */
+    function setFreezeGauge(payable, calculated, axisMax){
+      var capPct = (E.PLAN.perPersonCap / axisMax) * 100;
+      el['fp-fill'].style.width = ((payable / axisMax) * 100).toFixed(2) + '%';
+      el['fp-over'].style.left = capPct.toFixed(2) + '%';
+      el['fp-over'].style.width =
+        Math.max(0, ((calculated - E.PLAN.perPersonCap) / axisMax) * 100).toFixed(2) + '%';
+      el['fp-cap'].style.left = capPct.toFixed(2) + '%';
+    }
+
+    /* ---------- Payout schedule: highlight the rung actually applied ---------- */
+    function renderLadder(r){
+      var applied = (r && r.weightsValid && r.eligible && r.appliedRung)
+        ? r.appliedRung.basisPoints : null;
+      el['ladder-grid'].innerHTML = E.PAYOUT_SCHEDULE.map(function(rung){
+        var on = rung.basisPoints === applied ? ' class="applied"' : '';
+        return '<div' + on + '><b>' + rung.excessPct.toFixed(2) + '%</b><span>' +
+               Math.round(rung.factor * 100) + '%</span></div>';
+      }).join('');
+    }
+
+    function setGauge(payable, calculated, axisMax){
+      var capPct = (E.PLAN.perPersonCap / axisMax) * 100;
+      var payPct = (payable / axisMax) * 100;
+      var overPct = Math.max(0, ((calculated - E.PLAN.perPersonCap) / axisMax) * 100);
+
+      el['gauge-fill'].style.width = payPct.toFixed(2) + '%';
+      el['gauge-over'].style.left = capPct.toFixed(2) + '%';
+      el['gauge-over'].style.width = overPct.toFixed(2) + '%';
+      el['gauge-capline'].style.left = capPct.toFixed(2) + '%';
+      el['gauge-caplabel'].style.left = capPct.toFixed(2) + '%';
+      el['gauge-axis-max'].textContent = money(axisMax);
+
+      el['gauge-caplabel'].textContent = money(E.PLAN.perPersonCap) + ' ceiling';
+      document.getElementById('gauge-track').setAttribute('aria-label',
+        'Gauge: hypothetical calculated award ' + money(calculated) +
+        ', payable ' + money(payable) + ', against a ' + money(E.PLAN.perPersonCap) + ' payment ceiling.');
+    }
+
+    /* ---------- Benchmark callout ---------- */
+    function renderBenchmark(){
+      var bothZero = state.publicPos === 0 && state.privatePos === 0;
+      el.benchmark.setAttribute('data-state', bothZero ? 'matched' : 'excess');
+
+      if (bothZero){
+        el['benchmark-heading'].textContent = 'No investment outperformance assumed';
+        el['benchmark-text'].textContent = 'Both investment components are set to exactly match their applicable benchmarks.';
+      } else {
+        el['benchmark-heading'].textContent = 'Market excess return assumed';
+        el['benchmark-text'].textContent =
+          'Public market: ' + excessLabel(state.publicPos) + ' above its applicable benchmark. ' +
+          'Private market: ' + excessLabel(state.privatePos) + ' above its applicable benchmark.';
+      }
+    }
+
+    /* ---------- "What changed?" ---------- */
+    function isCioPreset(){
+      return state.salary === DEFAULTS.salary && state.maxPct === DEFAULTS.maxPct &&
+             state.wInd === DEFAULTS.wInd && state.wPub === DEFAULTS.wPub && state.wPriv === DEFAULTS.wPriv;
+    }
+
+    function buildSentence(r){
+      if (!r.eligible){
+        return 'Under the published plan, an employee who fails to meet expectations is not eligible for incentive compensation, so the formula produces no award regardless of market performance.';
+      }
+
+      var bothZero = state.publicPos === 0 && state.privatePos === 0;
+      var who = isCioPreset() ? 'the CIO’s 2025 salary of ' + money(state.salary)
+                              : 'a ' + money(state.salary) + ' salary at a ' + state.maxPct + '% maximum incentive';
+
+      if (bothZero){
+        if (state.rating === 'meets'){
+          if (r.capBinds){
+            return 'With both market components exactly matching their benchmarks, a “Meets Expectations” rating alone produces a calculated award above the ' + money(r.cap) + ' ceiling at ' + who + '.';
+          }
+          return 'With both market components exactly matching their benchmarks, a “Meets Expectations” rating alone produces about ' +
+                 Math.round((r.payableAward / r.cap) * 100) + '% of the ' + money(r.cap) + ' ceiling at ' + who + '.';
+        }
+        if (r.capBinds){
+          return 'With both market components exactly matching their benchmarks, an “Exceeds Expectations” rating alone produces a calculated award above the ' + money(r.cap) + ' ceiling at ' + who + '.';
+        }
+        return 'With both market components exactly matching their benchmarks, an “Exceeds Expectations” rating alone produces about ' +
+               Math.round((r.payableAward / r.cap) * 100) + '% of the ' + money(r.cap) + ' ceiling at ' + who + '.';
+      }
+
+      var parts = [];
+      if (state.publicPos > 0){ parts.push('public-market excess'); }
+      if (state.privatePos > 0){ parts.push('private-market excess'); }
+      var subject = parts.length === 2 ? 'Positive public- and private-market excess add' : 'Positive ' + parts[0] + ' adds';
+
+      var head = subject + ' to the personnel component under the plan’s weighted formula, for a total excess of ' +
+                 totalExcessLabel(r.blendedBp) + '.';
+
+      /* The schedule is a set of printed rungs. Between them the award does not
+         move, and saying so is the honest reading of the plans' own example. */
+      var rung = r.appliedRung
+        ? ' That reads the ' + r.appliedRung.excessPct.toFixed(2) + '% rung of the published schedule, a ' +
+          pct(r.appliedRung.factor) + ' payout factor.'
+        : ' That falls below the schedule’s first printed rung of 0.01%, so no payout factor applies.';
+
+      var tail = r.capBinds
+        ? ' The calculated award crosses the ' + money(r.cap) + ' payment ceiling; ' + money(r.payableAward) + ' is payable under the FY2025 cap.'
+        : ' The calculated award reaches ' + Math.round((r.payableAward / r.cap) * 100) + '% of the ' + money(r.cap) + ' ceiling.';
+
+      return head + rung + tail;
+    }
+
+    /* ---------- Show the math ---------- */
+    function renderMath(r, input){
+      var rows = [];
+
+      if (!r.weightsValid){
+        el['math-list'].innerHTML = '<li><span class="k">Component weights</span><span class="v">' +
+          r.weightsTotal * 100 + '% — must total 100%</span></li>';
+        el['math-note'].textContent = 'Set the three component weights to total 100% to see the calculation.';
+        return;
+      }
+
+      if (!r.eligible){
+        rows.push(['Personnel rating', 'Fails to Meet Expectations', '']);
+        rows.push(['Eligibility', 'Not eligible', '']);
+        rows.push(['Final', money(0), 'total']);
+        el['math-list'].innerHTML = rows.map(rowHtml).join('');
+        el['math-note'].textContent = 'A rating below “Meets Expectations” disqualifies an employee from incentive compensation outright, so no further calculation is performed.';
+        return;
+      }
+
+      rows.push(['Individual rating', r.individualBp + ' bp', '']);
+      rows.push(['Weighted contribution', r.individualBp + ' bp × ' + state.wInd + '% = ' + bpShort(r.weightedIndividualBp), 'step']);
+      rows.push(['Public-market excess', excessLabel(state.publicPos), '']);
+      rows.push(['Weighted contribution', bpShort(r.publicBp) + ' × ' + state.wPub + '% = ' + bpShort(r.weightedPublicBp), 'step']);
+      rows.push(['Private-market excess', excessLabel(state.privatePos), '']);
+      rows.push(['Weighted contribution', bpShort(r.privateBp) + ' × ' + state.wPriv + '% = ' + bpShort(r.weightedPrivateBp), 'step']);
+      rows.push(['Total excess', bpShort(r.blendedBp) + ' = ' + totalExcessLabel(r.blendedBp), 'step']);
+
+      if (r.appliedRung){
+        rows.push(['Payout schedule rung applied',
+                   r.appliedRung.excessPct.toFixed(2) + '% → ' + pct(r.appliedRung.factor), 'step']);
+      } else {
+        rows.push(['Payout schedule rung applied', 'below the 0.01% rung → 0%', 'step']);
+      }
+
+      rows.push(['Maximum incentive', state.maxPct + '% of ' + money(state.salary) + ' = ' + money(r.maximumIncentive), '']);
+      rows.push(['Calculated hypothetical award',
+                 pct(r.payoutFactor) + ' × ' + money(r.maximumIncentive) + ' = ' + money(r.calculatedAward), '']);
+      rows.push(['Payment ceiling', money(r.cap), '']);
+      rows.push([r.capBinds ? 'Final payable' : 'Final', money(r.payableAward), 'total']);
+
+      el['math-list'].innerHTML = rows.map(rowHtml).join('');
+
+      var notes = [];
+      if (r.capBinds){
+        notes.push('The calculated result of ' + money(r.calculatedAward) + ' crosses the ' + money(r.cap) +
+                   ' per-person ceiling, so ' + money(r.payableAward) + ' is payable under the FY2025 cap.');
+      }
+      if (r.betweenRungs){
+        notes.push('A total excess of ' + totalExcessLabel(r.blendedBp) +
+                   ' falls between printed rungs, so the calculator uses the lower published rung (' +
+                   r.appliedRung.excessPct.toFixed(2) + '%). That follows IPERS’s own worked example, in which a 0.054% total excess pays the 0.05% rung’s 25% — an example that recurs unchanged in the FY2023/4, FY2024 and FY2025 plans. None of them separately states a general rounding rule.');
+      }
+      if (r.atPlateau){
+        notes.push('At or above 0.20% the schedule pays 100%: anything above the plan’s 20-basis-point goal pays what 20 basis points pays.');
+      }
+      notes.push('Public- and private-market performance are calculated separately, then weighted into the single total excess the schedule is read against.');
+      el['math-note'].textContent = notes.join(' ');
+    }
+
+    function bpShort(bp){
+      var v = Math.round(bp * 1000) / 1000;
+      return v + ' bp';
+    }
+
+    function rowHtml(row){
+      var cls = row[2] ? ' class="' + row[2] + '"' : '';
+      return '<li' + cls + '><span class="k">' + row[0] + '</span><span class="v tnum">' + row[1] + '</span></li>';
+    }
+
+    /* ---------- Threshold explorer ---------- */
+    var THRESH_MIN = 75000, THRESH_MAX = 500000;
+
+    function renderThreshold(input){
+      var threshold = E.calculateCapThresholdSalary({
+        rating: 'exceeds',
+        weightIndividual: input.weightIndividual,
+        maxIncentivePct: input.maxIncentivePct,
+        cap: input.cap
+      });
+
+      var salaryPos = ((state.salary - THRESH_MIN) / (THRESH_MAX - THRESH_MIN)) * 100;
+      el['thresh-salary'].style.left = clamp(salaryPos, 0, 100).toFixed(2) + '%';
+
+      if (!input.weightIndividual || threshold === null || !isFinite(threshold)){
+        el['thresh-figure'].textContent = 'Not applicable';
+        el['thresh-label'].style.display = 'none';
+        el['thresh-mark'].style.display = 'none';
+        el['thresh-reached'].style.left = '100%';
+        el['thresh-caption'].textContent = 'With the current settings the individual-performance component contributes no payout factor, so an “Exceeds Expectations” rating alone never reaches the ceiling at any salary.';
+        previous.threshold = null;
+        return;
+      }
+
+      el['thresh-label'].style.display = '';
+      el['thresh-mark'].style.display = '';
+
+      var from = previous.threshold === null ? threshold : previous.threshold;
+      rollTo(el['thresh-figure'], 'threshold', from, threshold, money);
+      previous.threshold = threshold;
+      el['thresh-label-val'].textContent = money(threshold);
+
+      var markPos = ((threshold - THRESH_MIN) / (THRESH_MAX - THRESH_MIN)) * 100;
+      var withinAxis = markPos >= 0 && markPos <= 100;
+      var clamped = clamp(markPos, 0, 100);
+      el['thresh-mark'].style.left = clamped.toFixed(2) + '%';
+      el['thresh-label'].style.left = clamp(markPos, 8, 92).toFixed(2) + '%';
+      el['thresh-reached'].style.left = clamped.toFixed(2) + '%';
+
+      var caption = 'At a ' + state.maxPct + '% maximum incentive, an “Exceeds Expectations” personnel rating reaches a ' +
+                    money(input.cap) + ' ceiling at ' + money(threshold) +
+                    ' or above, even with zero positive market excess.';
+      if (!withinAxis){
+        caption += ' That threshold falls outside the scale shown.';
+      }
+      el['thresh-caption'].textContent = caption;
+      el['thresh-track'].setAttribute('aria-label',
+        'Salary scale from ' + money(THRESH_MIN) + ' to ' + money(THRESH_MAX) + '. Cap threshold at ' +
+        money(threshold) + '. Current salary ' + money(state.salary) + '.');
+    }
+
+    /* ---------- Live region ---------- */
+    var announceTimer = null;
+    function announce(r){
+      if (announceTimer){ clearTimeout(announceTimer); }
+      announceTimer = setTimeout(function(){
+        var msg;
+        if (!r.weightsValid){
+          msg = 'Result unavailable. The component weights must total 100 percent.';
+        } else if (!r.eligible){
+          msg = 'Not eligible for incentive compensation. Hypothetical calculated award: zero dollars.';
+        } else if (r.capBinds){
+          msg = 'Hypothetical calculated award ' + money(r.calculatedAward) + ', above the ' +
+                money(r.cap) + ' payment ceiling. Payable under the FY2025 cap: ' + money(r.payableAward) + '.';
+        } else {
+          msg = 'Hypothetical calculated award ' + money(r.payableAward) + ', ' +
+                Math.round((r.payableAward / r.cap) * 100) + ' percent of the ' + money(r.cap) + ' ceiling.';
+        }
+        el['live-region'].textContent = msg;
+      }, 350);
+    }
+
+    /* ========================================================================
+       EVENTS
+       ====================================================================== */
+
+    /* ---------- Personnel lever: click + roving-tabindex keyboard ---------- */
+    levelOptions.forEach(function(btn, i){
+      btn.addEventListener('click', function(){
+        state.rating = btn.getAttribute('data-rating');
+        render();
+      });
+      btn.addEventListener('keydown', function(evt){
+        var next = null;
+        if (evt.key === 'ArrowRight' || evt.key === 'ArrowDown'){ next = (i + 1) % levelOptions.length; }
+        else if (evt.key === 'ArrowLeft' || evt.key === 'ArrowUp'){ next = (i - 1 + levelOptions.length) % levelOptions.length; }
+        else if (evt.key === 'Home'){ next = 0; }
+        else if (evt.key === 'End'){ next = levelOptions.length - 1; }
+        else if (evt.key === ' ' || evt.key === 'Enter'){
+          evt.preventDefault();
+          state.rating = btn.getAttribute('data-rating');
+          render();
+          return;
+        }
+        if (next !== null){
+          evt.preventDefault();
+          state.rating = levelOptions[next].getAttribute('data-rating');
+          render();
+          levelOptions[next].focus();
+        }
+      });
+    });
+
+    /* ---------- Market dials ---------- */
+    el['public-slider'].addEventListener('input', function(){
+      state.publicPos = parseInt(this.value, 10); render();
+    });
+    el['private-slider'].addEventListener('input', function(){
+      state.privatePos = parseInt(this.value, 10); render();
+    });
+
+    /* ---------- Advanced ---------- */
+    el['salary-slider'].addEventListener('input', function(){
+      state.salary = parseInt(this.value, 10); render();
+    });
+    /* While typing, only an in-range value is committed: clamping a partial
+       entry such as "2" to $75,000 would rewrite the field mid-keystroke and
+       make ordinary entry of "250000" impossible. Out-of-range or unfinished
+       input is clamped once, on blur. */
+    el['salary-input'].addEventListener('input', function(){
+      var v = parseInt(this.value, 10);
+      if (isFinite(v) && v >= 75000 && v <= 500000){
+        state.salary = v;
+        render();
+      }
+    });
+    function commitSalary(){
+      var v = parseInt(el['salary-input'].value, 10);
+      if (isFinite(v)){ state.salary = Math.round(clamp(v, 75000, 500000)); }
+      render();
+      el['salary-input'].value = String(state.salary);
+    }
+    el['salary-input'].addEventListener('change', commitSalary);
+    el['salary-input'].addEventListener('blur', commitSalary);
+    el['maxpct-input'].addEventListener('input', function(){
+      state.maxPct = parseInt(this.value, 10); render();
+    });
+
+    /* Same rule as the salary field: an empty box is someone mid-edit, not a
+       weight of zero, so state is left alone until the value parses. */
+    [['w-ind','wInd'],['w-pub','wPub'],['w-priv','wPriv']].forEach(function(pair){
+      el[pair[0]].addEventListener('input', function(){
+        var v = parseFloat(this.value);
+        if (isFinite(v)){ state[pair[1]] = clamp(v, 0, 100); render(); }
+      });
+      function commitWeight(){
+        var v = parseFloat(el[pair[0]].value);
+        state[pair[1]] = isFinite(v) ? clamp(v, 0, 100) : 0;
+        render();
+        el[pair[0]].value = String(state[pair[1]]);
+      }
+      el[pair[0]].addEventListener('change', commitWeight);
+      el[pair[0]].addEventListener('blur', commitWeight);
+    });
+
+    /* ---------- Reset ---------- */
+    function reset(){
+      state = Object.assign({}, DEFAULTS);
+      render();
+      el['copy-status'].textContent = 'Reset to the 2025 CIO example.';
+    }
+    el['reset-btn'].addEventListener('click', reset);
+    el['reset-btn-2'].addEventListener('click', reset);
+
+    /* ---------- Copy scenario ---------- */
+    el['copy-btn'].addEventListener('click', function(){
+      var url = scenarioUrl();
+      function done(){
+        el['copy-status'].textContent = 'Link copied. It reproduces exactly these inputs.';
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(url).then(done).catch(function(){
+          window.prompt('Copy this scenario link:', url);
+        });
+      } else {
+        window.prompt('Copy this scenario link:', url);
+      }
+      if (window.history && window.history.replaceState){
+        window.history.replaceState(null, '', url);
+      }
+    });
+
+    /* The frozen pane needs no scroll observer: `position: sticky` inside the
+       workbench handles pinning and release on its own. */
+
+    /* ========================================================================
+       INIT
+       ====================================================================== */
+
+    buildTicks(el['public-ticks']);
+    buildTicks(el['private-ticks']);
+
+    // Published maximum-incentive percentages by position.
+    el['positions-table'].innerHTML = E.PUBLISHED_MAXIMUMS_BY_POSITION.map(function(p){
+      return '<li><span>' + p.title + '</span><span>' +
+             Math.round(p.maxIncentivePct * 100) + '%</span></li>';
+    }).join('');
+
+    // Published component weights, row by row. Repeated titles with different
+    // splits are exactly why no generic title preset is offered.
+    el['weights-rows'].innerHTML = E.PUBLISHED_WEIGHT_ROWS.map(function(row){
+      var w = Math.round(row.individual * 100) + ' / ' + Math.round(row.public * 100) +
+              ' / ' + Math.round(row.private * 100);
+      return '<li><span>' + row.title + (row.preset ? ' <em>(preset)</em>' : '') +
+             '</span><span>' + w + '</span></li>';
+    }).join('');
+
+    // Editorial links.
+    el['story-link'].href = ARTICLE_URL;
+    if (PLAN_DOCUMENT_URL){
+      var planBtn = document.createElement('a');
+      planBtn.className = 'btn btn-ghost';
+      planBtn.href = PLAN_DOCUMENT_URL;
+      planBtn.target = '_blank';
+      planBtn.rel = 'noopener noreferrer';
+      planBtn.textContent = 'View the Plan';
+      el['story-link'].parentNode.appendChild(planBtn);
+    }
+
+    readUrl();
+    render();
+
+    // Open "Show the math" by default on wider screens, where there is room.
+    if (window.matchMedia('(min-width:900px)').matches){
+      el['math-drawer'].open = true;
+    }
+  })();
+  </script>
+
+  <!-- Privacy-conscious aggregate analytics. -->
+  <script
+    data-goatcounter="https://restoring-democracy.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+  </script>
+</body>
+</html>
