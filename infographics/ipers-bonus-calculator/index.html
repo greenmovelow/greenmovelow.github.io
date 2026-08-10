@@ -1468,9 +1468,12 @@
       state.publicPos = readExcessParam(p.get('public'), state.publicPos);
       state.privatePos = readExcessParam(p.get('private'), state.privatePos);
 
+      /* Weights keep their parsed precision. The live inputs accept decimals,
+         and scenarioUrl() serialises them verbatim, so rounding here would
+         turn a copied 33.3 / 33.3 / 33.4 link into an invalid 99% total. */
       [['wi','wInd'],['wpub','wPub'],['wpriv','wPriv']].forEach(function(pair){
         var v = parseFloat(p.get(pair[0]));
-        if (isFinite(v)){ state[pair[1]] = Math.round(clamp(v, 0, 100)); }
+        if (isFinite(v)){ state[pair[1]] = clamp(v, 0, 100); }
       });
     }
 
@@ -1587,7 +1590,7 @@
       renderDial('private', state.privatePos, r.weightedPrivateBp, state.wPriv);
 
       // Advanced
-      el['salary-input'].value = String(state.salary);
+      setFieldValue(el['salary-input'], String(state.salary));
       el['salary-slider'].value = String(state.salary);
       setFill(el['salary-slider']);
       el['maxpct-input'].value = String(state.maxPct);
@@ -1595,14 +1598,24 @@
       setFill(el['maxpct-input']);
       el['maxpct-display'].textContent = state.maxPct + '%';
       el['maxpct-dollars'].textContent = money(r.maximumIncentive);
-      el['w-ind'].value = String(state.wInd);
-      el['w-pub'].value = String(state.wPub);
-      el['w-priv'].value = String(state.wPriv);
+      setFieldValue(el['w-ind'], String(state.wInd));
+      setFieldValue(el['w-pub'], String(state.wPub));
+      setFieldValue(el['w-priv'], String(state.wPriv));
 
-      var total = state.wInd + state.wPub + state.wPriv;
+      /* Validity comes from the engine so the warning can never disagree with
+         the calculation; the printed total is rounded only to keep
+         floating-point noise out of the label. */
+      var total = Math.round((state.wInd + state.wPub + state.wPriv) * 1e6) / 1e6;
       el['weights-total'].textContent = 'Total: ' + total + '%';
-      el['weights-warning'].hidden = (total === 100);
-      el['weights-total'].style.color = (total === 100) ? 'var(--muted)' : 'var(--alert)';
+      el['weights-warning'].hidden = r.weightsValid;
+      el['weights-total'].style.color = r.weightsValid ? 'var(--muted)' : 'var(--alert)';
+    }
+
+    /* Writing to a focused number field mid-entry rewrites what the reader is
+       typing. Partial input is left alone and committed on blur instead. */
+    function setFieldValue(node, value){
+      if (document.activeElement === node){ return; }
+      node.value = value;
     }
 
     /* The payout schedule is read against the TOTAL excess, not against each
@@ -2005,23 +2018,44 @@
     el['salary-slider'].addEventListener('input', function(){
       state.salary = parseInt(this.value, 10); render();
     });
+    /* While typing, only an in-range value is committed: clamping a partial
+       entry such as "2" to $75,000 would rewrite the field mid-keystroke and
+       make ordinary entry of "250000" impossible. Out-of-range or unfinished
+       input is clamped once, on blur. */
     el['salary-input'].addEventListener('input', function(){
       var v = parseInt(this.value, 10);
-      if (isFinite(v)){ state.salary = Math.round(clamp(v, 75000, 500000)); render(); }
+      if (isFinite(v) && v >= 75000 && v <= 500000){
+        state.salary = v;
+        render();
+      }
     });
-    el['salary-input'].addEventListener('blur', function(){
-      this.value = String(state.salary);
-    });
+    function commitSalary(){
+      var v = parseInt(el['salary-input'].value, 10);
+      if (isFinite(v)){ state.salary = Math.round(clamp(v, 75000, 500000)); }
+      render();
+      el['salary-input'].value = String(state.salary);
+    }
+    el['salary-input'].addEventListener('change', commitSalary);
+    el['salary-input'].addEventListener('blur', commitSalary);
     el['maxpct-input'].addEventListener('input', function(){
       state.maxPct = parseInt(this.value, 10); render();
     });
 
+    /* Same rule as the salary field: an empty box is someone mid-edit, not a
+       weight of zero, so state is left alone until the value parses. */
     [['w-ind','wInd'],['w-pub','wPub'],['w-priv','wPriv']].forEach(function(pair){
       el[pair[0]].addEventListener('input', function(){
         var v = parseFloat(this.value);
+        if (isFinite(v)){ state[pair[1]] = clamp(v, 0, 100); render(); }
+      });
+      function commitWeight(){
+        var v = parseFloat(el[pair[0]].value);
         state[pair[1]] = isFinite(v) ? clamp(v, 0, 100) : 0;
         render();
-      });
+        el[pair[0]].value = String(state[pair[1]]);
+      }
+      el[pair[0]].addEventListener('change', commitWeight);
+      el[pair[0]].addEventListener('blur', commitWeight);
     });
 
     /* ---------- Reset ---------- */

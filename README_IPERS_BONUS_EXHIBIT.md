@@ -365,9 +365,14 @@ be linked. Nothing is sent anywhere; the exhibit runs entirely in the browser.
 | `public` | percentage points, e.g. `0`, `0.04`, `0.2` | Clamped to the plan's 0–0.20% goal range |
 | `private` | percentage points | Same as `public` |
 | `max` | 10–50 | Maximum incentive as a percent of base salary |
-| `wi` | 0–100 | Individual-performance weight, percent |
-| `wpub` | 0–100 | Public-market weight, percent |
-| `wpriv` | 0–100 | Private-market weight, percent |
+| `wi` | 0–100 | Individual-performance weight, percent; decimals preserved |
+| `wpub` | 0–100 | Public-market weight, percent; decimals preserved |
+| `wpriv` | 0–100 | Private-market weight, percent; decimals preserved |
+
+Weights keep their parsed precision on load. The advanced inputs accept
+decimals and the copy button serialises them verbatim, so rounding on the way
+back in would turn a copied `33.3 / 33.3 / 33.4` link into an invalid 99%
+total. A test pins this.
 
 Omitted parameters fall back to the 2025 CIO preset. If the three weights do not
 total 100, the exhibit shows an inline warning and withholds the result rather
@@ -418,7 +423,7 @@ panel, the methodology drawer, the threshold explorer, and the tests together.
 
 ## Verification
 
-`node scripts/test_ipers_incentive_engine.js` — **195 assertions, all passing.**
+`node scripts/test_ipers_incentive_engine.js` — **198 assertions, all passing.**
 
 | Case | Inputs | Expected raw | Expected payable | Result |
 | --- | --- | --- | --- | --- |

@@ -339,6 +339,22 @@ console.log('\nWEIGHT VALIDATION');
   const good = scenario({ rating: 'meets', publicExcessBp: 0, privateExcessBp: 0 });
   check('weights totalling 100% flagged valid', good.weightsValid, true);
 
+  // The advanced controls accept decimals and scenario links serialise them
+  // verbatim, so a fractional split that sums to 100% must stay valid through
+  // a copy-and-reload round trip rather than being rounded into a 99% total.
+  const thirds = scenario({
+    rating: 'meets', publicExcessBp: 0, privateExcessBp: 0,
+    weightIndividual: 0.333, weightPublic: 0.333, weightPrivate: 0.334
+  });
+  check('decimal weights 33.3/33.3/33.4 flagged valid', thirds.weightsValid, true);
+  check('and still produce an award ($)', Math.round(thirds.payableAward), 25000, 0);
+
+  const roundedAway = scenario({
+    rating: 'meets', publicExcessBp: 0, privateExcessBp: 0,
+    weightIndividual: 0.33, weightPublic: 0.33, weightPrivate: 0.33
+  });
+  check('the rounded-away 99% total is correctly rejected', roundedAway.weightsValid, false);
+
   // Every published row sums to 100%.
   E.PUBLISHED_WEIGHT_ROWS.forEach((row, idx) => {
     const total = row.individual + row.public + row.private;
