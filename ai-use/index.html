@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <meta name="msapplication-config" content="/browserconfig.xml">
+  <meta name="msapplication-TileColor" content="#24473e">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#24473e">
+
+  <title>AI Use &amp; Editorial Principles | Restoring Democracy's Promise</title>
+  <meta name="description" content="How Restoring Democracy's Promise uses AI-assisted tools in investigative journalism while preserving human verification, editorial judgment, transparency, and accountability." />
+
+  <link rel="canonical" href="https://restoring-democracy.org/ai-use/" />
+  <meta name="robots" content="index,follow" />
+
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Restoring Democracy's Promise" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://restoring-democracy.org/ai-use/" />
+  <meta property="og:title" content="AI Use &amp; Editorial Principles | Restoring Democracy's Promise" />
+  <meta property="og:description" content="Why RDP describes its work as AI-assisted — and why a human remains accountable for every claim we publish." />
+  <meta property="og:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Gen3_Gold_Aperture_1536.png" />
+  <meta property="og:image:width" content="1536" />
+  <meta property="og:image:height" content="857" />
+  <meta property="og:image:alt" content="Restoring Democracy's Promise" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://restoring-democracy.org/ai-use/" />
+  <meta name="twitter:title" content="AI Use &amp; Editorial Principles | Restoring Democracy's Promise" />
+  <meta name="twitter:description" content="Why RDP describes its work as AI-assisted — and why a human remains accountable for every claim we publish." />
+  <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Gen3_Gold_Aperture_1536.png" />
+  <meta name="twitter:image:alt" content="Restoring Democracy's Promise" />
+<link rel="stylesheet" href="/assets/css/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["WebPage", "AboutPage"],
+    "name": "Statement of Principles on Artificial Intelligence",
+    "headline": "Statement of Principles on Artificial Intelligence",
+    "description": "How Restoring Democracy's Promise uses AI-assisted tools in investigative journalism while preserving human verification, editorial judgment, transparency, and accountability.",
+    "url": "https://restoring-democracy.org/ai-use/",
+    "inLanguage": "en-US",
+    "datePublished": "2026-08-09",
+    "dateModified": "2026-08-09",
+    "about": [
+      {"@type": "Thing", "name": "Artificial intelligence"},
+      {"@type": "Thing", "name": "Journalism ethics"},
+      {"@type": "Thing", "name": "Editorial standards"}
+    ],
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Restoring Democracy's Promise",
+      "url": "https://restoring-democracy.org/"
+    },
+    "publisher": {
+      "@type": "NewsMediaOrganization",
+      "name": "Restoring Democracy's Promise",
+      "alternateName": "RDP",
+      "url": "https://restoring-democracy.org/",
+      "correctionsPolicy": "https://restoring-democracy.org/corrections/",
+      "ethicsPolicy": "https://restoring-democracy.org/about/"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Restoring Democracy's Promise",
+    "alternateName": "RDP",
+    "url": "https://restoring-democracy.org/"
+  }
+  </script>
+
+  <style>
+    .mono-label { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    .policy-body h2 {
+      font-family: 'Lora', Georgia, Cambria, 'Times New Roman', serif;
+      font-weight: 700; font-size: 1.5rem; color: #2d5c4f;
+      margin-top: 3rem; margin-bottom: 1rem; padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+      scroll-margin-top: 5.5rem;
+    }
+    .policy-body p { margin-bottom: 1.15rem; line-height: 1.75; color: #334155; }
+    .policy-body ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+    .policy-body ul li { margin-bottom: 0.5rem; line-height: 1.7; color: #334155; }
+    .policy-body a { color: #2d5c4f; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+    .policy-body a:hover { color: #D4AF37; }
+    .policy-toc a { color: #2d5c4f; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .policy-toc a:hover { color: #D4AF37; text-decoration: underline; }
+
+    .callout {
+      background: linear-gradient(135deg, rgba(45, 92, 79, 0.06) 0%, rgba(212, 175, 55, 0.04) 100%);
+      border-left: 4px solid #D4AF37;
+    }
+
+    /* A single emphatic line the statement turns on. Kept on its own, as
+       written, rather than folded into the surrounding paragraph. */
+    .beat {
+      font-family: 'Lora', Georgia, Cambria, 'Times New Roman', serif;
+      font-size: 1.2rem; font-weight: 700; color: #2d5c4f;
+      line-height: 1.5; margin: 1.9rem 0;
+    }
+
+    /* Sequences of short declarative lines whose rhythm is the argument. */
+    .cadence { margin: 1.6rem 0; padding-left: 1.15rem; border-left: 3px solid rgba(212, 175, 55, 0.35); }
+    .cadence p { margin-bottom: 0.65rem; line-height: 1.65; color: #24473e; font-weight: 600; }
+    .cadence p:last-child { margin-bottom: 0; }
+
+    /* The evidence questions: parallel interrogatives, scannable but unbulleted
+       so the cadence survives. */
+    .questions { margin: 1.5rem 0; padding: 1.25rem 1.4rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; }
+    .questions p { margin-bottom: 0.85rem; line-height: 1.6; color: #24473e; font-weight: 600; }
+    .questions p:last-child { margin-bottom: 0; }
+
+    .closing-line {
+      font-family: 'Lora', Georgia, Cambria, 'Times New Roman', serif;
+      font-size: 1.4rem; font-weight: 700; color: #24473e; line-height: 1.45;
+    }
+
+    @media (min-width: 768px) {
+      .policy-body p { font-size: 1.05rem; line-height: 1.8; }
+      .beat { font-size: 1.35rem; }
+      .cadence p, .questions p { font-size: 1.05rem; }
+      .closing-line { font-size: 1.6rem; }
+    }
+  </style>
+
+</head>
+
+<body class="bg-brand-white text-brand-offblack font-sans antialiased">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-dark" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6">
+      <div class="flex items-center justify-between h-16 lg:h-[68px]">
+        <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
+          <img id="main-logo" width="40" height="40" src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise home" class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          <span class="text-brand-gold font-serif font-bold text-base lg:text-lg tracking-tight group-hover:text-brand-orange transition-colors leading-tight">RDP</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-5">
+          <a href="/#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
+          <a href="/analytics/" class="nav-link text-brand-sand text-sm">Analytics</a>
+          <a href="/about/" class="nav-link text-brand-sand text-sm">About</a>
+          <a href="/team/" class="nav-link text-brand-sand text-sm">Team</a>
+          <a href="/#standards" class="nav-link text-brand-sand text-sm">Standards</a>
+          <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm whitespace-nowrap">Investigations Desk</a>
+          <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+          <a href="/#support" class="ml-2 bg-brand-gold text-brand-offblack text-sm font-bold py-2 px-5 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-md">Support Our Work</a>
+        </div>
+        <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu lg:hidden bg-brand-green-dark border-t border-brand-gold/10">
+      <div class="max-w-7xl mx-auto px-4 py-3 space-y-1">
+        <a href="/#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations</a>
+        <a href="/analytics/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
+        <a href="/about/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
+        <a href="/team/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
+        <a href="/#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
+        <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Investigations Desk ↗</a>
+        <a href="/secure-tips/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
+        <div class="pt-2 pb-1"><a href="/#support" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">Support Our Work</a></div>
+      </div>
+    </div>
+  </nav>
+  <div class="h-16 lg:h-[68px]"></div>
+
+  <section class="hero-section py-12 md:py-16 px-4">
+    <div class="relative max-w-3xl mx-auto text-center z-10">
+      <p class="mono-label text-brand-gold/80 text-xs md:text-sm tracking-[0.2em] uppercase">Editorial Standards</p>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-bold text-brand-gold tracking-tight">
+        Statement of Principles on Artificial Intelligence
+      </h1>
+      <p class="mt-4 text-brand-sand text-lg">
+        Why we’re “AI-assisted” and don’t have a machine certify our work
+      </p>
+      <p class="mt-3 text-brand-sand/80 text-sm">
+        Effective Date: August 9, 2026 &nbsp;·&nbsp; Last Updated: August 9, 2026
+      </p>
+    </div>
+  </section>
+
+  <section class="py-6 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="callout rounded-xl p-6 md:p-8">
+        <p class="font-serif text-lg font-bold text-brand-green-dark mb-2">
+          Assistance isn’t authority.
+        </p>
+        <p class="text-slate-700 leading-relaxed">
+          Journalists are still responsible for what we write. AI doesn’t decide what we believe,
+          it doesn’t choose what we publish, and it doesn’t absolve us of the obligation to verify
+          our reporting. A human being signs our work and accepts responsibility for it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content" class="py-8 md:py-12 px-4">
+    <div class="max-w-3xl mx-auto policy-body">
+
+      <nav class="bg-slate-50 border border-slate-200 rounded-xl p-6 mb-10 policy-toc" aria-label="On this page">
+        <p class="font-serif font-bold text-brand-green-dark text-lg mb-4">On This Page</p>
+        <ul class="space-y-2 text-sm md:text-base">
+          <li><a href="#tool">AI Is a Tool</a></li>
+          <li><a href="#why-we-use-it">Why We Use It</a></li>
+          <li><a href="#authority">Assistance Is Not Authority</a></li>
+          <li><a href="#evidence">Evidence Over Detection</a></li>
+          <li><a href="#automated-judgment">The Danger of Automated Judgment</a></li>
+          <li><a href="#counterpower">Computationally Assisted Counterpower</a></li>
+          <li><a href="#commitment">Our Commitment</a></li>
+        </ul>
+      </nav>
+
+      <h2 id="tool">AI Is a Tool</h2>
+
+      <p>Restoring Democracy’s Promise is neither pro-AI nor anti-AI.</p>
+
+      <p>We are AI-agnostic.</p>
+
+      <p>
+        Artificial intelligence is a tool. Like any powerful technology, its value to democracy
+        depends on who wields it, how they’re using it, how transparent that use is, and who
+        suffers when it fails.
+      </p>
+
+      <p>
+        Governments, corporations, political parties, law-enforcement agencies, data brokers and
+        other powerful institutions use automated systems to surveil populations, identify targets
+        and opportunities, make predictions, mass communicate, manage information, shape
+        decision-making, and hold enormous amounts of data about our lives.
+      </p>
+
+      <p class="beat">Those tools aren’t going away.</p>
+
+      <p>
+        So the question journalists and citizens should be asking isn’t whether we can go back to a
+        world without these tools. The question is whether immense analytical power will remain
+        concentrated in institutions’ hands — or whether journalists, citizens, researchers, and
+        public-interest organizations will also be able to harness modern technology to understand,
+        analyze, and investigate the powerful entities those institutions serve.
+      </p>
+
+      <p>Our view is straightforward:</p>
+
+      <p class="beat">
+        The public shouldn’t be expected to face those institutions armed with nothing more than pen
+        and paper while the institutions themselves become increasingly technologically empowered.
+      </p>
+
+      <h2 id="why-we-use-it">Why We Use It</h2>
+
+      <p>
+        Restoring Democracy’s Promise uses AI-assisted tools because modern journalism often
+        requires analyzing institutions that operate on volumes of data no human can comprehend
+        unassisted.
+      </p>
+
+      <p>
+        Thousands of pages of contracts. Massive databases. Court filings. Years of procurement
+        records. Legislative histories. Lines of technical code. Mountains of financial data. Layers
+        of data-sharing agreements. Pages of public-record requests. Complex flows of money between
+        agencies and contractors.
+      </p>
+
+      <p>
+        AI can help us sort that information, identify connections worth investigating, compare one
+        document to another, find contradictions, summarize technical material, assist with data
+        analysis, build visual explanations, and proof our writing for clarity.
+      </p>
+
+      <h2 id="authority">Assistance Is Not Authority</h2>
+
+      <p class="beat">But assistance isn’t authority.</p>
+
+      <p>
+        AI doesn’t get to decide what RDP believes. It doesn’t choose what we publish. And it
+        doesn’t absolve us of our obligation to verify our reporting.
+      </p>
+
+      <p class="beat">Journalists are still responsible for what we write.</p>
+
+      <div class="cadence">
+        <p>We choose the questions we ask.</p>
+        <p>We fight to obtain the records we need to do our jobs.</p>
+        <p>We evaluate the information we uncover.</p>
+        <p>We test conclusions against the evidence.</p>
+        <p>We differentiate documented fact from inference.</p>
+        <p>We judge what is ethical to publish.</p>
+        <p>We correct our work if we’re given evidence that we’re wrong.</p>
+      </div>
+
+      <p>
+        And yes, ultimately a human being signs our work and accepts responsibility for it.
+      </p>
+
+      <p class="beat">That matters.</p>
+
+      <p>
+        There is a massive moral difference between feeding raw data into an algorithm that decides
+        whether someone should be surveilled, investigated, fired, disenfranchised, or labeled
+        suspicious — and using technological tools to analyze how those determinations are made.
+      </p>
+
+      <p class="beat">Morality isn’t baked into technology.</p>
+
+      <p>
+        Powerful entities and their purposes always exist behind the technology. Transparency,
+        accountability, and consequences always matter.
+      </p>
+
+      <h2 id="evidence">Evidence Over Detection</h2>
+
+      <p>We reject two naive arguments.</p>
+
+      <p>
+        We do not believe every use of AI should be accepted at face value simply because it’s
+        powerful or new.
+      </p>
+
+      <p>
+        But we also will not marginalize, ridicule, or distrust any journalistic work merely for
+        being “AI-assisted.”
+      </p>
+
+      <p>
+        AI tools can help flag claims, inconsistencies, and patterns for verification, but humans
+        are perfectly capable of assessing evidence without probabilistic sentence-level detectors
+        policing what we write.
+      </p>
+
+      <div class="cadence">
+        <p>A 100% human-written article can be entirely false.</p>
+        <p>An AI-assisted article can be exhaustively sourced and completely accurate.</p>
+      </div>
+
+      <p class="beat">Strong evidence should be the basis for our judgment.</p>
+
+      <div class="questions" role="group" aria-label="Questions worth asking about any piece of reporting">
+        <p>Does the reporting answer questions about its evidence?</p>
+        <p>Can the claim be supported by documents or firsthand sources?</p>
+        <p>Are the documents provided genuine?</p>
+        <p>Does the author represent sources fairly?</p>
+        <p>Does the reporting disclose uncertainties?</p>
+        <p>Can another reporter read the documentation and reach their own conclusion?</p>
+        <p>Will the reporter or publication correct significant errors when presented with evidence they are wrong?</p>
+        <p>Does the byline represent a human who stands behind the work?</p>
+      </div>
+
+      <p>
+        Those are far more useful questions than trusting an algorithm to attempt to guess how a
+        piece was written.
+      </p>
+
+      <p class="beat">Nothing about AI should obscure that journalism.</p>
+
+      <h2 id="automated-judgment">The Danger of Automated Judgment</h2>
+
+      <p>
+        We are especially concerned about automated systems that reduce complicated human decisions
+        to a simplistic score or category.
+      </p>
+
+      <div class="cadence">
+        <p>Citizens become risk scores.</p>
+        <p>Voters become “database matches.”</p>
+        <p>Neighborhoods become crime predictions.</p>
+        <p>Researchers become an “AI percentage.”</p>
+        <p>Investigative journalism becomes slop.</p>
+      </div>
+
+      <p>
+        It’s dangerous when society starts treating these quantifications as more than what they
+        are: proxies for complicated human realities.
+      </p>
+
+      <p>
+        Sure, a classifier can spit out a statistical probability that indicates a pattern it has
+        been trained to identify. But that doesn’t mean the algorithm understands the person, the
+        research process, the evidence, or the truth of the underlying work itself.
+      </p>
+
+      <p>
+        When scores start becoming credentials — as opposed to tools to be examined — people start
+        optimizing themselves to please the metric.
+      </p>
+
+      <div class="cadence">
+        <p>Journalists start writing to please detectors instead of readers.</p>
+        <p>Lawmakers start treating neighbors as data points to be governed rather than constituents to be represented.</p>
+      </div>
+
+      <p>
+        Slowly, human judgment is eroded in favor of whatever can conveniently be measured by a
+        computer program.
+      </p>
+
+      <p class="beat">Journalism should be investigating that future, not accepting it tacitly.</p>
+
+      <h2 id="counterpower">Computationally Assisted Counterpower</h2>
+
+      <p class="beat">Our stance is one of computationally assisted counterpower.</p>
+
+      <p>
+        Institutions will continue to harness computational power. Journalism should have the right
+        tools to investigate those institutions.
+      </p>
+
+      <p>
+        We don’t believe the answer to centralized technological power is for everyone else to
+        blindly disarm ourselves of technology.
+      </p>
+
+      <p>
+        The answer is transparency, access, accountability, verification, and democratic control of
+        technology.
+      </p>
+
+      <h2 id="commitment">Our Commitment</h2>
+
+      <p>
+        Where those tools improve our ability to gather information on matters of public
+        consequence, we’ll continue to use them.
+      </p>
+
+      <div class="cadence">
+        <p>We’ll be transparent about how we use them.</p>
+        <p>We’ll remain skeptics of those tools.</p>
+        <p>We’ll test their conclusions.</p>
+        <p>We’ll disclose their limits.</p>
+        <p>We will never accept what a machine tells us as evidence until we verify it ourselves.</p>
+        <p>And we will remain accountable for our work.</p>
+      </div>
+
+      <p>
+        We don’t expect readers to trust our work just because we’re human.
+      </p>
+
+      <p>
+        And you shouldn’t automatically distrust us because we work with machines.
+      </p>
+
+      <p>
+        You should expect better than that from anyone claiming to speak truth to power.
+      </p>
+
+      <p>
+        You should hold us to the same standards you hold governments, corporations, banks, and
+        algorithms.
+      </p>
+
+      <div class="callout rounded-xl p-6 md:p-8 mt-10">
+        <p class="closing-line">Trust us in proportion to the evidence we provide.</p>
+      </div>
+
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 mt-10">
+        <p class="font-bold text-brand-green-dark mb-2">Related standards</p>
+        <p class="text-slate-700">
+          This statement sits alongside our
+          <a href="/corrections/">corrections and updates policy</a>, which explains how we handle
+          errors, clarifications, and data revisions, and our
+          <a href="/about/">editorial standards</a>.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-brand-green-dark text-brand-sand border-t border-brand-gold/15 py-10 px-4">
+    <div class="max-w-4xl mx-auto text-center text-sm">
+      <picture>
+        <source srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.webp" type="image/webp">
+        <img src="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.png" width="1536" height="857" loading="lazy" decoding="async" class="h-10 w-auto mx-auto mb-4" alt="Restoring Democracy's Promise logo">
+      </picture>
+      <p class="mb-4 text-base font-serif italic text-brand-gold">Engineering Precision Journalism</p>
+      <p>&copy; 2023–2026 Restoring Democracy's Promise. All rights reserved.</p>
+      <p class="mt-2 font-semibold text-brand-sand">Webmaster &amp; General Inquiries</p>
+      <p class="mt-1">
+        <a href="mailto:webmaster@restoring-democracy.org" class="text-brand-orange hover:text-brand-gold hover:underline font-semibold">webmaster@restoring-democracy.org</a>
+      </p>
+      <p class="mt-4">
+        <a href="/" class="text-brand-orange hover:text-brand-gold hover:underline text-sm font-semibold">← Return to Homepage</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector('.nav-bar');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('mobile-menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }));
+    }
+  </script>
+
+  <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
+  <script
+    data-goatcounter="https://restoring-democracy.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+  </script>
+</body>
+</html>
