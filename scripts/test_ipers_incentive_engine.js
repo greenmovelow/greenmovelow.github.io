@@ -4,8 +4,9 @@
 
    Run:  node scripts/test_ipers_incentive_engine.js
 
-   The keystone is the IPERS FY2025 plan's own worked example. It is the
-   controlling evidence that the payout schedule is a discrete rung lookup
+   The keystone is the IPERS plans' own worked example, which appears with the
+   same figures in all three produced plans - FY2023/4, FY2024 and FY2025. It is
+   the controlling evidence that the payout schedule is a discrete rung lookup
    rather than a continuous line, and that the components are weighted into a
    single total excess before the schedule is consulted.
    ========================================================================== */
@@ -56,17 +57,22 @@ function scenario(overrides) {
 }
 
 /* ===========================================================================
-   KEYSTONE — OFFICIAL IPERS FY2025 WORKED EXAMPLE
+   KEYSTONE — OFFICIAL IPERS WORKED EXAMPLE
 
    Senior RIO - A, tenure > 3 years, weights 20 / 60 / 20.
    After the plan's tenure calculation the components are:
      individual 0.15%, public 0.00%, private 0.12%.
 
-   The plan reports Total Excess 0.054% and an award of 25% from the payout
+   The plans report Total Excess 0.054% and an award of 25% from the payout
    scale. A continuous reading (5.4 bp x 5 points) would produce 27%, so this
    example is what rules out interpolation.
+
+   The same example, with the same figures, appears in the FY2023/4, FY2024 and
+   FY2025 plans. Because all three repeat it rather than supplying different
+   intermediate values, they corroborate a consistent treatment without
+   expressly stating a general between-rung rule.
    =========================================================================== */
-console.log('\nOFFICIAL IPERS FY2025 WORKED EXAMPLE — Senior RIO - A');
+console.log('\nOFFICIAL IPERS WORKED EXAMPLE (FY2023/4, FY2024, FY2025) — Senior RIO - A');
 {
   const W = E.WORKED_EXAMPLE;
 
@@ -83,7 +89,7 @@ console.log('\nOFFICIAL IPERS FY2025 WORKED EXAMPLE — Senior RIO - A');
   });
 
   // "Meets Expectations" is 15 bp, which is exactly the example's 0.15%
-  // individual component, so the plan's own inputs are reproduced directly.
+  // individual component, so the plans' own inputs are reproduced directly.
   check('individual component (bp)', r.individualBp, W.individualExcessPct * 100);
   check('weighted individual (bp)', r.weightedIndividualBp, 3, 1e-9);      // 15 x 20%
   check('weighted public (bp)', r.weightedPublicBp, 0, 1e-9);              // 0 x 60%

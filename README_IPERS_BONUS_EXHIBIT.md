@@ -154,7 +154,7 @@ It is labelled as such in the exhibit's methodology drawer, and the "show the
 math" panel says so explicitly whenever a total lands between rungs.
 
 The engine does **not** compute `payoutFactor = basisPoints × 0.05` for
-arbitrary fractional totals. Doing so would contradict the plan's own example.
+arbitrary fractional totals. Doing so would contradict the plans' own example.
 
 A visible consequence, and an honest one: small amounts of market excess often
 do not move the award at all, because the total has to cross a whole printed
