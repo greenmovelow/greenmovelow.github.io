@@ -37,6 +37,11 @@ MAX_CATEGORY_LEN = 40
 MAX_BYTES = 2_000_000
 TIMEOUT_SECONDS = 15
 
+# Supporting/source posts remain available at the Investigations Desk, but they
+# are not standalone publications and must not displace reporting in this feed.
+SUPPORTING_TITLE_PREFIXES = ("evidence locker:",)
+SUPPORTING_PATH_PREFIXES = ("/p/evidence-locker-",)
+
 CATEGORY_ALIASES = {
     "investigation": "Investigation",
     "investigations": "Investigation",
@@ -93,6 +98,15 @@ def normalize_link(raw: str) -> str | None:
     return urlunsplit(("https", CANONICAL_HOST, parts.path, "", ""))
 
 
+def is_supporting_material(title: str, link: str) -> bool:
+    """Identify companion/source pages that do not belong in publication feeds."""
+    normalized_title = title.casefold().lstrip()
+    path = urlsplit(link).path.casefold()
+    return normalized_title.startswith(SUPPORTING_TITLE_PREFIXES) or path.startswith(
+        SUPPORTING_PATH_PREFIXES
+    )
+
+
 def main() -> int:
     request = Request(
         FEED_URL,
@@ -121,6 +135,8 @@ def main() -> int:
         title = strip_text(item.findtext("title"), MAX_TITLE_LEN)
         link = normalize_link(item.findtext("link") or "")
         if not title or not link:
+            continue
+        if is_supporting_material(title, link):
             continue
         date_iso = ""
         date_label = ""
