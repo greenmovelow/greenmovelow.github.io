@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Evidence Locker: The Formula Behind the $25,000: What Iowa’s Next Governor Inherits",
+      "link": "https://investigations.restoring-democracy.org/p/evidence-locker-the-formula-behind",
+      "date": "2026-08-10",
+      "dateLabel": "Aug 10",
+      "category": "Investigation"
+    },
+    {
       "title": "Trump’s 278,000 Claim Rests on Two Searches the Government Has Not Explained",
       "link": "https://investigations.restoring-democracy.org/p/trumps-278000-claim-rests-on-two",
       "date": "2026-07-19",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/newly-obtained-amended-ipers-lawsuit",
       "date": "2026-04-07",
       "dateLabel": "Apr 7",
-      "category": "Investigation"
-    },
-    {
-      "title": "RDP Analytics Is Now Live",
-      "link": "https://investigations.restoring-democracy.org/p/rdp-analytics-is-now-live",
-      "date": "2026-03-16",
-      "dateLabel": "Mar 16",
       "category": "Investigation"
     }
   ]
