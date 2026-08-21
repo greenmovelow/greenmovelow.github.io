@@ -113,6 +113,8 @@
     .policy-body a:hover { color: #D4AF37; }
     .policy-toc a { color: #2d5c4f; text-decoration: none; font-weight: 500; transition: color 0.2s; }
     .policy-toc a:hover { color: #D4AF37; text-decoration: underline; }
+    .policy-toc ol { list-style: decimal; margin-left: 1.5rem; margin-bottom: 1rem; }
+    .policy-toc ol li { margin-bottom: 0.5rem; line-height: 1.7; color: #334155; }
 
     .callout {
       background: linear-gradient(135deg, rgba(45, 92, 79, 0.06) 0%, rgba(212, 175, 55, 0.04) 100%);
@@ -229,9 +231,9 @@
 
       <nav class="bg-slate-50 border border-slate-200 rounded-xl p-6 mb-10 policy-toc" aria-label="On this page">
         <p class="font-serif font-bold text-brand-green-dark text-lg mb-4">On This Page</p>
-        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm md:text-base">
+        <ol class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm md:text-base">
+          <li><a href="#human-led">Human-Led, Original Reporting</a></li>
           <li><a href="#tool">AI Is a Tool</a></li>
-          <li><a href="#human-led">Human-led, original reporting</a></li>
           <li><a href="#why-we-use-it">Why We Use It</a></li>
           <li><a href="#authority">Assistance Is Not Authority</a></li>
           <li><a href="#evidence">Evidence Over Detection</a></li>
@@ -242,8 +244,28 @@
           <li><a href="#authorship-disclosure">Authorship, Synthetic Media &amp; Disclosure</a></li>
           <li><a href="#costs-limitations">Costs, Limitations &amp; Continuous Review</a></li>
           <li><a href="#commitment">Our Commitment</a></li>
-        </ul>
+        </ol>
       </nav>
+
+      <h2 id="human-led">Human-Led, Original Reporting</h2>
+
+      <p>
+        Every investigation published by Restoring Democracy’s Promise is conceived, directed,
+        verified, edited, and approved by a human journalist. AI-assisted tools may contribute to
+        parts of the reporting and publishing process, including research organization, document
+        analysis, outlining, language suggestions, coding, visualization, or editing. But the
+        investigation itself—its questions, evidence, conclusions, sourcing, framing, and final
+        publication decision—is our original work.
+      </p>
+
+      <p class="beat">
+        We do not publish autonomous AI journalism. We publish human journalism that may use modern
+        computational tools.
+      </p>
+
+      <p>
+        AI assistance does not transfer authorship or accountability away from the journalist.
+      </p>
 
       <h2 id="tool">AI Is a Tool</h2>
 
@@ -286,26 +308,6 @@
       <p class="beat">
         The public shouldn’t be expected to face those institutions armed with nothing more than pen
         and paper while the institutions themselves become increasingly technologically empowered.
-      </p>
-
-      <h2 id="human-led">Human-led, original reporting</h2>
-
-      <p>
-        Every investigation published by Restoring Democracy’s Promise is conceived, directed,
-        verified, edited, and approved by a human journalist. AI-assisted tools may contribute to
-        parts of the reporting and publishing process, including research organization, document
-        analysis, outlining, language suggestions, coding, visualization, or editing. But the
-        investigation itself—its questions, evidence, conclusions, sourcing, framing, and final
-        publication decision—is our original work.
-      </p>
-
-      <p class="beat">
-        We do not publish autonomous AI journalism. We publish human journalism that may use modern
-        computational tools.
-      </p>
-
-      <p>
-        AI assistance does not transfer authorship or accountability away from the journalist.
       </p>
 
       <h2 id="why-we-use-it">Why We Use It</h2>
