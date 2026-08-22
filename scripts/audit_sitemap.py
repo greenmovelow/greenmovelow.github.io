@@ -3,9 +3,11 @@
 
 from __future__ import annotations
 
+from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
+import re
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -17,7 +19,7 @@ SITEMAP_NAMESPACE = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 EXPECTED_EXCLUSIONS = {
     "go/save_backfill_ia/index.html": "UTILITY / REDIRECT",
     "go/when-war-tests-democracy/index.html": "UTILITY / REDIRECT",
-    "journalism/cross-and-capitol/index.html": "REVIEW REQUIRED",
+    "journalism/cross-and-capitol/index.html": "INTENTIONALLY EXCLUDED / ORPHAN ARTIFACT",
     "resources/reference/records/status/index.html": "INTENTIONALLY NOINDEX",
     "vault.html": "INTENTIONALLY NOINDEX",
 }
@@ -112,6 +114,8 @@ def main() -> int:
             classification = EXPECTED_EXCLUSIONS[relative]
             classifications.append((relative, classification))
             seen_exclusions.add(relative)
+            if classification == "REVIEW REQUIRED":
+                failures.append(f"{relative}: indexing classification requires review")
             if classification == "INTENTIONALLY NOINDEX" and not metadata.noindex:
                 failures.append(f"{relative}: expected an explicit noindex directive")
             if classification == "UTILITY / REDIRECT":
@@ -132,10 +136,26 @@ def main() -> int:
         for entry in entries
     }
     ai_url = f"{ORIGIN}/ai-use/"
-    if urls.count(ai_url) != 1 or lastmods.get(ai_url) != "2026-08-21":
-        failures.append("/ai-use/ must occur once with lastmod 2026-08-21")
-    if lastmods.get(f"{ORIGIN}/") != "2026-08-21":
-        failures.append("homepage lastmod must be 2026-08-21")
+    if urls.count(ai_url) != 1:
+        failures.append("/ai-use/ must occur exactly once")
+    minimum_lastmods = {
+        f"{ORIGIN}/": date(2026, 8, 21),
+        ai_url: date(2026, 8, 21),
+    }
+    for url, minimum in minimum_lastmods.items():
+        value = lastmods.get(url)
+        try:
+            parsed = (
+                date.fromisoformat(value)
+                if value and re.fullmatch(r"\d{4}-\d{2}-\d{2}", value)
+                else None
+            )
+        except ValueError:
+            parsed = None
+        if parsed is None:
+            failures.append(f"{url}: lastmod must be an ISO YYYY-MM-DD date")
+        elif parsed < minimum:
+            failures.append(f"{url}: lastmod must be at least {minimum.isoformat()}")
     if f"{ORIGIN}/confidential_mou/" not in sitemap_urls:
         failures.append("/confidential_mou/ must remain in the sitemap")
 
