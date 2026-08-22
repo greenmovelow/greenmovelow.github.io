@@ -140,6 +140,14 @@
     .questions p { margin-bottom: 0.85rem; line-height: 1.6; color: #24473e; font-weight: 600; }
     .questions p:last-child { margin-bottom: 0; }
 
+    /* A short plain-language precis of the statement. Deliberately quieter than
+       the callout above it: pale cream ground, gold hairline, tight leading. */
+    .at-a-glance { background: #faf8f4; border: 1px solid rgba(212, 175, 55, 0.3); }
+    .at-a-glance ul { margin: 0.8rem 0 0 1.1rem; padding: 0; list-style: disc; }
+    .at-a-glance li { margin-bottom: 0.5rem; line-height: 1.55; color: #334155; font-size: 0.95rem; }
+    .at-a-glance li:last-child { margin-bottom: 0; }
+    .at-a-glance li::marker { color: #D4AF37; }
+
     .closing-line {
       font-family: 'Lora', Georgia, Cambria, 'Times New Roman', serif;
       font-size: 1.4rem; font-weight: 700; color: #24473e; line-height: 1.45;
@@ -149,6 +157,7 @@
       .policy-body p { font-size: 1.05rem; line-height: 1.8; }
       .beat { font-size: 1.35rem; }
       .cadence p, .questions p { font-size: 1.05rem; }
+      .at-a-glance li { font-size: 1rem; }
       .closing-line { font-size: 1.6rem; }
     }
   </style>
@@ -222,6 +231,18 @@
           our reporting. The final work is human-directed, human-edited, human-approved, and
           human-accountable.
         </p>
+      </div>
+
+      <div class="at-a-glance rounded-xl p-5 md:p-6 mt-5" role="group" aria-label="At a glance">
+        <p class="mono-label text-brand-green text-xs tracking-[0.2em] uppercase">At a glance</p>
+        <ul>
+          <li>Our reporting is human-led. AI can assist our work; it does not decide what we report.</li>
+          <li>We verify consequential factual claims against original records or reliable sources.</li>
+          <li>AI-generated output is not treated as evidence by itself.</li>
+          <li>We protect confidential sources and sensitive information.</li>
+          <li>We do not use AI to fabricate reporting, impersonate sources, or mislead readers.</li>
+          <li>Humans retain editorial responsibility, including responsibility for corrections.</li>
+        </ul>
       </div>
     </div>
   </section>
