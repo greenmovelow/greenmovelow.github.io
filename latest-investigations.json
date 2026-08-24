@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Signed and Filed. Dallas County Says Its Plate-Reader Deal Isn’t in Effect",
+      "link": "https://investigations.restoring-democracy.org/p/signed-and-filed-dallas-county-says",
+      "date": "2026-08-24",
+      "dateLabel": "Aug 24",
+      "category": "Investigation"
+    },
+    {
       "title": "The Formula Behind the $25,000: What Iowa’s Next Governor Inherits",
       "link": "https://investigations.restoring-democracy.org/p/the-formula-behind-the-25000-what",
       "date": "2026-08-10",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/iowas-alpr-reform-bill-would-regulate",
       "date": "2026-05-03",
       "dateLabel": "May 3",
-      "category": "Investigation"
-    },
-    {
-      "title": "Newly Obtained Amended IPERS Lawsuit Expands Allegations on Risk, Fees, and Benchmarking",
-      "link": "https://investigations.restoring-democracy.org/p/newly-obtained-amended-ipers-lawsuit",
-      "date": "2026-04-07",
-      "dateLabel": "Apr 7",
       "category": "Investigation"
     }
   ]
