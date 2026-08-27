@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "As Public Pressure Mounts, West Des Moines Defends Its Flock Network",
+      "link": "https://investigations.restoring-democracy.org/p/as-public-pressure-mounts-west-des",
+      "date": "2026-08-27",
+      "dateLabel": "Aug 27",
+      "category": "Investigation"
+    },
+    {
       "title": "Signed and Filed. Dallas County Says Its Plate-Reader Deal Isn’t in Effect",
       "link": "https://investigations.restoring-democracy.org/p/signed-and-filed-dallas-county-says",
       "date": "2026-08-24",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/iowa-handed-over-the-voter-data-the",
       "date": "2026-05-07",
       "dateLabel": "May 7",
-      "category": "Investigation"
-    },
-    {
-      "title": "Iowa’s ALPR “Reform” Bill Would Regulate Plate Readers — and Hide the Logs",
-      "link": "https://investigations.restoring-democracy.org/p/iowas-alpr-reform-bill-would-regulate",
-      "date": "2026-05-03",
-      "dateLabel": "May 3",
       "category": "Investigation"
     }
   ]
