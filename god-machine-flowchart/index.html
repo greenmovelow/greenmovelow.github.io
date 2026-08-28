@@ -30,8 +30,19 @@
     <meta name="theme-color" content="#24473e">
     <title>The God Machine Interactive | Restoring Democracy's Promise</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script type="text/javascript"
+            src="https://unpkg.com/vis-network@10.1.2/standalone/umd/vis-network.min.js"
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
+        /* ------------------------------------------------------------------
+           LEGACY EXHIBIT — PAGE-LOCAL STYLES
+           This standalone interactive predates the site's current Tailwind
+           build. Its layout and typography are defined here, in page scope,
+           so that a future Tailwind rebuild (content scanning / purge) can
+           never silently strip this exhibit's appearance. Only the shared
+           preflight + self-hosted @font-face rules are taken from
+           /assets/css/styles.css.
+           ------------------------------------------------------------------ */
         :root {
             /* Branding Colors - DO NOT CHANGE THESE */
             --primary-navy-blue: #0A2239; /* Deep, authoritative Navy Blue */
@@ -39,10 +50,10 @@
             --background-dark: #121212; /* Overall page background/dark sections */
             --text-light: #E0E1DD; /* For light text on dark backgrounds */
             --text-dark: #1A1A1A; /* For dark text on light backgrounds */
-            
+
             /* Flowchart Specific Colors - Adjusted for direct Vis.js application */
             --flowchart-canvas-background: #FAFAD2; /* Light gold toned background for the network canvas */
-            
+
             /* Node Default Colors (Dark node, light text) */
             --node-default-bg-color: #333333; /* Dark charcoal/black for default node fill */
             --node-default-border-color: #777777; /* Grey outline for default node */
@@ -53,7 +64,9 @@
             --node-highlight-border-color: var(--accent-burnished-gold); /* Gold border on highlight */
             --node-highlight-text-color: #F0F0F0; /* Light text on highlight */
 
-            /* Group Specific Node Colors for better branding & readability */
+            /* Group Specific Node Colors for better branding & readability.
+               NOTE: these are mirrored as literal hex values in the Vis Network
+               `groups` option below — a <canvas> cannot resolve var(). */
             --group-funding-bg: var(--accent-burnished-gold); /* Gold background for funding nodes */
             --group-funding-text: var(--text-dark); /* Dark text on gold */
 
@@ -70,19 +83,150 @@
             font-family: var(--font-body);
             background-color: var(--primary-navy-blue); /* Page background */
             color: var(--text-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* legacy exhibit: never scroll the page sideways */
         }
         h1, h2, h3, h4 {
             font-family: var(--font-display);
             font-weight: 600;
             color: var(--accent-burnished-gold);
         }
+
+        /* ---- Shared shell -------------------------------------------------- */
+        .gm-shell {
+            width: 100%;
+            max-width: 80rem;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .gm-sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* ---- Legacy exhibit navigation (see /pincer-financial/) ------------- */
+        .gm-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(10, 34, 57, 0.9);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.35), 0 4px 6px -4px rgba(0, 0, 0, 0.35);
+        }
+        .gm-nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            min-height: 4rem;
+        }
+        .gm-nav-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 0;
+        }
+        .gm-logo {
+            display: block;
+            height: 2rem;
+            width: 2rem;
+            flex: none;
+        }
+        .gm-nav-link {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            color: #D1D5DB;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+        .gm-nav-link:hover,
+        .gm-nav-link:focus-visible {
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+        .gm-nav-sep {
+            color: rgba(212, 175, 55, 0.5);
+            flex: none;
+        }
+        .gm-nav-eyebrow {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            line-height: 1.2;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--accent-burnished-gold);
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+        }
+        .gm-share {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: none;
+            padding: 0.5rem;
+            border: 0;
+            border-radius: 9999px;
+            background-color: transparent;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .gm-share:hover { background-color: #374151; }
+        .gm-share svg { height: 1.5rem; width: 1.5rem; }
+
+        /* ---- Page body ------------------------------------------------------ */
+        .gm-main { padding-top: 1rem; padding-bottom: 1rem; }
+        .gm-header { text-align: center; padding-top: 1rem; padding-bottom: 0.5rem; }
+        .gm-title {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--accent-burnished-gold);
+            margin: 0;
+        }
+        .gm-lede {
+            color: var(--text-light);
+            margin: 0 0 1rem 0;
+            line-height: 1.625;
+        }
+
+        /* ---- Network canvas ------------------------------------------------- */
         #mynetwork {
             width: 100%;
             height: 75vh;
+            min-height: 420px;
             border: 2px solid var(--accent-burnished-gold);
             background-color: var(--flowchart-canvas-background); /* Light gold canvas background */
             border-radius: 8px;
+            touch-action: none; /* let Vis Network own pinch-zoom / drag inside the canvas */
         }
+        .gm-network-fallback {
+            display: none;
+            padding: 1.5rem;
+            color: var(--text-dark);
+            font-family: var(--font-body);
+        }
+        #mynetwork.gm-network-failed { display: grid; place-items: center; }
+        #mynetwork.gm-network-failed .gm-network-fallback { display: block; }
+
         .node-info-panel {
             background-color: var(--background-dark); /* Dark background for info panel */
             border-left: 5px solid var(--accent-burnished-gold);
@@ -91,8 +235,26 @@
             margin-top: 1rem;
             display: none;
             color: var(--text-light); /* Ensure text is visible in info panel */
+            scroll-margin-top: 5rem; /* clear the sticky nav when scrolled into view */
         }
         .node-info-panel.active { display: block; }
+        .gm-info-title {
+            font-size: 1.5rem;
+            line-height: 2rem;
+            margin: 0 0 0.5rem 0;
+        }
+        .gm-info-description {
+            line-height: 1.625;
+            margin: 0;
+        }
+        .gm-scroll-prompt {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            text-align: center;
+            color: var(--accent-burnished-gold);
+        }
+
         .vis-navigation .vis-button {
             background-color: rgba(10, 34, 57, 0.8) !important;
             border: 1px solid var(--accent-burnished-gold) !important;
@@ -100,14 +262,81 @@
         }
         .vis-navigation .vis-button:hover { background-color: var(--primary-navy-blue) !important; }
         .vis-navigation .vis-button svg { fill: var(--accent-burnished-gold) !important; }
-        
-        /* Ensure the scroll prompt animation */
-        @keyframes pulse {
+
+        /* ---- Continuation block + footer ------------------------------------ */
+        .gm-continue {
+            border-top: 1px solid rgba(212, 175, 55, 0.35);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            text-align: center;
+        }
+        .gm-continue p {
+            margin: 0;
+            font-size: 0.875rem;
+            line-height: 1.5rem;
+            color: var(--text-light);
+        }
+        .gm-continue p + p { margin-top: 0.5rem; }
+        .gm-continue a {
+            font-weight: 600;
+            color: var(--accent-burnished-gold);
+            text-decoration: none;
+        }
+        .gm-continue a:hover,
+        .gm-continue a:focus-visible { color: #FFFFFF; text-decoration: underline; }
+
+        .gm-footer {
+            border-top: 1px solid rgba(224, 225, 221, 0.15);
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--text-light);
+        }
+        .gm-footer p { margin: 0; }
+        .gm-footer p + p { margin-top: 0.5rem; font-size: 0.875rem; }
+
+        /* ---- Focus visibility (a11y) ---------------------------------------- */
+        a:focus-visible,
+        button:focus-visible,
+        #mynetwork:focus-visible {
+            outline: 3px solid var(--accent-burnished-gold);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        /* ---- Responsive ------------------------------------------------------ */
+        /* Hidden by default; progressively revealed at the breakpoints below so the
+           mobile bar can never overlap the logo or the share control. */
+        .gm-nav-return, .gm-nav-context, .gm-nav-sep { display: none; }
+
+        @media (min-width: 640px) {
+            .gm-nav-return { display: inline; }
+        }
+        @media (min-width: 768px) {
+            .gm-title { font-size: 3rem; line-height: 1; }
+            .gm-nav-eyebrow { font-size: 1.5rem; }
+        }
+        @media (min-width: 1024px) {
+            .gm-nav-context { display: inline; }
+            .gm-nav-sep { display: inline; }
+            .gm-nav-eyebrow { font-size: 1.875rem; }
+        }
+        @media (max-width: 639px) {
+            #mynetwork { height: 68vh; min-height: 380px; }
+            .gm-nav-eyebrow { font-size: 0.9375rem; letter-spacing: 0.04em; }
+        }
+
+        /* ---- Scroll prompt animation ---------------------------------------- */
+        @keyframes gm-pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-        .animate-pulse {
-            animation: pulse 1.5s infinite;
+        .gm-pulse { animation: gm-pulse 1.5s infinite; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .gm-pulse { animation: none; }
+            * { scroll-behavior: auto !important; }
         }
     </style>
 
@@ -125,164 +354,93 @@
   <meta name="twitter:description" content="Read The God Machine: Interactive Flowchart - RDP on Restoring Democracy's Promise." />
   <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Color.png" />
 </head>
-<body class="antialiased">
+<body>
 
-    <nav class="sticky top-0 z-50 shadow-lg" style="background-color: rgba(10, 34, 57, 0.9); backdrop-filter: blur(10px);">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex items-center justify-between h-16">
-                 <a href="/the-god-machine/" class="flex items-center space-x-3 text-gray-300 hover:text-white">
-                    <img src="/assets/Square_logo_transparent.png" alt="RDP Logo" class="h-8 w-8">
-                    <span class="text-sm font-medium hidden sm:inline">&larr; Return to The God Machine</span>
-                </a>
-                <h1 class="text-3xl uppercase tracking-wider">Interactive Dossier</h1>
-                <div class="flex items-center">
-                    <button id="share-button" title="Share this investigation" class="p-2 rounded-full text-white hover:bg-gray-700 transition-colors duration-200">
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="18" cy="5" r="3"></circle>
-                            <circle cx="6" cy="12" r="3"></circle>
-                            <circle cx="18" cy="19" r="3"></circle>
-                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                        </svg>
-                    </button>
+    <!-- Legacy exhibit navigation — restrained RDP treatment, mirroring
+         /pincer-financial/. Deliberately NOT the full site navigation. -->
+    <nav class="gm-nav" aria-label="Exhibit">
+        <div class="gm-shell">
+            <div class="gm-nav-inner">
+                <div class="gm-nav-left">
+                    <a href="/" title="Return to Homepage">
+                        <img src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise Logo" class="gm-logo" width="32" height="32">
+                    </a>
+                    <a href="/" class="gm-nav-link gm-nav-return">&larr; Return to Homepage</a>
+                    <span class="gm-nav-sep" aria-hidden="true">|</span>
+                    <a href="/the-god-machine/" class="gm-nav-link gm-nav-context">The God Machine</a>
                 </div>
+                <p class="gm-nav-eyebrow">Interactive Dossier</p>
+                <button id="share-button" type="button" class="gm-share" aria-label="Share this interactive dossier" title="Share this interactive dossier">
+                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto p-4 w-full">
-        <header class="text-center pt-4 pb-2">
-             <h1 class="text-4xl md:text-5xl font-black uppercase tracking-wider">The God Machine</h1>
+    <main class="gm-shell gm-main">
+        <header class="gm-header">
+             <h1 class="gm-title">The God Machine</h1>
         </header>
-        <div class="p-4 rounded-lg">
-            <p class="text-light mb-4">Click on any node in the diagram below to learn more about its role in The God Machine network. Hover over nodes for quick information. Use your mouse wheel or pinch-to-zoom to explore the connections. The navigation buttons allow you to pan, zoom, and reset the view. The network will stabilize after a moment.</p>
-            <div id="mynetwork"></div>
-            <div id="node-info" class="node-info-panel">
-                <h3 id="info-title" class="text-2xl mb-2"></h3>
-                <p id="info-description" class="leading-relaxed"></p>
-                <p id="scroll-prompt" class="mt-4 text-sm text-center text-accent-burnished-gold animate-pulse">
-                    &darr; Scroll down for node details &darr;
-                </p>
+        <div>
+            <p class="gm-lede">Click on any node in the diagram below to learn more about its role in The God Machine network. Hover over nodes for quick information. Use your mouse wheel or pinch-to-zoom to explore the connections. The navigation buttons allow you to pan, zoom, and reset the view. The network will stabilize after a moment.</p>
+            <div id="mynetwork" role="region" tabindex="0" aria-label="Interactive network map of The God Machine. Seven organisations and individuals connected by seven funding, lobbying and certification relationships. Select a node to read its description in the panel below the diagram.">
+                <p class="gm-network-fallback">The interactive network map could not be loaded. The relationships it shows are described in <a href="/the-god-machine/">The God Machine</a> investigation.</p>
+            </div>
+            <p id="scroll-prompt" class="gm-scroll-prompt gm-pulse">
+                &darr; Select a node for its dossier entry &darr;
+            </p>
+            <div id="node-info" class="node-info-panel" aria-live="polite">
+                <h2 id="info-title" class="gm-info-title"></h2>
+                <p id="info-description" class="gm-info-description"></p>
             </div>
         </div>
+
+        <!-- Standardized legacy exhibit continuation block (see /pincer-financial/) -->
+        <section class="gm-continue">
+            <p>This interactive dossier is part of The God Machine investigation.</p>
+            <p>Continue to the investigation: <a href="/the-god-machine/"><em>The God Machine &mdash; How a Tax-Exempt &lsquo;Ministry&rsquo; Built a Business Selling Chaplains to Public Schools</em> &rarr;</a></p>
+        </section>
     </main>
 
-    <footer class="border-t py-8 mt-4" style="border-color: var(--primary-navy-blue);">
-        <div class="container mx-auto px-4 text-center" style="color: var(--text-secondary);">
-            <p>&copy; 2025 Restoring Democracy's Promise. All Rights Reserved.</p>
-            <p class="text-sm mt-2">This interactive report is part of the keystone investigation "THE GOD MACHINE."</p>
-        </div>
+    <footer class="gm-shell gm-footer">
+        <p>&copy; 2025 Restoring Democracy's Promise. All Rights Reserved.</p>
+        <p>This interactive report is part of the keystone investigation "THE GOD MACHINE."</p>
     </footer>
 
 <script type="text/javascript">
-    // --- CORRECTED DATASET ---
-    var nodes = new vis.DataSet([
-        { id: 'daf', label: 'Anonymous Donors (DAFs)', group: 'funding' },
-        { id: 'nacl', label: 'NACL', group: 'ops' },
-        { id: 'faithwins', label: 'Faith Wins', group: 'ops' },
-        { id: 'missiongen', label: 'Mission Generation / NSCA', group: 'credentialer' },
-        { id: 'publicschools', label: 'Public Schools', group: 'target' },
-        { id: 'chaplains', label: 'NSCA Certified Chaplains', group: 'credentialer' },
-        { id: 'rockymalloy', label: 'Rocky Malloy', group: 'individual' }
-    ]);
+(function () {
+    'use strict';
 
-    var edges = new vis.DataSet([
-        { from: 'daf', to: 'missiongen', label: 'Funds', title: 'Verifiable $352k Grant (2022)' },
-        { from: 'nacl', to: 'publicschools', label: 'Pushes Legislation' },
-        { from: 'faithwins', to: 'nacl', label: 'Lobbies For' },
-        { from: 'missiongen', to: 'chaplains', label: 'Certifies' },
-        { from: 'chaplains', to: 'publicschools', label: 'Deployed To' },
-        { from: 'missiongen', to: 'rockymalloy', label: 'Provides Loan To', title: '$200,000 Principal Loan' },
-        { from: 'nacl', to: 'missiongen', label: 'Creates Market For' }
-    ]);
-    // --- END CORRECTION ---
+    var prefersReducedMotion = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ------------------------------------------------------------------
+       Vis Network palette.
+       These MUST be literal colours. Vis Network paints into a <canvas>,
+       and the Canvas 2D API silently ignores `var(--…)` assignments to
+       fillStyle / strokeStyle — the previous colour is retained instead.
+       The values below are the same four brand colours declared as CSS
+       custom properties in the <style> block above; keep them in sync.
+       ------------------------------------------------------------------ */
+    var NAVY   = '#0A2239'; /* --primary-navy-blue */
+    var GOLD   = '#D4AF37'; /* --accent-burnished-gold */
+    var CANVAS = '#FAFAD2'; /* --flowchart-canvas-background */
+    var INK    = '#1A1A1A'; /* --text-dark */
 
     var container = document.getElementById('mynetwork');
-    var data = { nodes: nodes, edges: edges };
-
-    var options = {
-        nodes: {
-            shape: 'box',
-            font: {
-                face: 'system-ui',
-                size: 18,
-                color: '#000000' // Fix for label visibility
-            },
-            borderWidth: 2,
-            color: {
-                background: 'var(--flowchart-canvas-background)',
-                border: 'var(--primary-navy-blue)',
-                highlight: {
-                    background: 'var(--accent-burnished-gold)',
-                    border: 'var(--primary-navy-blue)'
-                },
-                hover: {
-                    background: 'var(--accent-burnished-gold)',
-                    border: 'var(--primary-navy-blue)'
-                }
-            },
-            widthConstraint: { minimum: 150, maximum: 250 },
-            shadow: {
-                enabled: true,
-                color: 'rgba(0,0,0,0.5)',
-                size: 8,
-                x: 3,
-                y: 3
-            }
-        },
-        edges: {
-            width: 2,
-            color: { color: 'var(--text-dark)', highlight: 'var(--accent-burnished-gold)' },
-            font: {
-                color: 'var(--text-dark)',
-                face: 'Georgia',
-                size: 12,
-                strokeWidth: 0,
-                align: 'top'
-            },
-            arrows: { to: { enabled: true, scaleFactor: 0.8 } },
-            smooth: { type: 'curvedCW', roundness: 0.2 }
-        },
-        physics: {
-            enabled: true,
-            stabilization: {
-                enabled: true,
-                iterations: 1500,
-                updateInterval: 100,
-                fit: true
-            },
-            barnesHut: {
-                gravitationalConstant: -2000,
-                centralGravity: 0.1,
-                springLength: 120,
-                springConstant: 0.05,
-                damping: 0.09,
-                avoidOverlap: 0.8
-            },
-            solver: 'barnesHut'
-        },
-        interaction: {
-            navigationButtons: true,
-            keyboard: true,
-            zoomView: true,
-            dragView: true
-        }
-    };
-    
-    var network = new vis.Network(container, data, options);
-
-    network.on("stabilizationIterationsDone", function () {
-        network.setOptions({ physics: false });
-        network.fit({ animation: { duration: 1000, easingFunction: "easeInOutQuad" } });
-    });
-
-    const nodeInfoPanel = document.getElementById('node-info');
-    const infoTitle = document.getElementById('info-title');
-    const infoDescription = document.getElementById('info-description');
-    const scrollPrompt = document.getElementById('scroll-prompt');
+    var nodeInfoPanel = document.getElementById('node-info');
+    var infoTitle = document.getElementById('info-title');
+    var infoDescription = document.getElementById('info-description');
+    var scrollPrompt = document.getElementById('scroll-prompt');
 
     // --- CORRECTED NODE DETAILS ---
-    const nodeDetails = {
+    var nodeDetails = {
         'daf': {
             title: 'Anonymous Donor-Advised Funds (DAFs)',
             description: 'The untraceable financial engine. DAFs legally shield the identity of major donors, allowing large, coordinated grants (like a verified $352,000 grant in 2022) to flow to Mission Generation without public accountability.'
@@ -314,54 +472,219 @@
     };
     // --- END CORRECTION ---
 
-    network.on("selectNode", function (params) {
-        const nodeId = params.nodes[0];
-        if (nodeId && nodeDetails[nodeId]) {
-            const details = nodeDetails[nodeId];
-            infoTitle.textContent = details.title;
-            infoDescription.textContent = details.description;
-            nodeInfoPanel.classList.add('active');
-            nodeInfoPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            scrollPrompt.style.display = 'none';
-        } else {
-            nodeInfoPanel.classList.remove('active');
-            scrollPrompt.style.display = 'block';
-        }
-    });
-
-    network.on("deselectNode", function () {
-        nodeInfoPanel.classList.remove('active');
-        scrollPrompt.style.display = 'block';
-    });
-
-    // --- Share Button Functionality ---
-    const shareButton = document.getElementById('share-button');
+    /* ---------------- Share control ----------------------------------- */
+    // Registered before the network so a CDN failure can never disable it.
+    var shareButton = document.getElementById('share-button');
     if (shareButton) {
-        shareButton.addEventListener('click', async () => {
-            const shareData = {
+        shareButton.addEventListener('click', function () {
+            var shareData = {
                 title: 'The God Machine: Interactive Flowchart',
                 text: 'Explore the interconnected network behind the push for chaplains in public schools. An RDP investigation.',
                 url: window.location.href
             };
-            try {
-                if (navigator.share) {
-                    await navigator.share(shareData);
-                } else {
-                    throw new Error('Web Share API not supported');
+
+            var copyToClipboard = function () {
+                // Clipboard access requires a secure context and can be blocked
+                // by permissions policy. Degrade quietly instead of throwing.
+                if (!navigator.clipboard || !navigator.clipboard.writeText) {
+                    window.prompt('Copy this link to share the flowchart:', window.location.href);
+                    return;
                 }
-            } catch (err) {
-                navigator.clipboard.writeText(window.location.href).then(() => {
-                    alert('Link to flowchart copied to clipboard!');
+                navigator.clipboard.writeText(window.location.href).then(function () {
+                    window.alert('Link to flowchart copied to clipboard!');
+                }).catch(function () {
+                    window.prompt('Copy this link to share the flowchart:', window.location.href);
                 });
+            };
+
+            if (navigator.share) {
+                Promise.resolve()
+                    .then(function () { return navigator.share(shareData); })
+                    .catch(function (err) {
+                        // The user dismissing the share sheet is not a failure.
+                        if (err && err.name === 'AbortError') { return; }
+                        copyToClipboard();
+                    });
+            } else {
+                copyToClipboard();
             }
         });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        if (!network.getSelectedNodes().length && !network.getSelectedEdges().length) {
-            scrollPrompt.style.display = 'block';
+    /* ---------------- Network ----------------------------------------- */
+    if (typeof vis === 'undefined' || !container) {
+        if (container) { container.classList.add('gm-network-failed'); }
+        if (scrollPrompt) { scrollPrompt.style.display = 'none'; }
+        return;
+    }
+
+    // --- CORRECTED DATASET ---
+    var nodes = new vis.DataSet([
+        { id: 'daf', label: 'Anonymous Donors (DAFs)', group: 'funding' },
+        { id: 'nacl', label: 'NACL', group: 'ops' },
+        { id: 'faithwins', label: 'Faith Wins', group: 'ops' },
+        { id: 'missiongen', label: 'Mission Generation / NSCA', group: 'credentialer' },
+        { id: 'publicschools', label: 'Public Schools', group: 'target' },
+        { id: 'chaplains', label: 'NSCA Certified Chaplains', group: 'credentialer' },
+        { id: 'rockymalloy', label: 'Rocky Malloy', group: 'individual' }
+    ]);
+
+    var edges = new vis.DataSet([
+        { from: 'daf', to: 'missiongen', label: 'Funds', title: 'Verifiable $352k Grant (2022)' },
+        { from: 'nacl', to: 'publicschools', label: 'Pushes Legislation' },
+        { from: 'faithwins', to: 'nacl', label: 'Lobbies For' },
+        { from: 'missiongen', to: 'chaplains', label: 'Certifies' },
+        { from: 'chaplains', to: 'publicschools', label: 'Deployed To' },
+        { from: 'missiongen', to: 'rockymalloy', label: 'Provides Loan To', title: '$200,000 Principal Loan' },
+        { from: 'nacl', to: 'missiongen', label: 'Creates Market For' }
+    ]);
+    // --- END CORRECTION ---
+
+    var data = { nodes: nodes, edges: edges };
+
+    var nodeColor = {
+        background: CANVAS,
+        border: NAVY,
+        highlight: { background: GOLD, border: NAVY },
+        hover: { background: GOLD, border: NAVY }
+    };
+
+    var options = {
+        nodes: {
+            shape: 'box',
+            font: {
+                face: 'system-ui',
+                size: 18,
+                color: '#000000' // Fix for label visibility
+            },
+            borderWidth: 2,
+            color: nodeColor,
+            widthConstraint: { minimum: 150, maximum: 250 },
+            shadow: {
+                enabled: true,
+                color: 'rgba(0,0,0,0.5)',
+                size: 8,
+                x: 3,
+                y: 3
+            }
+        },
+        /* Every group named in the dataset must be declared here. Vis Network
+           assigns an unrecognised group a colour from its own default rainbow
+           palette, and that group colour overrides options.nodes.color — which
+           is why the map rendered in stock blue/yellow/red/green. The values
+           mirror the --group-*-bg custom properties declared above. */
+        groups: {
+            funding:      { color: { background: GOLD,   border: NAVY, highlight: { background: GOLD, border: NAVY }, hover: { background: GOLD, border: NAVY } }, font: { color: INK } },
+            ops:          { color: nodeColor, font: { color: INK } },
+            credentialer: { color: nodeColor, font: { color: INK } },
+            target:       { color: { background: CANVAS, border: NAVY, highlight: { background: GOLD, border: NAVY }, hover: { background: GOLD, border: NAVY } }, font: { color: INK } },
+            individual:   { color: { background: GOLD,   border: NAVY, highlight: { background: GOLD, border: NAVY }, hover: { background: GOLD, border: NAVY } }, font: { color: INK } }
+        },
+        edges: {
+            width: 2,
+            color: { color: INK, highlight: NAVY, hover: NAVY },
+            font: {
+                color: INK,
+                face: 'Georgia',
+                size: 12,
+                strokeWidth: 3,
+                strokeColor: CANVAS,
+                align: 'top'
+            },
+            arrows: { to: { enabled: true, scaleFactor: 0.8 } },
+            smooth: { type: 'curvedCW', roundness: 0.2 }
+        },
+        physics: {
+            enabled: true,
+            stabilization: {
+                enabled: true,
+                iterations: 1500,
+                updateInterval: 100,
+                fit: true
+            },
+            barnesHut: {
+                gravitationalConstant: -2000,
+                centralGravity: 0.1,
+                springLength: 120,
+                springConstant: 0.05,
+                damping: 0.09,
+                avoidOverlap: 0.8
+            },
+            solver: 'barnesHut'
+        },
+        interaction: {
+            navigationButtons: true,
+            keyboard: true,
+            zoomView: true,
+            dragView: true,
+            hover: true
         }
+    };
+
+    var network = new vis.Network(container, data, options);
+
+    /* Keep labels readable on narrow viewports. fit() alone will zoom a tall,
+       narrow container out far enough that the node labels become unreadable;
+       clamp the floor and let the reader pan instead. */
+    function minimumReadableScale() {
+        return window.innerWidth < 640 ? 0.55 : 0.35;
+    }
+
+    function enforceMinimumScale() {
+        var floor = minimumReadableScale();
+        if (network.getScale() < floor) {
+            network.moveTo({ scale: floor });
+        }
+    }
+
+    function fitGraph() {
+        if (prefersReducedMotion) {
+            network.fit({ animation: false });
+            enforceMinimumScale();
+            return;
+        }
+        network.fit({ animation: { duration: 1000, easingFunction: 'easeInOutQuad' } });
+        window.setTimeout(enforceMinimumScale, 1100);
+    }
+
+    network.on('stabilizationIterationsDone', function () {
+        network.setOptions({ physics: false });
+        fitGraph();
     });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(enforceMinimumScale, 200);
+    });
+
+    function showNode(nodeId) {
+        var details = nodeDetails[nodeId];
+        if (!details) { return false; }
+        infoTitle.textContent = details.title;
+        infoDescription.textContent = details.description;
+        nodeInfoPanel.classList.add('active');
+        nodeInfoPanel.scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'nearest'
+        });
+        scrollPrompt.style.display = 'none';
+        return true;
+    }
+
+    function clearNode() {
+        nodeInfoPanel.classList.remove('active');
+        infoTitle.textContent = '';
+        infoDescription.textContent = '';
+        scrollPrompt.style.display = '';
+    }
+
+    network.on('selectNode', function (params) {
+        if (!showNode(params.nodes[0])) { clearNode(); }
+    });
+
+    network.on('deselectNode', clearNode);
+})();
 </script>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script
