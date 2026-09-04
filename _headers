@@ -18,3 +18,7 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Content-Security-Policy: default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'none'; script-src 'none'; style-src 'self'; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'
+
+# Editorial handoff prototypes are source material, not published pages.
+/_handoff/*
+  X-Robots-Tag: noindex, nofollow, noarchive

@@ -1,10 +1,37 @@
 /* ============================================================
-   The Standing Query — interaction prototype
-   Classic script on purpose: ES modules are blocked under file://,
-   and this must run by double-clicking index.html.
+   The Standing Query — production script
+   Restoring Democracy's Promise · infographics/standing-query/
+
+   Adapted from the adversarially repaired prototype. One top-level
+   data-state on #sq drives the visual state; CSS does the rest.
+   Classic script on purpose: no modules, no bundler, no dependency.
    ============================================================ */
 (function () {
   'use strict';
+
+  /* ========================================================================
+     EDITORIAL CONFIGURATION
+     ARTICLE_URL — the full investigation on the Investigations Desk,
+     supplied by the editor on Sept. 4, 2026. If it is ever emptied, the
+     "Read the full investigation" links hide themselves again.
+     ====================================================================== */
+  var ARTICLE_URL = 'https://investigations.restoring-democracy.org/p/inside-iowas-save-clearinghouse-what';
+
+  /* ---------- analytics (site-standard GoatCounter only) ----------
+     Custom events ride on the aggregate counter already loaded at the end
+     of the page. This never touches the state machine: it is called AFTER
+     a transition, fires at most once per page load per event, and fails
+     silently if the counter is absent or blocked. */
+  var tracked = {};
+  function track(name) {
+    if (tracked[name]) { return; }
+    tracked[name] = true;
+    try {
+      if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+        window.goatcounter.count({ path: name, title: name, event: true });
+      }
+    } catch (e) { /* analytics must fail harmlessly */ }
+  }
 
   var sq        = document.getElementById('sq');
   var stage     = document.getElementById('stage');
@@ -20,8 +47,12 @@
   var railLoop  = document.getElementById('railLoop');
   var railStns  = document.getElementById('railStations');
   var railList  = document.getElementById('railList');
+  var railFollow= document.getElementById('railFollowup');
   var railLabel = document.getElementById('railLabel');
   var chipPrompt  = document.getElementById('chipPrompt');
+  var gateCount   = document.getElementById('gateCount');
+  var btnRestartEnd = document.getElementById('btnRestartEnd');
+  var railLabelEls  = document.querySelectorAll('.rail-labels .rail__label');
 
   if (!sq) { return; }
 
@@ -35,15 +66,17 @@
     { id: 2, x: 74,  y: 34, label: '' },
     { id: 3, x: 128, y: 34, label: '' },
     { id: 4, x: 182, y: 34, label: 'Response', dy: 16 },
-    { id: 5, x: 237, y: 34, label: '16,457',   dy: -11 },
+    { id: 5, x: 237, y: 34, label: '16,457 transactions', dy: -11 },
     { id: 6, x: 292, y: 34, label: 'Issued',   dy: 16 },
     { id: 7, x: 168, y: 86, label: 'Status expires', loop: true }
   ];
   var STATION_NAMES = {
     1: 'Application', 2: 'Submission', 3: 'Clearinghouse',
-    4: 'Response', 5: 'One of 16,457', 6: 'License issued',
-    7: 'Status expires — contemplated recheck'
+    4: 'Response', 5: '16,457 initial verification transactions', 6: 'License issued'
   };
+  /* The post-issuance follow-up is NOT a seventh step. It is announced only
+     after the loop has been revealed, outside the six-step list. */
+  var FOLLOWUP_TEXT = 'Post-issuance follow-up: the path returns to a status-expiration check — a contemplated recheck, documented procedure, not an observed event.';
 
   var LINE_X0 = 20, LINE_X1 = 292;
   var CARD_S2_SCALE = 0.34;   /* must match the scale() in styles.css */
@@ -67,19 +100,19 @@
     s5: '',
     s6: 'See what happens next',
     s7: 'Continue',
-    s8: 'Start over'
+    s8: ''            /* the bar is withdrawn at s8; exits are inline */
   };
 
   var ANNOUNCE = {
     s0: 'A composite professional-license application. Not an individual’s record.',
-    s1: 'Response. A response has come back. Evidence available: additional verification.',
-    s2: 'This case is one of 16,457 initial verifications. Three questions to resolve.',
+    s1: 'Response. SAVE returns a verification response. Some checks resolve immediately; others require additional verification.',
+    s2: 'The reports record 16,457 initial verification transactions. Three questions to resolve.',
     s3: '',
     s4: 'License issued. Application complete.',
     s5: '',
-    s6: 'The file stays open. The case returns to the system.',
+    s6: 'The question stays open. The path returns to a status-expiration check.',
     s7: 'When the status expires. Documented procedure, not an observed event.',
-    s8: 'End of prototype.'
+    s8: 'End of the sequence. Source and response context.'
   };
 
   function clearTimers() {
@@ -103,17 +136,7 @@
       c.setAttribute('class', 'rail__station' + (s.loop ? ' is-loop' : ''));
       c.setAttribute('data-station', s.id);
       railStns.appendChild(c);
-
-      if (s.label) {
-        var t = document.createElementNS(SVGNS, 'text');
-        t.setAttribute('x', s.x);
-        t.setAttribute('y', s.loop ? s.y + 21 : s.y + (s.dy || 18));
-        t.setAttribute('class', 'rail__label' + (s.loop ? ' rail__label--loop' : ''));
-        t.setAttribute('data-label', s.id);
-        t.setAttribute('text-anchor', s.x < 60 ? 'start' : (s.x > 250 ? 'end' : 'middle'));
-        t.textContent = s.label;
-        railStns.appendChild(t);
-      }
+      /* labels are HTML spans in .rail-labels (fixed CSS size); see styles.css */
     }
 
     try {
@@ -123,10 +146,19 @@
       progLen = LINE_X1 - LINE_X0;
       loopLen = 200;
     }
+    /* Set the initial dash state WITHOUT animating it. Both paths carry a
+       stroke-dashoffset transition; applied at boot, the first paint showed
+       them fully drawn and retracting over 900ms — a cold-load flash of the
+       loop's first arc inside the clip band, i.e. a telegraph. */
+    railProg.style.transition = 'none';
+    railLoop.style.transition = 'none';
     railProg.style.strokeDasharray = progLen;
     railProg.style.strokeDashoffset = progLen;
     railLoop.style.strokeDasharray = loopLen;
     railLoop.style.strokeDashoffset = loopLen;
+    void railLoop.getBoundingClientRect();   /* commit before restoring the transition */
+    railProg.style.transition = '';
+    railLoop.style.transition = '';
   }
 
   function railProgressTo(stationId) {
@@ -148,32 +180,37 @@
       if (id < currentId) { nodes[i].classList.add('is-done'); }
       else if (id === currentId) { nodes[i].classList.add('is-current'); }
     }
-    var labels = railStns.querySelectorAll('.rail__label');
-    for (var j = 0; j < labels.length; j++) {
-      var lid = parseInt(labels[j].getAttribute('data-label'), 10);
-      labels[j].classList.toggle('is-current', lid === currentId);
+    for (var j = 0; j < railLabelEls.length; j++) {
+      var lid = parseInt(railLabelEls[j].getAttribute('data-label'), 10);
+      railLabelEls[j].classList.toggle('is-current', lid === currentId);
     }
     buildRailList(currentId);
   }
 
   function buildRailList(currentId) {
+    var drawn = sq.getAttribute('data-loop') === 'drawn';
     var html = '';
     for (var i = 0; i < STATIONS.length; i++) {
       var id = STATIONS[i].id;
+      if (STATIONS[i].loop) { continue; }          /* never a seventh step */
       var status;
-      if (id === 7) {
-        status = (currentId === 7) ? 'current — documented procedure, not an observed event'
-                                   : (sq.getAttribute('data-loop') === 'drawn' ? 'the path returns here' : 'not yet reached');
-      } else if (id < currentId) { status = 'complete'; }
+      if (currentId === 7 || id < currentId) { status = 'complete'; }
       else if (id === currentId) { status = 'current'; }
       else { status = 'not yet reached'; }
       html += '<li>' + STATION_NAMES[id] + ' — ' + status + '</li>';
     }
     railList.innerHTML = html;
 
-    var summary = (sq.getAttribute('data-loop') === 'drawn')
+    /* Before the reveal the follow-up does not exist for the reader. */
+    if (drawn) {
+      railFollow.textContent = FOLLOWUP_TEXT + (currentId === 7 ? ' Currently here.' : '');
+    } else {
+      railFollow.textContent = '';
+    }
+
+    var summary = drawn
       ? 'Progress: six of six licensing steps complete, and the path returns to a status-expiration check.'
-      : 'Progress: step ' + currentId + ' of six licensing steps.';
+      : 'Progress: step ' + Math.min(currentId, 6) + ' of six licensing steps.';
     railLabel.textContent = summary;
   }
 
@@ -193,7 +230,12 @@
     scrim.hidden = false;
     if (opener) { opener.setAttribute('aria-expanded', 'true'); }
     var f = focusables(el);
-    if (f.length) { f[0].focus(); }
+    /* Focus the first control WITHOUT scrolling the sheet to it: on a short
+       viewport Close sits below the sheet's own scroll box, and a scrolling
+       focus opened every sheet with its title already scrolled out of view. */
+    if (f.length) { try { f[0].focus({ preventScroll: true }); } catch (e) { f[0].focus(); } }
+    var scroller = el.querySelector('.sheet__inner') || el;
+    scroller.scrollTop = 0;
     document.addEventListener('keydown', trapKey, true);
   }
 
@@ -202,10 +244,26 @@
     if (openSheetEl.classList.contains('receipt__body')) { openSheetEl.removeAttribute('data-open'); }
     else { openSheetEl.hidden = true; }
     scrim.hidden = true;
-    if (sheetOpener) { sheetOpener.setAttribute('aria-expanded', 'false'); sheetOpener.focus(); }
-    else if (btnPrimary && !btnPrimary.disabled) { btnPrimary.focus(); }
+    /* Focus returns to the opener WITHOUT an animated scroll. A focus()
+       that scrolls smoothly moves the sticky action bar for ~300ms, and a
+       tap that follows the Close tap immediately lands on the bar's
+       padding instead of the button. If the opener is entirely off-screen,
+       bring it in instantly so the next tap has a settled layout. */
+    var target = sheetOpener || ((btnPrimary && !btnPrimary.disabled) ? btnPrimary : null);
+    if (sheetOpener) { sheetOpener.setAttribute('aria-expanded', 'false'); }
+    if (target) { focusStill(target); }
     openSheetEl = null; sheetOpener = null;
     document.removeEventListener('keydown', trapKey, true);
+  }
+
+  function focusStill(el) {
+    try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); }
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (r.bottom < 0 || r.top > vh) {
+      try { el.scrollIntoView({ block: 'center', behavior: 'instant' }); }
+      catch (e2) { el.scrollIntoView(); }
+    }
   }
 
   function trapKey(e) {
@@ -262,18 +320,19 @@
   function updateChipGate() {
     if (state !== 's2') { return; }
     var n = chipCount();
+    btnPrimary.textContent = 'Continue';          /* an action, never a counter */
+    if (gateCount) { gateCount.textContent = n + ' of 3 resolved'; }
     if (n === 3) {
       btnPrimary.disabled = false;
-      btnPrimary.textContent = 'Continue';
       chipPrompt.textContent = 'The number has not changed. What it means has.';
       if (!flags.scopeSeen) {
         flags.scopeSeen = true;
         sq.setAttribute('data-gate', 'open');
         say('The three units are resolved. What this count covers is now shown below.');
+        track('standing_query_audit_complete');
       }
     } else {
       btnPrimary.disabled = true;
-      btnPrimary.textContent = n + ' of 3';
       chipPrompt.textContent = 'What does this number count? Resolve all three.';
     }
   }
@@ -299,7 +358,7 @@
     if (state === 's2') { updateChipGate(); }
     else {
       /* while the action bar is off-screen the button must not be tabbable */
-      var barGone = (state === 's3' || state === 's5' ||
+      var barGone = (state === 's3' || state === 's5' || state === 's8' ||
                      (state === 's4' && !reducedMotion()));
       btnPrimary.disabled = barGone;
       btnPrimary.textContent = PRIMARY_LABEL[state] || '';
@@ -348,6 +407,7 @@
     }
 
     if (s === 's6') {
+      track('standing_query_loop_reveal');
       sq.setAttribute('data-expiry', 'resolved');
       sq.setAttribute('data-loop', 'drawing');
       railLoop.style.strokeDashoffset = '0';
@@ -363,6 +423,59 @@
     }
 
     if (s === 's7') { sq.setAttribute('data-expiry', 'resolved'); }
+
+    if (s === 's8') { track('standing_query_complete'); }
+  }
+
+  /* ---------- keeping the active content in view ----------
+     Called only after USER-driven transitions (primary, back, restart),
+     never from the auto-advancing s3→s6 run: scrolling during the false
+     ending and the loop reveal would damage both. Honors reduced motion
+     by jumping instead of gliding. */
+  var NAV_GAP = 12;
+  function navOffset() {
+    var nav = document.querySelector('.nav-bar');
+    var h = nav ? nav.getBoundingClientRect().height : 68;
+    return Math.round(h) + NAV_GAP;
+  }
+  /* Every settle lands the EXHIBIT TOP under the fixed site nav, so the
+     Back / Composite case / Restart row is never occluded and the card sits
+     directly beneath it. s3 is entered by the reader's own tap at the gate:
+     the card must be on screen before the stamp lands, and after the gate
+     the reader has usually scrolled down through the scope text while the
+     page is about to shrink. Nothing scrolls after that until s7. */
+  var SETTLE_STATES = { s0: 1, s1: 1, s2: 1, s3: 1, s7: 1, s8: 1 };
+  function settle(s) {
+    if (!SETTLE_STATES[s]) { return; }
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    var top = sq.getBoundingClientRect().top + y - navOffset();
+    if (s === 's3') {
+      /* The stamp must land on screen. On a very short viewport the header
+         plus the full card do not both fit; yield toward the card by the
+         overflow, but never past the header's own height less a margin, so
+         the composite row stays partly visible. offsetHeight ignores the
+         scale transition the card is mid-way through. */
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      /* the "License issued" row only renders at s4: lay it out for the
+         measurement (same frame, no paint) so the yield covers the card
+         as it will be when the stamp lands */
+      var rowIssued = document.getElementById('rowIssued');
+      rowIssued.style.display = 'flex';
+      var cardH = card.offsetHeight;
+      rowIssued.style.display = '';
+      var cardBottom = card.getBoundingClientRect().top + y + cardH + 12;
+      var over = cardBottom - (top + vh);
+      if (over > 0) {
+        var hd = document.querySelector('.sq-header');
+        var cap = Math.max(0, (hd ? hd.offsetHeight : 0) - 28);
+        top += Math.min(over, cap);
+      }
+    }
+    if (top < 0) { top = 0; }
+    if (Math.abs(top - y) < 8) { return; }
+    try {
+      window.scrollTo({ top: top, behavior: reducedMotion() ? 'instant' : 'smooth' });
+    } catch (e) { window.scrollTo(0, top); }
   }
 
   /* internal advance that does not push history for auto transitions */
@@ -382,6 +495,7 @@
 
   function reset() {
     clearTimers();
+    var wasStarted = state !== 's0' || history.length > 0;
     if (openSheetEl) { closeSheet(); }
     state = 's0';
     history = [];
@@ -401,15 +515,17 @@
       chips[j].setAttribute('aria-expanded', 'false');
     }
     render();
+    if (wasStarted) { settle('s0'); }
   }
 
   /* ---------- events ---------- */
   btnPrimary.addEventListener('click', function () {
     if (state === 's8') { reset(); return; }
+    if (state === 's0') { track('standing_query_start'); }
     var i = ORDER.indexOf(state);
     if (state === 's2' && chipCount() < 3) { return; }
-    if (state === 's4' && reducedMotion()) { go('s6'); return; }
-    if (i < ORDER.length - 1) { go(ORDER[i + 1]); }
+    if (state === 's4' && reducedMotion()) { go('s6'); return; }   /* the reveal: no scroll */
+    if (i < ORDER.length - 1) { go(ORDER[i + 1]); settle(state); }
   });
 
   btnBack.addEventListener('click', function () {
@@ -425,9 +541,15 @@
       railLoop.style.strokeDashoffset = loopLen;
     }
     render();
+    settle(state);
   });
 
   btnRestart.addEventListener('click', reset);
+  if (btnRestartEnd) { btnRestartEnd.addEventListener('click', reset); }
+  var subs = document.querySelectorAll('[data-subscribe-cta]');
+  for (var u = 0; u < subs.length; u++) {
+    subs[u].addEventListener('click', function () { track('standing_query_subscribe_click'); });
+  }
   btnComp.addEventListener('click', function () {
     openSheet(document.getElementById('sheetComposite'), btnComp);
   });
@@ -469,6 +591,28 @@
     rmQuery.addEventListener('change', function () { render(); });
   }
 
+  /* ---------- article CTA ----------
+     Links carrying data-article-cta are hidden in the markup and only
+     shown once ARTICLE_URL has been supplied. */
+  function applyArticleUrl(url) {
+    var ctas = document.querySelectorAll('[data-article-cta]');
+    for (var a = 0; a < ctas.length; a++) {
+      var link = ctas[a];
+      if (url) {
+        link.href = url;
+        link.hidden = false;
+        if (!link.getAttribute('data-tracked')) {
+          link.setAttribute('data-tracked', 'true');
+          link.addEventListener('click', function () { track('standing_query_article_click'); });
+        }
+      } else {
+        link.hidden = true;
+        link.removeAttribute('href');
+      }
+    }
+  }
+  applyArticleUrl(ARTICLE_URL);
+
   /* ---------- boot ---------- */
   document.documentElement.setAttribute('data-enhanced', 'true');
   var allSheets = document.querySelectorAll('.sheet');
@@ -483,6 +627,11 @@
     get flags() { return flags; },
     go: go, reset: reset, skipHold: skipHold,
     gateOpen: function () { return sq.getAttribute('data-gate') === 'open'; },
-    loopDrawn: function () { return sq.getAttribute('data-loop') === 'drawn'; }
+    loopDrawn: function () { return sq.getAttribute('data-loop') === 'drawn'; },
+    articleUrl: function () { return ARTICLE_URL; },
+    /* test-only: prove the populated-URL presentation without editing the constant */
+    previewArticleUrl: function (u) { applyArticleUrl(u); },
+    navOffset: navOffset,
+    tracked: function () { return Object.keys(tracked); }
   };
 })();
