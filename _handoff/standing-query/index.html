@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Standing Query — interaction prototype</title>
+<meta name="description" content="Interaction prototype: one composite professional-license application moving through Iowa's SAVE verification system, stations 4 to 7.">
+<!-- Set the enhancement flag BEFORE first paint so the progressive rows are
+     never briefly visible on a cold load. The no-JS fallback is unaffected:
+     with scripting off this line never runs and the document renders whole. -->
+<script>document.documentElement.setAttribute('data-enhanced','true');</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="proto-banner">PROTOTYPE — stations 4–7 of 8. Not final art. No board is named and no dates are given: the production contains nothing that would supply them.</div>
+
+<section class="sq" id="sq" aria-label="The Standing Query: a composite license application moving through Iowa's SAVE verification system">
+
+  <header class="sq-header">
+    <button type="button" class="sq-back js-no-skip" id="btnBack" aria-label="Go back one step">←</button>
+    <button type="button" class="composite-label js-no-skip" id="btnComposite" aria-expanded="false" aria-controls="sheetComposite">
+      <span class="composite-label__tag">Composite case</span>
+      <span class="composite-label__sub">Assembled from Iowa's own procedures. Not an individual's record.</span>
+    </button>
+    <button type="button" class="sq-restart js-no-skip" id="btnRestart" aria-label="Restart the prototype">↺</button>
+  </header>
+
+  <!-- ===================== STAGE ===================== -->
+  <div class="sq-stage" id="stage">
+
+    <article class="card" id="card" aria-label="Composite case card">
+      <p class="card__mark">Composite — not an individual record</p>
+      <h2 class="card__title">Professional license application</h2>
+      <dl class="card__fields">
+        <div class="card__row">
+          <dt>Board</dt>
+          <dd>
+            <span class="card__placeholder">Board of “enter board name”</span>
+            <span class="m-caption">DIAL's own placeholder text, reproduced verbatim</span>
+          </dd>
+        </div>
+        <div class="card__row card__row--response" id="rowResponse">
+          <dt>SAVE response</dt>
+          <dd>
+            <span class="m-open-rule" role="img" aria-label="Not established">
+              <span class="m-open-rule__tick"></span><span class="m-open-rule__line"></span><span class="m-open-rule__tick"></span>
+            </span>
+            <span class="m-caption">counted as a transaction. The production contains no case-level results.</span>
+          </dd>
+        </div>
+        <div class="card__row card__row--issued" id="rowIssued">
+          <dt>License</dt>
+          <dd>issued</dd>
+        </div>
+        <div class="card__row card__row--expiry" id="rowExpiry">
+          <dt>Work authorization expires</dt>
+          <dd id="expiryValue">[before the license expires]</dd>
+        </div>
+      </dl>
+      <p class="card__stamp" id="cardStamp" aria-hidden="true">Issued</p>
+    </article>
+
+    <div class="rail-wrap">
+      <div class="rail-clip" id="railWrap">
+      <svg class="rail" id="rail" viewBox="0 0 320 118" role="img" aria-labelledby="railLabel" focusable="false">
+        <title id="railLabel">Progress rail</title>
+        <path id="railTrack" class="rail__track" d="M 20 34 L 292 34" fill="none"></path>
+        <path id="railProgress" class="rail__progress" d="M 20 34 L 292 34" fill="none"></path>
+        <path id="railLoop" class="rail__loop" d="M 292 34 C 310 34 310 62 292 62 L 168 62 C 150 62 150 79 168 79" fill="none"></path>
+        <g id="railStations"></g>
+      </svg>
+      </div>
+    </div>
+    <ol class="visually-hidden" id="railList" aria-label="Steps in this sequence"></ol>
+
+  </div><!-- /stage -->
+
+  <!-- ===================== RECEIPTS / 16,457 ===================== -->
+  <div class="receipts" id="receipts">
+    <p class="receipts__kicker"><span class="receipts__thumb-cap">this case</span> is one of</p>
+    <p class="receipts__number" id="bigNumber">16,457</p>
+    <!-- The unit travels with the number at all times. A reader who reads
+         nothing else must not be able to take this away as a count of people. -->
+    <p class="receipts__unit">initial verification transactions</p>
+    <p class="receipts__scope">recorded under benefit code 23, “Professional License,” from December 2025 through the report DHS prepared on 12 August 2026</p>
+
+    <dl class="slots" id="slots">
+      <div class="slot" data-slot="people"><dt>people</dt><dd data-slot-value>
+        <span class="m-unknown" role="img" aria-label="Not yet resolved"></span></dd></div>
+      <div class="slot" data-slot="cases"><dt>cases</dt><dd data-slot-value>
+        <span class="m-unknown" role="img" aria-label="Not yet resolved"></span></dd></div>
+      <div class="slot" data-slot="transactions"><dt>transactions</dt><dd data-slot-value>
+        <span class="m-unknown" role="img" aria-label="Not yet resolved"></span></dd></div>
+    </dl>
+
+    <p class="receipts__prompt" id="chipPrompt">What does this number count? Resolve all three.</p>
+    <div class="chips">
+      <button type="button" class="chip" data-chip="people" aria-controls="sheetPeople" aria-expanded="false">People</button>
+      <button type="button" class="chip" data-chip="cases" aria-controls="sheetCases" aria-expanded="false">Cases</button>
+      <button type="button" class="chip" data-chip="transactions" aria-controls="sheetTransactions" aria-expanded="false">Transactions</button>
+    </div>
+
+    <!-- Scope arrives inline when the gate opens. It does not take focus. -->
+    <div class="scope" id="scopeInline">
+      <h3 class="scope__head">What this count covers</h3>
+      <p><strong>One benefit code.</strong> These reports are filtered to benefit code 23, “Professional License.” The agency filter on their face is set to ALL — it is the benefit code that limits them. An Iowa account operating under a different benefit code would not appear in them at all.</p>
+      <div class="boundaries">
+        <div class="boundary boundary--filled"><span>Benefit code 23 — professional licensing</span><span class="boundary__val">16,457</span></div>
+      </div>
+      <p>The Iowa Department of Transportation separately told RDP that it uses SAVE when people apply for driver's licenses, through a different federally required pathway that does not run through DIAL.</p>
+      <p><strong>Additional verifications are separate.</strong> 98 across the period, counted in their own column. The two figures are never added.</p>
+      <p><strong>Third-step verifications are not reported at all.</strong> These reports carry no third-step column, so 16,457 is a floor on transactions, never a ceiling.</p>
+      <p><strong>August is partial.</strong> <span class="m-partial-edge">The report covers August 2026 and was prepared 12 August.</span> It does not print a data cutoff.</p>
+    </div>
+  </div>
+
+  <!-- ===================== NARRATIVE PANELS ===================== -->
+  <div class="panels" id="panels">
+
+    <section class="panel" data-panel="s0">
+      <p class="panel__body">You are following one professional-license application through Iowa's verification system. It has already been submitted.</p>
+    </section>
+
+    <section class="panel" data-panel="s1">
+      <h2 class="panel__head">A response comes back.</h2>
+      <p class="panel__body">The system returns what the federal government holds on that person's status. Some cases resolve here. Some do not.</p>
+      <div class="receipt" id="receiptAdditional">
+        <button type="button" class="receipt__trigger" aria-expanded="false" aria-controls="bodyAdditional">Additional verification</button>
+        <div class="receipt__body" id="bodyAdditional">
+          <p>Additional verification is the follow-up step when a case does not resolve immediately.</p>
+          <div class="measure-pair">
+            <div class="measure">
+              <span class="m-fact-bar">98</span>
+              <span class="m-caption">additional verifications recorded across the period, in their own column. Documented. They are never added to the 16,457.</span>
+            </div>
+            <div class="measure">
+              <span class="m-null-slot" role="img" aria-label="Not reported in these records"></span>
+              <span class="m-caption">third-step verifications — these reports carry no third-step column. Not reported in these records.</span>
+            </div>
+          </div>
+          <button type="button" class="btn btn--ghost receipt__close">Close</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- The completed beat. This is the ending the reader is meant to believe. -->
+    <section class="panel" data-panel="s4">
+      <p class="panel__end">Application complete.</p>
+      <span class="m-end-rule" aria-hidden="true"></span>
+    </section>
+
+    <section class="panel" data-panel="s6">
+      <p class="panel__reveal" id="loopCopy">The file stays open.</p>
+    </section>
+
+    <section class="panel" data-panel="s7">
+      <h2 class="panel__head">The template is written for the expiry.</h2>
+      <p class="panel__body">DIAL's staff template addresses licensees whose work authorization or admission period is scheduled to expire. It has two selectable paragraphs — one for when that date falls before the license expires, one for when it falls after — and both carry the same warning.</p>
+      <p class="panel__body">A staff note on the same page contemplates running another SAVE check after that date. The note is marked <em>“DO NOT USE THIS YET UNTIL LEGAL APPROVES WORDING.”</em></p>
+
+      <p class="legend-chip"><span class="legend-chip__swatch" aria-hidden="true"></span> Outline = documented procedure, not an observed event.</p>
+
+      <div class="receipt" id="receiptLetter">
+        <button type="button" class="receipt__trigger" aria-expanded="false" aria-controls="bodyLetter">The paragraph DIAL sends</button>
+        <div class="receipt__body receipt__body--paper" id="bodyLetter">
+          <p class="quote">“If your current immigration status is not maintained, your license status may be affected, including revocation of your license.”</p>
+          <p class="attrib">DIAL staff template, released 20 August 2026 under Iowa Code chapter 22. One paragraph of the template was withheld as still under legal review.</p>
+          <!-- The limitation travels with the quote. It is never seen alone. -->
+          <p class="attrib attrib--limit">This is a stated consequence in a notice template — a procedure and a possibility. No produced record shows it happening.</p>
+          <button type="button" class="btn btn--ghost receipt__close">Close</button>
+        </div>
+      </div>
+
+      <!-- ALWAYS VISIBLE. Never collapsed, never a footnote. -->
+      <div class="limit-block" id="limitBlock">
+        <p class="limit-block__head">What the records don't show</p>
+        <p class="limit-block__lead">No record produced so far shows any Iowa professional license denied, suspended, or revoked because of a SAVE result.</p>
+        <p class="limit-block__body">Iowa's own sworn filing described more than 350 licenses within DIAL that could not be verified and therefore could not be issued — a stall, not a revocation. This is Batch 001 of a rolling production, and the absence of a produced record is not proof that nothing happened.</p>
+      </div>
+    </section>
+
+    <section class="panel" data-panel="s8">
+      <h2 class="panel__head">End of prototype.</h2>
+      <p class="panel__body">This covered stations 4 through 7 of 8.</p>
+      <p class="panel__body panel__body--muted">Not shown: how a case enters the system, the agency architecture, or the withheld paragraph.</p>
+      <div class="limit-block limit-block--ror">
+        <p class="limit-block__head">Right of response</p>
+        <p class="limit-block__body">DIAL and USCIS were sent detailed questions on 31 August 2026, with a response requested by 4 September. This build carries no response because none had been received when it was made. The published version must state the outcome, and silence before the deadline is not a refusal.</p>
+      </div>
+    </section>
+
+  </div><!-- /panels -->
+
+  <div class="sq-action">
+    <button type="button" class="btn" id="btnPrimary">Begin</button>
+  </div>
+
+  <p class="visually-hidden" id="live" aria-live="polite" aria-atomic="true"></p>
+
+</section>
+
+<!-- ===================== SHEETS =====================
+     No `hidden` attribute in the markup: JS hides these on boot.
+     Without JS they render inline as ordinary document sections,
+     so the no-JS fallback loses no evidence.
+     ================================================== -->
+<div class="sheet" id="sheetComposite" role="dialog" aria-modal="true" aria-labelledby="sheetCompositeTitle">
+  <div class="sheet__inner">
+    <h2 id="sheetCompositeTitle">This is not a real person's case</h2>
+    <p>No case-level records have been released in this production. RDP has not seen any individual's SAVE case.</p>
+    <p>This sequence is assembled from Iowa's executed agreements, its own staff templates, the monthly transaction reports DHS prepared and Iowa released, and a sworn declaration filed in federal court. Every step shown is documented as procedure. None of it is a record of a particular person.</p>
+    <p>The board field reproduces DIAL's own placeholder text. No board is named, no dates are given, and there is no case number — because the production contains nothing that would supply them.</p>
+    <button type="button" class="btn btn--ghost sheet__close">Close</button>
+  </div>
+</div>
+
+<div class="sheet" id="sheetPeople" role="dialog" aria-modal="true" aria-labelledby="sheetPeopleTitle">
+  <div class="sheet__inner">
+    <h2 id="sheetPeopleTitle">People: not established</h2>
+    <p>The reports count transactions. They do not identify unique applicants, so they cannot establish how many people were checked.</p>
+    <p>RDP asked USCIS whether one person can generate more than one initial verification — through resubmission, renewal, or a corrected entry. That question is unanswered, and no produced record settles it either way.</p>
+    <button type="button" class="btn btn--ghost sheet__close">Close</button>
+  </div>
+</div>
+
+<div class="sheet" id="sheetCases" role="dialog" aria-modal="true" aria-labelledby="sheetCasesTitle">
+  <div class="sheet__inner">
+    <h2 id="sheetCasesTitle">Cases: a different unit</h2>
+    <p class="m-sworn-slip">Aaron Baack, DIAL's interim director, swore on 1 July 2026 that the State had “submitted more than 8,150 cases” through the SAVE system since December 2025.<span class="m-sworn-slip__rule"></span><span class="m-sworn-slip__foot">Sworn testimony — not established by records</span></p>
+    <p>Adding the released reports for December through June — the period ending the day before he signed — gives <strong>8,174 initial verifications</strong>. That is a shorter span than the 16,457 above, which runs through the August report.</p>
+    <p>The two figures count differently defined units. They corroborate each other. They are not the same number.</p>
+    <button type="button" class="btn btn--ghost sheet__close">Close</button>
+  </div>
+</div>
+
+<div class="sheet" id="sheetTransactions" role="dialog" aria-modal="true" aria-labelledby="sheetTransactionsTitle">
+  <div class="sheet__inner">
+    <h2 id="sheetTransactionsTitle">Transactions: documented</h2>
+    <p>This is what the reports count: initial verifications, generated by the Department of Homeland Security's SAVE program and released by Iowa under its open-records law.</p>
+    <p>Seven of the eleven months were prepared twice, on two different dates — 13 July and 12 August 2026. Every month matches.</p>
+    <button type="button" class="btn btn--ghost sheet__close">Close</button>
+  </div>
+</div>
+
+<div class="sheet__scrim" id="scrim" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
