@@ -66,11 +66,20 @@
 
 /* ---------- shell ---------- */
 .sq{
-  max-width:560px; margin:0 auto; min-height:100svh;
+  max-width:560px; margin:0 auto;
   display:flex; flex-direction:column;
   padding:0 20px 28px;
   position:relative;
 }
+/* No min-height: the primary action follows the content it belongs to.
+   A full-viewport minimum left a large empty band above the bar on phones.
+   The one exception is the false ending and the reveal (s3–s6): the exhibit
+   holds the fold so the section that follows does not intrude on
+   "Application complete." or on the loop being drawn. */
+.sq[data-state="s3"],
+.sq[data-state="s4"],
+.sq[data-state="s5"],
+.sq[data-state="s6"]{ min-height:100svh; }
 
 /* ---------- header ---------- */
 .sq-header{
@@ -141,7 +150,7 @@
 .sq[data-state="s8"] .card__stamp{ opacity:1; transform:rotate(-6deg) scale(1); }
 
 /* C — THE CONTAINMENT GESTURE.
-   The shrink alone did not communicate "this case is one of 16,457": the rail
+   The shrink alone did not tie the thumbnail to the count: the rail
    sat between the thumbnail and the count, so they read as two unrelated
    blocks. At s2 the stage stops being a box (display:contents) so the card,
    the count and the rail can be ordered directly — thumbnail immediately
@@ -291,6 +300,8 @@
 /* no-JS: bodies are visible inline. Enhanced: hidden until opened as a sheet. */
 .receipt__body{ padding:12px 2px 0; font-size:14px; color:var(--on-ink); }
 .receipt__body p{ margin:0 0 10px; }
+.receipt__title{ margin:0 0 10px; font-size:17px; font-weight:600; line-height:1.3; }
+.receipt__body--paper .receipt__title{ font-family:var(--ff-ui); color:#1b1b18; }
 [data-enhanced="true"] .receipt__body{ display:none; }
 [data-enhanced="true"] .receipt__body[data-open="true"]{
   display:block; position:fixed; left:0; right:0; bottom:0; z-index:70;
@@ -432,6 +443,9 @@
 .sheet h2{ margin:0 0 10px; font-size:17px; font-weight:600; line-height:1.3; }
 .sheet p{ margin:0 0 12px; font-size:14px; line-height:1.55; }
 .sheet__scrim{ position:fixed; inset:0; background:rgba(6,8,11,.62); z-index:65; }
+/* a closed backdrop or receipt must be non-hit-testable the same instant it closes */
+.sheet__scrim[hidden],.sheet[hidden]{ display:none!important; pointer-events:none; }
+[data-enhanced="true"] .receipt__body:not([data-open="true"]){ display:none!important; pointer-events:none; }
 
 /* ---------- progressive rows: CSS-owned, so there is no cold-paint flash ---------- */
 [data-enhanced="true"] .card__row--response,
@@ -518,6 +532,11 @@ html:not([data-enhanced="true"]) .card__row--expiry dd{ opacity:1; letter-spacin
   .rail-wrap{ grid-column:1 / -1; margin-top:26px; }
   .panels{ max-width:640px; }
   .sheet__inner{ max-width:640px; border-radius:14px; margin-bottom:24px; }
+  /* receipt sheets take the same constrained, centred width as the other dialogs */
+  [data-enhanced="true"] .receipt__body[data-open="true"]{
+    max-width:640px; margin-left:auto; margin-right:auto; bottom:24px; border-radius:14px;
+    border:1px solid var(--line);
+  }
 }
 
 /* ---------- focus (scoped to the exhibit) ---------- */

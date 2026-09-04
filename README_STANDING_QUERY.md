@@ -130,20 +130,65 @@ editor's instruction.
    shows it. `buildRail()` now sets the initial state with transitions
    suppressed. The suite samples the path four times during the first second.
 3. **Rail label for station 5 reads `16,457 transactions`** (was a bare
-   `16,457`), and the `<ol>` mirror reads "One of 16,457 transactions". The
-   number never appears without its unit.
+   `16,457`), and the `<ol>` mirror reads "16,457 initial verification
+   transactions". The number never appears without its unit.
 4. **Dates in the exhibit use the site's AP style** (`Aug. 12, 2026`, not
    `12 August 2026`). Two exceptions: "December 2025" and "December through
    June" were already month-only.
 5. **A second, page-level copy of the limitation** ("No record produced so far
    shows any Iowa professional license denied, suspended, or revoked because
-   of a SAVE result.") sits in the about section, always visible in every state.
-   The station-7 copy is unchanged. The suite asserts the lead appears at least
-   twice and that neither copy is collapsible.
+   of a SAVE result.") sits in the about section under the heading "Evidence
+   limit", always visible in every state and deliberately quieter than the
+   in-exhibit copy. The station-7 copy is unchanged, and the same complete
+   sentence now sits inside the revocation-letter modal. The suite asserts the
+   lead appears at least three times and that no copy is collapsible.
 6. **Custom analytics events** on the site-standard GoatCounter counter only
    (`standing_query_start`, `_audit_complete`, `_loop_reveal`, `_complete`,
    `_article_click`). Called after transitions, once per page load, in
    `try/catch`; no-op when the counter is absent. No new vendor.
+
+### Browser-review patch (second push to PR #205)
+
+7. **Positioning after the reader's own taps.** Entering s1, s2 and s3 brings
+   the card under the site nav; s7 and s8 bring their panel under the nav;
+   Restart returns to the top of the interactive. The scroll is smooth, or an
+   instant jump under `prefers-reduced-motion`. Nothing scrolls during the
+   auto-advancing s3→s6 run: the s3 positioning happens at the gate tap itself,
+   so the stamp lands on a card that is on screen. Back landing on those states
+   positions the same way. Focus is never moved onto revealed explanatory
+   content.
+8. **Immediate Close → Continue.** Diagnosed on touch input at 1440×900 with the
+   letter sheet open and the page scrolled behind it: closing returned focus to
+   the trigger, the browser smooth-scrolled the off-screen trigger into view
+   (the site's `scroll-smooth`), the sticky bar moved during the glide, and an
+   immediate tap landed on the bar's padding. `closeSheet()` now returns focus
+   with `preventScroll` and jumps instantly only when the opener is entirely
+   off-screen. The closed receipt and backdrop are `display:none` with
+   `pointer-events:none` in the same task. The suite reproduces the case on
+   touch at 390×844 and 1440×900, s1 and s7, scrolled and unscrolled, and
+   asserts one tap advances.
+9. **Accessible progress mirror.** The `<ol>` lists six licensing steps only.
+   The status-expiration follow-up is never a seventh item: after the loop is
+   revealed it is appended in a separate visually-hidden paragraph as
+   "Post-issuance follow-up … a contemplated recheck, documented procedure, not
+   an observed event." The summary never says "step 7".
+10. **Receipt sheets are dialogs.** "Additional verification" and "The paragraph
+    DIAL sends" carry `role="dialog"`, `aria-modal`, a titled heading, the
+    shared backdrop, Escape, focus trap and focus return, and the same
+    constrained centred width as the other sheets at ≥1024px. Without JS they
+    still render inline.
+11. **Mobile whitespace.** The full-viewport `min-height` on the exhibit is
+    gone: Begin and the later primary actions follow their content. The one
+    exception is the false ending: during s3–s5, while the bar is gone, the
+    exhibit holds the fold so the section below does not intrude on
+    "Application complete."
+12. **Unit-safe framing.** "this case is one of / 16,457" is gone from the
+    kicker, the live region and the mirror. The count is framed as "The reports
+    record 16,457 initial verification transactions." One composite case is not
+    presented as one transaction.
+13. **Editor-supplied sentence** replaces "Seven of the eleven months…":
+    "Seven monthly reports—December through June—were independently pulled
+    twice, on July 13 and Aug. 12, 2026. Every month matches."
 
 ### Exact copy changed because of the Sept. 4 USCIS response
 
@@ -175,17 +220,14 @@ is stated as open, not answered.
   "Close"), the inline scope delivery without focus transfer, the always-visible
   station-7 limitation, the two-branch template statement and the
   "DO NOT USE THIS YET" marking.
-- The Transactions sheet's sentence "Seven of the eleven months were prepared
-  twice…" is carried over verbatim from the reviewed prototype. **Flag for the
-  editor:** December 2025 through August 2026 is nine months, not eleven. Not
-  altered here because the source material for that count was not in the
-  handoff.
+- `ARTICLE_URL` stays empty; both "Read the full investigation →" CTAs stay
+  hidden until the editor supplies the final URL.
 
 ---
 
 ## Test results (this build)
 
-`node scripts/test_standing_query.js` — **297/297 passed, Chromium only.**
+`node scripts/test_standing_query.js` — **362/362 passed, Chromium only.**
 
 Engines: Chromium 141 (Playwright build). Firefox and WebKit could not be
 installed in the build environment (browser downloads are blocked by the
@@ -198,29 +240,42 @@ suite (`_handoff/standing-query/check.js`) also passed on Chromium, 160/160
 Viewports swept at s0, s2, s6, s7: 320×568, 375×667, 390×844, 430×932,
 768×1024, 1024×768, 1440×900 — horizontal overflow, rail-label collision,
 limitation trapped under the bar, pre-reveal telegraph, rail actually rendered,
-sticky bar pinned while the exhibit is in view, bar not covering the footer.
+sticky bar pinned while the exhibit extends past the viewport, bar not covering
+the footer.
 
 Modes: normal sequence · rapid interaction/abuse · keyboard only · reduced
-motion · JavaScript disabled · cold first paint (app.js blocked).
+motion · JavaScript disabled · cold first paint (app.js blocked) · touch input
+for the close→continue regression.
 
 Presence **and absence** guards, among others: ISSUED absent at boot, s1, s2, s3;
 loop absent (attribute, path, station, label, reveal copy) until s6 and again
 after back/reset; future rail band not visible before reveal; expiry row absent
 at the completed beat; composite card free of dates, numbers, names, images;
-limitation visible in every state and never collapsible; gate not bypassable
-by 12 forced taps or 12 Enter presses; no `16,555`, no `Board of Nursing`, no
-`clearinghouse director`, no `Secretary of State`, no obsolete "through Aug. 12"
-/ "does not print a data cutoff" wording, no "unanswered", no "USCIS did not
-respond", no "declined to comment", no "refused to respond"; `ARTICLE_URL` never
-rendered as text; only `gc.zgo.at/count.js` leaves the origin; no storage.
+limitation visible in every state and never collapsible, and present verbatim
+inside the letter modal; gate not bypassable by 12 forced taps or 12 Enter
+presses; no `16,555`, no `Board of Nursing`, no `clearinghouse director`, no
+`Secretary of State`, no obsolete "through Aug. 12" / "does not print a data
+cutoff" wording, no "unanswered", no "USCIS did not respond", no "declined to
+comment", no "refused to respond", no "is one of 16,457", no "step 7 of";
+`ARTICLE_URL` never rendered as text; only `gc.zgo.at/count.js` leaves the
+origin; no storage.
+
+Added in the browser-review patch: positioning on s1/s2/s3/s7/s8/Restart at
+390×844 and 1440×900 with a programmatic-scroll counter proving no scroll from
+s3 through s6; the stamp on screen when ISSUED lands after the reader scrolled
+into the scope; a clean fold at s4–s6 on 390×844; instant positioning under
+reduced motion; the close→continue regression on touch (s1 and s7, scrolled and
+unscrolled, both sizes) with a synchronous non-hit-testable check; six-step
+mirror at s0/s1/s2/s4/s5, follow-up appended at s6, marked current at s7,
+withdrawn on reset; dialog semantics, backdrop, width, focus trap, backdrop
+click, Escape and focus return for both receipt sheets.
 
 Repository checks: `verify_asset_refs.py`, `audit_sitemap.py`,
 `audit_analytics.py` — all pass.
 
-Screenshots inspected by eye: s0, s1, s2 gate, s2 resolved (full page), s4
-issued, s5 hold, s6 loop, s7 (full page), s7 letter sheet, s8 (full page),
-reduced-motion s4 and s6, no-JS (full page), cold paint, desktop false end at
-1440×900, and the fresh first paint at all seven viewports.
+Screenshots inspected by eye in this pass: fresh first paint at 320×568,
+390×844, 1024×768 and 1440×900; the click-driven false ending at 390×844; the
+letter modal with the complete limitation; s6 loop; s7 and s8 full page.
 
 ---
 
@@ -274,6 +329,5 @@ rebalancing before art, not after.
 
 - [ ] `ARTICLE_URL` set.
 - [ ] Right-of-response block resolved with the editor's exact wording.
-- [ ] "Seven of the eleven months" checked against the report set.
 - [ ] Decide whether `_handoff/standing-query/` should be removed from the
       publish directory after merge (it is `noindex` but still served).

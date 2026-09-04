@@ -48,6 +48,7 @@
   var railLoop  = document.getElementById('railLoop');
   var railStns  = document.getElementById('railStations');
   var railList  = document.getElementById('railList');
+  var railFollow= document.getElementById('railFollowup');
   var railLabel = document.getElementById('railLabel');
   var chipPrompt  = document.getElementById('chipPrompt');
 
@@ -69,9 +70,11 @@
   ];
   var STATION_NAMES = {
     1: 'Application', 2: 'Submission', 3: 'Clearinghouse',
-    4: 'Response', 5: 'One of 16,457 transactions', 6: 'License issued',
-    7: 'Status expires — contemplated recheck'
+    4: 'Response', 5: '16,457 initial verification transactions', 6: 'License issued'
   };
+  /* The post-issuance follow-up is NOT a seventh step. It is announced only
+     after the loop has been revealed, outside the six-step list. */
+  var FOLLOWUP_TEXT = 'Post-issuance follow-up: the path returns to a status-expiration check — a contemplated recheck, documented procedure, not an observed event.';
 
   var LINE_X0 = 20, LINE_X1 = 292;
   var CARD_S2_SCALE = 0.34;   /* must match the scale() in styles.css */
@@ -101,7 +104,7 @@
   var ANNOUNCE = {
     s0: 'A composite professional-license application. Not an individual’s record.',
     s1: 'Response. A response has come back. Evidence available: additional verification.',
-    s2: 'This case is one of 16,457 initial verifications. Three questions to resolve.',
+    s2: 'The reports record 16,457 initial verification transactions. Three questions to resolve.',
     s3: '',
     s4: 'License issued. Application complete.',
     s5: '',
@@ -194,23 +197,29 @@
   }
 
   function buildRailList(currentId) {
+    var drawn = sq.getAttribute('data-loop') === 'drawn';
     var html = '';
     for (var i = 0; i < STATIONS.length; i++) {
       var id = STATIONS[i].id;
+      if (STATIONS[i].loop) { continue; }          /* never a seventh step */
       var status;
-      if (id === 7) {
-        status = (currentId === 7) ? 'current — documented procedure, not an observed event'
-                                   : (sq.getAttribute('data-loop') === 'drawn' ? 'the path returns here' : 'not yet reached');
-      } else if (id < currentId) { status = 'complete'; }
+      if (currentId === 7 || id < currentId) { status = 'complete'; }
       else if (id === currentId) { status = 'current'; }
       else { status = 'not yet reached'; }
       html += '<li>' + STATION_NAMES[id] + ' — ' + status + '</li>';
     }
     railList.innerHTML = html;
 
-    var summary = (sq.getAttribute('data-loop') === 'drawn')
+    /* Before the reveal the follow-up does not exist for the reader. */
+    if (drawn) {
+      railFollow.textContent = FOLLOWUP_TEXT + (currentId === 7 ? ' Currently here.' : '');
+    } else {
+      railFollow.textContent = '';
+    }
+
+    var summary = drawn
       ? 'Progress: six of six licensing steps complete, and the path returns to a status-expiration check.'
-      : 'Progress: step ' + currentId + ' of six licensing steps.';
+      : 'Progress: step ' + Math.min(currentId, 6) + ' of six licensing steps.';
     railLabel.textContent = summary;
   }
 
@@ -239,10 +248,26 @@
     if (openSheetEl.classList.contains('receipt__body')) { openSheetEl.removeAttribute('data-open'); }
     else { openSheetEl.hidden = true; }
     scrim.hidden = true;
-    if (sheetOpener) { sheetOpener.setAttribute('aria-expanded', 'false'); sheetOpener.focus(); }
-    else if (btnPrimary && !btnPrimary.disabled) { btnPrimary.focus(); }
+    /* Focus returns to the opener WITHOUT an animated scroll. A focus()
+       that scrolls smoothly moves the sticky action bar for ~300ms, and a
+       tap that follows the Close tap immediately lands on the bar's
+       padding instead of the button. If the opener is entirely off-screen,
+       bring it in instantly so the next tap has a settled layout. */
+    var target = sheetOpener || ((btnPrimary && !btnPrimary.disabled) ? btnPrimary : null);
+    if (sheetOpener) { sheetOpener.setAttribute('aria-expanded', 'false'); }
+    if (target) { focusStill(target); }
     openSheetEl = null; sheetOpener = null;
     document.removeEventListener('keydown', trapKey, true);
+  }
+
+  function focusStill(el) {
+    try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); }
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (r.bottom < 0 || r.top > vh) {
+      try { el.scrollIntoView({ block: 'center', behavior: 'instant' }); }
+      catch (e2) { el.scrollIntoView(); }
+    }
   }
 
   function trapKey(e) {
@@ -406,6 +431,38 @@
     if (s === 's8') { track('standing_query_complete'); }
   }
 
+  /* ---------- keeping the active content in view ----------
+     Called only after USER-driven transitions (primary, back, restart),
+     never from the auto-advancing s3→s6 run: scrolling during the false
+     ending and the loop reveal would damage both. Honors reduced motion
+     by jumping instead of gliding. */
+  var NAV_OFFSET = 72;   /* matches html{scroll-padding-top} */
+  var SETTLE_ANCHOR = {
+    s0: function () { return sq; },
+    s1: function () { return card; },
+    s2: function () { return card; },
+    /* s3 is entered by the reader's own tap at the gate. The card must be on
+       screen BEFORE the stamp lands at s4: after the gate the reader has
+       usually scrolled down through the scope text, and the page shrinks
+       when the receipts leave. Nothing scrolls after this point until s7. */
+    s3: function () { return card; },
+    s7: function () { return document.querySelector('.panel[data-panel="s7"]'); },
+    s8: function () { return document.querySelector('.panel[data-panel="s8"]'); }
+  };
+  function settle(s) {
+    var pick = SETTLE_ANCHOR[s];
+    if (!pick) { return; }
+    var el = pick();
+    if (!el) { return; }
+    var top = el.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop) - NAV_OFFSET;
+    if (top < 0) { top = 0; }
+    var delta = top - (window.pageYOffset || document.documentElement.scrollTop);
+    if (Math.abs(delta) < 24) { return; }
+    try {
+      window.scrollTo({ top: top, behavior: reducedMotion() ? 'instant' : 'smooth' });
+    } catch (e) { window.scrollTo(0, top); }
+  }
+
   /* internal advance that does not push history for auto transitions */
   function go2(next) {
     clearTimers();
@@ -423,6 +480,7 @@
 
   function reset() {
     clearTimers();
+    var wasStarted = state !== 's0' || history.length > 0;
     if (openSheetEl) { closeSheet(); }
     state = 's0';
     history = [];
@@ -442,6 +500,7 @@
       chips[j].setAttribute('aria-expanded', 'false');
     }
     render();
+    if (wasStarted) { settle('s0'); }
   }
 
   /* ---------- events ---------- */
@@ -450,8 +509,8 @@
     if (state === 's0') { track('standing_query_start'); }
     var i = ORDER.indexOf(state);
     if (state === 's2' && chipCount() < 3) { return; }
-    if (state === 's4' && reducedMotion()) { go('s6'); return; }
-    if (i < ORDER.length - 1) { go(ORDER[i + 1]); }
+    if (state === 's4' && reducedMotion()) { go('s6'); return; }   /* the reveal: no scroll */
+    if (i < ORDER.length - 1) { go(ORDER[i + 1]); settle(state); }
   });
 
   btnBack.addEventListener('click', function () {
@@ -467,6 +526,7 @@
       railLoop.style.strokeDashoffset = loopLen;
     }
     render();
+    settle(state);
   });
 
   btnRestart.addEventListener('click', reset);
@@ -544,6 +604,7 @@
     gateOpen: function () { return sq.getAttribute('data-gate') === 'open'; },
     loopDrawn: function () { return sq.getAttribute('data-loop') === 'drawn'; },
     articleUrl: function () { return ARTICLE_URL; },
+    navOffset: NAV_OFFSET,
     tracked: function () { return Object.keys(tracked); }
   };
 })();

@@ -88,6 +88,13 @@ const BANNED_TEXT = [
   ['16,457 people', 'the number must never read as people'],
   ['16,457 Iowans', 'the number must never read as people'],
   ['End of prototype', 'prototype copy'],
+  ['is one of 16,457', 'one composite case is not one-to-one with one transaction'],
+  ['this case is one of', 'unit-unsafe framing'],
+  ['This case is one of', 'unit-unsafe framing'],
+  ['One of 16,457', 'unit-unsafe framing in the accessible mirror'],
+  ['Seven of the eleven', 'replaced by the editor-supplied sentence'],
+  ['step 7 of', 'the follow-up is not a seventh step'],
+  ['7 of 7', 'the follow-up is not a seventh step'],
   ['PROTOTYPE', 'prototype banner must not ship'],
   ['ARTICLE_URL', 'the placeholder constant must never render as text']
 ];
@@ -100,7 +107,9 @@ const REQUIRED_TEXT = [
   ['enter board name', "DIAL's own placeholder, not an invented board"],
   ['two selectable paragraphs', 'the warning is not conditional on the ordering'],
   ['never added', '98 is guarded against addition'],
-  ['No produced record shows it happening', 'the limitation travels with the quote'],
+  ['The reports record 16,457 initial verification transactions', 'unit-safe framing of the count'],
+  ['Seven monthly reports—December through June—were independently pulled twice, on July 13 and Aug. 12, 2026. Every month matches.', 'editor-supplied sentence, verbatim'],
+  ['Evidence limit', 'the page-level limitation callout'],
   ['through Aug. 11', 'USCIS: a mid-month report carries data through the day before it is run'],
   ['prepared Aug. 12, 2026', 'preparation date, stated as such'],
   ['one transaction', 'USCIS: an initial verification is one transaction'],
@@ -453,7 +462,10 @@ const LIMIT_VISIBLE = () => {
     return cs.fill === 'none' && cs.strokeDasharray !== 'none';
   }));
   chk('s6: rail summary mentions the return', (await page.textContent('#railLabel')).indexOf('returns') > -1);
-  chk('s6: ol mirror names the loop as procedure, not event', (await page.textContent('#railList')).indexOf('documented procedure') > -1 || (await page.textContent('#railList')).indexOf('returns here') > -1);
+  chk('s6: follow-up announced outside the six-step list, as procedure not event', await page.evaluate(() => {
+    const f = document.getElementById('railFollowup').textContent;
+    return document.querySelectorAll('#railList li').length === 6 && f.indexOf('Post-issuance follow-up') > -1 && f.indexOf('not an observed event') > -1;
+  }));
   await shot(page, '08-s6-loop.png');
 
   /* --- s7: the sensitive station --- */
@@ -483,7 +495,12 @@ const LIMIT_VISIBLE = () => {
   await page.click('#receiptLetter .receipt__trigger'); await page.waitForTimeout(260);
   const letter = await page.textContent('#bodyLetter');
   chk('s7: the quote is verbatim', letter.indexOf(VERBATIM_QUOTE) > -1);
-  chk('s7: the limitation travels INSIDE the quote sheet', letter.indexOf('No produced record shows it happening') > -1);
+  chk('s7: the COMPLETE limitation sits INSIDE the quote modal, verbatim', letter.indexOf(LIMIT_LEAD) > -1);
+  chk('s7: that limitation is visible while the modal is open', await page.evaluate(q => {
+    const p = [...document.querySelectorAll('#bodyLetter p')].find(x => x.textContent.indexOf(q) > -1);
+    return !!p && getComputedStyle(p).display !== 'none' && p.getBoundingClientRect().height > 10 &&
+      document.getElementById('bodyLetter').getAttribute('data-open') === 'true';
+  }, LIMIT_LEAD));
   chk('s7: the withheld paragraph is disclosed', letter.indexOf('withheld') > -1);
   chk('s7: the always-visible limit block remains visible while the letter is open', await page.evaluate(() => {
     const el = document.getElementById('limitBlock');
@@ -563,11 +580,15 @@ const LIMIT_VISIBLE = () => {
   for (const [phrase, why] of BANNED_TEXT) chk('editorial: NEVER "' + phrase + '"', allText.indexOf(phrase) === -1, why);
   for (const [phrase, why] of REQUIRED_TEXT) chk('editorial: carries "' + phrase + '"', allText.indexOf(phrase) > -1, why);
   chk('editorial: 16,457 never adjacent to 98 as a sum', !/16,457\s*\+\s*98|98\s*\+\s*16,457/.test(allText));
-  chk('editorial: limitation lead appears at least twice (station 7 + page)', allText.split(LIMIT_LEAD).length >= 3);
-  chk('editorial: revocation quote never appears without its limitation nearby', await page.evaluate(q => {
+  chk('editorial: limitation lead appears at least three times (station 7, letter modal, page)', allText.split(LIMIT_LEAD).length >= 4);
+  chk('editorial: revocation quote never appears without the complete limitation in the same container', await page.evaluate(([q, lim]) => {
     const hits = [...document.querySelectorAll('p')].filter(p => p.textContent.indexOf(q) > -1);
-    return hits.length >= 1 && hits.every(p => (p.parentElement.textContent.indexOf('No produced record shows it happening') > -1));
-  }, VERBATIM_QUOTE));
+    return hits.length >= 1 && hits.every(p => (p.parentElement.textContent.indexOf(lim) > -1));
+  }, [VERBATIM_QUOTE, LIMIT_LEAD]));
+  chk('editorial: live region frames the count unit-safely at s2', await page.evaluate(() => {
+    window.__sq.reset(); window.__sq.go('s2');
+    return document.getElementById('live').textContent.indexOf('The reports record 16,457 initial verification transactions') > -1;
+  }));
   chk('editorial: composite sheet says no case-level records were released', allText.indexOf('No case-level records have been released') > -1);
   await ctx.close();
 
@@ -677,6 +698,184 @@ const LIMIT_VISIBLE = () => {
   chk('no-JS: no horizontal overflow', await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1));
   chk('no-JS: site nav and footer still render', await page.evaluate(() => !!document.querySelector('nav.nav-bar') && !!document.querySelector('footer')));
   await shot(page, '15-nojs.png', { fullPage: true });
+  await ctx.close();
+
+
+  /* ======================= 7b. POSITIONING ======================= */
+  const scrollProbe = () => {
+    window.__scrolls = 0;
+    const st = window.scrollTo.bind(window);
+    window.scrollTo = function () { window.__scrolls++; return st.apply(window, arguments); };
+    const siv = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = function () { window.__scrolls++; return siv.apply(this, arguments); };
+  };
+  const anchorOk = (sel) => {
+    const el = document.querySelector(sel);
+    const top = el.getBoundingClientRect().top;
+    const off = window.__sq.navOffset;
+    const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+    return (top >= off - 6 && top <= off + 48) || (atEnd && top >= 0 && top < window.innerHeight);
+  };
+  for (const [name, w, h] of [['390x844', 390, 844], ['1440x900', 1440, 900]]) {
+    ctx = await browser.newContext({ viewport: { width: w, height: h } });
+    await guard(ctx, []);
+    page = await ctx.newPage();
+    await page.goto(URL); await page.waitForTimeout(250);
+    await page.evaluate(scrollProbe);
+    await page.click('#btnPrimary'); await page.waitForTimeout(900);
+    chk('position ' + name + ': s1 brings the card into view under the nav', await page.evaluate(anchorOk, '#card'),
+        String(await page.evaluate(() => Math.round(document.getElementById('card').getBoundingClientRect().top))));
+    await page.click('#btnPrimary'); await page.waitForTimeout(900);
+    chk('position ' + name + ': s2 brings the card thumbnail + count into view', await page.evaluate(anchorOk, '#card'));
+    for (const c of ['people', 'cases', 'transactions']) {
+      await page.click('.chip[data-chip="' + c + '"]'); await page.waitForTimeout(120);
+      await page.keyboard.press('Escape'); await page.waitForTimeout(120);
+    }
+    /* the reader has scrolled down through the scope text before continuing */
+    await page.evaluate(() => window.scrollTo({ top: document.getElementById('scopeInline').getBoundingClientRect().top + window.scrollY - 100, behavior: 'instant' }));
+    await page.waitForTimeout(200);
+    const before = await page.evaluate(() => window.__scrolls);
+    await page.click('#btnPrimary');                       /* s2 -> s3, the false ending begins */
+    const atTap = await page.evaluate(() => window.__scrolls);
+    chk('position ' + name + ': the gate tap itself positions the card once (reader had scrolled into the scope)', atTap === before + 1, 'scrolls=' + atTap);
+    await page.waitForTimeout(700);                        /* s4: the stamp has landed */
+    chk('position ' + name + ': the stamped card is on screen when ISSUED lands', await page.evaluate(() => {
+      const r = document.getElementById('cardStamp').getBoundingClientRect();
+      return r.top >= 0 && r.bottom <= window.innerHeight && document.getElementById('sq').getAttribute('data-state') === 's4';
+    }), await page.getAttribute('#sq', 'data-state'));
+    await page.waitForTimeout(3900);                       /* s4 > s5 > s6 */
+    chk('position ' + name + ': NO programmatic scroll from s3 through s6 (false ending untouched)',
+        (await page.evaluate(() => window.__scrolls)) === atTap && await page.getAttribute('#sq', 'data-state') === 's6',
+        'scrolls=' + await page.evaluate(() => window.__scrolls) + ' state=' + await page.getAttribute('#sq', 'data-state'));
+    if (name === '390x844') chk('position 390x844: the fold stays clean through the reveal (no about-section text above the fold at s6)', await page.evaluate(() =>
+      document.getElementById('about-heading').getBoundingClientRect().top >= window.innerHeight));
+    await page.click('#btnPrimary'); await page.waitForTimeout(900);
+    chk('position ' + name + ': s7 brings the station-7 panel into view', await page.evaluate(anchorOk, '.panel[data-panel="s7"]'));
+    await page.click('#btnPrimary'); await page.waitForTimeout(900);
+    chk('position ' + name + ': s8 brings the end panel into view', await page.evaluate(anchorOk, '.panel[data-panel="s8"]'));
+    await page.click('#btnRestart'); await page.waitForTimeout(900);
+    chk('position ' + name + ': Restart returns to the top of the interactive', await page.evaluate(anchorOk, '#sq'),
+        String(await page.evaluate(() => Math.round(document.getElementById('sq').getBoundingClientRect().top))));
+    if (name === '390x844') {
+      await page.click('#btnPrimary'); await page.waitForTimeout(700);
+      await page.click('#btnPrimary'); await page.waitForTimeout(700);
+      for (const c of ['people', 'cases', 'transactions']) { await page.click('.chip[data-chip="' + c + '"]'); await page.waitForTimeout(100); await page.keyboard.press('Escape'); await page.waitForTimeout(100); }
+      await page.click('#btnPrimary'); await page.waitForTimeout(700);
+      await shot(page, '19-mobile-false-end-clickdriven.png');
+    }
+    await ctx.close();
+  }
+  /* reduced motion: the positioning happens as a jump, synchronously */
+  ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+  await guard(ctx, []);
+  page = await ctx.newPage();
+  await page.goto(URL); await page.waitForTimeout(250);
+  const rmPos = await page.evaluate(() => {
+    document.getElementById('btnPrimary').click();
+    const top = document.getElementById('card').getBoundingClientRect().top;
+    return { top: Math.round(top), off: window.__sq.navOffset };
+  });
+  chk('position rm: s1 positioning is instant (no glide) under reduced motion', rmPos.top >= rmPos.off - 6 && rmPos.top <= rmPos.off + 48, JSON.stringify(rmPos));
+  await ctx.close();
+
+  /* ======================= 7c. CLOSE → CONTINUE (regression) =======================
+     A receipt's Close returned focus to its trigger; when the reader had
+     scrolled the page behind the sheet the browser smooth-scrolled the
+     trigger into view, the sticky bar moved during that glide, and an
+     immediate tap on Continue landed on the bar's padding. Reproduced on
+     touch input at 1440x900 (letter sheet, s7). */
+  for (const [name, w, h] of [['390x844', 390, 844], ['1440x900', 1440, 900]]) {
+    for (const station of ['s1', 's7']) {
+      for (const scrolled of [false, true]) {
+        ctx = await browser.newContext({ viewport: { width: w, height: h }, hasTouch: true, isMobile: w < 600 });
+        await guard(ctx, []);
+        page = await ctx.newPage();
+        await page.goto(URL); await page.waitForTimeout(250);
+        if (station === 's1') { await page.tap('#btnPrimary'); await page.waitForTimeout(900); }   /* let the s1 positioning settle, as a reader does */
+        else { await page.evaluate(() => window.__sq.go('s7')); await page.waitForTimeout(1200); }
+        const trig = station === 's1' ? '#receiptAdditional .receipt__trigger' : '#receiptLetter .receipt__trigger';
+        const body = station === 's1' ? '#bodyAdditional' : '#bodyLetter';
+        await page.tap(trig); await page.waitForTimeout(200);
+        /* a reader's touch scroll is instantaneous; a programmatic smooth glide would still be moving the bar */
+        if (scrolled) { await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight * 0.6, behavior: 'instant' })); await page.waitForTimeout(120); }
+        /* synchronous contract: in the same task as the Close click, the
+           receipt and the backdrop are already non-hit-testable and the
+           Continue button is what sits at its own centre. */
+        const sync = await page.evaluate(b => {
+          document.querySelector(b + ' .receipt__close').click();
+          const rb = document.querySelector(b), sc = document.getElementById('scrim');
+          const r = document.getElementById('btnPrimary').getBoundingClientRect();
+          const at = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+          return { body: getComputedStyle(rb).display, bodyPE: getComputedStyle(rb).pointerEvents, scrim: getComputedStyle(sc).display,
+                   hit: at ? at.id : null, x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        }, body);
+        chk('close→continue ' + name + ' ' + station + (scrolled ? ' (page scrolled behind)' : '') + ': receipt + backdrop non-hit-testable synchronously',
+            sync.body === 'none' && sync.scrim === 'none' && sync.hit === 'btnPrimary', JSON.stringify(sync));
+        await page.touchscreen.tap(sync.x, sync.y);     /* immediately: one tap */
+        await page.waitForTimeout(300);
+        const expect = station === 's1' ? 's2' : 's8';
+        chk('close→continue ' + name + ' ' + station + (scrolled ? ' (page scrolled behind)' : '') + ': one Continue tap advances',
+            await page.getAttribute('#sq', 'data-state') === expect, await page.getAttribute('#sq', 'data-state'));
+        await ctx.close();
+      }
+    }
+  }
+
+  /* ======================= 7d. RAIL MIRROR + MODAL SEMANTICS ======================= */
+  ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  await guard(ctx, []);
+  page = await ctx.newPage();
+  await page.goto(URL); await page.waitForTimeout(250);
+  const mirror = async () => page.evaluate(() => ({
+    n: document.querySelectorAll('#railList li').length,
+    li: [...document.querySelectorAll('#railList li')].map(l => l.textContent).join(' | '),
+    follow: document.getElementById('railFollowup').textContent,
+    label: document.getElementById('railLabel').textContent
+  }));
+  for (const st of ['s0', 's1', 's2', 's4', 's5']) {
+    await page.evaluate(t => window.__sq.go(t), st); await page.waitForTimeout(150);
+    const m = await mirror();
+    chk('mirror ' + st + ': six licensing steps only, no follow-up exposed before the reveal',
+        m.n === 6 && m.follow === '' && !/expire|recheck|returns/i.test(m.li + m.label) && /of six/.test(m.label), m.li + ' // ' + m.label);
+  }
+  await page.evaluate(() => window.__sq.go('s6')); await page.waitForTimeout(1300);
+  let m = await mirror();
+  chk('mirror s6: still six steps; follow-up appended as post-issuance procedure, not step 7',
+      m.n === 6 && /Post-issuance follow-up/.test(m.follow) && /not an observed event/.test(m.follow) && !/step 7|7 of/.test(m.li + m.label + m.follow), m.follow);
+  await page.evaluate(() => window.__sq.go('s7')); await page.waitForTimeout(200);
+  m = await mirror();
+  chk('mirror s7: six steps complete, follow-up marks the current position', m.n === 6 && /Currently here/.test(m.follow) && /six of six/.test(m.label), m.follow);
+  await page.evaluate(() => window.__sq.reset()); await page.waitForTimeout(200);
+  m = await mirror();
+  chk('mirror reset: follow-up withdrawn again', m.follow === '' && m.n === 6);
+
+  for (const [station, trig, body] of [['s1', '#receiptAdditional .receipt__trigger', '#bodyAdditional'], ['s7', '#receiptLetter .receipt__trigger', '#bodyLetter']]) {
+    await page.evaluate(t => window.__sq.go(t), station); await page.waitForTimeout(station === 's7' ? 1200 : 200);
+    chk('modal ' + body + ': dialog semantics in the markup', await page.evaluate(b => {
+      const el = document.querySelector(b);
+      const lab = el.getAttribute('aria-labelledby');
+      return el.getAttribute('role') === 'dialog' && el.getAttribute('aria-modal') === 'true' && !!lab &&
+        !!document.getElementById(lab) && document.getElementById(lab).textContent.trim().length > 3;
+    }, body));
+    await page.click(trig); await page.waitForTimeout(200);
+    chk('modal ' + body + ': backdrop shown and focus moved inside', await page.evaluate(b =>
+      getComputedStyle(document.getElementById('scrim')).display !== 'none' && document.querySelector(b).contains(document.activeElement), body));
+    chk('modal ' + body + ': constrained, centred width on desktop', await page.evaluate(b => {
+      const r = document.querySelector(b).getBoundingClientRect();
+      return r.width <= 700 && Math.abs(r.left - (window.innerWidth - r.right)) < 4;
+    }, body));
+    await page.keyboard.press('Tab'); await page.keyboard.press('Tab'); await page.waitForTimeout(80);
+    chk('modal ' + body + ': focus trapped', await page.evaluate(b => document.querySelector(b).contains(document.activeElement), body));
+    chk('modal ' + body + ': backdrop click closes', await (async () => {
+      await page.mouse.click(30, 200); await page.waitForTimeout(120);
+      return (await page.evaluate(b => document.querySelector(b).getAttribute('data-open') === null && document.getElementById('scrim').hidden, body));
+    })());
+    await page.click(trig); await page.waitForTimeout(200);
+    await page.keyboard.press('Escape'); await page.waitForTimeout(120);
+    chk('modal ' + body + ': Escape closes and focus returns to the trigger', await page.evaluate(([b, t]) =>
+      document.querySelector(b).getAttribute('data-open') === null && document.activeElement === document.querySelector(t) &&
+      document.querySelector(t).getAttribute('aria-expanded') === 'false', [body, trig]));
+  }
   await ctx.close();
 
   /* ======================= 8. VIEWPORT SWEEP ======================= */
