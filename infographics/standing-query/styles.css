@@ -99,8 +99,12 @@
 .composite-label{
   display:block; text-align:center; background:transparent; border:0;
   padding:4px 6px; cursor:pointer; color:inherit; font-family:inherit;
-  border-bottom:1px dotted var(--line);
+  border-bottom:1px dotted var(--on-ink-mut); border-radius:4px 4px 0 0;
+  transition:border-color var(--t-micro) linear, background var(--t-micro) linear;
 }
+.composite-label:hover,.composite-label:focus-visible{ border-bottom-color:var(--paper); background:rgba(232,230,225,.04); }
+.composite-label__hint{ font-family:var(--ff-ui); font-size:12px; letter-spacing:0; color:var(--on-ink-mut); vertical-align:1px; }
+.composite-label:hover .composite-label__hint,.composite-label:focus-visible .composite-label__hint{ color:var(--paper); }
 .composite-label__tag{
   display:block; font-family:var(--ff-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
   color:var(--on-ink); font-weight:600;
@@ -182,7 +186,7 @@
    the max-width and re-exposed the loop band on desktop. */
 .rail-clip{
   position:relative; width:100%;
-  height:0; padding-bottom:17%;          /* line band only: y 0-54 of 320 wide */
+  height:0; padding-bottom:19%;          /* line band + one label row: y 0-61 of 320 wide */
   overflow:hidden;
   transition:padding-bottom var(--t-reveal) var(--ease-settle);
 }
@@ -202,11 +206,52 @@
 .rail__station.is-loop{ fill:none; stroke:var(--on-ink); stroke-width:1.5; stroke-dasharray:3.4 2.6; opacity:0;
   transition:opacity var(--t-std) linear; }
 .sq[data-loop="drawn"] .rail__station.is-loop{ opacity:1; }
-.rail__label--loop{ opacity:0; transition:opacity var(--t-std) linear; }
+/* ---------- rail labels: HTML, fixed CSS size, revealed only when earned ----------
+   SVG text scales with the rail: 8.5 user units was ~9px on a phone and
+   ~15px on desktop. These spans sit over the SVG in the same coordinate
+   space (left as a % of the rail width; padding-top as a % of the width,
+   which is how percentage padding resolves) and keep a real 11.5px size. */
+.rail-labels{ position:absolute; inset:0; pointer-events:none; }
+/* the pin carries the position (percentage padding resolves against width);
+   the label inside is the measurable text box */
+.rail__pin{
+  position:absolute; top:0; left:calc(var(--x) / 320 * 100%); padding-top:calc(var(--y) / 320 * 100%);
+  transform:translateX(-50%); white-space:nowrap; line-height:0;
+}
+.rail__pin--end{ transform:translateX(-100%); }
+.rail__label{
+  display:inline-block; white-space:nowrap;
+  font-family:var(--ff-mono); font-size:11.5px; line-height:1.25; font-weight:500;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--on-ink-mut);
+  opacity:0; transition:opacity var(--t-std) linear;
+}
+.rail__label.is-current{ color:var(--on-ink); }
+@media (max-width:359px){ .rail__label{ font-size:11px; letter-spacing:.04em; } }
+@media (min-width:700px){ .rail__label{ font-size:12px; } }
+/* progressive disclosure: a label appears when its station is reached */
+.sq[data-state="s1"] .rail__label[data-label="4"],
+.sq[data-state="s2"] .rail__label[data-label="4"],
+.sq[data-state="s3"] .rail__label[data-label="4"],
+.sq[data-state="s4"] .rail__label[data-label="4"],
+.sq[data-state="s5"] .rail__label[data-label="4"],
+.sq[data-state="s6"] .rail__label[data-label="4"],
+.sq[data-state="s7"] .rail__label[data-label="4"],
+.sq[data-state="s8"] .rail__label[data-label="4"],
+.sq[data-state="s2"] .rail__label[data-label="5"],
+.sq[data-state="s3"] .rail__label[data-label="5"],
+.sq[data-state="s4"] .rail__label[data-label="5"],
+.sq[data-state="s5"] .rail__label[data-label="5"],
+.sq[data-state="s6"] .rail__label[data-label="5"],
+.sq[data-state="s7"] .rail__label[data-label="5"],
+.sq[data-state="s8"] .rail__label[data-label="5"],
+.sq[data-state="s4"] .rail__label[data-label="6"],
+.sq[data-state="s5"] .rail__label[data-label="6"],
+.sq[data-state="s6"] .rail__label[data-label="6"],
+.sq[data-state="s7"] .rail__label[data-label="6"],
+.sq[data-state="s8"] .rail__label[data-label="6"]{ opacity:1; }
+/* the post-issuance label is earned only by the reveal */
 .sq[data-loop="drawing"] .rail__label--loop,
 .sq[data-loop="drawn"] .rail__label--loop{ opacity:1; }
-.rail__label{ font-family:var(--ff-mono); font-size:8.5px; fill:var(--on-ink-mut); letter-spacing:.06em; text-transform:uppercase; }
-.rail__label.is-current{ fill:var(--on-ink); }
 
 /* ---------- receipts / the number ---------- */
 .receipts{ margin-top:18px; }
@@ -237,7 +282,8 @@
 .scope__head{ margin:0 0 10px; font-family:var(--ff-mono); font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--on-ink-mut); }
 .scope p{ margin:0 0 10px; font-size:13.5px; line-height:1.5; }
 .scope p:last-child{ margin-bottom:0; }
-.receipts__prompt{ margin:0 0 10px; font-size:13px; color:var(--on-ink-mut); }
+.receipts__prompt{ margin:0 0 4px; font-size:13px; color:var(--on-ink-mut); }
+.receipts__count{ margin:0 0 10px; font-family:var(--ff-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--on-ink-mut); }
 .chips{ display:flex; flex-direction:column; gap:8px; }
 .chip{
   min-height:48px; width:100%; text-align:left; padding:12px 14px;
@@ -266,14 +312,19 @@
 }
 .sq[data-loop="drawn"] .panel__reveal{ opacity:1; }
 
-/* ---------- article CTA (s8): restrained, not an advertisement ---------- */
-.sq-cta{
-  display:inline-flex; align-items:center; min-height:44px; margin:14px 0 4px; padding:10px 16px;
-  border:1px solid var(--on-ink-mut); border-radius:8px; color:var(--paper);
-  font-weight:600; font-size:15px; text-decoration:none;
+/* ---------- exit actions (s8): investigation > subscribe > start over ---------- */
+.sq-exit{ display:flex; flex-direction:column; gap:10px; margin:20px 0 4px; max-width:520px; }
+.sq-exit .btn{ display:flex; align-items:center; justify-content:center; margin:0; padding:12px 16px; text-decoration:none; text-align:center; }
+.sq-exit .btn--ghost:hover{ border-color:var(--on-ink-mut); }
+.sq-exit__tertiary{
+  align-self:flex-start; min-height:44px; padding:0 6px; margin-top:2px;
+  background:transparent; border:0; color:var(--on-ink-mut); font-family:inherit; font-size:14px;
+  text-decoration:underline; text-decoration-style:dotted; text-underline-offset:4px; cursor:pointer;
 }
-.sq-cta:hover{ border-color:var(--paper); }
-.sq-cta[hidden]{ display:none; }
+.sq-exit__tertiary:hover{ color:var(--on-ink); }
+[data-article-cta][hidden]{ display:none!important; }
+/* the sticky bar is withdrawn at s8: the exits live inline in the end panel */
+.sq[data-state="s8"] .sq-action{ display:none; }
 
 /* ---------- receipts (inline blocks that become sheets) ---------- */
 .receipt{ margin:14px 0 0; }
@@ -294,6 +345,9 @@
 }
 .limit-block__lead{ margin:0 0 8px; font-size:17px; line-height:1.35; font-weight:600; color:var(--paper); }
 .limit-block__body{ margin:0; font-size:14px; line-height:1.5; color:var(--on-ink); }
+.limit-block__list{ list-style:disc outside; margin:8px 0 0; padding:0 0 0 18px; font-size:14px; line-height:1.5; color:var(--on-ink); }
+.limit-block__list li{ margin:0 0 6px; padding-left:2px; }
+.limit-block__list li::marker{ color:var(--on-ink-mut); }
 .limit-block--ror{ margin-top:18px; border-color:var(--line); }
 .limit-block--ror .limit-block__body{ color:var(--on-ink-mut); }
 
@@ -384,10 +438,14 @@
    prototype's fixed bar (and the padding that goes with it). */
 .sq-action{
   position:fixed; left:0; right:0; bottom:0; z-index:40;
-  padding:14px 20px calc(10px + env(safe-area-inset-bottom,0px));
-  background:linear-gradient(to top,var(--ink) 65%,rgba(18,21,26,0));
+  padding:12px 20px calc(10px + env(safe-area-inset-bottom,0px));
+  /* solid, not a gradient: a pinned bar must read as a bar, never as a fade
+     that quietly masks what it covers */
+  background:var(--ink); border-top:1px solid var(--line-soft);
   transition:transform var(--t-micro) var(--ease-depart), opacity var(--t-micro) linear;
 }
+/* space reserved above the in-flow bar so the last content never sits under it */
+.panels{ padding-bottom:16px; }
 .sq{ padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom,0px) + 40px); }
 @supports (overflow: clip){
   html, body{ overflow-x:clip; }

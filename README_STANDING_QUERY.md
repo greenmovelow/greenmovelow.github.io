@@ -10,12 +10,14 @@ reader has experienced issuance as a completed state, the exhibit reveals that
 DIAL's released procedures contemplate continued attention to
 immigration-document expiration after the credential has already been issued.
 
-This is the production integration of the handoff prototype in
-`_handoff/standing-query/`. The prototype had already survived an adversarial
-editorial / UX / accessibility pass; that review
-(`_handoff/standing-query/ADVERSARIAL_REVIEW_v0_1.md`) is the controlling
-authority for the interaction and evidence contract, and the production build
-preserves it. This exhibit covers the **professional-licensing rail only**.
+This is the production integration of the editorial handoff prototype. The
+prototype had already survived an adversarial editorial / UX / accessibility
+pass (its review, `ADVERSARIAL_REVIEW_v0_1.md`, is the controlling authority
+for the interaction and evidence contract) and the production build preserves
+it. The handoff folder was internal review material; it was run against its
+own check script one last time (160/160 on Chromium) and then removed from
+the branch before this final pass, so nothing in production depends on it.
+This exhibit covers the **professional-licensing rail only**.
 
 ---
 
@@ -29,8 +31,8 @@ preserves it. This exhibit covers the **professional-licensing rail only**.
 | `scripts/test_standing_query.js` | Headless interaction + evidence-discipline suite (Playwright). Serves the repository root over local HTTP and drives the production page. |
 | `README_STANDING_QUERY.md` | This file. |
 | `sitemap.xml` | One `<url>` entry added. |
-| `_headers` | `X-Robots-Tag: noindex` for `/_handoff/*`, so the committed prototype is not indexed while it sits in the publish directory. |
-| `scripts/audit_analytics.py` | `_handoff/` added to the excluded prefixes (source material, not a route). |
+| `_headers` | `X-Robots-Tag: noindex` for `/_handoff/*`. Kept as a defence-in-depth convention for future handoff material; the folder itself is gone from this branch. |
+| `scripts/audit_analytics.py` | `_handoff/` in the excluded prefixes, for the same reason. |
 | `.gitignore` | Screenshot output folders (`_shots/`) ignored. |
 | `ANALYTICS_TRACKING_AUDIT.md` | Note on the new page and the custom events. |
 
@@ -57,8 +59,6 @@ python3 scripts/audit_sitemap.py
 python3 scripts/audit_analytics.py
 ```
 
-The handoff prototype's own suite still runs unchanged against the source:
-`cd _handoff/standing-query && node check.js`.
 
 ## Deploy
 
@@ -73,12 +73,20 @@ every Tailwind class the chrome uses is already in the compiled stylesheet.
 **Article link.** `infographics/standing-query/app.js`, top of the file:
 
 ```js
-var ARTICLE_URL = '';
+var ARTICLE_URL = 'https://investigations.restoring-democracy.org/p/inside-iowas-save-clearinghouse-what';
 ```
 
-It is empty because the final Substack URL had not been supplied. While it is
-empty, both "Read the full investigation →" links (end panel and about
-section) stay hidden. Set it and they appear. Do not invent the URL.
+It is set to the published investigation,
+`https://investigations.restoring-democracy.org/p/inside-iowas-save-clearinghouse-what`
+(supplied by the editor on Sept. 4, 2026). With it set, "Read the full
+investigation →" is the primary exit in the end panel and in the About
+section. If it is ever emptied, both links hide themselves and the end panel
+offers Subscribe and Start over.
+
+**Subscribe.** Both subscribe links point at the branded address
+`https://investigations.restoring-democracy.org/subscribe/` (not the older
+`exposed1.substack.com` address). They carry `data-subscribe-cta` and report
+`standing_query_subscribe_click` through the guarded GoatCounter helper.
 
 **Right of response.** `infographics/standing-query/index.html`, the block
 between `<!-- RIGHT OF RESPONSE -->` and `<!-- END RIGHT OF RESPONSE -->`
@@ -190,6 +198,61 @@ editor's instruction.
     "Seven monthly reports—December through June—were independently pulled
     twice, on July 13 and Aug. 12, 2026. Every month matches."
 
+### Final production polish (third push to PR #205)
+
+14. **Fixed-nav safe landing.** Every user-driven positioning (s1, s2, s3,
+    s7, s8, Back, Restart) now lands the exhibit top under the fixed site nav,
+    measured from the nav's rendered height plus a 12px gap, so the Back /
+    Composite case / Restart row is never occluded and the card sits directly
+    beneath it. The previous anchor (the card at a fixed 72px) put the header
+    36px above the viewport on phones. Reduced motion still jumps; the
+    auto-advancing s3→s6 run still never scrolls.
+15. **Action bar.** The sticky bar now has a solid ink ground and a top rule
+    rather than a gradient, and the panels reserve 16px above it. The bar is
+    in flow at the exhibit's end, so nothing is ever trapped beneath it; the
+    suite scrolls to the exhibit end in six states at seven widths and asserts
+    no text intersects the bar. While pinned mid-scroll the bar covers what
+    any pinned control covers, and everything beneath it scrolls clear. No
+    blanket `min-height` was added to ordinary states; s3–s6 keep the
+    full-viewport hold for the false ending and the reveal.
+16. **Rail labels.** SVG text scaled with the rail (≈9px on phones, ≈15px on
+    desktop). The four labels are now HTML spans positioned in the rail's own
+    coordinate space (left as a percentage of the width, vertical offset as
+    percentage padding, which resolves against width) at a fixed 11.5px
+    (11px below 360px, 12px at ≥700px), JetBrains Mono, uppercase, muted ink.
+    The clip band grew from 17% to 19% of the width to hold one label row
+    under the line; the loop station stays clipped until the reveal. Decorative
+    (`aria-hidden`); the `<ol>` mirror is unchanged.
+17. **Progressive rail disclosure.** Response appears at s1, 16,457
+    transactions at s2, Issued at s4, Status expires only once the loop is
+    drawing/drawn. Presence and absence are asserted at every width.
+18. **Response copy** (exact): heading "SAVE returns a verification
+    response." body "The licensing agency submits the applicant’s information
+    to SAVE. SAVE checks it against federal immigration records and returns a
+    verification response. Some checks resolve immediately. Others require
+    additional verification." Live region: "Response. SAVE returns a
+    verification response. Some checks resolve immediately; others require
+    additional verification."
+19. **Gate button.** The primary reads "Continue" at every count and is
+    disabled until 3 of 3. The count lives in a separate `role="status"`
+    helper line under the prompt: "0 of 3 resolved" … "3 of 3 resolved".
+20. **Exit hierarchy at s8.** The sticky bar is withdrawn; the end panel
+    offers, in order, Read the full investigation → (primary, hidden while
+    `ARTICLE_URL` is empty), Subscribe to follow the SAVE investigation
+    (secondary, outlined), Start over (tertiary text control, 44px tall).
+21. **About section.** Read the full investigation → (hidden while empty) and
+    Subscribe side by side on desktop, stacked on mobile, 44px+ targets;
+    Corrections policy demoted to a quiet text link.
+22. **"What USCIS confirmed"** is a five-item list under an adjacent
+    "In its Sept. 4, 2026 response to RDP's questions, USCIS confirmed:" line.
+    No new claims.
+23. **Reveal copy**: "The question stays open." (was "The file stays open.");
+    live region "The question stays open. The path returns to a
+    status-expiration check."
+24. **Composite affordance**: a small ⓘ after "Composite case", a brighter
+    dotted rule, and a hover/focus tint. Not a button redesign.
+25. **Handoff material removed** from the branch (see top of file).
+
 ### Exact copy changed because of the Sept. 4 USCIS response
 
 | Where | Prototype (obsolete) | Production |
@@ -220,22 +283,25 @@ is stated as open, not answered.
   "Close"), the inline scope delivery without focus transfer, the always-visible
   station-7 limitation, the two-branch template statement and the
   "DO NOT USE THIS YET" marking.
-- `ARTICLE_URL` stays empty; both "Read the full investigation →" CTAs stay
-  hidden until the editor supplies the final URL.
+- `ARTICLE_URL` is now set to the published story; the CTAs show.
 
 ---
 
 ## Test results (this build)
 
-`node scripts/test_standing_query.js` — **362/362 passed, Chromium only.**
+`node scripts/test_standing_query.js` — **699/699 passed, Chromium only.**
 
 Engines: Chromium 141 (Playwright build). Firefox and WebKit could not be
 installed in the build environment (browser downloads are blocked by the
-network policy), so the cross-engine leg ran on Chromium alone. The handoff
-suite (`_handoff/standing-query/check.js`) also passed on Chromium, 160/160
+network policy; a fresh install attempt in this pass failed the same way), so
+the cross-engine leg ran on Chromium alone. The handoff prototype's own check
+script passed 160/160 on Chromium immediately before the folder was removed
 (the review's 170 included the Firefox and WebKit engine checks).
 
-**Playwright's WebKit is not iOS Safari.** Nothing here licenses "tested on iPhone".
+**Playwright's WebKit is not iOS Safari.** Nothing here licenses "tested on
+iPhone". The Netlify deploy preview could not be opened from the build
+environment (outbound requests to the preview host are blocked), so the
+"walk the preview in Chrome as a human" step remains for the editor.
 
 Viewports swept at s0, s2, s6, s7: 320×568, 375×667, 390×844, 430×932,
 768×1024, 1024×768, 1440×900 — horizontal overflow, rail-label collision,
@@ -270,12 +336,29 @@ mirror at s0/s1/s2/s4/s5, follow-up appended at s6, marked current at s7,
 withdrawn on reset; dialog semantics, backdrop, width, focus trap, backdrop
 click, Escape and focus return for both receipt sheets.
 
+Added in the final polish pass: fixed-nav safe landing (`.sq-header` below
+the nav bottom plus a gap) after s1, s2, s7, s8, Back and Restart at 320×568,
+390×844, 1024×768 and 1440×900, plus the s3 landing with the stamp on screen
+(at 320×568 the header yields by the overflow and stays at least partly
+visible); action-bar collision at the exhibit end in six states at seven
+widths, and the bar's in-flow position; rail label size (≥11px, box ≥13.5px),
+overlap, dot collision, clipping and overflow; progressive label disclosure by
+state, including Issued absent at s3 and Status expires absent until the
+reveal; gate button always "Continue" with the separate helper count; the
+exact Response copy and live wording; s8 exit hierarchy, Subscribe href,
+article CTA hidden/revealed, subscribe event; five-point USCIS list; sheets on
+360×480, 360×568 and 390×844 (title reachable on open, body scrolls, Close
+reachable, Escape and focus return); a click-driven screenshot matrix at eight
+widths from 320×568 to 1534×881 with overflow and hidden-control checks.
+
 Repository checks: `verify_asset_refs.py`, `audit_sitemap.py`,
 `audit_analytics.py` — all pass.
 
-Screenshots inspected by eye in this pass: fresh first paint at 320×568,
-390×844, 1024×768 and 1440×900; the click-driven false ending at 390×844; the
-letter modal with the complete limitation; s6 loop; s7 and s8 full page.
+Screenshots inspected by eye in this pass: the matrix frames at 320×568,
+360×640, 375×812, 390×844, 768×1024, 1024×768, 1440×900 and 1534×881 for s0,
+s1, s2 unresolved, s2 resolved, s4 ISSUED, s6 loop, s7 and s8, with attention
+to the fixed nav, the sticky bar, rail readability, whitespace, the CTA
+hierarchy, horizontal overflow and hidden controls.
 
 ---
 
@@ -327,7 +410,5 @@ rebalancing before art, not after.
 
 ### Editorial, before publication
 
-- [ ] `ARTICLE_URL` set.
+- [x] `ARTICLE_URL` set (Sept. 4, 2026).
 - [ ] Right-of-response block resolved with the editor's exact wording.
-- [ ] Decide whether `_handoff/standing-query/` should be removed from the
-      publish directory after merge (it is `noindex` but still served).

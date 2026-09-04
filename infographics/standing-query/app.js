@@ -11,12 +11,11 @@
 
   /* ========================================================================
      EDITORIAL CONFIGURATION
-     ARTICLE_URL — the full investigation on the Investigations Desk.
-     Leave EMPTY until the final Substack URL is supplied by the editor; the
-     "Read the full investigation" links stay hidden while it is empty.
-     Do not invent a URL.
+     ARTICLE_URL — the full investigation on the Investigations Desk,
+     supplied by the editor on Sept. 4, 2026. If it is ever emptied, the
+     "Read the full investigation" links hide themselves again.
      ====================================================================== */
-  var ARTICLE_URL = '';
+  var ARTICLE_URL = 'https://investigations.restoring-democracy.org/p/inside-iowas-save-clearinghouse-what';
 
   /* ---------- analytics (site-standard GoatCounter only) ----------
      Custom events ride on the aggregate counter already loaded at the end
@@ -51,6 +50,9 @@
   var railFollow= document.getElementById('railFollowup');
   var railLabel = document.getElementById('railLabel');
   var chipPrompt  = document.getElementById('chipPrompt');
+  var gateCount   = document.getElementById('gateCount');
+  var btnRestartEnd = document.getElementById('btnRestartEnd');
+  var railLabelEls  = document.querySelectorAll('.rail-labels .rail__label');
 
   if (!sq) { return; }
 
@@ -98,17 +100,17 @@
     s5: '',
     s6: 'See what happens next',
     s7: 'Continue',
-    s8: 'Start over'
+    s8: ''            /* the bar is withdrawn at s8; exits are inline */
   };
 
   var ANNOUNCE = {
     s0: 'A composite professional-license application. Not an individual’s record.',
-    s1: 'Response. A response has come back. Evidence available: additional verification.',
+    s1: 'Response. SAVE returns a verification response. Some checks resolve immediately; others require additional verification.',
     s2: 'The reports record 16,457 initial verification transactions. Three questions to resolve.',
     s3: '',
     s4: 'License issued. Application complete.',
     s5: '',
-    s6: 'The file stays open. The case returns to the system.',
+    s6: 'The question stays open. The path returns to a status-expiration check.',
     s7: 'When the status expires. Documented procedure, not an observed event.',
     s8: 'End of the sequence. Source and response context.'
   };
@@ -134,17 +136,7 @@
       c.setAttribute('class', 'rail__station' + (s.loop ? ' is-loop' : ''));
       c.setAttribute('data-station', s.id);
       railStns.appendChild(c);
-
-      if (s.label) {
-        var t = document.createElementNS(SVGNS, 'text');
-        t.setAttribute('x', s.x);
-        t.setAttribute('y', s.loop ? s.y + 21 : s.y + (s.dy || 18));
-        t.setAttribute('class', 'rail__label' + (s.loop ? ' rail__label--loop' : ''));
-        t.setAttribute('data-label', s.id);
-        t.setAttribute('text-anchor', s.x < 60 ? 'start' : (s.x > 250 ? 'end' : 'middle'));
-        t.textContent = s.label;
-        railStns.appendChild(t);
-      }
+      /* labels are HTML spans in .rail-labels (fixed CSS size); see styles.css */
     }
 
     try {
@@ -188,10 +180,9 @@
       if (id < currentId) { nodes[i].classList.add('is-done'); }
       else if (id === currentId) { nodes[i].classList.add('is-current'); }
     }
-    var labels = railStns.querySelectorAll('.rail__label');
-    for (var j = 0; j < labels.length; j++) {
-      var lid = parseInt(labels[j].getAttribute('data-label'), 10);
-      labels[j].classList.toggle('is-current', lid === currentId);
+    for (var j = 0; j < railLabelEls.length; j++) {
+      var lid = parseInt(railLabelEls[j].getAttribute('data-label'), 10);
+      railLabelEls[j].classList.toggle('is-current', lid === currentId);
     }
     buildRailList(currentId);
   }
@@ -239,7 +230,12 @@
     scrim.hidden = false;
     if (opener) { opener.setAttribute('aria-expanded', 'true'); }
     var f = focusables(el);
-    if (f.length) { f[0].focus(); }
+    /* Focus the first control WITHOUT scrolling the sheet to it: on a short
+       viewport Close sits below the sheet's own scroll box, and a scrolling
+       focus opened every sheet with its title already scrolled out of view. */
+    if (f.length) { try { f[0].focus({ preventScroll: true }); } catch (e) { f[0].focus(); } }
+    var scroller = el.querySelector('.sheet__inner') || el;
+    scroller.scrollTop = 0;
     document.addEventListener('keydown', trapKey, true);
   }
 
@@ -324,9 +320,10 @@
   function updateChipGate() {
     if (state !== 's2') { return; }
     var n = chipCount();
+    btnPrimary.textContent = 'Continue';          /* an action, never a counter */
+    if (gateCount) { gateCount.textContent = n + ' of 3 resolved'; }
     if (n === 3) {
       btnPrimary.disabled = false;
-      btnPrimary.textContent = 'Continue';
       chipPrompt.textContent = 'The number has not changed. What it means has.';
       if (!flags.scopeSeen) {
         flags.scopeSeen = true;
@@ -336,7 +333,6 @@
       }
     } else {
       btnPrimary.disabled = true;
-      btnPrimary.textContent = n + ' of 3';
       chipPrompt.textContent = 'What does this number count? Resolve all three.';
     }
   }
@@ -362,7 +358,7 @@
     if (state === 's2') { updateChipGate(); }
     else {
       /* while the action bar is off-screen the button must not be tabbable */
-      var barGone = (state === 's3' || state === 's5' ||
+      var barGone = (state === 's3' || state === 's5' || state === 's8' ||
                      (state === 's4' && !reducedMotion()));
       btnPrimary.disabled = barGone;
       btnPrimary.textContent = PRIMARY_LABEL[state] || '';
@@ -436,28 +432,47 @@
      never from the auto-advancing s3→s6 run: scrolling during the false
      ending and the loop reveal would damage both. Honors reduced motion
      by jumping instead of gliding. */
-  var NAV_OFFSET = 72;   /* matches html{scroll-padding-top} */
-  var SETTLE_ANCHOR = {
-    s0: function () { return sq; },
-    s1: function () { return card; },
-    s2: function () { return card; },
-    /* s3 is entered by the reader's own tap at the gate. The card must be on
-       screen BEFORE the stamp lands at s4: after the gate the reader has
-       usually scrolled down through the scope text, and the page shrinks
-       when the receipts leave. Nothing scrolls after this point until s7. */
-    s3: function () { return card; },
-    s7: function () { return document.querySelector('.panel[data-panel="s7"]'); },
-    s8: function () { return document.querySelector('.panel[data-panel="s8"]'); }
-  };
+  var NAV_GAP = 12;
+  function navOffset() {
+    var nav = document.querySelector('.nav-bar');
+    var h = nav ? nav.getBoundingClientRect().height : 68;
+    return Math.round(h) + NAV_GAP;
+  }
+  /* Every settle lands the EXHIBIT TOP under the fixed site nav, so the
+     Back / Composite case / Restart row is never occluded and the card sits
+     directly beneath it. s3 is entered by the reader's own tap at the gate:
+     the card must be on screen before the stamp lands, and after the gate
+     the reader has usually scrolled down through the scope text while the
+     page is about to shrink. Nothing scrolls after that until s7. */
+  var SETTLE_STATES = { s0: 1, s1: 1, s2: 1, s3: 1, s7: 1, s8: 1 };
   function settle(s) {
-    var pick = SETTLE_ANCHOR[s];
-    if (!pick) { return; }
-    var el = pick();
-    if (!el) { return; }
-    var top = el.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop) - NAV_OFFSET;
+    if (!SETTLE_STATES[s]) { return; }
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    var top = sq.getBoundingClientRect().top + y - navOffset();
+    if (s === 's3') {
+      /* The stamp must land on screen. On a very short viewport the header
+         plus the full card do not both fit; yield toward the card by the
+         overflow, but never past the header's own height less a margin, so
+         the composite row stays partly visible. offsetHeight ignores the
+         scale transition the card is mid-way through. */
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      /* the "License issued" row only renders at s4: lay it out for the
+         measurement (same frame, no paint) so the yield covers the card
+         as it will be when the stamp lands */
+      var rowIssued = document.getElementById('rowIssued');
+      rowIssued.style.display = 'flex';
+      var cardH = card.offsetHeight;
+      rowIssued.style.display = '';
+      var cardBottom = card.getBoundingClientRect().top + y + cardH + 12;
+      var over = cardBottom - (top + vh);
+      if (over > 0) {
+        var hd = document.querySelector('.sq-header');
+        var cap = Math.max(0, (hd ? hd.offsetHeight : 0) - 28);
+        top += Math.min(over, cap);
+      }
+    }
     if (top < 0) { top = 0; }
-    var delta = top - (window.pageYOffset || document.documentElement.scrollTop);
-    if (Math.abs(delta) < 24) { return; }
+    if (Math.abs(top - y) < 8) { return; }
     try {
       window.scrollTo({ top: top, behavior: reducedMotion() ? 'instant' : 'smooth' });
     } catch (e) { window.scrollTo(0, top); }
@@ -530,6 +545,11 @@
   });
 
   btnRestart.addEventListener('click', reset);
+  if (btnRestartEnd) { btnRestartEnd.addEventListener('click', reset); }
+  var subs = document.querySelectorAll('[data-subscribe-cta]');
+  for (var u = 0; u < subs.length; u++) {
+    subs[u].addEventListener('click', function () { track('standing_query_subscribe_click'); });
+  }
   btnComp.addEventListener('click', function () {
     openSheet(document.getElementById('sheetComposite'), btnComp);
   });
@@ -574,19 +594,24 @@
   /* ---------- article CTA ----------
      Links carrying data-article-cta are hidden in the markup and only
      shown once ARTICLE_URL has been supplied. */
-  var ctas = document.querySelectorAll('[data-article-cta]');
-  for (var a = 0; a < ctas.length; a++) {
-    (function (link) {
-      if (ARTICLE_URL) {
-        link.href = ARTICLE_URL;
+  function applyArticleUrl(url) {
+    var ctas = document.querySelectorAll('[data-article-cta]');
+    for (var a = 0; a < ctas.length; a++) {
+      var link = ctas[a];
+      if (url) {
+        link.href = url;
         link.hidden = false;
-        link.addEventListener('click', function () { track('standing_query_article_click'); });
+        if (!link.getAttribute('data-tracked')) {
+          link.setAttribute('data-tracked', 'true');
+          link.addEventListener('click', function () { track('standing_query_article_click'); });
+        }
       } else {
         link.hidden = true;
         link.removeAttribute('href');
       }
-    })(ctas[a]);
+    }
   }
+  applyArticleUrl(ARTICLE_URL);
 
   /* ---------- boot ---------- */
   document.documentElement.setAttribute('data-enhanced', 'true');
@@ -604,7 +629,9 @@
     gateOpen: function () { return sq.getAttribute('data-gate') === 'open'; },
     loopDrawn: function () { return sq.getAttribute('data-loop') === 'drawn'; },
     articleUrl: function () { return ARTICLE_URL; },
-    navOffset: NAV_OFFSET,
+    /* test-only: prove the populated-URL presentation without editing the constant */
+    previewArticleUrl: function (u) { applyArticleUrl(u); },
+    navOffset: navOffset,
     tracked: function () { return Object.keys(tracked); }
   };
 })();

@@ -96,7 +96,11 @@ const BANNED_TEXT = [
   ['step 7 of', 'the follow-up is not a seventh step'],
   ['7 of 7', 'the follow-up is not a seventh step'],
   ['PROTOTYPE', 'prototype banner must not ship'],
-  ['ARTICLE_URL', 'the placeholder constant must never render as text']
+  ['ARTICLE_URL', 'the placeholder constant must never render as text'],
+  ['The file stays open', 'the records establish a documented procedure, not a literally open federal case'],
+  ['A response comes back', 'replaced by the approved Response copy'],
+  ['exposed1.substack.com/subscribe', 'use the branded Investigations subscribe address'],
+  ['0 of 3\u00a0', 'counter must not be the button label']
 ];
 const REQUIRED_TEXT = [
   ['initial verification transactions', 'the unit must travel with the number'],
@@ -110,6 +114,9 @@ const REQUIRED_TEXT = [
   ['The reports record 16,457 initial verification transactions', 'unit-safe framing of the count'],
   ['Seven monthly reports—December through June—were independently pulled twice, on July 13 and Aug. 12, 2026. Every month matches.', 'editor-supplied sentence, verbatim'],
   ['Evidence limit', 'the page-level limitation callout'],
+  ['SAVE returns a verification response.', 'approved Response heading'],
+  ['The question stays open.', 'reveal copy'],
+  ['Subscribe to follow the SAVE investigation', 'subscribe CTA'],
   ['through Aug. 11', 'USCIS: a mid-month report carries data through the day before it is run'],
   ['prepared Aug. 12, 2026', 'preparation date, stated as such'],
   ['one transaction', 'USCIS: an initial verification is one transaction'],
@@ -206,7 +213,10 @@ const LIMIT_VISIBLE = () => {
   chk('sitemap: canonical page listed once', sitemap.split('https://restoring-democracy.org/infographics/standing-query/').length === 2);
   chk('source: ROR block is isolated and marked for patching', html.indexOf('RIGHT OF RESPONSE') > -1 && html.indexOf('id="rorBlock"') > -1);
   const appjs = fs.readFileSync(path.join(PAGE_DIR, 'app.js'), 'utf8');
-  chk('source: ARTICLE_URL is a single named constant in app.js', /var ARTICLE_URL = '[^']*';/.test(appjs));
+  chk('source: ARTICLE_URL is a single named constant in app.js', /var ARTICLE_URL = '[^']*';/.test(appjs) && (appjs.match(/var ARTICLE_URL = /g) || []).length === 1);
+  chk('source: ARTICLE_URL, when set, points at the branded Investigations Desk', (() => {
+    const m = appjs.match(/var ARTICLE_URL = '([^']*)';/); return !m[1] || /^https:\/\/investigations\.restoring-democracy\.org\/p\//.test(m[1]);
+  })());
   chk('source: analytics helper is try/catch guarded and site-standard', /window\.goatcounter/.test(appjs) && /catch \(e\)/.test(appjs) && !/gtag|dataLayer|plausible|umami/.test(appjs));
   chk('source: card has no image, svg, canvas, or code (no photo, QR, seal, signature)', (() => {
     const card = html.slice(html.indexOf('<article class="card"'), html.indexOf('</article>'));
@@ -294,6 +304,13 @@ const LIMIT_VISIBLE = () => {
   chk('s1: ISSUED stamp still ABSENT', await page.evaluate(STAMP_HIDDEN));
   chk('s1: loop still ABSENT', await page.evaluate(LOOP_ABSENT));
   chk('s1: response row shown', await page.evaluate(() => getComputedStyle(document.querySelector('.card__row--response')).display !== 'none'));
+  chk('s1: response copy is the exact approved wording', await page.evaluate(() => {
+    const p = document.querySelector('.panel[data-panel="s1"]');
+    return p.querySelector('.panel__head').textContent.trim() === 'SAVE returns a verification response.' &&
+      p.querySelector('.panel__body').textContent.trim() === 'The licensing agency submits the applicant’s information to SAVE. SAVE checks it against federal immigration records and returns a verification response. Some checks resolve immediately. Others require additional verification.';
+  }));
+  chk('s1: live region announces the response naturally', (await page.textContent('#live')).trim() === 'Response. SAVE returns a verification response. Some checks resolve immediately; others require additional verification.');
+  chk('s1: response is not framed as a decision or adverse action', !/denied|revok|decision|unlawful|adverse/i.test(await page.textContent('.panel[data-panel="s1"] .panel__body')));
   await page.click('#receiptAdditional .receipt__trigger'); await page.waitForTimeout(220);
   chk('s1: additional-verification receipt opens', await page.evaluate(() => document.getElementById('bodyAdditional').getAttribute('data-open') === 'true'));
   const addl = await page.textContent('#bodyAdditional');
@@ -324,7 +341,11 @@ const LIMIT_VISIBLE = () => {
     [...document.querySelectorAll('.rail__label')].some(t => t.textContent === '16,457 transactions') &&
     ![...document.querySelectorAll('.rail__label')].some(t => t.textContent.trim() === '16,457')));
   chk('s2: primary gated', await page.isDisabled('#btnPrimary'));
-  chk('s2: gate label 0 of 3', (await page.textContent('#btnPrimary')).trim() === '0 of 3');
+  chk('s2: primary reads "Continue", never a counter', (await page.textContent('#btnPrimary')).trim() === 'Continue');
+  chk('s2: helper count reads "0 of 3 resolved" in its own status element', await page.evaluate(() => {
+    const g = document.getElementById('gateCount');
+    return g.textContent.trim() === '0 of 3 resolved' && g.getAttribute('role') === 'status' && g !== document.getElementById('live');
+  }));
   chk('s2: gate cannot be bypassed by keyboard on the disabled control', await (async () => {
     await page.evaluate(() => document.getElementById('btnPrimary').focus());
     await page.keyboard.press('Enter'); await page.keyboard.press(' '); await page.waitForTimeout(150);
@@ -357,7 +378,9 @@ const LIMIT_VISIBLE = () => {
     await page.click('.chip[data-chip="' + c + '"]'); await page.waitForTimeout(200);
     chk('s2: chip ' + c + ' opens its sheet', await page.evaluate(id => !document.getElementById(id).hidden,
       'sheet' + c.charAt(0).toUpperCase() + c.slice(1)));
-    if (i < 2) chk('s2: gate still closed after ' + (i + 1) + ' of 3', await page.isDisabled('#btnPrimary'));
+    if (i < 2) chk('s2: gate still closed after ' + (i + 1) + ' of 3, button still "Continue", count updated',
+      (await page.isDisabled('#btnPrimary')) && (await page.textContent('#btnPrimary')).trim() === 'Continue' &&
+      (await page.textContent('#gateCount')).trim() === (i + 1) + ' of 3 resolved');
     if (i === 1) await shot(page, '04-s2-sheet-cases.png');
     await page.keyboard.press('Escape'); await page.waitForTimeout(180);
   }
@@ -391,6 +414,7 @@ const LIMIT_VISIBLE = () => {
   chk('s2: scope does NOT steal focus', await page.evaluate(() => !document.getElementById('scopeInline').contains(document.activeElement)));
   chk('s2: scrim stays down', await page.evaluate(() => document.getElementById('scrim').hidden));
   chk('s2: primary ungated', !(await page.isDisabled('#btnPrimary')));
+  chk('s2: helper count reads "3 of 3 resolved"', (await page.textContent('#gateCount')).trim() === '3 of 3 resolved');
   const scopeTxt = await page.textContent('#scopeInline');
   chk('s2: scope states floor, standard benefit category, manual review, Aug. 11',
       ['floor on transactions', 'standard SAVE benefit category', 'manual review', 'through Aug. 11'].every(k => scopeTxt.indexOf(k) > -1));
@@ -448,6 +472,7 @@ const LIMIT_VISIBLE = () => {
   chk('reveal copy is hidden until the loop draws', await page.evaluate(() => parseFloat(getComputedStyle(document.getElementById('loopCopy')).opacity) < 0.05));
   await page.evaluate(() => window.__sq.go('s6')); await page.waitForTimeout(1400);
   chk('s6: reveal copy visible', await page.evaluate(() => parseFloat(getComputedStyle(document.getElementById('loopCopy')).opacity) > 0.5));
+  chk('s6: reveal reads "The question stays open."', (await page.textContent('#loopCopy')).trim() === 'The question stays open.');
   chk('s6: action bar returned', await page.evaluate(() => getComputedStyle(document.querySelector('.sq-action')).pointerEvents !== 'none'));
   chk('s6: primary reads "See what happens next"', (await page.textContent('#btnPrimary')).trim() === 'See what happens next');
   const railS6 = await page.evaluate(() => document.getElementById('railWrap').getBoundingClientRect().height);
@@ -520,9 +545,63 @@ const LIMIT_VISIBLE = () => {
   chk('s8: page-level limitation still visible at the end', await page.evaluate(LIMIT_VISIBLE));
   await shot(page, '11-s8.png', { fullPage: true });
 
-  /* --- reset --- */
-  await page.click('#btnPrimary'); await page.waitForTimeout(320);
-  chk('s8 -> reset to s0', await page.getAttribute('#sq', 'data-state') === 's0');
+  /* --- s8 exits and reset --- */
+  chk('s8: sticky bar withdrawn; Start over is not the dominant exit', await page.evaluate(() => {
+    const bar = getComputedStyle(document.querySelector('.sq-action')).display === 'none';
+    const r = document.getElementById('btnRestartEnd');
+    const sub = document.querySelector('.sq-exit [data-subscribe-cta]');
+    return bar && r && r.offsetParent !== null && r.getBoundingClientRect().height >= 44 &&
+      getComputedStyle(r).backgroundColor === 'rgba(0, 0, 0, 0)' && sub && sub.getBoundingClientRect().width > r.getBoundingClientRect().width;
+  }));
+  chk('s8: Subscribe present with the exact branded URL', await page.evaluate(() => {
+    const a = document.querySelector('.sq-exit [data-subscribe-cta]');
+    return !!a && a.getAttribute('href') === 'https://investigations.restoring-democracy.org/subscribe/' && a.offsetParent !== null && a.getBoundingClientRect().height >= 44;
+  }));
+  chk('s8: article CTA hidden while ARTICLE_URL is empty', await page.evaluate(() => {
+    const a = document.querySelector('.sq-exit [data-article-cta]');
+    return !window.__sq.articleUrl() ? (a.hidden && getComputedStyle(a).display === 'none') : !a.hidden;
+  }));
+  chk('s8: article CTA would reveal as the primary action when configured', await page.evaluate(() => {
+    window.__sq.previewArticleUrl('https://example.invalid/preview-only');
+    const a = document.querySelector('.sq-exit [data-article-cta]');
+    const about = document.querySelector('#about-exhibit [data-article-cta]');
+    const ok = !a.hidden && a.getAttribute('href') === 'https://example.invalid/preview-only' && getComputedStyle(a).display !== 'none' &&
+      !about.hidden && about.getAttribute('href') === 'https://example.invalid/preview-only' &&
+      a.getBoundingClientRect().top < document.querySelector('.sq-exit [data-subscribe-cta]').getBoundingClientRect().top;
+    window.__sq.previewArticleUrl('');
+    const hiddenWhenEmpty = document.querySelector('.sq-exit [data-article-cta]').hidden && getComputedStyle(document.querySelector('.sq-exit [data-article-cta]')).display === 'none';
+    window.__sq.previewArticleUrl(window.__sq.articleUrl());   /* restore the configured state */
+    return ok && hiddenWhenEmpty;
+  }));
+  chk('s8: configured ARTICLE_URL is the branded Investigations Desk story', await page.evaluate(() =>
+    window.__sq.articleUrl() === 'https://investigations.restoring-democracy.org/p/inside-iowas-save-clearinghouse-what'));
+  chk('s8: article CTA is the visually strongest exit when configured', await page.evaluate(() => {
+    const a = document.querySelector('.sq-exit [data-article-cta]');
+    if (!window.__sq.articleUrl()) return true;
+    const cs = getComputedStyle(a);
+    return !a.hidden && cs.backgroundColor !== 'rgba(0, 0, 0, 0)' && a.getBoundingClientRect().height >= 44 &&
+      a.getBoundingClientRect().top < document.querySelector('.sq-exit [data-subscribe-cta]').getBoundingClientRect().top;
+  }));
+  chk('s8: USCIS confirmation is a five-point list with the attribution adjacent', await page.evaluate(() => {
+    const ul = document.querySelector('.panel[data-panel="s8"] .limit-block__list');
+    const li = ul ? [...ul.querySelectorAll('li')].map(l => l.textContent.trim()) : [];
+    const attrib = ul && ul.previousElementSibling && ul.previousElementSibling.textContent.indexOf('Sept. 4, 2026') > -1;
+    return li.length === 5 && attrib &&
+      li[0] === 'One initial verification is one transaction.' &&
+      li[1] === 'An agency can submit another transaction for the same person.' &&
+      li[2] === '“Professional License” is a standard SAVE benefit category used by many registered user agencies.' &&
+      li[3] === 'The Dec. 23, 2025 DIAL–USCIS memorandum of agreement remains in effect.' &&
+      li[4] === 'DIAL continues to retain SAVE access for professional-licensing verification.';
+  }));
+  chk('s8: subscribe click is tracked through the guarded helper', await page.evaluate(() => {
+    const a = document.querySelector('.sq-exit [data-subscribe-cta]');
+    const ev = new MouseEvent('click', { bubbles: true, cancelable: true });
+    a.addEventListener('click', e => e.preventDefault(), { once: true });
+    a.dispatchEvent(ev);
+    return window.__sq.tracked().indexOf('standing_query_subscribe_click') > -1;
+  }));
+  await page.click('#btnRestartEnd'); await page.waitForTimeout(320);
+  chk('s8 -> reset to s0 via the tertiary Start over', await page.getAttribute('#sq', 'data-state') === 's0');
   chk('reset: gate cleared', !(await page.evaluate(() => window.__sq.gateOpen())));
   chk('reset: loop ABSENT again', await page.evaluate(LOOP_ABSENT));
   chk('reset: ISSUED ABSENT again', await page.evaluate(STAMP_HIDDEN));
@@ -709,24 +788,27 @@ const LIMIT_VISIBLE = () => {
     const siv = Element.prototype.scrollIntoView;
     Element.prototype.scrollIntoView = function () { window.__scrolls++; return siv.apply(this, arguments); };
   };
-  const anchorOk = (sel) => {
-    const el = document.querySelector(sel);
-    const top = el.getBoundingClientRect().top;
-    const off = window.__sq.navOffset;
+  /* the interactive header (Back / Composite case / Restart) must sit below the
+     fixed nav with a modest gap, and the exhibit top must be the landing */
+  const anchorOk = () => {
+    const nav = document.querySelector('.nav-bar').getBoundingClientRect();
+    const hd = document.querySelector('.sq-header').getBoundingClientRect();
+    const sqTop = document.getElementById('sq').getBoundingClientRect().top;
     const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
-    return (top >= off - 6 && top <= off + 48) || (atEnd && top >= 0 && top < window.innerHeight);
+    return hd.top >= nav.bottom + 4 && (sqTop <= nav.bottom + 40 || atEnd);
   };
-  for (const [name, w, h] of [['390x844', 390, 844], ['1440x900', 1440, 900]]) {
+  for (const [name, w, h] of [['320x568', 320, 568], ['390x844', 390, 844], ['1024x768', 1024, 768], ['1440x900', 1440, 900]]) {
     ctx = await browser.newContext({ viewport: { width: w, height: h } });
     await guard(ctx, []);
     page = await ctx.newPage();
     await page.goto(URL); await page.waitForTimeout(250);
     await page.evaluate(scrollProbe);
     await page.click('#btnPrimary'); await page.waitForTimeout(900);
-    chk('position ' + name + ': s1 brings the card into view under the nav', await page.evaluate(anchorOk, '#card'),
-        String(await page.evaluate(() => Math.round(document.getElementById('card').getBoundingClientRect().top))));
+    chk('position ' + name + ': s1 lands the exhibit header below the fixed nav, card beneath it', await page.evaluate(anchorOk) &&
+        await page.evaluate(() => document.getElementById('card').getBoundingClientRect().top < window.innerHeight * 0.6),
+        String(await page.evaluate(() => Math.round(document.querySelector('.sq-header').getBoundingClientRect().top))));
     await page.click('#btnPrimary'); await page.waitForTimeout(900);
-    chk('position ' + name + ': s2 brings the card thumbnail + count into view', await page.evaluate(anchorOk, '#card'));
+    chk('position ' + name + ': s2 lands the header below the nav with the thumbnail + count beneath', await page.evaluate(anchorOk));
     for (const c of ['people', 'cases', 'transactions']) {
       await page.click('.chip[data-chip="' + c + '"]'); await page.waitForTimeout(120);
       await page.keyboard.press('Escape'); await page.waitForTimeout(120);
@@ -743,6 +825,11 @@ const LIMIT_VISIBLE = () => {
       const r = document.getElementById('cardStamp').getBoundingClientRect();
       return r.top >= 0 && r.bottom <= window.innerHeight && document.getElementById('sq').getAttribute('data-state') === 's4';
     }), await page.getAttribute('#sq', 'data-state'));
+    chk('position ' + name + ': at s3/s4 the composite row is still visible below the nav (fully at ≥360 wide)', await page.evaluate(() => {
+      const nav = document.querySelector('.nav-bar').getBoundingClientRect();
+      const hd = document.querySelector('.sq-header').getBoundingClientRect();
+      return window.innerWidth >= 360 ? hd.top >= nav.bottom + 4 : hd.bottom >= nav.bottom + 24;
+    }));
     await page.waitForTimeout(3900);                       /* s4 > s5 > s6 */
     chk('position ' + name + ': NO programmatic scroll from s3 through s6 (false ending untouched)',
         (await page.evaluate(() => window.__scrolls)) === atTap && await page.getAttribute('#sq', 'data-state') === 's6',
@@ -750,12 +837,14 @@ const LIMIT_VISIBLE = () => {
     if (name === '390x844') chk('position 390x844: the fold stays clean through the reveal (no about-section text above the fold at s6)', await page.evaluate(() =>
       document.getElementById('about-heading').getBoundingClientRect().top >= window.innerHeight));
     await page.click('#btnPrimary'); await page.waitForTimeout(900);
-    chk('position ' + name + ': s7 brings the station-7 panel into view', await page.evaluate(anchorOk, '.panel[data-panel="s7"]'));
+    chk('position ' + name + ': s7 lands the header below the nav (loop rail in view)', await page.evaluate(anchorOk));
     await page.click('#btnPrimary'); await page.waitForTimeout(900);
-    chk('position ' + name + ': s8 brings the end panel into view', await page.evaluate(anchorOk, '.panel[data-panel="s8"]'));
+    chk('position ' + name + ': s8 lands the header below the nav', await page.evaluate(anchorOk));
+    await page.click('#btnBack'); await page.waitForTimeout(900);
+    chk('position ' + name + ': Back leaves the header below the nav', await page.evaluate(anchorOk));
     await page.click('#btnRestart'); await page.waitForTimeout(900);
-    chk('position ' + name + ': Restart returns to the top of the interactive', await page.evaluate(anchorOk, '#sq'),
-        String(await page.evaluate(() => Math.round(document.getElementById('sq').getBoundingClientRect().top))));
+    chk('position ' + name + ': Restart returns to the top of the interactive, header clear of the nav', await page.evaluate(anchorOk),
+        String(await page.evaluate(() => Math.round(document.querySelector('.sq-header').getBoundingClientRect().top))));
     if (name === '390x844') {
       await page.click('#btnPrimary'); await page.waitForTimeout(700);
       await page.click('#btnPrimary'); await page.waitForTimeout(700);
@@ -772,10 +861,11 @@ const LIMIT_VISIBLE = () => {
   await page.goto(URL); await page.waitForTimeout(250);
   const rmPos = await page.evaluate(() => {
     document.getElementById('btnPrimary').click();
-    const top = document.getElementById('card').getBoundingClientRect().top;
-    return { top: Math.round(top), off: window.__sq.navOffset };
+    const nav = document.querySelector('.nav-bar').getBoundingClientRect();
+    const hd = document.querySelector('.sq-header').getBoundingClientRect();
+    return { hdTop: Math.round(hd.top), navB: Math.round(nav.bottom) };
   });
-  chk('position rm: s1 positioning is instant (no glide) under reduced motion', rmPos.top >= rmPos.off - 6 && rmPos.top <= rmPos.off + 48, JSON.stringify(rmPos));
+  chk('position rm: s1 positioning is instant (no glide) and the header clears the nav', rmPos.hdTop >= rmPos.navB + 4 && rmPos.hdTop <= rmPos.navB + 40, JSON.stringify(rmPos));
   await ctx.close();
 
   /* ======================= 7c. CLOSE → CONTINUE (regression) =======================
@@ -878,9 +968,163 @@ const LIMIT_VISIBLE = () => {
   }
   await ctx.close();
 
+
+  /* ======================= 7e. ACTION-BAR COLLISION + RAIL LABELS + DISCLOSURE ======================= */
+  const NO_OVERLAP = () => {
+    /* no visible text inside the exhibit may sit under the action bar once the
+       exhibit's end is on screen (the bar is in flow there); while pinned mid-
+       scroll, everything beneath it must be reachable by scrolling. */
+    const bar = document.querySelector('.sq-action');
+    if (getComputedStyle(bar).display === 'none' || getComputedStyle(bar).pointerEvents === 'none') return { ok: true, n: 0 };
+    const b = bar.getBoundingClientRect();
+    const hits = [];
+    document.querySelectorAll('#sq p, #sq h2, #sq h3, #sq dt, #sq dd, #sq button:not(#btnPrimary), #sq .rail__label, #sq li').forEach(el => {
+      if (bar.contains(el)) return;
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || parseFloat(cs.opacity) < 0.05 || el.closest('.visually-hidden')) return;
+      const r = el.getBoundingClientRect();
+      if (r.height === 0) return;
+      if (r.bottom > b.top + 1 && r.top < b.bottom) hits.push(el.className || el.tagName);
+    });
+    return { ok: hits.length === 0, n: hits.length, hits: hits.slice(0, 4).join(',') };
+  };
+  const SCROLL_TO_EXHIBIT_END = () => {
+    const sq = document.getElementById('sq').getBoundingClientRect();
+    window.scrollTo({ top: sq.bottom + window.scrollY - window.innerHeight + 4, behavior: 'instant' });
+  };
+  for (const [name, w, h] of [['320x568', 320, 568], ['360x640', 360, 640], ['375x812', 375, 812], ['390x844', 390, 844], ['700x900', 700, 900], ['1024x768', 1024, 768], ['1440x900', 1440, 900]]) {
+    ctx = await browser.newContext({ viewport: { width: w, height: h } });
+    await guard(ctx, []);
+    page = await ctx.newPage();
+    await page.goto(URL); await page.waitForTimeout(250);
+    const states = [['s0', async () => {}], ['s1', async () => { await page.click('#btnPrimary'); }], ['s2 unresolved', async () => { await page.click('#btnPrimary'); }],
+      ['s2 resolved', async () => { for (const c of ['people', 'cases', 'transactions']) { await page.click('.chip[data-chip="' + c + '"]'); await page.waitForTimeout(100); await page.keyboard.press('Escape'); await page.waitForTimeout(100); } }],
+      ['s7', async () => { await page.evaluate(() => window.__sq.go('s6')); await page.waitForTimeout(1300); await page.click('#btnPrimary'); }],
+      ['s8', async () => { await page.click('#btnPrimary'); }]];
+    for (const [st, act] of states) {
+      await act(); await page.waitForTimeout(900);
+      /* collision B: at the exhibit's end nothing sits under the bar */
+      await page.evaluate(SCROLL_TO_EXHIBIT_END); await page.waitForTimeout(80);
+      const col = await page.evaluate(NO_OVERLAP);
+      chk('bar ' + name + ' ' + st + ': no content beneath the action bar at the exhibit end', col.ok, col.hits || '');
+      /* every text element that the bar covers while pinned can be scrolled clear */
+      chk('bar ' + name + ' ' + st + ': bar is in flow at the exhibit end (content above it, never trapped)', await page.evaluate(() => {
+        const bar = document.querySelector('.sq-action');
+        if (getComputedStyle(bar).display === 'none') return true;
+        const b = bar.getBoundingClientRect(), sq = document.getElementById('sq').getBoundingClientRect();
+        return b.bottom <= sq.bottom + 1 && b.top >= sq.top;
+      }));
+      /* rail C: rendered label size and no clipping / overlap, when labels are shown */
+      const rail = await page.evaluate(() => {
+        const wrap = document.getElementById('railWrap').getBoundingClientRect();
+        const shown = [...document.querySelectorAll('.rail__label')].filter(t => parseFloat(getComputedStyle(t).opacity) > 0.5);
+        const rects = shown.map(t => t.getBoundingClientRect());
+        let overlap = 0;
+        for (let i = 0; i < rects.length; i++) for (let j = i + 1; j < rects.length; j++) {
+          const a = rects[i], b = rects[j];
+          if (a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom) overlap++;
+        }
+        const dots = [...document.querySelectorAll('.rail__station:not(.is-loop)')].map(d => d.getBoundingClientRect());
+        let dotHit = 0;
+        for (const r of rects) for (const d of dots) if (r.left < d.right && d.left < r.right && r.top < d.bottom && d.top < r.bottom) dotHit++;
+        const clipped = rects.some(r => r.left < wrap.left - 1 || r.right > wrap.right + 1 || r.top < wrap.top - 1 || r.bottom > wrap.bottom + 1);
+        return { n: shown.length, minH: rects.length ? Math.min(...rects.map(r => r.height)) : null, fs: shown.length ? parseFloat(getComputedStyle(shown[0]).fontSize) : null,
+                 overlap, dotHit, clipped, ovf: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+                 labels: shown.map(t => t.textContent).join('|') };
+      });
+      if (rail.n) {
+        chk('rail ' + name + ' ' + st + ': labels render ≥11px / box ≥13.5px', rail.fs >= 11 && rail.minH >= 13.5, 'fs=' + rail.fs + ' minH=' + rail.minH);
+        chk('rail ' + name + ' ' + st + ': no label overlap, no dot collision, no clipping, no overflow', rail.overlap === 0 && rail.dotHit === 0 && !rail.clipped && !rail.ovf, JSON.stringify(rail));
+      }
+      /* disclosure D: labels only when earned */
+      const exp = { 's0': [], 's1': ['Response'], 's2 unresolved': ['Response', '16,457 transactions'], 's2 resolved': ['Response', '16,457 transactions'],
+                    's7': ['Response', '16,457 transactions', 'Issued', 'Status expires'], 's8': ['Response', '16,457 transactions', 'Issued', 'Status expires'] }[st];
+      chk('disclosure ' + name + ' ' + st + ': visible rail labels are exactly ' + (exp.join(', ') || 'none'), rail.labels === exp.join('|'), rail.labels);
+      if (st === 's2 resolved') {
+        chk('bar ' + name + ' s2: scope open — its text clears the bar at the exhibit end', col.ok);
+      }
+    }
+    /* s4 (ISSUED) — via the real flow from s2 */
+    await page.evaluate(() => window.__sq.reset()); await page.waitForTimeout(150);
+    await page.evaluate(() => window.__sq.go('s2')); await page.waitForTimeout(150);
+    for (const c of ['people', 'cases', 'transactions']) { await page.click('.chip[data-chip="' + c + '"]'); await page.waitForTimeout(80); await page.keyboard.press('Escape'); await page.waitForTimeout(80); }
+    await page.click('#btnPrimary'); await page.waitForTimeout(150);
+    chk('disclosure ' + name + ' s3: Issued label ABSENT before the stamp lands', await page.evaluate(() =>
+      parseFloat(getComputedStyle(document.querySelector('.rail__label[data-label="6"]')).opacity) < 0.05 && parseFloat(getComputedStyle(document.querySelector('.rail__label--loop')).opacity) < 0.05));
+    await page.waitForTimeout(600);
+    chk('disclosure ' + name + ' s4: Issued label present, Status expires still ABSENT during the false ending', await page.evaluate(() =>
+      document.getElementById('sq').getAttribute('data-state') === 's4' &&
+      parseFloat(getComputedStyle(document.querySelector('.rail__label[data-label="6"]')).opacity) > 0.5 &&
+      parseFloat(getComputedStyle(document.querySelector('.rail__label--loop')).opacity) < 0.05));
+    await page.waitForTimeout(4000);
+    chk('disclosure ' + name + ' s6: Status expires label earned by the reveal', await page.evaluate(() =>
+      document.getElementById('sq').getAttribute('data-state') === 's6' && parseFloat(getComputedStyle(document.querySelector('.rail__label--loop')).opacity) > 0.5));
+    await ctx.close();
+  }
+
+  /* ======================= 7f. SHEETS ON SHORT VIEWPORTS (K) ======================= */
+  for (const [name, w, h] of [['360x480', 360, 480], ['360x568', 360, 568], ['390x844', 390, 844]]) {
+    ctx = await browser.newContext({ viewport: { width: w, height: h } });
+    await guard(ctx, []);
+    page = await ctx.newPage();
+    await page.goto(URL); await page.waitForTimeout(250);
+    const sheets = [
+      ['People', 's2', '.chip[data-chip="people"]', '#sheetPeople', '#sheetPeople .sheet__inner', '#sheetPeople h2', '#sheetPeople .sheet__close'],
+      ['Cases', 's2', '.chip[data-chip="cases"]', '#sheetCases', '#sheetCases .sheet__inner', '#sheetCases h2', '#sheetCases .sheet__close'],
+      ['Transactions', 's2', '.chip[data-chip="transactions"]', '#sheetTransactions', '#sheetTransactions .sheet__inner', '#sheetTransactions h2', '#sheetTransactions .sheet__close'],
+      ['Additional verification', 's1', '#receiptAdditional .receipt__trigger', '#bodyAdditional', '#bodyAdditional', '#bodyAdditionalTitle', '#bodyAdditional .receipt__close'],
+      ['The paragraph DIAL sends', 's7', '#receiptLetter .receipt__trigger', '#bodyLetter', '#bodyLetter', '#bodyLetterTitle', '#bodyLetter .receipt__close']
+    ];
+    for (const [label, st, trig, box, scroller, title, close] of sheets) {
+      await page.evaluate(t => { window.__sq.reset(); window.__sq.go(t); }, st); await page.waitForTimeout(st === 's7' ? 1200 : 200);
+      await page.click(trig); await page.waitForTimeout(200);
+      const m = await page.evaluate(([sc, ti, cl]) => {
+        const s = document.querySelector(sc), t = document.querySelector(ti), c = document.querySelector(cl);
+        const tr = t.getBoundingClientRect();
+        const needs = s.scrollHeight > s.clientHeight + 1;
+        s.scrollTop = s.scrollHeight;
+        const cr = c.getBoundingClientRect();
+        const focusIn = s.contains(document.activeElement) || document.querySelector(cl).closest('[role="dialog"]').contains(document.activeElement);
+        return { titleOk: tr.top >= 0 && tr.top < window.innerHeight, needs, closeOk: cr.top >= 0 && cr.bottom <= window.innerHeight, focusIn,
+                 overflowY: getComputedStyle(s).overflowY, maxH: getComputedStyle(s).maxHeight };
+      }, [scroller, title, close]);
+      chk('sheet ' + name + ' ' + label + ': title reachable, body scrolls when needed, Close reachable, focus inside',
+          m.titleOk && m.closeOk && m.focusIn && (!m.needs || m.overflowY === 'auto' || m.overflowY === 'scroll'), JSON.stringify(m));
+      await page.keyboard.press('Escape'); await page.waitForTimeout(120);
+      chk('sheet ' + name + ' ' + label + ': Escape closes and returns focus', await page.evaluate(([b, t]) => {
+        const el = document.querySelector(b);
+        const closed = el.classList.contains('receipt__body') ? el.getAttribute('data-open') === null : el.hidden;
+        return closed && document.activeElement === document.querySelector(t) && document.getElementById('scrim').hidden;
+      }, [box, trig]));
+    }
+    await ctx.close();
+  }
+
+  /* ======================= 7g. SCREENSHOT MATRIX ======================= */
+  for (const [name, w, h] of [['320x568', 320, 568], ['360x640', 360, 640], ['375x812', 375, 812], ['390x844', 390, 844], ['768x1024', 768, 1024], ['1024x768', 1024, 768], ['1440x900', 1440, 900], ['1534x881', 1534, 881]]) {
+    ctx = await browser.newContext({ viewport: { width: w, height: h } });
+    await guard(ctx, []);
+    page = await ctx.newPage();
+    await page.goto(URL); await page.waitForTimeout(300);
+    const S = async (tag) => shot(page, '20-' + name + '-' + tag + '.png');
+    await S('s0');
+    await page.click('#btnPrimary'); await page.waitForTimeout(900); await S('s1');
+    await page.click('#btnPrimary'); await page.waitForTimeout(900); await S('s2-unresolved');
+    for (const c of ['people', 'cases', 'transactions']) { await page.click('.chip[data-chip="' + c + '"]'); await page.waitForTimeout(100); await page.keyboard.press('Escape'); await page.waitForTimeout(100); }
+    await page.waitForTimeout(300); await S('s2-resolved');
+    await page.click('#btnPrimary'); await page.waitForTimeout(800); await S('s4-issued');
+    await page.waitForTimeout(3900); await S('s6-loop');
+    await page.click('#btnPrimary'); await page.waitForTimeout(900); await S('s7');
+    await page.click('#btnPrimary'); await page.waitForTimeout(900); await S('s8');
+    chk('matrix ' + name + ': no horizontal overflow at s8', await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1));
+    chk('matrix ' + name + ': no hidden-but-focusable control at s8', await page.evaluate(() =>
+      [...document.querySelectorAll('#sq button, #sq a')].every(b => (b.offsetParent !== null) || b.disabled || b.hidden || b.getClientRects().length === 0)));
+    await ctx.close();
+  }
+
   /* ======================= 8. VIEWPORT SWEEP ======================= */
-  for (const [name, w, h] of [['320x568', 320, 568], ['375x667', 375, 667], ['390x844', 390, 844],
-                              ['430x932', 430, 932], ['768x1024', 768, 1024], ['1024x768', 1024, 768], ['1440x900', 1440, 900]]) {
+  for (const [name, w, h] of [['320x568', 320, 568], ['360x640', 360, 640], ['375x667', 375, 667], ['375x812', 375, 812], ['390x844', 390, 844],
+                              ['430x932', 430, 932], ['768x1024', 768, 1024], ['1024x768', 1024, 768], ['1440x900', 1440, 900], ['1534x881', 1534, 881]]) {
     ctx = await browser.newContext({ viewport: { width: w, height: h } });
     await guard(ctx, []);
     page = await ctx.newPage();
@@ -909,7 +1153,8 @@ const LIMIT_VISIBLE = () => {
         const line = document.getElementById('railProgress').getBoundingClientRect();
         /* the sticky bar must be pinned to the viewport bottom while the exhibit is in view */
         const sqR = document.getElementById('sq').getBoundingClientRect();
-        const pinned = (sqR.bottom > window.innerHeight) ? Math.abs(bar.bottom - window.innerHeight) < 2 : true;
+        /* pinned only matters when the bar's natural (in-flow) position is below the fold */
+        const pinned = (sqR.bottom - 32 > window.innerHeight) ? Math.abs(bar.bottom - window.innerHeight) < 2 : bar.bottom <= window.innerHeight + 2;
         return { ovf: de.scrollWidth > de.clientWidth + 1, col: col, cov: cov,
                  railW: Math.round(wrap.width), railH: Math.round(line.width),
                  tele: (state === 's0' || state === 's2') && dot.top < wrap.bottom - 2,

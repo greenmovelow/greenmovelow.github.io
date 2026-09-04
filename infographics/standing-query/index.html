@@ -100,6 +100,7 @@
     .about-note{background:#112218;border:1px solid #1e3a29;border-left:3px solid rgba(212,175,55,.7)}
     /* Tailwind utilities outrank preflight's [hidden]; article CTAs stay hidden until the article link is configured in app.js. */
     [data-article-cta][hidden]{display:none!important}
+    .about-cta{min-height:44px}
     .section-rule{border:none;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,55,.3),transparent);margin:2.5rem 0}
 
     .footer-tooltip{position:relative;cursor:pointer}
@@ -183,7 +184,7 @@
     <header class="sq-header">
       <button type="button" class="sq-back js-no-skip" id="btnBack" aria-label="Go back one step">←</button>
       <button type="button" class="composite-label js-no-skip" id="btnComposite" aria-expanded="false" aria-controls="sheetComposite">
-        <span class="composite-label__tag">Composite case</span>
+        <span class="composite-label__tag">Composite case <span class="composite-label__hint" aria-hidden="true">ⓘ</span></span>
         <span class="composite-label__sub">Assembled from Iowa's own procedures. Not an individual's record.</span>
       </button>
       <button type="button" class="sq-restart js-no-skip" id="btnRestart" aria-label="Restart the sequence">↺</button>
@@ -238,6 +239,15 @@
           <path id="railLoop" class="rail__loop" d="M 292 34 C 310 34 310 62 292 62 L 168 62 C 150 62 150 79 168 79" fill="none"></path>
           <g id="railStations"></g>
         </svg>
+        <!-- Station labels are HTML, not SVG text, so they keep a real CSS size
+             at every width. Decorative: the accessible mirror is the <ol> below.
+             Each label is revealed only when its station has been reached. -->
+        <div class="rail-labels" aria-hidden="true">
+          <span class="rail__pin" style="--x:182;--y:42"><span class="rail__label" data-label="4">Response</span></span>
+          <span class="rail__pin" style="--x:237;--y:9"><span class="rail__label" data-label="5">16,457 transactions</span></span>
+          <span class="rail__pin rail__pin--end" style="--x:292;--y:42"><span class="rail__label" data-label="6">Issued</span></span>
+          <span class="rail__pin" style="--x:168;--y:96"><span class="rail__label rail__label--loop" data-label="7">Status expires</span></span>
+        </div>
         </div>
       </div>
       <ol class="visually-hidden" id="railList" aria-label="Licensing steps in this sequence"></ol>
@@ -266,6 +276,7 @@
       </dl>
 
       <p class="receipts__prompt" id="chipPrompt">What does this number count? Resolve all three.</p>
+      <p class="receipts__count" id="gateCount" role="status" aria-live="polite">0 of 3 resolved</p>
       <div class="chips">
         <button type="button" class="chip" data-chip="people" aria-controls="sheetPeople" aria-expanded="false">People</button>
         <button type="button" class="chip" data-chip="cases" aria-controls="sheetCases" aria-expanded="false">Cases</button>
@@ -294,8 +305,8 @@
       </section>
 
       <section class="panel" data-panel="s1">
-        <h2 class="panel__head">A response comes back.</h2>
-        <p class="panel__body">The system returns what the federal government holds on that person's status. Some cases resolve here. Some do not.</p>
+        <h2 class="panel__head">SAVE returns a verification response.</h2>
+        <p class="panel__body">The licensing agency submits the applicant’s information to SAVE. SAVE checks it against federal immigration records and returns a verification response. Some checks resolve immediately. Others require additional verification.</p>
         <div class="receipt" id="receiptAdditional">
           <button type="button" class="receipt__trigger" aria-expanded="false" aria-controls="bodyAdditional">Additional verification</button>
           <div class="receipt__body" id="bodyAdditional" role="dialog" aria-modal="true" aria-labelledby="bodyAdditionalTitle">
@@ -323,7 +334,7 @@
       </section>
 
       <section class="panel" data-panel="s6">
-        <p class="panel__reveal" id="loopCopy">The file stays open.</p>
+        <p class="panel__reveal" id="loopCopy">The question stays open.</p>
       </section>
 
       <section class="panel" data-panel="s7">
@@ -360,7 +371,14 @@
 
         <div class="limit-block limit-block--ror">
           <p class="limit-block__head">What USCIS confirmed</p>
-          <p class="limit-block__body">In its Sept. 4, 2026 response, USCIS confirmed that an initial verification is one transaction; that an agency can submit another transaction for the same person; that “Professional License” is a standard SAVE benefit category used by many registered user agencies; that the Dec. 23, 2025 DIAL–USCIS memorandum of agreement remains in effect; and that DIAL continues to retain SAVE access for professional-licensing verification.</p>
+          <p class="limit-block__body">In its Sept. 4, 2026 response to RDP’s questions, USCIS confirmed:</p>
+          <ul class="limit-block__list">
+            <li>One initial verification is one transaction.</li>
+            <li>An agency can submit another transaction for the same person.</li>
+            <li>“Professional License” is a standard SAVE benefit category used by many registered user agencies.</li>
+            <li>The Dec. 23, 2025 DIAL–USCIS memorandum of agreement remains in effect.</li>
+            <li>DIAL continues to retain SAVE access for professional-licensing verification.</li>
+          </ul>
         </div>
 
         <!-- ======================================================================
@@ -375,7 +393,14 @@
         </div>
         <!-- ================== END RIGHT OF RESPONSE ================== -->
 
-        <a class="sq-cta" data-article-cta hidden>Read the full investigation &rarr;</a>
+        <!-- Exit actions. Primary = the investigation (hidden until ARTICLE_URL
+             is set), secondary = subscribe, tertiary = start over. The sticky
+             bar is withdrawn at s8 so "Start over" is never the dominant exit. -->
+        <div class="sq-exit">
+          <a class="btn sq-exit__primary" data-article-cta hidden>Read the full investigation &rarr;</a>
+          <a class="btn btn--ghost sq-exit__secondary" href="https://investigations.restoring-democracy.org/subscribe/" target="_blank" rel="noopener noreferrer" data-subscribe-cta>Subscribe to follow the SAVE investigation</a>
+          <button type="button" class="sq-exit__tertiary" id="btnRestartEnd">Start over</button>
+        </div>
       </section>
 
     </div><!-- /panels -->
@@ -458,9 +483,10 @@
       </p>
 
       <div class="flex flex-col sm:flex-row gap-3">
-        <a data-article-cta hidden target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-brand-gold text-brand-offblack font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-brand-orange transition-colors shadow-lg">Read the full investigation &rarr;</a>
-        <a href="/corrections/" class="inline-flex items-center justify-center gap-2 border border-brand-gold/40 text-brand-sand hover:text-brand-gold hover:border-brand-gold/60 font-medium text-sm px-5 py-2.5 rounded-lg transition-colors">Corrections policy</a>
+        <a data-article-cta hidden target="_blank" rel="noopener noreferrer" class="about-cta inline-flex items-center justify-center gap-2 bg-brand-gold text-brand-offblack font-bold text-sm px-5 py-3 rounded-lg hover:bg-brand-orange transition-colors shadow-lg">Read the full investigation &rarr;</a>
+        <a href="https://investigations.restoring-democracy.org/subscribe/" target="_blank" rel="noopener noreferrer" data-subscribe-cta class="about-cta inline-flex items-center justify-center gap-2 border border-brand-gold/40 text-brand-sand hover:text-brand-gold hover:border-brand-gold/60 font-medium text-sm px-5 py-3 rounded-lg transition-colors">Subscribe to follow the SAVE investigation</a>
       </div>
+      <p class="mt-4 text-sm"><a href="/corrections/" class="text-brand-sand/60 hover:text-brand-gold underline underline-offset-4 transition-colors">Corrections policy</a></p>
     </div>
   </section>
 
