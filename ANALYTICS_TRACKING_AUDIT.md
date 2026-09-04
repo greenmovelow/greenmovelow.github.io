@@ -55,6 +55,12 @@ The audit classifies all 41 repository HTML files: 35 eligible public pages cont
 - `vault.html` — operational-security/canary page; no analytics.
 - `journalism/cross-and-capitol/index.html` — empty, one-byte non-content placeholder; no analytics.
 
+## Additions since the migration
+
+- `infographics/ipers-bonus-calculator/index.html` — eligible public page; carries one GoatCounter snippet.
+- `infographics/standing-query/index.html` — eligible public page; carries one GoatCounter snippet. The exhibit's script also reports five custom interaction events through the same counter (`standing_query_start`, `standing_query_audit_complete`, `standing_query_loop_reveal`, `standing_query_complete`, `standing_query_article_click`) via `window.goatcounter.count({event: true})`. The calls are wrapped in `try/catch`, fire at most once per page load, and are a no-op when the counter is absent or blocked. No new vendor.
+- `_handoff/**` — editorial handoff prototypes committed as source material. Excluded from the audit (`EXCLUDED_PREFIXES` in `scripts/audit_analytics.py`) and served with `X-Robots-Tag: noindex` via `_headers`. They are not published routes and carry no analytics.
+
 ## Exclusion principles
 
 Analytics are excluded from:

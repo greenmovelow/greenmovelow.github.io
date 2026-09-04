@@ -1,1 +1,4 @@
 node_modules/
+# Playwright screenshot output from scripts/test_standing_query.js and the handoff check
+_shots/
+_handoff/**/_shots/

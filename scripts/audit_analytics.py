@@ -16,6 +16,7 @@ EXCLUDED_PREFIXES: dict[str, str] = {
     "secure-tips/": "source-contact and source-intake pages",
     "resources/reference/records/status/": "restricted-status pages with script-src 'none'",
     "go/": "redirect-only and forwarding pages",
+    "_handoff/": "editorial handoff prototypes; source material, not published routes",
 }
 EXCLUDED_FILES: dict[str, str] = {
     "vault.html": "operational security / canary page",
