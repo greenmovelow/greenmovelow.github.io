@@ -98,6 +98,9 @@ const BANNED_TEXT = [
   ['PROTOTYPE', 'prototype banner must not ship'],
   ['ARTICLE_URL', 'the placeholder constant must never render as text'],
   ['The file stays open', 'the records establish a documented procedure, not a literally open federal case'],
+  ['still pending', 'obsolete: DIAL responded Sept. 4, 2026'],
+  ['will be updated if DIAL responds', 'obsolete: DIAL responded Sept. 4, 2026'],
+  ['denied, suspended, or revoked', 'obsolete enumeration: denial is now an affirmative DIAL answer, not an absence of record'],
   ['A response comes back', 'replaced by the approved Response copy'],
   ['exposed1.substack.com/subscribe', 'use the branded Investigations subscribe address'],
   ['0 of 3\u00a0', 'counter must not be the button label']
@@ -105,7 +108,8 @@ const BANNED_TEXT = [
 const REQUIRED_TEXT = [
   ['initial verification transactions', 'the unit must travel with the number'],
   ['so far', 'absence of a produced record is not proof of non-occurrence'],
-  ['denied, suspended, or revoked', 'the limitation must carry the full enumeration'],
+  ['suspended or revoked because of a SAVE result', 'the absence-of-record limitation for the categories DIAL did not answer'],
+  ['no professional license has been denied, wholly or in part, because of a SAVE system response', 'DIAL’s affirmative Sept. 4 answer on denials'],
   ['floor on transactions', '16,457 is a floor, never a ceiling'],
   ['DO NOT USE THIS YET', 'the recheck note is not in active use'],
   ['enter board name', "DIAL's own placeholder, not an invented board"],
@@ -127,15 +131,16 @@ const REQUIRED_TEXT = [
   ['continues to retain SAVE access', 'USCIS: DIAL retains SAVE access'],
   ['manual review', 'USCIS: third-step verification is manual review'],
   ['did not answer whether testing', 'USCIS did not answer the non-production question; no inference'],
-  ['USCIS responded', 'right of response: USCIS has responded'],
-  ['pending', 'right of response: DIAL still pending'],
+  ['Both agencies responded on Sept. 4', 'right of response: both agencies answered'],
+  ['identified its SAVE compliance officer', 'DIAL’s Sept. 4 answers, editor’s wording'],
+  ['overarching SAVE agency code', 'DIAL’s Sept. 4 answers, editor’s wording'],
   ['Not an individual', 'composite marking in the header']
 ];
 /* hard bans checked against RAW SOURCE too (comments and attributes included) */
 const BANNED_SOURCE = ['16,555', 'Board of Nursing', 'clearinghouse director', 'Secretary of State', 'proto-banner'];
 
 const VERBATIM_QUOTE = 'If your current immigration status is not maintained, your license status may be affected, including revocation of your license.';
-const LIMIT_LEAD = 'No record produced so far shows any Iowa professional license denied, suspended, or revoked because of a SAVE result.';
+const LIMIT_LEAD = 'DIAL told RDP on Sept. 4 that no professional license has been denied, wholly or in part, because of a SAVE system response. No record produced so far shows any Iowa professional license suspended or revoked because of a SAVE result.';
 
 async function reach(page, s) {
   await page.evaluate(t => window.__sq.go(t), s);
@@ -503,6 +508,10 @@ const LIMIT_VISIBLE = () => {
   chk('s7: limit block is not collapsible (no toggle targets it, no details/hidden ancestor)', await page.evaluate(() =>
     !document.querySelector('[aria-controls="limitBlock"]') && !document.getElementById('limitBlock').closest('details, [hidden], .receipt__body, .sheet')));
   chk('s7: limit lead is verbatim', (await page.textContent('.limit-block__lead')).trim() === LIMIT_LEAD);
+  chk('s7: the limitation states DIAL’s denial answer as DIAL’s, and keeps suspension/revocation as absence of record', (() => {
+    const t = LIMIT_LEAD;
+    return /^DIAL told RDP on Sept\. 4 that no professional license has been denied, wholly or in part, because of a SAVE system response\. No record produced so far shows any Iowa professional license suspended or revoked because of a SAVE result\.$/.test(t);
+  })());
   chk('s7: limit lead outweighs the letter trigger', await page.evaluate(() =>
     parseFloat(getComputedStyle(document.querySelector('.limit-block__lead')).fontSize) >
     parseFloat(getComputedStyle(document.querySelector('#receiptLetter .receipt__trigger')).fontSize)));
@@ -538,7 +547,7 @@ const LIMIT_VISIBLE = () => {
   chk('s7 -> s8', await page.getAttribute('#sq', 'data-state') === 's8');
   chk('s8: complete event tracked', (await page.evaluate(() => window.__sq.tracked())).indexOf('standing_query_complete') > -1);
   const s8 = await page.textContent('.panel[data-panel="s8"]');
-  chk('s8: right-of-response says USCIS responded and DIAL pending', s8.indexOf('USCIS responded') > -1 && s8.indexOf('pending') > -1);
+  chk('s8: right-of-response says both agencies responded on Sept. 4', s8.indexOf('Both agencies responded on Sept. 4') > -1 && s8.indexOf('pending') === -1);
   chk('s8: no "declined" / "refused" / "did not respond" for silence', !/declined to comment|refused to respond|did not respond|no response/i.test(s8));
   chk('s8: USCIS confirmations carried (MOA in effect, access retained)', s8.indexOf('remains in effect') > -1 && s8.indexOf('continues to retain SAVE access') > -1);
   chk('s8: no scope creep into DOT / voter registration / SOS', !/voter registration|Secretary of State|driver/i.test(s8));

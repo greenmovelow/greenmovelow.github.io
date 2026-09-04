@@ -93,14 +93,31 @@ between `<!-- RIGHT OF RESPONSE -->` and `<!-- END RIGHT OF RESPONSE -->`
 (`#rorBlock`). It has no state-machine or layout dependency. Current text:
 
 > DIAL and USCIS were sent detailed questions on Aug. 31, 2026, with a response
-> requested by Sept. 4. USCIS responded on Sept. 4; its answers are reflected in
-> this exhibit. DIAL's response was still pending when this version was
-> published. This exhibit will be updated if DIAL responds.
+> requested by Sept. 4. Both agencies responded on Sept. 4. Their answers are
+> reflected in this exhibit. DIAL confirmed that its SAVE agreement with USCIS
+> remains in effect, identified its SAVE compliance officer, explained that
+> participating-agency transactions appear under DIAL’s overarching SAVE agency
+> code, and said no professional license has been denied wholly or in part
+> because of a SAVE system response.
 
+This is the editor's wording for DIAL's Sept. 4, 2026 response (fourth commit).
 Rules the suite enforces: never "declined to comment" without an affirmative
-decline; never "refused to respond" for silence. If DIAL responds, integrate only
-the factual answer supplied by the editor. Do not paraphrase an agency email
-independently.
+decline; never "refused to respond" for silence; the obsolete "still pending"
+formulation is banned. Do not paraphrase an agency email independently.
+
+**The evidence limitation** (station 7, the letter modal, and the About
+"Evidence limit" callout, all identical) now reads:
+
+> DIAL told RDP on Sept. 4 that no professional license has been denied, wholly
+> or in part, because of a SAVE system response. No record produced so far
+> shows any Iowa professional license suspended or revoked because of a SAVE
+> result.
+
+Denial is stated as DIAL's affirmative answer; suspension and revocation stay
+absence-of-record statements. The editor asked for the station-7 copy; the two
+other copies were changed to match so the page never carries both the
+affirmative and the older absence-only formulation of denial. The suite
+asserts the sentence verbatim in all three places.
 
 **The "What USCIS confirmed" block** (`#rorBlock`'s sibling in the end panel)
 carries the Sept. 4 confirmations verbatim from the fact lock. Edit only on the
@@ -143,9 +160,8 @@ editor's instruction.
 4. **Dates in the exhibit use the site's AP style** (`Aug. 12, 2026`, not
    `12 August 2026`). Two exceptions: "December 2025" and "December through
    June" were already month-only.
-5. **A second, page-level copy of the limitation** ("No record produced so far
-   shows any Iowa professional license denied, suspended, or revoked because
-   of a SAVE result.") sits in the about section under the heading "Evidence
+5. **A second, page-level copy of the limitation** (the evidence limitation
+   quoted under Editorial switches) sits in the about section under the heading "Evidence
    limit", always visible in every state and deliberately quieter than the
    in-exhibit copy. The station-7 copy is unchanged, and the same complete
    sentence now sits inside the revocation-letter modal. The suite asserts the
@@ -267,7 +283,9 @@ editor's instruction.
 | End panel | "End of prototype. This covered stations 4 through 7 of 8." | "End of the sequence. This exhibit follows the professional-licensing rail only." plus a "What USCIS confirmed" block (one transaction; resubmission for the same person; standard benefit category; Dec. 23, 2025 MOA remains in effect; DIAL continues to retain SAVE access). |
 | Right of response | "This build carries no response because none had been received when it was made…" | see **Editorial switches** above. |
 
-Nothing else in the evidentiary copy was changed. No claim was added from
+The fourth commit adds DIAL's Sept. 4 response (right-of-response block and
+the evidence limitation, both in the editor's wording). Nothing else in the
+evidentiary copy was changed. No claim was added from
 outside research. The open non-production question (item 12 of the fact lock)
 is stated as open, not answered.
 
@@ -289,7 +307,7 @@ is stated as open, not answered.
 
 ## Test results (this build)
 
-`node scripts/test_standing_query.js` — **699/699 passed, Chromium only.**
+`node scripts/test_standing_query.js` — **705/705 passed, Chromium only.**
 
 Engines: Chromium 141 (Playwright build). Firefox and WebKit could not be
 installed in the build environment (browser downloads are blocked by the
@@ -402,7 +420,7 @@ rebalancing before art, not after.
 
 - [ ] The rail's `<ol>` mirror and the SVG summary.
 - [ ] Live-region cadence during the auto-advance (s3 → s6): does "License
-      issued. Application complete." land as an ending, and does "The file
+      issued. Application complete." land as an ending, and does "The question
       stays open." land as a reversal?
 - [ ] Chip resolution announcements: the probe found sub-second gaps where a
       `polite` update lands as focus enters a dialog. Confirm nothing is dropped.
@@ -411,4 +429,4 @@ rebalancing before art, not after.
 ### Editorial, before publication
 
 - [x] `ARTICLE_URL` set (Sept. 4, 2026).
-- [ ] Right-of-response block resolved with the editor's exact wording.
+- [x] Right-of-response block resolved with the editor's exact wording (Sept. 4, 2026; both agencies).
