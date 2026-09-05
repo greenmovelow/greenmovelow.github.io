@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Division 26 Takeoff Workbench</title>
+  <meta name="description" content="Client-side electrical bid takeoff: load a project manual and drawings, answer intake questions, get a Division 26 takeoff split by distributor, mechanical supplier and systems integrator, with RFIs and bid-date reminders.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/takeoff/app.css">
+  <script src="/takeoff/vendor/xlsx.full.min.js" defer></script>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">Division 26 Takeoff<small>Workbench &middot; runs in your browser</small></div>
+    <nav id="nav">
+      <button data-view="dashboard"><span class="n">0</span>Projects</button>
+      <button data-view="documents"><span class="n">1</span>Documents<span class="badge" id="nav-docs"></span></button>
+      <button data-view="questions"><span class="n">2</span>Questions<span class="badge" id="nav-questions"></span></button>
+      <button data-view="takeoff"><span class="n">3</span>Takeoff<span class="badge" id="nav-items"></span></button>
+      <button data-view="rfis"><span class="n">4</span>RFIs<span class="badge" id="nav-rfis"></span></button>
+      <button data-view="schedule"><span class="n">5</span>Schedule &amp; reminders</button>
+      <button data-view="exports"><span class="n">6</span>Exports</button>
+      <button data-view="claude"><span class="n">7</span>Claude review</button>
+      <button data-view="sources"><span class="n">8</span>Source map</button>
+    </nav>
+    <div class="foot">
+      Documents and answers stay in this browser (IndexedDB). Nothing is uploaded unless you run the optional Claude review, which sends selected pages to api.anthropic.com with your own key.<br><br>
+      <a href="/takeoff/README.md">How it works</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="proj">
+        <label for="project-select" class="sr-only">Project</label>
+        <select id="project-select"></select>
+        <button class="btn small secondary" id="btn-new-project">New project</button>
+        <button class="btn small secondary" id="btn-rename-project" title="Rename">Rename</button>
+        <button class="btn small danger" id="btn-delete-project" title="Delete this project">Delete</button>
+      </div>
+      <div id="countdown" class="countdown hidden"></div>
+      <button class="btn small secondary" id="btn-notify" title="Browser notifications while this page is open">Enable notifications</button>
+    </div>
+
+    <!-- 0 Dashboard -->
+    <section class="view" id="view-dashboard">
+      <header><div><h1>Projects</h1><p>Every bid you have loaded, with its countdown and open items. Pick one above or create a new one.</p></div></header>
+      <div id="dashboard-list"></div>
+      <div class="card">
+        <h2>Workflow</h2>
+        <ol style="margin:0 0 0 1.1rem; padding:0; line-height:1.7">
+          <li><b>Documents.</b> Drop the project manual, electrical sheets and every addendum as PDF (text is extracted locally) or paste text. Each file is hashed for the source map.</li>
+          <li><b>Questions.</b> The engine pre-fills what it found (bid date, question deadline, addenda, voltage, funding clauses) and asks only what the documents leave open.</li>
+          <li><b>Takeoff.</b> Line items split by who quotes them: electrical distributor, mechanical supplier, systems integrator, other packages, contractor-carried material, and ambiguous items that need an RFI. Edit quantities and channels inline.</li>
+          <li><b>RFIs.</b> Ready-to-send questions ranked by pricing impact, each with the basis the bid carries if unanswered. Track sent and answered dates.</li>
+          <li><b>Schedule.</b> Milestones backed off the bid date. Export to your calendar (.ics with alarms) and turn on browser reminders.</li>
+          <li><b>Exports.</b> Excel workbook, quote requests per channel, RFI log, takeoff report, and a JSON backup of the whole project.</li>
+          <li><b>Claude review</b> (optional). Send the relevant pages to Claude with your own API key for a second, cited opinion you can merge line by line.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 1 Documents -->
+    <section class="view" id="view-documents">
+      <header><div><h1>Documents</h1><p>Load the bid set. Mark each file as specification, drawings, addendum or other; addenda take precedence in the analysis and are always included in the Claude page selection.</p></div>
+        <div class="actions"><button class="btn" id="btn-analyze">Run analysis</button></div></header>
+      <div class="grid two">
+        <div class="card">
+          <h2>Add PDF files</h2>
+          <div class="drop" id="drop">Drop PDFs here or <label style="display:inline;cursor:pointer;color:var(--green);text-decoration:underline">choose files<input type="file" id="file-input" accept="application/pdf,.pdf,.txt,.md" multiple hidden></label>.<br><small>Text is extracted page by page in your browser. Scanned (image-only) PDFs yield no text; run OCR first.</small>
+            <div class="progress hidden" id="extract-progress"><div></div></div><div id="extract-status" class="muted" style="margin-top:.3rem"></div></div>
+        </div>
+        <div class="card">
+          <h2>Or paste text</h2>
+          <div class="field"><label for="paste-name">Document name</label><input type="text" id="paste-name" placeholder="e.g. 26 29 23 VFD section, Addendum 2 text"></div>
+          <div class="field"><label for="paste-role">Role</label><select id="paste-role"><option value="spec">Specification</option><option value="drawings">Drawings / schedules</option><option value="addendum">Addendum</option><option value="other">Other</option></select></div>
+          <div class="field"><label for="paste-text">Text</label><textarea id="paste-text" placeholder="Paste specification or schedule text. Use a form feed or a line with only --- to separate pages."></textarea></div>
+          <button class="btn secondary" id="btn-add-paste">Add pasted text</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Loaded documents</h2>
+        <ul class="doclist" id="doclist"></ul>
+        <div class="empty hidden" id="doclist-empty">No documents yet.</div>
+      </div>
+      <div class="card" id="detect-summary"></div>
+    </section>
+
+    <!-- 2 Questions -->
+    <section class="view" id="view-questions">
+      <header><div><h1>Questions</h1><p>Answers drive the quote-channel assignments, RFIs and schedule. Pre-filled values come from the documents; the evidence is shown under each field. Changes re-run the analysis.</p></div>
+        <div class="actions"><button class="btn secondary" id="btn-reset-answers">Reset to detected defaults</button></div></header>
+      <div id="questions-form"></div>
+      <div id="claude-questions" class="card hidden"></div>
+    </section>
+
+    <!-- 3 Takeoff -->
+    <section class="view" id="view-takeoff">
+      <header><div><h1>Division 26 takeoff</h1><p>Who quotes what. Quantities come from distinct equipment tags when the documents support a count, otherwise TBD. Edit quantity, unit or channel inline; edits persist as overrides.</p></div>
+        <div class="actions"><button class="btn secondary small" id="btn-add-item">Add line item</button><button class="btn secondary small" id="btn-clear-overrides">Clear overrides</button></div></header>
+      <div class="stats" id="takeoff-stats"></div>
+      <div class="tabs" id="takeoff-tabs"></div>
+      <div class="tablewrap"><table id="takeoff-table"><thead><tr><th>Item</th><th>Tags</th><th>Qty</th><th>Unit</th><th>Quoted by</th><th>Section</th><th>Confidence</th><th>Qualifications / RFIs</th><th>Evidence</th><th>Src</th><th></th></tr></thead><tbody></tbody></table></div>
+      <div class="card" style="margin-top:1rem" id="conflicts-card"></div>
+      <div class="card" id="responsibility-card"></div>
+    </section>
+
+    <!-- 4 RFIs -->
+    <section class="view" id="view-rfis">
+      <header><div><h1>RFIs and pricing qualifications</h1><p>Ranked by pricing impact. Each carries the basis the bid uses if the engineer does not answer before bid. Mark sent and answered dates to keep the reminder list honest.</p></div>
+        <div class="actions"><button class="btn secondary small" id="btn-add-rfi">Add RFI</button><button class="btn small" id="btn-copy-rfis">Copy ready-to-send text</button></div></header>
+      <div class="stats" id="rfi-stats"></div>
+      <div id="rfi-list"></div>
+      <div class="card" id="compliance-card"></div>
+    </section>
+
+    <!-- 5 Schedule -->
+    <section class="view" id="view-schedule">
+      <header><div><h1>Schedule and reminders</h1><p>Milestones backed off the bid due date and question deadline. The calendar export carries alarms one day and two hours ahead of each milestone. Browser notifications fire while this page is open.</p></div>
+        <div class="actions"><button class="btn" id="btn-ics">Download calendar (.ics)</button></div></header>
+      <div class="card"><ul class="timeline" id="timeline"></ul><div class="empty hidden" id="timeline-empty">Set the bid due date under Questions to build the schedule.</div></div>
+      <div class="card">
+        <h2>How reminders reach you</h2>
+        <p><b>Calendar file (reliable).</b> Import the .ics into Google Calendar, Outlook or Apple Calendar. Every milestone becomes an event with alarms, and the RFI-send event lists the open RFIs in its description. Re-download after changing the bid date or answers; the events keep the same IDs so imports update in place.</p>
+        <p><b>Browser notifications (while open).</b> With notifications enabled, this page checks every minute and raises a notification for milestones due within 24 hours or overdue, once per milestone per day. A static site cannot send email or push when the tab is closed, so use the calendar file as the primary reminder.</p>
+      </div>
+    </section>
+
+    <!-- 6 Exports -->
+    <section class="view" id="view-exports">
+      <header><div><h1>Exports</h1><p>Deliverables in the format your prior takeoffs used: a multi-tab workbook, markdown quote requests per channel, an RFI log, the takeoff report, and a JSON backup that restores the whole project including document text.</p></div></header>
+      <div class="grid three">
+        <div class="card"><h3>Workbook</h3><p class="muted">Executive Summary, Takeoff, one tab per quote channel, Responsibility Matrix, RFI Log, Conflicts, Compliance, Schedule, Questions, Source References.</p><button class="btn" id="btn-xlsx">Download .xlsx</button></div>
+        <div class="card"><h3>Quote requests</h3><p class="muted">One markdown request per channel, listing items, basis, qualifications and disclosures.</p><div class="actions"><button class="btn secondary small" data-md="distributor">Distributor</button><button class="btn secondary small" data-md="mechanical">Mechanical</button><button class="btn secondary small" data-md="integrator">Integrator</button><button class="btn secondary small" data-md="package">Packages</button></div></div>
+        <div class="card"><h3>Reports</h3><p class="muted">Takeoff report and RFI log as markdown.</p><div class="actions"><button class="btn secondary small" id="btn-md-report">Takeoff report</button><button class="btn secondary small" id="btn-md-rfi">RFI log</button></div></div>
+        <div class="card"><h3>Project backup</h3><p class="muted">JSON with documents, answers, overrides and RFI status. Import on another machine to continue.</p><div class="actions"><button class="btn secondary small" id="btn-json-export">Export JSON</button><label class="btn secondary small" style="cursor:pointer">Import JSON<input type="file" id="json-import" accept="application/json,.json" hidden></label></div></div>
+        <div class="card"><h3>Print</h3><p class="muted">Print the current view to PDF from the browser.</p><button class="btn secondary small" onclick="window.print()">Print</button></div>
+      </div>
+      <div class="card"><h3>Preview</h3><pre class="log" id="export-preview" style="max-height:480px">Choose an export to preview it here.</pre></div>
+    </section>
+
+    <!-- 7 Claude -->
+    <section class="view" id="view-claude">
+      <header><div><h1>Claude review</h1><p>Optional second pass. The relevant pages, your answers and the rules-engine result are sent to Claude with a fixed JSON schema. The reply is shown beside the rules result and can be merged into the takeoff and RFI list. Your key never leaves this browser except to api.anthropic.com.</p></div></header>
+      <div class="grid two">
+        <div class="card">
+          <h2>Settings</h2>
+          <div class="field"><label for="api-key">Anthropic API key</label><input type="password" id="api-key" placeholder="sk-ant-..." autocomplete="off"><div class="why">Stored in this browser's localStorage only. Use a key you can rotate; browser-held keys are visible to anyone with access to this computer.</div></div>
+          <div class="field"><label for="claude-model">Model</label><select id="claude-model"></select></div>
+          <div class="field"><label for="claude-maxchars">Maximum characters of document text to send</label><input type="number" id="claude-maxchars" value="900000" step="50000" min="50000"><div class="why">Pages are ranked by relevance (Division 26/40 sections, equipment tags, addenda) and included until the cap. Roughly 3.6 characters per token.</div></div>
+          <div id="claude-estimate" class="notice info"></div>
+          <div class="actions"><button class="btn orange" id="btn-claude-run">Run Claude review</button><button class="btn secondary" id="btn-claude-cancel" disabled>Cancel</button></div>
+        </div>
+        <div class="card">
+          <h2>Run log</h2>
+          <pre class="log" id="claude-log">Not run.</pre>
+        </div>
+      </div>
+      <div id="claude-result"></div>
+    </section>
+
+    <!-- 8 Sources -->
+    <section class="view" id="view-sources">
+      <header><div><h1>Source map</h1><p>Audit trail: documents with hashes, specification sections located, equipment tags, values and manufacturer names detected. Use it to check the engine's reading before you rely on the takeoff.</p></div></header>
+      <div id="sources"></div>
+    </section>
+  </main>
+</div>
+
+<div id="modal-root"></div>
+<script type="module" src="/takeoff/app.js"></script>
+</body>
+</html>

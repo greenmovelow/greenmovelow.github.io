@@ -22,3 +22,7 @@
 # Editorial handoff prototypes are source material, not published pages.
 /_handoff/*
   X-Robots-Tag: noindex, nofollow, noarchive
+
+# Takeoff workbench is a working tool, not a published article.
+/takeoff/*
+  X-Robots-Tag: noindex, nofollow, noarchive

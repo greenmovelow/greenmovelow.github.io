@@ -28,6 +28,6 @@ Disallow: /
 
 # Permit all other public crawlers unless restricted by the rules above.
 User-agent: *
-Disallow:
+Disallow: /takeoff/
 
 Sitemap: https://restoring-democracy.org/sitemap.xml
