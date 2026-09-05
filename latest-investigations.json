@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Inside Iowa’s SAVE Clearinghouse: What the State’s Own Records Show",
+      "link": "https://investigations.restoring-democracy.org/p/inside-iowas-save-clearinghouse-what",
+      "date": "2026-09-05",
+      "dateLabel": "Sep 5",
+      "category": "Investigation"
+    },
+    {
       "title": "As Public Pressure Mounts, West Des Moines Defends Its Flock Network",
       "link": "https://investigations.restoring-democracy.org/p/as-public-pressure-mounts-west-des",
       "date": "2026-08-27",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/the-dexter-disinformation-playbook",
       "date": "2026-05-17",
       "dateLabel": "May 17",
-      "category": "Investigation"
-    },
-    {
-      "title": "Iowa Handed Over the Voter Data — The Legal Blueprint Was Already There",
-      "link": "https://investigations.restoring-democracy.org/p/iowa-handed-over-the-voter-data-the",
-      "date": "2026-05-07",
-      "dateLabel": "May 7",
       "category": "Investigation"
     }
   ]
