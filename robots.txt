@@ -1,33 +1,150 @@
 # Restoring Democracy's Promise
-# Public search, indexing, citation, reference use, and user-requested
-# retrieval are permitted. Known model-training crawlers are disallowed.
+# https://restoring-democracy.org/
+#
+# PUBLISHER CONTENT POLICY
+#
+# Search engine crawling and indexing: ALLOWED
+# AI search and generative search: ALLOWED
+# Real-time AI retrieval and grounding: ALLOWED
+# Retrieval-augmented generation (RAG): ALLOWED
+# Citation and reference use: ALLOWED
+# User-requested retrieval: ALLOWED
+#
+# Foundation-model training and fine-tuning: NOT ALLOWED
+# except where a provider does not offer a practical separation between
+# retrieval/grounding and training and access is intentionally permitted below.
+#
+# Restoring Democracy's Promise expressly welcomes indexing, citation,
+# linking, summarization for search/reference purposes, and real-time
+# retrieval that directs users to the original reporting.
+#
+# Copyright and related rights are reserved for uses beyond those permitted
+# by these signals.
+
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference
+Allow: /
+
+# ============================================================
+# GOOGLE
+# ============================================================
+#
+# Googlebot powers Google Search, including Google's AI search features.
+# Google-Extended also controls certain Gemini grounding uses as well as
+# future Gemini model training.
+#
+# Because Google does not currently provide a clean grounding-YES /
+# training-NO separation for Google-Extended, Restoring Democracy's
+# Promise intentionally permits Google-Extended so that its reporting
+# can be available to Gemini and Google AI grounding.
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# ============================================================
+# MICROSOFT / BING / COPILOT
+# ============================================================
+
+User-agent: bingbot
+Allow: /
+
+# ============================================================
+# PERPLEXITY
+# ============================================================
+#
+# PerplexityBot indexes material for Perplexity search and citation.
+# Perplexity-User retrieves current material in response to user requests.
+# Perplexity states that neither is used for foundation-model training.
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# ============================================================
+# OPENAI / CHATGPT
+# ============================================================
+#
+# OAI-SearchBot supports ChatGPT Search.
+# ChatGPT-User supports user-requested retrieval.
+# GPTBot is the crawler associated with potential model training.
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
 
 User-agent: GPTBot
 Disallow: /
 
+# ============================================================
+# ANTHROPIC / CLAUDE
+# ============================================================
+#
+# Claude-SearchBot supports Claude search.
+# Claude-User supports user-requested web retrieval.
+# ClaudeBot is the general crawler associated with model development.
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
 User-agent: ClaudeBot
 Disallow: /
 
-User-agent: Google-Extended
-Disallow: /
+# ============================================================
+# APPLE
+# ============================================================
+#
+# Applebot powers search, Siri, Spotlight, Safari, and current-information
+# retrieval. Applebot-Extended controls use for Apple foundation-model
+# training and can be disabled without disabling Applebot search access.
+
+User-agent: Applebot
+Allow: /
 
 User-agent: Applebot-Extended
 Disallow: /
 
+# ============================================================
+# AMAZON / ALEXA
+# ============================================================
+#
+# Amzn-SearchBot supports Amazon/Alexa search experiences.
+# Amzn-User supports live user-requested retrieval.
+# Amazonbot may be used for Amazon AI model training.
+
+User-agent: Amzn-SearchBot
+Allow: /
+
+User-agent: Amzn-User
+Allow: /
+
 User-agent: Amazonbot
+Disallow: /
+
+# ============================================================
+# OTHER KNOWN BULK / AI TRAINING CRAWLERS
+# ============================================================
+
+User-agent: CCBot
 Disallow: /
 
 User-agent: Bytespider
 Disallow: /
 
-User-agent: CCBot
-Disallow: /
-
 User-agent: meta-externalagent
 Disallow: /
 
-# Permit all other public crawlers unless restricted by the rules above.
-User-agent: *
-Disallow:
+# ============================================================
+# SITEMAP
+# ============================================================
 
 Sitemap: https://restoring-democracy.org/sitemap.xml
