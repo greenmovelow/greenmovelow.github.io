@@ -131,6 +131,26 @@ User-agent: Amazonbot
 Disallow: /
 
 # ============================================================
+# META / FACEBOOK
+# ============================================================
+#
+# Allow social link previews.
+User-agent: facebookexternalhit
+Allow: /
+
+# Allow Meta AI search indexing.
+User-agent: meta-webindexer
+Allow: /
+
+# Allow user-requested Meta AI retrieval.
+User-agent: meta-externalfetcher
+Allow: /
+
+# Block Meta's bulk AI-training crawler.
+User-agent: meta-externalagent
+Disallow: /
+
+# ============================================================
 # OTHER KNOWN BULK / AI TRAINING CRAWLERS
 # ============================================================
 
@@ -138,9 +158,6 @@ User-agent: CCBot
 Disallow: /
 
 User-agent: Bytespider
-Disallow: /
-
-User-agent: meta-externalagent
 Disallow: /
 
 # ============================================================
