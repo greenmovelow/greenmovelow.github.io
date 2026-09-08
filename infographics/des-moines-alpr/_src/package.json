@@ -1,0 +1,14 @@
+{
+  "name": "rdp-dsm-alpr-exhibit-tooling",
+  "private": true,
+  "type": "module",
+  "description": "Build, lint and browser-test tooling for the Des Moines ALPR exhibit. Scoped here so the site's own package.json stays untouched.",
+  "scripts": {
+    "build": "node build.mjs",
+    "lint": "node lint.mjs",
+    "test": "node test.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}

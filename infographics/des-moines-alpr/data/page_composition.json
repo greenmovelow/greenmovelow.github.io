@@ -1,0 +1,50 @@
+{
+ "package_version": "0.1.0-phase1",
+ "document": "Roll Call 23-1629 — City Clerk's roll-call file as produced by the City on 4 August 2026",
+ "total_pages": 25,
+ "caveat": "This is the City Clerk's roll-call file as produced in August 2026. It is not a certified reproduction of the agenda packet distributed before the meeting. Whether these pages were before council members on 20 November 2023 is not established. Two documents in it bear post-vote dates.",
+ "receipt_id": "R-FILE-COMPOSITION",
+ "facsimiles_status": "PLACEHOLDER — no page images are shipped in Phase 1. See _src/content/PLACEHOLDERS.md.",
+ "sections": [
+  {"from": 1, "to": 2, "document": "Resolution and roll-call vote sheet", "document_short": "Resolution", "record_layer": "L1", "receipt_id": "R-RC-23-1629-OP1"},
+  {"from": 3, "to": 4, "document": "Council Communication No. 23-519", "document_short": "Council communication", "record_layer": "L1", "receipt_id": "R-CC-23-519-HEAD"},
+  {"from": 5, "to": 6, "document": "Short Form Agreement — Contract No. W24-152", "document_short": "Short form agreement", "record_layer": "L2", "receipt_id": "R-W24-152-1"},
+  {"from": 7, "to": 13, "document": "Mobile Video Addendum", "document_short": "Mobile Video Addendum", "record_layer": "L2", "receipt_id": "R-MVA-4.5"},
+  {"from": 14, "to": 18, "document": "Subscription Software Addendum", "document_short": "Subscription Software Addendum", "record_layer": "L2", "receipt_id": "R-SSA-4.1"},
+  {"from": 19, "to": 23, "document": "Equipment Purchase and Software License Addendum", "document_short": "EPSLA", "record_layer": "L2", "receipt_id": "R-EPSLA-4.3"},
+  {"from": 24, "to": 25, "document": "Equipment Purchase Amendment", "document_short": "Equipment Purchase Amendment", "record_layer": "L2", "post_vote_date": true, "receipt_id": "R-FILE-COMPOSITION"}
+ ],
+ "pages": [
+  {"page": 1, "document_short": "Resolution", "record_layer": "L1", "label": "Resolution · Roll Call 23-1629 · Agenda Item 32", "described_in_summary": true, "contains_lpr_terms": false, "term_check": "verified", "receipt_id": "R-RC-23-1629-OP1"},
+  {"page": 2, "document_short": "Roll call", "record_layer": "L1", "label": "Roll-call vote sheet and clerk's certificate", "described_in_summary": true, "contains_lpr_terms": false, "term_check": "verified", "receipt_id": "R-CONSENT-23-1597"},
+  {"page": 3, "document_short": "Council communication", "record_layer": "L1", "label": "Council Communication 23-519, page 1", "described_in_summary": true, "contains_lpr_terms": false, "term_check": "verified", "receipt_id": "R-CC-23-519-HEAD"},
+  {"page": 4, "document_short": "Council communication", "record_layer": "L1", "label": "Council Communication 23-519, page 2", "described_in_summary": true, "contains_lpr_terms": false, "term_check": "verified", "receipt_id": "R-CC-23-519-PCA"},
+  {"page": 5, "document_short": "Short form agreement", "record_layer": "L2", "label": "Short Form Agreement W24-152, page 1", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-W24-152-1"},
+  {"page": 6, "document_short": "Short form agreement", "record_layer": "L2", "label": "Short Form Agreement W24-152, page 2", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-W24-152-1"},
+  {"page": 7, "document_short": "Mobile Video Addendum", "record_layer": "L2", "label": "Mobile Video Addendum, page 1", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 8, "document_short": "Mobile Video Addendum", "record_layer": "L2", "label": "Mobile Video Addendum, page 2", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 9, "document_short": "Mobile Video Addendum", "record_layer": "L2", "label": "Mobile Video Addendum, page 3 — §4.4 Vigilant Access and §4.5 License Plate Recognition Data", "described_in_summary": false, "contains_lpr_terms": true, "term_check": "verified", "is_page_nine": true, "receipt_id": "R-MVA-4.5"},
+  {"page": 10, "document_short": "Mobile Video Addendum", "record_layer": "L2", "label": "Mobile Video Addendum, page 4", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 11, "document_short": "Mobile Video Addendum", "record_layer": "L2", "label": "Mobile Video Addendum, page 5 — §7.1 Data Storage", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-MVA-7.1"},
+  {"page": 12, "document_short": "Mobile Video Addendum", "record_layer": "L2", "label": "Mobile Video Addendum, page 6", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 13, "document_short": "Mobile Video Addendum", "record_layer": "L2", "label": "Mobile Video Addendum, page 7 — signature page", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 14, "document_short": "Subscription Software Addendum", "record_layer": "L2", "label": "Subscription Software Addendum, page 1", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 15, "document_short": "Subscription Software Addendum", "record_layer": "L2", "label": "Subscription Software Addendum, page 2 — §2.2 End User Licenses", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-SSA-2.2"},
+  {"page": 16, "document_short": "Subscription Software Addendum", "record_layer": "L2", "label": "Subscription Software Addendum, page 3 — §4.1 License True-Up", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-SSA-4.1"},
+  {"page": 17, "document_short": "Subscription Software Addendum", "record_layer": "L2", "label": "Subscription Software Addendum, page 4", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 18, "document_short": "Subscription Software Addendum", "record_layer": "L2", "label": "Subscription Software Addendum, page 5 — signature page", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 19, "document_short": "EPSLA", "record_layer": "L2", "label": "Equipment Purchase and Software License Addendum, page 1", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 20, "document_short": "EPSLA", "record_layer": "L2", "label": "EPSLA, page 2", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 21, "document_short": "EPSLA", "record_layer": "L2", "label": "EPSLA, page 3 — §4.3 Customer Termination", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-EPSLA-4.3"},
+  {"page": 22, "document_short": "EPSLA", "record_layer": "L2", "label": "EPSLA, page 4", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 23, "document_short": "EPSLA", "record_layer": "L2", "label": "EPSLA, page 5 — signature page", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 24, "document_short": "Equipment Purchase Amendment", "record_layer": "L2", "label": "Equipment Purchase Amendment, page 1 — dated as of 22 November 2023", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "post_vote_date": true, "receipt_id": "R-FILE-COMPOSITION"},
+  {"page": 25, "document_short": "Equipment Purchase Amendment", "record_layer": "L2", "label": "Equipment Purchase Amendment, page 2 — City signature reads 11-21-23", "described_in_summary": false, "contains_lpr_terms": false, "term_check": "not_individually_checked", "post_vote_date": true, "receipt_id": "R-FILE-COMPOSITION"}
+ ],
+ "not_in_the_file": [
+  {"label": "QUOTE-2241626, the ordering document with the plate-reader line items", "receipt_id": "R-QUOTE-L10"},
+  {"label": "The quote's solution-description page", "receipt_id": "R-QUOTE-INFO"},
+  {"label": "Any line items or pricing breakdown below the $1,500,080 total", "receipt_id": "R-FILE-COMPOSITION"},
+  {"label": "Every Chain B instrument — W23-383, the commercial-data quote and invoice, the fixed-camera PO, the 29 September amendment", "receipt_id": "R-W23-383"}
+ ]
+}
