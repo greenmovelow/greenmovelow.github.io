@@ -37,11 +37,40 @@
     });
   }
 
+  /* --------------------------------------------- house nav: mobile menu */
+  var mobileToggle = document.getElementById('mobile-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener('click', function () {
+      var open = mobileMenu.classList.toggle('open');
+      mobileToggle.setAttribute('aria-expanded', String(open));
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* --------------------------------------------- house nav: scrolled state */
+  var navBar = document.querySelector('.nav-bar');
+  if (navBar) {
+    var onScroll = function () {
+      navBar.classList.toggle('scrolled', window.scrollY > 8);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
   /* ------------------------------------------------------- receipt drawer */
   var RECEIPTS = window.RDP_RECEIPTS || {};
   var LAYERS = window.RDP_LAYER_LABELS || {};
   var TAGS = window.RDP_TAG_LABELS || {};
   var STATUS = window.RDP_STATUS_LABELS || {};
+
+  /* facsimile paths are stored relative to the exhibit root */
+  var depthPrefix = /\/(network|records)\//.test(window.location.pathname) ? '../' : '';
 
   var drawer = document.getElementById('receipt-drawer');
   var scrim = document.getElementById('receipt-scrim');
@@ -99,8 +128,16 @@
         ? '<p class="rd-excerpt">' + esc(r.source_excerpt) +
           (r.ocr ? '\n\n[Read from a scan by OCR; exact characters may vary.]' : '') + '</p>'
         : '') +
-      section('Page image', '<p class="rd-facsimile">No page image is shipped in this prototype. ' +
-        'Facsimile crops of the produced public records are a Phase 2 item.</p>') +
+      section('Page image', r.facsimile
+        ? '<figure class="fax"><img src="' + esc(depthPrefix + r.facsimile.src) + '" ' +
+          'alt="Facsimile: ' + esc(r.facsimile.caption) + '" loading="lazy" decoding="async" ' +
+          'width="' + r.facsimile.pixels[0] + '" height="' + r.facsimile.pixels[1] + '">' +
+          '<figcaption>' + esc(r.facsimile.caption) +
+          ' Source: ' + esc(r.facsimile.source_document) + ', p. ' + r.facsimile.page +
+          '. Region crop of a straight render at ' + r.facsimile.render_dpi +
+          ' dpi; no pixel altered.</figcaption></figure>'
+        : '<p class="rd-facsimile">No page image is shipped for this receipt. ' +
+          'The verbatim text above is taken from the record itself.</p>') +
       section('Caveat that travels with this', r.caveat ? '<p>' + esc(r.caveat) + '</p>' : '', 'rd-caveat') +
       section('What this does not establish',
         r.what_it_does_not_establish ? '<p>' + esc(r.what_it_does_not_establish) + '</p>' : '', 'rd-notestab') +

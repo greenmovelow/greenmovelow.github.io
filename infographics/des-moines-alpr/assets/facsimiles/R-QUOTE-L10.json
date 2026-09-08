@@ -1,0 +1,24 @@
+{
+ "receipt_id": "R-QUOTE-L10",
+ "source_document": "Updated DMPD Quote 11-7-23.pdf",
+ "source_path_relative_to_corpus": "26_City_of_Des_Moines_ORR_Responses/05_Final_Response_Short_Form_Roll_Call_23-1629/Response to City of Des Moines Open Records Request Dated 8_4_26/Updated DMPD Quote 11-7-23.pdf",
+ "source_sha256": "e21380c09d12cad2fec4d6a09a65829c7eb5e2ef1484f0c350b64777cd2f4af3",
+ "page": 4,
+ "page_size_pt": [
+  612.0,
+  792.0
+ ],
+ "crop_box_pt": [
+  30,
+  308,
+  596,
+  392
+ ],
+ "render_dpi": 200,
+ "pixels": [
+  1573,
+  234
+ ],
+ "caption": "The two plate-reader lines in Motorola quote 2241626.",
+ "alteration": "none - region crop of a straight render; no pixel modified"
+}

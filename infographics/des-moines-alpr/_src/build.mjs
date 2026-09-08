@@ -14,7 +14,7 @@
    Lint: node _src/lint.mjs
    ========================================================================= */
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -34,8 +34,24 @@ const chains = read(join(DATA, 'chain_registry.json'));
 const pageComp = read(join(DATA, 'page_composition.json'));
 const parts = read(join(DATA, 'parts_list.json'));
 const platform = read(join(DATA, 'platform_summary.json'));
+const termCheck = read(join(DATA, 'page_term_check.json'));
 
 const RECEIPTS = Object.fromEntries(receiptsFile.rows.map((r) => [r.receipt_id, r]));
+
+/* Attach any facsimile crop that exists on disk. Crops are produced by
+   _src/tools/make_facsimiles.py, which writes a sidecar recording the source
+   file, its SHA-256, the page and the crop box. A receipt with no crop keeps
+   its stated placeholder rather than showing a stand-in. */
+const FAX_DIR = join(OUT, 'assets', 'facsimiles');
+let faxCount = 0;
+for (const id of Object.keys(RECEIPTS)) {
+  const png = join(FAX_DIR, id + '.png');
+  const meta = join(FAX_DIR, id + '.json');
+  if (existsSync(png) && existsSync(meta)) {
+    RECEIPTS[id].facsimile = { src: 'assets/facsimiles/' + id + '.png', ...read(meta) };
+    faxCount++;
+  }
+}
 
 const LAYER_LABELS = {
   L0: 'Cooperative-contract record',
@@ -148,25 +164,55 @@ function head({ title, description, canonical, sections, key }) {
 <meta property="og:locale" content="en_US">
 <meta name="theme-color" content="#2d5c4f">
 <link rel="icon" type="image/png" href="/assets/rdp_logo_gold_on_green_bg.png">
+<!-- Site-wide shell styles first, then the exhibit's own. The shared
+     stylesheet carries the masthead, navigation and footer; everything
+     specific to this exhibit's evidence grammar stays in exhibit.css. -->
+<link rel="stylesheet" href="/assets/css/styles.css">
 <link rel="stylesheet" href="${depth}assets/exhibit.css">
 </head>
 <body>
 <script>document.documentElement.classList.add('js');</script>
 <a class="skip-link" href="#main">Skip to content</a>
-<p class="draft-banner"><b>PROTOTYPE</b> &nbsp;&middot;&nbsp; Phase 1 working build. Not published. Copy, headline and byline are provisional; no right-of-reply responses have been added.</p>
-<header class="masthead">
-  <div class="masthead-inner">
-    <a class="brand" href="/" aria-label="Restoring Democracy's Promise — home">
-      <img src="/assets/Square_logo_transparent.png" alt="" width="28" height="28">
-      <span class="name"><b>Restoring Democracy&rsquo;s Promise</b></span>
-    </a>
-    <button id="share-btn" class="btn-share" type="button" aria-label="Share this page">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle>
-        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-      </svg><span id="share-label">Share</span>
-    </button>
+<!-- Site navigation: matches the current house shell used by the newest
+     exhibits (/infographics/standing-query/, /infographics/save-four-state-settlement/). -->
+<nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-exhibit-dark/90" role="navigation" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-4 lg:px-6">
+    <div class="flex items-center justify-between h-16 lg:h-[68px]">
+      <a href="/" class="flex items-center gap-3 flex-shrink-0 group" aria-label="Restoring Democracy's Promise home">
+        <img src="/assets/Square_logo_transparent.png" alt="RDP home" class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+        <span class="text-brand-gold font-serif font-bold text-base lg:text-lg tracking-tight group-hover:text-brand-orange transition-colors leading-tight">RDP</span>
+      </a>
+      <div class="hidden lg:flex items-center gap-5">
+        <a href="/#investigations" class="nav-link text-brand-sand text-sm">Investigations</a>
+        <a href="/analytics/" class="nav-link text-brand-sand text-sm">Analytics</a>
+        <a href="/about/" class="nav-link text-brand-sand text-sm">About</a>
+        <a href="/team/" class="nav-link text-brand-sand text-sm">Team</a>
+        <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm whitespace-nowrap">Investigations Desk</a>
+        <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
+        <button id="share-btn" type="button" title="Share" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share this page">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          <span id="share-label" class="sr-only">Share</span>
+        </button>
+      </div>
+      <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
   </div>
+  <div id="mobile-menu" class="mobile-menu lg:hidden bg-exhibit-dark border-t border-brand-gold/10">
+    <div class="px-4 py-3 space-y-2">
+      <a href="/#investigations" class="block text-brand-sand text-sm py-1">Investigations</a>
+      <a href="/analytics/" class="block text-brand-sand text-sm py-1">Analytics</a>
+      <a href="/about/" class="block text-brand-sand text-sm py-1">About</a>
+      <a href="/team/" class="block text-brand-sand text-sm py-1">Team</a>
+      <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="block text-brand-sand text-sm py-1">Investigations Desk</a>
+      <a href="/secure-tips/" class="block text-brand-sand text-sm py-1">Secure Tips</a>
+    </div>
+  </div>
+</nav>
+
+<p class="draft-banner"><b>PREPUBLICATION DRAFT</b> &nbsp;&middot;&nbsp; Not published. Aligned to article draft v0.2; right-of-response deadline 5:00 p.m. Central, Friday 11 September 2026. Responses pending.</p>
+<header class="exhibit-chrome">
   <nav class="exhibit-nav routes" aria-label="Exhibit pages">
     <div class="exhibit-nav-inner">
       ${ROUTES.map((r) => `<a href="${r.href}"${r.key === key ? ' aria-current="page"' : ''}>${esc(r.label)}</a>`).join('\n      ')}
@@ -174,7 +220,7 @@ function head({ title, description, canonical, sections, key }) {
   </nav>
   ${sections && sections.length ? `<nav class="exhibit-nav sections" aria-label="Sections on this page">
     <div class="exhibit-nav-inner">
-      ${sections.map((s) => `<a href="#${s.id}">${esc(s.label)}</a>`).join('\n      ')}
+      ${sections.map((sec) => `<a href="#${sec.id}">${esc(sec.label)}</a>`).join('\n      ')}
     </div>
   </nav>` : ''}
 </header>
@@ -199,6 +245,7 @@ function noJsReceipts(ids) {
         ${layerChip(r.record_layer)} <span class="layer-chip">${esc(TAG_LABELS[r.source_tag] || r.source_tag)}</span>
         <p><em>Source:</em> ${esc([r.source_document, fmtDate(r.source_date), r.page_or_row].filter(Boolean).join(' · '))}</p>
         ${r.source_excerpt ? `<blockquote class="rd-excerpt">${esc(r.source_excerpt)}${r.ocr ? '\n\n[Read from a scan by OCR; exact characters may vary.]' : ''}</blockquote>` : ''}
+        ${r.facsimile ? `<figure class="fax"><img src="/infographics/des-moines-alpr/${esc(r.facsimile.src)}" alt="Facsimile: ${esc(r.facsimile.caption)}" loading="lazy" decoding="async" width="${r.facsimile.pixels[0]}" height="${r.facsimile.pixels[1]}"><figcaption>${esc(r.facsimile.caption)} Source: ${esc(r.facsimile.source_document)}, p. ${r.facsimile.page}. Region crop of a straight render at ${r.facsimile.render_dpi} dpi; no pixel altered.</figcaption></figure>` : ''}
         ${r.caveat ? `<p><em>Caveat:</em> ${esc(r.caveat)}</p>` : ''}
         ${r.what_it_does_not_establish ? `<p><em>What this does not establish:</em> ${esc(r.what_it_does_not_establish)}</p>` : ''}
         <p class="note">Receipt ${esc(r.receipt_id)}</p>
@@ -220,16 +267,41 @@ function foot({ receiptIds, extraScripts, inlineData }) {
 
 ${noJsReceipts(receiptIds)}
 
-<footer class="site">
-  <div class="f-inner">
-    <div>
-      <div class="f-brand">Restoring Democracy&rsquo;s Promise</div>
-      <div class="f-tag">Engineering Precision Journalism</div>
+<footer class="bg-brand-offblack text-brand-sand py-10 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div class="md:col-span-1">
+        <p class="font-serif text-base font-bold text-brand-gold">Restoring Democracy&rsquo;s Promise</p>
+        <p class="font-serif text-sm italic text-brand-gold">Quantifying the Truth</p>
+        <p class="text-xs text-brand-sand/50 mt-0.5">Engineering Precision Journalism</p>
+      </div>
+      <div>
+        <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">This exhibit</h4>
+        <ul class="space-y-1.5 text-sm">
+          <li><a href="/infographics/des-moines-alpr/" class="text-brand-sand/80 hover:text-brand-gold transition">Page Nine</a></li>
+          <li><a href="/infographics/des-moines-alpr/network/" class="text-brand-sand/80 hover:text-brand-gold transition">Explore the configuration</a></li>
+          <li><a href="/infographics/des-moines-alpr/records/" class="text-brand-sand/80 hover:text-brand-gold transition">The record</a></li>
+          <li><a href="/infographics/des-moines-alpr/records/#methodology" class="text-brand-sand/80 hover:text-brand-gold transition">Method and corrections</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Organization</h4>
+        <ul class="space-y-1.5 text-sm">
+          <li><a href="/about/" class="text-brand-sand/80 hover:text-brand-gold transition">About Restoring Democracy's Promise</a></li>
+          <li><a href="/team/" class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
+          <li><a href="/ai-use/" class="text-brand-sand/80 hover:text-brand-gold transition">AI Use &amp; Editorial Principles</a></li>
+          <li><a href="/privacy-policy/" class="text-brand-sand/80 hover:text-brand-gold transition">Privacy Policy</a></li>
+          <li><a href="/secure-tips/" class="text-brand-sand/80 hover:text-brand-gold transition">Secure Tips</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Contact</h4>
+        <p class="text-sm text-brand-sand/80">Webmaster &amp; General Inquiries</p>
+        <a href="mailto:webmaster@restoring-democracy.org" class="mt-2 inline-block text-brand-orange hover:text-brand-gold transition">webmaster@restoring-democracy.org</a>
+      </div>
     </div>
-    <div class="f-meta">
-      Prototype build &mdash; not published. &nbsp;&bull;&nbsp;
-      &copy; 2023&ndash;2026 Restoring Democracy&rsquo;s Promise. &nbsp;&bull;&nbsp;
-      <a href="/privacy-policy/">Privacy</a>
+    <div class="border-t border-brand-sand/10 pt-6 text-center">
+      <p class="text-xs text-brand-sand/50">Prepublication draft &mdash; not published. &copy; 2023&ndash;2026 Restoring Democracy's Promise. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -269,12 +341,19 @@ function chapterShell(ch, graphicHtml, opts = {}) {
 const GRAPHICS = {
   resolution() {
     return `<div class="figure">
-      <div class="in-summary" style="border:1px solid var(--hairline-3);border-radius:3px;padding:1rem;background:var(--paper-l1)">
+      <div style="border:1px solid var(--hairline-3);border-radius:3px;padding:1rem;background:var(--paper-l1)">
         ${layerChip('L1')}
-        <p style="font-family:var(--serif);font-size:1.02rem;line-height:1.55;margin:.7rem 0 0">
+        <p class="note" style="margin:.6rem 0 .5rem;border:0;padding:0">Roll Call 23-1597 &mdash; the consent agenda</p>
+        <p style="font-family:var(--serif);font-size:.98rem;line-height:1.5;margin:0">
+          &ldquo;APPROVING CONSENT AGENDA &ndash; items 3 through 38 &hellip; Motion Carried 7&ndash;0.&rdquo;
+        </p>
+        <p class="note" style="margin-top:.6rem">Footnote: &ldquo;These are routine items and will be enacted by one roll call vote without separate discussion unless&hellip; Council requests an item be removed to be considered separately.&rdquo;</p>
+      </div>
+      <div class="in-summary" style="border:1px solid var(--hairline-3);border-radius:3px;padding:1rem;margin-top:.7rem;background:var(--paper-l1)">
+        <p class="note" style="margin:0 0 .5rem;border:0;padding:0">Item 32, not removed</p>
+        <p style="font-family:var(--serif);font-size:1.02rem;line-height:1.55;margin:0">
           &ldquo;The purchase of M500 In-Car Video System and Video Manager from Motorola Solutions, Inc. in the amount of
-          <strong class="tnum">$1,500,080.00</strong> and per the terms and pricing of the Sourcewell Master Agreement Contract
-          #010720-WCH for use by the Police Department, is hereby approved.&rdquo;
+          <strong class="tnum">$1,500,080.00</strong>&hellip; is hereby approved.&rdquo;
         </p>
       </div>
       <div class="by-reference" style="border:1px dashed var(--hairline-3);border-radius:3px;padding:.85rem;margin-top:.7rem;background:var(--paper-l2)">
@@ -283,7 +362,7 @@ const GRAPHICS = {
         </p>
         <p class="note" style="margin-top:.5rem">Incorporation by reference. The operative clause uses the singular &ldquo;Addendum.&rdquo; Four addenda were executed.</p>
       </div>
-      <p class="figure-caption">Agenda item 32, adopted inside a consent agenda covering items 3 through 38 on a single roll call, 7&ndash;0. Consent items are described in the agenda as routine items enacted by one roll call vote without separate discussion. Nothing in the record establishes what any individual member read, knew, understood or intended.</p>
+      <p class="figure-caption">Nothing in the record establishes what any individual member read, knew, understood or intended. That is outside the record and outside this exhibit.</p>
     </div>`;
   },
 
@@ -337,6 +416,10 @@ const GRAPHICS = {
           ${pageComp.not_in_the_file.map((x) => `<li class="not-in-summary">${esc(x.label)} ${chip(x.receipt_id, 'source')}</li>`).join('\n          ')}
         </ul>
       </div>
+      <div class="callout">
+        <h3>Where the plate-reader language is</h3>
+        <p>Twenty-one of the twenty-five pages can be searched in a text layer. Across all of them, terms such as <em>license plate</em>, <em>LPR</em>, <em>Vigilant</em> and <em>VehicleManager</em> appear on <strong>page 9 alone</strong>. Page 8 carries the word <em>retention</em> once, in a clause about video recordings. ${chip('R-PAGE-TERM-CHECK', 'method and result')}</p>
+      </div>
       <p class="figure-caption">${esc(pageComp.caveat)}</p>
     </div>`;
   },
@@ -370,7 +453,15 @@ const GRAPHICS = {
     ];
     return `<div class="figure not-in-summary">
       ${layerChip('L3')}
-      <p class="note" style="margin-top:.6rem">QUOTE-2241626, &ldquo;Updated M500 VaaS&rdquo;, 23 October 2023. Produced to RDP in 2026. Not in the 25-page clerk&rsquo;s file.</p>
+      <p class="note" style="margin-top:.6rem">QUOTE-2241626, &ldquo;Updated M500 VaaS&rdquo;, 23 October 2023. Not in the 25-page clerk&rsquo;s file; the City produced it to RDP in September 2026.</p>
+      <div class="arith">
+        <div><span>130 in-car systems, five years of cloud video service</span><b class="tnum">$1,287,000</b></div>
+        <div><span>Installation, removal, deployment and training</span><b class="tnum">$145,500</b></div>
+        <div><span>Basic Remote Support for WG LPR License</span><b class="tnum">$500</b></div>
+        <div><span>M500 Basic ALPR VaaS, 130 &times; $516</span><b class="tnum">$67,080</b></div>
+        <div class="arith-total"><span>Approved by the Council</span><b class="tnum">$1,500,080</b></div>
+      </div>
+      ${chipRow(['R-QUOTE-ARITHMETIC'])}
       <div class="table-scroll" style="margin-top:.8rem">
         <table class="data">
           <caption>Plate-reader lines in the ordering document</caption>
@@ -384,9 +475,9 @@ const GRAPHICS = {
       </div>
       <div class="callout">
         <h3>The required companion</h3>
-        <p>$67,580 is 4.5% of the purchase &mdash; and it is the licence-and-support layer, not the extent of the deployment. The delivery pack list records a component the vendor calls an <strong>&ldquo;M500 ALPR DVR&rdquo;</strong> on every one of the 130 systems. ${chip('R-PACKLIST-DVR', 'pack list')}</p>
+        <p>$67,580 is 4.51 percent of the purchase &mdash; and it is the licence-and-support layer, not the extent of the deployment. The delivery pack list records a component the vendor calls an <strong>&ldquo;M500 ALPR DVR&rdquo;</strong> on every one of the 130 systems. ${chip('R-PACKLIST-DVR', 'pack list')}</p>
       </div>
-      <p class="figure-caption">The vendor&rsquo;s own price file defines the purchased SKU as &ldquo;CarDetector Mobile, Vigilant PlateSearch (agency data only).&rdquo; The council-approved purchase did not include commercial national vehicle-location data. That came from somewhere else.</p>
+      <p class="figure-caption">The vendor&rsquo;s own price file defines the purchased SKU as &ldquo;CarDetector Mobile, Vigilant PlateSearch (agency data only).&rdquo; The council-approved purchase did not include commercial national vehicle-location data. That came from somewhere else. Note too that the quote as produced is not complete: two different produced pages carry the same page number. ${chip('R-QUOTE-INCOMPLETE', 'source')}</p>
     </div>`;
   },
 
@@ -427,10 +518,18 @@ const GRAPHICS = {
     return `<div class="figure not-in-summary">
       ${layerChip('L0')}
       <div style="border:1px solid var(--hairline-3);border-left:4px solid var(--chain-a-faint);border-radius:3px;padding:1rem;margin-top:.7rem;background:var(--paper-l0)">
-        <p class="note" style="margin:0 0 .6rem;border:0;padding:0">Price and Product Change Request, Sourcewell contract 010720, effective 14 September 2021 &mdash; justification field</p>
+        <p class="note" style="margin:0 0 .5rem;border:0;padding:0">Field 1 &mdash; &ldquo;Changed Product List&rdquo;</p>
         <p class="clause" style="margin:0">&ldquo;WatchGuard Video <mark>mistakenly left off</mark> a key component of our VaaS offering &ndash; The License Plate Reader (LPR). It is now included in the VaaS price list.&rdquo;</p>
       </div>
-      <h3 style="font-size:.95rem;margin:1.1rem 0 .5rem">Five change forms, 2021</h3>
+      <div style="border:1px solid var(--hairline-3);border-left:4px solid var(--chain-a-faint);border-radius:3px;padding:1rem;margin-top:.6rem;background:var(--paper-l0)">
+        <p class="note" style="margin:0 0 .5rem;border:0;padding:0">Field 3 &mdash; printed prompt: &ldquo;Describe how the product additions fit within the scope of the original RFP.&rdquo;</p>
+        <p class="clause" style="margin:0">&ldquo;The LPR is a key component of the WatchGuard Mobile Video System.&rdquo;</p>
+      </div>
+      <div class="callout">
+        <h3>The solicitation it refers to</h3>
+        <p>Sourcewell RFP #010720, noticed 7 November 2019, sought &ldquo;Public Safety Video Surveillance Solutions with Related Equipment, Software and Accessories.&rdquo; Across its twenty-two pages and four addenda, the words <em>license plate</em>, <em>plate reader</em>, <em>LPR</em> and <em>ALPR</em> do not appear. The only four matches for the string &ldquo;plate&rdquo; are the word &ldquo;template.&rdquo; ${chip('R-SW-RFP-010720', 'source')}</p>
+      </div>
+      <h3 style="font-size:.95rem;margin:1.2rem 0 .5rem">Five change forms, 2021</h3>
       <ul style="margin:0;padding-left:1.1rem;font-size:.88rem;color:var(--ink-soft)">
         <li>Expiring 19 April 2021</li>
         <li>Effective 3 September 2021 &mdash; repricing; creates the VaaS price list</li>
@@ -438,7 +537,7 @@ const GRAPHICS = {
         <li>Effective 29 October 2021 &mdash; combined in-car video and plate-reader unit</li>
         <li>Effective 14 December 2021 &mdash; reversion</li>
       </ul>
-      <p class="figure-caption">The change-request mechanism is expressly authorised by the contract: an executed form becomes an amendment incorporated by reference. The cooperative&rsquo;s own rule is that modifications must be within the scope of the original solicitation. Whether any scope determination was made is not found in the records produced. The 3 September form carries a signature dated &ldquo;8/31/22&rdquo; &mdash; an anomaly on the face of the document, noted and not built on.</p>
+      <p class="figure-caption">The change-request mechanism is expressly authorised by the contract: an executed form becomes an amendment incorporated by reference. The cooperative&rsquo;s own printed rule is that additions must be within the scope of the original solicitation, and that it &ldquo;will determine&rdquo; whether a request meets that test. Whether any such determination was made for this change is not found in the records produced; the cooperative has been asked.</p>
     </div>`;
   },
 
@@ -486,7 +585,11 @@ const GRAPHICS = {
   },
 
   ledger() {
-    const col = (kind, items, heading) => `<div class="ledger-col" data-kind="${kind}">
+    /* The "does not establish" column is, by construction, a list of
+       propositions the record does NOT support. A rule that bans asserting
+       intent cannot fire on a column whose whole semantic is negation, so the
+       column is marked rather than the prose weakened. */
+    const col = (kind, items, heading) => `<div class="ledger-col" data-kind="${kind}"${kind === 'unknown' ? ' data-lint-exempt="explicit-negations"' : ''}>
       <h3>${esc(heading)}</h3>
       <ul>${items.map((i) => `<li>${esc(i.text)} ${i.receipts.map((r) => chip(r, 'source')).join(' ')}</li>`).join('\n      ')}</ul>
     </div>`;
@@ -536,13 +639,13 @@ function buildIndex() {
 </section>
 
 <div id="scrolly" class="scrolly">
-  ${chapterShell(ch['ch01-purchase'], GRAPHICS.resolution())}
-  ${chapterShell(ch['ch02-summary'], GRAPHICS.summary())}
-  ${chapterShell(ch['ch03-stack'], GRAPHICS.stack())}
-  ${chapterShell(ch['ch04-page-nine'], GRAPHICS.pageNine())}
-  ${chapterShell(ch['ch05-quote'], GRAPHICS.quote())}
-  ${chapterShell(ch['ch06-other-contract'], GRAPHICS.twoChains() + switchBar)}
-  ${chapterShell(ch['ch07-mistakenly'], GRAPHICS.changeForm())}
+  ${chapterShell(ch['ch01-mistakenly'], GRAPHICS.changeForm())}
+  ${chapterShell(ch['ch02-item-32'], GRAPHICS.resolution())}
+  ${chapterShell(ch['ch03-summary'], GRAPHICS.summary())}
+  ${chapterShell(ch['ch04-stack'], GRAPHICS.stack())}
+  ${chapterShell(ch['ch05-page-nine'], GRAPHICS.pageNine())}
+  ${chapterShell(ch['ch06-quote'], GRAPHICS.quote())}
+  ${chapterShell(ch['ch07-other-contract'], GRAPHICS.twoChains() + switchBar)}
 </div>
 
 <section class="hard-cut" id="${esc(ch['ch08-hard-cut'].id)}" aria-labelledby="hc-h">
@@ -558,7 +661,7 @@ function buildIndex() {
 
 <div class="plane3">
   ${chapterShell(ch['ch09-configuration'], GRAPHICS.tileMap())}
-  ${chapterShell(ch['ch10-cannot-show'], GRAPHICS.emptyDrawer())}
+  ${chapterShell(ch['ch10-drawer'], GRAPHICS.emptyDrawer())}
 </div>
 
 <section class="module" id="${esc(ch['ch11-ledger'].id)}" aria-labelledby="ledger-h">
@@ -566,10 +669,15 @@ function buildIndex() {
     <p class="chapter-num">${esc(ch['ch11-ledger'].number)} &mdash; <span class="kicker" style="display:inline;margin:0">${esc(ch['ch11-ledger'].kicker)}</span></p>
     <h2 id="ledger-h">${esc(ch['ch11-ledger'].heading)}</h2>
     ${GRAPHICS.ledger()}
-    <div class="callout" style="margin-top:1.6rem">
-      <h3>${esc(copy.exhibit.responses_block.heading)}</h3>
-      <p>${esc(copy.exhibit.responses_block.body)}</p>
+    <!-- ================== RIGHT OF RESPONSE ==================
+         RIGHT OF RESPONSE - STATUS COPY. Editorially owned; patch
+         _src/content/copy.json -> right_of_response only. Do not summarise,
+         characterise or anticipate a response that has not been received. -->
+    <div class="limit-block limit-block--ror" id="rorBlock" data-ror-status="${esc(copy.right_of_response.status)}">
+      <p class="limit-block__head">${esc(copy.right_of_response.heading)}</p>
+      <p class="limit-block__body">${esc(copy.right_of_response.body)}</p>
     </div>
+    <!-- ================== END RIGHT OF RESPONSE ================== -->
     <p style="margin-top:1.4rem"><a href="/infographics/des-moines-alpr/records/"><strong>Every instrument, date, price and receipt &rarr;</strong></a> &nbsp;&middot;&nbsp; <a href="/infographics/des-moines-alpr/network/"><strong>Explore the configuration &rarr;</strong></a></p>
   </div>
 </section>
@@ -860,6 +968,22 @@ function buildRecords() {
           <td>${layerChip(p.record_layer)}</td>
           <td>${p.described_in_summary ? 'Yes' : 'No — attachment'}</td>
           <td>${chip(p.receipt_id, 'source')}</td>
+        </tr>`).join('\n        ')}
+      </tbody>
+    </table>
+  </div>
+  <h3 style="margin-top:1.6rem">Page-by-page term check</h3>
+  <p class="note">${esc(termCheck.method_note)}</p>
+  <div class="table-scroll" style="margin-top:.8rem">
+    <table class="data">
+      <caption>Terms searched: ${termCheck.terms_checked.map(esc).join(', ')}. A blank cell means the term was not found in the text layer searched &mdash; not that it is absent from the scanned image.</caption>
+      <thead><tr><th scope="col">Packet page</th><th scope="col">Document</th><th scope="col">How it was searched</th><th scope="col">Terms found</th></tr></thead>
+      <tbody>
+        ${termCheck.pages.map((p) => `<tr${p.terms_found.length ? ' style="background:#fff6ec"' : ''}>
+          <td class="num">${p.packet_page}</td>
+          <td>${esc(p.document_short)}${p.twin_document ? ` <span class="layer-chip">${esc(p.twin_document)} p.${p.twin_page}</span>` : ''}</td>
+          <td>${p.method === 'text_layer_of_twin' ? 'Text layer of the twin document' : 'OCR and visual inspection, earlier pass &mdash; not re-searched here'}</td>
+          <td>${p.terms_found.length ? p.terms_found.map(esc).join(', ') : '&mdash;'}</td>
         </tr>`).join('\n        ')}
       </tbody>
     </table>

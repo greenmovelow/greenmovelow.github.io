@@ -72,7 +72,30 @@
   --wide:    980px;
   --full:    1320px;
 
-  --nav-h: 112px;
+  /* site nav (fixed, 64px / 68px at lg) + the exhibit's own two nav rows */
+  --site-nav-h: 64px;
+  --nav-h: 150px;
+}
+@media (min-width:1024px){ :root{ --site-nav-h: 68px; } }
+
+/* ---------------------------------------------------------------------------
+   Shared-shell compatibility.
+
+   /assets/css/styles.css is Tailwind, and its preflight resets headings, lists,
+   figures, blockquotes and table borders to nothing. The exhibit sets its own
+   type and borders explicitly, but a few defaults it does rely on have to be
+   restored — scoped to exhibit content so nothing leaks into the shared shell.
+   --------------------------------------------------------------------------- */
+#main ul[style*="padding-left"], #main ol[style*="padding-left"]{ list-style:revert; }
+#main .lane ul, #main .callout ul{ list-style:disc outside; }
+#main blockquote{ margin:0; }
+#main figure{ margin:0; }
+#main dl, #main dd, #main dt{ margin:0; }
+#main table{ border-collapse:collapse; }
+#main img{ max-width:100%; height:auto; }
+.sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -136,7 +159,16 @@ p:last-child{ margin-bottom:0; }
 .standfirst{ font-family:var(--serif); font-size:clamp(1.1rem,2.6vw,1.35rem); color:var(--ink-soft); margin:1.1rem 0 0; max-width:56ch; }
 .byline{ font-family:var(--mono); font-size:.76rem; letter-spacing:.06em; color:var(--muted); margin:1.4rem 0 0; text-transform:uppercase; }
 
-/* ---------- masthead (site pattern) ---------- */
+/* ---------- exhibit chrome, under the fixed site nav ---------- */
+.draft-banner{ margin-top:var(--site-nav-h); }
+.exhibit-chrome{
+  position:sticky; top:var(--site-nav-h); z-index:40;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--hairline);
+}
+
+/* ---------- masthead (retained for reference; unused by the built pages) ---------- */
 .masthead{
   position:sticky; top:0; z-index:120;
   background:rgba(255,255,255,0.94);
@@ -306,6 +338,7 @@ p:last-child{ margin-bottom:0; }
 }
 .rd-caveat{ border-left:3px solid var(--orange-ink); background:rgba(244,162,97,0.09); padding:.7rem .85rem; }
 .rd-notestab{ border-left:3px solid var(--hairline-3); background:var(--paper-l1); padding:.7rem .85rem; }
+.rd-section .fax img{ border-color:var(--hairline); }
 .rd-facsimile{
   border:1px dashed var(--hairline-3); border-radius:4px; padding:.9rem;
   font-family:var(--mono); font-size:.72rem; color:var(--muted); text-align:center;
@@ -442,6 +475,44 @@ html:not(.js) .ev{ border-bottom-style:dotted; cursor:default; }
 [data-summary-dim="true"] .by-reference{ opacity:.45; outline:1px dashed var(--muted-light); outline-offset:2px; }
 .not-in-summary, .in-summary, .by-reference{ transition:opacity .22s ease; }
 @media (prefers-reduced-motion: reduce){ .not-in-summary,.in-summary,.by-reference{ transition:none; } }
+
+/* ---------- quote arithmetic ---------- */
+.arith{ margin:1rem 0 0; border:1px solid var(--hairline); border-radius:3px; overflow:hidden; }
+.arith > div{
+  display:flex; align-items:baseline; justify-content:space-between; gap:1rem;
+  padding:.5rem .8rem; border-top:1px solid var(--hairline-2); font-size:.9rem;
+}
+.arith > div:first-child{ border-top:0; }
+.arith > div > span{ color:var(--ink-soft); }
+.arith > div > b{ font-variant-numeric:tabular-nums; white-space:nowrap; }
+.arith .arith-total{ background:var(--paper-l2); border-top:2px solid var(--hairline-3); font-weight:700; }
+
+/* ---------- facsimile ---------- */
+.fax{ margin:.6rem 0 0; }
+.fax img{
+  width:100%; height:auto; border:1px solid var(--hairline-3); border-radius:3px;
+  background:#fff;
+}
+.fax figcaption{
+  font-family:var(--mono); font-size:.66rem; line-height:1.55; color:var(--muted);
+  margin-top:.45rem;
+}
+.plane3 .fax figcaption{ color:var(--plane3-muted); }
+
+/* ---------- right of response (house limit-block pattern) ---------- */
+.limit-block{
+  margin:1.6rem 0 0; padding:.9rem 1rem;
+  border:1px solid var(--hairline-3); border-radius:8px; background:transparent;
+}
+.limit-block__head{
+  margin:0 0 .5rem; font-family:var(--mono); font-size:.69rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted);
+}
+.limit-block__body{ margin:0; font-size:.92rem; line-height:1.55; color:var(--ink-soft); }
+.limit-block--ror{ border-left:3px solid var(--orange-ink); }
+.limit-block--ror[data-ror-status="pending"] .limit-block__head::after{
+  content:" — responses pending"; letter-spacing:.04em; text-transform:none; color:var(--orange-ink);
+}
 
 /* ---------- two-chain chronology ---------- */
 .chains{ display:grid; gap:1rem; }

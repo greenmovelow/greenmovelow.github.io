@@ -429,6 +429,111 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   await ctx.close();
 }
 
+/* ------------------------- 9. article-v0.2 alignment (Phase 2) ----------- */
+{
+  const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+
+  /* narrative order now follows the article's movements */
+  const order = await page.$$eval('#scrolly .chapter', (els) => els.map((e) => e.id));
+  assert(order[0] === 'ch01-mistakenly',
+    'the exhibit opens on the 2021 change form', order[0]);
+  assert(order[1] === 'ch02-item-32',
+    'the council vote is second', order[1]);
+  assert(order.indexOf('ch05-page-nine') > order.indexOf('ch04-stack'),
+    'page nine still follows the document stack');
+  assert(order.indexOf('ch07-other-contract') === order.length - 1,
+    'the contract underneath closes the 2023 movement', order[order.length - 1]);
+
+  const ch1 = await page.locator('#ch01-mistakenly').innerText();
+  assert(/mistakenly left off/i.test(ch1) && /key component of the WatchGuard Mobile Video System/i.test(ch1),
+    'chapter 1 carries both quoted fields of the change form');
+
+  /* the hard cut still separates 2023 from 2026, after the last 2023 chapter */
+  const cutY = await page.locator('.hard-cut').evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+  const lastDoc = await page.locator('#ch07-other-contract').evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+  const config = await page.locator('#ch09-configuration').evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+  assert(lastDoc < cutY && cutY < config,
+    'the discontinuity sits between the dated record and the 2026 snapshot');
+
+  /* corrected arithmetic */
+  const arith = await page.locator('.arith').innerText();
+  for (const n of ['$1,287,000', '$145,500', '$500', '$67,080', '$1,500,080']) {
+    assert(arith.includes(n), `arithmetic shows ${n}`);
+  }
+  const body = await page.locator('body').innerText();
+  assert(body.includes('4.51'), 'the exhibit states 4.51 percent');
+  assert(!body.includes('157,500'), 'the superseded services figure appears nowhere');
+
+  /* facsimile renders, with provenance, and actually loads */
+  await page.locator('button[data-receipt="R-MVA-4.5"]').first().click();
+  await page.waitForTimeout(400);
+  const fax = page.locator('#receipt-drawer .fax img');
+  assert(await fax.count() === 1, 'the page-9 receipt carries a facsimile');
+  const loaded = await fax.evaluate((img) => img.complete && img.naturalWidth > 100);
+  assert(loaded, 'the facsimile image actually loads');
+  const cap = await page.locator('#receipt-drawer .fax figcaption').innerText();
+  assert(/Source:/.test(cap) && /dpi/.test(cap) && /no pixel altered/i.test(cap),
+    'the facsimile caption carries source, page, dpi and an alteration statement');
+  await page.keyboard.press('Escape');
+
+  /* a receipt with no crop says so rather than showing a stand-in */
+  await page.locator('button[data-receipt="R-QTY-SEQUENCE"]').first().click();
+  await page.waitForTimeout(300);
+  const noFax = await page.locator('#receipt-drawer .rd-facsimile').innerText();
+  assert(/No page image is shipped/i.test(noFax),
+    'a receipt without a crop states the absence plainly');
+  await page.keyboard.press('Escape');
+
+  /* right of response */
+  const ror = page.locator('#rorBlock');
+  assert(await ror.count() === 1, 'the right-of-response block is present');
+  assert(await ror.getAttribute('data-ror-status') === 'pending', 'it reports responses as pending');
+  const rorText = await ror.innerText();
+  assert(/September 11, 2026/.test(rorText) && /pending/i.test(rorText),
+    'it names the deadline and does not anticipate an answer');
+  assert(!/declined to comment|did not respond|said that/i.test(rorText),
+    'it characterises no response that has not been received');
+
+  /* shared site shell */
+  /* the link appears twice by design: desktop bar and mobile menu */
+  assert(await page.locator('nav.nav-bar a[href="/#investigations"]').count() >= 1,
+    'the shared site navigation is present',
+    `${await page.locator('nav.nav-bar a[href="/#investigations"]').count()} occurrence(s)`);
+  assert(await page.locator('footer a[href="/privacy-policy/"]').count() === 1,
+    'the shared footer links the current privacy path');
+  const navFixed = await page.locator('nav.nav-bar').evaluate((el) => getComputedStyle(el).position);
+  assert(navFixed === 'fixed', 'the site nav is fixed, as on the newest exhibits', navFixed);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(150);
+  const bannerTop = await page.locator('.draft-banner').evaluate((el) => el.getBoundingClientRect().top);
+  assert(bannerTop >= 60, 'the prepublication banner clears the fixed nav', `${Math.round(bannerTop)}px`);
+
+  assert(errors.length === 0, 'no JS errors on the aligned page', errors.slice(0, 2).join(' | '));
+  await ctx.close();
+}
+
+/* ------------------------- 10. mobile menu (shared shell) --------------- */
+{
+  const ctx = await browser.newContext({ viewport: VIEWPORTS.mobile, hasTouch: true, isMobile: true });
+  const page = await ctx.newPage();
+  await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+  const menu = page.locator('#mobile-menu');
+  assert(await menu.evaluate((el) => el.getBoundingClientRect().height) < 5,
+    'mobile menu starts closed');
+  await page.locator('#mobile-toggle').click();
+  await page.waitForTimeout(400);
+  assert(await menu.evaluate((el) => el.getBoundingClientRect().height) > 50,
+    'mobile menu opens');
+  assert(await page.locator('#mobile-toggle').getAttribute('aria-expanded') === 'true',
+    'the toggle reports its expanded state');
+  await page.screenshot({ path: join(SHOTS, 'index-mobile-nav-open.png') });
+  await ctx.close();
+}
+
 await browser.close();
 console.log(`\n${pass} assertion(s) passed, ${fail} failed.`);
 process.exit(fail ? 1 : 0);

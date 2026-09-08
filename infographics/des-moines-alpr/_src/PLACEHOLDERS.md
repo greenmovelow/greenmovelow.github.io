@@ -1,81 +1,102 @@
 # Placeholders and open items
 
-Everything on this list is a deliberate gap. Nothing here was guessed at.
-Search `_src/content/copy.json` for `PROVISIONAL` to find the copy slots.
+Aligned to article draft v0.2 (2026-09-07). Everything on this list is a
+deliberate gap. Nothing here was guessed at. Search
+`_src/content/copy.json` for `PROVISIONAL`.
 
-## A. Provisional copy — expected to be replaced from the Opus article draft
+## A. Provisional copy
 
-| Slot | Path in `copy.json` | Current value |
+| Slot | Path in `copy.json` | State |
 |---|---|---|
-| Exhibit title | `exhibit.headline` | "Page Nine" — a working title, not a publication title |
-| Dek | `exhibit.dek` | Written for this prototype; replace with the article's dek |
-| Byline | `exhibit.byline` | "Restoring Democracy's Promise" — no author, no date |
-| Display date | `exhibit.date_display` | "Draft — not published" |
-| Meta description | `exhibit.meta_description` | Written for this prototype |
-| Article link | `exhibit.article_link` | `enabled: false`, empty URL. Set `enabled: true` and fill `url` when the article publishes |
+| Title | `exhibit.headline` | **Set** — "Page Nine", from the article |
+| Dek | `exhibit.dek` | **Set** — from the article |
+| Byline | `exhibit.byline` | **Set** — Timothy Tucker |
+| Publication date | `exhibit.date_display` | PROVISIONAL — "the week of 14 September 2026" |
+| Article link | `exhibit.article_link` | PROVISIONAL — `enabled:false`, empty URL. **No slug has been invented.** |
 
-All chapter body and consequence text in `copy.chapters[]` is written from the
-adjudicated record and is publication-safe as written, but it is exhibit copy,
-not article copy. It can be tightened against the article's voice without
-touching any template.
+Chapter body and consequence text follows the article's movements and wording
+and is publication-safe as written. It remains exhibit copy, not article copy,
+and can be tightened to the article's voice without touching a template.
 
-## B. Reserved blocks that are empty on purpose
+## B. Right of response — OPEN
 
-| Block | Where it renders | State |
-|---|---|---|
-| Responses / right of reply | Chapter 11, narrative page | Renders with a visible placeholder saying nothing has been added. Nothing has been sought or received in this build. |
-| Updates and corrections | `copy.exhibit.updates_block` | `enabled: false`, empty list |
+Outreach has been sent. The comment and factual-correction deadline is
+**5:00 p.m. Central, Friday, September 11, 2026**; publication is expected the
+week of September 14.
 
-## C. Not shipped in Phase 1
+The block renders and states that responses are pending. It characterises
+nothing. `right_of_response.status` is `pending`; the publication gate
+(`node _src/lint.mjs --publish`) fails until it is `received` or `closed`, and
+that gate is deliberately separate from the ordinary lint so this draft builds.
 
-| Item | Why | What the exhibit does instead |
-|---|---|---|
-| Facsimile page images | No crops of the produced records were prepared, and inventing them was not an option | Every receipt shows a "Page image" section that says plainly that no image is shipped and that crops are a Phase 2 item. The verbatim excerpt is always present. |
-| Social cards / OG images | Out of Phase 1 scope; the headline is provisional | `og:image` is omitted rather than pointing at a placeholder |
-| A separate `/methodology/` route | It would separate the definitions from the tables they describe | Methodology, definitions, corrections and sources sit at the bottom of the records page |
+## C. Facsimiles — ten shipped, the rest placeholders
 
-## D. Facts the record does not supply, and which the exhibit therefore does not assert
+Shipped, each with a sidecar recording the source file, its SHA-256, the page,
+the crop box in PDF points and the render DPI, and each declared an unaltered
+region crop:
 
-These are not build gaps — they are the record's own limits, and each is stated
-on the page and in the relevant receipt.
+| Receipt | What it shows |
+|---|---|
+| `R-SW-PNP-2021-09-14` | Field 1, "mistakenly left off" |
+| `R-SW-PNP-BOX3` | Fields 2 and 3, including the scope prompt and its one-sentence answer |
+| `R-SW-SCOPE-RULE` | The form's printed instructions — the cooperative's own scope rule |
+| `R-SW-PNP-SIG` | The approvals block |
+| `R-RC-23-1629-OP1` | The resolution's two operative clauses |
+| `R-RC-23-1629-BID` | The competitive-bid recital |
+| `R-MVA-4.5` | **Page 9 of the clerk's file — §4.4 and §4.5** |
+| `R-QUOTE-L10` | The two plate-reader lines |
+| `R-QUOTE-TOTAL` | The quote's grand total |
+| `R-QUOTE-INFO` | The product-description page footered "Page 4" |
 
-- **When any of the 155 sharing relationships was configured.** 151 of 155 rows
-  carry no usable date; the four that do carry a *last update* stamp, not a start
-  date. No other produced record dates any relationship.
-- **Whether any plate record has ever been transferred, queried or viewed** under
-  any of these settings. No transfer, query, hit or audit record exists in
-  anything produced.
-- **Whether the addenda were physically before council members** on 20 November
-  2023, as opposed to in the clerk's file at execution the same day.
-- **How 130 / 126 / 120 / 140 reconcile.** Four unit counts, four sources, no
-  reconciling document. All four are published with their sources.
-- **What "Customer Data" meant in November 2023.** The definitional chain runs
-  out of the produced record into a vendor-hosted addendum that may change from
-  time to time. The only customer-agreement edition in the record is dated
-  September 2024 and post-dates the order.
-- **What the "(F)" prefix (51 rows) or the "Inactive" prefix (5 rows) means.**
-  Not defined in any located documentation.
-- **What "Has system", "Retention" and the "InActive" alert-monitoring value
-  mean** in the export. Vendor definitions were not located.
-- **What fund account code `JAG00020` on the fixed-camera purchase order refers
-  to.** No document maps it. Published as an open question only.
-- **The complete universe of sharing relationships.** The export is filtered to
-  "Sharing status : Sharing", so 155 is a floor, not a total.
+Every other receipt shows a plain statement that no page image is shipped for
+it. Nothing is faked, reconstructed or enhanced.
 
-## E. Carried forward but not re-verified
+## D. Page-by-page term check — COMPLETED
 
-- The "~$729,000 Sourcewell reporting gap" from earlier RDP working notes was
-  **not re-verified** in the controlling adjudication and is **not used anywhere
-  in this exhibit**. It must not be added without re-opening the Sourcewell
-  sales workbooks.
+`data/page_term_check.json`, generated by `_src/tools/verify_page_terms.py`.
 
-## F. Publication gates (also rendered on the narrative page)
+The 25-page clerk's file is a scan with no text layer, so it cannot be searched
+directly. The same production contains text-layer twins of every attachment;
+those were searched page by page and mapped onto packet pages, with the mapping
+**asserted against three anchors before any result was recorded**.
 
-1. **Right of reply** — City, DMPD, Motorola Solutions, Sourcewell, H-GAC.
-2. **Prior-reporting sweep** — no claim in this exhibit has been checked against
-   previously published reporting.
-3. **Article integration** — headline, dek, byline, article link.
-4. **Facsimile images** — none shipped.
+- **21 of 25 pages** searched in a text layer (packet pp. 5–25).
+- **Packet pp. 1–4** have no twin and were **not** re-searched; they are carried
+  from the earlier OCR-and-visual pass.
+- **Result:** of the eleven terms searched, packet **p. 9** carries LPR,
+  Vigilant, VehicleManager, license plate and retention. Packet **p. 8** carries
+  *retention* only, in a clause about video recordings. No other searched page
+  carries any of them.
 
-Until all four are resolved, every page carries `noindex,nofollow` and a
-prototype banner.
+A term not found is a statement about the text layer searched. It is **not**
+proof of absence from the scanned image, and the exhibit does not record it as
+one.
+
+## E. Facts the record does not supply
+
+Unchanged from Phase 1 and each stated on the page and in its receipt: when any
+sharing relationship was configured; whether any plate record has ever been
+transferred, queried or viewed; which documents accompanied Item 32 in council
+packets; how 130 / 126 / 120 / 140 reconcile; what "Customer Data" meant in
+November 2023; what the "(F)" and "Inactive" prefixes mean; what `JAG00020`
+refers to; and the complete universe of sharing relationships behind a filtered
+export.
+
+Added in this pass: the produced quote is **not the complete ordering
+document** — two produced pages carry the same page number.
+
+## F. Carried forward but not re-verified
+
+The "~$729,000 Sourcewell reporting gap" was not re-verified and is **not used
+anywhere in this exhibit**. It must not be added without re-opening the
+Sourcewell sales workbooks.
+
+## G. Publication gates
+
+1. **Right of response** — open until 11 September 2026, 5:00 p.m. Central.
+2. **Prior-reporting sweep** — not done.
+3. **Article integration** — publication date and article URL not set.
+4. **Facsimile coverage** — ten crops shipped; the rest state their absence.
+
+Until these close, every page carries `noindex,nofollow` and a prepublication
+banner, and the routes stay out of `sitemap.xml`.

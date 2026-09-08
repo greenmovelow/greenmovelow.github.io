@@ -1,7 +1,11 @@
 # Des Moines ALPR exhibit — "Page Nine"
 
-Phase 1 working prototype. **Not published, not deployed, not merged.**
+Prepublication draft. **Not published, not deployed, not merged.**
 Branch: `claude/dsm-alpr-page-nine`.
+
+Aligned to article draft **v0.2** (2026-09-07). The article's narrative order
+controls where it conflicts with the September 2 concept deck: the exhibit now
+opens on the 2021 change form, not on the council purchase.
 
 ## Routes
 
@@ -20,9 +24,13 @@ they describe.
 ## Build
 
 ```
-node _src/build.mjs     # renders the three index.html files from data/ + content/
-node _src/lint.mjs      # editorial guardrails; exits non-zero on any failure
-node _src/test.mjs      # browser pass at 390 / 768 / 1440 (needs a server on :8787)
+node _src/build.mjs           # renders the three index.html files from data/ + content/
+node _src/lint.mjs            # editorial guardrails; exits non-zero on any failure
+node _src/lint.mjs --publish  # ALSO runs the publication gates (expected to fail while ROR is open)
+node _src/test.mjs            # browser pass at 390 / 768 / 1440 (needs a server on :8787)
+
+python _src/tools/verify_page_terms.py   # per-page term check of the 25-page clerk's file
+python _src/tools/make_facsimiles.py     # facsimile crops + provenance sidecars
 ```
 
 Serve locally with any static server from the repo root, e.g.
@@ -45,7 +53,8 @@ data/                    adjudicated data — the only source of facts
   page_composition.json    the 25 pages of the clerk's roll-call file
   parts_list.json          canonical accessible table: every part, status, receipt
   platform_summary.json    aggregates from the three Aug 2026 exports
-  evidence_receipts.json   64 authored receipts
+  evidence_receipts.json   77 authored receipts
+  page_term_check.json     per-page term check of the clerk's file, with method
 
 _src/content/copy.json   ALL on-screen exhibit prose
 _src/build.mjs           renders static HTML from the two above
@@ -53,7 +62,8 @@ _src/lint.mjs            editorial guardrails
 _src/test.mjs            browser assertions
 _src/tools/              extraction from the source .xlsx, with assertions
 
-assets/exhibit.css       shared stylesheet (all three routes)
+assets/facsimiles/       page crops of produced records + provenance sidecars
+assets/exhibit.css       exhibit stylesheet (all three routes)
 assets/exhibit.js        receipt drawer, council switch, document stack, modes
 assets/network.js        the configuration explorer
 ```
@@ -92,10 +102,39 @@ asserts the same totals again against the shipped JSON.
 9. a missing skip link, uncaptioned table, unscoped `<th>`, `alt`-less image,
    missing reduced-motion handling or missing live region
 10. a missing no-JS fallback (receipts, the 155-row table, all four record views)
+11. a facsimile crop without a provenance sidecar, or one not declared unaltered
+12. the three formulations narrowed in the article's v0.2 precision pass, and the
+    superseded `$157,500` services figure
+13. incomplete purchase arithmetic, or `4.5%` without the corrected `4.51`
+14. a lost prepublication posture: missing `noindex`, missing banner, routes in
+    the sitemap, or an article link enabled with no URL
+
+`--publish` adds the publication gates — right of response resolved, article
+linked, no PROVISIONAL copy, `noindex` and banner removed. They are **not** part
+of the ordinary run, so a draft PR builds and lints cleanly while responses are
+still pending.
 
 Two regions are marked `data-lint-exempt` because they quote guarded language in
 order to explain it: the corrections table and the "language this exhibit does
 not use" glossary, both on the records page. Nothing else is exempt.
+
+## The shared shell
+
+The masthead, navigation and footer follow the current house pattern used by
+`/infographics/standing-query/` and `/infographics/save-four-state-settlement/`:
+the fixed `.nav-bar`, the Tailwind brand classes, and `/assets/css/styles.css`
+loaded before the exhibit's own stylesheet. Everything specific to this
+exhibit's evidence grammar — the tile grid, the rings, the receipt drawer, the
+chain rails, the empty drawer — stays in `assets/exhibit.css` and is not
+expressed in utility classes, so a Tailwind rebuild or class rename cannot
+change what the exhibit asserts.
+
+`exhibit.css` carries a small, commented compatibility block restoring the few
+defaults Tailwind preflight removes that the exhibit relies on, scoped to
+`#main` so nothing leaks into the shared shell.
+
+The right-of-response block reuses the house `limit-block limit-block--ror`
+markup and `id="rorBlock"`, with the same editorially-owned comment fences.
 
 ## Design decisions worth knowing
 

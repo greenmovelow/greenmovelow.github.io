@@ -24,6 +24,11 @@ const PAGES = [
 const ASSETS = ['exhibit.css', 'exhibit.js', 'network.js']
   .map((f) => [`assets/${f}`, join(OUT, 'assets', f)]);
 
+/* `node lint.mjs --publish` adds the publication gates. They are deliberately
+   NOT part of the ordinary run, so a prototype or draft-PR build renders and
+   lints cleanly while right-of-response is still pending. */
+const PUBLISH = process.argv.includes('--publish');
+
 let failures = 0;
 let checks = 0;
 
@@ -83,7 +88,20 @@ const BANNED = [
    'asserts what council members saw or knew; item 32 was a consent item'],
   [/\b386 officers\b/i, 'accounts are not people'],
   [/\b140 vehicles\b/i, 'one Mobile row is literally named "Unit number"'],
-  [/\bone-way flow\b/i, 'a receiving setting of "none" is a setting, not a flow']
+  [/\bone-way flow\b/i, 'a receiving setting of "none" is a setting, not a flow'],
+
+  /* The three formulations narrowed in the article's v0.2 precision pass.
+     Each broader claim asserts more than the source ledger supports. */
+  [/did not go through (?:the )?council at all/i,
+   'too broad: the reviewed records show the earlier capability was acquired administratively, while the November purchase went to the Council'],
+  [/\bnetwork reach(?:ed|es|ing)\b/i,
+   'too broad: the 2026 platform was CONFIGURED for sharing relationships across 36 states and D.C.; nothing "reached" anywhere'],
+  [/reaching (?:thirty-six|36) states/i,
+   'too broad: configuration, not reach'],
+  [/(?:contracts?|agreements?) (?:give|gives|gave) the [Cc]ity no right to audit/i,
+   'too broad: the REVIEWED EXECUTED agreements contain no corresponding City-side audit, inspection or log-access right'],
+  [/\$157,500\b/,
+   'superseded figure from a corrected services subtotal; the authoritative arithmetic is $1,287,000 + $145,500 + $500 + $67,080 = $1,500,080']
 ];
 let bannedHits = 0;
 for (const [name, text] of Object.entries(pageText)) {
@@ -129,6 +147,23 @@ for (const [name, text] of Object.entries(pageText)) {
   }
 }
 if (!compHits) pass('required-companion — every guarded figure carries its mandatory companion sentence');
+
+/* ------------------------------------------------------------------ rule 3b
+   The purchase arithmetic must appear in its corrected form, and 4.51% must
+   travel with the fleet-wide ALPR hardware fact. */
+let arithHits = 0;
+{
+  const idx = pageText['index.html'];
+  for (const needle of ['$1,287,000', '$145,500', '$67,080', '$1,500,080', '4.51']) {
+    if (!idx.includes(needle)) {
+      arithHits++; fail('arithmetic', 'index.html', `the corrected arithmetic is incomplete: "${needle}" is missing`);
+    }
+  }
+  if (/4\.5\s*%/.test(idx) && !idx.includes('4.51')) {
+    arithHits++; fail('arithmetic', 'index.html', 'the superseded "4.5%" appears without the corrected 4.51 percent');
+  }
+}
+if (!arithHits) pass('arithmetic — $1,287,000 + $145,500 + $500 + $67,080 = $1,500,080, and 4.51 percent is stated');
 
 /* ------------------------------------------------------------------ rule 4
    Drawing rules. Arrowheads mean movement; draw-on and motion-along-path are
@@ -194,6 +229,34 @@ for (const r of receiptsFile.rows) {
 }
 if (!recHits) pass(`receipts — ${receiptsFile.rows.length} authored receipts, all resolving, all carrying a pinpoint and a "does not establish" line`);
 
+/* ------------------------------------------------------------------ rule 6b
+   Every shipped facsimile must carry a sidecar recording where it came from,
+   and must be declared unaltered. A crop without provenance is not evidence. */
+let faxHits = 0;
+{
+  const faxDir = join(OUT, 'assets', 'facsimiles');
+  let files = [];
+  try { files = readdirSync(faxDir); } catch { /* no crops shipped yet */ }
+  const pngs = files.filter((f) => f.endsWith('.png'));
+  for (const png of pngs) {
+    const id = png.replace(/\.png$/, '');
+    if (!files.includes(id + '.json')) {
+      faxHits++; fail('facsimile-provenance', `assets/facsimiles/${png}`, 'no sidecar; a crop without provenance is not evidence');
+      continue;
+    }
+    const meta = JSON.parse(readFileSync(join(faxDir, id + '.json'), 'utf8'));
+    for (const field of ['source_document', 'source_sha256', 'page', 'crop_box_pt', 'render_dpi', 'alteration']) {
+      if (meta[field] === undefined) {
+        faxHits++; fail('facsimile-provenance', `assets/facsimiles/${id}.json`, `missing ${field}`);
+      }
+    }
+    if (!/^none/.test(meta.alteration || '')) {
+      faxHits++; fail('facsimile-provenance', `assets/facsimiles/${id}.json`, 'alteration is not declared as none');
+    }
+  }
+  if (!faxHits) pass(`facsimile-provenance — ${pngs.length} crop(s), each with a sidecar naming the source, page, crop box and SHA-256`);
+}
+
 /* ------------------------------------------------------------------ rule 7
    No account name may appear anywhere. The user export is not a build input;
    assert that no shipped data file carries a name-bearing field. */
@@ -251,6 +314,59 @@ for (const mode of ['timeline', 'tree', 'stack', 'parts']) {
   }
 }
 if (!fallbackHits) pass('no-js-fallback — receipts, the 155-row table and all four record views are in the static HTML');
+
+/* ----------------------------------------------------------------- rule 11
+   Prepublication posture. While the exhibit is a draft it must not be
+   indexable, must not appear in the sitemap, and must not link to an article
+   URL that does not exist. */
+let draftHits = 0;
+for (const [name, src] of Object.entries(pageRaw)) {
+  if (!/name="robots" content="noindex,nofollow"/.test(src)) {
+    draftHits++; fail('prepublication', name, 'noindex,nofollow is missing');
+  }
+  if (!/class="draft-banner"/.test(src)) {
+    draftHits++; fail('prepublication', name, 'the prepublication banner is missing');
+  }
+}
+try {
+  const sitemap = readFileSync(join(OUT, '..', '..', 'sitemap.xml'), 'utf8');
+  if (/des-moines-alpr/.test(sitemap)) {
+    draftHits++; fail('prepublication', 'sitemap.xml', 'the exhibit routes are in the sitemap before publication');
+  }
+} catch { /* sitemap not reachable from here; skip */ }
+{
+  const link = JSON.parse(readFileSync(join(HERE, 'content', 'copy.json'), 'utf8')).exhibit.article_link;
+  if (link.enabled && !link.url) {
+    draftHits++; fail('prepublication', 'copy.json', 'the article link is enabled with no URL');
+  }
+}
+if (!draftHits) pass('prepublication — noindex on every page, banner present, not in the sitemap, no invented article link');
+
+/* ------------------------------------------------------- PUBLICATION GATES
+   Run only with --publish. These are the checks that must pass before the
+   exhibit goes live, and they are deliberately excluded from the ordinary
+   prototype and draft-PR run. */
+if (PUBLISH) {
+  let gateHits = 0;
+  const copyJson = JSON.parse(readFileSync(join(HERE, 'content', 'copy.json'), 'utf8'));
+  const ror = copyJson.right_of_response;
+  if (ror.status !== 'received' && ror.status !== 'closed') {
+    gateHits++; fail('PUBLISH-GATE', 'copy.json', `right_of_response.status is "${ror.status}"; responses must be received or the window closed and stated`);
+  }
+  if (!copyJson.exhibit.article_link.enabled || !copyJson.exhibit.article_link.url) {
+    gateHits++; fail('PUBLISH-GATE', 'copy.json', 'the article link is not set');
+  }
+  if (/PROVISIONAL/i.test(JSON.stringify(copyJson))) {
+    gateHits++; fail('PUBLISH-GATE', 'copy.json', 'PROVISIONAL copy remains');
+  }
+  for (const [name, src] of Object.entries(pageRaw)) {
+    if (/noindex/.test(src)) { gateHits++; fail('PUBLISH-GATE', name, 'still noindex'); }
+    if (/class="draft-banner"/.test(src)) { gateHits++; fail('PUBLISH-GATE', name, 'the prepublication banner is still present'); }
+  }
+  if (!gateHits) pass('PUBLICATION GATES — right of response resolved, article linked, no provisional copy, indexable');
+} else {
+  console.log('note  publication gates skipped (run with --publish to check them)');
+}
 
 /* -------------------------------------------------------------------- done */
 console.log(`\n${checks} rule group(s) passed, ${failures} failure(s).`);
