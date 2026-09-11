@@ -211,7 +211,7 @@ function head({ title, description, canonical, sections, key }) {
   </div>
 </nav>
 
-<p class="draft-banner"><b>PREPUBLICATION DRAFT</b> &nbsp;&middot;&nbsp; Not published. Aligned to article draft v0.2; right-of-response deadline 5:00 p.m. Central, Friday 11 September 2026. Responses pending.</p>
+<p class="draft-banner"><b>PREPUBLICATION DRAFT</b> &nbsp;&middot;&nbsp; Not published. Aligned to article draft v0.2. Responses to RDP&rsquo;s questions are pending.</p>
 <header class="exhibit-chrome">
   <nav class="exhibit-nav routes" aria-label="Exhibit pages">
     <div class="exhibit-nav-inner">
@@ -362,7 +362,6 @@ const GRAPHICS = {
         </p>
         <p class="note" style="margin-top:.5rem">Incorporation by reference. The operative clause uses the singular &ldquo;Addendum.&rdquo; Four addenda were executed.</p>
       </div>
-      <p class="figure-caption">Nothing in the record establishes what any individual member read, knew, understood or intended. That is outside the record and outside this exhibit.</p>
     </div>`;
   },
 
@@ -381,7 +380,7 @@ const GRAPHICS = {
       <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.35rem">
         ${absent.map((t) => `<li class="not-in-summary" style="font-family:var(--mono);font-size:.72rem;color:var(--muted);border:1px solid var(--hairline-2);border-radius:3px;padding:.3rem .45rem"><span style="color:var(--orange-ink)">0</span> &nbsp;${esc(t)}</li>`).join('')}
       </ul>
-      <p class="figure-caption">Full-page OCR of pages 1&ndash;4, with pages 1 and 3 additionally inspected visually. This is a statement about the resolution and the council communication. The attachments in the same file do contain these terms &mdash; that is the next chapter.</p>
+      <p class="figure-caption">Full-page OCR of pages 1&ndash;4, with pages 1 and 3 additionally inspected visually. The attachments in the same file contain these terms; they are the next chapter.</p>
     </div>`;
   },
 
@@ -420,7 +419,7 @@ const GRAPHICS = {
         <h3>Where the plate-reader language is</h3>
         <p>Twenty-one of the twenty-five pages can be searched in a text layer. Across all of them, terms such as <em>license plate</em>, <em>LPR</em>, <em>Vigilant</em> and <em>VehicleManager</em> appear on <strong>page 9 alone</strong>. Page 8 carries the word <em>retention</em> once, in a clause about video recordings. ${chip('R-PAGE-TERM-CHECK', 'method and result')}</p>
       </div>
-      <p class="figure-caption">${esc(pageComp.caveat)}</p>
+      <p class="figure-caption">${esc(copy.standing.clerk_file_caveat)}</p>
     </div>`;
   },
 
@@ -440,9 +439,8 @@ const GRAPHICS = {
           <span class="toggle-glyph" aria-hidden="true"></span>
           by selecting this option
         </p>
-        <p class="note" style="margin-top:.9rem">Sharing with another qualifying agency requires nothing but a setting. The agreement requires no memorandum of understanding, no notice, no review and no approval. A separate sentence in the same clause restricts <em>logins</em> &mdash; not sharing.</p>
+        <p class="note" style="margin-top:.9rem">Within &sect;4.5, sharing is enabled by selecting an option in VehicleManager. The section lists no MOU, notice, review, council action or additional approval. Its separate login restriction governs credentials, not sharing.</p>
       </div>
-      <p class="figure-caption">${esc(pageComp.caveat)}</p>
     </div>`;
   },
 
@@ -453,7 +451,7 @@ const GRAPHICS = {
     ];
     return `<div class="figure not-in-summary">
       ${layerChip('L3')}
-      <p class="note" style="margin-top:.6rem">QUOTE-2241626, &ldquo;Updated M500 VaaS&rdquo;, 23 October 2023. Not in the 25-page clerk&rsquo;s file; the City produced it to RDP in September 2026.</p>
+      <p class="note" style="margin-top:.6rem">QUOTE-2241626, &ldquo;Updated M500 VaaS&rdquo;, 23 October 2023. Produced to RDP in September 2026.</p>
       <div class="arith">
         <div><span>130 in-car systems, five years of cloud video service</span><b class="tnum">$1,287,000</b></div>
         <div><span>Installation, removal, deployment and training</span><b class="tnum">$145,500</b></div>
@@ -473,11 +471,7 @@ const GRAPHICS = {
           </tbody>
         </table>
       </div>
-      <div class="callout">
-        <h3>The required companion</h3>
-        <p>$67,580 is 4.51 percent of the purchase &mdash; and it is the licence-and-support layer, not the extent of the deployment. The delivery pack list records a component the vendor calls an <strong>&ldquo;M500 ALPR DVR&rdquo;</strong> on every one of the 130 systems. ${chip('R-PACKLIST-DVR', 'pack list')}</p>
-      </div>
-      <p class="figure-caption">The vendor&rsquo;s own price file defines the purchased SKU as &ldquo;CarDetector Mobile, Vigilant PlateSearch (agency data only).&rdquo; The council-approved purchase did not include commercial national vehicle-location data. That came from somewhere else. Note too that the quote as produced is not complete: two different produced pages carry the same page number. ${chip('R-QUOTE-INCOMPLETE', 'source')}</p>
+      <p class="figure-caption">The vendor&rsquo;s price file defines the purchased SKU as &ldquo;CarDetector Mobile, Vigilant PlateSearch (agency data only).&rdquo; The purchased SKU covered agency data only; commercial national vehicle-location data appears in the separate Vigilant/H-GAC procurement described next. The production contains two different pages bearing the same page number. ${chip('R-QUOTE-INCOMPLETE', 'source')}</p>
     </div>`;
   },
 
@@ -510,7 +504,7 @@ const GRAPHICS = {
         </div>
         <p style="font-size:.9rem;margin:0"><strong>${esc(chains.meeting_point.label)}.</strong> ${esc(chains.meeting_point.copy)}</p>
       </div>
-      <p class="figure-caption">Chain A is drawn with a square end-cap and a solid rule; Chain B with a round end-cap and a doubled rule. The two are distinguishable without colour, and each is always named in text. Chain A is not the origin of Chain B: Chain B was executed first.</p>
+      <p class="figure-caption">Chain A is drawn with a square end-cap and a solid rule; Chain B with a round end-cap and a doubled rule. The two are distinguishable without colour, and each is always named in text. Chain B was executed first.</p>
     </div>`;
   },
 
@@ -567,7 +561,6 @@ const GRAPHICS = {
         </table>
       </div>
       <p style="margin-top:1rem"><a href="/infographics/des-moines-alpr/network/"><strong>Explore all 155 &rarr;</strong></a> &mdash; filter by state, agency type, Iowa or non-Iowa, and receiving status, and open the source row for any one of them.</p>
-      <p class="figure-caption">${esc(copy.standing.config_not_use_long)}</p>
     </div>`;
   },
 
@@ -580,22 +573,20 @@ const GRAPHICS = {
           ${chipRow(l.receipts)}
         </div>`).join('\n        ')}
       </div>
-      <p class="figure-caption">The fourth lane is drawn empty because the record is empty, not because the graphic is decorative. That is a statement about the records produced to RDP. It is not a statement that no log exists anywhere, including on the vendor&rsquo;s platform.</p>
     </div>`;
   },
 
   ledger() {
-    /* The "does not establish" column is, by construction, a list of
-       propositions the record does NOT support. A rule that bans asserting
-       intent cannot fire on a column whose whole semantic is negation, so the
-       column is marked rather than the prose weakened. */
-    const col = (kind, items, heading) => `<div class="ledger-col" data-kind="${kind}"${kind === 'unknown' ? ' data-lint-exempt="explicit-negations"' : ''}>
+    /* Both columns are ordinary rendered prose and are linted like the rest
+       of the page: findings are stated affirmatively, and each unresolved
+       question names a specific absence in the produced record. */
+    const col = (kind, items, heading) => `<div class="ledger-col" data-kind="${kind}">
       <h3>${esc(heading)}</h3>
       <ul>${items.map((i) => `<li>${esc(i.text)} ${i.receipts.map((r) => chip(r, 'source')).join(' ')}</li>`).join('\n      ')}</ul>
     </div>`;
     return `<div class="ledger-grid">
-      ${col('known', copy.ledger.known, 'What the records establish')}
-      ${col('unknown', copy.ledger.unknown, 'What the records do not establish')}
+      ${col('known', copy.ledger.known, 'Findings')}
+      ${col('unknown', copy.ledger.unknown, 'Unresolved questions')}
     </div>`;
   }
 };
@@ -614,7 +605,7 @@ function buildIndex() {
   const switchBar = `<div class="switch-bar">
     <button type="button" id="summary-switch" class="switch-btn" aria-pressed="false"
       data-scope="scrolly"
-      data-label-on="Showing only what the council-facing summary described"
+      data-label-on="${esc(copy.council_switch.label_on)}"
       data-label-off="${esc(copy.council_switch.label)}">
       <span class="toggle-glyph" aria-hidden="true"></span>
       <span class="switch-label">${esc(copy.council_switch.label)}</span>
@@ -632,9 +623,19 @@ function buildIndex() {
     <p class="byline">${esc(copy.exhibit.byline)} &nbsp;&bull;&nbsp; ${esc(copy.exhibit.date_display)}</p>
     <div class="callout">
       <h3>How to read this exhibit</h3>
-      <p>${esc(copy.standing.grammar_note)} Any number or quotation with a <strong>?</strong> button opens its receipt: the document, the date, the page or row, the verbatim text, the caveat that travels with it, and one line on what it does <em>not</em> establish.</p>
-      <p style="margin-top:.6rem">${esc(copy.standing.no_intent)}</p>
+      <p>${esc(copy.standing.how_to_read)}</p>
     </div>
+    <!-- ================== RIGHT OF RESPONSE ==================
+         RIGHT OF RESPONSE - STATUS COPY. Editorially owned; patch
+         _src/content/copy.json -> right_of_response only. Do not summarise,
+         characterise or anticipate a response that has not been received.
+         This is the single reader-visible statement of the response status;
+         it is deliberately placed at the top of the page and nowhere else. -->
+    <div class="limit-block limit-block--ror" id="rorBlock" data-ror-status="${esc(copy.right_of_response.status)}">
+      <p class="limit-block__head">${esc(copy.right_of_response.heading)}</p>
+      <p class="limit-block__body">${esc(copy.right_of_response.body)}</p>
+    </div>
+    <!-- ================== END RIGHT OF RESPONSE ================== -->
   </div>
 </section>
 
@@ -669,15 +670,6 @@ function buildIndex() {
     <p class="chapter-num">${esc(ch['ch11-ledger'].number)} &mdash; <span class="kicker" style="display:inline;margin:0">${esc(ch['ch11-ledger'].kicker)}</span></p>
     <h2 id="ledger-h">${esc(ch['ch11-ledger'].heading)}</h2>
     ${GRAPHICS.ledger()}
-    <!-- ================== RIGHT OF RESPONSE ==================
-         RIGHT OF RESPONSE - STATUS COPY. Editorially owned; patch
-         _src/content/copy.json -> right_of_response only. Do not summarise,
-         characterise or anticipate a response that has not been received. -->
-    <div class="limit-block limit-block--ror" id="rorBlock" data-ror-status="${esc(copy.right_of_response.status)}">
-      <p class="limit-block__head">${esc(copy.right_of_response.heading)}</p>
-      <p class="limit-block__body">${esc(copy.right_of_response.body)}</p>
-    </div>
-    <!-- ================== END RIGHT OF RESPONSE ================== -->
     <p style="margin-top:1.4rem"><a href="/infographics/des-moines-alpr/records/"><strong>Every instrument, date, price and receipt &rarr;</strong></a> &nbsp;&middot;&nbsp; <a href="/infographics/des-moines-alpr/network/"><strong>Explore the configuration &rarr;</strong></a></p>
   </div>
 </section>
@@ -699,12 +691,11 @@ function buildIndex() {
 <section class="module" id="about-this-exhibit" aria-labelledby="ab-h">
   <div class="wrap-wide">
     <p class="kicker">About this exhibit</p>
-    <h2 id="ab-h">Language, drawing and the limits we imposed on ourselves</h2>
+    <h2 id="ab-h">Method</h2>
     <div style="display:grid;gap:1rem;margin-top:1rem">
-      <div class="callout" style="margin:0"><h3>On the 2026 export</h3><p>Relationships from the August 2026 export are described only as <em>configured</em>, <em>listed</em>, <em>selected</em>, <em>shown in the export</em> or <em>in Sharing status</em>. This exhibit does not say that data was sent, transmitted, accessed or viewed, because no record produced establishes that.</p></div>
-      <div class="callout" style="margin:0"><h3>On the drawing</h3><p>Counterparties are open rings, not filled location dots. No connector is drawn by default. When you select an agency, one connector appears at once &mdash; no arrowhead, no direction, no motion along the line, no glow &mdash; labelled &ldquo;configured to share.&rdquo; Nothing appears in a time-ordered sequence, because the export contains no chronology.</p></div>
-      <div class="callout" style="margin:0"><h3>On the council</h3><p>${esc(copy.council_switch.explainer)}</p></div>
-      <div class="callout" style="margin:0"><h3>Before publication</h3><ul style="margin:.4rem 0 0;padding-left:1.1rem;font-size:.92rem">${copy.publication_gates.map((g) => `<li>${esc(g)}</li>`).join('')}</ul></div>
+      <div class="callout" style="margin:0"><h3>Terms for the 2026 export</h3><p>Relationships from the August 17, 2026 export are described as <em>configured</em>, <em>listed</em>, <em>selected</em>, <em>shown in the export</em> or <em>in Sharing status</em>: each is a setting recorded in the City&rsquo;s VehicleManager account.</p></div>
+      <div class="callout" style="margin:0"><h3>Symbols</h3><p>Counterparties are open rings. A ring with an inner ring is also configured to receive; a dashed ring shows receiving as approval required; a dotted ring, declined; a struck ring carries an &ldquo;Inactive&rdquo; prefix. The filled node is Des Moines. A connector appears only when you select an agency, whole and undirected, labelled &ldquo;configured to share.&rdquo; Chain A is drawn with a square end-cap and a solid rule, Chain B with a round end-cap and a doubled rule.</p></div>
+      <div class="callout" style="margin:0"><h3>Sources and receipts</h3><p>Every sourced figure and quotation carries a <strong>?</strong> button that opens its receipt: the document, the date, the page or row, the verbatim text, and the limitation that travels with it. The same receipts are printed at the foot of this page so the exhibit reads without JavaScript and in print.</p></div>
     </div>
     <p style="margin-top:1.4rem"><a href="/infographics/des-moines-alpr/records/#methodology">Method, definitions, corrections and sources &rarr;</a></p>
   </div>

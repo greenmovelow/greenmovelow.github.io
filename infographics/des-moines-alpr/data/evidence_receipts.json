@@ -86,7 +86,7 @@
    "ocr": true,
    "evidence_status": "described",
    "caveat": "This is the council-facing description. It is accurate as far as it goes: the M500 is an in-car video system and VideoManager EL is video evidence management software.",
-   "what_it_does_not_establish": "It does not establish that the description was complete, nor that anything was withheld."
+   "what_it_does_not_establish": "It describes the purchase at the level of the agenda heading; the line items are in the quote, not in this document."
   },
   {
    "receipt_id": "R-CC-23-519-SYN",
@@ -118,7 +118,7 @@
    "ocr": true,
    "evidence_status": "described",
    "caveat": "The resolution recites “FY 2024 Adopted Operating Budget, General Fund”; PO 24209, issued the next day, labels the same dollar pattern FY24-FY28. The dollar amounts agree; the year labels are offset by one.",
-   "what_it_does_not_establish": "No debt-financing instrument for this purchase appears in the reviewed records. Not found is not the same as nonexistent."
+   "what_it_does_not_establish": "No debt-financing instrument for this purchase appears in the reviewed records."
   },
   {
    "receipt_id": "R-CC-23-519-PCA",
@@ -149,7 +149,7 @@
    "source_excerpt": "Full-page OCR of pages 1-4 yields no occurrence of ALPR, LPR, license plate, Vigilant, LEARN, PlateSearch, VehicleManager, hot list, retention or data sharing. Pages 1 and 3 were additionally inspected visually at 130 dpi.",
    "evidence_status": "not_established",
    "caveat": "This is a statement about the resolution and the council communication, not about the 25-page file. The attachments in the file do contain these terms.",
-   "what_it_does_not_establish": "It does not establish concealment, intent or that anything was withheld."
+   "what_it_does_not_establish": "The result covers pages 1–4 only; the attachments in the same file contain these terms."
   },
   {
    "receipt_id": "R-CONSENT-23-1597",
@@ -165,7 +165,7 @@
    "ocr": true,
    "evidence_status": "described",
    "caveat": "The agenda footnote describes consent items as routine items enacted by one roll call vote without separate discussion.",
-   "what_it_does_not_establish": "It does not establish what any individual council member read, knew, understood or intended. That is outside the record and outside this exhibit."
+   "what_it_does_not_establish": "Which materials accompanied Item 32 in the packets distributed to council members."
   },
   {
    "receipt_id": "R-FILE-COMPOSITION",
@@ -262,7 +262,7 @@
    "page_or_row": "clerk's file, Subscription Software Addendum",
    "source_excerpt": "Motorola will have the right to conduct an audit of total user licenses credentialed by Customer for any Subscription Software during a Subscription Term, and Customer will cooperate with such audit.",
    "evidence_status": "contracted",
-   "caveat": "No City-side audit, inspection or log-access right appears anywhere in the executed instruments reviewed. Not found is not the same as nonexistent.",
+   "caveat": "The executed instruments reviewed contain no City-side audit, inspection or log-access right.",
    "what_it_does_not_establish": "It does not establish that the City lacks any other route to platform records; it establishes only that the reviewed agreements contain no such right."
   },
   {
@@ -311,7 +311,7 @@
    "source_excerpt": "the order of preference shall be as follows: 1) City Short-Form Agreement, 2) Sourcewell Contract #010720-WCH, 3) Equipment Purchase and Software License Addendum (EPSLA) agreed upon and executed by City and Contractor on or around September 29, 2023 and Software License Addendum (SLA) agreed upon and executed by City and Contractor on or around September 29, 2023, and 4) Contractor's Quotes.",
    "evidence_status": "contracted",
    "caveat": "The Motorola-party EPSLA produced bears the date November 20, 2023. The only instrument in the record executed on September 29, 2023 belongs to the separate Vigilant / H-GAC chain. No executed Software License Addendum has been produced for either chain. The most economical reading is a drafting carry-over from the City's earlier Vigilant short form, prepared by the same buyer.",
-   "what_it_does_not_establish": "It does not establish deliberate incorporation of the other chain's terms. That reading is untested and is not adopted here.",
+   "what_it_does_not_establish": "The cross-reference is recorded as written; how it came to be in the form is not addressed by the document.",
    "related_receipts": [
     "R-EPA-20230929"
    ]
@@ -483,7 +483,7 @@
    "source_excerpt": "Scope: “Public Safety Video Surveillance Solutions with Related Equipment, Software and Accessories.” Verified by full-text search: the only four case-insensitive matches for “plate” in the document are the word “template.”",
    "evidence_status": "not_established",
    "caveat": "",
-   "what_it_does_not_establish": "It does not establish that adding plate readers later was improper. The change-request mechanism is expressly authorised by the contract."
+   "what_it_does_not_establish": "The solicitation's scope as issued. The contract's change-request mechanism, through which plate readers were later added, is documented separately."
   },
   {
    "receipt_id": "R-SW-PNP-2021-09-14",
@@ -498,7 +498,7 @@
    "source_excerpt": "1. Changed Product List — List the products and/or services that are changing from the previous contract price list, along with the percentage change for each item or category:\n\n“WatchGuard Video mistakenly left off a key component of our VaaS offering - The License Plate Reader (LPR). It is now included in the VaaS price list.”",
    "evidence_status": "contracted",
    "caveat": "Under Article 4 of the contract, an executed change form becomes an amendment incorporated by reference. The cooperative's own rule is that modifications must be within the scope of the original solicitation. Whether any scope determination was made is not found in the records produced.",
-   "what_it_does_not_establish": "It does not establish intent, evasion or wrongdoing by any party. The document says what it says.",
+   "what_it_does_not_establish": "The form records the addition and its stated reason; the cooperative's scope determination, if any, is not in the records produced.",
    "related_receipts": [
     "R-SW-PNP-FIVE",
     "R-SW-RFP-010720"
@@ -517,7 +517,7 @@
    "source_excerpt": "Expiring 4-19-2021; effective 9-3-2021 (VaaS repricing, creating the VaaS price list); effective 9-14-2021 (LPR added); effective 10-29-2021 (next-generation combined in-car video and plate reader, new price-list format); effective 12-14-2021 (reversion).",
    "evidence_status": "contracted",
    "caveat": "The September 3, 2021 form created the VaaS price list that the September 14 form says the plate reader was left off of. That form's signature is dated “8/31/22” - an anomaly on the face of the document, noted and not built on.",
-   "what_it_does_not_establish": "It does not establish a sequence of intent. Earlier RDP working notes described only two forms; five is the corrected count."
+   "what_it_does_not_establish": "Five forms are identified for contract 010720 in 2021; earlier RDP working notes described only two, and five is the corrected count."
   },
   {
    "receipt_id": "R-SW-PNP-2021-10-29",
@@ -666,7 +666,7 @@
    "page_or_row": "pp. 1-2, 7",
    "source_excerpt": "Purpose: “to add on the ability for the City to purchase LPR Equipment.” Signed for the City by Matt Anderson, Deputy City Manager; for the vendor by Ravi Suthar, Area Sales Manager. Recites the Software Subscription Addendum, Vigilant Addendum and Data License Addendum dated July 28, 2023.",
    "evidence_status": "contracted",
-   "caveat": "No council action for any Chain B instrument appears in the records reviewed. Not found is not the same as nonexistence.",
+   "caveat": "The council records reviewed contain no action for the Chain B instruments.",
    "what_it_does_not_establish": "It does not establish that council action was legally required, or that any was sought.",
    "related_receipts": [
     "R-W23-383",
@@ -715,7 +715,7 @@
    "page_or_row": "sheet rows 9-163",
    "source_excerpt": "155 data rows; column “Detection sharing” reads “Sharing” for every row. Uniformity follows from the export filter.",
    "evidence_status": "configured_out",
-   "caveat": "Configured to share. Not shown to have shared. The export contains no query log, hit log or transfer record.",
+   "caveat": "The export records sharing settings; it contains no query log, hit log or transfer record.",
    "what_it_does_not_establish": "It does not establish that any plate record was transferred to, queried by or viewed by any listed agency, or when any relationship was configured.",
    "related_receipts": [
     "R-EXPORT-UNDATED",
@@ -922,7 +922,7 @@
    "page_or_row": "response items 6 and 7",
    "source_excerpt": "6. ALPR database search logs — The City has no documents responsive to this request. The searches are queried as needed, and search logs are not something the City generates or keeps copies of. 7. ALPR database audit reports or trails — All documents responsive to this request are considered Intelligence Data and are deemed confidential pursuant to Iowa Code Section 692.8. Spot audits are conducted in response to complaints or allegations of misuse. Only one entry exists from a review of searches to ensure case numbers were being documented and it is attached.",
    "evidence_status": "not_established",
-   "caveat": "This is a statement about what the City generates and retains. It is not a statement that no log exists anywhere, including on the vendor's platform.",
+   "caveat": "The response addresses records held by the City; vendor-platform logging remains outside the production.",
    "what_it_does_not_establish": "It does not establish that searches did or did not occur, nor what the platform itself records.",
    "related_receipts": [
     "R-GO-25-AUDIT",
@@ -1002,7 +1002,7 @@
    "page_or_row": "CC 26-235",
    "source_excerpt": "2026 LPR software purchase under Sourcewell contract 101223-MOT. PREVIOUS COUNCIL ACTION(S): NONE.",
    "evidence_status": "described",
-   "caveat": "This is a 2026 document. It is reachable as a sidebar and is never spliced into the 2023 chronology.",
+   "caveat": "A 2026 document, presented as a sidebar.",
    "what_it_does_not_establish": "It does not establish that no earlier council action existed; it records what that communication states."
   },
   {
@@ -1055,8 +1055,8 @@
   },
   {
    "receipt_id": "R-FLOCK-SEPARATION",
-   "claim": "This is not a Flock system.",
-   "display_copy": "Not a Flock system",
+   "claim": "Des Moines' ALPR network uses Motorola/Vigilant technology.",
+   "display_copy": "Motorola/Vigilant, not Flock",
    "record_layer": "L6",
    "chain": "other",
    "source_tag": "P",
@@ -1081,7 +1081,7 @@
    "source_excerpt": "2. Justification for Changes — Provide justification and documentation explaining the requested changes … : “Watchguard's VaaS offering is not complete without the key component - the License Plate Reader (LPR).”\n\n3. Product additions only — Describe how the product additions fit within the scope of the original RFP: “The LPR is a key component of the WatchGuard Mobile Video System.”",
    "evidence_status": "contracted",
    "caveat": "The prompt is the form's own printed text; the answer is the vendor's. Quote both, so the reader can see what was asked as well as what was said.",
-   "what_it_does_not_establish": "It does not establish that the answer was inadequate, or that anyone assessed it. Whether the cooperative made a scope determination is not found in the records produced.",
+   "what_it_does_not_establish": "The eleven-word scope answer as submitted; whether the cooperative made a scope determination is not found in the records produced.",
    "related_receipts": [
     "R-SW-PNP-2021-09-14",
     "R-SW-SCOPE-RULE",
@@ -1138,7 +1138,7 @@
    "source_excerpt": "Purchase from Motorola Solutions, Inc. (Greg Brown, CEO) of M500 In-Car Video Systems and Video Manager and five (5) year subscription for service and maintenance per Sourcewell Master Agreement for use by the Police Department, $1,500,080. (Council Communication No. 23-519)",
    "evidence_status": "described",
    "caveat": "Item 32 sat inside the consent agenda block, items 3 through 38, and was not removed for separate consideration.",
-   "what_it_does_not_establish": "It does not establish what any council member read, knew, understood or intended.",
+   "what_it_does_not_establish": "Which materials accompanied Item 32 in the packets distributed to council members.",
    "related_receipts": [
     "R-CONSENT-23-1597",
     "R-RC-23-1629-OP1"
@@ -1156,7 +1156,7 @@
    "page_or_row": "2 pages; PDF creation timestamp 2023-11-15 18:02:05 UTC",
    "source_excerpt": "The file the Clerk's system generated for Item 32 contains the two-page resolution and no attachment.",
    "evidence_status": "described",
-   "caveat": "This says what the Clerk's system generated for the item. It does not establish what was in council members' packets, or what any member received, read, knew or understood.",
+   "caveat": "This is what the Clerk's system generated for the item; the production does not identify which pages council members received.",
    "what_it_does_not_establish": "Which documents, if any, accompanied Item 32 in the packets distributed to council members. RDP has asked the City; no answer had been received when this exhibit was built.",
    "related_receipts": [
     "R-FILE-COMPOSITION",
@@ -1176,7 +1176,7 @@
    "source_excerpt": "Terms searched: license plate, plate reader, LPR, ALPR, Vigilant, LEARN, PlateSearch, VehicleManager, hot list, retention, data sharing.\n\nResult: packet p. 9 — LPR, Vigilant, VehicleManager, license plate, retention. Packet p. 8 — retention only, in a clause about video recordings. No other searched page carries any of the terms.\n\nThe page mapping was asserted against three anchors before any result was recorded.",
    "evidence_status": "not_established",
    "caveat": "The 25-page file is a scan with no text layer, so it cannot be searched directly. The search was run on the text-layer twins of the same attachments, produced in the same tranche, with the twin-to-packet page mapping asserted before use. Packet pages 1–4 have no twin and were not re-searched here.",
-   "what_it_does_not_establish": "A term not found is a statement about the text layer searched. It is not proof of absence from the scanned image, and it establishes nothing about what any council member read.",
+   "what_it_does_not_establish": "Presence or absence of a term in the scanned image of the four pages that have no text layer.",
    "related_receipts": [
     "R-MVA-4.5",
     "R-FILE-COMPOSITION",
@@ -1217,7 +1217,7 @@
    "source_excerpt": "The product-description page produced separately by the City is footered “Page 4.” A different page of the produced quote is also footered “Page 4.”",
    "evidence_status": "not_established",
    "caveat": "This establishes that the ordering document in the public record is incomplete. It does not establish what the missing material contains.",
-   "what_it_does_not_establish": "It does not establish that anything was withheld. RDP has asked the City for the complete quote; no answer had been received when this exhibit was built.",
+   "what_it_does_not_establish": "What the missing material contains. RDP has asked the City for the complete quote; no answer had been received when this exhibit was built.",
    "related_receipts": [
     "R-QUOTE-INFO",
     "R-QUOTE-ARITHMETIC"
@@ -1237,7 +1237,7 @@
    "ocr": true,
    "evidence_status": "contracted",
    "caveat": "This is exculpatory and belongs in the body of the account, not in a footnote. Iowa cities buy through cooperative contracts routinely.",
-   "what_it_does_not_establish": "The reviewed records do not establish that any of these purchases violated Iowa law or city code. Nor do they establish what signature authority applied to the administratively executed instruments; RDP has asked the City.",
+   "what_it_does_not_establish": "What signature authority applied to the administratively executed instruments; RDP has asked the City.",
    "related_receipts": [
     "R-RC-23-1629-BID",
     "R-EPA-20230929"

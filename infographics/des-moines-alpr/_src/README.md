@@ -28,6 +28,7 @@ node _src/build.mjs           # renders the three index.html files from data/ + 
 node _src/lint.mjs            # editorial guardrails; exits non-zero on any failure
 node _src/lint.mjs --publish  # ALSO runs the publication gates (expected to fail while ROR is open)
 node _src/test.mjs            # browser pass at 390 / 768 / 1440 (needs a server on :8787)
+                              # set PW_CHROMIUM_PATH=/path/to/chrome to use a preinstalled browser
 
 python _src/tools/verify_page_terms.py   # per-page term check of the 25-page clerk's file
 python _src/tools/make_facsimiles.py     # facsimile crops + provenance sidecars

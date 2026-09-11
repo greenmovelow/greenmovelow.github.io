@@ -31,7 +31,9 @@ const ok = (n, d = '') => { pass++; console.log(`ok    ${n}${d ? ' — ' + d : '
 const no = (n, d = '') => { fail++; console.log(`FAIL  ${n}${d ? ' — ' + d : ''}`); };
 const assert = (cond, n, d) => cond ? ok(n, d) : no(n, d);
 
-const browser = await chromium.launch();
+/* PW_CHROMIUM_PATH lets a sandbox with a preinstalled Chromium run the suite
+   without downloading a browser; unset, Playwright uses its own download. */
+const browser = await chromium.launch(process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : {});
 
 /* Scroll a target clear of the sticky masthead before clicking it. */
 async function scrollClear(page, locator) {
@@ -167,8 +169,8 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   const sw = page.locator('#summary-switch');
   await scrollClear(page, sw);
   const label = await sw.innerText();
-  assert(/council-facing summary described/i.test(label) && !/knew|saw/i.test(label),
-    'switch is labelled by what the summary described');
+  assert(/named in the council-facing summary/i.test(label) && !/knew|saw|described/i.test(label),
+    'switch is labelled by the summary\'s scope, pages 1–4');
   await sw.click();
   await page.waitForTimeout(300);
   assert(await page.locator('#scrolly[data-summary-dim="true"]').count() === 1,
@@ -204,7 +206,7 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   /* the hard cut is present and says so */
   const hc = await page.locator('.hard-cut').innerText();
   assert(/2023 RECORD/i.test(hc) && /2026 CONFIGURATION SNAPSHOT/i.test(hc) &&
-    /do not establish when/i.test(hc), 'hard cut states the discontinuity explicitly');
+    /151 of 155 sharing rows contain no usable date/i.test(hc), 'hard cut states the export date and the undated rows');
 
   /* the empty lane really is empty */
   const emptyLane = await page.locator('.lane[data-state="empty"]');
@@ -507,8 +509,12 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
     'the shared footer links the current privacy path');
   const navFixed = await page.locator('nav.nav-bar').evaluate((el) => getComputedStyle(el).position);
   assert(navFixed === 'fixed', 'the site nav is fixed, as on the newest exhibits', navFixed);
-  await page.evaluate(() => window.scrollTo(0, 0));
-  await page.waitForTimeout(150);
+  /* The stylesheet scrolls smoothly, so a single jump may still be animating
+     when it is measured; repeat until the page reports the top. */
+  for (let i = 0; i < 10 && (await page.evaluate(() => window.scrollY)) > 0; i++) {
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await page.waitForTimeout(200);
+  }
   const bannerTop = await page.locator('.draft-banner').evaluate((el) => el.getBoundingClientRect().top);
   assert(bannerTop >= 60, 'the prepublication banner clears the fixed nav', `${Math.round(bannerTop)}px`);
 

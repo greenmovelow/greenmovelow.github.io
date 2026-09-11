@@ -207,7 +207,7 @@
       if (labelEl) labelEl.textContent = next ? labelOn : labelOff;
       if (live) {
         live.textContent = next
-          ? 'Showing only what the council-facing summary described. Everything the summary did not describe is dimmed; material incorporated by reference is outlined.'
+          ? 'Showing only elements named in the council-facing summary, pages 1–4. Other material is dimmed; material incorporated by reference is outlined.'
           : 'Showing the full record.';
       }
     });
