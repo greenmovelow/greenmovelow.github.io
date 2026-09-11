@@ -523,8 +523,25 @@ html:not(.js) .ev{ border-bottom-style:dotted; cursor:default; }
 }
 
 /* ---------- story / subscribe links ---------- */
-.story-links{ margin:1rem 0 0; font-family:var(--mono); font-size:.78rem; letter-spacing:.04em; }
-.story-links a{ font-weight:700; }
+.story-links{
+  display:flex; flex-wrap:wrap; gap:.65rem; margin:1.2rem 0 0;
+  font-family:var(--sans); font-size:.84rem;
+}
+.story-button{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  min-height:44px; padding:.68rem 1rem; border:1px solid var(--green);
+  border-radius:4px; font-weight:700; line-height:1.1; text-decoration:none;
+  transition:background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.story-button--primary{ background:var(--green); color:#fff; }
+.story-button--primary:hover{ background:var(--green-dark); border-color:var(--green-dark); color:#fff; }
+.story-button--secondary{ background:transparent; color:var(--green); }
+.story-button--secondary:hover{ background:var(--paper-l1); color:var(--green-dark); border-color:var(--green-dark); }
+.story-button:focus-visible{ outline:3px solid var(--gold-bright); outline-offset:3px; }
+@media (max-width:480px){
+  .story-links{ display:grid; grid-template-columns:1fr; }
+  .story-button{ width:100%; }
+}
 
 /* ---------- two-chain chronology ---------- */
 .chains{ display:grid; gap:1rem; }

@@ -4,7 +4,7 @@
 
  "exhibit": {
   "working_title": "Expanded plate-reader use",
-  "headline": "Des Moines Expanded Plate-Reader Use. Then It Asked Residents What to Cut.",
+  "headline": "Des Moines’ Plate-Reader Expansion",
   "dek": "How mobile plate readers and a commercially sourced vehicle-location platform settled into routine Des Moines policing — and how little of that a resident could see when the city asked what it could afford to keep.",
   "byline": "Timothy Tucker",
   "byline_note": "From article draft v0.4.",
@@ -21,8 +21,8 @@
   },
   "subscribe_link": {
    "enabled": true,
-   "label": "Subscribe",
-   "url": "https://investigations.restoring-democracy.org/fall_signal_drop"
+   "label": "Subscribe — 7 days free",
+   "url": "https://investigations.restoring-democracy.org/fall_signal_drop/"
   },
   "updates_block": {
    "enabled": false,

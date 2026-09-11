@@ -1,4 +1,4 @@
-# Des Moines ALPR exhibit — "Des Moines Expanded Plate-Reader Use. Then It Asked Residents What to Cut."
+# Des Moines ALPR exhibit — "Des Moines’ Plate-Reader Expansion"
 
 Prepublication draft. **Not published, not deployed, not merged.**
 Branch: `claude/dsm-alpr-page-nine`.

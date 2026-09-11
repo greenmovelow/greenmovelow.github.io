@@ -148,9 +148,9 @@ const ROUTES = [
 function storyLinks() {
   const a = copy.exhibit.article_link, sub = copy.exhibit.subscribe_link;
   const parts = [];
-  if (a && a.enabled && a.url) parts.push(`<a href="${esc(a.url)}">${esc(a.label)} &rarr;</a>`);
-  if (sub && sub.enabled && sub.url) parts.push(`<a href="${esc(sub.url)}" rel="noopener">${esc(sub.label)} &rarr;</a>`);
-  return parts.length ? `<p class="story-links">${parts.join(' &nbsp;&middot;&nbsp; ')}</p>` : '';
+  if (a && a.enabled && a.url) parts.push(`<a class="story-button story-button--primary" href="${esc(a.url)}">${esc(a.label)} <span aria-hidden="true">&rarr;</span></a>`);
+  if (sub && sub.enabled && sub.url) parts.push(`<a class="story-button story-button--secondary" href="${esc(sub.url)}" rel="noopener">${esc(sub.label)} <span aria-hidden="true">&rarr;</span></a>`);
+  return parts.length ? `<nav class="story-links" aria-label="Story actions">${parts.join('')}</nav>` : '';
 }
 
 function head({ title, description, canonical, sections, key }) {
