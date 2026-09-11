@@ -1,9 +1,9 @@
-# Des Moines ALPR exhibit — "Page Nine"
+# Des Moines ALPR exhibit — "Des Moines Expanded Plate-Reader Use. Then It Asked Residents What to Cut."
 
 Prepublication draft. **Not published, not deployed, not merged.**
 Branch: `claude/dsm-alpr-page-nine`.
 
-Aligned to article draft **v0.2** (2026-09-07). The article's narrative order
+Aligned to article draft **v0.4** (2026-09-11; first aligned to v0.2, 2026-09-07). The article's narrative order
 controls where it conflicts with the September 2 concept deck: the exhibit now
 opens on the 2021 change form, not on the council purchase.
 

@@ -513,6 +513,18 @@ html:not(.js) .ev{ border-bottom-style:dotted; cursor:default; }
 .limit-block--ror[data-ror-status="pending"] .limit-block__head::after{
   content:" — responses pending"; letter-spacing:.04em; text-transform:none; color:var(--orange-ink);
 }
+/* compact single-line notice used at the top of the narrative page */
+.ror-note{
+  margin:1.2rem 0 0; padding:.55rem .9rem; border-left:3px solid var(--orange-ink);
+  font-size:.86rem; line-height:1.5; color:var(--ink-soft);
+}
+.ror-note strong{
+  font-family:var(--mono); font-size:.69rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
+}
+
+/* ---------- story / subscribe links ---------- */
+.story-links{ margin:1rem 0 0; font-family:var(--mono); font-size:.78rem; letter-spacing:.04em; }
+.story-links a{ font-weight:700; }
 
 /* ---------- two-chain chronology ---------- */
 .chains{ display:grid; gap:1rem; }

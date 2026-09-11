@@ -139,10 +139,19 @@ function statusPill(status) {
 
 /* ------------------------------------------------------------- page shell */
 const ROUTES = [
-  { href: '/infographics/des-moines-alpr/', label: 'Page Nine', key: 'index' },
+  { href: '/infographics/des-moines-alpr/', label: copy.exhibit.working_title, key: 'index' },
   { href: '/infographics/des-moines-alpr/network/', label: 'Explore the configuration', key: 'network' },
   { href: '/infographics/des-moines-alpr/records/', label: 'The record', key: 'records' }
 ];
+
+/* Story and subscribe links, rendered only when the editor has set them. */
+function storyLinks() {
+  const a = copy.exhibit.article_link, sub = copy.exhibit.subscribe_link;
+  const parts = [];
+  if (a && a.enabled && a.url) parts.push(`<a href="${esc(a.url)}">${esc(a.label)} &rarr;</a>`);
+  if (sub && sub.enabled && sub.url) parts.push(`<a href="${esc(sub.url)}" rel="noopener">${esc(sub.label)} &rarr;</a>`);
+  return parts.length ? `<p class="story-links">${parts.join(' &nbsp;&middot;&nbsp; ')}</p>` : '';
+}
 
 function head({ title, description, canonical, sections, key }) {
   const depth = key === 'index' ? '' : '../';
@@ -211,7 +220,7 @@ function head({ title, description, canonical, sections, key }) {
   </div>
 </nav>
 
-<p class="draft-banner"><b>PREPUBLICATION DRAFT</b> &nbsp;&middot;&nbsp; Not published. Aligned to article draft v0.2. Responses to RDP&rsquo;s questions are pending.</p>
+<p class="draft-banner"><b>PREPUBLICATION DRAFT</b> &nbsp;&middot;&nbsp; Not published. Aligned to article draft v0.4.</p>
 <header class="exhibit-chrome">
   <nav class="exhibit-nav routes" aria-label="Exhibit pages">
     <div class="exhibit-nav-inner">
@@ -278,7 +287,8 @@ ${noJsReceipts(receiptIds)}
       <div>
         <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">This exhibit</h4>
         <ul class="space-y-1.5 text-sm">
-          <li><a href="/infographics/des-moines-alpr/" class="text-brand-sand/80 hover:text-brand-gold transition">Page Nine</a></li>
+          <li><a href="/infographics/des-moines-alpr/" class="text-brand-sand/80 hover:text-brand-gold transition">${esc(copy.exhibit.working_title)}</a></li>
+          ${copy.exhibit.article_link.enabled && copy.exhibit.article_link.url ? `<li><a href="${esc(copy.exhibit.article_link.url)}" class="text-brand-sand/80 hover:text-brand-gold transition">${esc(copy.exhibit.article_link.label)}</a></li>` : ''}
           <li><a href="/infographics/des-moines-alpr/network/" class="text-brand-sand/80 hover:text-brand-gold transition">Explore the configuration</a></li>
           <li><a href="/infographics/des-moines-alpr/records/" class="text-brand-sand/80 hover:text-brand-gold transition">The record</a></li>
           <li><a href="/infographics/des-moines-alpr/records/#methodology" class="text-brand-sand/80 hover:text-brand-gold transition">Method and corrections</a></li>
@@ -319,7 +329,7 @@ ${extraScripts || ''}
 }
 
 /* ==========================================================================
-   PAGE 1 — Page Nine (narrative)
+   PAGE 1 — narrative
    ========================================================================= */
 
 function chapterShell(ch, graphicHtml, opts = {}) {
@@ -471,7 +481,7 @@ const GRAPHICS = {
           </tbody>
         </table>
       </div>
-      <p class="figure-caption">The vendor&rsquo;s price file defines the purchased SKU as &ldquo;CarDetector Mobile, Vigilant PlateSearch (agency data only).&rdquo; The purchased SKU covered agency data only; commercial national vehicle-location data appears in the separate Vigilant/H-GAC procurement described next. The production contains two different pages bearing the same page number. ${chip('R-QUOTE-INCOMPLETE', 'source')}</p>
+      <p class="figure-caption">The vendor&rsquo;s price file defines the purchased SKU as &ldquo;CarDetector Mobile, Vigilant PlateSearch (agency data only)&rdquo;; commercial national vehicle-location data appears in the separate Vigilant/H-GAC procurement described next. The production contains two different pages bearing the same page number. ${chip('R-QUOTE-INCOMPLETE', 'source')}</p>
     </div>`;
   },
 
@@ -531,7 +541,7 @@ const GRAPHICS = {
         <li>Effective 29 October 2021 &mdash; combined in-car video and plate-reader unit</li>
         <li>Effective 14 December 2021 &mdash; reversion</li>
       </ul>
-      <p class="figure-caption">The change-request mechanism is expressly authorised by the contract: an executed form becomes an amendment incorporated by reference. The cooperative&rsquo;s own printed rule is that additions must be within the scope of the original solicitation, and that it &ldquo;will determine&rdquo; whether a request meets that test. Whether any such determination was made for this change is not found in the records produced; the cooperative has been asked.</p>
+      <p class="figure-caption">The change-request mechanism is expressly authorised by the contract: an executed form becomes an amendment incorporated by reference. The cooperative&rsquo;s own printed rule is that additions must be within the scope of the original solicitation, and that it &ldquo;will determine&rdquo; whether a request meets that test. The produced records contain no Sourcewell determination on this request. Sourcewell has been asked whether it made one.</p>
     </div>`;
   },
 
@@ -621,6 +631,7 @@ function buildIndex() {
     <h1 id="hero-h">${esc(copy.exhibit.headline)}</h1>
     <p class="standfirst">${esc(copy.exhibit.dek)}</p>
     <p class="byline">${esc(copy.exhibit.byline)} &nbsp;&bull;&nbsp; ${esc(copy.exhibit.date_display)}</p>
+    ${storyLinks()}
     <div class="callout">
       <h3>How to read this exhibit</h3>
       <p>${esc(copy.standing.how_to_read)}</p>
@@ -631,10 +642,7 @@ function buildIndex() {
          characterise or anticipate a response that has not been received.
          This is the single reader-visible statement of the response status;
          it is deliberately placed at the top of the page and nowhere else. -->
-    <div class="limit-block limit-block--ror" id="rorBlock" data-ror-status="${esc(copy.right_of_response.status)}">
-      <p class="limit-block__head">${esc(copy.right_of_response.heading)}</p>
-      <p class="limit-block__body">${esc(copy.right_of_response.body)}</p>
-    </div>
+    <p class="ror-note" id="rorBlock" data-ror-status="${esc(copy.right_of_response.status)}"><strong>${esc(copy.right_of_response.heading)}.</strong> ${esc(copy.right_of_response.body)}</p>
     <!-- ================== END RIGHT OF RESPONSE ================== -->
   </div>
 </section>
@@ -677,7 +685,7 @@ function buildIndex() {
 <section class="module" id="sidebars" aria-labelledby="sb-h">
   <div class="wrap-wide">
     <p class="kicker">Sidebars</p>
-    <h2 id="sb-h">Three things that sit beside the story</h2>
+    <h2 id="sb-h">Four things that sit beside the story</h2>
     <div style="display:grid;gap:1rem;margin-top:1.2rem">
       ${copy.sidebars.map((s) => `<div class="callout" style="margin:0">
         <h3>${esc(s.heading)}</h3>

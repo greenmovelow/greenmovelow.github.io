@@ -1056,7 +1056,7 @@
   {
    "receipt_id": "R-FLOCK-SEPARATION",
    "claim": "Des Moines' ALPR network uses Motorola/Vigilant technology.",
-   "display_copy": "Motorola/Vigilant, not Flock",
+   "display_copy": "Motorola/Vigilant system",
    "record_layer": "L6",
    "chain": "other",
    "source_tag": "P",

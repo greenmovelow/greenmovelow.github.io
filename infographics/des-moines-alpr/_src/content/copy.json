@@ -1,23 +1,28 @@
 {
- "_README": "ALL on-screen exhibit prose lives here. Nothing narrative is authored inside build templates. Aligned to article draft v0.2 (2026-09-07): the narrative order below follows the article's movements, and the article controls where it conflicts with the September 2 concept deck. Strings marked PROVISIONAL are expected to change before publication. Banned verbs and the three tightened formulations are enforced by _src/lint.mjs against the rendered HTML.",
- "_aligned_to": "01_DES_MOINES_ALPR_PUBLICATION_DRAFT_v0_2.md · 03_DES_MOINES_ALPR_DRAFT_SOURCE_LEDGER_v0_2.md",
+ "_README": "ALL on-screen exhibit prose lives here. Nothing narrative is authored inside build templates. Aligned to article draft v0.4 (2026-09-11): the narrative order below follows the article's movements, and the article controls where it conflicts with the September 2 concept deck. Strings marked PROVISIONAL are expected to change before publication. Banned verbs and the three tightened formulations are enforced by _src/lint.mjs against the rendered HTML.",
+ "_aligned_to": "01_PAGE_NINE_DRAFT_v0_4.md · 03_DES_MOINES_ALPR_DRAFT_SOURCE_LEDGER_v0_2.md",
 
  "exhibit": {
-  "working_title": "Page Nine",
-  "headline": "Page Nine",
-  "dek": "What Des Moines bought, what the contracts allowed, and what the city's plate-reader platform shows three years on",
+  "working_title": "Expanded plate-reader use",
+  "headline": "Des Moines Expanded Plate-Reader Use. Then It Asked Residents What to Cut.",
+  "dek": "How mobile plate readers and a commercially sourced vehicle-location platform settled into routine Des Moines policing — and how little of that a resident could see when the city asked what it could afford to keep.",
   "byline": "Timothy Tucker",
-  "byline_note": "From article draft v0.2.",
+  "byline_note": "From article draft v0.4.",
   "date_display": "Publication expected the week of 14 September 2026",
   "date_note": "PROVISIONAL — replace with the publication date once set.",
   "kicker": "RDP Investigation",
   "kicker_topic": "Des Moines ALPR",
-  "meta_description": "What Des Moines bought, what the contracts allowed, and what the city's plate-reader platform shows three years on. An interactive companion to RDP's Des Moines ALPR investigation.",
+  "meta_description": "How mobile plate readers and a commercially sourced vehicle-location platform settled into routine Des Moines policing, and how little of that a resident could see when the city asked what to cut. An interactive companion to RDP's Des Moines ALPR investigation.",
   "article_link": {
-   "enabled": false,
-   "label": "Read the full investigation",
-   "url": "",
-   "note": "PROVISIONAL — the article slug does not exist yet. Do not invent one. Set enabled:true and fill url at publication."
+   "enabled": true,
+   "label": "Read the full story",
+   "url": "https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader",
+   "note": "Story URL supplied by the editor on 2026-09-11."
+  },
+  "subscribe_link": {
+   "enabled": true,
+   "label": "Subscribe",
+   "url": "https://investigations.restoring-democracy.org/fall_signal_drop"
   },
   "updates_block": {
    "enabled": false,
@@ -28,14 +33,14 @@
 
  "right_of_response": {
   "heading": "Right of response",
-  "body": "The City of Des Moines, the Des Moines Police Department, Motorola Solutions, Sourcewell and the Houston-Galveston Area Council were sent detailed questions, with a deadline for comment and factual correction of 5:00 p.m. Central on Friday, September 11, 2026. Responses are pending. Any answer received will be reflected here and in the article; where a custodian does not answer, this exhibit will say so and state what was asked.",
+  "body": "The City of Des Moines, the Des Moines Police Department, Motorola Solutions, Sourcewell and the Houston-Galveston Area Council were sent detailed questions, with a deadline of 5:00 p.m. Central, Friday, September 11, 2026. Responses are pending; any answer received will be reflected here and in the article.",
   "status": "pending",
   "deadline_display": "5:00 p.m. Central, Friday, September 11, 2026",
   "note": "EDITORIALLY OWNED — patch this block only. Do not summarise, characterise or anticipate a response that has not been received."
  },
 
  "standing": {
-  "how_to_read": "Page Nine follows the documentary record. Every sourced figure and quotation opens the underlying document, date, page or row, and relevant limitation. The exhibit compares the 2023 procurement record with the platform's August 2026 configuration.",
+  "how_to_read": "This exhibit follows the documentary record. Every sourced figure and quotation opens the underlying document, date, page or row, and relevant limitation. The exhibit compares the 2023 procurement record with the platform's August 2026 configuration.",
   "no_dates": "The export records the configuration on August 17, 2026; 151 of 155 sharing rows contain no usable date.",
   "clerk_file_caveat": "The City produced this 25-page roll-call file in August 2026. Two documents in it are dated after the vote. The production does not identify which pages were distributed to council members beforehand.",
   "legend_line": "Open rings and dashed connectors show settings in the City's own platform export. They do not show that any plate record was sent or viewed."
@@ -68,7 +73,7 @@
    "kicker": "The summary",
    "heading": "What the council-facing summary described",
    "body": "The staff document supporting the item, Council Communication 23-519, described the proposition as “purchasing upgraded in-car video systems with installation, implementation, and video evidence management software.” Its synopsis explains why: the existing equipment “has reached the end of supported life,” the replacement has “enhanced 4K camera functions,” and the software integrates body-worn and in-car video into “a single encrypted file which automatically uploads from the field.”",
-   "consequence": "All of that is accurate. The M500 is an in-car video system, VideoManager EL is video evidence management software, and the body-worn integration was real. And across the resolution and the council communication — pages 1 to 4 — there is no occurrence of ALPR, LPR, license plate, Vigilant, LEARN, PlateSearch, VehicleManager, hot list, retention or data sharing.",
+   "consequence": "The M500 is an in-car video system, VideoManager EL is video evidence management software, and the body-worn integration was real. And across the resolution and the council communication — pages 1 to 4 — there is no occurrence of ALPR, LPR, license plate, Vigilant, LEARN, PlateSearch, VehicleManager, hot list, retention or data sharing.",
    "receipts": ["R-CC-23-519-HEAD", "R-CC-23-519-SYN", "R-RC-ABSENT-TERMS", "R-POSTING-COPY-32"],
    "graphic": "summary"
   },
@@ -210,7 +215,7 @@
   {
    "id": "counting",
    "heading": "Sidebar — how the systems were counted",
-   "body": "The August 2026 systems export contains 149 top-level system rows — 140 Mobile, 7 IP, 2 Fixed — with 560 camera rows nested beneath them. Counting the seven IP lane units as cameras rather than systems gives the alternative shorthand of 142 systems and 567 cameras. Either convention is defensible. This exhibit uses the first and says so. One Mobile row is literally named “Unit number.”",
+   "body": "The August 2026 systems export contains 149 top-level system rows — 140 Mobile, 7 IP, 2 Fixed — with 560 camera rows nested beneath them. Counting the seven IP lane units as cameras rather than systems gives the alternative shorthand of 142 systems and 567 cameras. This exhibit counts top-level rows, yielding 149 systems and 560 nested cameras. One Mobile row is literally named “Unit number.”",
    "receipts": ["R-SYSTEMS-149", "R-SYSTEMS-FIXED"]
   },
   {
