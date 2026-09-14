@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Altoona's Plate Reader Network Goes Beyond Flock",
+      "link": "https://investigations.restoring-democracy.org/p/altoonas-plate-reader-network-goes",
+      "date": "2026-09-14",
+      "dateLabel": "Sep 14",
+      "category": "Investigation"
+    },
+    {
       "title": "Inside Iowa’s SAVE Clearinghouse: What the State’s Own Records Show",
       "link": "https://investigations.restoring-democracy.org/p/inside-iowas-save-clearinghouse-what",
       "date": "2026-09-05",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/a-resignation-is-not-an-audit-why",
       "date": "2026-05-19",
       "dateLabel": "May 19",
-      "category": "Investigation"
-    },
-    {
-      "title": "The Dexter Disinformation Playbook: Why a $35k Audit Wasn’t a \"Bookkeeping Error\"",
-      "link": "https://investigations.restoring-democracy.org/p/the-dexter-disinformation-playbook",
-      "date": "2026-05-17",
-      "dateLabel": "May 17",
       "category": "Investigation"
     }
   ]
