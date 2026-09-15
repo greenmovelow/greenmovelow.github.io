@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Who Decides the Future of Central Iowa’s Plate Readers?",
+      "link": "https://investigations.restoring-democracy.org/p/who-decides-about-central-iowas-plate",
+      "date": "2026-09-15",
+      "dateLabel": "Sep 15",
+      "category": "Investigation"
+    },
+    {
       "title": "Altoona's Plate Reader Network Goes Beyond Flock",
       "link": "https://investigations.restoring-democracy.org/p/altoonas-plate-reader-network-goes",
       "date": "2026-09-14",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came",
       "date": "2026-06-07",
       "dateLabel": "Jun 7",
-      "category": "Investigation"
-    },
-    {
-      "title": "A Resignation Is Not an Audit: Why Iowa Still Owes its Public Employees Answers",
-      "link": "https://investigations.restoring-democracy.org/p/a-resignation-is-not-an-audit-why",
-      "date": "2026-05-19",
-      "dateLabel": "May 19",
       "category": "Investigation"
     }
   ]
