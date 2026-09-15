@@ -49,12 +49,12 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
 
-  for (const [route, file] of [['/', 'index'], ['/network/', 'network'], ['/records/', 'records'], ['/visual/', 'visual']]) {
+  for (const [route, file] of [['/', 'overview'], ['/network/', 'network']]) {
     await page.goto(BASE + route, { waitUntil: 'networkidle' });
     await page.waitForTimeout(250);
     await page.screenshot({ path: join(SHOTS, `${file}-${name}.png`), fullPage: false });
-    if (name === 'desktop' || (name === 'mobile' && (file === 'index' || file === 'visual'))) {
-      if (file === 'visual') {
+    if (name === 'desktop' || (name === 'mobile' && file === 'overview')) {
+      if (file === 'overview') {
         await page.evaluate(async () => {
           for (let y = 0; y < document.documentElement.scrollHeight; y += Math.max(400, innerHeight * .7)) {
             scrollTo({ top: y, behavior: 'instant' });
@@ -80,7 +80,7 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
-  await page.goto(BASE + '/visual/', { waitUntil: 'networkidle' });
+  await page.goto(BASE + '/', { waitUntil: 'networkidle' });
 
   assert(await page.locator('#visual-map .visual-state.is-configured').count() === 37,
     'visual map renders 36 states plus D.C. from the export',
@@ -115,7 +115,7 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   await page.locator('.scope-button[data-scope="outside"]').click();
   assert(await page.locator('#visual-map .visual-state.is-configured.is-in-scope').count() === 36,
     'outside-Iowa scope leaves 35 states plus D.C. in scope');
-  await page.screenshot({ path: join(SHOTS, 'visual-outside-iowa.png'), fullPage: false });
+  await page.screenshot({ path: join(SHOTS, 'overview-outside-iowa.png'), fullPage: false });
 
   assert(errors.length === 0, 'visual companion has no JS errors', errors.join(' | '));
   await ctx.close();
@@ -204,78 +204,60 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   await ctx.close();
 }
 
-/* --------------------------------------------------- 3. narrative page */
+/* ----------------------------------------- 3. canonical overview and IA */
 {
   const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
   const page = await ctx.newPage();
   await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+  assert((await page.locator('h1').innerText()).trim() === 'WHERE DES MOINES PLATE DATA CAN GO',
+    'canonical root renders the visual overview');
 
-  /* receipt chip */
-  const receiptTrigger = page.locator('button[data-receipt="R-MVA-4.5"]').first();
-  assert((await receiptTrigger.innerText()).trim() === 'Source note',
-    'receipt trigger uses the source-note label');
-  assert(/^Source note:/.test(await receiptTrigger.getAttribute('aria-label')),
-    'receipt trigger carries a claim-specific source-note accessible name');
-  await receiptTrigger.click();
-  await page.waitForTimeout(200);
-  const rd = await page.locator('#receipt-drawer .rd-inner').innerText();
-  assert((await page.locator('#receipt-drawer .rd-eyebrow').first().innerText()).trim() === 'SOURCE NOTE',
-    'receipt drawer uses the source-note heading');
-  assert(/by selecting this option within Vigilant VehicleManager/.test(rd),
-    'page-9 receipt carries the verbatim clause');
-  assert(/page 9 of the 25-page clerk/i.test(rd), 'receipt pinpoints page 9');
-  await page.screenshot({ path: join(SHOTS, 'index-receipt-drawer.png') });
-  await page.keyboard.press('Escape');
-  await page.waitForTimeout(150);
+  const publicNav = await page.locator('.exhibit-nav.routes').innerText();
+  assert(/Overview/i.test(publicNav) && /Explore the network/i.test(publicNav),
+    'public exhibit navigation contains overview and network');
+  assert(!/Expanded Plate-Reader Use|The Record|Explore the Configuration/i.test(publicNav),
+    'removed route labels are absent from public navigation');
 
-  /* council-summary switch */
-  const sw = page.locator('#summary-switch');
-  await scrollClear(page, sw);
-  const label = await sw.innerText();
-  assert(/named in the council-facing summary/i.test(label) && !/knew|saw|described/i.test(label),
-    'switch is labelled by the summary\'s scope, pages 1–4');
-  await sw.click();
-  await page.waitForTimeout(300);
-  assert(await page.locator('#scrolly[data-summary-dim="true"]').count() === 1,
-    'switch dims material outside the council-facing summary');
-  const dimOpacity = await page.locator('#scrolly .not-in-summary').first()
-    .evaluate((el) => getComputedStyle(el).opacity);
-  assert(Number(dimOpacity) < 0.3, 'out-of-summary material is visibly de-emphasised', dimOpacity);
-  const refOpacity = await page.locator('#scrolly .by-reference').first()
-    .evaluate((el) => getComputedStyle(el).opacity);
-  assert(Number(refOpacity) > Number(dimOpacity),
-    'material incorporated by reference stays more visible than material absent entirely',
-    `by-reference ${refOpacity} vs absent ${dimOpacity}`);
-  await page.screenshot({ path: join(SHOTS, 'index-council-switch-on.png'), fullPage: false });
-  await sw.click();
-  await page.waitForTimeout(200);
+  const heroLinks = page.locator('.visual-cta-group a');
+  assert(await heroLinks.count() === 3, 'hero CTA group has the intended three actions');
+  assert(/^Read the full story/i.test((await heroLinks.nth(0).innerText()).trim()),
+    'Read the full story is first and primary');
+  assert(/visual-cta--primary/.test(await heroLinks.nth(0).getAttribute('class')),
+    'Read the full story carries the primary treatment');
+  const primaryColors = await heroLinks.nth(0).evaluate((el) => {
+    const style = getComputedStyle(el); return { color: style.color, background: style.backgroundColor };
+  });
+  assert(primaryColors.color !== primaryColors.background,
+    'primary CTA text remains visible against its fill', JSON.stringify(primaryColors));
+  assert(/^Explore the network/i.test((await heroLinks.nth(1).innerText()).trim()),
+    'Explore the network is second');
+  assert(/^Subscribe — 7 days free/i.test((await heroLinks.nth(2).innerText()).trim()),
+    'Subscribe is present as the tertiary CTA');
+  assert(await heroLinks.nth(0).getAttribute('href') === 'https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader',
+    'story CTA preserves its existing destination');
+  assert(await heroLinks.nth(2).getAttribute('href') === 'https://investigations.restoring-democracy.org/fall_signal_drop/',
+    'subscription CTA reuses the long-form destination');
 
-  /* document stack */
-  const p9 = page.locator('.doc-page[data-pagenine="true"]');
-  await scrollClear(page, p9);
-  await p9.click();
-  await page.waitForTimeout(150);
-  const ro = await page.locator('#doc-stack-readout').innerText();
-  assert(/Page 9/.test(ro) && /4\.4|4\.5|License Plate/i.test(ro),
-    'selecting page 9 reports its contents', ro.replace(/\n/g, ' ').slice(0, 90));
+  const bodyText = await page.locator('body').innerText();
+  assert(!/Expanded Plate-Reader Use|View the full evidence record|Explore the Configuration/i.test(bodyText),
+    'retired public labels are absent from the overview');
+  assert(await page.locator('a[href*="/records/"]').count() === 0,
+    'overview has no link to the detached records page');
 
-  /* arrow-key traversal of the stack */
-  await page.locator('.doc-page[data-page="1"]').focus();
-  await page.keyboard.press('ArrowRight');
-  await page.waitForTimeout(100);
-  const focusedPage = await page.evaluate(() => document.activeElement.getAttribute('data-page'));
-  assert(focusedPage === '2', 'arrow keys move through the document stack', `focus on page ${focusedPage}`);
+  const pageNine = page.locator('.page-nine');
+  const pageNineText = await pageNine.innerText();
+  assert(/by selecting this option within Vigilant VehicleManager/.test(pageNineText),
+    'Page 9 explanatory evidence remains');
+  assert(await pageNine.locator('img').evaluate((img) => img.complete && img.naturalWidth > 100),
+    'Page 9 facsimile remains and loads');
+  assert(/23-1629\.pdf, page 9/.test(await pageNine.locator('figcaption').innerText()),
+    'Page 9 source caption remains');
+  assert(await pageNine.locator('a').count() === 0,
+    'Page 9 evidence-record CTA is removed without removing evidence');
 
-  /* the hard cut is present and says so */
-  const hc = await page.locator('.hard-cut').innerText();
-  assert(/2023 RECORD/i.test(hc) && /2026 CONFIGURATION SNAPSHOT/i.test(hc) &&
-    /151 of 155 sharing rows contain no usable date/i.test(hc), 'hard cut states the export date and the undated rows');
-
-  /* the empty lane really is empty */
-  const emptyLane = await page.locator('.lane[data-state="empty"]');
-  assert(await emptyLane.count() === 1, 'exactly one empty lane in the use layer');
-  await scrollClear(page, emptyLane);
-  await page.screenshot({ path: join(SHOTS, 'index-empty-drawer.png') });
+  const endLinks = await page.locator('.visual-end-links').innerText();
+  assert(/READ THE FULL STORY/.test(endLinks) && /EXPLORE THE NETWORK/.test(endLinks) &&
+    /SUBSCRIBE — 7 DAYS FREE/.test(endLinks), 'bottom CTA group uses the revised hierarchy');
   await ctx.close();
 }
 
@@ -336,7 +318,7 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   await page.waitForLoadState('networkidle');
   await page.goBack();
   await page.waitForLoadState('networkidle');
-  assert(page.url().endsWith('/des-moines-alpr/'), 'browser back returns to the narrative page', page.url());
+  assert(page.url().endsWith('/des-moines-alpr/'), 'browser back returns to the overview', page.url());
   await ctx.close();
 }
 
@@ -360,7 +342,7 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   assert(/^0s/.test(drawerTrans), 'reduced motion: drawer does not animate', drawerTrans);
   await page.screenshot({ path: join(SHOTS, 'network-reduced-motion.png') });
 
-  await page.goto(BASE + '/visual/', { waitUntil: 'networkidle' });
+  await page.goto(BASE + '/', { waitUntil: 'networkidle' });
   const reveal = page.locator('.visual-hero-copy');
   const revealStyle = await reveal.evaluate((el) => ({
     opacity: getComputedStyle(el).opacity,
@@ -369,7 +351,7 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   }));
   assert(revealStyle.opacity === '1' && /^0s/.test(revealStyle.transition) && revealStyle.transform === 'none',
     'visual reduced motion renders immediately with no transition', JSON.stringify(revealStyle));
-  await page.screenshot({ path: join(SHOTS, 'visual-reduced-motion.png') });
+  await page.screenshot({ path: join(SHOTS, 'overview-reduced-motion.png') });
   await ctx.close();
 }
 
@@ -379,12 +361,13 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   const page = await ctx.newPage();
 
   await page.goto(BASE + '/', { waitUntil: 'domcontentloaded' });
-  const idxText = await page.locator('body').innerText();
-  assert(/Sources for every claim on this page/.test(idxText), 'no-JS: receipts fallback renders');
-  assert(/by selecting this option within Vigilant VehicleManager/.test(idxText),
-    'no-JS: the page-9 clause is present in the static HTML');
-  assert(/mistakenly left off/.test(idxText), 'no-JS: the change-form quotation is present');
-  await page.screenshot({ path: join(SHOTS, 'index-nojs.png'), fullPage: false });
+  assert(await page.locator('#visual-map .visual-state.is-configured').count() === 37,
+    'no-JS: all represented jurisdictions remain in the overview map');
+  assert(await page.locator('#relationship-layer [data-relationship]').count() === 0,
+    'no-JS: the overview map has no relationship path');
+  assert(await page.locator('.visual-access-table tbody tr').count() === 37,
+    'no-JS: the overview map has a 37-jurisdiction semantic table');
+  await page.screenshot({ path: join(SHOTS, 'overview-nojs.png'), fullPage: false });
 
   await page.goto(BASE + '/network/', { waitUntil: 'domcontentloaded' });
   assert(await page.locator('#network-tbody tr').count() === 155,
@@ -398,13 +381,6 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   assert(/Chronology/.test(recText) && /Parts list/.test(recText),
     'no-JS: record views are in the static HTML');
 
-  await page.goto(BASE + '/visual/', { waitUntil: 'domcontentloaded' });
-  assert(await page.locator('#visual-map .visual-state.is-configured').count() === 37,
-    'no-JS: all represented jurisdictions remain in the visual map');
-  assert(await page.locator('#relationship-layer [data-relationship]').count() === 0,
-    'no-JS: the visual map has no relationship path');
-  assert(await page.locator('.visual-access-table tbody tr').count() === 37,
-    'no-JS: the visual map has a 37-jurisdiction semantic table');
   await ctx.close();
 }
 
@@ -417,31 +393,13 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   const firstStop = await page.evaluate(() => document.activeElement.className);
   assert(/skip-link/.test(firstStop), 'first tab stop is the skip link', firstStop);
 
-  let reachedChip = false;
-  for (let i = 0; i < 40 && !reachedChip; i++) {
-    await page.keyboard.press('Tab');
-    reachedChip = await page.evaluate(() =>
-      !!(document.activeElement && document.activeElement.hasAttribute('data-receipt')));
-  }
-  assert(reachedChip, 'a receipt chip is reachable by keyboard alone');
-  if (reachedChip) {
-    await page.keyboard.press('Enter');
-    await page.waitForTimeout(200);
-    const focusIsClose = await page.evaluate(() => document.activeElement.id === 'rd-close');
-    assert(focusIsClose, 'opening a receipt moves focus into the drawer');
-    await page.keyboard.press('Escape');
-    await page.waitForTimeout(150);
-    const back = await page.evaluate(() =>
-      !!(document.activeElement && document.activeElement.hasAttribute('data-receipt')));
-    assert(back, 'closing the receipt returns focus to the chip that opened it');
-  }
-
-  /* focus visibility */
-  const outline = await page.evaluate(() => {
-    const b = document.querySelector('.receipt-chip');
-    b.focus();
-    return getComputedStyle(b).outlineStyle + ' ' + getComputedStyle(b).outlineWidth;
-  });
+  const california = page.locator('#visual-map .visual-state[data-state="CA"]');
+  await california.focus();
+  await page.keyboard.press('Enter');
+  assert(await page.locator('#relationship-layer [data-relationship="configured"]').count() === 1,
+    'overview map state is selectable by keyboard');
+  const outline = await california.evaluate((el) =>
+    getComputedStyle(el).outlineStyle + ' ' + getComputedStyle(el).outlineWidth);
   assert(!/none/.test(outline), 'focus is visible', outline);
   await ctx.close();
 }
@@ -497,14 +455,22 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   await scrollClear(page, page.locator('#tilemap-details'));
   await page.screenshot({ path: join(SHOTS, 'network-mobile-grid-open.png') });
 
-  /* narrative page at 390px */
+  /* overview CTA hierarchy at 390px */
   await page.goto(BASE + '/', { waitUntil: 'networkidle' });
-  await scrollClear(page, page.locator('#doc-stack'));
-  await page.screenshot({ path: join(SHOTS, 'index-mobile-stack.png') });
+  await scrollClear(page, page.locator('.visual-cta-group'));
+  const mobileCtas = page.locator('.visual-cta-group a');
+  const ctaRects = await mobileCtas.evaluateAll((els) => els.map((el) => {
+    const r = el.getBoundingClientRect(); return { top: r.top, width: r.width, height: r.height };
+  }));
+  assert(ctaRects.length === 3 && ctaRects[0].top < ctaRects[1].top && ctaRects[1].top < ctaRects[2].top,
+    'mobile: overview CTAs stack in priority order');
+  assert(ctaRects.every((r) => r.width > 300 && r.height >= 36),
+    'mobile: overview CTAs remain large, full-width targets');
+  await page.screenshot({ path: join(SHOTS, 'overview-mobile-ctas.png') });
 
   /* touch-target floor on the smallest interactive control */
   const small = await page.evaluate(() => {
-    const els = [...document.querySelectorAll('.doc-page, .receipt-chip, .switch-btn, .mode-btn')];
+    const els = [...document.querySelectorAll('.visual-cta, .scope-button')];
     return els.map((e) => { const r = e.getBoundingClientRect(); return Math.min(r.width, r.height); })
       .filter((n) => n > 0).sort((a, b) => a - b)[0];
   });
@@ -513,94 +479,15 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   await ctx.close();
 }
 
-/* ------------------------- 9. article-v0.2 alignment (Phase 2) ----------- */
+/* ------------------------------------------ 9. legacy visual-route redirect */
 {
   const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
   const page = await ctx.newPage();
-  const errors = [];
-  page.on('pageerror', (e) => errors.push(String(e)));
-  await page.goto(BASE + '/', { waitUntil: 'networkidle' });
-
-  /* narrative order now follows the article's movements */
-  const order = await page.$$eval('#scrolly .chapter', (els) => els.map((e) => e.id));
-  assert(order[0] === 'ch01-mistakenly',
-    'the exhibit opens on the 2021 change form', order[0]);
-  assert(order[1] === 'ch02-item-32',
-    'the council vote is second', order[1]);
-  assert(order.indexOf('ch05-page-nine') > order.indexOf('ch04-stack'),
-    'page nine still follows the document stack');
-  assert(order.indexOf('ch07-other-contract') === order.length - 1,
-    'the contract underneath closes the 2023 movement', order[order.length - 1]);
-
-  const ch1 = await page.locator('#ch01-mistakenly').innerText();
-  assert(/mistakenly left off/i.test(ch1) && /key component of the WatchGuard Mobile Video System/i.test(ch1),
-    'chapter 1 carries both quoted fields of the change form');
-
-  /* the hard cut still separates 2023 from 2026, after the last 2023 chapter */
-  const cutY = await page.locator('.hard-cut').evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
-  const lastDoc = await page.locator('#ch07-other-contract').evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
-  const config = await page.locator('#ch09-configuration').evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
-  assert(lastDoc < cutY && cutY < config,
-    'the discontinuity sits between the dated record and the 2026 snapshot');
-
-  /* corrected arithmetic */
-  const arith = await page.locator('.arith').innerText();
-  for (const n of ['$1,287,000', '$145,500', '$500', '$67,080', '$1,500,080']) {
-    assert(arith.includes(n), `arithmetic shows ${n}`);
-  }
-  const body = await page.locator('body').innerText();
-  assert(body.includes('4.51'), 'the exhibit states 4.51 percent');
-  assert(!body.includes('157,500'), 'the superseded services figure appears nowhere');
-
-  /* facsimile renders, with provenance, and actually loads */
-  await page.locator('button[data-receipt="R-MVA-4.5"]').first().click();
-  await page.waitForTimeout(400);
-  const fax = page.locator('#receipt-drawer .fax img');
-  assert(await fax.count() === 1, 'the page-9 receipt carries a facsimile');
-  const loaded = await fax.evaluate((img) => img.complete && img.naturalWidth > 100);
-  assert(loaded, 'the facsimile image actually loads');
-  const cap = await page.locator('#receipt-drawer .fax figcaption').innerText();
-  assert(/Source:/.test(cap) && /dpi/.test(cap) && /no pixel altered/i.test(cap),
-    'the facsimile caption carries source, page, dpi and an alteration statement');
-  await page.keyboard.press('Escape');
-
-  /* a receipt with no crop says so rather than showing a stand-in */
-  await page.locator('button[data-receipt="R-QTY-SEQUENCE"]').first().click();
-  await page.waitForTimeout(300);
-  const noFax = await page.locator('#receipt-drawer .rd-facsimile').innerText();
-  assert(/No page image is shipped/i.test(noFax),
-    'a receipt without a crop states the absence plainly');
-  await page.keyboard.press('Escape');
-
-  /* right of response */
-  const ror = page.locator('#rorBlock');
-  assert(await ror.count() === 1, 'the right-of-response block is present');
-  assert(await ror.getAttribute('data-ror-status') === 'pending', 'it reports responses as pending');
-  const rorText = await ror.innerText();
-  assert(/September 11, 2026/.test(rorText) && /pending/i.test(rorText),
-    'it names the deadline and does not anticipate an answer');
-  assert(!/declined to comment|did not respond|said that/i.test(rorText),
-    'it characterises no response that has not been received');
-
-  /* shared site shell */
-  /* the link appears twice by design: desktop bar and mobile menu */
-  assert(await page.locator('nav.nav-bar a[href="/#investigations"]').count() >= 1,
-    'the shared site navigation is present',
-    `${await page.locator('nav.nav-bar a[href="/#investigations"]').count()} occurrence(s)`);
-  assert(await page.locator('footer a[href="/privacy-policy/"]').count() === 1,
-    'the shared footer links the current privacy path');
-  const navFixed = await page.locator('nav.nav-bar').evaluate((el) => getComputedStyle(el).position);
-  assert(navFixed === 'fixed', 'the site nav is fixed, as on the newest exhibits', navFixed);
-  /* The stylesheet scrolls smoothly, so a single jump may still be animating
-     when it is measured; repeat until the page reports the top. */
-  for (let i = 0; i < 10 && (await page.evaluate(() => window.scrollY)) > 0; i++) {
-    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-    await page.waitForTimeout(200);
-  }
-  const bannerTop = await page.locator('.draft-banner').evaluate((el) => el.getBoundingClientRect().top);
-  assert(bannerTop >= 60, 'the prepublication banner clears the fixed nav', `${Math.round(bannerTop)}px`);
-
-  assert(errors.length === 0, 'no JS errors on the aligned page', errors.slice(0, 2).join(' | '));
+  await page.goto(BASE + '/visual/?from=legacy#map', { waitUntil: 'networkidle' });
+  assert(page.url().includes('/des-moines-alpr/?from=legacy#map'),
+    'legacy visual route redirects to the canonical overview and preserves query/hash', page.url());
+  assert((await page.locator('h1').innerText()).trim() === 'WHERE DES MOINES PLATE DATA CAN GO',
+    'legacy visual route lands on the overview');
   await ctx.close();
 }
 

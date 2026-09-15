@@ -130,9 +130,8 @@ function statusPill(status) {
 
 /* ------------------------------------------------------------- page shell */
 const ROUTES = [
-  { href: '/infographics/des-moines-alpr/', label: copy.exhibit.working_title, key: 'index' },
-  { href: '/infographics/des-moines-alpr/network/', label: 'Explore the configuration', key: 'network' },
-  { href: '/infographics/des-moines-alpr/records/', label: 'The record', key: 'records' }
+  { href: '/infographics/des-moines-alpr/', label: 'Overview', key: 'overview' },
+  { href: '/infographics/des-moines-alpr/network/', label: 'Explore the network', key: 'network' }
 ];
 
 /* Story and subscribe links, rendered only when the editor has set them. */
@@ -145,7 +144,7 @@ function storyLinks() {
 }
 
 function head({ title, description, canonical, sections, key, extraStyles = '', draftNote = 'Not published. Aligned to article draft v0.4.' }) {
-  const depth = key === 'index' ? '' : '../';
+  const depth = key === 'index' || key === 'overview' ? '' : '../';
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -278,11 +277,10 @@ ${omitReceipts ? '' : noJsReceipts(receiptIds)}
       <div>
         <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">This exhibit</h4>
         <ul class="space-y-1.5 text-sm">
-          <li><a href="/infographics/des-moines-alpr/" class="text-brand-sand/80 hover:text-brand-gold transition">${esc(copy.exhibit.working_title)}</a></li>
+          <li><a href="/infographics/des-moines-alpr/" class="text-brand-sand/80 hover:text-brand-gold transition">Overview</a></li>
           ${copy.exhibit.article_link.enabled && copy.exhibit.article_link.url ? `<li><a href="${esc(copy.exhibit.article_link.url)}" class="text-brand-sand/80 hover:text-brand-gold transition">${esc(copy.exhibit.article_link.label)}</a></li>` : ''}
-          <li><a href="/infographics/des-moines-alpr/network/" class="text-brand-sand/80 hover:text-brand-gold transition">Explore the configuration</a></li>
-          <li><a href="/infographics/des-moines-alpr/records/" class="text-brand-sand/80 hover:text-brand-gold transition">The record</a></li>
-          <li><a href="/infographics/des-moines-alpr/records/#methodology" class="text-brand-sand/80 hover:text-brand-gold transition">Method and corrections</a></li>
+          <li><a href="/infographics/des-moines-alpr/network/" class="text-brand-sand/80 hover:text-brand-gold transition">Explore the network</a></li>
+          ${copy.exhibit.subscribe_link.enabled && copy.exhibit.subscribe_link.url ? `<li><a href="${esc(copy.exhibit.subscribe_link.url)}" class="text-brand-sand/80 hover:text-brand-gold transition" rel="noopener">${esc(copy.exhibit.subscribe_link.label)}</a></li>` : ''}
         </ul>
       </div>
       <div>
@@ -669,7 +667,7 @@ function buildIndex() {
     <p class="chapter-num">${esc(ch['ch11-ledger'].number)} &mdash; <span class="kicker" style="display:inline;margin:0">${esc(ch['ch11-ledger'].kicker)}</span></p>
     <h2 id="ledger-h">${esc(ch['ch11-ledger'].heading)}</h2>
     ${GRAPHICS.ledger()}
-    <p style="margin-top:1.4rem"><a href="/infographics/des-moines-alpr/records/"><strong>Every instrument, date, price and receipt &rarr;</strong></a> &nbsp;&middot;&nbsp; <a href="/infographics/des-moines-alpr/network/"><strong>Explore the configuration &rarr;</strong></a></p>
+    <p style="margin-top:1.4rem"><a href="/infographics/des-moines-alpr/records/"><strong>Every instrument, date, price and receipt &rarr;</strong></a> &nbsp;&middot;&nbsp; <a href="/infographics/des-moines-alpr/network/"><strong>Explore the network &rarr;</strong></a></p>
   </div>
 </section>
 
@@ -713,7 +711,7 @@ function buildIndex() {
 }
 
 /* ==========================================================================
-   PAGE 2 — Explore the configuration
+   PAGE 2 — Explore the network
    ========================================================================= */
 
 function buildNetwork() {
@@ -860,7 +858,7 @@ function buildNetwork() {
 window.RDP_TILES = ${JSON.stringify(tiles.tiles)};`;
 
   return head({
-    title: `Explore the configuration — Des Moines ALPR | Restoring Democracy's Promise`,
+    title: `Explore the network — Des Moines ALPR | Restoring Democracy's Promise`,
     description: copy.network_page.dek,
     canonical: 'https://restoring-democracy.org/infographics/des-moines-alpr/network/',
     sections: [{ id: 'explorer', label: 'Explorer' }, { id: 'rows', label: 'All 155 rows' }],
@@ -870,6 +868,23 @@ window.RDP_TILES = ${JSON.stringify(tiles.tiles)};`;
     inlineData,
     extraScripts: '<script src="../assets/exhibit.js" defer></script>\n<script src="../assets/network.js" defer></script>'
   });
+}
+
+function buildVisualRedirect() {
+  const target = '/infographics/des-moines-alpr/';
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Des Moines ALPR overview | Restoring Democracy's Promise</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://restoring-democracy.org${target}">
+<meta http-equiv="refresh" content="0;url=${target}">
+<script>location.replace('${target}' + location.search + location.hash);</script>
+</head>
+<body><p>This page has moved to the <a href="${target}">Des Moines ALPR overview</a>.</p></body>
+</html>`;
 }
 
 /* ==========================================================================
@@ -1169,12 +1184,12 @@ mkdirSync(join(OUT, 'records'), { recursive: true });
 mkdirSync(join(OUT, 'visual'), { recursive: true });
 
 const outputs = [
-  [join(OUT, 'index.html'), buildIndex()],
+  [join(OUT, 'index.html'), buildVisualPage({
+    head, foot, esc, stateCounts, nodes, platform, copy
+  })],
   [join(OUT, 'network', 'index.html'), buildNetwork()],
   [join(OUT, 'records', 'index.html'), buildRecords()],
-  [join(OUT, 'visual', 'index.html'), buildVisualPage({
-    head, foot, esc, stateCounts, nodes, platform, copy
-  })]
+  [join(OUT, 'visual', 'index.html'), buildVisualRedirect()]
 ];
 
 for (const [path, html] of outputs) {

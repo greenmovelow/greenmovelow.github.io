@@ -1,5 +1,5 @@
 /* ============================================================================
-   Des Moines ALPR — premium visual companion only.
+   Des Moines ALPR — premium visual overview.
 
    VISUAL SEMANTICS
    - gold is reserved for Des Moines and document emphasis
@@ -127,11 +127,17 @@ html.js .visual-page:not(.visual-map-ready) .visual-state.is-configured{ opacity
 .map-caveat span{ display:inline-grid; place-items:center; width:19px; height:19px; margin-right:.45rem; border:1px solid var(--v-teal-light); border-radius:50%; color:var(--v-teal-light); font-weight:700; }
 .map-context{ display:flex; flex-wrap:wrap; gap:.6rem 1.8rem; margin:.7rem 0 0; color:#d8dfdc; font:650 .72rem/1.3 var(--v-sans); letter-spacing:.05em; text-transform:uppercase; }
 .hero-source{ margin:.65rem 0 0; }
+.visual-cta-group{ display:flex; flex-wrap:wrap; align-items:center; gap:.65rem 1.4rem; margin-top:1.2rem; }
 .visual-cta{
-  display:inline-flex; gap:.8rem; align-items:center; margin-top:1rem; padding:.8rem 0; color:var(--v-gold-pale);
+  display:inline-flex; gap:.8rem; align-items:center; padding:.8rem 0; color:var(--v-gold-pale);
   font:700 .78rem/1 var(--v-sans); letter-spacing:.11em; text-decoration:none; text-transform:uppercase;
   border-bottom:1px solid rgba(224,173,79,.55);
 }
+.visual-page .visual-cta--primary{ padding:.85rem 1rem; color:#07100f; background:var(--v-gold-pale); border:1px solid var(--v-gold-pale); }
+.visual-page .visual-cta--primary:hover,.visual-page .visual-cta--primary:focus-visible{ color:#07100f; background:var(--v-gold); border-color:var(--v-gold); }
+.visual-cta--secondary:hover,.visual-cta--secondary:focus-visible{ color:#fff; border-color:var(--v-gold); }
+.visual-cta--tertiary{ color:#aebbb6; font-size:.7rem; border-color:rgba(174,187,182,.36); }
+.visual-cta--tertiary:hover,.visual-cta--tertiary:focus-visible{ color:var(--v-gold-pale); border-color:rgba(224,173,79,.55); }
 .visual-access-table{ max-width:900px; margin:2rem auto 0; color:var(--v-muted); font-size:.82rem; }
 .visual-access-table summary{ cursor:pointer; color:#c8d1ce; font-weight:650; }
 .visual-table-scroll{ overflow:auto; max-height:360px; margin-top:.8rem; border-top:1px solid var(--v-line); }
@@ -254,6 +260,7 @@ html.js .visual-page:not(.visual-map-ready) .visual-state.is-configured{ opacity
   .scope-controls{ width:100%; }
   .scope-button{ flex:1; padding:.72rem .5rem; font-size:.62rem; }
   .map-context{ display:grid; gap:.45rem; }
+  .visual-cta-group{ align-items:stretch; flex-direction:column; gap:.4rem; }
   .visual-cta{ width:100%; justify-content:space-between; }
   .visual-access-table{ margin-top:1.4rem; }
   .fixed-mobile{ grid-template-columns:1fr; }

@@ -19,8 +19,7 @@ const DATA = join(OUT, 'data');
 const PAGES = [
   ['index.html', join(OUT, 'index.html')],
   ['network/index.html', join(OUT, 'network', 'index.html')],
-  ['records/index.html', join(OUT, 'records', 'index.html')],
-  ['visual/index.html', join(OUT, 'visual', 'index.html')]
+  ['records/index.html', join(OUT, 'records', 'index.html')]
 ];
 const ASSETS = ['exhibit.css', 'exhibit.js', 'network.js', 'visual.css', 'visual.js']
   .map((f) => [`assets/${f}`, join(OUT, 'assets', f)]);
@@ -70,6 +69,8 @@ for (const [name, path] of PAGES) {
 }
 const pageRaw = Object.fromEntries(PAGES.map(([n, p]) => [n, readFileSync(p, 'utf8')]));
 const assetRaw = Object.fromEntries(ASSETS.map(([n, p]) => [n, readFileSync(p, 'utf8')]));
+const redirectRaw = readFileSync(join(OUT, 'visual', 'index.html'), 'utf8');
+const copyRaw = readFileSync(join(HERE, 'content', 'copy.json'), 'utf8');
 
 /* ------------------------------------------------------------------ rule 1
    Banned verbs. These would assert movement, access or intent that no
@@ -169,14 +170,14 @@ if (!compHits) pass('required-companion — every guarded figure carries its man
    travel with the fleet-wide ALPR hardware fact. */
 let arithHits = 0;
 {
-  const idx = pageText['index.html'];
+  const idx = visibleText(copyRaw);
   for (const needle of ['$1,287,000', '$145,500', '$67,080', '$1,500,080', '4.51']) {
     if (!idx.includes(needle)) {
-      arithHits++; fail('arithmetic', 'index.html', `the corrected arithmetic is incomplete: "${needle}" is missing`);
+      arithHits++; fail('arithmetic', 'copy.json', `the corrected arithmetic is incomplete: "${needle}" is missing`);
     }
   }
   if (/4\.5\s*%/.test(idx) && !idx.includes('4.51')) {
-    arithHits++; fail('arithmetic', 'index.html', 'the superseded "4.5%" appears without the corrected 4.51 percent');
+    arithHits++; fail('arithmetic', 'copy.json', 'the superseded "4.5%" appears without the corrected 4.51 percent');
   }
 }
 if (!arithHits) pass('arithmetic — $1,287,000 + $145,500 + $500 + $67,080 = $1,500,080, and 4.51 percent is stated');
@@ -214,8 +215,8 @@ if (!connHits) pass('default-no-connectors — the served HTML contains no conne
    state selection. It must not ship a default path or describe the path as an
    event-level search, view or transfer. Existing route guardrails are unchanged. */
 let visualPathHits = 0;
-if (/data-relationship=/.test(pageRaw['visual/index.html'])) {
-  visualPathHits++; fail('visual-relationship-semantics', 'visual/index.html', 'a relationship path exists before reader selection');
+if (/data-relationship=/.test(pageRaw['index.html'])) {
+  visualPathHits++; fail('visual-relationship-semantics', 'index.html', 'a relationship path exists before reader selection');
 }
 if (!/addEventListener\('click',[\s\S]{0,120}selectState/.test(assetRaw['assets/visual.js'])) {
   visualPathHits++; fail('visual-relationship-semantics', 'assets/visual.js', 'state selection is not explicitly click-triggered');
@@ -338,7 +339,7 @@ if (!a11yHits) pass('a11y — skip link, captioned tables, scoped headers, alt t
    The no-JS fallback must actually contain the evidence. */
 let fallbackHits = 0;
 for (const [name, src] of Object.entries(pageRaw)) {
-  if (name === 'visual/index.html') {
+  if (name === 'index.html') {
     if (!/class="visual-access-table"[\s\S]*?<table>/.test(src)) {
       fallbackHits++; fail('no-js-fallback', name, 'the visual map has no semantic list/table alternative');
     }
@@ -355,6 +356,36 @@ for (const mode of ['timeline', 'tree', 'stack', 'parts']) {
   }
 }
 if (!fallbackHits) pass('no-js-fallback — receipts, map alternative, the 155-row table and all four record views are in the static HTML');
+
+/* -------------------------------------------------------------- public IA
+   The public reader journey has only the overview and network. The retained
+   records page remains buildable for editorial use but must not be linked. */
+let iaHits = 0;
+for (const name of ['index.html', 'network/index.html']) {
+  const src = pageRaw[name];
+  for (const [re, detail] of [
+    [/href="[^"]*\/records\//i, 'links to the detached records page'],
+    [/Expanded Plate-Reader Use/i, 'uses the removed long-form navigation label'],
+    [/>\s*The Record\s*</i, 'uses the removed records navigation label'],
+    [/View the full evidence record/i, 'uses the removed evidence-record CTA'],
+    [/Explore the Configuration/i, 'uses the retired configuration label']
+  ]) {
+    if (re.test(src)) { iaHits++; fail('public-information-architecture', name, detail); }
+  }
+}
+if (!/WHERE DES MOINES PLATE DATA CAN GO/.test(pageRaw['index.html'])) {
+  iaHits++; fail('public-information-architecture', 'index.html', 'the canonical root is not the visual overview');
+}
+if (!/href="\/infographics\/des-moines-alpr\/network\/"[^>]*>Explore the network/i.test(pageRaw['index.html'])) {
+  iaHits++; fail('public-information-architecture', 'index.html', 'the overview lacks its Explore the network link');
+}
+if (!/href="\/infographics\/des-moines-alpr\/"[^>]*>Overview/i.test(pageRaw['network/index.html'])) {
+  iaHits++; fail('public-information-architecture', 'network/index.html', 'the network lacks a clear Overview link');
+}
+if (!/location\.replace\('\/infographics\/des-moines-alpr\/'/.test(redirectRaw)) {
+  iaHits++; fail('public-information-architecture', 'visual/index.html', 'the legacy visual route does not redirect to the canonical overview');
+}
+if (!iaHits) pass('public-information-architecture — overview and network are the only linked exhibit routes; legacy visual redirects');
 
 /* ----------------------------------------------------------------- rule 11
    Prepublication posture. While the exhibit is a draft it must not be

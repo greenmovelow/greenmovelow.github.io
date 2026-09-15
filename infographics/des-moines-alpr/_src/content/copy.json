@@ -233,7 +233,7 @@
  ],
 
  "network_page": {
-  "title": "Explore the configuration",
+  "title": "Explore the network",
   "dek": "Every relationship in the City of Des Moines' August 2026 VehicleManager sharing export, as the reader chooses to see it. These are settings, not movements.",
   "standing_note": "Nothing on this page is animated to suggest motion. Counterparties are drawn as open rings, never as filled location dots. No connector is drawn by default. Select a ring to show that one relationship; select a state's label to filter to that state. When you select an agency, one connector appears at once, without direction and without motion, labelled “configured to share.”",
   "table_caption": "All 155 rows of the August 2026 sharing export, verbatim. This table is the accessible equivalent of the tile grid above and works without JavaScript."

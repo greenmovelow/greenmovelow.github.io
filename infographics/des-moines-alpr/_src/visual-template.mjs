@@ -1,9 +1,8 @@
 /* ============================================================================
-   RDP — Des Moines ALPR premium visual companion.
+   RDP — Des Moines ALPR visual overview.
 
-   This fourth route is intentionally lighter than the evidence exhibit. It
-   reuses the adjudicated export, counts and Page Nine facsimile while sending
-   readers to /network/ and /records/ for row-level evidence.
+   This canonical front page reuses the adjudicated export, counts and Page Nine
+   facsimile while sending readers to the detailed /network/ explorer.
 
    Relationship paths are not emitted here. visual.js creates one whole,
    undirected path only after a reader selects a represented state.
@@ -111,7 +110,11 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
     <p class="map-caveat"><span aria-hidden="true">i</span> Map shows configured detection-sharing relationships, not searches, views or transfers.</p>
     <p class="map-context"><span>${totals.non_iowa} outside Iowa</span><span>${totals.federal_typed} rows typed Federal</span><span>${totals.receiving} also configured as receiving</span></p>
     <p class="hero-source">The August 2026 export records sharing settings. It does not show whether any particular agency searched, viewed or received a Des Moines plate record.</p>
-    <a class="visual-cta" href="/infographics/des-moines-alpr/network/">Explore all relationships <span aria-hidden="true">&rarr;</span></a>
+    <nav class="visual-cta-group" aria-label="Continue reading">
+      <a class="visual-cta visual-cta--primary" href="${esc(copy.exhibit.article_link.url)}">${esc(copy.exhibit.article_link.label)} <span aria-hidden="true">&rarr;</span></a>
+      <a class="visual-cta visual-cta--secondary" href="/infographics/des-moines-alpr/network/">Explore the network <span aria-hidden="true">&rarr;</span></a>
+      <a class="visual-cta visual-cta--tertiary" href="${esc(copy.exhibit.subscribe_link.url)}" rel="noopener">${esc(copy.exhibit.subscribe_link.label)} <span aria-hidden="true">&rarr;</span></a>
+    </nav>
   </div>
   <p id="map-status" class="sr-only" role="status" aria-live="polite">Showing all represented jurisdictions.</p>
   ${mapTable(stateCounts, esc)}
@@ -160,10 +163,9 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
     <h2 id="page-nine-h">PAGE NINE</h2>
     <blockquote>&ldquo;by selecting this option within Vigilant VehicleManager&rdquo;</blockquote>
     <p>Page 9 of the city-produced contract packet describes sharing as a setting inside VehicleManager.</p>
-    <a href="/infographics/des-moines-alpr/records/">View the full evidence record <span aria-hidden="true">&rarr;</span></a>
   </div>
   <figure class="document-stage reveal">
-    <div class="document-frame"><img src="../assets/facsimiles/R-MVA-4.5.png" width="1334" height="918" loading="lazy" decoding="async" alt="Unaltered region crop from Page 9 of the City-produced contract packet, including sections 4.4 and 4.5 of the Mobile Video Addendum."></div>
+    <div class="document-frame"><img src="assets/facsimiles/R-MVA-4.5.png" width="1334" height="918" loading="lazy" decoding="async" alt="Unaltered region crop from Page 9 of the City-produced contract packet, including sections 4.4 and 4.5 of the Mobile Video Addendum."></div>
     <figcaption>Source: 23-1629.pdf, page 9. Straight 200 dpi region crop; no pixel altered.</figcaption>
   </figure>
 </section>
@@ -188,23 +190,23 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
     <div class="record-unknown reveal"><h3>DARK / UNRESOLVED</h3><ul><li>Actual mobile travel</li><li>Total scan volume</li><li>Complete search history</li><li>Individual record views</li><li>Most relationship start dates</li></ul></div>
   </div>
   <nav class="visual-end-links reveal" aria-label="Continue reading">
-    <a href="${esc(copy.exhibit.article_link.url)}">READ THE INVESTIGATION <span aria-hidden="true">&rarr;</span></a>
+    <a href="${esc(copy.exhibit.article_link.url)}">READ THE FULL STORY <span aria-hidden="true">&rarr;</span></a>
     <a href="/infographics/des-moines-alpr/network/">EXPLORE THE NETWORK <span aria-hidden="true">&rarr;</span></a>
-    <a href="/infographics/des-moines-alpr/records/">VIEW THE FULL EVIDENCE RECORD <span aria-hidden="true">&rarr;</span></a>
+    <a href="${esc(copy.exhibit.subscribe_link.url)}" rel="noopener">SUBSCRIBE &mdash; 7 DAYS FREE <span aria-hidden="true">&rarr;</span></a>
   </nav>
 </section>`;
 
   return head({
     title: 'Where Des Moines plate data can go | Restoring Democracy\'s Promise',
     description: 'A visual companion showing mobile plate readers, searchable observations and configured sharing in Des Moines.',
-    canonical: 'https://restoring-democracy.org/infographics/des-moines-alpr/visual/',
+    canonical: 'https://restoring-democracy.org/infographics/des-moines-alpr/',
     sections: [],
-    key: 'visual',
-    draftNote: 'Not published. Visual companion aligned to the final publication candidate, 15 September 2026.',
-    extraStyles: '<link rel="stylesheet" href="../assets/visual.css">'
+    key: 'overview',
+    draftNote: 'Not published. Visual overview aligned to the final publication candidate, 15 September 2026.',
+    extraStyles: '<link rel="stylesheet" href="assets/visual.css">'
   }) + body + foot({
     receiptIds: [],
     omitReceipts: true,
-    extraScripts: '<script src="../assets/exhibit.js" defer></script>\n<script src="../assets/visual.js" defer></script>'
+    extraScripts: '<script src="assets/exhibit.js" defer></script>\n<script src="assets/visual.js" defer></script>'
   });
 }
