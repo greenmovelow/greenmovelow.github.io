@@ -261,6 +261,66 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   await ctx.close();
 }
 
+/* ------------------------------------------ 3b. metadata and share URLs */
+{
+  const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
+  const page = await ctx.newPage();
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'share', {
+      configurable: true,
+      value: async (data) => { window.__shareData = data; }
+    });
+  });
+
+  const expected = [
+    {
+      route: '/?utm_source=qa#map',
+      title: "Where Des Moines Plate Data Can Go | Restoring Democracy's Promise",
+      description: 'An interactive visual investigation of Des Moines’ plate-reader system—mobile and fixed collection, searchable vehicle-location data, and 155 configured sharing relationships across 36 states and the District of Columbia.',
+      canonical: 'https://restoring-democracy.org/infographics/des-moines-alpr/'
+    },
+    {
+      route: '/network/?utm_source=qa#rows',
+      title: "Explore the Des Moines Plate-Reader Network | Restoring Democracy's Promise",
+      description: 'Explore 155 configured detection-sharing relationships—not actual searches or transfers—in Des Moines’ August 2026 VehicleManager export, spanning 36 states and the District of Columbia.',
+      canonical: 'https://restoring-democracy.org/infographics/des-moines-alpr/network/'
+    }
+  ];
+
+  for (const item of expected) {
+    await page.goto(BASE + item.route, { waitUntil: 'networkidle' });
+    assert(await page.title() === item.title, `metadata: route-specific title · ${item.canonical}`);
+    assert(await page.locator('meta[name="description"]').getAttribute('content') === item.description,
+      `metadata: route-specific description · ${item.canonical}`);
+    assert(await page.locator('link[rel="canonical"]').count() === 1 &&
+      await page.locator('link[rel="canonical"]').getAttribute('href') === item.canonical,
+      `metadata: one production canonical · ${item.canonical}`);
+    assert(await page.locator('meta[property="og:image"]').getAttribute('content') ===
+      'https://restoring-democracy.org/infographics/des-moines-alpr/assets/og/dsm_alpr_og.png',
+      `metadata: approved social image · ${item.canonical}`);
+    assert(await page.locator('meta[name="twitter:card"]').getAttribute('content') === 'summary_large_image',
+      `metadata: Twitter large card · ${item.canonical}`);
+    const schema = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
+    assert(schema['@type'] === 'WebApplication' && schema.url === item.canonical,
+      `metadata: route-specific WebApplication JSON-LD · ${item.canonical}`);
+
+    await page.locator('#share-btn').click();
+    const shared = await page.evaluate(() => window.__shareData);
+    assert(shared.url === item.canonical && shared.title === item.title,
+      `share button uses canonical URL without preview/query/hash · ${item.canonical}`,
+      JSON.stringify(shared));
+  }
+
+  const imageOk = await page.evaluate(async () => {
+    const image = new Image();
+    image.src = '/infographics/des-moines-alpr/assets/og/dsm_alpr_og.png';
+    await image.decode();
+    return image.naturalWidth === 1200 && image.naturalHeight === 630;
+  });
+  assert(imageOk, 'approved social image loads at 1200×630');
+  await ctx.close();
+}
+
 /* ------------------------------------------------------- 4. records page */
 {
   const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });

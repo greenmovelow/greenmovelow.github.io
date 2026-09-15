@@ -197,8 +197,8 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
 </section>`;
 
   return head({
-    title: 'Where Des Moines plate data can go | Restoring Democracy\'s Promise',
-    description: 'A visual companion showing mobile plate readers, searchable observations and configured sharing in Des Moines.',
+    title: 'Where Des Moines Plate Data Can Go | Restoring Democracy\'s Promise',
+    description: 'An interactive visual investigation of Des Moines’ plate-reader system—mobile and fixed collection, searchable vehicle-location data, and 155 configured sharing relationships across 36 states and the District of Columbia.',
     canonical: 'https://restoring-democracy.org/infographics/des-moines-alpr/',
     sections: [],
     key: 'overview',

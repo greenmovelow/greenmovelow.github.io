@@ -21,18 +21,20 @@
   if (shareBtn) {
     var shareLabel = document.getElementById('share-label');
     shareBtn.addEventListener('click', function () {
-      var data = { title: document.title, url: window.location.href };
+      var canonical = document.querySelector('link[rel="canonical"]');
+      var shareUrl = canonical && canonical.href ? canonical.href : window.location.href;
+      var data = { title: document.title, url: shareUrl };
       if (navigator.share) {
         navigator.share(data).catch(function () {});
       } else if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(window.location.href).then(function () {
+        navigator.clipboard.writeText(shareUrl).then(function () {
           if (!shareLabel) return;
           var t = shareLabel.textContent;
           shareLabel.textContent = 'Copied';
           setTimeout(function () { shareLabel.textContent = t; }, 1600);
-        }).catch(function () { window.prompt('Copy this link:', window.location.href); });
+        }).catch(function () { window.prompt('Copy this link:', shareUrl); });
       } else {
-        window.prompt('Copy this link:', window.location.href);
+        window.prompt('Copy this link:', shareUrl);
       }
     });
   }

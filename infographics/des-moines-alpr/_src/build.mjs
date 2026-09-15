@@ -143,6 +143,33 @@ function storyLinks() {
   return parts.length ? `<nav class="story-links" aria-label="Story actions">${parts.join('')}</nav>` : '';
 }
 
+const SOCIAL_IMAGE = 'https://restoring-democracy.org/infographics/des-moines-alpr/assets/og/dsm_alpr_og.png';
+const SOCIAL_IMAGE_ALT = 'Editorial illustration of a roadside camera overlooking a city, with a network motif representing configured data-sharing relationships.';
+
+function structuredData({ title, description, canonical, key }) {
+  if (!['overview', 'network'].includes(key)) return '';
+  const name = title.replace(/ \| Restoring Democracy's Promise$/, '');
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name,
+    applicationCategory: 'EducationalApplication',
+    description,
+    operatingSystem: 'Any',
+    url: canonical,
+    image: SOCIAL_IMAGE,
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    author: { '@type': 'Organization', name: "Restoring Democracy's Promise" },
+    publisher: {
+      '@type': 'NewsMediaOrganization',
+      name: "Restoring Democracy's Promise",
+      url: 'https://restoring-democracy.org/'
+    }
+  };
+  return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2).replace(/</g, '\\u003c')}\n</script>`;
+}
+
 function head({ title, description, canonical, sections, key, extraStyles = '', draftNote = 'Not published. Aligned to article draft v0.4.' }) {
   const depth = key === 'index' || key === 'overview' ? '' : '../';
   return `<!DOCTYPE html>
@@ -155,21 +182,25 @@ function head({ title, description, canonical, sections, key, extraStyles = '', 
 <!-- PROVISIONAL: unpublished prototype. Indexing is disabled until the exhibit is cleared for publication. -->
 <meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="${esc(canonical)}">
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:site_name" content="Restoring Democracy's Promise">
 <meta property="og:url" content="${esc(canonical)}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://restoring-democracy.org/infographics/des-moines-alpr/assets/og/des-moines-alpr-og-1200x630.jpg">
-<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image" content="${SOCIAL_IMAGE}">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Editorial illustration of a plate-reading camera overlooking a rain-darkened city and a static network of configured relationships.">
+<meta property="og:image:alt" content="${esc(SOCIAL_IMAGE_ALT)}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://restoring-democracy.org/infographics/des-moines-alpr/assets/og/des-moines-alpr-og-1200x630.jpg">
-<meta name="twitter:image:alt" content="Editorial illustration of a plate-reading camera overlooking a rain-darkened city and a static network of configured relationships.">
+<meta name="twitter:url" content="${esc(canonical)}">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(description)}">
+<meta name="twitter:image" content="${SOCIAL_IMAGE}">
+<meta name="twitter:image:alt" content="${esc(SOCIAL_IMAGE_ALT)}">
 <meta name="theme-color" content="#2d5c4f">
+${structuredData({ title, description, canonical, key })}
 <link rel="icon" type="image/png" href="/assets/rdp_logo_gold_on_green_bg.png">
 <!-- Site-wide shell styles first, then the exhibit's own. The shared
      stylesheet carries the masthead, navigation and footer; everything
@@ -866,8 +897,8 @@ function buildNetwork() {
 window.RDP_TILES = ${JSON.stringify(tiles.tiles)};`;
 
   return head({
-    title: `Explore the network — Des Moines ALPR | Restoring Democracy's Promise`,
-    description: copy.network_page.dek,
+    title: `Explore the Des Moines Plate-Reader Network | Restoring Democracy's Promise`,
+    description: 'Explore 155 configured detection-sharing relationships—not actual searches or transfers—in Des Moines’ August 2026 VehicleManager export, spanning 36 states and the District of Columbia.',
     canonical: 'https://restoring-democracy.org/infographics/des-moines-alpr/network/',
     sections: [{ id: 'explorer', label: 'Explorer' }, { id: 'rows', label: 'All 155 rows' }],
     key: 'network'

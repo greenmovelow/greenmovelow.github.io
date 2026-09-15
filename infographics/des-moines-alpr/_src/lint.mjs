@@ -387,6 +387,68 @@ if (!/location\.replace\('\/infographics\/des-moines-alpr\/'/.test(redirectRaw))
 }
 if (!iaHits) pass('public-information-architecture — overview and network are the only linked exhibit routes; legacy visual redirects');
 
+/* ---------------------------------------------------------- metadata / SEO
+   Keep the two reader-facing routes distinct while sharing the approved card. */
+let metaHits = 0;
+const socialImage = 'https://restoring-democracy.org/infographics/des-moines-alpr/assets/og/dsm_alpr_og.png';
+const socialAlt = 'Editorial illustration of a roadside camera overlooking a city, with a network motif representing configured data-sharing relationships.';
+const metaExpected = {
+  'index.html': {
+    title: "Where Des Moines Plate Data Can Go | Restoring Democracy's Promise",
+    description: 'An interactive visual investigation of Des Moines’ plate-reader system—mobile and fixed collection, searchable vehicle-location data, and 155 configured sharing relationships across 36 states and the District of Columbia.',
+    canonical: 'https://restoring-democracy.org/infographics/des-moines-alpr/'
+  },
+  'network/index.html': {
+    title: "Explore the Des Moines Plate-Reader Network | Restoring Democracy's Promise",
+    description: 'Explore 155 configured detection-sharing relationships—not actual searches or transfers—in Des Moines’ August 2026 VehicleManager export, spanning 36 states and the District of Columbia.',
+    canonical: 'https://restoring-democracy.org/infographics/des-moines-alpr/network/'
+  }
+};
+for (const [name, expected] of Object.entries(metaExpected)) {
+  const src = pageRaw[name];
+  const checks = [
+    [`<title>${expected.title}</title>`, 'title'],
+    [`<meta name="description" content="${expected.description}">`, 'meta description'],
+    [`<link rel="canonical" href="${expected.canonical}">`, 'canonical URL'],
+    [`<meta property="og:url" content="${expected.canonical}">`, 'Open Graph URL'],
+    [`<meta property="og:title" content="${expected.title}">`, 'Open Graph title'],
+    [`<meta property="og:description" content="${expected.description}">`, 'Open Graph description'],
+    [`<meta property="og:image" content="${socialImage}">`, 'approved Open Graph image'],
+    ['<meta property="og:image:type" content="image/png">', 'Open Graph image type'],
+    ['<meta property="og:image:width" content="1200">', 'Open Graph image width'],
+    ['<meta property="og:image:height" content="630">', 'Open Graph image height'],
+    [`<meta property="og:image:alt" content="${socialAlt}">`, 'Open Graph image alt'],
+    ['<meta property="og:type" content="website">', 'Open Graph type'],
+    ['<meta name="twitter:card" content="summary_large_image">', 'Twitter large card'],
+    [`<meta name="twitter:url" content="${expected.canonical}">`, 'Twitter URL'],
+    [`<meta name="twitter:title" content="${expected.title}">`, 'Twitter title'],
+    [`<meta name="twitter:description" content="${expected.description}">`, 'Twitter description'],
+    [`<meta name="twitter:image" content="${socialImage}">`, 'Twitter image'],
+    [`<meta name="twitter:image:alt" content="${socialAlt}">`, 'Twitter image alt']
+  ];
+  for (const [needle, label] of checks) {
+    if (!src.includes(needle)) { metaHits++; fail('metadata-seo', name, `${label} is missing or stale`); }
+  }
+  if ((src.match(/<link rel="canonical"/g) || []).length !== 1) {
+    metaHits++; fail('metadata-seo', name, 'expected exactly one canonical link');
+  }
+  if (!/<script type="application\/ld\+json">[\s\S]*?"@type": "WebApplication"[\s\S]*?<\/script>/.test(src)) {
+    metaHits++; fail('metadata-seo', name, 'WebApplication JSON-LD is missing');
+  }
+  if (/\/visual\/|des-moines-alpr-og-1200x630\.jpg/.test(src.slice(0, src.indexOf('</head>')))) {
+    metaHits++; fail('metadata-seo', name, 'head metadata references a deprecated route or stale social crop');
+  }
+}
+try {
+  const image = readFileSync(join(OUT, 'assets', 'og', 'dsm_alpr_og.png'));
+  if (image.toString('ascii', 1, 4) !== 'PNG' || image.readUInt32BE(16) !== 1200 || image.readUInt32BE(20) !== 630) {
+    metaHits++; fail('metadata-seo', 'assets/og/dsm_alpr_og.png', 'approved image is not a 1200×630 PNG');
+  }
+} catch {
+  metaHits++; fail('metadata-seo', 'assets/og/dsm_alpr_og.png', 'approved image is missing');
+}
+if (!metaHits) pass('metadata-seo — route-specific titles/descriptions, production canonicals, approved 1200×630 PNG, social cards and JSON-LD');
+
 /* ----------------------------------------------------------------- rule 11
    Prepublication posture. While the exhibit is a draft it must not be
    indexable, must not appear in the sitemap, and must not link to an article
