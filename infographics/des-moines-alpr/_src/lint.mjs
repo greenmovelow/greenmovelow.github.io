@@ -116,6 +116,21 @@ for (const [name, text] of Object.entries(pageText)) {
 }
 if (!bannedHits) pass('banned-language — no banned verb, causal bridge or intent claim in rendered text');
 
+/* -------------------------------------------------------------- UI copy
+   Source access is presented as a documentary note, never as a challenge or
+   an unexplained question-mark control. */
+let sourceNoteHits = 0;
+const defensiveSourcePrompt = new RegExp('How do you ' + 'know that\\??', 'i');
+for (const [name, raw] of [...Object.entries(pageRaw), ...Object.entries(assetRaw)]) {
+  if (defensiveSourcePrompt.test(raw)) {
+    sourceNoteHits++; fail('source-note-language', name, 'defensive source-trigger wording remains');
+  }
+  if (/\.receipt-chip::before\s*\{[^}]*content\s*:\s*["']\?["']/i.test(raw)) {
+    sourceNoteHits++; fail('source-note-language', name, 'bare question-mark source trigger remains');
+  }
+}
+if (!sourceNoteHits) pass('source-note-language — triggers and drawer use the documentary source-note system');
+
 /* ------------------------------------------------------------------ rule 2
    The jurisdiction count is locked. "37 states" double-counts D.C. */
 let stateHits = 0;

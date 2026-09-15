@@ -211,9 +211,16 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   await page.goto(BASE + '/', { waitUntil: 'networkidle' });
 
   /* receipt chip */
-  await page.locator('button[data-receipt="R-MVA-4.5"]').first().click();
+  const receiptTrigger = page.locator('button[data-receipt="R-MVA-4.5"]').first();
+  assert((await receiptTrigger.innerText()).trim() === 'Source note',
+    'receipt trigger uses the source-note label');
+  assert(/^Source note:/.test(await receiptTrigger.getAttribute('aria-label')),
+    'receipt trigger carries a claim-specific source-note accessible name');
+  await receiptTrigger.click();
   await page.waitForTimeout(200);
   const rd = await page.locator('#receipt-drawer .rd-inner').innerText();
+  assert((await page.locator('#receipt-drawer .rd-eyebrow').first().innerText()).trim() === 'SOURCE NOTE',
+    'receipt drawer uses the source-note heading');
   assert(/by selecting this option within Vigilant VehicleManager/.test(rd),
     'page-9 receipt carries the verbatim clause');
   assert(/page 9 of the 25-page clerk/i.test(rd), 'receipt pinpoints page 9');

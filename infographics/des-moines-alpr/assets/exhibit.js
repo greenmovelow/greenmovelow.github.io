@@ -110,14 +110,16 @@
     if (r.related_receipts && r.related_receipts.length) {
       related = r.related_receipts.map(function (id) {
         var rel = RECEIPTS[id];
-        return '<button type="button" class="receipt-chip" data-receipt="' + esc(id) + '">' +
-          '<span class="rc-label">' + esc(rel ? (rel.display_copy || rel.claim) : id) + '</span></button>';
+        var detail = rel ? (rel.display_copy || rel.claim) : id;
+        return '<button type="button" class="receipt-chip" data-receipt="' + esc(id) + '" ' +
+          'title="' + esc(detail) + '" aria-label="Source note: ' + esc(detail) + '">' +
+          '<span class="rc-label">Source note</span></button>';
       }).join('');
     }
 
     return '' +
       '<div class="rd-head">' +
-        '<div><p class="rd-eyebrow">How do you know that?</p>' +
+        '<div><p class="rd-eyebrow">SOURCE NOTE</p>' +
         '<p class="rd-eyebrow" style="color:var(--muted);letter-spacing:.08em">' + esc(r.receipt_id) + '</p></div>' +
         '<button type="button" class="rd-close" id="rd-close" aria-label="Close receipt">&times;</button>' +
       '</div>' +

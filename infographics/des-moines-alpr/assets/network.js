@@ -359,7 +359,7 @@
         '<td>' + esc(n.retention) + '</td>' +
         '<td class="num">' + n.xlsx_row + '</td>' +
         '<td><button type="button" class="receipt-chip" data-receipt="' + esc(n.receipt_id) + '">' +
-          '<span class="rc-label">Source row</span></button></td>' +
+          '<span class="rc-label">Source note</span></button></td>' +
         '</tr>';
     }).join('');
     tableBody.innerHTML = html;

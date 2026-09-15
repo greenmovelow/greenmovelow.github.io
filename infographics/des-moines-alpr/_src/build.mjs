@@ -104,24 +104,14 @@ function missingReceipt(id) {
   return RECEIPTS[id];
 }
 
-/* Chip faces are short so they stay legible at 390px; the accessible name and
-   the tooltip carry the full claim, and the drawer carries the whole receipt. */
-function shorten(s, max = 46) {
-  const t = String(s).replace(/\s+/g, ' ').trim();
-  if (t.length <= max) return t;
-  const cut = t.slice(0, max);
-  const sp = cut.lastIndexOf(' ');
-  return (sp > max * 0.6 ? cut.slice(0, sp) : cut).replace(/[,;:.—–-]$/, '') + '…';
-}
-
-/* A receipt chip: the only affordance for "how do you know that?" */
-function chip(id, labelOverride) {
+/* A compact source-note trigger; the accessible name and tooltip carry the
+   specific claim, and the drawer carries the whole receipt. */
+function chip(id) {
   const r = missingReceipt(id);
-  const full = labelOverride || r.display_copy || r.claim;
-  const face = shorten(labelOverride || r.display_copy || r.claim);
+  const full = r.display_copy || r.claim;
   return `<button type="button" class="receipt-chip" data-receipt="${esc(id)}"` +
-    ` title="${esc(full)}" aria-label="How do you know that? ${esc(full)}">` +
-    `<span class="rc-label">${esc(face)}</span></button>`;
+    ` title="${esc(full)}" aria-label="Source note: ${esc(full)}">` +
+    '<span class="rc-label">Source note</span></button>';
 }
 
 function chipRow(ids) {
@@ -704,7 +694,7 @@ function buildIndex() {
     <div style="display:grid;gap:1rem;margin-top:1rem">
       <div class="callout" style="margin:0"><h3>Terms for the 2026 export</h3><p>Relationships from the August 17, 2026 export are described as <em>configured</em>, <em>listed</em>, <em>selected</em>, <em>shown in the export</em> or <em>in Sharing status</em>: each is a setting recorded in the City&rsquo;s VehicleManager account.</p></div>
       <div class="callout" style="margin:0"><h3>Symbols</h3><p>Counterparties are open rings. A ring with an inner ring is also configured to receive; a dashed ring shows receiving as approval required; a dotted ring, declined; a struck ring carries an &ldquo;Inactive&rdquo; prefix. The filled node is Des Moines. A connector appears only when you select an agency, whole and undirected, labelled &ldquo;configured to share.&rdquo; Chain A is drawn with a square end-cap and a solid rule, Chain B with a round end-cap and a doubled rule.</p></div>
-      <div class="callout" style="margin:0"><h3>Sources and receipts</h3><p>Every sourced figure and quotation carries a <strong>?</strong> button that opens its receipt: the document, the date, the page or row, the verbatim text, and the limitation that travels with it. The same receipts are printed at the foot of this page so the exhibit reads without JavaScript and in print.</p></div>
+      <div class="callout" style="margin:0"><h3>Sources and receipts</h3><p>Every sourced figure and quotation carries a <strong>Source note</strong> button that opens its receipt: the document, the date, the page or row, the verbatim text, and the limitation that travels with it. The same receipts are printed at the foot of this page so the exhibit reads without JavaScript and in print.</p></div>
     </div>
     <p style="margin-top:1.4rem"><a href="/infographics/des-moines-alpr/records/#methodology">Method, definitions, corrections and sources &rarr;</a></p>
   </div>
@@ -853,7 +843,7 @@ function buildNetwork() {
             <td>${esc(n.detection_sharing)}</td><td>${esc(n.detection_receiving)}</td>
             <td class="raw">${esc(n.date_of_last_update)}</td><td>${esc(n.has_system)}</td><td>${esc(n.retention)}</td>
             <td class="num">${n.xlsx_row}</td>
-            <td><button type="button" class="receipt-chip" data-receipt="${esc(n.receipt_id)}"><span class="rc-label">Source row</span></button></td>
+            <td><button type="button" class="receipt-chip" data-receipt="${esc(n.receipt_id)}"><span class="rc-label">Source note</span></button></td>
           </tr>`).join('\n          ')}
         </tbody>
       </table>

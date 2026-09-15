@@ -240,7 +240,7 @@ p:last-child{ margin-bottom:0; }
 .callout p{ font-size:.95rem; }
 
 /* ============================================================================
-   EVIDENCE CHIPS + RECEIPT DRAWER  ("How do you know that?")
+   SOURCE NOTES + RECEIPT DRAWER
    ========================================================================= */
 
 .chip-row{ display:flex; flex-wrap:wrap; gap:.4rem; margin:1.1rem 0 0; min-width:0; }
@@ -259,7 +259,12 @@ p:last-child{ margin-bottom:0; }
   text-align:left; max-width:100%;
 }
 .receipt-chip:hover{ background:var(--paper-l2); border-color:var(--green); }
-.receipt-chip::before{ content:"?"; font-weight:700; color:var(--orange-ink); }
+.receipt-chip::before{
+  content:""; flex:none; width:.62rem; height:.76rem;
+  border:1px solid var(--orange-ink); border-radius:1px;
+  background:linear-gradient(to bottom, transparent 35%, var(--orange-ink) 36% 43%, transparent 44% 62%, var(--orange-ink) 63% 70%, transparent 71%);
+  opacity:.82;
+}
 .receipt-chip{ min-width:0; max-width:min(100%, 40ch); }
 .receipt-chip .rc-label{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
 
