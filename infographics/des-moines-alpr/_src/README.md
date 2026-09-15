@@ -14,6 +14,12 @@ opens on the 2021 change form, not on the council purchase.
 | `/infographics/des-moines-alpr/` | `index.html` | Narrative investigation, chapters 01–11 |
 | `/infographics/des-moines-alpr/network/` | `network/index.html` | Reader-controlled explorer for the Aug 2026 sharing export |
 | `/infographics/des-moines-alpr/records/` | `records/index.html` | Forensic record explorer + methodology, definitions, corrections, sources |
+| `/infographics/des-moines-alpr/visual/` | `visual/index.html` | Unlisted, noindex premium visual-companion experiment |
+
+The visual route is aligned to the September 15 final publication candidate.
+It is intentionally absent from the exhibit route switcher, site navigation and
+`sitemap.xml`; the other three routes remain aligned to their existing v0.4
+copy until a separate editorial update is requested.
 
 A fourth `/methodology/` route was considered and **not** built: the material
 (evidence grammar, definitions, corrections, sources, accessible tables) lives
@@ -24,7 +30,7 @@ they describe.
 ## Build
 
 ```
-node _src/build.mjs           # renders the three index.html files from data/ + content/
+node _src/build.mjs           # renders the four index.html files from data/ + content/
 node _src/lint.mjs            # editorial guardrails; exits non-zero on any failure
 node _src/lint.mjs --publish  # ALSO runs the publication gates (expected to fail while ROR is open)
 node _src/test.mjs            # browser pass at 390 / 768 / 1440 (needs a server on :8787)
@@ -67,6 +73,9 @@ assets/facsimiles/       page crops of produced records + provenance sidecars
 assets/exhibit.css       exhibit stylesheet (all three routes)
 assets/exhibit.js        receipt drawer, council switch, document stack, modes
 assets/network.js        the configuration explorer
+assets/visual.css        visual-companion styles and documented visual grammar
+assets/visual.js         state selection, scoped filtering and reveal enhancement
+assets/visual/           optimized generated scene assets with no factual labels
 ```
 
 **Nothing narrative is authored inside `build.mjs`.** Headline, dek, byline,
@@ -96,6 +105,8 @@ asserts the same totals again against the shipped JSON.
 3. a guarded figure (4.5%, 386, 155, 567) without its mandatory companion sentence
 4. any arrowhead, `stroke-dashoffset`, `animateMotion` or `offset-path` in any file
 5. a connector present in the served HTML (the default plane-3 state must have zero)
+   and, on `/visual/`, any relationship path before explicit state selection or
+   a selected path without its configuration-not-activity qualification
 6. a receipt trigger that does not resolve, or a receipt without a pinpoint,
    without a caveat (L2), or that never says what it does not establish (L5)
 7. a name-bearing field in any shipped data file

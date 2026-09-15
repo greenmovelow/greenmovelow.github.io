@@ -9,6 +9,9 @@
     "test": "node test.mjs"
   },
   "devDependencies": {
-    "playwright": "^1.63.0"
+    "d3-geo": "^3.1.1",
+    "playwright": "^1.63.0",
+    "topojson-client": "^3.1.0",
+    "us-atlas": "^3.0.1"
   }
 }

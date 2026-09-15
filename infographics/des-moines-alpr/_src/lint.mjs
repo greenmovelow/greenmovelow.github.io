@@ -19,9 +19,10 @@ const DATA = join(OUT, 'data');
 const PAGES = [
   ['index.html', join(OUT, 'index.html')],
   ['network/index.html', join(OUT, 'network', 'index.html')],
-  ['records/index.html', join(OUT, 'records', 'index.html')]
+  ['records/index.html', join(OUT, 'records', 'index.html')],
+  ['visual/index.html', join(OUT, 'visual', 'index.html')]
 ];
-const ASSETS = ['exhibit.css', 'exhibit.js', 'network.js']
+const ASSETS = ['exhibit.css', 'exhibit.js', 'network.js', 'visual.css', 'visual.js']
   .map((f) => [`assets/${f}`, join(OUT, 'assets', f)]);
 
 /* `node lint.mjs --publish` adds the publication gates. They are deliberately
@@ -193,6 +194,25 @@ for (const [name, src] of Object.entries(pageRaw)) {
 }
 if (!connHits) pass('default-no-connectors — the served HTML contains no connector; 155 rings, zero lines');
 
+/* ---------------------------------------------------------------- rule 5b
+   The visual companion may show one abstract relationship after explicit
+   state selection. It must not ship a default path or describe the path as an
+   event-level search, view or transfer. Existing route guardrails are unchanged. */
+let visualPathHits = 0;
+if (/data-relationship=/.test(pageRaw['visual/index.html'])) {
+  visualPathHits++; fail('visual-relationship-semantics', 'visual/index.html', 'a relationship path exists before reader selection');
+}
+if (!/addEventListener\('click',[\s\S]{0,120}selectState/.test(assetRaw['assets/visual.js'])) {
+  visualPathHits++; fail('visual-relationship-semantics', 'assets/visual.js', 'state selection is not explicitly click-triggered');
+}
+if (!/Configured relationship only[^.]*not a search, view or transfer/i.test(assetRaw['assets/visual.js'])) {
+  visualPathHits++; fail('visual-relationship-semantics', 'assets/visual.js', 'selected-path status lacks its configuration-not-activity qualification');
+}
+if (/mouseenter[\s\S]{0,160}(?:appendChild|selectState)/.test(assetRaw['assets/visual.js'])) {
+  visualPathHits++; fail('visual-relationship-semantics', 'assets/visual.js', 'hover creates a relationship path; explicit selection is required');
+}
+if (!visualPathHits) pass('visual-relationship-semantics — no default path; one whole undirected path only after explicit state selection');
+
 /* ------------------------------------------------------------------ rule 6
    Every receipt trigger must resolve to a receipt that exists and that carries
    both a caveat and a "what this does not establish" line. */
@@ -303,7 +323,13 @@ if (!a11yHits) pass('a11y — skip link, captioned tables, scoped headers, alt t
    The no-JS fallback must actually contain the evidence. */
 let fallbackHits = 0;
 for (const [name, src] of Object.entries(pageRaw)) {
-  if (!/class="module no-js-receipts"/.test(src)) { fallbackHits++; fail('no-js-fallback', name, 'no receipts fallback block'); }
+  if (name === 'visual/index.html') {
+    if (!/class="visual-access-table"[\s\S]*?<table>/.test(src)) {
+      fallbackHits++; fail('no-js-fallback', name, 'the visual map has no semantic list/table alternative');
+    }
+  } else if (!/class="module no-js-receipts"/.test(src)) {
+    fallbackHits++; fail('no-js-fallback', name, 'no receipts fallback block');
+  }
 }
 if (!/<tbody id="network-tbody">[\s\S]{5000,}/.test(pageRaw['network/index.html'])) {
   fallbackHits++; fail('no-js-fallback', 'network/index.html', 'the 155-row table is not rendered server-side');
@@ -313,7 +339,7 @@ for (const mode of ['timeline', 'tree', 'stack', 'parts']) {
     fallbackHits++; fail('no-js-fallback', 'records/index.html', `mode "${mode}" is not in the static HTML`);
   }
 }
-if (!fallbackHits) pass('no-js-fallback — receipts, the 155-row table and all four record views are in the static HTML');
+if (!fallbackHits) pass('no-js-fallback — receipts, map alternative, the 155-row table and all four record views are in the static HTML');
 
 /* ----------------------------------------------------------------- rule 11
    Prepublication posture. While the exhibit is a draft it must not be

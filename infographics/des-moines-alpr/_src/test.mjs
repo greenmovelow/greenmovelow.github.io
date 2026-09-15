@@ -49,11 +49,20 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
 
-  for (const [route, file] of [['/', 'index'], ['/network/', 'network'], ['/records/', 'records']]) {
+  for (const [route, file] of [['/', 'index'], ['/network/', 'network'], ['/records/', 'records'], ['/visual/', 'visual']]) {
     await page.goto(BASE + route, { waitUntil: 'networkidle' });
     await page.waitForTimeout(250);
     await page.screenshot({ path: join(SHOTS, `${file}-${name}.png`), fullPage: false });
-    if (name === 'desktop' || (name === 'mobile' && file === 'index')) {
+    if (name === 'desktop' || (name === 'mobile' && (file === 'index' || file === 'visual'))) {
+      if (file === 'visual') {
+        await page.evaluate(async () => {
+          for (let y = 0; y < document.documentElement.scrollHeight; y += Math.max(400, innerHeight * .7)) {
+            scrollTo({ top: y, behavior: 'instant' });
+            await new Promise((resolve) => setTimeout(resolve, 60));
+          }
+          scrollTo({ top: 0, behavior: 'instant' });
+        });
+      }
       await page.screenshot({ path: join(SHOTS, `${file}-${name}-full.png`), fullPage: true });
     }
     /* horizontal overflow check */
@@ -62,6 +71,53 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
     assert(overflow <= 1, `no horizontal overflow · ${file} @ ${name}`, `${overflow}px`);
   }
   assert(errors.length === 0, `no JS errors @ ${name}`, errors.slice(0, 2).join(' | '));
+  await ctx.close();
+}
+
+/* -------------------------------------- 1b. visual companion semantics */
+{
+  const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  await page.goto(BASE + '/visual/', { waitUntil: 'networkidle' });
+
+  assert(await page.locator('#visual-map .visual-state.is-configured').count() === 37,
+    'visual map renders 36 states plus D.C. from the export',
+    String(await page.locator('#visual-map .visual-state.is-configured').count()));
+  assert(await page.locator('#relationship-layer [data-relationship]').count() === 0,
+    'visual map default state has no relationship path');
+  const visualAssets = await page.evaluate(() => ({
+    fixed: getComputedStyle(document.querySelector('.fixed-panel')).backgroundImage,
+    street: getComputedStyle(document.querySelector('.street-frame')).backgroundImage,
+    loaded: performance.getEntriesByType('resource').map((entry) => entry.name)
+  }));
+  assert(/fixed-mobile\.webp/.test(visualAssets.fixed) && visualAssets.loaded.some((url) => /fixed-mobile\.webp/.test(url)),
+    'fixed/mobile production scene asset loads');
+  assert(/street-observation\.webp/.test(visualAssets.street) && visualAssets.loaded.some((url) => /street-observation\.webp/.test(url)),
+    'street-observation production scene asset loads');
+
+  await page.locator('#visual-map .visual-state[data-state="CA"]').click();
+  assert(await page.locator('#relationship-layer [data-relationship="configured"]').count() === 1,
+    'explicit state selection creates one relationship path');
+  const selectedPath = page.locator('#relationship-layer [data-relationship="configured"]');
+  assert(await selectedPath.getAttribute('marker-end') === null,
+    'selected relationship has no arrowhead');
+  const anim = await selectedPath.evaluate((el) => getComputedStyle(el).animationName);
+  assert(anim === 'none', 'no motion runs along the selected relationship', anim);
+  const selectedStatus = await page.locator('#map-status').innerText();
+  assert(/Configured relationship only/i.test(selectedStatus) && /not a search, view or transfer/i.test(selectedStatus),
+    'selected relationship is qualified as configuration, not activity', selectedStatus);
+
+  await page.locator('.scope-button[data-scope="iowa"]').click();
+  assert(await page.locator('#visual-map .visual-state.is-configured.is-in-scope').count() === 1,
+    'Iowa scope leaves exactly one represented state in scope');
+  await page.locator('.scope-button[data-scope="outside"]').click();
+  assert(await page.locator('#visual-map .visual-state.is-configured.is-in-scope').count() === 36,
+    'outside-Iowa scope leaves 35 states plus D.C. in scope');
+  await page.screenshot({ path: join(SHOTS, 'visual-outside-iowa.png'), fullPage: false });
+
+  assert(errors.length === 0, 'visual companion has no JS errors', errors.join(' | '));
   await ctx.close();
 }
 
@@ -296,6 +352,17 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
     .evaluate((el) => getComputedStyle(el).transitionDuration);
   assert(/^0s/.test(drawerTrans), 'reduced motion: drawer does not animate', drawerTrans);
   await page.screenshot({ path: join(SHOTS, 'network-reduced-motion.png') });
+
+  await page.goto(BASE + '/visual/', { waitUntil: 'networkidle' });
+  const reveal = page.locator('.visual-hero-copy');
+  const revealStyle = await reveal.evaluate((el) => ({
+    opacity: getComputedStyle(el).opacity,
+    transition: getComputedStyle(el).transitionDuration,
+    transform: getComputedStyle(el).transform
+  }));
+  assert(revealStyle.opacity === '1' && /^0s/.test(revealStyle.transition) && revealStyle.transform === 'none',
+    'visual reduced motion renders immediately with no transition', JSON.stringify(revealStyle));
+  await page.screenshot({ path: join(SHOTS, 'visual-reduced-motion.png') });
   await ctx.close();
 }
 
@@ -323,6 +390,14 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   const recText = await page.locator('body').innerText();
   assert(/Chronology/.test(recText) && /Parts list/.test(recText),
     'no-JS: record views are in the static HTML');
+
+  await page.goto(BASE + '/visual/', { waitUntil: 'domcontentloaded' });
+  assert(await page.locator('#visual-map .visual-state.is-configured').count() === 37,
+    'no-JS: all represented jurisdictions remain in the visual map');
+  assert(await page.locator('#relationship-layer [data-relationship]').count() === 0,
+    'no-JS: the visual map has no relationship path');
+  assert(await page.locator('.visual-access-table tbody tr').count() === 37,
+    'no-JS: the visual map has a 37-jurisdiction semantic table');
   await ctx.close();
 }
 

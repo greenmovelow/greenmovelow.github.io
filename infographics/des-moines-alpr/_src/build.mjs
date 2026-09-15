@@ -17,6 +17,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildVisualPage } from './visual-template.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = join(HERE, '..');
@@ -153,7 +154,7 @@ function storyLinks() {
   return parts.length ? `<nav class="story-links" aria-label="Story actions">${parts.join('')}</nav>` : '';
 }
 
-function head({ title, description, canonical, sections, key }) {
+function head({ title, description, canonical, sections, key, extraStyles = '', draftNote = 'Not published. Aligned to article draft v0.4.' }) {
   const depth = key === 'index' ? '' : '../';
   return `<!DOCTYPE html>
 <html lang="en">
@@ -177,7 +178,7 @@ function head({ title, description, canonical, sections, key }) {
      stylesheet carries the masthead, navigation and footer; everything
      specific to this exhibit's evidence grammar stays in exhibit.css. -->
 <link rel="stylesheet" href="/assets/css/styles.css">
-<link rel="stylesheet" href="${depth}assets/exhibit.css">
+<link rel="stylesheet" href="${depth}assets/exhibit.css">${extraStyles ? `\n${extraStyles}` : ''}
 </head>
 <body>
 <script>document.documentElement.classList.add('js');</script>
@@ -220,14 +221,14 @@ function head({ title, description, canonical, sections, key }) {
   </div>
 </nav>
 
-<p class="draft-banner"><b>PREPUBLICATION DRAFT</b> &nbsp;&middot;&nbsp; Not published. Aligned to article draft v0.4.</p>
+<p class="draft-banner"><b>PREPUBLICATION DRAFT</b> &nbsp;&middot;&nbsp; ${esc(draftNote)}</p>
 <header class="exhibit-chrome">
   <nav class="exhibit-nav routes" aria-label="Exhibit pages">
     <div class="exhibit-nav-inner">
       ${ROUTES.map((r) => `<a href="${r.href}"${r.key === key ? ' aria-current="page"' : ''}>${esc(r.label)}</a>`).join('\n      ')}
     </div>
   </nav>
-  ${sections && sections.length ? `<nav class="exhibit-nav sections" aria-label="Sections on this page">
+${sections && sections.length ? `  <nav class="exhibit-nav sections" aria-label="Sections on this page">
     <div class="exhibit-nav-inner">
       ${sections.map((sec) => `<a href="#${sec.id}">${esc(sec.label)}</a>`).join('\n      ')}
     </div>
@@ -265,7 +266,7 @@ function noJsReceipts(ids) {
 </section>`;
 }
 
-function foot({ receiptIds, extraScripts, inlineData }) {
+function foot({ receiptIds, extraScripts, inlineData, omitReceipts = false }) {
   return `</main>
 
 <div class="rd-scrim" id="receipt-scrim" data-open="false"></div>
@@ -274,7 +275,7 @@ function foot({ receiptIds, extraScripts, inlineData }) {
   <div class="rd-inner"></div>
 </aside>
 
-${noJsReceipts(receiptIds)}
+${omitReceipts ? '' : noJsReceipts(receiptIds)}
 
 <footer class="bg-brand-offblack text-brand-sand py-10 px-4">
   <div class="max-w-6xl mx-auto">
@@ -1175,11 +1176,15 @@ function buildRecords() {
 /* ------------------------------------------------------------------- main */
 mkdirSync(join(OUT, 'network'), { recursive: true });
 mkdirSync(join(OUT, 'records'), { recursive: true });
+mkdirSync(join(OUT, 'visual'), { recursive: true });
 
 const outputs = [
   [join(OUT, 'index.html'), buildIndex()],
   [join(OUT, 'network', 'index.html'), buildNetwork()],
-  [join(OUT, 'records', 'index.html'), buildRecords()]
+  [join(OUT, 'records', 'index.html'), buildRecords()],
+  [join(OUT, 'visual', 'index.html'), buildVisualPage({
+    head, foot, esc, stateCounts, nodes, platform, copy
+  })]
 ];
 
 for (const [path, html] of outputs) {
