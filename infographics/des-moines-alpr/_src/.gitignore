@@ -1,8 +1,0 @@
-node_modules/
-
-# Regenerable review artefacts: `npm test` rewrites every file in screens/.
-# Kept out of the site repo so 6 MB of PNGs do not enter its history.
-screens/
-
-# scratch renders used when choosing facsimile crop boxes
-_faxtmp/
