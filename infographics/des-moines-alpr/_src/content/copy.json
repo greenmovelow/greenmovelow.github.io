@@ -1,0 +1,285 @@
+{
+ "_README": "ALL on-screen exhibit prose lives here. Nothing narrative is authored inside build templates. Aligned to article draft v0.4 (2026-09-11): the narrative order below follows the article's movements, and the article controls where it conflicts with the September 2 concept deck. Strings marked PROVISIONAL are expected to change before publication. Banned verbs and the three tightened formulations are enforced by _src/lint.mjs against the rendered HTML.",
+ "_aligned_to": "01_PAGE_NINE_DRAFT_v0_4.md · 03_DES_MOINES_ALPR_DRAFT_SOURCE_LEDGER_v0_2.md",
+
+ "exhibit": {
+  "working_title": "Expanded plate-reader use",
+  "headline": "Des Moines’ Plate-Reader Expansion",
+  "dek": "How mobile plate readers and a commercially sourced vehicle-location platform settled into routine Des Moines policing — and how little of that a resident could see when the city asked what it could afford to keep.",
+  "byline": "Timothy Tucker",
+  "byline_note": "From article draft v0.4.",
+  "date_display": "Publication expected the week of 14 September 2026",
+  "date_note": "PROVISIONAL — replace with the publication date once set.",
+  "kicker": "RDP Investigation",
+  "kicker_topic": "Des Moines ALPR",
+  "meta_description": "How mobile plate readers and a commercially sourced vehicle-location platform settled into routine Des Moines policing, and how little of that a resident could see when the city asked what to cut. An interactive companion to RDP's Des Moines ALPR investigation.",
+  "article_link": {
+   "enabled": true,
+   "label": "Read the full story",
+   "url": "https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader",
+   "note": "Story URL supplied by the editor on 2026-09-11."
+  },
+  "subscribe_link": {
+   "enabled": true,
+   "label": "Subscribe — 7 days free",
+   "url": "https://investigations.restoring-democracy.org/fall_signal_drop/"
+  },
+  "updates_block": {
+   "enabled": false,
+   "heading": "Updates and corrections",
+   "items": []
+  }
+ },
+
+ "right_of_response": {
+  "heading": "Right of response",
+  "body": "The City of Des Moines, the Des Moines Police Department, Motorola Solutions, Sourcewell and the Houston-Galveston Area Council were sent detailed questions, with a deadline of 5:00 p.m. Central, Friday, September 11, 2026. Responses are pending; any answer received will be reflected here and in the article.",
+  "status": "pending",
+  "deadline_display": "5:00 p.m. Central, Friday, September 11, 2026",
+  "note": "EDITORIALLY OWNED — patch this block only. Do not summarise, characterise or anticipate a response that has not been received."
+ },
+
+ "standing": {
+  "how_to_read": "This exhibit follows the documentary record. Every sourced figure and quotation opens the underlying document, date, page or row, and relevant limitation. The exhibit compares the 2023 procurement record with the platform's August 2026 configuration.",
+  "no_dates": "The export records the configuration on August 17, 2026; 151 of 155 sharing rows contain no usable date.",
+  "clerk_file_caveat": "The City produced this 25-page roll-call file in August 2026. Two documents in it are dated after the vote. The production does not identify which pages were distributed to council members beforehand.",
+  "legend_line": "Open rings and dashed connectors show settings in the City's own platform export. They do not show that any plate record was sent or viewed."
+ },
+
+ "chapters": [
+  {
+   "id": "ch01-mistakenly",
+   "number": "01",
+   "kicker": "The cooperative vehicle",
+   "heading": "“Mistakenly left off”",
+   "body": "On September 10, 2021, a vice president at Motorola Solutions signed a two-page form and sent it to a purchasing cooperative in Staples, Minnesota. It is the routine instrument by which a vendor adds items to a cooperative purchasing contract — the kind of contract that lets a city in Iowa buy from a company in Illinois without running its own bid. Field 1 asks what is changing. The answer, in its entirety, was two sentences.",
+   "consequence": "Field 3 asks the vendor to “Describe how the product additions fit within the scope of the original RFP.” The answer, complete, is eleven words: “The LPR is a key component of the WatchGuard Mobile Video System.”",
+   "receipts": ["R-SW-PNP-2021-09-14", "R-SW-PNP-BOX3", "R-SW-SCOPE-RULE", "R-SW-RFP-010720", "R-SW-PNP-SIG"],
+   "graphic": "change-form"
+  },
+  {
+   "id": "ch02-item-32",
+   "number": "02",
+   "kicker": "The vote",
+   "heading": "Item 32 of 36",
+   "body": "The Des Moines City Council met on the evening of Monday, November 20, 2023. Its third act of the night was to approve the consent agenda — items 3 through 38, thirty-six items, adopted in a single vote, 7–0. The agenda's own footnote calls them “routine items … enacted by one roll call vote without separate discussion unless … Council requests an item be removed to be considered separately.”",
+   "consequence": "Item 32 was not removed. It approved $1,500,080 for M500 in-car video systems and Video Manager under a Sourcewell master agreement, and authorised the Mayor to execute a short form agreement and addendum already on file with the City Clerk.",
+   "receipts": ["R-CONSENT-23-1597", "R-ITEM-32", "R-RC-23-1629-OP1", "R-RC-23-1629-OP2", "R-RC-23-1629-BID"],
+   "graphic": "resolution"
+  },
+  {
+   "id": "ch03-summary",
+   "number": "03",
+   "kicker": "The summary",
+   "heading": "What the council-facing summary described",
+   "body": "The staff document supporting the item, Council Communication 23-519, described the proposition as “purchasing upgraded in-car video systems with installation, implementation, and video evidence management software.” Its synopsis explains why: the existing equipment “has reached the end of supported life,” the replacement has “enhanced 4K camera functions,” and the software integrates body-worn and in-car video into “a single encrypted file which automatically uploads from the field.”",
+   "consequence": "The M500 is an in-car video system, VideoManager EL is video evidence management software, and the body-worn integration was real. And across the resolution and the council communication — pages 1 to 4 — there is no occurrence of ALPR, LPR, license plate, Vigilant, LEARN, PlateSearch, VehicleManager, hot list, retention or data sharing.",
+   "receipts": ["R-CC-23-519-HEAD", "R-CC-23-519-SYN", "R-RC-ABSENT-TERMS", "R-POSTING-COPY-32"],
+   "graphic": "summary"
+  },
+  {
+   "id": "ch04-stack",
+   "number": "04",
+   "kicker": "The document stack",
+   "heading": "Twenty-five pages in the clerk's file",
+   "body": "The file the resolution points to — produced to RDP in 2026, twenty-five pages, scanned on a city copier — holds the resolution and roll call, the council communication, the two-page Short Form Agreement W24-152, and then four executed vendor addenda. All four bear signatures dated on or within two days of the vote.",
+   "consequence": "Twenty-one of those twenty-five pages can be searched in a text layer. Across all of them, plate-reader language appears on one page.",
+   "receipts": ["R-FILE-COMPOSITION", "R-PAGE-TERM-CHECK"],
+   "graphic": "stack"
+  },
+  {
+   "id": "ch05-page-nine",
+   "number": "05",
+   "kicker": "Page nine",
+   "heading": "The sharing setting on page 9",
+   "body": "Section 4.5 of the Mobile Video Addendum states that plate data belongs to the City and is governed by the City's retention policy. It also lets the City enable sharing with similarly situated law-enforcement agencies that use Vigilant VehicleManager.",
+   "consequence": "",
+   "receipts": ["R-MVA-4.5", "R-MVA-4.5-LOGINS", "R-MVA-4.4"],
+   "graphic": "page-nine"
+  },
+  {
+   "id": "ch06-quote",
+   "number": "06",
+   "kicker": "The ordering document",
+   "heading": "The price list that was not in the file",
+   "body": "The document that says what the City was buying, line by line, is Motorola quote 2241626, dated October 23, 2023. It is not in the clerk's file for Item 32; the City produced it to RDP in September 2026. Its arithmetic ties exactly to the number the Council approved: $1,287,000 for 130 in-car systems with five years of cloud video service, $145,500 for installation, removal, deployment and training, and then two plate-reader lines.",
+   "consequence": "Plate-reader licensing and support accounted for $67,580 of the purchase. The delivery pack list records an ‘M500 ALPR DVR’ component in each of the 130 systems.",
+   "receipts": ["R-QUOTE-ARITHMETIC", "R-QUOTE-L10", "R-QUOTE-L9", "R-QUOTE-TOTAL", "R-PACKLIST-DVR", "R-PRICEFILE-DDN3421A", "R-QUOTE-INCOMPLETE"],
+   "graphic": "quote"
+  },
+  {
+   "id": "ch07-other-contract",
+   "number": "07",
+   "kicker": "The other contract",
+   "heading": "The contract underneath",
+   "body": "By the time the Council voted, Des Moines had already bought the plate-reader platform. It did so on a different cooperative contract, from a different company, under a different city agreement, signed by different officials, over the preceding four months. The vendor was Vigilant Solutions, LLC. The cooperative was the Houston-Galveston Area Council. The city instrument was Short Form Agreement W23-383, whose scope reads: “Contractor will provide automated license plate recognition software Products.”",
+   "consequence": "The reviewed record shows that the hosted platform, commercial data and fixed cameras were purchased through W23-383 under H-GAC. The November 2023 Council purchase used W24-152 under Sourcewell. The council records reviewed contain no action for the Chain B instruments. City code authorises cooperative purchasing.",
+   "receipts": ["R-W23-383", "R-DOB-0015-10", "R-DOB-0041-05", "R-EPA-20230929", "R-PO-24131", "R-CODE-2-726"],
+   "graphic": "two-chains"
+  },
+  {
+   "id": "ch08-hard-cut",
+   "number": "08",
+   "kicker": "Discontinuity",
+   "heading": "2023 record → 2026 configuration snapshot",
+   "body": "Everything above is dated. Everything below is a snapshot taken on one morning in August 2026.",
+   "consequence": "The export records the configuration on August 17, 2026; 151 of 155 sharing rows contain no usable date.",
+   "receipts": ["R-EXPORT-UNDATED"],
+   "graphic": "hard-cut"
+  },
+  {
+   "id": "ch09-configuration",
+   "number": "09",
+   "kicker": "The 2026 snapshot",
+   "heading": "What the platform is configured to do",
+   "body": "On August 19, 2026 the City produced three spreadsheets exported from Vigilant VehicleManager two days earlier. One is a data-sharing report: a list of law-enforcement agencies whose status for receiving Des Moines' plate detections reads “Sharing.” Five of its rows are typed “Federal.”",
+   "consequence": "The August 17, 2026 export lists at least 155 outbound sharing relationships across 36 states and the District of Columbia, including 141 outside Iowa. Because the export is filtered, 155 is a floor. Because 151 rows lack usable dates, individual relationships cannot be placed on a timeline.",
+   "receipts": ["R-EXPORT-FILTER", "R-EXPORT-155", "R-EXPORT-STATES", "R-EXPORT-IOWA", "R-EXPORT-FEDERAL", "R-EXPORT-RECEIVING", "R-EXPORT-UNDATED"],
+   "graphic": "tile-map"
+  },
+  {
+   "id": "ch10-drawer",
+   "number": "10",
+   "kicker": "The limits of the record",
+   "heading": "The drawer where the use records would be",
+   "body": "The key oversight question is who checked. Department policy requires a documented reason for every query and regular supervisory audits.",
+   "consequence": "In response to RDP's request, the City produced one audit entry: a review of 500 records dated October 1, 2025. It said the City does not generate or retain copies of search logs and withholds other audit material under Iowa Code §692.8. The City's response addresses records held by the City; vendor-platform logging remains outside the production. The executed agreements grant the vendor an audit right; they grant none to the City for inspecting or obtaining platform logs.",
+   "receipts": ["R-GO-25-QUERY-REASON", "R-GO-25-AUDIT", "R-GO-25-RETENTION", "R-LOGS-20251210", "R-AUDIT-20251001", "R-SSA-4.1", "R-SSA-2.2", "R-MVA-7.1", "R-DPA-CHAIN", "R-CITY-FAVOURABLE"],
+   "graphic": "empty-drawer"
+  },
+  {
+   "id": "ch11-ledger",
+   "number": "11",
+   "kicker": "The ledger",
+   "heading": "Findings and unresolved questions",
+   "body": "",
+   "consequence": "",
+   "receipts": [],
+   "graphic": "ledger"
+  }
+ ],
+
+ "council_switch": {
+  "label": "Show only elements named in the council-facing summary, pages 1–4.",
+  "label_on": "Showing only elements named in the council-facing summary, pages 1–4.",
+  "explainer": "Scope: Council Communication 23-519 and the accompanying resolution.",
+  "receipts": ["R-RC-23-1629-OP2", "R-CONSENT-23-1597", "R-RC-ABSENT-TERMS"]
+ },
+
+ "hard_cut": {
+  "above": "2023 record",
+  "below": "2026 configuration snapshot",
+  "line": "The export records the configuration on August 17, 2026; 151 of 155 sharing rows contain no usable date.",
+  "receipts": ["R-EXPORT-UNDATED"]
+ },
+
+ "empty_drawer": {
+  "heading": "The use layer",
+  "lanes": [
+   {"id": "retains", "label": "What the City retains", "body": "No responsive search-log documents; audit material it holds withheld as confidential intelligence data under Iowa Code §692.8; spot audits described as complaint-driven.", "state": "stated", "receipts": ["R-LOGS-20251210"]},
+   {"id": "produced", "label": "What the City produced", "body": "One internal audit entry dated 1 October 2025, recording a review of 500 records. General Order Chapter 25, issued 8 March 2024, requiring a documented reason for every query and regular audits of ALPR inquiries.", "state": "produced", "receipts": ["R-AUDIT-20251001", "R-GO-25-QUERY-REASON", "R-GO-25-AUDIT"]},
+   {"id": "allows", "label": "What the contract allows", "body": "Outbound sharing enabled by a setting in VehicleManager (§4.5). Chained sub-processor consent. Storage location in the vendor's sole discretion. One audit right, running vendor to City.", "state": "contracted", "receipts": ["R-MVA-4.5", "R-SSA-2.2", "R-MVA-7.1", "R-SSA-4.1"]},
+   {"id": "transfers", "label": "Transfer and use records produced", "body": "None. The production contains no event-level search, alert, hit, transfer or viewing record.", "state": "empty", "receipts": ["R-LOGS-20251210", "R-EXPORT-155"]}
+  ]
+ },
+
+ "ledger": {
+  "known": [
+   {"text": "A cooperative contract competed for public-safety video surveillance acquired plate readers in September 2021, on a two-page vendor form whose scope answer is one sentence.", "receipts": ["R-SW-PNP-2021-09-14", "R-SW-PNP-BOX3", "R-SW-RFP-010720"]},
+   {"text": "Des Moines cited that contract to its Council as evidence the purchase had been competitively bid.", "receipts": ["R-RC-23-1629-BID"]},
+   {"text": "The Council approved $1,500,080 as one of thirty-six consent items, on a description that named in-car video and video evidence management software.", "receipts": ["R-CONSENT-23-1597", "R-ITEM-32", "R-CC-23-519-HEAD"]},
+   {"text": "The plate-reader lines — $67,580, or 4.51 percent of the total — were priced in Motorola quote 2241626, produced to RDP in September 2026, and every delivered system carried an “M500 ALPR DVR” component.", "receipts": ["R-QUOTE-ARITHMETIC", "R-QUOTE-L10", "R-PACKLIST-DVR"]},
+   {"text": "The sharing clause was in the file, at page 9 of 25 — the only page of the twenty-one searchable in a text layer where plate-reader language appears.", "receipts": ["R-MVA-4.5", "R-PAGE-TERM-CHECK"]},
+   {"text": "The reviewed records show the earlier plate-reader capability — platform, national commercial data and fixed cameras — was acquired administratively between July and September 2023, while the November purchase went to the Council.", "receipts": ["R-W23-383", "R-DOB-0015-10", "R-DOB-0041-05", "R-EPA-20230929"]},
+   {"text": "As of 17 August 2026 the platform was configured to share with at least 155 government agencies across 36 states and the District of Columbia, five of them typed Federal, and to receive from 120 of them.", "receipts": ["R-EXPORT-155", "R-EXPORT-STATES", "R-EXPORT-FEDERAL", "R-EXPORT-RECEIVING"]},
+   {"text": "The executed agreements grant the vendor an audit right; they grant none to the City for inspecting or obtaining platform logs.", "receipts": ["R-SSA-4.1"]}
+  ],
+  "unknown": [
+   {"text": "Platform use — The City produced no event-level search, alert, hit or transfer records.", "receipts": ["R-LOGS-20251210", "R-EXPORT-155"]},
+   {"text": "Timeline — Individual sharing relationships cannot be dated from the export.", "receipts": ["R-EXPORT-UNDATED"]},
+   {"text": "Council materials — The pre-meeting posting contains a two-page resolution; the later clerk's file contains 25 pages. The production does not identify what individual members received.", "receipts": ["R-POSTING-COPY-32", "R-FILE-COMPOSITION"]},
+   {"text": "Unit counts — The available records do not reconcile 130 purchased, 126 subscribed, 120 reported operational and 140 Mobile system records.", "receipts": ["R-QTY-SEQUENCE"]},
+   {"text": "Contract definition — ‘Customer Data’ leads to a vendor-hosted addendum that may change over time and prevails in a conflict.", "receipts": ["R-DPA-CHAIN"]},
+   {"text": "Undefined labels — Located documentation does not define ‘(F)’ or ‘Inactive.’", "receipts": ["R-EXPORT-F-PREFIX", "R-EXPORT-INACTIVE"]},
+   {"text": "Account code — No located document maps the fixed-camera account code to a fund.", "receipts": ["R-PO-24131"]}
+  ]
+ },
+
+ "sidebars": [
+  {
+   "id": "cc-26-235",
+   "heading": "Sidebar — the correction nobody voted on",
+   "body": "On June 29, 2026 the Council approved a renewal of the plate-reader software under a newer cooperative contract. Under “PREVIOUS COUNCIL ACTION(S)” the staff communication printed: NONE. It also told the Council the software “is used in connection with the body worn cameras, the in-vehicle video systems, and the stationary traffic cameras.” Seven weeks later, answering a records request, the City withdrew that sentence as misstated, saying the traffic cameras “are not connected to any ALPR system.” The City's own platform inventory supports the correction: two fixed plate-reader sites, no traffic cameras.",
+   "receipts": ["R-CC-26-235", "R-26-235-CORRECTION"]
+  },
+  {
+   "id": "counting",
+   "heading": "Sidebar — how the systems were counted",
+   "body": "The August 2026 systems export contains 149 top-level system rows — 140 Mobile, 7 IP, 2 Fixed — with 560 camera rows nested beneath them. Counting the seven IP lane units as cameras rather than systems gives the alternative shorthand of 142 systems and 567 cameras. This exhibit counts top-level rows, yielding 149 systems and 560 nested cameras. One Mobile row is literally named “Unit number.”",
+   "receipts": ["R-SYSTEMS-149", "R-SYSTEMS-FIXED"]
+  },
+  {
+   "id": "counts",
+   "heading": "Sidebar — four unit counts",
+   "body": "130 purchased and licensed. 126 subscribed. 120 reported operational. 140 Mobile system records in the 2026 export. Four measures appear across four sources; the available record does not reconcile them.",
+   "receipts": ["R-QTY-SEQUENCE", "R-DASHCAM-STATEMENT", "R-INV-1411147976"]
+  },
+  {
+   "id": "flock",
+   "heading": "Sidebar — a separate Flock MOU",
+   "body": "Des Moines' ALPR network uses Motorola/Vigilant technology. One Flock document exists in the City's productions: a data-sharing memorandum of understanding signed for the City by the Chief of Police on February 3, 2026, whose Flock Group, Inc. signature block — signature, name, title and date — is blank, on a memorandum stating it becomes effective “on the last date specified below.”",
+   "receipts": ["R-FLOCK-SEPARATION", "R-FLOCK-MOU"]
+  }
+ ],
+
+ "network_page": {
+  "title": "Explore the network",
+  "dek": "Every relationship in the City of Des Moines' August 2026 VehicleManager sharing export, as the reader chooses to see it. These are settings, not movements.",
+  "standing_note": "Nothing on this page is animated to suggest motion. Counterparties are drawn as open rings, never as filled location dots. No connector is drawn by default. Select a ring to show that one relationship; select a state's label to filter to that state. When you select an agency, one connector appears at once, without direction and without motion, labelled “configured to share.”",
+  "table_caption": "All 155 rows of the August 2026 sharing export, verbatim. This table is the accessible equivalent of the tile grid above and works without JavaScript."
+ },
+
+ "records_page": {
+  "title": "The record",
+  "dek": "Every instrument, chain, price, date, record layer and receipt behind this exhibit — as a chronology, as two contract chains, as the clerk's document stack, and as a parts list.",
+  "methodology_heading": "Method, definitions and corrections",
+  "corrections_heading": "Corrections carried forward",
+  "corrections_note": "This exhibit is built on a complete-record adjudication dated 3 September 2026 and aligned to article draft v0.2 dated 7 September 2026. Both corrected figures and framings used in earlier RDP working notes. Those corrections are listed here so the older versions are not reintroduced."
+ },
+
+ "corrections": [
+  {"was": "“37 states + D.C.”", "now": "36 states and the District of Columbia", "why": "The export's State column holds 37 distinct values, one of which is the District of Columbia."},
+  {"was": "“142 systems / 567 cameras”", "now": "149 top-level system rows (140 Mobile, 7 IP, 2 Fixed) with 560 nested cameras", "why": "The earlier shorthand counted the seven IP lane units as cameras. Both conventions are defensible; the exhibit states which it uses."},
+  {"was": "“Council saw the cameras but not the network.”", "now": "What the council-facing summary described, versus what the instruments contained, versus what the City had already contracted administratively", "why": "Item 32 was one of thirty-six consent items and the resolution incorporated the addendum by reference. Nothing in the record establishes what any member saw, read or knew."},
+  {"was": "Two Sourcewell change forms", "now": "Five change forms identified for contract 010720 in 2021", "why": "The 3 September 2021 form created the price list that the 14 September form says the plate reader was left off of."},
+  {"was": "“Customer Data is defined in the MCA.”", "now": "The customer agreement refers onward to a vendor-hosted Data Processing Addendum for that definition", "why": "The addendum is at a vendor URL, may be updated from time to time, and states that it prevails in a conflict."},
+  {"was": "“The logs do not exist.”", "now": "The City stated it has no responsive documents and does not generate or keep copies of search logs", "why": "Department policy requires a documented reason for every query and regular audits, and one audit entry reviewing 500 records is in the record. Retention by the City is not the same as existence anywhere."},
+  {"was": "“The 2023 purchase grew into a 155-agency network.”", "now": "Two separately dated facts: contractual permission in 2023, observed configuration in 2026", "why": "151 of 155 rows carry no date. No record establishes that chronology."},
+  {"was": "An arithmetic error in the services subtotal", "now": "$1,287,000 + $145,500 + $500 + $67,080 = $1,500,080", "why": "Recomputed to the cent from the quote's line items; ties exactly to the resolution amount and to the purchase order's five-year schedule."},
+  {"was": "“The larger surveillance capability did not go through Council at all.”", "now": "The reviewed records show the earlier capability was acquired administratively, while the November purchase went to the Council", "why": "The narrower proposition is what the ledger supports; the broader one asserts more about council process than the records establish."},
+  {"was": "“The contracts give the City no right to audit it.”", "now": "The reviewed executed agreements contain no corresponding City-side audit, inspection or log-access right", "why": "Not found within the instruments reviewed is not the same as nonexistence."}
+ ],
+
+ "sources": [
+  {"label": "Sourcewell production: RFP 010720, contract 010720-WCH, Amendments #1 and #2, five Price and Product Change Request forms, June 2022 price file", "layers": ["L0"]},
+  {"label": "Des Moines City Council agenda and roll call, 20 November 2023 (RC 23-1597, RC 23-1629, Council Communication 23-519); Item 32 posting copy", "layers": ["L1"]},
+  {"label": "Roll Call 23-1629 clerk's file (25 pp.), produced by the City in 2026, with text-layer twins of each attachment in the same production", "layers": ["L1", "L2"]},
+  {"label": "Motorola QUOTE-2241626 and its product-description page, 23 October 2023; City Contracts/POs 24209 and 24131; Motorola and Vigilant invoices; delivery packing list", "layers": ["L3"]},
+  {"label": "Vigilant Solutions contract and addenda, W23-383, quotes DOB-0015-10 and DOB-0041-05, Equipment Purchase Amendment and EPSLA (29 September 2023), H-GAC order confirmation CC24-01277", "layers": ["L4"]},
+  {"label": "VehicleManager exports generated by the City 17 August 2026: data sharing (10:40), systems and cameras (10:38), users (10:42)", "layers": ["L5"]},
+  {"label": "City of Des Moines records-request responses, 10 December 2025 and 19 August 2026; DMPD General Order Chapter 25 (8 March 2024); internal audit review (1 October 2025); ALPR data sharing MOU (3 December 2025); Council Communication 26-235", "layers": ["L6"]}
+ ],
+
+ "publication_gates": [
+  "Right of response — questions are out to the City, DMPD, Motorola Solutions, Sourcewell and H-GAC, with a comment and factual-correction deadline of 5:00 p.m. Central on Friday, 11 September 2026. Responses are pending."
+ ],
+
+ "_production_notes": {
+  "_README": "Internal, not rendered on any page. Kept here so the operational checklist survives without becoming reader copy.",
+  "items": [
+   "Prior-reporting sweep — no claim in this exhibit has been checked against previously published reporting.",
+   "Article integration — the publication date and the article link are not yet set.",
+   "Facsimile coverage — ten crops of produced records are shipped; the remaining receipts carry a stated placeholder."
+  ]
+ }
+}
