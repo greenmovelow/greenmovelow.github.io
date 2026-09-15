@@ -161,6 +161,14 @@ function head({ title, description, canonical, sections, key, extraStyles = '', 
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://restoring-democracy.org/infographics/des-moines-alpr/assets/og/des-moines-alpr-og-1200x630.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Editorial illustration of a plate-reading camera overlooking a rain-darkened city and a static network of configured relationships.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://restoring-democracy.org/infographics/des-moines-alpr/assets/og/des-moines-alpr-og-1200x630.jpg">
+<meta name="twitter:image:alt" content="Editorial illustration of a plate-reading camera overlooking a rain-darkened city and a static network of configured relationships.">
 <meta name="theme-color" content="#2d5c4f">
 <link rel="icon" type="image/png" href="/assets/rdp_logo_gold_on_green_bg.png">
 <!-- Site-wide shell styles first, then the exhibit's own. The shared

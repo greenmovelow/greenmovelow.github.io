@@ -76,6 +76,7 @@ assets/network.js        the configuration explorer
 assets/visual.css        visual-companion styles and documented visual grammar
 assets/visual.js         state selection, scoped filtering and reveal enhancement
 assets/visual/           optimized generated scene assets with no factual labels
+assets/og/               text-free 21:9 master plus 16:9 and 1200×630 social crops
 ```
 
 **Nothing narrative is authored inside `build.mjs`.** Headline, dek, byline,
