@@ -160,8 +160,8 @@ p:last-child{ margin-bottom:0; }
 .byline{ font-family:var(--mono); font-size:.76rem; letter-spacing:.06em; color:var(--muted); margin:1.4rem 0 0; text-transform:uppercase; }
 
 /* ---------- exhibit chrome, under the fixed site nav ---------- */
-.draft-banner{ margin-top:var(--site-nav-h); }
 .exhibit-chrome{
+  margin-top:var(--site-nav-h);
   position:sticky; top:var(--site-nav-h); z-index:40;
   background:rgba(255,255,255,0.96);
   backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
@@ -210,14 +210,6 @@ p:last-child{ margin-bottom:0; }
 .exhibit-nav a[aria-current="page"]{ color:var(--green); font-weight:700; background:var(--paper-l2); }
 .routes{ border-bottom:1px solid var(--hairline-2); }
 .routes .exhibit-nav-inner{ gap:.4rem; }
-
-/* ---------- draft banner ---------- */
-.draft-banner{
-  background:var(--green-darker); color:#f1efe8;
-  font-family:var(--mono); font-size:.72rem; letter-spacing:.08em;
-  padding:.55rem 20px; text-align:center;
-}
-.draft-banner b{ color:var(--gold-bright); }
 
 /* ---------- generic sections ---------- */
 .module{ padding-block:clamp(2.6rem, 6vw, 4.5rem); border-top:1px solid var(--hairline-2); }
@@ -884,7 +876,7 @@ footer.site a{ color:var(--gold-bright); }
 
 /* ---------- print ---------- */
 @media print{
-  .masthead, .exhibit-nav, .receipt-drawer, .rd-scrim, .draft-banner, .btn-share, .modes, .filters{ display:none !important; }
+  .masthead, .exhibit-nav, .receipt-drawer, .rd-scrim, .btn-share, .modes, .filters{ display:none !important; }
   .plane3, .hard-cut, .snapshot-break{ background:#fff !important; color:#000 !important; }
   .no-js-receipts{ display:block !important; }
   body{ font-size:11pt; }

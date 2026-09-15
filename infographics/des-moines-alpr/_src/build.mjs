@@ -170,7 +170,7 @@ function structuredData({ title, description, canonical, key }) {
   return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2).replace(/</g, '\\u003c')}\n</script>`;
 }
 
-function head({ title, description, canonical, sections, key, extraStyles = '', draftNote = 'Not published. Aligned to article draft v0.4.' }) {
+function head({ title, description, canonical, sections, key, extraStyles = '' }) {
   const depth = key === 'index' || key === 'overview' ? '' : '../';
   return `<!DOCTYPE html>
 <html lang="en">
@@ -249,7 +249,6 @@ ${structuredData({ title, description, canonical, key })}
   </div>
 </nav>
 
-<p class="draft-banner"><b>PREPUBLICATION DRAFT</b> &nbsp;&middot;&nbsp; ${esc(draftNote)}</p>
 <header class="exhibit-chrome">
   <nav class="exhibit-nav routes" aria-label="Exhibit pages">
     <div class="exhibit-nav-inner">

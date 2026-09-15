@@ -202,7 +202,6 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
     canonical: 'https://restoring-democracy.org/infographics/des-moines-alpr/',
     sections: [],
     key: 'overview',
-    draftNote: 'Not published. Visual overview aligned to the final publication candidate, 15 September 2026.',
     extraStyles: '<link rel="stylesheet" href="assets/visual.css">'
   }) + body + foot({
     receiptIds: [],

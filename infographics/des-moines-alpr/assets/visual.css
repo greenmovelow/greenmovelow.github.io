@@ -27,9 +27,6 @@
   color:var(--v-cream);
 }
 .visual-page main{ background:var(--v-bg); overflow:hidden; }
-.visual-page .draft-banner{
-  margin-bottom:0; background:#142821; color:#ddcfae; border-color:rgba(224,173,79,.22);
-}
 .visual-page .exhibit-chrome{
   background:rgba(7,16,15,.92); border-color:rgba(224,173,79,.14);
   backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);

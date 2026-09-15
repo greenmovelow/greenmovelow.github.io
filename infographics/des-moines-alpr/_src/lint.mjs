@@ -458,9 +458,6 @@ for (const [name, src] of Object.entries(pageRaw)) {
   if (!/name="robots" content="noindex,nofollow"/.test(src)) {
     draftHits++; fail('prepublication', name, 'noindex,nofollow is missing');
   }
-  if (!/class="draft-banner"/.test(src)) {
-    draftHits++; fail('prepublication', name, 'the prepublication banner is missing');
-  }
 }
 try {
   const sitemap = readFileSync(join(OUT, '..', '..', 'sitemap.xml'), 'utf8');
@@ -474,7 +471,7 @@ try {
     draftHits++; fail('prepublication', 'copy.json', 'the article link is enabled with no URL');
   }
 }
-if (!draftHits) pass('prepublication — noindex on every page, banner present, not in the sitemap, no invented article link');
+if (!draftHits) pass('prepublication — noindex on every page, not in the sitemap, no invented article link');
 
 /* ------------------------------------------------------- PUBLICATION GATES
    Run only with --publish. These are the checks that must pass before the
