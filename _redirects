@@ -1,3 +1,6 @@
+# TEMPORARY: Remove this rule when the Des Moines ALPR article/exhibit publishes.
+/infographics/des-moines-alpr/* /404.html 404!
+
 /infographics/des-moines-alpr/visual/ /infographics/des-moines-alpr/ 301!
 
 https://fantastic-faloodeh-fc75a0.netlify.app/* https://restoring-democracy.org/:splat 301!
