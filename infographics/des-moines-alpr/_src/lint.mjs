@@ -23,6 +23,8 @@ const PAGES = [
 ];
 const PUBLIC_PAGES = PAGES.filter(([name]) => name !== 'records/index.html');
 const UNLISTED_PAGES = PAGES.filter(([name]) => name === 'records/index.html');
+const GOAT_ATTRIBUTE = 'data-goatcounter="https://restoring-democracy.goatcounter.com/count"';
+const GOAT_SCRIPT = 'https://gc.zgo.at/count.js';
 const ASSETS = ['exhibit.css', 'exhibit.js', 'network.js', 'visual.css', 'visual.js']
   .map((f) => [`assets/${f}`, join(OUT, 'assets', f)]);
 
@@ -599,6 +601,29 @@ try {
   }
 }
 if (!publicationHits) pass('publication-posture — public routes indexable and listed; unlisted records route unlinked, noindex and omitted from the sitemap');
+
+/* -------------------------------------------------------------- analytics
+   All three substantive exhibit routes use the standard aggregate page-view
+   counter. Records is a deliberate path-specific exception to the site's
+   usual noindex exclusion; its publication posture must remain unchanged. */
+let analyticsHits = 0;
+for (const [name] of PAGES) {
+  const src = pageRaw[name];
+  const goatAttributes = src.split(GOAT_ATTRIBUTE).length - 1;
+  const goatScripts = src.split(GOAT_SCRIPT).length - 1;
+  if (goatAttributes !== 1 || goatScripts !== 1) {
+    analyticsHits++;
+    fail('analytics', name,
+      `expected exactly one GoatCounter snippet; found ${goatAttributes} endpoint attribute(s) and ${goatScripts} script URL(s)`);
+  }
+  if (/G-QJ3L9CT4Z7|googletagmanager\.com|google-analytics\.com|\bgtag\s*\(|\bdataLayer\b/i.test(src)) {
+    analyticsHits++; fail('analytics', name, 'contains a GA4/GTM analytics reference');
+  }
+}
+if (!/name="robots" content="noindex,nofollow"/.test(pageRaw['records/index.html'])) {
+  analyticsHits++; fail('analytics', 'records/index.html', 'the analytics exception must remain noindex,nofollow');
+}
+if (!analyticsHits) pass('analytics — one GoatCounter page-view snippet on each exhibit route; no GA4/GTM; records remains noindex');
 
 /* ------------------------------------------------------- PUBLICATION GATES
    Run only with --publish. These are the checks that must pass before the

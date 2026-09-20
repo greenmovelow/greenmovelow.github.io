@@ -22,6 +22,12 @@ EXCLUDED_FILES: dict[str, str] = {
     "vault.html": "operational security / canary page",
     "journalism/cross-and-capitol/index.html": "empty non-content placeholder",
 }
+# Noindex pages are normally analytics-free. This publicly reachable evidence
+# exhibit is the sole named exception; keeping it path-specific avoids changing
+# the posture of redirects, restricted pages, canaries, or other hidden routes.
+NOINDEX_ANALYTICS_EXCEPTIONS = {
+    "infographics/des-moines-alpr/records/index.html",
+}
 
 GOAT_ATTRIBUTE = 'data-goatcounter="https://restoring-democracy.goatcounter.com/count"'
 GOAT_SCRIPT = "https://gc.zgo.at/count.js"
@@ -58,7 +64,7 @@ def exclusion_reason(path: str) -> str | None:
 
 def main() -> int:
     eligible: list[str] = []
-    excluded: list[str] = []
+    excluded: list[tuple[str, str]] = []
     goat_pages: list[str] = []
     violations: list[str] = []
 
@@ -66,6 +72,12 @@ def main() -> int:
         relative = file_path.relative_to(ROOT).as_posix()
         markup = file_path.read_text(encoding="utf-8")
         reason = exclusion_reason(relative)
+        if (
+            reason is None
+            and re.search(r'<meta\s+name=["\']robots["\'][^>]*\bnoindex\b', markup, re.I)
+            and relative not in NOINDEX_ANALYTICS_EXCEPTIONS
+        ):
+            reason = "noindex page (not a named analytics exception)"
         goat_count = markup.count(GOAT_ATTRIBUTE)
         goat_script_count = markup.count(GOAT_SCRIPT)
 
@@ -74,7 +86,7 @@ def main() -> int:
                 violations.append(f"{relative}: active {label} remains")
 
         if reason is not None:
-            excluded.append(relative)
+            excluded.append((relative, reason))
             if goat_count or goat_script_count:
                 violations.append(f"{relative}: excluded page contains GoatCounter ({reason})")
             if OTHER_ANALYTICS.search(markup):
@@ -102,8 +114,8 @@ def main() -> int:
     for path in eligible:
         print(f"  {path}")
     print(f"Excluded pages checked ({len(excluded)}):")
-    for path in excluded:
-        print(f"  {path} — {exclusion_reason(path)}")
+    for path, reason in excluded:
+        print(f"  {path} — {reason}")
     print(f"Pages containing GoatCounter ({len(goat_pages)}):")
     for path in goat_pages:
         print(f"  {path}")
