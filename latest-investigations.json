@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Des Moines Expanded Plate Reader Use, Then Asked What to Cut",
+      "link": "https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader",
+      "date": "2026-09-20",
+      "dateLabel": "Sep 20",
+      "category": "Investigation"
+    },
+    {
       "title": "Who Decides the Future of Central Iowa’s Plate Readers?",
       "link": "https://investigations.restoring-democracy.org/p/who-decides-about-central-iowas-plate",
       "date": "2026-09-15",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/iowas-46-billion-pension-fund-paid",
       "date": "2026-06-13",
       "dateLabel": "Jun 13",
-      "category": "Investigation"
-    },
-    {
-      "title": "Bird Thanked Iowa; The Money Came From Washington",
-      "link": "https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came",
-      "date": "2026-06-07",
-      "dateLabel": "Jun 7",
       "category": "Investigation"
     }
   ]
