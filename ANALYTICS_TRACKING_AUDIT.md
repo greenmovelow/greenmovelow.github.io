@@ -60,6 +60,7 @@ The audit classifies all 41 repository HTML files: 35 eligible public pages cont
 - `infographics/ipers-bonus-calculator/index.html` — eligible public page; carries one GoatCounter snippet.
 - `infographics/standing-query/index.html` — eligible public page; carries one GoatCounter snippet. The exhibit's script also reports five custom interaction events through the same counter (`standing_query_start`, `standing_query_audit_complete`, `standing_query_loop_reveal`, `standing_query_complete`, `standing_query_article_click`) via `window.goatcounter.count({event: true})`. The calls are wrapped in `try/catch`, fire at most once per page load, and are a no-op when the counter is absent or blocked. No new vendor.
 - `_handoff/**` — editorial handoff prototypes committed as source material. Excluded from the audit (`EXCLUDED_PREFIXES` in `scripts/audit_analytics.py`) and served with `X-Robots-Tag: noindex` via `_headers`. They are not published routes and carry no analytics.
+- `infographics/des-moines-alpr/index.html`, `infographics/des-moines-alpr/network/index.html`, and `infographics/des-moines-alpr/records/index.html` — the three Des Moines ALPR exhibit pages each carry one standard GoatCounter page-view snippet. The records exhibit remains unlisted, `noindex,nofollow`, absent from normal public navigation, and publicly reachable by URL; GoatCounter there is a deliberate path-specific exception for aggregate readership measurement of the evidence and chronology exhibit. It does not change the analytics exclusion for secure tips, restricted-status pages, redirects, vault/canary pages, 404s, or other sensitive or non-content routes.
 
 ## Exclusion principles
 
@@ -70,7 +71,7 @@ Analytics are excluded from:
 - `go/**`, immediate redirects, forwarding-only pages, and other non-content routes;
 - `vault.html`, canaries, tripwires, honeypots, decoys, and security-test pages;
 - 404/error pages;
-- pages marked `noindex`, `nofollow`, `noarchive`, or otherwise intentionally hidden;
+- pages marked `noindex`, `nofollow`, `noarchive`, or otherwise intentionally hidden, except the named `infographics/des-moines-alpr/records/index.html` aggregate-measurement exception;
 - temporary test fixtures and empty placeholders.
 
 A security-related word in a public article slug is not itself an exclusion. Ordinary public, substantive, indexable pages—including `security-policy/index.html` and `confidential_mou/index.html`—receive GoatCounter.

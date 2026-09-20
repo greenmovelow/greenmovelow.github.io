@@ -367,6 +367,11 @@ window.RDP_STATUS_LABELS = ${JSON.stringify(STATUS_LABELS)};
 ${inlineData || ''}
 </script>
 ${extraScripts || ''}
+<script
+  data-goatcounter="https://restoring-democracy.goatcounter.com/count"
+  async
+  src="https://gc.zgo.at/count.js">
+</script>
 </body>
 </html>`;
 }
