@@ -482,6 +482,10 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
     assert(await page.title() === item.title, `metadata: route-specific title · ${item.canonical}`);
     assert(await page.locator('meta[name="description"]').getAttribute('content') === item.description,
       `metadata: route-specific description · ${item.canonical}`);
+    assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'index,follow',
+      `metadata: public route is indexable · ${item.canonical}`);
+    assert(await page.locator('.draft-banner').count() === 0,
+      `metadata: no prepublication banner · ${item.canonical}`);
     assert(await page.locator('link[rel="canonical"]').count() === 1 &&
       await page.locator('link[rel="canonical"]').getAttribute('href') === item.canonical,
       `metadata: one production canonical · ${item.canonical}`);
@@ -499,6 +503,14 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
     assert(shared.url === item.canonical && shared.title === item.title,
       `share button uses canonical URL without preview/query/hash · ${item.canonical}`,
       JSON.stringify(shared));
+
+    const storyHrefs = await page.locator('a').evaluateAll((links) => links
+      .filter((link) => /^read the full story\b/i.test(link.textContent.trim()))
+      .map((link) => link.href));
+    assert(storyHrefs.length > 0 && storyHrefs.every((href) =>
+      href === 'https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader'),
+    `every Read the full story link uses the approved destination · ${item.canonical}`,
+    JSON.stringify(storyHrefs));
   }
 
   const imageOk = await page.evaluate(async () => {
@@ -516,6 +528,14 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
   const page = await ctx.newPage();
   await page.goto(BASE + '/records/', { waitUntil: 'networkidle' });
+  assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'noindex,nofollow',
+    'internal records route remains noindex,nofollow');
+  const recordStoryHrefs = await page.locator('a').evaluateAll((links) => links
+    .filter((link) => /^read the full story\b/i.test(link.textContent.trim()))
+    .map((link) => link.href));
+  assert(recordStoryHrefs.length > 0 && recordStoryHrefs.every((href) =>
+    href === 'https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader'),
+  'internal record footer preserves the approved story destination', JSON.stringify(recordStoryHrefs));
   assert(await page.locator('.mode-panel:not([hidden])').count() === 1, 'one record view visible at a time');
   await page.locator('.mode-btn[data-mode="parts"]').click();
   await page.waitForTimeout(150);

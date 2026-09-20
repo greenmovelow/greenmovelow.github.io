@@ -21,6 +21,8 @@ const PAGES = [
   ['network/index.html', join(OUT, 'network', 'index.html')],
   ['records/index.html', join(OUT, 'records', 'index.html')]
 ];
+const PUBLIC_PAGES = PAGES.filter(([name]) => name !== 'records/index.html');
+const INTERNAL_PAGES = PAGES.filter(([name]) => name === 'records/index.html');
 const ASSETS = ['exhibit.css', 'exhibit.js', 'network.js', 'visual.css', 'visual.js']
   .map((f) => [`assets/${f}`, join(OUT, 'assets', f)]);
 
@@ -500,28 +502,54 @@ try {
 if (!metaHits) pass('metadata-seo — route-specific titles/descriptions, production canonicals, approved 1200×630 PNG, social cards and JSON-LD');
 
 /* ----------------------------------------------------------------- rule 11
-   Prepublication posture. While the exhibit is a draft it must not be
-   indexable, must not appear in the sitemap, and must not link to an article
-   URL that does not exist. */
-let draftHits = 0;
-for (const [name, src] of Object.entries(pageRaw)) {
+   Publication posture. The overview and network explorer are public. The
+   retained records artifact remains internal: noindex and absent from public
+   navigation and the sitemap. */
+let publicationHits = 0;
+for (const [name] of PUBLIC_PAGES) {
+  const src = pageRaw[name];
+  if (!/name="robots" content="index,follow"/.test(src)) {
+    publicationHits++; fail('publication-posture', name, 'index,follow is missing');
+  }
+  if (/PROVISIONAL: unpublished prototype|class="draft-banner"/.test(src)) {
+    publicationHits++; fail('publication-posture', name, 'prepublication marker remains on a public route');
+  }
+}
+for (const [name] of INTERNAL_PAGES) {
+  const src = pageRaw[name];
   if (!/name="robots" content="noindex,nofollow"/.test(src)) {
-    draftHits++; fail('prepublication', name, 'noindex,nofollow is missing');
+    publicationHits++; fail('publication-posture', name, 'the internal records route must remain noindex,nofollow');
+  }
+}
+for (const [name] of PUBLIC_PAGES) {
+  if (/href="\/infographics\/des-moines-alpr\/records\//.test(pageRaw[name])) {
+    publicationHits++; fail('publication-posture', name, 'public navigation links to the internal records route');
   }
 }
 try {
   const sitemap = readFileSync(join(OUT, '..', '..', 'sitemap.xml'), 'utf8');
-  if (/des-moines-alpr/.test(sitemap)) {
-    draftHits++; fail('prepublication', 'sitemap.xml', 'the exhibit routes are in the sitemap before publication');
+  const publicUrls = [
+    'https://restoring-democracy.org/infographics/des-moines-alpr/',
+    'https://restoring-democracy.org/infographics/des-moines-alpr/network/'
+  ];
+  for (const url of publicUrls) {
+    if (sitemap.split(`<loc>${url}</loc>`).length !== 2) {
+      publicationHits++; fail('publication-posture', 'sitemap.xml', `${url} must appear exactly once`);
+    }
   }
-} catch { /* sitemap not reachable from here; skip */ }
+  if (/https:\/\/restoring-democracy\.org\/infographics\/des-moines-alpr\/records\//.test(sitemap)) {
+    publicationHits++; fail('publication-posture', 'sitemap.xml', 'the internal records route must stay out of the sitemap');
+  }
+} catch {
+  publicationHits++; fail('publication-posture', 'sitemap.xml', 'the sitemap could not be read');
+}
 {
   const link = JSON.parse(readFileSync(join(HERE, 'content', 'copy.json'), 'utf8')).exhibit.article_link;
   if (link.enabled && !link.url) {
-    draftHits++; fail('prepublication', 'copy.json', 'the article link is enabled with no URL');
+    publicationHits++; fail('publication-posture', 'copy.json', 'the article link is enabled with no URL');
   }
 }
-if (!draftHits) pass('prepublication — noindex on every page, not in the sitemap, no invented article link');
+if (!publicationHits) pass('publication-posture — public routes indexable and listed; internal records route unlinked, noindex and omitted');
 
 /* ------------------------------------------------------- PUBLICATION GATES
    Run only with --publish. These are the checks that must pass before the
@@ -540,7 +568,8 @@ if (PUBLISH) {
   if (/PROVISIONAL/i.test(JSON.stringify(copyJson))) {
     gateHits++; fail('PUBLISH-GATE', 'copy.json', 'PROVISIONAL copy remains');
   }
-  for (const [name, src] of Object.entries(pageRaw)) {
+  for (const [name] of PUBLIC_PAGES) {
+    const src = pageRaw[name];
     if (/noindex/.test(src)) { gateHits++; fail('PUBLISH-GATE', name, 'still noindex'); }
     if (/class="draft-banner"/.test(src)) { gateHits++; fail('PUBLISH-GATE', name, 'the prepublication banner is still present'); }
   }

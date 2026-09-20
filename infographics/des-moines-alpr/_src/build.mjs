@@ -172,6 +172,9 @@ function structuredData({ title, description, canonical, key }) {
 
 function head({ title, description, canonical, sections, key, extraStyles = '' }) {
   const depth = key === 'index' || key === 'overview' ? '' : '../';
+  const robots = key === 'overview' || key === 'network'
+    ? '<meta name="robots" content="index,follow">'
+    : '<!-- Internal editorial record. Excluded from public navigation and search indexing. -->\n<meta name="robots" content="noindex,nofollow">';
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -179,8 +182,7 @@ function head({ title, description, canonical, sections, key, extraStyles = '' }
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<!-- PROVISIONAL: unpublished prototype. Indexing is disabled until the exhibit is cleared for publication. -->
-<meta name="robots" content="noindex,nofollow">
+${robots}
 <link rel="canonical" href="${esc(canonical)}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Restoring Democracy's Promise">
