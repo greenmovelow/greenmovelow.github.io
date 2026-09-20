@@ -234,6 +234,53 @@ let commercialHits = 0;
 }
 if (!commercialHits) pass('commercial-source-qualification — the overview source figure is scoped to 2023 and never presents the commercial dataset as an established 2026 capability');
 
+/* ----------------------------------------------------------------- rule 3d
+   Unit-count framing, and the reconciliation with the article.
+
+   140 and 149 are counts of ROWS in the August 2026 export, not counts of
+   vehicles or of operating systems. One top-level Mobile row is a non-unit
+   header labelled "Unit number", which is why the article reports 139 and this
+   exhibit reports 140. Wherever the exhibit shows those row counts it must also
+   carry the reconciliation, and the fourth measure (126) must name its invoice
+   rather than floating free. */
+const UNIT_COUNT_BANS = [
+  [/\b140 vehicles\b/i, '140 counts export rows, not vehicles; one Mobile row is the "Unit number" header'],
+  [/\b140 systems\b/i, '140 counts top-level Mobile ROWS, not operating systems'],
+  [/\b149 systems\b/i, '149 counts top-level ROWS in the export, not operating systems']
+];
+const RECONCILIATION_MARKERS = [
+  '139 mobile-system entries after excluding a repeated header row',
+  '140 Mobile rows and 149 total top-level rows',
+  'drawn from a separate subscription invoice'
+];
+let unitHits = 0;
+for (const [name, text] of Object.entries(pageText)) {
+  for (const [re, why] of UNIT_COUNT_BANS) {
+    const m = re.exec(text);
+    if (m) { unitHits++; fail('unit-count-framing', name, `"${m[0]}" — ${why}`); }
+  }
+  /* Scoped to pages that actually publish the row counts, so the network
+     explorer's unrelated table values never trip it. */
+  if (!/\b140 Mobile\b|\b149 top-level\b/.test(text)) continue;
+  for (const marker of RECONCILIATION_MARKERS) {
+    if (!text.includes(marker)) {
+      unitHits++;
+      fail('unit-count-framing', name,
+        `this page publishes the export row counts without the article reconciliation: "${marker}" is missing`);
+    }
+  }
+  /* Page-level, not per-occurrence: the four-measure ladder reaches the page
+     from evidence_receipts.json, which is governed data and not editable to
+     satisfy a linter. The requirement is that the page states, somewhere a
+     reader will meet it, which invoice the 126 comes from. */
+  if (/\b126 subscribed\b/i.test(text) && !/126[^.]{0,120}invoice|invoice[^.]{0,120}126/i.test(text)) {
+    unitHits++;
+    fail('unit-count-framing', name,
+      '"126 subscribed" appears but the page never names the subscription invoice it comes from');
+  }
+}
+if (!unitHits) pass('unit-count-framing — 140/149 are described as rows, the article reconciliation is published beside them, and 126 names its invoice');
+
 /* ------------------------------------------------------------------ rule 4
    Drawing rules. Arrowheads mean movement; draw-on and motion-along-path are
    directional cues. None may exist anywhere in the exhibit. */

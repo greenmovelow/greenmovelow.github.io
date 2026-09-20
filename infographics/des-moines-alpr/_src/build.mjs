@@ -1126,6 +1126,10 @@ function buildRecords() {
       <div class="callout" style="margin:0"><h3>Systems and cameras</h3>
         <p><strong>Counting convention:</strong> ${esc(platform.systems.counting_convention)} On that convention: ${platform.systems.systems_total} system rows (${platform.systems.systems_mobile} Mobile, ${platform.systems.systems_ip} IP, ${platform.systems.systems_fixed} Fixed) with ${platform.systems.cameras_total} nested cameras. ${esc(platform.systems.alternative_convention)}</p>
         <p style="margin-top:.6rem">${esc(platform.systems.anomaly)}</p>
+        <!-- Reconciles this exhibit's row counts with the article's unit counts.
+             The two use different conventions on one non-unit header row; both
+             are stated rather than silently reconciled. -->
+        <p class="note" style="margin-top:.6rem">${esc(copy.standing.unit_count_reconciliation)}</p>
         ${chipRow(platform.systems.receipt_ids)}
       </div>
       <div class="callout" style="margin:0"><h3>Accounts</h3>

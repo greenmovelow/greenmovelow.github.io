@@ -45,6 +45,7 @@
   "how_to_read": "This exhibit follows the documentary record. Every sourced figure and quotation opens the underlying document, date, page or row, and relevant limitation. The exhibit compares the 2023 procurement record with the platform's August 2026 configuration.",
   "no_dates": "The export records the configuration on August 17, 2026; 151 of 155 sharing rows contain no usable date.",
   "clerk_file_caveat": "The City produced this 25-page roll-call file in August 2026. Two documents in it are dated after the vote. The production does not identify which pages were distributed to council members beforehand.",
+  "unit_count_reconciliation": "The article reports 139 mobile-system entries after excluding a repeated header row labeled \u201cUnit number.\u201d This exhibit preserves and counts every top-level row in the export\u2014including that non-unit header row\u2014so it displays 140 Mobile rows and 149 total top-level rows. The exhibit also includes a fourth measure, 126 subscribed, drawn from a separate subscription invoice.",
   "legend_line": "Open rings and dashed connectors show settings in the City's own platform export. They do not show that any plate record was sent or viewed."
  },
 
@@ -217,13 +218,13 @@
   {
    "id": "counting",
    "heading": "Sidebar — how the systems were counted",
-   "body": "The August 2026 systems export contains 149 top-level system rows — 140 Mobile, 7 IP, 2 Fixed — with 560 camera rows nested beneath them. Counting the seven IP lane units as cameras rather than systems gives the alternative shorthand of 142 systems and 567 cameras. This exhibit counts top-level rows, yielding 149 systems and 560 nested cameras. One Mobile row is literally named “Unit number.”",
+   "body": "The August 2026 systems export contains 149 top-level system rows — 140 Mobile, 7 IP, 2 Fixed — with 560 camera rows nested beneath them. Counting the seven IP lane units as cameras rather than systems gives the alternative shorthand of 142 systems and 567 cameras. This exhibit counts top-level rows, yielding 149 top-level rows and 560 nested cameras. One Mobile row is literally named “Unit number.”",
    "receipts": ["R-SYSTEMS-149", "R-SYSTEMS-FIXED"]
   },
   {
    "id": "counts",
    "heading": "Sidebar — four unit counts",
-   "body": "130 purchased and licensed. 126 subscribed. 120 reported operational. 140 Mobile system records in the 2026 export. Four measures appear across four sources; the available record does not reconcile them.",
+   "body": "130 purchased and licensed. 126 subscribed, drawn from a separate subscription invoice. 120 reported operational. 140 Mobile system records in the 2026 export. Four measures appear across four sources; the available record does not reconcile them.",
    "receipts": ["R-QTY-SEQUENCE", "R-DASHCAM-STATEMENT", "R-INV-1411147976"]
   },
   {
