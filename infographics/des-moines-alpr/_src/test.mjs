@@ -539,6 +539,13 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
       `right of response states the actual disposition · ${route}`);
     assert(!/Responses are pending/i.test(await page.content()),
       `no prepublication response language · ${route}`);
+    const statement = page.locator('#rorSourcewell');
+    assert(await statement.count() === 1, `Sourcewell's response is published · ${route}`);
+    const stext = (await statement.innerText()).replace(/\s+/g, ' ');
+    assert(/Sourcewell said it approved WatchGuard/.test(stext)
+      && /did not expressly name LPR or ALPR/.test(stext)
+      && /\$53,576\.61 in administrative fees/.test(stext),
+      `the Sourcewell statement renders in full · ${route}`, stext.slice(0, 100));
     const footer = (await page.locator('footer').innerText()).replace(/\s+/g, ' ');
     assert(/Published September 19, 2026/.test(footer),
       `the publication date is visible · ${route}`, footer.slice(0, 120));
