@@ -187,7 +187,9 @@ if (!arithHits) pass('arithmetic — $1,287,000 + $145,500 + $500 + $67,080 = $1
    acquired vehicle-location dataset was part of the 2023 package; no reviewed
    record establishes it for the 2026 renewal. This rule keeps that figure from
    drifting back into an unqualified present-tense capability claim, and keeps
-   the face-matching detail out of an explanatory visual that cannot carry it.
+   the FaceSearch detail out of it. No receipt or copy.json entry currently
+   sources that detail anywhere in the exhibit, so it is not to be restored
+   here on this figure's own authority.
 
    Scoped deliberately to that one section: the records page and the evidence
    tables may discuss the dataset in their own, separately caveated terms. */
@@ -224,7 +226,7 @@ let commercialHits = 0;
     if (/FaceSearch/i.test(text)) {
       commercialHits++;
       fail('commercial-source-qualification', 'index.html',
-        'the face-matching detail is back in the explanatory source figure; the records carry that evidence, this visual does not');
+        'the FaceSearch detail is not part of this explanatory figure; do not restore it here without a separately sourced evidence entry');
     }
   }
 }

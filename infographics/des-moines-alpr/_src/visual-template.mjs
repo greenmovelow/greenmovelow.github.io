@@ -184,16 +184,16 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
   <div class="source-stage reveal">
     <div class="source-stream source-stream--city">
       <div class="stream-text">
-        <strong>Des Moines detections</strong>
-        <span class="stream-sub">Fixed and in-car ALPR systems</span>
+        <strong>Des Moines ALPR capability</strong>
+        <span class="stream-sub">Fixed and in-car reader systems</span>
       </div>
       <p class="stream-kind">LAW-ENFORCEMENT SOURCE &middot; SOLID</p>
       <div class="stream-points" aria-hidden="true"></div>
     </div>
     <div class="source-stream source-stream--agency">
       <div class="stream-text">
-        <strong>Shared law-enforcement data</strong>
-        <span class="stream-sub">Detections shared by partner agencies</span>
+        <strong>Partner-agency LPR data</strong>
+        <span class="stream-sub">VehicleManager permitted reciprocal sharing</span>
       </div>
       <p class="stream-kind">LAW-ENFORCEMENT SOURCE &middot; SOLID</p>
       <div class="stream-rings" aria-hidden="true"></div>
@@ -215,7 +215,7 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
     <p>DMPD says ALPR supports missing or endangered persons, stolen vehicles or plates, and investigative work.</p>
     <p>Policy says an ALPR alert alone is not sufficient probable cause for a stop.</p>
   </div>
-  <p class="sr-only">Visual summary: Des Moines detections and configured partner-agency data are shown as law-enforcement sources with solid bands. The commercial vehicle-location source is drawn with a dashed band and labelled as part of the 2023 package; its inclusion in the 2026 renewal is not established. The bands converge on the platform to show what could be searched there. Later search is a possibility, not proof of any particular search or transfer, and the sources are not shown as one combined database.</p>
+  <p class="sr-only">Visual summary: the Des Moines ALPR capability and the reciprocal partner-agency sharing that VehicleManager permitted are shown as law-enforcement sources with solid bands. Both are purchased or contracted capabilities. The reviewed records do not establish that fixed cameras were operating, that in-car readers were enabled, or that partner-agency data was in fact available in 2023. The commercial vehicle-location source is drawn with a dashed band and labelled as part of the 2023 package; its inclusion in the 2026 renewal is not established. The bands converge on the platform to show what the platform could search, not what it did search. Later search is a possibility, not proof of any particular search or transfer, and the sources are not shown as one combined database.</p>
 </section>
 
 <section class="visual-section record-light" aria-labelledby="record-light-h">

@@ -35,6 +35,19 @@ const assert = (cond, n, d) => cond ? ok(n, d) : no(n, d);
    without downloading a browser; unset, Playwright uses its own download. */
 const browser = await chromium.launch(process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : {});
 
+/* Walk the page so every `.reveal` block has been observed: review captures
+   must show the finished section, not mid-reveal blanks. */
+async function settleReveals(page) {
+  await page.evaluate(async () => {
+    for (let y = 0; y < document.documentElement.scrollHeight; y += Math.max(400, innerHeight * 0.7)) {
+      scrollTo({ top: y, behavior: 'instant' });
+      await new Promise((r) => setTimeout(r, 90));
+    }
+    scrollTo({ top: 0, behavior: 'instant' });
+  });
+  await page.waitForTimeout(400);
+}
+
 /* Scroll a target clear of the sticky masthead before clicking it. */
 async function scrollClear(page, locator) {
   await locator.evaluate((el) => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
@@ -137,6 +150,23 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   assert(fig2Text.includes('DIFFERENT SOURCES. A LARGER SEARCHABLE PICTURE.'),
     'figure 2 carries its subtitle');
 
+  /* Capability, not activity: the record establishes what was purchased or
+     contracted for, not that cameras were operating, that in-car readers were
+     enabled, or that partner data was in fact available in 2023. */
+  const cityText = (await page.locator('.source-stream--city').innerText()).replace(/\s+/g, ' ');
+  const agencyText = (await page.locator('.source-stream--agency').innerText()).replace(/\s+/g, ' ');
+  assert(cityText.includes('Des Moines ALPR capability') && cityText.includes('Fixed and in-car reader systems'),
+    'source 1 is labelled as capability, not as detections', cityText);
+  assert(agencyText.includes('Partner-agency LPR data') && agencyText.includes('VehicleManager permitted reciprocal sharing'),
+    'source 2 is labelled as permitted sharing, not as data actually shared', agencyText);
+  assert(!/Des Moines detections|Detections shared by partner agencies/.test(fig2Text),
+    'figure 2 no longer implies 2023 detection or sharing activity');
+  const srSummary = await fig2.locator('.sr-only').innerText();
+  assert(/purchased or contracted capabilit/i.test(srSummary)
+    && /do not establish that fixed cameras were operating/i.test(srSummary)
+    && /what the platform could search, not what it did search/i.test(srSummary),
+    'the screen-reader summary draws the same capability-not-activity distinction');
+
   const commercial = page.locator('.source-stream--commercial');
   const commercialText = (await commercial.innerText()).replace(/\s+/g, ' ');
   assert(commercialText.includes('Included in the 2023 package'),
@@ -210,7 +240,8 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   assert(await paths.first().getAttribute('marker-end') === null
     && await paths.first().getAttribute('marker-start') === null,
     'the selected configuration path stays undirected');
-  await page.screenshot({ path: join(SHOTS, 'figure3-desktop.png'), fullPage: false });
+  await settleReveals(page);
+  await page.locator('.visual-hero').screenshot({ path: join(SHOTS, 'figure3-desktop.png') });
   await fig2.scrollIntoViewIfNeeded();
   await page.waitForTimeout(400);
   await fig2.screenshot({ path: join(SHOTS, 'figure2-desktop.png') });
@@ -271,13 +302,12 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   }));
   assert(mobMetric.font >= 14 && mobMetric.w >= 120,
     'mobile: metric labels keep an accessible type size and column width', JSON.stringify(mobMetric));
+  await settleReveals(mobPage);
   const fig2m = mobPage.locator('section.three-sources');
   await fig2m.scrollIntoViewIfNeeded();
   await mobPage.waitForTimeout(400);
-  await mobPage.screenshot({ path: join(SHOTS, 'figure2-mobile.png'), fullPage: false });
-  await mobPage.locator('.visual-hero').scrollIntoViewIfNeeded();
-  await mobPage.waitForTimeout(300);
-  await mobPage.screenshot({ path: join(SHOTS, 'figure3-mobile.png'), fullPage: false });
+  await fig2m.screenshot({ path: join(SHOTS, 'figure2-mobile.png') });
+  await mobPage.locator('.visual-hero').screenshot({ path: join(SHOTS, 'figure3-mobile.png') });
   await mob.close();
 }
 
