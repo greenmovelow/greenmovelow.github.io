@@ -182,6 +182,54 @@ let arithHits = 0;
 }
 if (!arithHits) pass('arithmetic — $1,287,000 + $145,500 + $500 + $67,080 = $1,500,080, and 4.51 percent is stated');
 
+/* ----------------------------------------------------------------- rule 3c
+   The public source figure on the overview is historical. The commercially
+   acquired vehicle-location dataset was part of the 2023 package; no reviewed
+   record establishes it for the 2026 renewal. This rule keeps that figure from
+   drifting back into an unqualified present-tense capability claim, and keeps
+   the face-matching detail out of an explanatory visual that cannot carry it.
+
+   Scoped deliberately to that one section: the records page and the evidence
+   tables may discuss the dataset in their own, separately caveated terms. */
+let commercialHits = 0;
+{
+  const section = /<section class="visual-section three-sources"[\s\S]*?<\/section>/.exec(pageRaw['index.html']);
+  if (!section) {
+    commercialHits++;
+    fail('commercial-source-qualification', 'index.html', 'the public source figure is missing from the overview');
+  } else {
+    const text = visibleText(section[0]);
+    if (!/WHAT THE PLATFORM COULD SEARCH IN 2023/.test(text)) {
+      commercialHits++;
+      fail('commercial-source-qualification', 'index.html',
+        'the source figure no longer scopes itself to what the platform COULD search in 2023');
+    }
+    if (/commercial/i.test(text)) {
+      for (const needle of ['Included in the 2023 package', 'Not established for the 2026 renewal']) {
+        if (!text.includes(needle)) {
+          commercialHits++;
+          fail('commercial-source-qualification', 'index.html',
+            `the commercial source is shown without its qualification "${needle}"`);
+        }
+      }
+      for (const sentence of text.split(/(?<=[.!?;])\s+/)) {
+        if (!/commercial/i.test(sentence)) continue;
+        if (!/2023/.test(sentence) && !/not established|do(?:es)? not establish/i.test(sentence)) {
+          commercialHits++;
+          fail('commercial-source-qualification', 'index.html',
+            `the commercial source is described as a current capability: "${sentence.trim().slice(0, 140)}"`);
+        }
+      }
+    }
+    if (/FaceSearch/i.test(text)) {
+      commercialHits++;
+      fail('commercial-source-qualification', 'index.html',
+        'the face-matching detail is back in the explanatory source figure; the records carry that evidence, this visual does not');
+    }
+  }
+}
+if (!commercialHits) pass('commercial-source-qualification — the overview source figure is scoped to 2023 and never presents the commercial dataset as an established 2026 capability');
+
 /* ------------------------------------------------------------------ rule 4
    Drawing rules. Arrowheads mean movement; draw-on and motion-along-path are
    directional cues. None may exist anywhere in the exhibit. */
