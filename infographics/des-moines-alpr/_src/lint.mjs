@@ -21,6 +21,8 @@ const PAGES = [
   ['network/index.html', join(OUT, 'network', 'index.html')],
   ['records/index.html', join(OUT, 'records', 'index.html')]
 ];
+const PUBLIC_PAGES = PAGES.filter(([name]) => name !== 'records/index.html');
+const UNLISTED_PAGES = PAGES.filter(([name]) => name === 'records/index.html');
 const ASSETS = ['exhibit.css', 'exhibit.js', 'network.js', 'visual.css', 'visual.js']
   .map((f) => [`assets/${f}`, join(OUT, 'assets', f)]);
 
@@ -181,6 +183,56 @@ let arithHits = 0;
   }
 }
 if (!arithHits) pass('arithmetic — $1,287,000 + $145,500 + $500 + $67,080 = $1,500,080, and 4.51 percent is stated');
+
+/* ----------------------------------------------------------------- rule 3c
+   The public source figure on the overview is historical. The commercially
+   acquired vehicle-location dataset was part of the 2023 package; no reviewed
+   record establishes it for the 2026 renewal. This rule keeps that figure from
+   drifting back into an unqualified present-tense capability claim, and keeps
+   the FaceSearch detail out of it. No receipt or copy.json entry currently
+   sources that detail anywhere in the exhibit, so it is not to be restored
+   here on this figure's own authority.
+
+   Scoped deliberately to that one section: the records page and the evidence
+   tables may discuss the dataset in their own, separately caveated terms. */
+let commercialHits = 0;
+{
+  const section = /<section class="visual-section three-sources"[\s\S]*?<\/section>/.exec(pageRaw['index.html']);
+  if (!section) {
+    commercialHits++;
+    fail('commercial-source-qualification', 'index.html', 'the public source figure is missing from the overview');
+  } else {
+    const text = visibleText(section[0]);
+    if (!/WHAT THE PLATFORM COULD SEARCH IN 2023/.test(text)) {
+      commercialHits++;
+      fail('commercial-source-qualification', 'index.html',
+        'the source figure no longer scopes itself to what the platform COULD search in 2023');
+    }
+    if (/commercial/i.test(text)) {
+      for (const needle of ['Included in the 2023 package', 'Not established for the 2026 renewal']) {
+        if (!text.includes(needle)) {
+          commercialHits++;
+          fail('commercial-source-qualification', 'index.html',
+            `the commercial source is shown without its qualification "${needle}"`);
+        }
+      }
+      for (const sentence of text.split(/(?<=[.!?;])\s+/)) {
+        if (!/commercial/i.test(sentence)) continue;
+        if (!/2023/.test(sentence) && !/not established|do(?:es)? not establish/i.test(sentence)) {
+          commercialHits++;
+          fail('commercial-source-qualification', 'index.html',
+            `the commercial source is described as a current capability: "${sentence.trim().slice(0, 140)}"`);
+        }
+      }
+    }
+    if (/FaceSearch/i.test(text)) {
+      commercialHits++;
+      fail('commercial-source-qualification', 'index.html',
+        'the FaceSearch detail is not part of this explanatory figure; do not restore it here without a separately sourced evidence entry');
+    }
+  }
+}
+if (!commercialHits) pass('commercial-source-qualification — the overview source figure is scoped to 2023 and never presents the commercial dataset as an established 2026 capability');
 
 /* ------------------------------------------------------------------ rule 4
    Drawing rules. Arrowheads mean movement; draw-on and motion-along-path are
@@ -450,28 +502,56 @@ try {
 if (!metaHits) pass('metadata-seo — route-specific titles/descriptions, production canonicals, approved 1200×630 PNG, social cards and JSON-LD');
 
 /* ----------------------------------------------------------------- rule 11
-   Prepublication posture. While the exhibit is a draft it must not be
-   indexable, must not appear in the sitemap, and must not link to an article
-   URL that does not exist. */
-let draftHits = 0;
-for (const [name, src] of Object.entries(pageRaw)) {
+   Publication posture. The overview and network explorer are public. The
+   retained records artifact stays UNLISTED: noindex, absent from public
+   navigation and absent from the sitemap. Unlisted is not private — anyone
+   with the URL can still reach it, so nothing may be published there that
+   could not stand being read. */
+let publicationHits = 0;
+for (const [name] of PUBLIC_PAGES) {
+  const src = pageRaw[name];
+  if (!/name="robots" content="index,follow"/.test(src)) {
+    publicationHits++; fail('publication-posture', name, 'index,follow is missing');
+  }
+  if (/PROVISIONAL: unpublished prototype|class="draft-banner"/.test(src)) {
+    publicationHits++; fail('publication-posture', name, 'prepublication marker remains on a public route');
+  }
+}
+for (const [name] of UNLISTED_PAGES) {
+  const src = pageRaw[name];
   if (!/name="robots" content="noindex,nofollow"/.test(src)) {
-    draftHits++; fail('prepublication', name, 'noindex,nofollow is missing');
+    publicationHits++; fail('publication-posture', name, 'the unlisted records route must remain noindex,nofollow');
+  }
+}
+for (const [name] of PUBLIC_PAGES) {
+  if (/href="\/infographics\/des-moines-alpr\/records\//.test(pageRaw[name])) {
+    publicationHits++; fail('publication-posture', name, 'public navigation links to the unlisted records route');
   }
 }
 try {
   const sitemap = readFileSync(join(OUT, '..', '..', 'sitemap.xml'), 'utf8');
-  if (/des-moines-alpr/.test(sitemap)) {
-    draftHits++; fail('prepublication', 'sitemap.xml', 'the exhibit routes are in the sitemap before publication');
+  const publicUrls = [
+    'https://restoring-democracy.org/infographics/des-moines-alpr/',
+    'https://restoring-democracy.org/infographics/des-moines-alpr/network/'
+  ];
+  for (const url of publicUrls) {
+    if (sitemap.split(`<loc>${url}</loc>`).length !== 2) {
+      publicationHits++; fail('publication-posture', 'sitemap.xml', `${url} must appear exactly once`);
+    }
   }
-} catch { /* sitemap not reachable from here; skip */ }
+  if (/https:\/\/restoring-democracy\.org\/infographics\/des-moines-alpr\/records\//.test(sitemap)) {
+    publicationHits++; fail('publication-posture', 'sitemap.xml', 'the unlisted records route must stay out of the sitemap');
+  }
+} catch {
+  publicationHits++; fail('publication-posture', 'sitemap.xml', 'the sitemap could not be read');
+}
 {
   const link = JSON.parse(readFileSync(join(HERE, 'content', 'copy.json'), 'utf8')).exhibit.article_link;
   if (link.enabled && !link.url) {
-    draftHits++; fail('prepublication', 'copy.json', 'the article link is enabled with no URL');
+    publicationHits++; fail('publication-posture', 'copy.json', 'the article link is enabled with no URL');
   }
 }
-if (!draftHits) pass('prepublication — noindex on every page, not in the sitemap, no invented article link');
+if (!publicationHits) pass('publication-posture — public routes indexable and listed; unlisted records route unlinked, noindex and omitted from the sitemap');
 
 /* ------------------------------------------------------- PUBLICATION GATES
    Run only with --publish. These are the checks that must pass before the
@@ -484,13 +564,21 @@ if (PUBLISH) {
   if (ror.status !== 'received' && ror.status !== 'closed') {
     gateHits++; fail('PUBLISH-GATE', 'copy.json', `right_of_response.status is "${ror.status}"; responses must be received or the window closed and stated`);
   }
+  /* The reader-facing block states that Sourcewell responded. Publishing that
+     sentence without the response itself would name a responder and withhold
+     what they said, so the gate holds until the approved text is set. */
+  if (/Sourcewell responded/i.test(ror.body || '') && !(ror.sourcewell_statement || '').trim()) {
+    gateHits++; fail('PUBLISH-GATE', 'copy.json',
+      'right_of_response.body states that Sourcewell responded, but right_of_response.sourcewell_statement is empty; paste the exact response or the approved summary');
+  }
   if (!copyJson.exhibit.article_link.enabled || !copyJson.exhibit.article_link.url) {
     gateHits++; fail('PUBLISH-GATE', 'copy.json', 'the article link is not set');
   }
   if (/PROVISIONAL/i.test(JSON.stringify(copyJson))) {
     gateHits++; fail('PUBLISH-GATE', 'copy.json', 'PROVISIONAL copy remains');
   }
-  for (const [name, src] of Object.entries(pageRaw)) {
+  for (const [name] of PUBLIC_PAGES) {
+    const src = pageRaw[name];
     if (/noindex/.test(src)) { gateHits++; fail('PUBLISH-GATE', name, 'still noindex'); }
     if (/class="draft-banner"/.test(src)) { gateHits++; fail('PUBLISH-GATE', name, 'the prepublication banner is still present'); }
   }

@@ -1,5 +1,5 @@
 {
- "_README": "ALL on-screen exhibit prose lives here. Nothing narrative is authored inside build templates. Aligned to article draft v0.4 (2026-09-11): the narrative order below follows the article's movements, and the article controls where it conflicts with the September 2 concept deck. Strings marked PROVISIONAL are expected to change before publication. Banned verbs and the three tightened formulations are enforced by _src/lint.mjs against the rendered HTML.",
+ "_README": "ALL on-screen exhibit prose lives here. Nothing narrative is authored inside build templates. Aligned to article draft v0.4 (2026-09-11): the narrative order below follows the article's movements, and the article controls where it conflicts with the September 2 concept deck. Strings that were held for pre-publication review have been resolved and set. Banned verbs and the three tightened formulations are enforced by _src/lint.mjs against the rendered HTML.",
  "_aligned_to": "01_PAGE_NINE_DRAFT_v0_4.md · 03_DES_MOINES_ALPR_DRAFT_SOURCE_LEDGER_v0_2.md",
 
  "exhibit": {
@@ -8,8 +8,8 @@
   "dek": "How mobile plate readers and a commercially sourced vehicle-location platform settled into routine Des Moines policing — and how little of that a resident could see when the city asked what it could afford to keep.",
   "byline": "Timothy Tucker",
   "byline_note": "From article draft v0.4.",
-  "date_display": "Publication expected the week of 14 September 2026",
-  "date_note": "PROVISIONAL — replace with the publication date once set.",
+  "date_display": "September 19, 2026",
+  "date_note": "Publication date confirmed by the editor: 19 September 2026.",
   "kicker": "RDP Investigation",
   "kicker_topic": "Des Moines ALPR",
   "meta_description": "How mobile plate readers and a commercially sourced vehicle-location platform settled into routine Des Moines policing, and how little of that a resident could see when the city asked what to cut. An interactive companion to RDP's Des Moines ALPR investigation.",
@@ -33,9 +33,11 @@
 
  "right_of_response": {
   "heading": "Right of response",
-  "body": "The City of Des Moines, the Des Moines Police Department, Motorola Solutions, Sourcewell and the Houston-Galveston Area Council were sent detailed questions, with a deadline of 5:00 p.m. Central, Friday, September 11, 2026. Responses are pending; any answer received will be reflected here and in the article.",
-  "status": "pending",
+  "body": "The City of Des Moines, the Des Moines Police Department, Motorola Solutions, Sourcewell and the Houston-Galveston Area Council were sent detailed questions, with a deadline of 5:00 p.m. Central, Friday, September 11, 2026. Sourcewell responded. The City of Des Moines acknowledged the questions and referred them to its public-records process as a new records request, which remained pending at publication; it did not answer them substantively. The Des Moines Police Department provided no separate response. Motorola Solutions and the Houston-Galveston Area Council did not respond. Any further answer will be reflected here and in the article.",
+  "status": "received",
   "deadline_display": "5:00 p.m. Central, Friday, September 11, 2026",
+  "sourcewell_statement": "Sourcewell said it approved WatchGuard’s 2021 addition of license-plate-reader products because the vendor described LPR as a component of its mobile-video and Video-as-a-Service offering, which Sourcewell considered within the solutions-based public-safety video solicitation. Sourcewell said the RFP did not expressly name LPR or ALPR and that its review identified no other documentation associated with that scope decision beyond the executed change request. It reported receiving $53,576.61 in administrative fees attributable to the contract over its life.",
+  "sourcewell_statement_note": "EDITORIALLY OWNED — paste Sourcewell's exact response or the approved summary. The body above states that Sourcewell responded, so the publication gate fails while this is empty; it renders beneath the right-of-response note once set.",
   "note": "EDITORIALLY OWNED — patch this block only. Do not summarise, characterise or anticipate a response that has not been received."
  },
 
@@ -271,7 +273,7 @@
  ],
 
  "publication_gates": [
-  "Right of response — questions are out to the City, DMPD, Motorola Solutions, Sourcewell and H-GAC, with a comment and factual-correction deadline of 5:00 p.m. Central on Friday, 11 September 2026. Responses are pending."
+  "Right of response — the comment and factual-correction window closed at 5:00 p.m. Central on Friday, 11 September 2026. Sourcewell responded; the City of Des Moines acknowledged the questions and referred them to its public-records process; the Des Moines Police Department, Motorola Solutions and the Houston-Galveston Area Council did not answer."
  ],
 
  "_production_notes": {

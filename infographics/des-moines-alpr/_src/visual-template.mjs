@@ -87,12 +87,11 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
     <h1 id="visual-hero-h">WHERE DES MOINES PLATE DATA CAN GO</h1>
     <p class="visual-dek">The map shows the geographic scale of sharing settings in one City export&mdash;not a history of activity.</p>
   </div>
-  <div class="visual-hero-stage">
-    <div class="hero-stats reveal" aria-label="Key totals">
-      <p><strong class="tnum">${totals.agencies}</strong><span>configured relationships</span></p>
-      <p><strong class="tnum">${totals.states_excl_dc}</strong><span>states + D.C.</span></p>
-      <p class="sr-only">The export lists at least ${totals.agencies} agencies configured to share detection data.</p>
-    </div>
+  <figure class="visual-hero-stage map-figure">
+    <figcaption class="map-figure-head reveal">
+      <p class="map-figure-title">A Wider Network</p>
+      <p class="map-figure-sub">ONE CITY. A BROADER SYSTEM.</p>
+    </figcaption>
     <div class="map-shell reveal">
       ${buildMap(stateCounts, esc)}
       <div class="map-readout" id="map-readout">
@@ -100,7 +99,14 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
         <p class="map-readout-value">See its export count</p>
       </div>
     </div>
-  </div>
+    <div class="hero-metrics reveal" aria-label="Key totals">
+      <p class="hero-metric"><strong class="tnum">${totals.agencies}</strong><span>configured detection-sharing relationships</span></p>
+      <p class="hero-metric"><strong class="tnum">${totals.states_excl_dc}</strong><span>states + D.C.</span></p>
+      <p class="hero-metric"><strong class="tnum">${totals.non_iowa}</strong><span>outside Iowa</span></p>
+      <p class="hero-metric"><strong class="tnum">${totals.federal_typed}</strong><span>rows typed federal</span></p>
+      <p class="sr-only">The export lists at least ${totals.agencies} agencies configured to share detection data.</p>
+    </div>
+  </figure>
   <div class="visual-hero-footer reveal">
     <div class="scope-controls" role="group" aria-label="Map scope">
       <button type="button" class="scope-button is-active" data-scope="all" aria-pressed="true">ALL</button>
@@ -108,8 +114,8 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
       <button type="button" class="scope-button" data-scope="outside" aria-pressed="false">OUTSIDE IOWA</button>
     </div>
     <p class="map-caveat"><span aria-hidden="true">i</span> Map shows configured detection-sharing relationships, not searches, views or transfers.</p>
-    <p class="map-context"><span>${totals.non_iowa} outside Iowa</span><span>${totals.federal_typed} rows typed Federal</span><span>${totals.receiving} also configured as receiving</span></p>
-    <p class="hero-source">The August 2026 export records sharing settings. It does not show whether any particular agency searched, viewed or received a Des Moines plate record.</p>
+    <p class="map-context"><span>${totals.receiving} also configured as receiving</span></p>
+    <p class="hero-source">Configured relationships reflect settings in an August 2026 sharing export. Configuration does not establish that an agency searched, viewed, downloaded, or received a particular Des Moines record.</p>
     <nav class="visual-cta-group" aria-label="Continue reading">
       <a class="visual-cta visual-cta--primary" href="${esc(copy.exhibit.article_link.url)}">${esc(copy.exhibit.article_link.label)} <span aria-hidden="true">&rarr;</span></a>
       <a class="visual-cta visual-cta--secondary" href="/infographics/des-moines-alpr/network/">Explore the network <span aria-hidden="true">&rarr;</span></a>
@@ -171,16 +177,45 @@ export function buildVisualPage({ head, foot, esc, stateCounts, nodes, platform,
 </section>
 
 <section class="visual-section three-sources" aria-labelledby="sources-h">
-  <div class="section-heading reveal"><h2 id="sources-h">THREE SOURCES. ONE PLATFORM.</h2></div>
-  <div class="source-stage reveal">
-    <div class="source-stream source-stream--city"><div class="stream-text"><strong>DES MOINES<br>MOBILE / FIXED CAMERAS</strong></div><div class="stream-points" aria-hidden="true"></div></div>
-    <div class="source-stream source-stream--agency"><div class="stream-text"><strong>OTHER AGENCY DATA</strong></div><div class="stream-rings" aria-hidden="true"></div></div>
-    <div class="source-stream source-stream--commercial"><div class="stream-text"><strong>COMMERCIALLY ACQUIRED NATIONAL<br>VEHICLE-LOCATION DATA</strong></div><div class="stream-contours" aria-hidden="true"></div></div>
-    <div class="source-platform"><span aria-hidden="true"></span><strong>VEHICLEMANAGER<br>/ LEARN</strong></div>
+  <div class="section-heading reveal">
+    <h2 id="sources-h">WHAT THE PLATFORM COULD SEARCH IN 2023</h2>
+    <p class="section-subtitle">DIFFERENT SOURCES. A LARGER SEARCHABLE PICTURE.</p>
   </div>
-  <p class="source-caption reveal">Des Moines&rsquo; 2023 subscription included commercially acquired national vehicle-location data.</p>
-  <details class="face-note reveal"><summary>One additional quotation detail</summary><p>The quotation also listed FaceSearch and image tools. Records reviewed do not establish which tools city personnel actually used.</p></details>
-  <p class="sr-only">Visual summary: three differently styled, unlabeled-direction bands converge spatially at the platform. They represent sources available in the platform, not proof that any particular record was used or transferred.</p>
+  <div class="source-stage reveal">
+    <div class="source-stream source-stream--city">
+      <div class="stream-text">
+        <strong>Des Moines ALPR capability</strong>
+        <span class="stream-sub">Fixed and in-car reader systems</span>
+      </div>
+      <p class="stream-kind">LAW-ENFORCEMENT SOURCE &middot; SOLID</p>
+      <div class="stream-points" aria-hidden="true"></div>
+    </div>
+    <div class="source-stream source-stream--agency">
+      <div class="stream-text">
+        <strong>Partner-agency LPR data</strong>
+        <span class="stream-sub">VehicleManager permitted reciprocal sharing</span>
+      </div>
+      <p class="stream-kind">LAW-ENFORCEMENT SOURCE &middot; SOLID</p>
+      <div class="stream-rings" aria-hidden="true"></div>
+    </div>
+    <div class="source-stream source-stream--commercial is-conditional">
+      <div class="stream-text">
+        <strong>Commercial vehicle-location data</strong>
+        <span class="stream-sub">Included in the 2023 package</span>
+        <span class="stream-qualifier">Not established for the 2026 renewal</span>
+      </div>
+      <p class="stream-kind stream-kind--conditional">HISTORICAL 2023 PACKAGE &middot; SHOWN DASHED</p>
+      <div class="stream-contours" aria-hidden="true"></div>
+    </div>
+    <div class="source-platform"><span aria-hidden="true"></span><strong>VehicleManager / LEARN</strong></div>
+  </div>
+  <p class="source-callout reveal">A plate detection could be searched later even if it did not trigger an alert when it was collected.</p>
+  <p class="source-caption reveal">Des Moines&rsquo; 2023 subscription included commercially acquired national vehicle-location data. Records reviewed do not establish that the commercial dataset is part of the 2026 renewal.</p>
+  <div class="source-policy reveal">
+    <p>DMPD says ALPR supports missing or endangered persons, stolen vehicles or plates, and investigative work.</p>
+    <p>Policy says an ALPR alert alone is not sufficient probable cause for a stop.</p>
+  </div>
+  <p class="sr-only">Visual summary: the Des Moines ALPR capability and the reciprocal partner-agency sharing that VehicleManager permitted are shown as law-enforcement sources with solid bands. Both are purchased or contracted capabilities. The reviewed records do not establish that fixed cameras were operating, that in-car readers were enabled, or that partner-agency data was in fact available in 2023. The commercial vehicle-location source is drawn with a dashed band and labelled as part of the 2023 package; its inclusion in the 2026 renewal is not established. The bands converge on the platform to show what the platform could search, not what it did search. Later search is a possibility, not proof of any particular search or transfer, and the sources are not shown as one combined database.</p>
 </section>
 
 <section class="visual-section record-light" aria-labelledby="record-light-h">

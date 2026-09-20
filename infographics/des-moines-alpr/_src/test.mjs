@@ -11,7 +11,7 @@
    ========================================================================= */
 
 import { chromium } from 'playwright';
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -34,6 +34,19 @@ const assert = (cond, n, d) => cond ? ok(n, d) : no(n, d);
 /* PW_CHROMIUM_PATH lets a sandbox with a preinstalled Chromium run the suite
    without downloading a browser; unset, Playwright uses its own download. */
 const browser = await chromium.launch(process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : {});
+
+/* Walk the page so every `.reveal` block has been observed: review captures
+   must show the finished section, not mid-reveal blanks. */
+async function settleReveals(page) {
+  await page.evaluate(async () => {
+    for (let y = 0; y < document.documentElement.scrollHeight; y += Math.max(400, innerHeight * 0.7)) {
+      scrollTo({ top: y, behavior: 'instant' });
+      await new Promise((r) => setTimeout(r, 90));
+    }
+    scrollTo({ top: 0, behavior: 'instant' });
+  });
+  await page.waitForTimeout(400);
+}
 
 /* Scroll a target clear of the sticky masthead before clicking it. */
 async function scrollClear(page, locator) {
@@ -119,6 +132,183 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
 
   assert(errors.length === 0, 'visual companion has no JS errors', errors.join(' | '));
   await ctx.close();
+}
+
+/* ------------------- 1c. figure 2 / figure 3 corrections (article graphics) */
+{
+  const TOTALS = JSON.parse(readFileSync(join(HERE, '..', 'data', 'state_counts.json'), 'utf8')).totals;
+  const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
+  const page = await ctx.newPage();
+  await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+
+  /* ---- figure 2: what the platform could search in 2023 ---- */
+  const fig2 = page.locator('section.three-sources');
+  const fig2Text = (await fig2.innerText()).replace(/\s+/g, ' ');
+
+  assert(fig2Text.includes('WHAT THE PLATFORM COULD SEARCH IN 2023'),
+    'figure 2 is scoped to what the platform could search in 2023');
+  assert(fig2Text.includes('DIFFERENT SOURCES. A LARGER SEARCHABLE PICTURE.'),
+    'figure 2 carries its subtitle');
+
+  /* Capability, not activity: the record establishes what was purchased or
+     contracted for, not that cameras were operating, that in-car readers were
+     enabled, or that partner data was in fact available in 2023. */
+  const cityText = (await page.locator('.source-stream--city').innerText()).replace(/\s+/g, ' ');
+  const agencyText = (await page.locator('.source-stream--agency').innerText()).replace(/\s+/g, ' ');
+  assert(cityText.includes('Des Moines ALPR capability') && cityText.includes('Fixed and in-car reader systems'),
+    'source 1 is labelled as capability, not as detections', cityText);
+  assert(agencyText.includes('Partner-agency LPR data') && agencyText.includes('VehicleManager permitted reciprocal sharing'),
+    'source 2 is labelled as permitted sharing, not as data actually shared', agencyText);
+  assert(!/Des Moines detections|Detections shared by partner agencies/.test(fig2Text),
+    'figure 2 no longer implies 2023 detection or sharing activity');
+  const srSummary = await fig2.locator('.sr-only').innerText();
+  assert(/purchased or contracted capabilit/i.test(srSummary)
+    && /do not establish that fixed cameras were operating/i.test(srSummary)
+    && /what the platform could search, not what it did search/i.test(srSummary),
+    'the screen-reader summary draws the same capability-not-activity distinction');
+
+  const commercial = page.locator('.source-stream--commercial');
+  const commercialText = (await commercial.innerText()).replace(/\s+/g, ' ');
+  assert(commercialText.includes('Included in the 2023 package'),
+    'the commercial source is dated to the 2023 package');
+  assert(commercialText.includes('Not established for the 2026 renewal'),
+    'the commercial source carries its 2026 qualification');
+
+  /* The distinction must survive greyscale: dashed geometry AND a text label,
+     never colour alone. */
+  const borders = await page.evaluate(() => {
+    const style = (sel) => getComputedStyle(document.querySelector(sel)).borderTopStyle;
+    return {
+      commercial: style('.source-stream--commercial'),
+      city: style('.source-stream--city'),
+      agency: style('.source-stream--agency')
+    };
+  });
+  assert(borders.commercial === 'dashed' && borders.city === 'solid' && borders.agency === 'solid',
+    'the commercial source is drawn dashed while both law-enforcement sources stay solid',
+    JSON.stringify(borders));
+  assert(/DASHED/.test(commercialText) && /SOLID/.test((await page.locator('.source-stream--city').innerText())),
+    'the dashed/solid distinction is also stated in text, not carried by colour alone');
+
+  assert(fig2Text.includes('A plate detection could be searched later even if it did not trigger an alert when it was collected.'),
+    'figure 2 carries the later-search callout');
+  assert(!/FaceSearch/i.test(await fig2.innerHTML()),
+    'the face-matching detail is not shown in the explanatory source figure');
+  assert(fig2Text.includes('DMPD says ALPR supports missing or endangered persons, stolen vehicles or plates, and investigative work.')
+    && fig2Text.includes('Policy says an ALPR alert alone is not sufficient probable cause for a stop.'),
+    'figure 2 keeps the policy and permitted-use language visible');
+
+  const fig2Html = await fig2.innerHTML();
+  assert(!/<marker\b|marker-end|marker-start|marker-mid|animateMotion|offset-path|stroke-dashoffset/i.test(fig2Html),
+    'figure 2 introduces no arrowhead, draw-on or motion-along-path cue');
+
+  /* ---- figure 3: a wider network ---- */
+  const hero = page.locator('.visual-hero');
+  const heroText = (await hero.innerText()).replace(/\s+/g, ' ');
+  assert(heroText.includes('A Wider Network') && heroText.includes('ONE CITY. A BROADER SYSTEM.'),
+    'the map carries the A Wider Network figure treatment');
+  assert((await page.locator('h1#visual-hero-h').innerText()).trim() === 'WHERE DES MOINES PLATE DATA CAN GO',
+    'the document-level exhibit H1 is unchanged');
+
+  const metrics = await page.locator('.hero-metric').evaluateAll((els) =>
+    els.map((el) => ({
+      value: el.querySelector('strong').textContent.trim(),
+      label: el.querySelector('span').textContent.trim(),
+      visible: el.getBoundingClientRect().width > 0
+    })));
+  assert(metrics.length === 4, 'the map carries four governed metrics', String(metrics.length));
+  const expected = [
+    [String(TOTALS.agencies), 'configured detection-sharing relationships'],
+    [String(TOTALS.states_excl_dc), 'states + D.C.'],
+    [String(TOTALS.non_iowa), 'outside Iowa'],
+    [String(TOTALS.federal_typed), 'rows typed federal']
+  ];
+  for (const [i, [value, label]] of expected.entries()) {
+    assert(metrics[i] && metrics[i].value === value && metrics[i].label === label && metrics[i].visible,
+      `metric ${i + 1} renders the governed total`, JSON.stringify(metrics[i]));
+  }
+
+  const CAVEAT = 'Configured relationships reflect settings in an August 2026 sharing export. Configuration does not establish that an agency searched, viewed, downloaded, or received a particular Des Moines record.';
+  assert(heroText.includes(CAVEAT), 'the full configuration-not-activity caveat is visible beside the map');
+  assert(await page.locator('.hero-source').isVisible(), 'the caveat is visible without opening anything');
+
+  assert(await page.locator('#relationship-layer [data-relationship]').count() === 0,
+    'figure 3 has no connector at initial load');
+  await page.locator('#visual-map .visual-state[data-state="TX"]').click();
+  const paths = page.locator('#relationship-layer [data-relationship="configured"]');
+  assert(await paths.count() === 1, 'selection still creates exactly one configuration path');
+  assert(await paths.first().getAttribute('marker-end') === null
+    && await paths.first().getAttribute('marker-start') === null,
+    'the selected configuration path stays undirected');
+  await settleReveals(page);
+  await page.locator('.visual-hero').screenshot({ path: join(SHOTS, 'figure3-desktop.png') });
+  await fig2.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(400);
+  await fig2.screenshot({ path: join(SHOTS, 'figure2-desktop.png') });
+  await ctx.close();
+}
+
+/* ------- 1d. figure corrections: reduced motion, no-JS and mobile layout --- */
+{
+  const rm = await browser.newContext({ viewport: VIEWPORTS.desktop, reducedMotion: 'reduce' });
+  const rmPage = await rm.newPage();
+  await rmPage.goto(BASE + '/', { waitUntil: 'networkidle' });
+  const rmStyles = await rmPage.evaluate(() => {
+    const read = (sel) => {
+      const cs = getComputedStyle(document.querySelector(sel));
+      return { opacity: cs.opacity, transition: cs.transitionDuration, transform: cs.transform };
+    };
+    return { metrics: read('.hero-metrics'), sources: read('.source-stage') };
+  });
+  assert(rmStyles.metrics.opacity === '1' && /^0s/.test(rmStyles.metrics.transition) && rmStyles.metrics.transform === 'none'
+    && rmStyles.sources.opacity === '1' && /^0s/.test(rmStyles.sources.transition),
+    'reduced motion: the revised metric row and source figure render immediately',
+    JSON.stringify(rmStyles));
+  await rm.close();
+
+  const nojs = await browser.newContext({ viewport: VIEWPORTS.desktop, javaScriptEnabled: false });
+  const nojsPage = await nojs.newPage();
+  await nojsPage.goto(BASE + '/', { waitUntil: 'domcontentloaded' });
+  const nojsText = (await nojsPage.locator('.visual-hero').innerText()).replace(/\s+/g, ' ');
+  assert(/155\s*configured detection-sharing relationships/.test(nojsText)
+    && /36\s*states \+ D\.C\./.test(nojsText)
+    && /141\s*outside Iowa/.test(nojsText)
+    && /5\s*rows typed federal/.test(nojsText),
+    'no-JS: all four governed metrics are server-rendered');
+  assert(/Configuration does not establish that an agency searched, viewed, downloaded, or received a particular Des Moines record\./.test(nojsText),
+    'no-JS: the full caveat is server-rendered');
+  assert(await nojsPage.locator('.visual-access-table table tbody tr').count() === 37,
+    'no-JS: the map still reads as a 37-jurisdiction list');
+  assert(await nojsPage.locator('#relationship-layer [data-relationship]').count() === 0,
+    'no-JS: no connector is drawn');
+  await nojs.close();
+
+  const mob = await browser.newContext({ viewport: VIEWPORTS.mobile, hasTouch: true, isMobile: true });
+  const mobPage = await mob.newPage();
+  await mobPage.goto(BASE + '/', { waitUntil: 'networkidle' });
+  const overflow = await mobPage.evaluate(() => ({
+    doc: document.documentElement.scrollWidth <= window.innerWidth + 1,
+    metrics: [...document.querySelectorAll('.hero-metric')]
+      .every((el) => el.scrollWidth <= el.clientWidth + 1),
+    streams: [...document.querySelectorAll('.source-stream')]
+      .every((el) => el.scrollWidth <= el.clientWidth + 1)
+  }));
+  assert(overflow.doc, 'mobile: the revised overview has no horizontal page overflow');
+  assert(overflow.metrics && overflow.streams,
+    'mobile: no metric or source card clips its own text', JSON.stringify(overflow));
+  const mobMetric = await mobPage.locator('.hero-metric').first().evaluate((el) => ({
+    font: parseFloat(getComputedStyle(el.querySelector('span')).fontSize),
+    w: el.getBoundingClientRect().width
+  }));
+  assert(mobMetric.font >= 14 && mobMetric.w >= 120,
+    'mobile: metric labels keep an accessible type size and column width', JSON.stringify(mobMetric));
+  await settleReveals(mobPage);
+  const fig2m = mobPage.locator('section.three-sources');
+  await fig2m.scrollIntoViewIfNeeded();
+  await mobPage.waitForTimeout(400);
+  await fig2m.screenshot({ path: join(SHOTS, 'figure2-mobile.png') });
+  await mobPage.locator('.visual-hero').screenshot({ path: join(SHOTS, 'figure3-mobile.png') });
+  await mob.close();
 }
 
 /* ------------------------------------------- 2. network explorer behaviour */
@@ -292,6 +482,10 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
     assert(await page.title() === item.title, `metadata: route-specific title · ${item.canonical}`);
     assert(await page.locator('meta[name="description"]').getAttribute('content') === item.description,
       `metadata: route-specific description · ${item.canonical}`);
+    assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'index,follow',
+      `metadata: public route is indexable · ${item.canonical}`);
+    assert(await page.locator('.draft-banner').count() === 0,
+      `metadata: no prepublication banner · ${item.canonical}`);
     assert(await page.locator('link[rel="canonical"]').count() === 1 &&
       await page.locator('link[rel="canonical"]').getAttribute('href') === item.canonical,
       `metadata: one production canonical · ${item.canonical}`);
@@ -309,6 +503,14 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
     assert(shared.url === item.canonical && shared.title === item.title,
       `share button uses canonical URL without preview/query/hash · ${item.canonical}`,
       JSON.stringify(shared));
+
+    const storyHrefs = await page.locator('a').evaluateAll((links) => links
+      .filter((link) => /^read the full story\b/i.test(link.textContent.trim()))
+      .map((link) => link.href));
+    assert(storyHrefs.length > 0 && storyHrefs.every((href) =>
+      href === 'https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader'),
+    `every Read the full story link uses the approved destination · ${item.canonical}`,
+    JSON.stringify(storyHrefs));
   }
 
   const imageOk = await page.evaluate(async () => {
@@ -321,11 +523,49 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   await ctx.close();
 }
 
+/* -------------------- 3c. right of response reaches every route ---------- */
+{
+  const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
+  const page = await ctx.newPage();
+  for (const route of ['/', '/network/', '/records/']) {
+    await page.goto(BASE + route, { waitUntil: 'networkidle' });
+    const block = page.locator('#rorBlock');
+    assert(await block.count() === 1, `right of response appears exactly once · ${route}`,
+      String(await block.count()));
+    const text = (await block.innerText()).replace(/\s+/g, ' ');
+    assert(/Sourcewell responded\./.test(text)
+      && /did not respond/.test(text)
+      && /public-records process/.test(text),
+      `right of response states the actual disposition · ${route}`);
+    assert(!/Responses are pending/i.test(await page.content()),
+      `no prepublication response language · ${route}`);
+    const statement = page.locator('#rorSourcewell');
+    assert(await statement.count() === 1, `Sourcewell's response is published · ${route}`);
+    const stext = (await statement.innerText()).replace(/\s+/g, ' ');
+    assert(/Sourcewell said it approved WatchGuard/.test(stext)
+      && /did not expressly name LPR or ALPR/.test(stext)
+      && /\$53,576\.61 in administrative fees/.test(stext),
+      `the Sourcewell statement renders in full · ${route}`, stext.slice(0, 100));
+    const footer = (await page.locator('footer').innerText()).replace(/\s+/g, ' ');
+    assert(/Published September 19, 2026/.test(footer),
+      `the publication date is visible · ${route}`, footer.slice(0, 120));
+  }
+  await ctx.close();
+}
+
 /* ------------------------------------------------------- 4. records page */
 {
   const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
   const page = await ctx.newPage();
   await page.goto(BASE + '/records/', { waitUntil: 'networkidle' });
+  assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'noindex,nofollow',
+    'unlisted records route remains noindex,nofollow');
+  const recordStoryHrefs = await page.locator('a').evaluateAll((links) => links
+    .filter((link) => /^read the full story\b/i.test(link.textContent.trim()))
+    .map((link) => link.href));
+  assert(recordStoryHrefs.length > 0 && recordStoryHrefs.every((href) =>
+    href === 'https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader'),
+  'unlisted record footer preserves the approved story destination', JSON.stringify(recordStoryHrefs));
   assert(await page.locator('.mode-panel:not([hidden])').count() === 1, 'one record view visible at a time');
   await page.locator('.mode-btn[data-mode="parts"]').click();
   await page.waitForTimeout(150);

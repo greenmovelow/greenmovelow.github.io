@@ -1,7 +1,7 @@
 # Des Moines ALPR exhibit
 
-Prepublication draft. **Not published, not deployed, not merged.**
-Branch: `claude/dsm-alpr-page-nine`.
+The overview and network explorer are configured as public, indexable routes.
+The retained records artifact remains internal, unlinked and `noindex`.
 
 Aligned to article draft **v0.4** (2026-09-11; first aligned to v0.2, 2026-09-07). The article's narrative order
 controls where it conflicts with the September 2 concept deck: the exhibit now
@@ -119,13 +119,14 @@ asserts the same totals again against the shipped JSON.
 12. the three formulations narrowed in the article's v0.2 precision pass, and the
     superseded `$157,500` services figure
 13. incomplete purchase arithmetic, or `4.5%` without the corrected `4.51`
-14. a lost prepublication posture: missing `noindex`, missing banner, routes in
-    the sitemap, or an article link enabled with no URL
+14. a lost publication posture: overview/network not `index,follow` or absent
+    from the sitemap; records linked, indexable, or present in the sitemap; or
+    an article link enabled with no URL
 
-`--publish` adds the publication gates — right of response resolved, article
-linked, no PROVISIONAL copy, `noindex` and banner removed. They are **not** part
-of the ordinary run, so a draft PR builds and lints cleanly while responses are
-still pending.
+`--publish` adds the editorial publication gates — right of response resolved,
+article linked, no PROVISIONAL copy, and public pages indexable without a draft
+banner. They are **not** part of the ordinary run, so the mechanical release
+checks remain independently testable while editorial items are still pending.
 
 Two regions are marked `data-lint-exempt` because they quote guarded language in
 order to explain it: the corrections table and the "language this exhibit does

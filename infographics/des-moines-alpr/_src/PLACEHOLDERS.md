@@ -12,7 +12,7 @@ deliberate gap. Nothing here was guessed at. Search
 | Dek | `exhibit.dek` | **Set** — from the article |
 | Byline | `exhibit.byline` | **Set** — Timothy Tucker |
 | Publication date | `exhibit.date_display` | PROVISIONAL — "the week of 14 September 2026" |
-| Article link | `exhibit.article_link` | PROVISIONAL — `enabled:false`, empty URL. **No slug has been invented.** |
+| Article link | `exhibit.article_link` | **Set** — editor-supplied investigation URL. |
 
 Chapter body and consequence text follows the article's movements and wording
 and is publication-safe as written. It remains exhibit copy, not article copy,
@@ -95,8 +95,11 @@ Sourcewell sales workbooks.
 
 1. **Right of response** — open until 11 September 2026, 5:00 p.m. Central.
 2. **Prior-reporting sweep** — not done.
-3. **Article integration** — publication date and article URL not set.
+3. **Article integration** — publication date not set; article URL set.
 4. **Facsimile coverage** — ten crops shipped; the rest state their absence.
 
-Until these close, every page carries `noindex,nofollow` and a prepublication
-banner, and the routes stay out of `sitemap.xml`.
+The mechanical release is prepared: the overview and network explorer are
+`index,follow` and listed in `sitemap.xml`; the retained records artifact stays
+unlinked, `noindex,nofollow`, and absent from the sitemap. Publication lint
+continues to report the unresolved editorial gates rather than fabricating a
+resolution.

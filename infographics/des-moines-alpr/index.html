@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Where Des Moines Plate Data Can Go | Restoring Democracy's Promise</title>
 <meta name="description" content="An interactive visual investigation of Des Moines’ plate-reader system—mobile and fixed collection, searchable vehicle-location data, and 155 configured sharing relationships across 36 states and the District of Columbia.">
-<!-- PROVISIONAL: unpublished prototype. Indexing is disabled until the exhibit is cleared for publication. -->
-<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://restoring-democracy.org/infographics/des-moines-alpr/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Restoring Democracy's Promise">
@@ -118,12 +117,11 @@
     <h1 id="visual-hero-h">WHERE DES MOINES PLATE DATA CAN GO</h1>
     <p class="visual-dek">The map shows the geographic scale of sharing settings in one City export&mdash;not a history of activity.</p>
   </div>
-  <div class="visual-hero-stage">
-    <div class="hero-stats reveal" aria-label="Key totals">
-      <p><strong class="tnum">155</strong><span>configured relationships</span></p>
-      <p><strong class="tnum">36</strong><span>states + D.C.</span></p>
-      <p class="sr-only">The export lists at least 155 agencies configured to share detection data.</p>
-    </div>
+  <figure class="visual-hero-stage map-figure">
+    <figcaption class="map-figure-head reveal">
+      <p class="map-figure-title">A Wider Network</p>
+      <p class="map-figure-sub">ONE CITY. A BROADER SYSTEM.</p>
+    </figcaption>
     <div class="map-shell reveal">
       <svg id="visual-map" class="visual-map" viewBox="0 0 960 600" role="img" aria-labelledby="map-title map-desc">
     <title id="map-title">Configured detection-sharing relationships by state</title>
@@ -196,7 +194,14 @@
         <p class="map-readout-value">See its export count</p>
       </div>
     </div>
-  </div>
+    <div class="hero-metrics reveal" aria-label="Key totals">
+      <p class="hero-metric"><strong class="tnum">155</strong><span>configured detection-sharing relationships</span></p>
+      <p class="hero-metric"><strong class="tnum">36</strong><span>states + D.C.</span></p>
+      <p class="hero-metric"><strong class="tnum">141</strong><span>outside Iowa</span></p>
+      <p class="hero-metric"><strong class="tnum">5</strong><span>rows typed federal</span></p>
+      <p class="sr-only">The export lists at least 155 agencies configured to share detection data.</p>
+    </div>
+  </figure>
   <div class="visual-hero-footer reveal">
     <div class="scope-controls" role="group" aria-label="Map scope">
       <button type="button" class="scope-button is-active" data-scope="all" aria-pressed="true">ALL</button>
@@ -204,8 +209,8 @@
       <button type="button" class="scope-button" data-scope="outside" aria-pressed="false">OUTSIDE IOWA</button>
     </div>
     <p class="map-caveat"><span aria-hidden="true">i</span> Map shows configured detection-sharing relationships, not searches, views or transfers.</p>
-    <p class="map-context"><span>141 outside Iowa</span><span>5 rows typed Federal</span><span>120 also configured as receiving</span></p>
-    <p class="hero-source">The August 2026 export records sharing settings. It does not show whether any particular agency searched, viewed or received a Des Moines plate record.</p>
+    <p class="map-context"><span>120 also configured as receiving</span></p>
+    <p class="hero-source">Configured relationships reflect settings in an August 2026 sharing export. Configuration does not establish that an agency searched, viewed, downloaded, or received a particular Des Moines record.</p>
     <nav class="visual-cta-group" aria-label="Continue reading">
       <a class="visual-cta visual-cta--primary" href="https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader">Read the full story <span aria-hidden="true">&rarr;</span></a>
       <a class="visual-cta visual-cta--secondary" href="/infographics/des-moines-alpr/network/">Explore the network <span aria-hidden="true">&rarr;</span></a>
@@ -274,16 +279,45 @@
 </section>
 
 <section class="visual-section three-sources" aria-labelledby="sources-h">
-  <div class="section-heading reveal"><h2 id="sources-h">THREE SOURCES. ONE PLATFORM.</h2></div>
-  <div class="source-stage reveal">
-    <div class="source-stream source-stream--city"><div class="stream-text"><strong>DES MOINES<br>MOBILE / FIXED CAMERAS</strong></div><div class="stream-points" aria-hidden="true"></div></div>
-    <div class="source-stream source-stream--agency"><div class="stream-text"><strong>OTHER AGENCY DATA</strong></div><div class="stream-rings" aria-hidden="true"></div></div>
-    <div class="source-stream source-stream--commercial"><div class="stream-text"><strong>COMMERCIALLY ACQUIRED NATIONAL<br>VEHICLE-LOCATION DATA</strong></div><div class="stream-contours" aria-hidden="true"></div></div>
-    <div class="source-platform"><span aria-hidden="true"></span><strong>VEHICLEMANAGER<br>/ LEARN</strong></div>
+  <div class="section-heading reveal">
+    <h2 id="sources-h">WHAT THE PLATFORM COULD SEARCH IN 2023</h2>
+    <p class="section-subtitle">DIFFERENT SOURCES. A LARGER SEARCHABLE PICTURE.</p>
   </div>
-  <p class="source-caption reveal">Des Moines&rsquo; 2023 subscription included commercially acquired national vehicle-location data.</p>
-  <details class="face-note reveal"><summary>One additional quotation detail</summary><p>The quotation also listed FaceSearch and image tools. Records reviewed do not establish which tools city personnel actually used.</p></details>
-  <p class="sr-only">Visual summary: three differently styled, unlabeled-direction bands converge spatially at the platform. They represent sources available in the platform, not proof that any particular record was used or transferred.</p>
+  <div class="source-stage reveal">
+    <div class="source-stream source-stream--city">
+      <div class="stream-text">
+        <strong>Des Moines ALPR capability</strong>
+        <span class="stream-sub">Fixed and in-car reader systems</span>
+      </div>
+      <p class="stream-kind">LAW-ENFORCEMENT SOURCE &middot; SOLID</p>
+      <div class="stream-points" aria-hidden="true"></div>
+    </div>
+    <div class="source-stream source-stream--agency">
+      <div class="stream-text">
+        <strong>Partner-agency LPR data</strong>
+        <span class="stream-sub">VehicleManager permitted reciprocal sharing</span>
+      </div>
+      <p class="stream-kind">LAW-ENFORCEMENT SOURCE &middot; SOLID</p>
+      <div class="stream-rings" aria-hidden="true"></div>
+    </div>
+    <div class="source-stream source-stream--commercial is-conditional">
+      <div class="stream-text">
+        <strong>Commercial vehicle-location data</strong>
+        <span class="stream-sub">Included in the 2023 package</span>
+        <span class="stream-qualifier">Not established for the 2026 renewal</span>
+      </div>
+      <p class="stream-kind stream-kind--conditional">HISTORICAL 2023 PACKAGE &middot; SHOWN DASHED</p>
+      <div class="stream-contours" aria-hidden="true"></div>
+    </div>
+    <div class="source-platform"><span aria-hidden="true"></span><strong>VehicleManager / LEARN</strong></div>
+  </div>
+  <p class="source-callout reveal">A plate detection could be searched later even if it did not trigger an alert when it was collected.</p>
+  <p class="source-caption reveal">Des Moines&rsquo; 2023 subscription included commercially acquired national vehicle-location data. Records reviewed do not establish that the commercial dataset is part of the 2026 renewal.</p>
+  <div class="source-policy reveal">
+    <p>DMPD says ALPR supports missing or endangered persons, stolen vehicles or plates, and investigative work.</p>
+    <p>Policy says an ALPR alert alone is not sufficient probable cause for a stop.</p>
+  </div>
+  <p class="sr-only">Visual summary: the Des Moines ALPR capability and the reciprocal partner-agency sharing that VehicleManager permitted are shown as law-enforcement sources with solid bands. Both are purchased or contracted capabilities. The reviewed records do not establish that fixed cameras were operating, that in-car readers were enabled, or that partner-agency data was in fact available in 2023. The commercial vehicle-location source is drawn with a dashed band and labelled as part of the 2023 package; its inclusion in the 2026 renewal is not established. The bands converge on the platform to show what the platform could search, not what it did search. Later search is a possibility, not proof of any particular search or transfer, and the sources are not shown as one combined database.</p>
 </section>
 
 <section class="visual-section record-light" aria-labelledby="record-light-h">
@@ -340,8 +374,20 @@
         <a href="mailto:webmaster@restoring-democracy.org" class="mt-2 inline-block text-brand-orange hover:text-brand-gold transition">webmaster@restoring-democracy.org</a>
       </div>
     </div>
+    <!-- ================== RIGHT OF RESPONSE ==================
+         Editorially owned; patch _src/content/copy.json -> right_of_response
+         only. Do not summarise, characterise or anticipate a response that has
+         not been received. It sits in the shared footer so that every served
+         route carries it exactly once. -->
+    <div class="border-t border-brand-sand/10 pt-6 mb-6" id="rorBlock" data-ror-status="received">
+      <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">Right of response</h4>
+      <p class="text-sm text-brand-sand/80 max-w-4xl">The City of Des Moines, the Des Moines Police Department, Motorola Solutions, Sourcewell and the Houston-Galveston Area Council were sent detailed questions, with a deadline of 5:00 p.m. Central, Friday, September 11, 2026. Sourcewell responded. The City of Des Moines acknowledged the questions and referred them to its public-records process as a new records request, which remained pending at publication; it did not answer them substantively. The Des Moines Police Department provided no separate response. Motorola Solutions and the Houston-Galveston Area Council did not respond. Any further answer will be reflected here and in the article.</p>
+      <p class="text-sm text-brand-sand/80 max-w-4xl mt-3" id="rorSourcewell"><strong class="text-brand-sand">Sourcewell&rsquo;s response.</strong> Sourcewell said it approved WatchGuard’s 2021 addition of license-plate-reader products because the vendor described LPR as a component of its mobile-video and Video-as-a-Service offering, which Sourcewell considered within the solutions-based public-safety video solicitation. Sourcewell said the RFP did not expressly name LPR or ALPR and that its review identified no other documentation associated with that scope decision beyond the executed change request. It reported receiving $53,576.61 in administrative fees attributable to the contract over its life.</p>
+    </div>
+    <!-- ================== END RIGHT OF RESPONSE ================== -->
     <div class="border-t border-brand-sand/10 pt-6 text-center">
-      <p class="text-xs text-brand-sand/50">&copy; 2023&ndash;2026 Restoring Democracy's Promise. All rights reserved.</p>
+      <p class="text-xs text-brand-sand/50">Published September 19, 2026 &nbsp;&middot;&nbsp; Timothy Tucker</p>
+      <p class="text-xs text-brand-sand/50 mt-1">&copy; 2023&ndash;2026 Restoring Democracy's Promise. All rights reserved.</p>
     </div>
   </div>
 </footer>
