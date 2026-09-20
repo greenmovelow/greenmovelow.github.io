@@ -22,7 +22,7 @@ const PAGES = [
   ['records/index.html', join(OUT, 'records', 'index.html')]
 ];
 const PUBLIC_PAGES = PAGES.filter(([name]) => name !== 'records/index.html');
-const INTERNAL_PAGES = PAGES.filter(([name]) => name === 'records/index.html');
+const UNLISTED_PAGES = PAGES.filter(([name]) => name === 'records/index.html');
 const ASSETS = ['exhibit.css', 'exhibit.js', 'network.js', 'visual.css', 'visual.js']
   .map((f) => [`assets/${f}`, join(OUT, 'assets', f)]);
 
@@ -503,8 +503,10 @@ if (!metaHits) pass('metadata-seo — route-specific titles/descriptions, produc
 
 /* ----------------------------------------------------------------- rule 11
    Publication posture. The overview and network explorer are public. The
-   retained records artifact remains internal: noindex and absent from public
-   navigation and the sitemap. */
+   retained records artifact stays UNLISTED: noindex, absent from public
+   navigation and absent from the sitemap. Unlisted is not private — anyone
+   with the URL can still reach it, so nothing may be published there that
+   could not stand being read. */
 let publicationHits = 0;
 for (const [name] of PUBLIC_PAGES) {
   const src = pageRaw[name];
@@ -515,15 +517,15 @@ for (const [name] of PUBLIC_PAGES) {
     publicationHits++; fail('publication-posture', name, 'prepublication marker remains on a public route');
   }
 }
-for (const [name] of INTERNAL_PAGES) {
+for (const [name] of UNLISTED_PAGES) {
   const src = pageRaw[name];
   if (!/name="robots" content="noindex,nofollow"/.test(src)) {
-    publicationHits++; fail('publication-posture', name, 'the internal records route must remain noindex,nofollow');
+    publicationHits++; fail('publication-posture', name, 'the unlisted records route must remain noindex,nofollow');
   }
 }
 for (const [name] of PUBLIC_PAGES) {
   if (/href="\/infographics\/des-moines-alpr\/records\//.test(pageRaw[name])) {
-    publicationHits++; fail('publication-posture', name, 'public navigation links to the internal records route');
+    publicationHits++; fail('publication-posture', name, 'public navigation links to the unlisted records route');
   }
 }
 try {
@@ -538,7 +540,7 @@ try {
     }
   }
   if (/https:\/\/restoring-democracy\.org\/infographics\/des-moines-alpr\/records\//.test(sitemap)) {
-    publicationHits++; fail('publication-posture', 'sitemap.xml', 'the internal records route must stay out of the sitemap');
+    publicationHits++; fail('publication-posture', 'sitemap.xml', 'the unlisted records route must stay out of the sitemap');
   }
 } catch {
   publicationHits++; fail('publication-posture', 'sitemap.xml', 'the sitemap could not be read');
@@ -549,7 +551,7 @@ try {
     publicationHits++; fail('publication-posture', 'copy.json', 'the article link is enabled with no URL');
   }
 }
-if (!publicationHits) pass('publication-posture — public routes indexable and listed; internal records route unlinked, noindex and omitted');
+if (!publicationHits) pass('publication-posture — public routes indexable and listed; unlisted records route unlinked, noindex and omitted from the sitemap');
 
 /* ------------------------------------------------------- PUBLICATION GATES
    Run only with --publish. These are the checks that must pass before the
@@ -561,6 +563,13 @@ if (PUBLISH) {
   const ror = copyJson.right_of_response;
   if (ror.status !== 'received' && ror.status !== 'closed') {
     gateHits++; fail('PUBLISH-GATE', 'copy.json', `right_of_response.status is "${ror.status}"; responses must be received or the window closed and stated`);
+  }
+  /* The reader-facing block states that Sourcewell responded. Publishing that
+     sentence without the response itself would name a responder and withhold
+     what they said, so the gate holds until the approved text is set. */
+  if (/Sourcewell responded/i.test(ror.body || '') && !(ror.sourcewell_statement || '').trim()) {
+    gateHits++; fail('PUBLISH-GATE', 'copy.json',
+      'right_of_response.body states that Sourcewell responded, but right_of_response.sourcewell_statement is empty; paste the exact response or the approved summary');
   }
   if (!copyJson.exhibit.article_link.enabled || !copyJson.exhibit.article_link.url) {
     gateHits++; fail('PUBLISH-GATE', 'copy.json', 'the article link is not set');

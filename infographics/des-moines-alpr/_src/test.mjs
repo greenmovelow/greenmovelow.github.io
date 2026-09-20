@@ -523,19 +523,42 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   await ctx.close();
 }
 
+/* -------------------- 3c. right of response reaches every route ---------- */
+{
+  const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
+  const page = await ctx.newPage();
+  for (const route of ['/', '/network/', '/records/']) {
+    await page.goto(BASE + route, { waitUntil: 'networkidle' });
+    const block = page.locator('#rorBlock');
+    assert(await block.count() === 1, `right of response appears exactly once · ${route}`,
+      String(await block.count()));
+    const text = (await block.innerText()).replace(/\s+/g, ' ');
+    assert(/Sourcewell responded\./.test(text)
+      && /did not respond/.test(text)
+      && /public-records process/.test(text),
+      `right of response states the actual disposition · ${route}`);
+    assert(!/Responses are pending/i.test(await page.content()),
+      `no prepublication response language · ${route}`);
+    const footer = (await page.locator('footer').innerText()).replace(/\s+/g, ' ');
+    assert(/Published September 19, 2026/.test(footer),
+      `the publication date is visible · ${route}`, footer.slice(0, 120));
+  }
+  await ctx.close();
+}
+
 /* ------------------------------------------------------- 4. records page */
 {
   const ctx = await browser.newContext({ viewport: VIEWPORTS.desktop });
   const page = await ctx.newPage();
   await page.goto(BASE + '/records/', { waitUntil: 'networkidle' });
   assert(await page.locator('meta[name="robots"]').getAttribute('content') === 'noindex,nofollow',
-    'internal records route remains noindex,nofollow');
+    'unlisted records route remains noindex,nofollow');
   const recordStoryHrefs = await page.locator('a').evaluateAll((links) => links
     .filter((link) => /^read the full story\b/i.test(link.textContent.trim()))
     .map((link) => link.href));
   assert(recordStoryHrefs.length > 0 && recordStoryHrefs.every((href) =>
     href === 'https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader'),
-  'internal record footer preserves the approved story destination', JSON.stringify(recordStoryHrefs));
+  'unlisted record footer preserves the approved story destination', JSON.stringify(recordStoryHrefs));
   assert(await page.locator('.mode-panel:not([hidden])').count() === 1, 'one record view visible at a time');
   await page.locator('.mode-btn[data-mode="parts"]').click();
   await page.waitForTimeout(150);

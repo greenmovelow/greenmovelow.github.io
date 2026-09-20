@@ -174,7 +174,7 @@ function head({ title, description, canonical, sections, key, extraStyles = '' }
   const depth = key === 'index' || key === 'overview' ? '' : '../';
   const robots = key === 'overview' || key === 'network'
     ? '<meta name="robots" content="index,follow">'
-    : '<!-- Internal editorial record. Excluded from public navigation and search indexing. -->\n<meta name="robots" content="noindex,nofollow">';
+    : '<!-- Unlisted editorial record: kept out of public navigation and search indexing. It remains publicly reachable by URL; it is not private. -->\n<meta name="robots" content="noindex,nofollow">';
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -339,8 +339,22 @@ ${omitReceipts ? '' : noJsReceipts(receiptIds)}
         <a href="mailto:webmaster@restoring-democracy.org" class="mt-2 inline-block text-brand-orange hover:text-brand-gold transition">webmaster@restoring-democracy.org</a>
       </div>
     </div>
+    <!-- ================== RIGHT OF RESPONSE ==================
+         Editorially owned; patch _src/content/copy.json -> right_of_response
+         only. Do not summarise, characterise or anticipate a response that has
+         not been received. It sits in the shared footer so that every served
+         route carries it exactly once. -->
+    <div class="border-t border-brand-sand/10 pt-6 mb-6" id="rorBlock" data-ror-status="${esc(copy.right_of_response.status)}">
+      <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/70 mb-3">${esc(copy.right_of_response.heading)}</h4>
+      <p class="text-sm text-brand-sand/80 max-w-4xl">${esc(copy.right_of_response.body)}</p>
+${(copy.right_of_response.sourcewell_statement || '').trim()
+  ? `      <p class="text-sm text-brand-sand/80 max-w-4xl mt-3" id="rorSourcewell"><strong class="text-brand-sand">Sourcewell&rsquo;s response.</strong> ${esc(copy.right_of_response.sourcewell_statement.trim())}</p>`
+  : ''}
+    </div>
+    <!-- ================== END RIGHT OF RESPONSE ================== -->
     <div class="border-t border-brand-sand/10 pt-6 text-center">
-      <p class="text-xs text-brand-sand/50">&copy; 2023&ndash;2026 Restoring Democracy's Promise. All rights reserved.</p>
+      <p class="text-xs text-brand-sand/50">Published ${esc(copy.exhibit.date_display)} &nbsp;&middot;&nbsp; ${esc(copy.exhibit.byline)}</p>
+      <p class="text-xs text-brand-sand/50 mt-1">&copy; 2023&ndash;2026 Restoring Democracy's Promise. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -665,14 +679,9 @@ function buildIndex() {
       <h3>How to read this exhibit</h3>
       <p>${esc(copy.standing.how_to_read)}</p>
     </div>
-    <!-- ================== RIGHT OF RESPONSE ==================
-         RIGHT OF RESPONSE - STATUS COPY. Editorially owned; patch
-         _src/content/copy.json -> right_of_response only. Do not summarise,
-         characterise or anticipate a response that has not been received.
-         This is the single reader-visible statement of the response status;
-         it is deliberately placed at the top of the page and nowhere else. -->
-    <p class="ror-note" id="rorBlock" data-ror-status="${esc(copy.right_of_response.status)}"><strong>${esc(copy.right_of_response.heading)}.</strong> ${esc(copy.right_of_response.body)}</p>
-    <!-- ================== END RIGHT OF RESPONSE ================== -->
+    <!-- The right-of-response statement now lives in the shared footer, so
+         every served route carries it exactly once. This retired narrative
+         page must not emit a second copy. -->
   </div>
 </section>
 
