@@ -4,7 +4,8 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --minify",
     "test:sitemap": "python scripts/audit_sitemap.py",
-    "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --watch"
+    "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --watch",
+    "test:takeoff": "node scripts/test_takeoff_engine.mjs"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
