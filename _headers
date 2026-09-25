@@ -1,4 +1,22 @@
 # Netlify custom headers
+# Text companions have an HTML canonical URL and do not opt into AI training.
+/index.md
+  Content-Type: text/markdown; charset=utf-8
+  Link: <https://restoring-democracy.org/>; rel="canonical"
+  Content-Signal: ai-train=no, search=yes, ai-input=yes
+/about/index.md
+  Content-Type: text/markdown; charset=utf-8
+  Link: <https://restoring-democracy.org/about/>; rel="canonical"
+  Content-Signal: ai-train=no, search=yes, ai-input=yes
+/corrections/index.md
+  Content-Type: text/markdown; charset=utf-8
+  Link: <https://restoring-democracy.org/corrections/>; rel="canonical"
+  Content-Signal: ai-train=no, search=yes, ai-input=yes
+/analytics/index.md
+  Content-Type: text/markdown; charset=utf-8
+  Link: <https://restoring-democracy.org/analytics/>; rel="canonical"
+  Content-Signal: ai-train=no, search=yes, ai-input=yes
+
 # Cache the feed JSON at CDN/browser for 15 min, serve stale while revalidating.
 /latest-investigations.json
   Cache-Control: public, max-age=900, stale-while-revalidate=3600

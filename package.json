@@ -3,10 +3,14 @@
   "private": true,
   "scripts": {
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --minify",
+    "build:markdown": "node scripts/build_markdown.js",
+    "test:markdown": "node scripts/build_markdown.js --check",
     "test:sitemap": "python scripts/audit_sitemap.py",
     "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --watch"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.17"
+    "linkedom": "^0.18.13",
+    "tailwindcss": "^3.4.17",
+    "turndown": "^7.2.4"
   }
 }
