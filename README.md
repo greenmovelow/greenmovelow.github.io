@@ -47,6 +47,19 @@ This is a modern static website built for speed, readability, security, and long
 
 ## Editorial Standards
 
+### Markdown companions
+
+The homepage, About, Corrections, and Analytics pages have generated Markdown
+companions at `/index.md`, `/about/index.md`, `/corrections/index.md`, and
+`/analytics/index.md`. They are derived from the public HTML source, carry
+canonical links back to the HTML pages, and are advertised through
+`rel="alternate"` links. The homepage companion links to the live archive in
+place of the JavaScript-powered latest-feed fallback.
+
+After editing one of these HTML files, run `npm run build:markdown` and commit
+the updated `.md` file. `npm run test:markdown` checks for drift; the PR workflow
+runs that check automatically. This pilot does not cover Substack articles.
+
 Restoring Democracy’s Promise emphasizes:
 
 - primary documents whenever possible;
