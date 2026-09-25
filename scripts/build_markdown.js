@@ -7,7 +7,7 @@ const TurndownService = require('turndown');
 
 const root = path.resolve(__dirname, '..');
 const site = 'https://restoring-democracy.org';
-const pages = ['/', '/about/', '/corrections/', '/analytics/'];
+const pages = ['/', '/about/', '/corrections/', '/analytics/', '/team/', '/ai-use/'];
 const check = process.argv.includes('--check');
 let stale = false;
 
@@ -23,6 +23,8 @@ for (const pathname of pages) {
   // Retain the published editorial body and links, omitting site chrome and
   // scripts that cannot be represented usefully in a text document.
   const body = document.body;
+  // A keyboard skip link is useful in HTML but not in a linear document.
+  if (pathname === '/ai-use/') body.querySelector('.skip-link')?.remove();
   if (pathname === '/') {
     // The browser replaces this old HTML fallback with a live JSON feed. A
     // static Markdown copy would otherwise advertise months-old stories.

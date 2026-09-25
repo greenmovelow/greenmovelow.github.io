@@ -7,10 +7,14 @@ on:
       - about/index.html
       - corrections/index.html
       - analytics/index.html
+      - team/index.html
+      - ai-use/index.html
       - index.md
       - about/index.md
       - corrections/index.md
       - analytics/index.md
+      - team/index.md
+      - ai-use/index.md
       - scripts/build_markdown.js
       - package.json
       - package-lock.json
@@ -21,10 +25,14 @@ on:
       - about/index.html
       - corrections/index.html
       - analytics/index.html
+      - team/index.html
+      - ai-use/index.html
       - index.md
       - about/index.md
       - corrections/index.md
       - analytics/index.md
+      - team/index.md
+      - ai-use/index.md
       - scripts/build_markdown.js
       - package.json
       - package-lock.json
