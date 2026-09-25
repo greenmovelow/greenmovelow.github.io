@@ -16,6 +16,14 @@
   Content-Type: text/markdown; charset=utf-8
   Link: <https://restoring-democracy.org/analytics/>; rel="canonical"
   Content-Signal: ai-train=no, search=yes, ai-input=yes
+/team/index.md
+  Content-Type: text/markdown; charset=utf-8
+  Link: <https://restoring-democracy.org/team/>; rel="canonical"
+  Content-Signal: ai-train=no, search=yes, ai-input=yes
+/ai-use/index.md
+  Content-Type: text/markdown; charset=utf-8
+  Link: <https://restoring-democracy.org/ai-use/>; rel="canonical"
+  Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 # Cache the feed JSON at CDN/browser for 15 min, serve stale while revalidating.
 /latest-investigations.json
