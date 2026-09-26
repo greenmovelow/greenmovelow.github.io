@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "The Supreme Court Put SAVE Back in Play",
+      "link": "https://investigations.restoring-democracy.org/p/the-supreme-court-put-save-back-in",
+      "date": "2026-09-26",
+      "dateLabel": "Sep 26",
+      "category": "Investigation"
+    },
+    {
       "title": "Des Moines Expanded Plate Reader Use, Then Asked What to Cut",
       "link": "https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader",
       "date": "2026-09-20",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/a-court-struck-down-trumps-voterscreening",
       "date": "2026-06-25",
       "dateLabel": "Jun 25",
-      "category": "Investigation"
-    },
-    {
-      "title": "Iowa’s $46 Billion Pension Fund Paid Its CIO “Exceptional” Performance Pay — No One Will Say Why",
-      "link": "https://investigations.restoring-democracy.org/p/iowas-46-billion-pension-fund-paid",
-      "date": "2026-06-13",
-      "dateLabel": "Jun 13",
       "category": "Investigation"
     }
   ]
