@@ -84,11 +84,23 @@ Also see our [corrections and updates policy](https://restoring-democracy.org/co
 
 Publication profile: [Restoring Democracy's Promise on Muck Rack](https://muckrack.com/media-outlet/restoring-democracy)
 
-## Contact
+Get in touch
 
-For partnership inquiries, collaboration, research access, media requests, corrections, or other serious inquiries, please use the contact form.
+## Contact Restoring Democracy’s Promise
 
-We review submissions selectively based on fit, timing, and capacity.
+For general, media, partnership, syndication, speaking, or publishing inquiries:
+
+Phone
+
+[754-293-6975](tel:+17542936975)
+
+Email
+
+[webmaster@restoring-democracy.org](mailto:webmaster@restoring-democracy.org)
+
+For confidential sources or sensitive material, use our [Secure Tips](https://restoring-democracy.org/secure-tips/) page. Standard phone and email channels should not be treated as secure.
+
+You may also send a general inquiry through our contact form.
 
 [Contact Us](https://tally.so/r/yPDJy6)
 
