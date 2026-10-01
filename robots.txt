@@ -24,6 +24,8 @@
 User-agent: *
 Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference
 Allow: /
+# The takeoff workbench is a working tool, not published reporting.
+Disallow: /takeoff/
 
 # ============================================================
 # GOOGLE
