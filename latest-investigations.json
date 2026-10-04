@@ -2,6 +2,13 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Hinson’s campaign took $24,500 from detention companies’ PACs and their CEOs",
+      "link": "https://investigations.restoring-democracy.org/p/hinsons-campaign-took-24500-from",
+      "date": "2026-10-04",
+      "dateLabel": "Oct 4",
+      "category": "Investigation"
+    },
+    {
       "title": "The Supreme Court Put SAVE Back in Play",
       "link": "https://investigations.restoring-democracy.org/p/the-supreme-court-put-save-back-in",
       "date": "2026-09-26",
@@ -69,13 +76,6 @@
       "link": "https://investigations.restoring-democracy.org/p/dhs-built-a-four-state-save-workaround",
       "date": "2026-07-11",
       "dateLabel": "Jul 11",
-      "category": "Investigation"
-    },
-    {
-      "title": "A Court Struck Down Trump’s Voter‑Screening System. Iowa Had Already Signed On Twice.",
-      "link": "https://investigations.restoring-democracy.org/p/a-court-struck-down-trumps-voterscreening",
-      "date": "2026-06-25",
-      "dateLabel": "Jun 25",
       "category": "Investigation"
     }
   ]
