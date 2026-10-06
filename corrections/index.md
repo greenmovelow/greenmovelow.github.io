@@ -8,7 +8,7 @@ canonical: "https://restoring-democracy.org/corrections/"
 
 How we fix mistakes, update reporting, and revise data — transparently
 
-Effective Date: February 10, 2026  ·  Last Updated: February 10, 2026
+Effective Date: February 10, 2026  ·  Last Updated: October 6, 2026 (corrections log)
 
 No Stealth Edits. No Quiet Rewrites.
 
