@@ -82,13 +82,13 @@ When we get a fact wrong, we correct it in a dated note on the article. We do no
 
 Independent of political parties, candidates, and government agencies. No advertising, corporate sponsorships or government funding, and no contributions that carry editorial conditions.
 
+[Privacy policy →](https://restoring-democracy.org/privacy-policy/) [Security policy →](https://restoring-democracy.org/security-policy/)
+
 ### AI use
 
 Read how RDP uses artificial intelligence and computational tools while preserving human editorial responsibility, source protection, verification, and transparency.
 
 [AI use and editorial principles →](https://restoring-democracy.org/ai-use/)
-
-[Privacy policy →](https://restoring-democracy.org/privacy-policy/) [Security policy →](https://restoring-democracy.org/security-policy/)
 
 ## Support Independent Investigative Journalism
 
