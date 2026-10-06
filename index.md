@@ -52,7 +52,7 @@ On July 29, 2025, Attorney General Brenna Bird announced an investigation of Uni
 
 [Read the investigation →](https://investigations.restoring-democracy.org/p/the-dei-hoax-iowas-attorney-general)
 
-Earlier investigations and exhibits are collected in the [Investigations Archive](https://restoring-democracy.org/journalism/).
+Our major investigations and their interactive exhibits are collected on the [Key Investigations](https://restoring-democracy.org/journalism/) page.
 
 ## About RDP
 
