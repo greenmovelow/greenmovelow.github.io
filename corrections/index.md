@@ -97,9 +97,11 @@ If unpublishing occurs, we aim to leave a transparent record (for example, a ret
 
 We may publish a running log of significant corrections here over time. If this section is currently empty, that means we have no logged corrections to list yet.
 
-Current Status
+Logged corrections
 
-No corrections have been logged on this page as of the “Last Updated” date above.
+Log updated: October 6, 2026. This log lists corrections confirmed from published correction notices. It is not yet a complete inventory of earlier corrections.
+
+-   **Sept. 4, 2026 — Correction.** [RDP’s SAVE investigation, published Dec. 10, 2025](https://investigations.restoring-democracy.org/p/save-the-benefits-database-now-monitoring). The correction notice at the top of the article states that an earlier version incorrectly described Executive Order 15 as creating a driver-data pipeline linking the Iowa Department of Transportation, the Iowa Department of Health and Human Services and SAVE; identified HHS as the state’s SAVE clearinghouse (subsequent records show the professional-licensing SAVE clearinghouse was established at the Iowa Department of Inspections, Appeals, and Licensing); stated that every Iowa driver was being run through SAVE; and overstated the November 2025 federal settlement as establishing continuous federal access to Iowa’s entire DMV database.
 
 ## 10\. Contact
 
