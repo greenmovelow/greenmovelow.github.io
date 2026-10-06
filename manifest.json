@@ -1,6 +1,9 @@
 {
   "name": "Restoring Democracy's Promise",
   "short_name": "RDP",
+  "description": "Independent investigative journalism based in Iowa with national scope.",
+  "id": "/",
+  "scope": "/",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#24473e",
