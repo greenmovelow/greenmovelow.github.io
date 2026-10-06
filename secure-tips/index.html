@@ -54,7 +54,7 @@
     "@type": "WebPage",
     "name": "Secure Tips — Restoring Democracy's Promise",
     "url": "https://restoring-democracy.org/secure-tips/",
-    "dateModified": "2026-09-26",
+    "dateModified": "2026-10-06",
     "isPartOf": {"@type":"WebSite","name":"Restoring Democracy's Promise","url":"https://restoring-democracy.org/"},
     "publisher": {"@type":"Organization","name":"Restoring Democracy's Promise","url":"https://restoring-democracy.org/"}
   }
@@ -73,39 +73,18 @@
       color: #F6F7F8;
     }
 
-    /* Decorative orbs (fixed so they don't scroll) */
-    .orb-tr {
-      position: fixed; top: -15%; right: -12%; z-index: 0;
-      width: 55vw; height: 55vw; max-width: 500px; max-height: 500px;
-      background: radial-gradient(circle, rgba(212,175,55,0.055) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .orb-bl {
-      position: fixed; bottom: -20%; left: -10%; z-index: 0;
-      width: 50vw; height: 50vw; max-width: 450px; max-height: 450px;
-      background: radial-gradient(circle, rgba(244,162,97,0.04) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero-lock {
-      width: 50px; height: 50px; border-radius: 50%;
-      background: rgba(212,175,55,0.1);
-      border: 1.5px solid rgba(212,175,55,0.28);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 1.1rem;
-    }
-
     .method-card {
       background: rgba(26,51,44,0.65);
       border: 1px solid rgba(212,175,55,0.2);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       border-radius: 0.875rem;
-      transition: border-color 0.25s;
       width: 100%; overflow: hidden;
     }
-    .method-card:hover { border-color: rgba(212,175,55,0.42); }
-    .method-card.best { border-color: rgba(212,175,55,0.32); }
+    .method-card.best { border-color: rgba(212,175,55,0.4); }
+
+    .method-label {
+      font-size: 0.75rem; letter-spacing: 0.08em;
+      text-transform: uppercase; font-weight: 700;
+    }
 
     .signal-id {
       font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -119,16 +98,17 @@
       word-break: break-all;
     }
 
-    .info-card {
-      background: rgba(26,51,44,0.5);
-      border: 1px solid rgba(212,175,55,0.14);
-      border-radius: 0.875rem;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      transition: border-color 0.25s;
-      width: 100%; overflow: hidden;
+    .secure-list > li {
+      padding: 0.85rem 0;
+      border-top: 1px solid rgba(212,175,55,0.14);
     }
-    .info-card:hover { border-color: rgba(212,175,55,0.32); }
+    .secure-list > li:last-child { border-bottom: 1px solid rgba(212,175,55,0.14); }
+
+    .secure-contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
 
     .template-block {
       background: rgba(0,0,0,0.42);
@@ -154,57 +134,29 @@
       border-top: 1px solid rgba(212,175,55,0.12);
     }
 
-    .badge {
-      display: inline-block;
-      font-size: 0.6rem; letter-spacing: 0.12em;
-      text-transform: uppercase; font-weight: 700;
-      padding: 0.25rem 0.55rem; border-radius: 999px;
-    }
-
     @media (min-width: 900px) {
-      .secure-hero-shell,
-      .secure-section-shell {
-        max-width: 1040px;
-      }
-      .secure-hero-shell {
-        padding-left: 2.5rem;
-        padding-right: 2.5rem;
-      }
       .secure-section-shell {
         max-width: 1040px;
       }
       .secure-contact-grid {
-        display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-      }
-      .secure-helpful-grid,
-      .secure-safety-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
       }
       .secure-rule {
         max-width: 1040px;
       }
-      .secure-text-col {
-        max-width: 740px;
-      }
-      .secure-subscribe {
+      .secure-text-col,
+      .secure-prose > * {
         max-width: 740px;
       }
     }
 
-    @media print { .nav-bar, .mobile-menu, .orb-tr, .orb-bl { display: none !important; } }
+    @media print { .nav-bar, .mobile-menu { display: none !important; } }
   </style>
 
   <meta name="twitter:url" content="https://restoring-democracy.org/secure-tips/" />
 </head>
 
 <body class="font-sans antialiased">
-  <!-- Decorative orbs -->
-  <div class="orb-tr" aria-hidden="true"></div>
-  <div class="orb-bl" aria-hidden="true"></div>
-
   <!-- ══ NAVIGATION ══ -->
   <nav class="nav-bar fixed top-0 left-0 right-0 z-50 bg-brand-green-dark"
        role="navigation" aria-label="Main navigation">
@@ -279,16 +231,8 @@
   <div class="h-16 lg:h-[68px]" aria-hidden="true"></div>
 
   <!-- ══ HERO ══ -->
-  <header class="relative z-10 text-center pt-12 pb-10 md:pt-18 md:pb-14 px-4">
+  <header class="relative z-10 text-center pt-10 pb-8 md:pt-12 md:pb-10 px-4">
     <div class="max-w-md mx-auto w-full secure-section-shell secure-text-col">
-
-      <div class="hero-lock">
-        <svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor"
-             viewBox="0 0 24 24" stroke-width="1.75">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        </svg>
-      </div>
 
       <h1 class="font-serif text-4xl sm:text-5xl font-bold text-brand-gold tracking-tight leading-tight">
         Secure Tips
@@ -296,20 +240,18 @@
 
       <div class="w-12 h-px bg-brand-gold mx-auto mt-4 mb-4 opacity-50"></div>
 
-      <p class="text-brand-orange italic font-semibold text-lg">We take source protection seriously.</p>
-
-      <p class="mt-4 text-brand-sand text-sm leading-relaxed px-2">
-        If you have documents, first-hand information, or context that may matter to an investigation,
-        you can contact us here. You do not need to have the whole story; we verify information independently.
+      <p class="text-brand-sand text-base leading-relaxed">
+        If you have documents, first-hand information, or context relevant to our reporting,
+        you can reach RDP here. You do not need the whole story. We verify information independently.
       </p>
 
-      <p class="mt-3 text-brand-sand/45 text-xs">Last updated September 26, 2026</p>
+      <p class="mt-3 text-brand-sand/80 text-xs">Last updated October 6, 2026</p>
 
-      <div class="alert-box mt-5 px-4 py-3 text-left mx-auto">
+      <div class="alert-box mt-6 px-4 py-3 text-left mx-auto">
         <p class="text-brand-sand text-sm leading-relaxed">
           <span class="text-brand-gold font-semibold">Before you contact us:</span>
-          Sensitive contact can carry risk. If the subject involves your employer or agency, avoid work devices,
-          work accounts, and ordinary SMS. Signal is our preferred first contact for sensitive tips.
+          If this concerns your employer or agency, avoid work phones, computers, accounts and networks,
+          as well as ordinary email, calls or text messages. Use Signal for anything sensitive.
           No contact method is risk-free.
         </p>
       </div>
@@ -320,40 +262,34 @@
   <main class="relative z-10">
 
     <!-- §1 Contact Methods -->
-    <section class="px-4 pb-10">
+    <section class="px-4 pb-10" aria-labelledby="reach-us">
       <div class="max-w-md mx-auto w-full secure-section-shell">
 
-        <div class="text-center mb-5">
-          <span class="badge bg-brand-gold text-brand-offblack">Recommended Contact Methods</span>
-        </div>
+        <h2 id="reach-us" class="font-serif text-2xl font-bold text-brand-gold mb-5">How to reach us</h2>
 
-        <div class="space-y-4 secure-contact-grid">
+        <div class="secure-contact-grid">
 
           <div class="method-card best p-5">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="badge bg-brand-gold text-brand-offblack">Preferred</span>
-              <span class="text-brand-sand/55 text-xs">End-to-end encrypted</span>
-            </div>
-            <h2 class="font-serif text-xl font-bold text-brand-white mb-2">Signal</h2>
+            <p class="method-label text-brand-gold mb-2">Preferred for sensitive tips</p>
+            <h3 class="font-serif text-xl font-bold text-brand-white mb-2">Signal</h3>
             <p class="text-brand-sand text-sm leading-relaxed mb-4">
-              Signal is our preferred first contact for sensitive tips. If identifying you could create risk,
-              say that before sending files so we can discuss the safest practical way to proceed.
+              Messages and files sent through Signal are end-to-end encrypted. If being identified
+              could put you at risk, say so before sending files so we can discuss the safest practical
+              way to proceed.
             </p>
-            <p class="text-brand-sand/55 text-xs uppercase tracking-wider font-bold mb-1.5">Signal ID</p>
+            <p class="text-brand-sand/80 text-xs uppercase tracking-wider font-bold mb-1.5">Signal ID</p>
             <div class="signal-id">restoredemocracy.27</div>
           </div>
 
           <div class="method-card p-5">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="badge text-brand-sand border border-brand-gold/25" style="background:rgba(45,92,79,0.6)">Lower risk</span>
-              <span class="text-brand-sand/55 text-xs">For routine or initial contact</span>
-            </div>
-            <h2 class="font-serif text-xl font-bold text-brand-white mb-2">Email</h2>
+            <p class="method-label text-brand-sand/80 mb-2">For low-risk tips</p>
+            <h3 class="font-serif text-xl font-bold text-brand-white mb-2">Email</h3>
             <p class="text-brand-sand text-sm leading-relaxed mb-4">
-              Use email for lower-risk tips or to arrange another contact method. Standard email is not
-              end-to-end encrypted, and you should not use a work account for sensitive material.
+              Use email for tips that would not put you at risk if exposed, or to arrange another way
+              to reach us. Standard email is not end-to-end encrypted, so do not use it, or a work account,
+              for sensitive material.
             </p>
-            <p class="text-brand-sand/55 text-xs uppercase tracking-wider font-bold mb-1.5">Tip Email</p>
+            <p class="text-brand-sand/80 text-xs uppercase tracking-wider font-bold mb-1.5">Tip Email</p>
             <div class="bg-black/30 border border-brand-gold/20 rounded-lg px-3 py-2.5">
               <a href="mailto:restoringdemocracyspromise.scoop255@passmail.net"
                  class="text-brand-orange hover:text-brand-gold transition text-xs font-medium break-all leading-relaxed">
@@ -364,118 +300,88 @@
 
         </div>
 
-        <div class="alert-box mt-4 px-4 py-3">
-          <p class="text-brand-sand/80 text-xs leading-relaxed">
-            If you need confidentiality, anonymity, background, or off-the-record treatment,
-            say so before sharing sensitive details. Those terms should be discussed explicitly rather than assumed.
-          </p>
-        </div>
+        <p class="mt-5 text-brand-sand text-sm leading-relaxed">
+          This tip line is not monitored continuously.
+        </p>
       </div>
     </section>
 
     <hr class="section-rule max-w-md mx-auto mx-4 secure-rule">
 
-    <!-- §2 What's Helpful -->
+    <!-- §2 Confidentiality -->
     <section class="px-4 py-10">
-      <div class="max-w-md mx-auto w-full secure-section-shell">
-        <h2 class="font-serif text-2xl font-bold text-brand-gold mb-1">What's Helpful</h2>
-        <p class="text-brand-sand/65 text-sm mb-5">Start with what you know. We can follow up.</p>
-
-        <div class="grid grid-cols-1 gap-3 secure-helpful-grid">
-          <div class="info-card p-4">
-            <p class="text-brand-gold text-xs font-bold uppercase tracking-wider mb-1">Documents or Records</p>
-            <p class="text-brand-sand text-sm">Original files, emails, memos, contracts, filings, minutes, screenshots, or public links.</p>
-          </div>
-          <div class="info-card p-4">
-            <p class="text-brand-gold text-xs font-bold uppercase tracking-wider mb-1">What Happened</p>
-            <p class="text-brand-sand text-sm">A plain description of the event, decision, practice, or discrepancy you think matters.</p>
-          </div>
-          <div class="info-card p-4">
-            <p class="text-brand-gold text-xs font-bold uppercase tracking-wider mb-1">Who Can Verify</p>
-            <p class="text-brand-sand text-sm">Names, agencies, offices, vendors, or public records that can independently confirm the information.</p>
-          </div>
-          <div class="info-card p-4">
-            <p class="text-brand-gold text-xs font-bold uppercase tracking-wider mb-1">Timeline</p>
-            <p class="text-brand-sand text-sm">Key dates and what changed, especially if documents were revised or an action is ongoing.</p>
-          </div>
-        </div>
+      <div class="max-w-md mx-auto w-full secure-section-shell secure-prose">
+        <h2 class="font-serif text-2xl font-bold text-brand-gold mb-4">Confidentiality and anonymity</h2>
+        <p class="text-brand-sand text-base leading-relaxed">
+          If you want confidentiality or anonymity, or want to speak on background or off the record,
+          tell us before you share sensitive details. Those terms can mean different things, so we agree
+          on them explicitly rather than assume them.
+        </p>
       </div>
     </section>
 
     <hr class="section-rule max-w-md mx-auto mx-4 secure-rule">
 
-    <!-- §3 Safety Notes -->
+    <!-- §3 Verification -->
     <section class="px-4 py-10">
-      <div class="max-w-md mx-auto w-full secure-section-shell">
-        <h2 class="font-serif text-2xl font-bold text-brand-gold mb-1">Safety Notes</h2>
-        <p class="text-brand-sand/65 text-sm mb-5">If contacting us could create risk, say so early.</p>
-
-        <div class="grid grid-cols-1 gap-3 secure-safety-grid">
-          <div class="info-card p-4">
-            <p class="text-brand-sand font-semibold text-sm mb-1">Avoid workplace systems</p>
-            <p class="text-brand-sand/70 text-sm">
-              If the tip concerns your employer or agency, avoid work devices, accounts, cloud storage,
-              and networks when practical.
-            </p>
-          </div>
-          <div class="info-card p-4">
-            <p class="text-brand-sand font-semibold text-sm mb-1">Share only what is needed at first</p>
-            <p class="text-brand-sand/70 text-sm">
-              You can begin with a short description. If exposure is a concern, do not send identifying
-              details until we have discussed how to proceed.
-            </p>
-          </div>
-          <div class="info-card p-4">
-            <p class="text-brand-sand font-semibold text-sm mb-1">Preserve originals</p>
-            <p class="text-brand-sand/70 text-sm">
-              Original files and metadata can matter as evidence. Do not alter them just to contact us.
-              If a file itself could identify you, contact us first and we can discuss transfer.
-            </p>
-          </div>
-          <div class="info-card p-4" style="border-color:rgba(244,162,97,0.22)">
-            <p class="text-brand-orange font-semibold text-sm mb-1">If timing matters</p>
-            <p class="text-brand-sand/70 text-sm">
-              Signal first and explain why timing matters in the first sentence.
-              This tip line is not monitored continuously.
-            </p>
-          </div>
-        </div>
+      <div class="max-w-md mx-auto w-full secure-section-shell secure-prose">
+        <h2 class="font-serif text-2xl font-bold text-brand-gold mb-5">What helps us verify a tip</h2>
+        <ul class="secure-list text-brand-sand text-base leading-relaxed">
+          <li><span class="text-brand-white font-semibold">Documents or records:</span> original files, emails, memos, contracts, filings, meeting minutes or links to public records.</li>
+          <li><span class="text-brand-white font-semibold">What happened:</span> a plain description of the event, decision, practice or discrepancy you think matters.</li>
+          <li><span class="text-brand-white font-semibold">Who can confirm it:</span> names, agencies, offices, vendors or records that can independently confirm the information.</li>
+          <li><span class="text-brand-white font-semibold">Timeline:</span> key dates and what changed, especially if records were revised or an action is ongoing.</li>
+        </ul>
       </div>
     </section>
 
     <hr class="section-rule max-w-md mx-auto mx-4 secure-rule">
 
-    <!-- §4 Template -->
+    <!-- §4 Risk -->
     <section class="px-4 py-10">
-      <div class="max-w-md mx-auto w-full secure-section-shell">
-        <h2 class="font-serif text-2xl font-bold text-brand-gold mb-1">Simple Tip Template</h2>
-        <p class="text-brand-sand/65 text-sm mb-5">You can copy this into Signal if useful:</p>
+      <div class="max-w-md mx-auto w-full secure-section-shell secure-prose">
+        <h2 class="font-serif text-2xl font-bold text-brand-gold mb-5">Reducing your risk</h2>
+        <ul class="secure-list text-brand-sand text-base leading-relaxed">
+          <li><span class="text-brand-white font-semibold">Avoid workplace systems.</span> Do not store or send the material through work devices, accounts, cloud storage or networks when practical.</li>
+          <li><span class="text-brand-white font-semibold">Share only what is needed at first.</span> You can begin with a short description. If exposure is a concern, do not send identifying details until we have discussed how to proceed.</li>
+          <li><span class="text-brand-white font-semibold">Preserve originals.</span> Original files and metadata can matter as evidence. Do not alter them just to contact us. If a file itself could identify you, contact us first and we can discuss transfer.</li>
+          <li><span class="text-brand-white font-semibold">If timing matters.</span> Use Signal and explain the deadline or timing issue in your first message.</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="section-rule max-w-md mx-auto mx-4 secure-rule">
+
+    <!-- §5 Template -->
+    <section class="px-4 py-10">
+      <div class="max-w-md mx-auto w-full secure-section-shell secure-prose">
+        <h2 class="font-serif text-2xl font-bold text-brand-gold mb-2">A first message</h2>
+        <p class="text-brand-sand text-base mb-5">Copy this into Signal or email and fill in what you can.</p>
         <div class="template-block">
 I have information about [topic/agency].<br>
 What happened: [one or two sentences].<br>
 What I can provide: [documents / records / first-hand account].<br>
 Timeframe: [dates].<br>
 Risk if identified: [low / medium / high / unsure].<br>
-Please [do / do not] identify me without discussing it first.
+Can RDP identify me as a source? [No / Only after we discuss it / Yes]
         </div>
-        <p class="mt-4 text-brand-sand/50 text-xs leading-relaxed">
-          Start with the minimum needed to explain why the information matters.
+        <p class="mt-4 text-brand-sand text-sm leading-relaxed">
           We can ask follow-up questions after we establish a safe way to communicate.
         </p>
       </div>
     </section>
 
-    <!-- Subscribe strip -->
+    <!-- Published reporting -->
     <section class="px-4 pb-14">
-      <div class="max-w-md mx-auto w-full secure-section-shell secure-subscribe">
-        <div class="bg-brand-green-dark/45 border border-brand-gold/15 rounded-xl p-5 text-center">
-          <p class="text-brand-sand text-sm mb-3">Follow our published investigations:</p>
+      <div class="max-w-md mx-auto w-full secure-section-shell secure-prose">
+        <p class="pt-6 border-t border-brand-gold/15 text-brand-sand text-sm leading-relaxed">
+          Read our published reporting at the
+          <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer"
+             class="text-brand-gold underline underline-offset-2 hover:text-brand-orange">Investigations Desk</a>,
+          or
           <a href="https://investigations.restoring-democracy.org/subscribe" target="_blank" rel="noopener noreferrer"
-             class="inline-block bg-brand-gold text-brand-offblack font-bold py-2.5 px-7 rounded-full
-                    hover:bg-brand-orange transition-all duration-200 text-sm shadow-md">
-            Subscribe to our newsletter &rarr;
-          </a>
-        </div>
+             class="text-brand-gold underline underline-offset-2 hover:text-brand-orange whitespace-nowrap">subscribe by email &rarr;</a>
+        </p>
       </div>
     </section>
 
@@ -490,44 +396,44 @@ Please [do / do not] identify me without discussing it first.
         <div class="col-span-2 md:col-span-1">
           <img src="/assets/Square_logo_transparent.png" class="h-8 w-auto mb-2" alt="RDP logo">
           <p class="font-serif text-xs italic text-brand-gold">Quantifying the Truth</p>
-          <p class="text-xs text-brand-sand/40 mt-0.5">Engineering Precision Journalism</p>
-          <p class="mt-2 text-xs text-brand-sand/28">Independent &middot; Evidence-driven &middot; Document-first</p>
+          <p class="text-xs text-brand-sand/80 mt-0.5">Engineering Precision Journalism</p>
+          <p class="mt-2 text-xs text-brand-sand/80">Independent &middot; Evidence-driven &middot; Document-first</p>
         </div>
 
         <div>
-          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/50 mb-2">Investigations</h4>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/80 mb-2">Investigations</h4>
           <ul class="space-y-1 text-xs">
-            <li><a href="/journalism/" class="text-brand-sand/60 hover:text-brand-gold transition font-semibold">Key Investigations</a></li>
-            <li><a href="/dream_machine/"               class="text-brand-sand/60 hover:text-brand-gold transition">The Dream Machine</a></li>
-            <li><a href="/iowa-doge-pension-privatize/" class="text-brand-sand/60 hover:text-brand-gold transition">Pension Privatization</a></li>
-            <li><a href="/the-god-machine/"             class="text-brand-sand/60 hover:text-brand-gold transition">The God Machine</a></li>
-            <li><a href="/pincer-dataviz/"             class="text-brand-sand/60 hover:text-brand-gold transition">Pincer Movement</a></li>
+            <li><a href="/journalism/" class="text-brand-sand/80 hover:text-brand-gold transition font-semibold">Key Investigations</a></li>
+            <li><a href="/dream_machine/"               class="text-brand-sand/80 hover:text-brand-gold transition">The Dream Machine</a></li>
+            <li><a href="/iowa-doge-pension-privatize/" class="text-brand-sand/80 hover:text-brand-gold transition">Pension Privatization</a></li>
+            <li><a href="/the-god-machine/"             class="text-brand-sand/80 hover:text-brand-gold transition">The God Machine</a></li>
+            <li><a href="/pincer-dataviz/"             class="text-brand-sand/80 hover:text-brand-gold transition">Pincer Movement</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/50 mb-2">Organization</h4>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/80 mb-2">Organization</h4>
           <ul class="space-y-1 text-xs">
-            <li><a href="/about/"             class="text-brand-sand/60 hover:text-brand-gold transition">About RDP</a></li>
-            <li><a href="/analytics/"         class="text-brand-sand/60 hover:text-brand-gold transition">RDP Analytics</a></li>
-            <li><a href="/#standards"         class="text-brand-sand/60 hover:text-brand-gold transition">Standards</a></li>
-            <li><a href="/privacy-policy/" class="text-brand-sand/60 hover:text-brand-gold transition">Privacy Policy</a></li>
+            <li><a href="/about/"             class="text-brand-sand/80 hover:text-brand-gold transition">About RDP</a></li>
+            <li><a href="/analytics/"         class="text-brand-sand/80 hover:text-brand-gold transition">RDP Analytics</a></li>
+            <li><a href="/#standards"         class="text-brand-sand/80 hover:text-brand-gold transition">Standards</a></li>
+            <li><a href="/privacy-policy/" class="text-brand-sand/80 hover:text-brand-gold transition">Privacy Policy</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/50 mb-2">Contact</h4>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-sand/80 mb-2">Contact</h4>
           <ul class="space-y-1.5 text-xs">
             <li>
-              <span class="text-brand-sand/38 block">General</span>
+              <span class="text-brand-sand/80 block">General</span>
               <a href="mailto:webmaster@restoring-democracy.org"
                  class="text-brand-orange hover:text-brand-gold transition break-all">
                 webmaster@restoring-democracy.org
               </a>
             </li>
             <li class="pt-1">
-              <span class="text-brand-sand/38 block">Signal</span>
-              <span class="font-mono text-brand-sand/75 text-xs">restoredemocracy.27</span>
+              <span class="text-brand-sand/80 block">Signal</span>
+              <span class="font-mono text-brand-sand/80 text-xs">restoredemocracy.27</span>
             </li>
           </ul>
         </div>
@@ -535,7 +441,7 @@ Please [do / do not] identify me without discussing it first.
       </div>
 
       <div class="border-t border-white/6 pt-5 flex flex-col sm:flex-row items-center
-                  justify-between gap-2 text-xs text-brand-sand/30">
+                  justify-between gap-2 text-xs text-brand-sand/80">
         <div class="footer-tooltip">
           <span>&copy; 2023&ndash;2026 Restoring Democracy's Promise. All rights reserved.</span>
           <span class="tooltip-text">This project is powered by receipts.</span>
