@@ -71,7 +71,6 @@
     "founder": {
       "@id": "https://restoring-democracy.org/team/#timothy-c-tucker"
     },
-    "memberOf": {"@type": "Organization","name": "Investigative Reporters and Editors","url": "https://www.ire.org/"},
     "logo": {
       "@type": "ImageObject",
       "url": "https://restoring-democracy.org/assets/og/Banner_RDP_Color.png"
@@ -140,7 +139,7 @@
         </a>
 
         <div class="hidden lg:flex items-center gap-6">
-          <a href="#investigations" class="nav-link text-brand-sand text-sm">Featured Work</a>
+          <a href="/journalism/"     class="nav-link text-brand-sand text-sm">Key Investigations</a>
           <a href="/analytics/"     class="nav-link text-brand-sand text-sm">Analytics</a>
           <a href="/about/"         class="nav-link text-brand-sand text-sm">About</a>
           <a href="/team/"          class="nav-link text-brand-sand text-sm">Team</a>
@@ -187,7 +186,7 @@
     <div id="mobile-menu"
          class="mobile-menu lg:hidden bg-brand-green-dark border-t border-brand-gold/10">
       <div class="max-w-7xl mx-auto px-4 py-3 space-y-0.5">
-        <a href="#investigations" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Featured Work</a>
+        <a href="/journalism/"     class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Key Investigations</a>
         <a href="/analytics/"     class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Analytics</a>
         <a href="/about/"         class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
         <a href="/team/"          class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
@@ -211,33 +210,12 @@
   <div class="h-16 lg:h-[68px]" aria-hidden="true"></div>
 
   <!-- ══════════════════════════════════════════
-       HERO — editorial masthead style, no promotional CTAs
+       MASTHEAD — compact; current reporting follows directly
   ══════════════════════════════════════════ -->
-  <header class="hero-section pt-16 pb-20 md:pt-24 md:pb-28 lg:pt-32 lg:pb-36 px-4 text-center">
+  <header class="hero-section pt-8 pb-10 md:pt-12 md:pb-14 lg:pt-16 lg:pb-16 px-4 text-center">
 
     <div class="relative max-w-4xl mx-auto z-10">
 
-      <!-- Investigations Desk relocation notice -->
-      <div class="mb-6 flex justify-center">
-        <a href="https://investigations.restoring-democracy.org"
-           class="inline-flex items-center gap-2 hover:opacity-80 transition"
-           style="font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#D4AF37;">
-          <span class="w-1.5 h-1.5 rounded-full" style="background:#D4AF37;flex-shrink:0;"></span>
-          Longform now lives at investigations.restoring-democracy.org
-        </a>
-      </div>
-
-      <!-- Established eyebrow -->
-      <div class="mb-8 flex justify-center">
-        <span class="established text-xs text-brand-sand/90 tracking-[0.2em] uppercase font-semibold">
-          <svg class="w-2.5 h-2.5 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="6"/>
-          </svg>
-          Est.&nbsp;2023
-        </span>
-      </div>
-
-      <!-- Logo (slightly larger) -->
       <picture>
         <source type="image/webp"
                 srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_320.webp 320w, /assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.webp 640w"
@@ -248,51 +226,27 @@
              height="857"
              fetchpriority="high"
              decoding="async"
-             class="mx-auto mb-8 h-20 md:h-24 lg:h-28 w-auto drop-shadow-md">
+             class="mx-auto mb-5 h-16 md:h-20 lg:h-24 w-auto drop-shadow-md">
       </picture>
 
-      <!-- Headline -->
       <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brand-gold
                  tracking-tight leading-[1.05]">
         Restoring Democracy's Promise
       </h1>
 
-      <!-- Gold rule -->
-      <div class="w-24 h-0.5 bg-brand-gold mx-auto mt-7 mb-5 opacity-70"></div>
+      <div class="w-24 h-0.5 bg-brand-gold mx-auto mt-5 mb-4 opacity-70"></div>
 
-      <!-- Tagline -->
       <p class="text-lg md:text-xl lg:text-2xl text-brand-orange italic font-semibold">
         Quantifying the Truth
       </p>
 
-      <!-- Elevator paragraph -->
-      <p class="mt-7 text-base md:text-lg text-brand-sand leading-relaxed max-w-2xl mx-auto">
-        Independent accountability journalism focused on democratic governance, surveillance, election systems, immigration, and public corruption.
+      <p class="mt-5 text-base md:text-lg text-brand-sand leading-relaxed max-w-2xl mx-auto">
+        Independent investigative journalism from Iowa on surveillance, immigration, education, elections, public money, and the institutions shaping democratic life.
       </p>
 
-      <p class="mt-4 text-sm md:text-base text-brand-sand/90 leading-relaxed max-w-2xl mx-auto">
+      <p class="mt-3 text-sm md:text-base text-brand-sand/90 leading-relaxed max-w-2xl mx-auto">
         Reporting built from public records, data, contracts, and court filings.
       </p>
-
-      <!-- Investigations Desk CTAs -->
-      <div class="mt-10 flex flex-col sm:flex-row justify-center gap-3 max-w-lg mx-auto">
-        <a href="https://investigations.restoring-democracy.org"
-           class="inline-flex items-center justify-center gap-2 bg-brand-gold text-brand-offblack font-bold py-3.5 px-7 rounded-full shadow-lg hover:bg-brand-orange transition text-sm">
-          Visit The Investigations Desk &rarr;
-        </a>
-        <a href="#support"
-           class="inline-flex items-center justify-center border border-brand-sand/25 text-brand-sand font-medium py-3.5 px-6 rounded-full hover:border-brand-sand/50 transition text-sm">
-          Support Our Work
-        </a>
-      </div>
-      <div class="mt-4 flex justify-center items-center gap-4">
-        <a href="https://investigations.restoring-democracy.org/feed"
-           class="inline-flex items-center gap-1.5 text-brand-orange hover:text-brand-gold transition"
-           style="font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;">
-          <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.18 17.82a2.18 2.18 0 1 0 0-4.36 2.18 2.18 0 0 0 0 4.36ZM4 11.06A8.94 8.94 0 0 1 12.94 20h-2.4A6.54 6.54 0 0 0 4 13.46v-2.4Zm0-4.06A13 13 0 0 1 17 20h-2.4A10.6 10.6 0 0 0 4 9.4V7Z"/></svg>
-          Subscribe via RSS
-        </a>
-      </div>
 
     </div>
   </header>
@@ -300,624 +254,161 @@
   <main>
 
     <!-- ══════════════════════════════════════════
-         LATEST PUBLICATIONS FEED
+         LATEST FROM THE INVESTIGATIONS DESK
+         #latest-feed is replaced by the renderer below. The archive link
+         sits outside it so it survives both success and failure.
     ══════════════════════════════════════════ -->
-    <section class="bg-brand-offblack border-b border-brand-gold/15" aria-label="Latest publications">
-      <div class="max-w-7xl mx-auto px-4 py-5">
-        <div class="flex items-start gap-4 lg:gap-6">
-          <div class="flex-shrink-0 pt-0.5 flex flex-col items-start gap-1.5">
-            <span class="badge bg-brand-orange text-brand-offblack">Latest</span>
-            <span id="feed-status" style="font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#e4d5b9;">&middot; recent</span>
-          </div>
-          <div id="latest-feed" class="flex-grow min-w-0 divide-y divide-white/5">
-
-            <a href="https://investigations.restoring-democracy.org/p/the-formula-behind-the-25000-what"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item feed-lead flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="2026-08-10">Aug 10</time>
-              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                The Formula Behind the $25,000: What Iowa’s Next Governor Inherits
-              </span>
-              <span class="badge bg-brand-orange text-brand-offblack flex-shrink-0 hidden md:inline ml-auto">NEW</span>
-            </a>
-
-            <a href="https://investigations.restoring-democracy.org/p/trumps-278000-claim-rests-on-two"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="2026-07-19">Jul 19</time>
-              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Trump’s 278,000 Claim Rests on Two Searches the Government Has Not Explained
-              </span>
-            </a>
-
-            <a href="https://investigations.restoring-democracy.org/p/dhs-built-a-four-state-save-workaround"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="2026-07-11">Jul 11</time>
-              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                DHS Built a Four-State SAVE Workaround After a Judge Struck Down the 2025 System
-              </span>
-            </a>
-
-            <a href="https://investigations.restoring-democracy.org/p/a-court-struck-down-trumps-voterscreening"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="2026-06-25">Jun 25</time>
-              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                A Court Struck Down Trump’s Voter‑Screening System. Iowa Had Already Signed On Twice.
-              </span>
-            </a>
-
-            <a href="https://investigations.restoring-democracy.org/p/iowas-46-billion-pension-fund-paid"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="2026-06-13">Jun 13</time>
-              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Iowa’s $46 Billion Pension Fund Paid Its CIO “Exceptional” Performance Pay — No One Will Say Why
-              </span>
-            </a>
-
-            <a href="https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="2026-06-07">Jun 7</time>
-              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Bird Thanked Iowa; The Money Came From Washington
-              </span>
-            </a>
-
-            <a href="https://investigations.restoring-democracy.org/p/a-resignation-is-not-an-audit-why"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="2026-05-19">May 19</time>
-              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                A Resignation Is Not an Audit: Why Iowa Still Owes its Public Employees Answers
-              </span>
-            </a>
-
-            <a href="https://investigations.restoring-democracy.org/p/the-dexter-disinformation-playbook"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="2026-05-17">May 17</time>
-              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                The Dexter Disinformation Playbook: Why a $35k Audit Wasn’t a "Bookkeeping Error"
-              </span>
-            </a>
-
-            <a href="https://investigations.restoring-democracy.org/p/iowa-handed-over-the-voter-data-the"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="2026-05-07">May 7</time>
-              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Iowa Handed Over the Voter Data — The Legal Blueprint Was Already There
-              </span>
-            </a>
-
-            <a href="https://investigations.restoring-democracy.org/p/iowas-alpr-reform-bill-would-regulate"
-               target="_blank" rel="noopener noreferrer"
-               class="feed-item flex items-baseline gap-3 py-2.5 rounded group">
-              <time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="2026-05-03">May 3</time>
-              <span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">
-                Iowa’s ALPR “Reform” Bill Would Regulate Plate Readers — and Hide the Logs
-              </span>
-            </a>
-            <div class="py-2.5">
-              <a href="https://investigations.restoring-democracy.org"
-                 class="text-brand-gold/90 hover:text-brand-gold transition"
-                 style="font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;">
-                All investigations at The Investigations Desk &rarr;
-              </a>
-            </div>
-
-
-          </div>
+    <section id="latest" class="bg-brand-offblack border-b border-brand-gold/15" aria-label="Latest publications">
+      <div class="max-w-5xl mx-auto px-4 py-8 md:py-10">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-5">Latest from the Investigations Desk</h2>
+        <p id="feed-status" class="sr-only" role="status"></p>
+        <div id="latest-feed" class="min-w-0 divide-y divide-white/5">
+          <p class="py-2.5 text-sm text-brand-sand">Read the latest reporting in the Investigations Desk archive below.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         FLAGSHIP SERIES: THE LEVIATHAN SERIES
-    ══════════════════════════════════════════ -->
-    <section class="flagship-section py-14 md:py-20" aria-label="Flagship investigation series">
-      <div class="max-w-7xl mx-auto px-4 relative z-10">
-
-        <div class="mb-10">
-          <span class="badge bg-brand-gold text-brand-offblack mb-3">Flagship Investigation</span>
-          <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-brand-white leading-tight mt-2">
-            The Leviathan Series
-          </h2>
-          <p class="mt-4 text-brand-sand text-base md:text-lg max-w-3xl leading-relaxed">
-            Five-part investigation into the surveillance architecture being built beneath American
-            democracy&mdash;plate readers, benefits databases, secret MOUs, and algorithmic governance.
-          </p>
-        </div>
-
-        <div class="bg-brand-green-dark/55 border border-brand-gold/30 rounded-xl p-6 md:p-8 mb-5 shadow-md">
-          <div class="flex flex-col lg:flex-row gap-6 items-start">
-            <div class="flex-grow">
-              <div class="flex flex-wrap items-center gap-2 mb-3">
-                <span class="badge bg-brand-orange text-brand-offblack">Part V &mdash; Latest</span>
-                <time class="text-brand-sand/80 text-xs" datetime="2026-01-29">January 29, 2026</time>
-              </div>
-              <h3 class="font-serif text-xl md:text-2xl lg:text-3xl font-bold text-brand-white mb-3 leading-tight">
-                The Department of Governance by Algorithm:<br class="hidden md:block">
-                <span class="text-brand-gold">How DOGE Built Cleta Mitchell's Dream Machine</span>
-              </h3>
-              <p class="text-brand-sand text-sm md:text-base leading-relaxed max-w-2xl">
-                Private briefings, retroactive authorizations, and irregular data transfers turned a
-                benefits-verification tool into a national citizenship gatekeeper&mdash;with biometric
-                capabilities built in from day one.
-              </p>
-            </div>
-            <div class="flex-shrink-0 w-full lg:w-52 flex flex-col gap-2">
-              <a href="https://investigations.restoring-democracy.org/p/the-department-of-governance-by-algorithm"
-                 target="_blank" rel="noopener noreferrer"
-                 class="block text-center bg-brand-gold text-brand-offblack font-bold py-3 px-5 rounded-lg
-                        shadow-lg hover:bg-brand-orange transition-all duration-200 text-sm">
-                Read Part V &rarr;
-              </a>
-              <a href="dream_machine/"
-                 class="block text-center text-brand-gold font-semibold py-2.5 px-5 rounded-lg text-sm
-                        border border-brand-gold/30 hover:border-brand-gold/70 hover:bg-brand-gold/10 transition-all duration-200">
-                &#9889; Interactive Exhibit
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-
-          <a href="https://investigations.restoring-democracy.org/p/the-performance-of-protection"
-             target="_blank" rel="noopener noreferrer"
-             class="series-part-card rounded-lg p-4 group block">
-            <div class="flex justify-between items-start">
-              <div>
-                <span class="text-brand-orange text-xs font-bold uppercase tracking-wider">Part I</span>
-                <h4 class="text-brand-white text-sm font-semibold mt-1 leading-snug group-hover:text-brand-gold transition">
-                  The Performance of Protection
-                </h4>
-              </div>
-              <svg class="w-4 h-4 text-brand-gold/40 group-hover:text-brand-gold transition flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </div>
+        <p class="mt-6">
+          <a href="https://investigations.restoring-democracy.org/archive"
+             class="inline-flex items-center gap-1 text-brand-gold font-semibold text-sm md:text-base hover:text-brand-orange transition">
+            Browse the full Investigations Desk archive &rarr;
           </a>
-
-          <div class="series-part-card rounded-lg p-4">
-            <span class="text-brand-orange text-xs font-bold uppercase tracking-wider">Part II</span>
-            <h4 class="text-brand-white text-sm font-semibold mt-1 leading-snug">
-              <a href="https://investigations.restoring-democracy.org/p/the-alpr-trap-how-americas-plate"
-                 target="_blank" rel="noopener noreferrer"
-                 class="hover:text-brand-gold transition">
-                The ALPR Trap: America's Plate Reader Network
-              </a>
-            </h4>
-            <a href="/alpr-trap/" class="inline-block mt-2 text-xs font-bold text-brand-gold hover:text-brand-orange transition">
-              &#9889; Interactive Exhibit &rarr;
-            </a>
-          </div>
-
-          <div class="series-part-card rounded-lg p-4">
-            <span class="text-brand-orange text-xs font-bold uppercase tracking-wider">Part III</span>
-            <h4 class="text-brand-white text-sm font-semibold mt-1 leading-snug">
-              <a href="https://investigations.restoring-democracy.org/p/save-the-benefits-database-now-monitoring"
-                 target="_blank" rel="noopener noreferrer"
-                 class="hover:text-brand-gold transition">
-                SAVE: The Database They Won't Name
-              </a>
-            </h4>
-            <a href="/save_iowa/" class="inline-block mt-2 text-xs font-bold text-brand-gold hover:text-brand-orange transition">
-              &#9889; Iowa Case Study &rarr;
-            </a>
-          </div>
-
-          <div class="series-part-card rounded-lg p-4">
-            <span class="text-brand-orange text-xs font-bold uppercase tracking-wider">Part IV</span>
-            <h4 class="text-brand-white text-sm font-semibold mt-1 leading-snug">
-              <a href="https://investigations.restoring-democracy.org/p/dojs-confidential-save-mou-to-federalize"
-                 target="_blank" rel="noopener noreferrer"
-                 class="hover:text-brand-gold transition">
-                DOJ's &ldquo;Confidential&rdquo; SAVE MOU to Federalize Voter Rolls
-              </a>
-            </h4>
-            <a href="/funding_flow/" class="inline-block mt-2 text-xs font-bold text-brand-gold hover:text-brand-orange transition">
-              &#9889; Follow the Money &rarr;
-            </a>
-          </div>
-
-        </div>
+        </p>
       </div>
     </section>
 
     <!-- ══════════════════════════════════════════
-         INVESTIGATIONS HUB
+         FEATURED INVESTIGATIONS
     ══════════════════════════════════════════ -->
-    <section id="investigations" class="py-16 md:py-20 bg-brand-cream">
-      <div class="max-w-7xl mx-auto px-4">
-
-        <div class="mb-12">
-          <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-green-dark">Investigations</h2>
-          <p class="mt-2 text-slate-600 text-base max-w-2xl leading-relaxed">
-            Interactive reports, data visualizations, and document-driven accountability coverage.
-          </p>
-        </div>
-
-        <article class="bg-white rounded-xl shadow-sm p-6 md:p-8 mb-10 border border-brand-gold/30 inv-card relative overflow-hidden">
-          <span class="absolute top-0 right-0 badge bg-brand-orange text-brand-offblack rounded-none rounded-bl-lg text-[0.58rem] py-1.5 px-3">NEW</span>
-          <p class="text-brand-green text-xs font-bold uppercase tracking-wider" style="padding-right:3rem;">Regional &amp; Local Elections / Campaign Finance</p>
-          <h3 class="mt-2 font-serif text-xl md:text-2xl font-bold text-brand-green-dark leading-tight">Bird Thanked Iowa; The Money Came From Washington</h3>
-          <p class="mt-3 text-slate-600 text-sm leading-relaxed max-w-3xl">
-            Iowa campaign-finance records show one Washington-based RAGA Super PAC supplied more than 80 percent of Brenna Bird&rsquo;s May 2026 fundraising, with additional transfers confirmed after the filing closed.
-          </p>
-          <time class="mt-3 block text-xs text-slate-600" datetime="2026-06-07">June 7, 2026</time>
-          <div class="mt-5 flex flex-col sm:flex-row gap-3 sm:items-center">
-            <a href="https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came" target="_blank" rel="noopener noreferrer"
-               class="inline-flex justify-center bg-brand-green text-white font-bold py-2.5 px-5 rounded-lg text-sm shadow-sm hover:bg-brand-green-dark transition-all duration-200">
-              Read the investigation &rarr;
-            </a>
-            <a href="/infographics/bird-raga-money-trail/" class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-              View interactive infographic &rarr;
-            </a>
-          </div>
-        </article>
-
-        <div class="mb-12">
-          <h3 class="font-serif text-lg md:text-xl font-bold text-brand-green-dark mb-4 pb-2
-                     border-b-2 border-brand-gold/25 tracking-tight">
-            Governance &amp; Formal Accountability
-          </h3>
-
-          <div class="bg-brand-offblack rounded-xl p-6 md:p-8 mb-5 shadow-lg inv-card relative overflow-hidden">
-            <span class="absolute top-0 right-0 badge bg-brand-gold text-brand-offblack
-                         rounded-none rounded-bl-lg text-[0.58rem] py-1.5 px-3">
-              Official Filing
-            </span>
-            <div class="flex flex-col md:flex-row gap-5 items-start mt-1">
-              <div class="flex-grow">
-                <h4 class="font-serif text-xl md:text-2xl font-bold text-brand-white leading-tight">
-                  Formal Inquiry Filed with Iowa Ethics Board
-                </h4>
-                <p class="mt-3 text-brand-sand text-sm leading-relaxed max-w-2xl">
-                  On November 8th, RDP submitted a formal Memorandum of Concern to the Iowa Ethics
-                  and Campaign Disclosure Board outlining potential undisclosed conflicts of interest
-                  in IPERS investment decisions.
-                </p>
-                <p class="mt-2 text-brand-orange/80 text-xs italic">Official documentation of our formal inquiry process.</p>
-              </div>
-              <a href="https://investigations.restoring-democracy.org/p/restoring-democracys-promise-submits"
-                 target="_blank" rel="noopener noreferrer"
-                 class="flex-shrink-0 bg-brand-gold text-brand-offblack font-bold py-2.5 px-5 rounded-lg
-                        text-sm shadow-md hover:bg-brand-orange transition-all duration-200">
-                Read Announcement &rarr;
-              </a>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-slate-200 inv-card">
-              <h4 class="font-serif text-lg font-bold text-brand-green-dark">The DEI Hoax</h4>
-              <p class="mt-2 text-slate-600 text-sm flex-grow leading-relaxed">
-                AG Brenna Bird's 6-hour investigation and the 60 days of silence that followed&mdash;a
-                case study in &ldquo;process as punishment.&rdquo;
-              </p>
-              <a href="https://investigations.restoring-democracy.org/p/the-dei-hoax-iowas-attorney-general"
-                 target="_blank" rel="noopener noreferrer"
-                 class="mt-4 text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                Read Investigation &rarr;
-              </a>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-slate-200 inv-card">
-              <h4 class="font-serif text-lg font-bold text-brand-green-dark">Iowa's Pension Privatization</h4>
-              <p class="mt-2 text-slate-600 text-sm flex-grow leading-relaxed">
-                The Iowa DOGE task force, the ALEC connection, and the multi-million dollar conflict
-                of interest at the heart of the plan to end public pensions.
-              </p>
-              <div class="mt-4 flex flex-col gap-2">
-                <a href="/iowa-doge-pension-privatize/"
-                   class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                  Launch Interactive Investigation &rarr;
-                </a>
-                <a href="https://investigations.restoring-democracy.org/p/exclusive-doge-pension-privatize"
-                   target="_blank" rel="noopener noreferrer"
-                   class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                  Read Original Investigation &rarr;
-                </a>
-              </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-slate-200 inv-card">
-              <h4 class="font-serif text-lg font-bold text-brand-green-dark">The God Machine</h4>
-              <p class="mt-2 text-slate-600 text-sm flex-grow leading-relaxed">
-                How a tax-exempt &ldquo;ministry&rdquo; built a business selling unqualified chaplains
-                to public schools, fueled by anonymous dark money.
-              </p>
-              <div class="mt-4 flex flex-col gap-2">
-                <a href="/the-god-machine/"
-                   class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                  Launch Interactive Report &rarr;
-                </a>
-                <a href="https://investigations.restoring-democracy.org/p/the-god-machine-how-faith-based-credentialing"
-                   target="_blank" rel="noopener noreferrer"
-                   class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                  Read Original Investigation &rarr;
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="font-serif text-lg md:text-xl font-bold text-brand-green-dark mb-4 pb-2
-                     border-b-2 border-brand-gold/25 tracking-tight">
-            Dark Money &amp; Influence Networks
-          </h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-slate-200 inv-card">
-              <h4 class="font-serif text-lg font-bold text-brand-green-dark">The Financial Superhighway</h4>
-              <p class="mt-2 text-slate-600 text-sm flex-grow leading-relaxed">
-                The money trail from the Marble Freedom Trust through DAFs like Schwab Charitable
-                and DonorsTrust. Follow the money year by year.
-              </p>
-              <div class="mt-4 flex flex-col gap-2">
-                <a href="/pincer-financial/"
-                   class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                  Launch Interactive Timeline &rarr;
-                </a>
-                <a href="https://investigations.restoring-democracy.org/p/exclusive-the-pincer-movement"
-                   target="_blank" rel="noopener noreferrer"
-                   class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                  Read the Investigation That Started It: The Pincer Movement &rarr;
-                </a>
-              </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-slate-200 inv-card">
-              <h4 class="font-serif text-lg font-bold text-brand-green-dark">The Pincer Movement</h4>
-              <p class="mt-2 text-slate-600 text-sm flex-grow leading-relaxed">
-                An interactive data visualization mapping the full &ldquo;Pincer Movement&rdquo;
-                strategy&mdash;key players, connections, and the flow of influence.
-              </p>
-              <div class="mt-4 flex flex-col gap-2">
-                <a href="/pincer-dataviz/"
-                   class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                  Launch Data Visualization &rarr;
-                </a>
-                <a href="https://investigations.restoring-democracy.org/p/exclusive-the-pincer-movement"
-                   target="_blank" rel="noopener noreferrer"
-                   class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                  Read the Investigation That Started It: The Pincer Movement &rarr;
-                </a>
-              </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-slate-200 inv-card">
-              <h4 class="font-serif text-lg font-bold text-brand-green-dark">The Pincer Infographic</h4>
-              <p class="mt-2 text-slate-600 text-sm flex-grow leading-relaxed">
-                A high-level visual summary: key findings, major players, and core concepts at a glance.
-              </p>
-              <div class="mt-4 flex flex-col gap-2">
-                <a href="/pincer-infographic/"
-                   class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                  View Infographic &rarr;
-                </a>
-                <a href="https://investigations.restoring-democracy.org/p/exclusive-the-pincer-movement"
-                   target="_blank" rel="noopener noreferrer"
-                   class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">
-                  Read the Investigation That Started It: The Pincer Movement &rarr;
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         DUAL MISSION
-    ══════════════════════════════════════════ -->
-    <section class="py-16 md:py-20 bg-brand-green-dark">
+    <section id="investigations" class="py-12 md:py-16 bg-brand-cream">
       <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold">Our Mission</h2>
-          <p class="mt-3 text-brand-sand text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            RDP combines investigative journalism with proprietary analytical infrastructure&mdash;each
-            strengthening the other and serving the broader civic sector.
-          </p>
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark mb-6">Featured investigations</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+          <article class="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-slate-200 inv-card">
+            <p class="text-brand-green text-xs font-bold uppercase tracking-wider">Campaign finance</p>
+            <h3 class="mt-2 font-serif text-lg font-bold text-brand-green-dark leading-snug">Bird Thanked Iowa; The Money Came From Washington</h3>
+            <time class="mt-1 block text-xs text-slate-600" datetime="2026-06-07">June 7, 2026</time>
+            <p class="mt-3 text-slate-600 text-sm flex-grow leading-relaxed">
+              More than 80 percent of the money Attorney General Brenna Bird&rsquo;s campaign reported for the pre-primary period came from one Washington-based super PAC.
+            </p>
+            <div class="mt-4 flex flex-col gap-2">
+              <a href="https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came" target="_blank" rel="noopener noreferrer"
+                 class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">Read the investigation &rarr;</a>
+              <a href="/infographics/bird-raga-money-trail/"
+                 class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">See the money trail &rarr;</a>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-slate-200 inv-card">
+            <p class="text-brand-green text-xs font-bold uppercase tracking-wider">Public pensions</p>
+            <h3 class="mt-2 font-serif text-lg font-bold text-brand-green-dark leading-snug">Iowa&rsquo;s pension proposal</h3>
+            <time class="mt-1 block text-xs text-slate-600" datetime="2025-08-11">Aug. 11, 2025</time>
+            <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+              A state task force proposed moving new public employees from the IPERS pension into 401(k)-style accounts. RDP projected that Principal Financial, where a task-force member is an executive, could collect about $42.9 million in fees over a decade if the plan became law.
+            </p>
+            <p class="mt-3 text-slate-600 text-xs leading-relaxed flex-grow">
+              Disclosure: On Nov. 8, 2025, RDP filed its own
+              <a href="https://investigations.restoring-democracy.org/p/restoring-democracys-promise-submits" target="_blank" rel="noopener noreferrer"
+                 class="text-brand-green underline underline-offset-2 hover:text-brand-green-dark">memorandum of concern</a>
+              about IPERS conflicts with the Iowa Ethics and Campaign Disclosure Board.
+            </p>
+            <div class="mt-4 flex flex-col gap-2">
+              <a href="https://investigations.restoring-democracy.org/p/exclusive-doge-pension-privatize" target="_blank" rel="noopener noreferrer"
+                 class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">Read the investigation &rarr;</a>
+              <a href="/iowa-doge-pension-privatize/"
+                 class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">Explore the interactive version &rarr;</a>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-xl shadow-sm p-6 flex flex-col border border-slate-200 inv-card">
+            <p class="text-brand-green text-xs font-bold uppercase tracking-wider">Education</p>
+            <h3 class="mt-2 font-serif text-lg font-bold text-brand-green-dark leading-snug">The DEI Hoax</h3>
+            <time class="mt-1 block text-xs text-slate-600" datetime="2025-11-07">Nov. 7, 2025</time>
+            <p class="mt-3 text-slate-600 text-sm flex-grow leading-relaxed">
+              On July 29, 2025, Attorney General Brenna Bird announced an investigation of University of Iowa diversity, equity and inclusion (DEI) programs within six hours of a video&rsquo;s release. Reviewing public releases and reporting through Nov. 7, RDP found no follow-up report or filing.
+            </p>
+            <div class="mt-4 flex flex-col gap-2">
+              <a href="https://investigations.restoring-democracy.org/p/the-dei-hoax-iowas-attorney-general" target="_blank" rel="noopener noreferrer"
+                 class="text-brand-green font-semibold text-sm hover:text-brand-green-dark transition">Read the investigation &rarr;</a>
+            </div>
+          </article>
+
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <p class="mt-8 text-slate-700 text-base">
+          Our major investigations and their interactive exhibits are collected on the
+          <a href="/journalism/" class="text-brand-green font-semibold underline underline-offset-2 hover:text-brand-green-dark">Key Investigations</a> page.
+        </p>
+      </div>
+    </section>
 
-          <div class="bg-brand-green/15 border border-brand-gold/15 rounded-xl p-6 md:p-7
-                      hover:border-brand-gold/35 transition">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="w-9 h-9 bg-brand-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
-                </svg>
-              </span>
-              <h3 class="font-serif text-lg md:text-xl font-bold text-brand-white">RDP Journalism</h3>
-            </div>
-            <p class="text-brand-sand text-sm leading-relaxed">
-              Investigative longform reporting rooted in public records&mdash;contracts, court filings,
-              correspondence, and oversight documentation. Interactive explainers, infographic-driven
-              series, and document-first accountability coverage. National in scope with an Iowa-based
-              field desk.
-            </p>
-            <p class="mt-3 text-brand-gold text-xs font-semibold uppercase tracking-wider">
-              We follow systems of power, not party lines.
-            </p>
-            <a href="https://investigations.restoring-democracy.org/"
-               class="mt-3 inline-block text-brand-gold text-sm font-semibold hover:text-brand-orange transition">
-              Explore RDP Journalism &rarr;
-            </a>
-          </div>
-
-          <div class="bg-brand-green/15 border border-brand-gold/15 rounded-xl p-6 md:p-7
-                      hover:border-brand-gold/35 transition">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="w-9 h-9 bg-brand-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                </svg>
-              </span>
-              <h3 class="font-serif text-lg md:text-xl font-bold text-brand-white">RDP Analytics</h3>
-            </div>
-            <p class="text-brand-sand text-sm leading-relaxed">
-              Proprietary investigative modeling&mdash;AI-driven analytical systems built to detect
-              patterns and anomalies across government data, financial flows, and institutional networks.
-              Glass-box architecture: every output is explainable, auditable, and reproducible.
-            </p>
-            <p class="mt-3 text-brand-gold text-xs font-semibold uppercase tracking-wider">
-              Proprietary technology &middot; Licensed to aligned civic organizations
-            </p>
-            <a href="/analytics/" class="mt-3 inline-block text-brand-gold text-sm font-semibold hover:text-brand-orange transition">
-              Explore RDP Analytics &rarr;
-            </a>
-          </div>
-
+    <!-- ══════════════════════════════════════════
+         ABOUT RDP (with RDP Analytics)
+    ══════════════════════════════════════════ -->
+    <section id="about" class="py-12 md:py-16 bg-brand-green-dark">
+      <div class="max-w-3xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-5">About RDP</h2>
+        <p class="text-brand-sand text-base leading-relaxed">
+          Restoring Democracy&rsquo;s Promise is an independent investigative newsroom based in Iowa, founded in 2023. We follow systems of power, not party lines.
+        </p>
+        <p class="mt-4 text-brand-sand text-base leading-relaxed">
+          Timothy Tucker is RDP&rsquo;s founder and executive editor and a member of
+          <a href="https://www.ire.org/" target="_blank" rel="noopener noreferrer" class="text-brand-gold underline underline-offset-2 hover:text-brand-orange">Investigative Reporters &amp; Editors (IRE)</a>.
+        </p>
+        <p id="analytics" class="mt-4 text-brand-sand text-base leading-relaxed">
+          RDP Analytics, our research and methods division, builds data models, network maps and statistical analyses for our reporting and supports journalists, researchers and public-interest organizations.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+          <a href="/about/" class="text-brand-gold text-sm font-semibold hover:text-brand-orange transition">About RDP &rarr;</a>
+          <a href="/team/" class="text-brand-gold text-sm font-semibold hover:text-brand-orange transition">Team &rarr;</a>
+          <a href="/analytics/" class="text-brand-gold text-sm font-semibold hover:text-brand-orange transition">RDP Analytics &rarr;</a>
         </div>
       </div>
     </section>
 
     <!-- ══════════════════════════════════════════
-         RDP ANALYTICS EXPANDED
+         STANDARDS
     ══════════════════════════════════════════ -->
-    <section id="analytics" class="py-16 md:py-20 bg-brand-green">
+    <section id="standards" class="py-12 md:py-16 bg-brand-green">
       <div class="max-w-6xl mx-auto px-4">
-        <div class="analytics-block rounded-2xl p-8 md:p-12 shadow-lg relative z-10">
-          <div class="flex flex-col lg:flex-row items-start gap-8">
-            <div class="flex-grow">
-              <div class="flex items-center gap-3 mb-4">
-                <svg class="w-6 h-6 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                </svg>
-                <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-white">
-                  RDP Analytics
-                </h2>
-              </div>
-              <p class="text-brand-sand text-base md:text-lg leading-relaxed">
-                Our analytical division develops proprietary investigative modeling systems&mdash;including
-                state-space-flow hybrid models for anomaly detection across government and financial data.
-                These systems produce explainable, auditable results that power RDP's journalism
-                and are available for licensing to aligned organizations.
-              </p>
-              <p class="mt-4 text-brand-sand text-sm leading-relaxed">
-                We build tools for civic organizations, human rights groups, pro-democracy coalitions,
-                and any institution committed to using analytical power responsibly. Our systems are
-                designed for transparency&mdash;not surveillance.
-              </p>
-              <div class="mt-6 pt-5 border-t border-brand-gold/12">
-                <p class="text-brand-sand text-sm">
-                  For partnership, licensing, media, or research inquiries:
-                </p>
-                <a href="https://tally.so/r/yPDJy6" target="_blank" rel="noopener noreferrer"
-                   class="mt-3 inline-block bg-brand-orange/85 text-brand-offblack font-bold
-                          py-2.5 px-6 rounded-full text-sm shadow-lg
-                          hover:bg-brand-orange hover:text-brand-green transition-all duration-200">
-                  Contact Us
-                </a>
-              </div>
-            </div>
-
-            <div class="flex-shrink-0 w-full lg:w-48">
-              <div class="bg-brand-green-dark/55 border border-brand-gold/25 rounded-lg p-5">
-                <p class="text-brand-sand text-xs uppercase tracking-wider font-bold mb-3">Explore</p>
-                <div class="space-y-2.5">
-                  <a href="/pincer-dataviz/"
-                     class="block text-brand-gold hover:text-brand-orange transition text-sm font-medium">
-                    Network Maps &rarr;
-                  </a>
-                  <a href="/pincer-financial/"
-                     class="block text-brand-gold hover:text-brand-orange transition text-sm font-medium">
-                    Financial Timelines &rarr;
-                  </a>
-                  <a href="dream_machine/"
-                     class="block text-brand-gold hover:text-brand-orange transition text-sm font-medium">
-                    Systems Exhibits &rarr;
-                  </a>
-                  <a href="/analytics/"
-                     class="block text-brand-gold hover:text-brand-orange transition text-sm font-medium">
-                    Full Analytics Division &rarr;
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         EDITORIAL STANDARDS
-    ══════════════════════════════════════════ -->
-    <section id="standards" class="py-14 md:py-18 bg-brand-green-dark">
-      <div class="max-w-6xl mx-auto px-4">
-        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-8 text-center">
-          Editorial Standards
-        </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-6">Standards</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
           <div class="standard-card rounded-xl p-5">
-            <h3 class="font-serif text-base font-bold text-brand-white mb-2">Methodology</h3>
-            <p class="text-brand-sand text-xs leading-relaxed">
-              Primary sources first: statutes, contracts, court filings, MOUs, procurement documents,
-              and audit reports. Every claim is tagged by confidence level&mdash;confirmed,
-              high-confidence, plausible, or unconfirmed.
+            <h3 class="font-serif text-base font-bold text-brand-white mb-2">How we report</h3>
+            <p class="text-brand-sand text-sm leading-relaxed">
+              We start with primary records: statutes, contracts, court filings, procurement documents and audits. We say what the records show and what they do not.
             </p>
-            <a href="/about/"
-               class="mt-3 inline-block text-brand-gold text-xs font-semibold hover:text-brand-orange transition">
-              About RDP &rarr;
-            </a>
+            <a href="/about/" class="mt-3 inline-block text-brand-gold text-sm font-semibold hover:text-brand-orange transition">Editorial standards &rarr;</a>
           </div>
 
           <div class="standard-card rounded-xl p-5">
-            <h3 class="font-serif text-base font-bold text-brand-white mb-2">Corrections Policy</h3>
-            <p class="text-brand-sand text-xs leading-relaxed">
-              Factual errors are corrected promptly and transparently. Substantive updates are logged.
-              We do not stealth-edit.
+            <h3 class="font-serif text-base font-bold text-brand-white mb-2">Corrections</h3>
+            <p class="text-brand-sand text-sm leading-relaxed">
+              When we get a fact wrong, we correct it in a dated note on the article. We do not stealth-edit.
             </p>
-            <a href="/corrections/"
-               class="mt-3 inline-block text-brand-gold text-xs font-semibold hover:text-brand-orange transition">
-              Full Corrections Policy &rarr;
-            </a>
+            <a href="/corrections/" class="mt-3 inline-block text-brand-gold text-sm font-semibold hover:text-brand-orange transition">Corrections policy and log &rarr;</a>
           </div>
 
           <div class="standard-card rounded-xl p-5">
             <h3 class="font-serif text-base font-bold text-brand-white mb-2">Independence</h3>
-            <p class="text-brand-sand text-xs leading-relaxed">
-              Independent of political parties, candidates, and government agencies. No advertising.
-              No corporate sponsorships. Credibility is earned through transparent method, rigorous
-              sourcing, and restraint in judgment.
+            <p class="text-brand-sand text-sm leading-relaxed">
+              Independent of political parties, candidates, and government agencies. No advertising, corporate sponsorships or government funding, and no contributions that carry editorial conditions.
             </p>
           </div>
 
           <div class="standard-card rounded-xl p-5">
-            <h3 class="font-serif text-base font-bold text-brand-white mb-2">Funding</h3>
-            <p class="text-brand-sand text-xs leading-relaxed">
-              Donor-supported and reader-funded through voluntary subscriptions. No government
-              funding, no advertising revenue, no contributions carrying editorial conditions.
-              Future institutional funders disclosed publicly.
+            <h3 class="font-serif text-base font-bold text-brand-white mb-2">AI use</h3>
+            <p class="text-brand-sand text-sm leading-relaxed">
+              Read how RDP uses artificial intelligence and computational tools while preserving human
+              editorial responsibility, source protection, verification, and transparency.
             </p>
-            <p class="text-brand-sand/80 text-xs mt-2 italic">Financial disclosures published annually.</p>
+            <a href="/ai-use/" class="mt-3 inline-block text-brand-gold text-sm font-semibold hover:text-brand-orange transition">AI use and editorial principles &rarr;</a>
           </div>
 
         </div>
-
-        <div class="mt-8 pt-6 border-t border-brand-gold/15 max-w-2xl mx-auto text-center">
-          <h3 class="font-serif text-base font-bold text-brand-white">AI Use &amp; Editorial Principles</h3>
-          <p class="mt-2 text-brand-sand text-xs leading-relaxed">
-            Read how RDP uses artificial intelligence and computational tools while preserving human
-            editorial responsibility, source protection, verification, and transparency.
-          </p>
-          <a href="/ai-use/"
-             class="mt-3 inline-block text-brand-gold text-xs font-semibold hover:text-brand-orange transition">
-            Read our AI Use &amp; Editorial Principles &rarr;
-          </a>
+        <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+          <a href="/privacy-policy/" class="text-brand-gold text-sm font-semibold hover:text-brand-orange transition">Privacy policy &rarr;</a>
+          <a href="/security-policy/" class="text-brand-gold text-sm font-semibold hover:text-brand-orange transition">Security policy &rarr;</a>
         </div>
       </div>
     </section>
@@ -925,126 +416,48 @@
     <!-- ══════════════════════════════════════════
          SUPPORT
     ══════════════════════════════════════════ -->
-    <section id="support" class="py-14 md:py-18 bg-brand-cream">
+    <section id="support" class="py-12 md:py-16 bg-brand-cream">
       <div class="max-w-2xl mx-auto px-4 text-center">
         <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark">
           Support Independent Investigative Journalism
         </h2>
         <p class="mt-4 text-slate-600 text-sm md:text-base leading-relaxed">
-          Your support strengthens both parts of our mission: investigative journalism that holds
-          power accountable and analytical tools that make civic oversight scalable. RDP accepts no
-          advertising, corporate sponsorships, or government funding.
+          Free subscribers receive new investigations by email. Paid subscriptions support RDP&rsquo;s reporting and the data work behind it. Both options are on our subscription page.
         </p>
         <a href="https://investigations.restoring-democracy.org/subscribe"
            class="mt-6 inline-block bg-brand-gold text-brand-offblack font-bold py-3 px-8 rounded-full
                   hover:bg-brand-orange transition-all duration-200 shadow-lg text-sm">
-          Become a Paid Subscriber &rarr;
+          Subscribe &rarr;
         </a>
-        <p class="mt-3 text-slate-600 text-xs">
-          Free and paid tiers are both on our subscription page&mdash;choose whichever fits.
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CONTACT AND SECURE TIPS
+    ══════════════════════════════════════════ -->
+    <section id="contact" class="py-12 md:py-16 bg-brand-green">
+      <div class="max-w-3xl mx-auto px-4">
+        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-5">Contact</h2>
+        <p class="text-brand-sand text-base leading-relaxed">
+          General inquiries:
+          <a href="mailto:webmaster@restoring-democracy.org" class="text-brand-gold underline underline-offset-2 hover:text-brand-orange break-all">webmaster@restoring-democracy.org</a>
+          &middot;
+          <a href="tel:+17542936975" class="text-brand-gold underline underline-offset-2 hover:text-brand-orange whitespace-nowrap">754-293-6975</a>
         </p>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         INSTITUTIONAL CREDIBILITY STRIP
-    ══════════════════════════════════════════ -->
-    <section class="py-6 bg-white border-y border-slate-200">
-      <div class="max-w-5xl mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 text-center">
-          <p class="text-sm text-slate-600">
-            <span class="font-semibold text-brand-green-dark">Investigative Journalism</span>
-            <span class="text-slate-300 mx-1.5">&middot;</span>
-            <span class="font-semibold text-brand-green-dark">Civic Systems Analysis</span>
-          </p>
-          <span class="hidden md:inline text-slate-200">|</span>
-          <p class="text-xs text-slate-600 tracking-wide uppercase">
-            Member&nbsp;&middot;&nbsp;<a href="https://www.ire.org/" target="_blank" rel="noopener noreferrer"
-               class="text-brand-green hover:text-brand-green-dark underline decoration-dotted underline-offset-2 transition font-semibold">
-              Investigative Reporters &amp; Editors (IRE)
-            </a>
-            <span class="mx-1.5">&middot;</span>National Scope<span class="mx-1.5">&middot;</span>Iowa Field Desk
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         WHAT YOU CAN DO
-    ══════════════════════════════════════════ -->
-    <section class="py-12 md:py-16 bg-brand-cream">
-      <div class="max-w-5xl mx-auto px-4">
-        <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark text-center mb-8">
-          What You Can Do
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
-
-          <div class="action-card bg-white rounded-xl p-6 text-center border border-slate-200
-                      hover:border-brand-green shadow-sm">
-            <svg class="w-7 h-7 text-brand-green mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <h3 class="font-serif text-base font-bold text-brand-green-dark mb-1">Check Your Registration</h3>
-            <p class="text-slate-600 text-xs mb-3">Verify your voter registration is current and accurate.</p>
-            <a href="https://vote.gov/" target="_blank" rel="noopener noreferrer"
-               class="text-brand-green font-semibold text-xs hover:text-brand-green-dark transition">
-              Visit Vote.gov &rarr;
-            </a>
-          </div>
-
-          <div class="action-card bg-white rounded-xl p-6 text-center border border-slate-200
-                      hover:border-brand-gold shadow-sm">
-            <svg class="w-7 h-7 text-brand-gold mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
-            </svg>
-            <h3 class="font-serif text-base font-bold text-brand-green-dark mb-1">Share Our Work</h3>
-            <p class="text-slate-600 text-xs mb-3">Help expand our reach by sharing investigations.</p>
-            <button onclick="shareThisPage()"
-                    class="text-brand-green-dark font-semibold text-xs hover:text-brand-green transition cursor-pointer">
-              Share This Site &rarr;
-            </button>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         SECURE TIPS + SUBSCRIBE
-    ══════════════════════════════════════════ -->
-    <section class="py-14 md:py-18 bg-brand-green">
-      <div class="max-w-4xl mx-auto px-4">
-
-        <div class="text-center mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold">Stay Connected</h2>
-          <p class="mt-3 text-brand-sand text-sm">
-            Subscribe to get our latest investigations delivered directly to you.
-          </p>
-          <a href="https://investigations.restoring-democracy.org/subscribe"
-             class="mt-5 inline-block bg-brand-gold text-brand-offblack font-bold py-3 px-8 rounded-full
-                    shadow-md hover:bg-brand-sand transition-all duration-200 text-sm">
-            Subscribe for Free &rarr;
-          </a>
-        </div>
-
-        <div class="tips-bar rounded-xl p-6 md:p-7 text-center">
-          <p class="text-brand-sand text-sm font-semibold mb-1">
-            <span class="text-brand-gold">Secure Tips</span> &mdash; Sources are protected. Always.
-          </p>
-          <p class="text-brand-sand/90 text-xs leading-relaxed max-w-lg mx-auto">
-            Use our secure tips page for confidential submissions.
-          </p>
-          <p class="text-brand-sand/80 text-xs mt-2">
-            Avoid standard email for sensitive material. Use Signal or Proton.
+        <p class="mt-3 text-brand-sand text-base leading-relaxed">
+          Found an error?
+          <a href="/corrections/" class="text-brand-gold underline underline-offset-2 hover:text-brand-orange">Report it on our corrections page &rarr;</a>
+        </p>
+        <div class="tips-bar rounded-xl p-6 mt-6">
+          <p class="text-brand-sand text-sm leading-relaxed">
+            <span class="text-brand-gold font-semibold">Sensitive information:</span>
+            use Secure Tips, not ordinary email or phone. The page explains how to reach us by Signal or a dedicated tip address, and the risks of each. No contact method is risk-free.
           </p>
           <a href="/secure-tips/"
-             class="mt-4 inline-block text-brand-gold text-xs font-semibold hover:text-brand-sand transition">
+             class="mt-4 inline-block text-brand-gold text-sm font-semibold hover:text-brand-sand transition">
             Visit Secure Tips &rarr;
           </a>
         </div>
-
       </div>
     </section>
 
@@ -1070,23 +483,19 @@
         <div>
           <h3 class="text-xs uppercase tracking-wider font-bold text-brand-sand/80 mb-3">Investigations</h3>
           <ul class="space-y-1.5 text-sm">
-            <li><a href="/journalism/"                 class="text-brand-sand/80 hover:text-brand-gold transition font-semibold">Pillar Investigations</a></li>
-            <li><a href="dream_machine/"               class="text-brand-sand/80 hover:text-brand-gold transition">The Dream Machine</a></li>
-            <li><a href="/iowa-doge-pension-privatize/" class="text-brand-sand/80 hover:text-brand-gold transition">Pension Privatization</a></li>
-            <li><a href="/the-god-machine/"             class="text-brand-sand/80 hover:text-brand-gold transition">The God Machine</a></li>
-            <li><a href="/pincer-dataviz/"             class="text-brand-sand/80 hover:text-brand-gold transition">Pincer Movement</a></li>
-            <li><a href="/pincer-financial/"            class="text-brand-sand/80 hover:text-brand-gold transition">Financial Superhighway</a></li>
+            <li><a href="https://investigations.restoring-democracy.org" class="text-brand-gold hover:text-brand-sand transition font-semibold">The Investigations Desk &#8599;</a></li>
+            <li><a href="/journalism/"                 class="text-brand-sand/80 hover:text-brand-gold transition">Key Investigations</a></li>
+            <li><a href="https://investigations.restoring-democracy.org/feed" class="text-brand-sand/80 hover:text-brand-gold transition">RSS feed</a></li>
           </ul>
         </div>
 
         <div>
           <h3 class="text-xs uppercase tracking-wider font-bold text-brand-sand/80 mb-3">Organization</h3>
           <ul class="space-y-1.5 text-sm">
-            <li><a href="https://investigations.restoring-democracy.org" class="text-brand-gold hover:text-brand-sand transition font-semibold">The Investigations Desk &#8599;</a></li>
             <li><a href="/about/"             class="text-brand-sand/80 hover:text-brand-gold transition">About RDP</a></li>
             <li><a href="/team/"              class="text-brand-sand/80 hover:text-brand-gold transition">Team</a></li>
             <li><a href="/analytics/"         class="text-brand-sand/80 hover:text-brand-gold transition">RDP Analytics</a></li>
-            <li><a href="#standards"          class="text-brand-sand/80 hover:text-brand-gold transition">Standards &amp; Corrections</a></li>
+            <li><a href="/corrections/"      class="text-brand-sand/80 hover:text-brand-gold transition">Corrections</a></li>
             <li><a href="/ai-use/"            class="text-brand-sand/80 hover:text-brand-gold transition">AI Use &amp; Editorial Principles</a></li>
             <li><a href="/privacy-policy/" class="text-brand-sand/80 hover:text-brand-gold transition">Privacy Policy</a></li>
             <li><a href="/security-policy/" class="text-brand-sand/80 hover:text-brand-gold transition">Security Policy</a></li>
@@ -1193,11 +602,12 @@
   </script>
 
   <script>
-    /* Latest feed — progressive enhancement over the static fallback list.
+    /* Latest feed — progressive enhancement over the undated fallback message.
        Fetches the same-origin /latest-investigations.json (built on a schedule
        by .github/workflows/latest-investigations.yml from the Investigations
        Desk RSS feed and public section metadata). No CORS involved. On ANY failure — missing file, bad
-       JSON, empty items — the static fallback list stays untouched. */
+       JSON, empty items — the fallback message stays untouched. The archive
+       link sits outside #latest-feed, so rendering never duplicates or removes it. */
     (function () {
       var ENDPOINT = '/latest-investigations.json';
       var LINK_PREFIX = 'https://investigations.restoring-democracy.org/';
@@ -1220,25 +630,18 @@
             // assigned section label; tags and editorial formats are separate.
             var category = it.categorySource === 'section' && typeof it.category === 'string'
               ? it.category.trim().slice(0, 100) : '';
-            var badge = index === 0
-              ? ' <span class="badge bg-brand-orange text-brand-offblack hidden md:inline">NEW</span>'
-              : '';
             return '<a href="'+esc(it.link)+'" target="_blank" rel="noopener noreferrer"'
               + ' class="feed-item feed-row'+(index === 0 ? ' feed-lead' : '')+' py-2.5 rounded group">'
               + '<time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="'+esc(dt)+'">'+esc(label)+'</time>'
-              + '<span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">'+esc(it.title)+badge+'</span>'
+              + '<span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">'+esc(it.title)+'</span>'
               + '<span class="feed-category">'+(category ? '<span class="sr-only">Category: </span>'+esc(category) : '')+'</span>'
               + '</a>';
           }).join('');
           rows = '<div class="feed-columns" aria-hidden="true"><span>Date</span><span>Publication</span><span>Category</span></div>' + rows;
-          rows += '<div class="py-2.5"><a href="https://investigations.restoring-democracy.org"'
-            + ' class="text-brand-gold/90 hover:text-brand-gold transition"'
-            + ' style="font-family:\'JetBrains Mono\',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;">'
-            + 'All investigations at The Investigations Desk \u2192</a></div>';
           list.innerHTML = rows;
-          if (statusEl) statusEl.innerHTML = '&middot; live feed';
+          if (statusEl) statusEl.textContent = 'Latest Investigations Desk stories loaded.';
         })
-        .catch(function (){ /* static fallback stays */ });
+        .catch(function (){ /* fallback message stays */ });
     })();
   </script>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->

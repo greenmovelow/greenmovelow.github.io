@@ -4,235 +4,104 @@ description: "Independent investigative journalism on surveillance, election sys
 canonical: "https://restoring-democracy.org/"
 ---
 
-[Longform now lives at investigations.restoring-democracy.org](https://investigations.restoring-democracy.org/)
-
-Est. 2023
-
- ![Restoring Democracy's Promise logo](https://restoring-democracy.org/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.png)
+![Restoring Democracy's Promise logo](https://restoring-democracy.org/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.png)
 
 # Restoring Democracy's Promise
 
 Quantifying the Truth
 
-Independent accountability journalism focused on democratic governance, surveillance, election systems, immigration, and public corruption.
+Independent investigative journalism from Iowa on surveillance, immigration, education, elections, public money, and the institutions shaping democratic life.
 
 Reporting built from public records, data, contracts, and court filings.
-
-[Visit The Investigations Desk →](https://investigations.restoring-democracy.org/) [Support Our Work](https://restoring-democracy.org/#support)
-
-[Subscribe via RSS](https://investigations.restoring-democracy.org/feed)
 
 ## Latest reporting
 
 [Read the current Investigations Desk archive](https://investigations.restoring-democracy.org/archive).
 
-Flagship Investigation
+## Featured investigations
 
-## The Leviathan Series
-
-Five-part investigation into the surveillance architecture being built beneath American democracy—plate readers, benefits databases, secret MOUs, and algorithmic governance.
-
-Part V — Latest January 29, 2026
-
-### The Department of Governance by Algorithm:  
-How DOGE Built Cleta Mitchell's Dream Machine
-
-Private briefings, retroactive authorizations, and irregular data transfers turned a benefits-verification tool into a national citizenship gatekeeper—with biometric capabilities built in from day one.
-
-[Read Part V →](https://investigations.restoring-democracy.org/p/the-department-of-governance-by-algorithm) [⚡ Interactive Exhibit](https://restoring-democracy.org/dream_machine/)
-
-[
-
-Part I
-
-#### The Performance of Protection
-
-](https://investigations.restoring-democracy.org/p/the-performance-of-protection)
-
-Part II
-
-#### [The ALPR Trap: America's Plate Reader Network](https://investigations.restoring-democracy.org/p/the-alpr-trap-how-americas-plate)
-
-[⚡ Interactive Exhibit →](https://restoring-democracy.org/alpr-trap/)
-
-Part III
-
-#### [SAVE: The Database They Won't Name](https://investigations.restoring-democracy.org/p/save-the-benefits-database-now-monitoring)
-
-[⚡ Iowa Case Study →](https://restoring-democracy.org/save_iowa/)
-
-Part IV
-
-#### [DOJ's “Confidential” SAVE MOU to Federalize Voter Rolls](https://investigations.restoring-democracy.org/p/dojs-confidential-save-mou-to-federalize)
-
-[⚡ Follow the Money →](https://restoring-democracy.org/funding_flow/)
-
-## Investigations
-
-Interactive reports, data visualizations, and document-driven accountability coverage.
-
-NEW
-
-Regional & Local Elections / Campaign Finance
+Campaign finance
 
 ### Bird Thanked Iowa; The Money Came From Washington
 
-Iowa campaign-finance records show one Washington-based RAGA Super PAC supplied more than 80 percent of Brenna Bird’s May 2026 fundraising, with additional transfers confirmed after the filing closed.
-
 June 7, 2026
 
-[Read the investigation →](https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came) [View interactive infographic →](https://restoring-democracy.org/infographics/bird-raga-money-trail/)
+More than 80 percent of the money Attorney General Brenna Bird’s campaign reported for the pre-primary period came from one Washington-based super PAC.
 
-### Governance & Formal Accountability
+[Read the investigation →](https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came) [See the money trail →](https://restoring-democracy.org/infographics/bird-raga-money-trail/)
 
-Official Filing
+Public pensions
 
-#### Formal Inquiry Filed with Iowa Ethics Board
+### Iowa’s pension proposal
 
-On November 8th, RDP submitted a formal Memorandum of Concern to the Iowa Ethics and Campaign Disclosure Board outlining potential undisclosed conflicts of interest in IPERS investment decisions.
+Aug. 11, 2025
 
-Official documentation of our formal inquiry process.
+A state task force proposed moving new public employees from the IPERS pension into 401(k)-style accounts. RDP projected that Principal Financial, where a task-force member is an executive, could collect about $42.9 million in fees over a decade if the plan became law.
 
-[Read Announcement →](https://investigations.restoring-democracy.org/p/restoring-democracys-promise-submits)
+Disclosure: On Nov. 8, 2025, RDP filed its own [memorandum of concern](https://investigations.restoring-democracy.org/p/restoring-democracys-promise-submits) about IPERS conflicts with the Iowa Ethics and Campaign Disclosure Board.
 
-#### The DEI Hoax
+[Read the investigation →](https://investigations.restoring-democracy.org/p/exclusive-doge-pension-privatize) [Explore the interactive version →](https://restoring-democracy.org/iowa-doge-pension-privatize/)
 
-AG Brenna Bird's 6-hour investigation and the 60 days of silence that followed—a case study in “process as punishment.”
+Education
 
-[Read Investigation →](https://investigations.restoring-democracy.org/p/the-dei-hoax-iowas-attorney-general)
+### The DEI Hoax
 
-#### Iowa's Pension Privatization
+Nov. 7, 2025
 
-The Iowa DOGE task force, the ALEC connection, and the multi-million dollar conflict of interest at the heart of the plan to end public pensions.
+On July 29, 2025, Attorney General Brenna Bird announced an investigation of University of Iowa diversity, equity and inclusion (DEI) programs within six hours of a video’s release. Reviewing public releases and reporting through Nov. 7, RDP found no follow-up report or filing.
 
-[Launch Interactive Investigation →](https://restoring-democracy.org/iowa-doge-pension-privatize/) [Read Original Investigation →](https://investigations.restoring-democracy.org/p/exclusive-doge-pension-privatize)
+[Read the investigation →](https://investigations.restoring-democracy.org/p/the-dei-hoax-iowas-attorney-general)
 
-#### The God Machine
+Our major investigations and their interactive exhibits are collected on the [Key Investigations](https://restoring-democracy.org/journalism/) page.
 
-How a tax-exempt “ministry” built a business selling unqualified chaplains to public schools, fueled by anonymous dark money.
+## About RDP
 
-[Launch Interactive Report →](https://restoring-democracy.org/the-god-machine/) [Read Original Investigation →](https://investigations.restoring-democracy.org/p/the-god-machine-how-faith-based-credentialing)
+Restoring Democracy’s Promise is an independent investigative newsroom based in Iowa, founded in 2023. We follow systems of power, not party lines.
 
-### Dark Money & Influence Networks
+Timothy Tucker is RDP’s founder and executive editor and a member of [Investigative Reporters & Editors (IRE)](https://www.ire.org/).
 
-#### The Financial Superhighway
+RDP Analytics, our research and methods division, builds data models, network maps and statistical analyses for our reporting and supports journalists, researchers and public-interest organizations.
 
-The money trail from the Marble Freedom Trust through DAFs like Schwab Charitable and DonorsTrust. Follow the money year by year.
+[About RDP →](https://restoring-democracy.org/about/) [Team →](https://restoring-democracy.org/team/) [RDP Analytics →](https://restoring-democracy.org/analytics/)
 
-[Launch Interactive Timeline →](https://restoring-democracy.org/pincer-financial/) [Read the Investigation That Started It: The Pincer Movement →](https://investigations.restoring-democracy.org/p/exclusive-the-pincer-movement)
+## Standards
 
-#### The Pincer Movement
+### How we report
 
-An interactive data visualization mapping the full “Pincer Movement” strategy—key players, connections, and the flow of influence.
+We start with primary records: statutes, contracts, court filings, procurement documents and audits. We say what the records show and what they do not.
 
-[Launch Data Visualization →](https://restoring-democracy.org/pincer-dataviz/) [Read the Investigation That Started It: The Pincer Movement →](https://investigations.restoring-democracy.org/p/exclusive-the-pincer-movement)
+[Editorial standards →](https://restoring-democracy.org/about/)
 
-#### The Pincer Infographic
+### Corrections
 
-A high-level visual summary: key findings, major players, and core concepts at a glance.
+When we get a fact wrong, we correct it in a dated note on the article. We do not stealth-edit.
 
-[View Infographic →](https://restoring-democracy.org/pincer-infographic/) [Read the Investigation That Started It: The Pincer Movement →](https://investigations.restoring-democracy.org/p/exclusive-the-pincer-movement)
-
-## Our Mission
-
-RDP combines investigative journalism with proprietary analytical infrastructure—each strengthening the other and serving the broader civic sector.
-
-### RDP Journalism
-
-Investigative longform reporting rooted in public records—contracts, court filings, correspondence, and oversight documentation. Interactive explainers, infographic-driven series, and document-first accountability coverage. National in scope with an Iowa-based field desk.
-
-We follow systems of power, not party lines.
-
-[Explore RDP Journalism →](https://investigations.restoring-democracy.org/)
-
-### RDP Analytics
-
-Proprietary investigative modeling—AI-driven analytical systems built to detect patterns and anomalies across government data, financial flows, and institutional networks. Glass-box architecture: every output is explainable, auditable, and reproducible.
-
-Proprietary technology · Licensed to aligned civic organizations
-
-[Explore RDP Analytics →](https://restoring-democracy.org/analytics/)
-
-## RDP Analytics
-
-Our analytical division develops proprietary investigative modeling systems—including state-space-flow hybrid models for anomaly detection across government and financial data. These systems produce explainable, auditable results that power RDP's journalism and are available for licensing to aligned organizations.
-
-We build tools for civic organizations, human rights groups, pro-democracy coalitions, and any institution committed to using analytical power responsibly. Our systems are designed for transparency—not surveillance.
-
-For partnership, licensing, media, or research inquiries:
-
-[Contact Us](https://tally.so/r/yPDJy6)
-
-Explore
-
-[Network Maps →](https://restoring-democracy.org/pincer-dataviz/) [Financial Timelines →](https://restoring-democracy.org/pincer-financial/) [Systems Exhibits →](https://restoring-democracy.org/dream_machine/) [Full Analytics Division →](https://restoring-democracy.org/analytics/)
-
-## Editorial Standards
-
-### Methodology
-
-Primary sources first: statutes, contracts, court filings, MOUs, procurement documents, and audit reports. Every claim is tagged by confidence level—confirmed, high-confidence, plausible, or unconfirmed.
-
-[About RDP →](https://restoring-democracy.org/about/)
-
-### Corrections Policy
-
-Factual errors are corrected promptly and transparently. Substantive updates are logged. We do not stealth-edit.
-
-[Full Corrections Policy →](https://restoring-democracy.org/corrections/)
+[Corrections policy and log →](https://restoring-democracy.org/corrections/)
 
 ### Independence
 
-Independent of political parties, candidates, and government agencies. No advertising. No corporate sponsorships. Credibility is earned through transparent method, rigorous sourcing, and restraint in judgment.
+Independent of political parties, candidates, and government agencies. No advertising, corporate sponsorships or government funding, and no contributions that carry editorial conditions.
 
-### Funding
-
-Donor-supported and reader-funded through voluntary subscriptions. No government funding, no advertising revenue, no contributions carrying editorial conditions. Future institutional funders disclosed publicly.
-
-Financial disclosures published annually.
-
-### AI Use & Editorial Principles
+### AI use
 
 Read how RDP uses artificial intelligence and computational tools while preserving human editorial responsibility, source protection, verification, and transparency.
 
-[Read our AI Use & Editorial Principles →](https://restoring-democracy.org/ai-use/)
+[AI use and editorial principles →](https://restoring-democracy.org/ai-use/)
+
+[Privacy policy →](https://restoring-democracy.org/privacy-policy/) [Security policy →](https://restoring-democracy.org/security-policy/)
 
 ## Support Independent Investigative Journalism
 
-Your support strengthens both parts of our mission: investigative journalism that holds power accountable and analytical tools that make civic oversight scalable. RDP accepts no advertising, corporate sponsorships, or government funding.
+Free subscribers receive new investigations by email. Paid subscriptions support RDP’s reporting and the data work behind it. Both options are on our subscription page.
 
-[Become a Paid Subscriber →](https://investigations.restoring-democracy.org/subscribe)
+[Subscribe →](https://investigations.restoring-democracy.org/subscribe)
 
-Free and paid tiers are both on our subscription page—choose whichever fits.
+## Contact
 
-Investigative Journalism · Civic Systems Analysis
+General inquiries: [webmaster@restoring-democracy.org](mailto:webmaster@restoring-democracy.org) · [754-293-6975](tel:+17542936975)
 
-|
+Found an error? [Report it on our corrections page →](https://restoring-democracy.org/corrections/)
 
-Member ·  [Investigative Reporters & Editors (IRE)](https://www.ire.org/) ·National Scope·Iowa Field Desk
-
-## What You Can Do
-
-### Check Your Registration
-
-Verify your voter registration is current and accurate.
-
-[Visit Vote.gov →](https://vote.gov/)
-
-### Share Our Work
-
-Help expand our reach by sharing investigations.
-
-## Stay Connected
-
-Subscribe to get our latest investigations delivered directly to you.
-
-[Subscribe for Free →](https://investigations.restoring-democracy.org/subscribe)
-
-Secure Tips — Sources are protected. Always.
-
-Use our secure tips page for confidential submissions.
-
-Avoid standard email for sensitive material. Use Signal or Proton.
+Sensitive information: use Secure Tips, not ordinary email or phone. The page explains how to reach us by Signal or a dedicated tip address, and the risks of each. No contact method is risk-free.
 
 [Visit Secure Tips →](https://restoring-democracy.org/secure-tips/)
