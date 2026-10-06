@@ -6,77 +6,99 @@
       "link": "https://investigations.restoring-democracy.org/p/hinsons-campaign-took-24500-from",
       "date": "2026-10-04",
       "dateLabel": "Oct 4",
-      "category": "Investigation"
+      "sectionId": 95395,
+      "category": "National & State Elections",
+      "categorySource": "section"
     },
     {
       "title": "The Supreme Court Put SAVE Back in Play",
       "link": "https://investigations.restoring-democracy.org/p/the-supreme-court-put-save-back-in",
       "date": "2026-09-26",
       "dateLabel": "Sep 26",
-      "category": "Investigation"
+      "sectionId": 450391,
+      "category": "Voting Rights & Election Systems",
+      "categorySource": "section"
     },
     {
       "title": "Des Moines Expanded Plate Reader Use, Then Asked What to Cut",
       "link": "https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader",
       "date": "2026-09-20",
       "dateLabel": "Sep 20",
-      "category": "Investigation"
+      "sectionId": 450386,
+      "category": "Surveillance & Technology",
+      "categorySource": "section"
     },
     {
       "title": "Who Decides the Future of Central Iowa’s Plate Readers?",
       "link": "https://investigations.restoring-democracy.org/p/who-decides-about-central-iowas-plate",
       "date": "2026-09-15",
       "dateLabel": "Sep 15",
-      "category": "Investigation"
+      "sectionId": 450386,
+      "category": "Surveillance & Technology",
+      "categorySource": "section"
     },
     {
       "title": "Altoona's Plate Reader Network Goes Beyond Flock",
       "link": "https://investigations.restoring-democracy.org/p/altoonas-plate-reader-network-goes",
       "date": "2026-09-14",
       "dateLabel": "Sep 14",
-      "category": "Investigation"
+      "sectionId": 450386,
+      "category": "Surveillance & Technology",
+      "categorySource": "section"
     },
     {
       "title": "Inside Iowa’s SAVE Clearinghouse: What the State’s Own Records Show",
       "link": "https://investigations.restoring-democracy.org/p/inside-iowas-save-clearinghouse-what",
       "date": "2026-09-05",
       "dateLabel": "Sep 5",
-      "category": "Investigation"
+      "sectionId": 305309,
+      "category": "Civil Liberties",
+      "categorySource": "section"
     },
     {
       "title": "As Public Pressure Mounts, West Des Moines Defends Its Flock Network",
       "link": "https://investigations.restoring-democracy.org/p/as-public-pressure-mounts-west-des",
       "date": "2026-08-27",
       "dateLabel": "Aug 27",
-      "category": "Investigation"
+      "sectionId": 450386,
+      "category": "Surveillance & Technology",
+      "categorySource": "section"
     },
     {
       "title": "Signed and Filed. Dallas County Says Its Plate-Reader Deal Isn’t in Effect",
       "link": "https://investigations.restoring-democracy.org/p/signed-and-filed-dallas-county-says",
       "date": "2026-08-24",
       "dateLabel": "Aug 24",
-      "category": "Investigation"
+      "sectionId": 450386,
+      "category": "Surveillance & Technology",
+      "categorySource": "section"
     },
     {
       "title": "The Formula Behind the $25,000: What Iowa’s Next Governor Inherits",
       "link": "https://investigations.restoring-democracy.org/p/the-formula-behind-the-25000-what",
       "date": "2026-08-10",
       "dateLabel": "Aug 10",
-      "category": "Investigation"
+      "sectionId": 450382,
+      "category": "Money and Institutions",
+      "categorySource": "section"
     },
     {
       "title": "Trump’s 278,000 Claim Rests on Two Searches the Government Has Not Explained",
       "link": "https://investigations.restoring-democracy.org/p/trumps-278000-claim-rests-on-two",
       "date": "2026-07-19",
       "dateLabel": "Jul 19",
-      "category": "Investigation"
+      "sectionId": 450391,
+      "category": "Voting Rights & Election Systems",
+      "categorySource": "section"
     },
     {
       "title": "DHS Built a Four-State SAVE Workaround After a Judge Struck Down the 2025 System",
       "link": "https://investigations.restoring-democracy.org/p/dhs-built-a-four-state-save-workaround",
       "date": "2026-07-11",
       "dateLabel": "Jul 11",
-      "category": "Investigation"
+      "sectionId": 450391,
+      "category": "Voting Rights & Election Systems",
+      "categorySource": "section"
     }
   ]
 }
