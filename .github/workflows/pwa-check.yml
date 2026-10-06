@@ -10,6 +10,7 @@ on:
       - _headers
       - package.json
       - scripts/audit_pwa.py
+      - scripts/test_pwa.py
       - .github/workflows/pwa-check.yml
   push:
     branches: [main]
@@ -21,6 +22,7 @@ on:
       - _headers
       - package.json
       - scripts/audit_pwa.py
+      - scripts/test_pwa.py
       - .github/workflows/pwa-check.yml
 
 permissions:
@@ -35,3 +37,4 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/audit_pwa.py
+      - run: python -m unittest discover -s scripts -p 'test_pwa.py'
