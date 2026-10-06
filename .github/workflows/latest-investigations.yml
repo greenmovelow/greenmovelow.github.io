@@ -1,7 +1,8 @@
 name: Update latest investigations feed
 
-# Fetches the Investigations Desk RSS feed on a schedule and commits a
-# sanitized static latest-investigations.json when (and only when) the
+# Fetches the Investigations Desk RSS feed and the assigned Substack section
+# for each post on a schedule, then commits a sanitized static
+# latest-investigations.json when (and only when) the
 # content changed. Netlify redeploys automatically on the commit.
 
 on:
@@ -29,7 +30,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Build latest-investigations.json
+      - name: Test feed importer
+        run: python -m unittest discover -s scripts -p 'test_latest_investigations.py'
+
+      - name: Build feed with assigned Substack sections
         run: python scripts/build_latest_investigations.py
 
       - name: Commit and push if changed

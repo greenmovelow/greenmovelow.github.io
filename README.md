@@ -47,6 +47,37 @@ This is a modern static website built for speed, readability, security, and long
 
 ## Editorial Standards
 
+### Latest publications feed
+
+`.github/workflows/latest-investigations.yml` refreshes the 11 latest standalone
+posts every three hours. The RSS feed supplies titles, links, and dates; it does
+not currently include the assigned Substack section. The importer resolves each
+published post's `section_id` through the public `/api/v1/posts/<slug>` response
+and matches it to the publication homepage's public section-name data. The
+homepage displays that section as a Category column on desktop and below the
+title on phones. Subcategories keep their own names, such as
+"Voting Rights & Election Systems".
+
+The importer refreshes assignments even when RSS content is unchanged. It
+never substitutes a post tag or the generic "Investigation" label for a section.
+Unassigned or unresolvable sections stay blank. Lookup failures preserve the
+last verified label for the same article while allowing RSS updates to continue;
+if the post lookup succeeds with a different section ID, the old label is not
+reused. The JSON itself holds the small last-good section cache, so no separate
+cache file or credentials are needed. No post bodies, tags, or subscriber data
+are persisted.
+
+Substack's public post endpoint and homepage preload format are unsupported
+interfaces and can change. Warnings in the Actions log identify failures; the
+next scheduled run retries. A feed fetch or XML parse failure keeps the entire
+last-good JSON file. Offline regression tests run on PRs and before scheduled
+imports:
+
+```sh
+python -m unittest discover -s scripts -p 'test_latest_investigations.py'
+python scripts/build_latest_investigations.py
+```
+
 ### Markdown companions
 
 The homepage, About, Corrections, Analytics, Team, and AI Use pages have generated

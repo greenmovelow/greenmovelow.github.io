@@ -99,7 +99,18 @@
     .feed-lead { padding-top: .3rem; padding-bottom: .7rem; }
     .feed-lead .feed-title { font-size: .98rem; line-height: 1.3; font-weight: 700; color: #f6f1e6; }
     .feed-lead:hover .feed-title { color: #d4af37; }
-    @media (min-width: 768px) { .feed-lead .feed-title { font-size: 1.05rem; } }
+    /* Section labels are a column on desktop and a second line on phones. */
+    .feed-row { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); column-gap: .75rem; row-gap: .25rem; align-items: baseline; }
+    .feed-row .feed-title { grid-column: 2; grid-row: 1; min-width: 0; overflow-wrap: anywhere; }
+    .feed-date { grid-column: 1; grid-row: 1; }
+    .feed-category { grid-column: 2; grid-row: 2; font-size: .75rem; line-height: 1.4; color: #e4d5b9; overflow-wrap: anywhere; }
+    .feed-columns { display: none; }
+    @media (min-width: 768px) {
+      .feed-lead .feed-title { font-size: 1.05rem; }
+      .feed-row, .feed-columns { grid-template-columns: 3.5rem minmax(0, 1fr) 14rem; }
+      .feed-category { grid-column: 3; grid-row: 1; }
+      .feed-columns { display: grid; column-gap: .75rem; padding: 0 0 .5rem; font-size: .7rem; color: #e4d5b9; }
+    }
   </style>
 
 </head>
@@ -1185,7 +1196,7 @@
     /* Latest feed — progressive enhancement over the static fallback list.
        Fetches the same-origin /latest-investigations.json (built on a schedule
        by .github/workflows/latest-investigations.yml from the Investigations
-       Desk RSS feed). No CORS involved. On ANY failure — missing file, bad
+       Desk RSS feed and public section metadata). No CORS involved. On ANY failure — missing file, bad
        JSON, empty items — the static fallback list stays untouched. */
     (function () {
       var ENDPOINT = '/latest-investigations.json';
@@ -1193,11 +1204,7 @@
       var list = document.getElementById('latest-feed');
       var statusEl = document.getElementById('feed-status');
       if (!list || !('fetch' in window)) return;
-      var BADGES = { 'analysis': 'bg-blue-900/40 text-blue-300',
-                     'announcement': 'bg-brand-orange/20 text-brand-orange',
-                     'statement': 'bg-brand-orange/20 text-brand-orange',
-                     'dispatch': 'bg-brand-gold/20 text-brand-gold' };
-      function esc(s){ var p=document.createElement('span'); p.textContent=String(s); return p.innerHTML; }
+      function esc(s){ var p=document.createElement('span'); p.textContent=String(s); return p.innerHTML.replace(/"/g, '&quot;'); }
       fetch(ENDPOINT)
         .then(function (r){ if(!r.ok) throw 0; return r.json(); })
         .then(function (data){
@@ -1209,21 +1216,21 @@
           var rows = items.map(function (it, index){
             var dt = typeof it.date === 'string' ? it.date.slice(0, 10) : '';
             var label = typeof it.dateLabel === 'string' ? it.dateLabel : '';
-            var category = String(it.category||'').toLowerCase().trim();
-            var categoryBadge = BADGES[category]
-              ? '<span class="badge '+BADGES[category]+' flex-shrink-0 hidden md:inline ml-auto">'+esc(it.category)+'</span>'
+            // Legacy JSON called every post "Investigation". Only display an
+            // assigned section label; tags and editorial formats are separate.
+            var category = it.categorySource === 'section' && typeof it.category === 'string'
+              ? it.category.trim().slice(0, 100) : '';
+            var badge = index === 0
+              ? ' <span class="badge bg-brand-orange text-brand-offblack hidden md:inline">NEW</span>'
               : '';
-            var badge = categoryBadge
-              + (index === 0
-                ? '<span class="badge bg-brand-orange text-brand-offblack flex-shrink-0 hidden md:inline '+(categoryBadge ? 'ml-2' : 'ml-auto')+'">NEW</span>'
-                : '');
             return '<a href="'+esc(it.link)+'" target="_blank" rel="noopener noreferrer"'
-              + ' class="feed-item'+(index === 0 ? ' feed-lead' : '')+' flex items-baseline gap-3 py-2.5 rounded group">'
-              + '<time class="text-xs text-brand-sand/80 flex-shrink-0 tabular-nums w-14" datetime="'+esc(dt)+'">'+esc(label)+'</time>'
-              + '<span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">'+esc(it.title)+'</span>'
-              + badge
+              + ' class="feed-item feed-row'+(index === 0 ? ' feed-lead' : '')+' py-2.5 rounded group">'
+              + '<time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="'+esc(dt)+'">'+esc(label)+'</time>'
+              + '<span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">'+esc(it.title)+badge+'</span>'
+              + '<span class="feed-category">'+(category ? '<span class="sr-only">Category: </span>'+esc(category) : '')+'</span>'
               + '</a>';
           }).join('');
+          rows = '<div class="feed-columns" aria-hidden="true"><span>Date</span><span>Publication</span><span>Category</span></div>' + rows;
           rows += '<div class="py-2.5"><a href="https://investigations.restoring-democracy.org"'
             + ' class="text-brand-gold/90 hover:text-brand-gold transition"'
             + ' style="font-family:\'JetBrains Mono\',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;">'
