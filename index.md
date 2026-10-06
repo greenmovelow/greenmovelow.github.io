@@ -8,11 +8,7 @@ canonical: "https://restoring-democracy.org/"
 
 # Restoring Democracy's Promise
 
-Quantifying the Truth
-
-Independent investigative journalism from Iowa on surveillance, immigration, education, elections, public money, and the institutions shaping democratic life.
-
-Reporting built from public records, data, contracts, and court filings.
+Independent investigative journalism based in Iowa, examining surveillance, immigration, education, elections, public money, and the institutions shaping democratic life.
 
 ## Latest reporting
 
