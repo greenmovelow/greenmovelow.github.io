@@ -64,7 +64,6 @@ for (const pathname of pages) {
   ].join('\n');
   const destination = path.join(directory, 'index.md');
   if (check) {
-    if (pathname === '/analytics/' && fs.readFileSync(destination, 'utf8') !== markdown) console.log('RDP_ANALYTICS_EXPECTED_BASE64:' + Buffer.from(markdown, 'utf8').toString('base64'));
     if (!fs.existsSync(destination) || fs.readFileSync(destination, 'utf8') !== markdown) {
       console.error(`Stale Markdown: ${path.relative(root, destination)}`);
       stale = true;
