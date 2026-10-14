@@ -6,4 +6,3 @@ Preferred-Languages: en
 Canonical: https://restoring-democracy.org/.well-known/security.txt
 Policy: https://restoring-democracy.org/security-policy/
 Acknowledgments: https://restoring-democracy.org/about/
-Hiring: https://restoring-democracy.org/analytics/
