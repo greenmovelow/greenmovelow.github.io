@@ -26,7 +26,7 @@ Through [RDP Analytics](https://restoring-democracy.org/analytics/), the newsroo
 
 ## Building the Newsroom
 
-Restoring Democracy’s Promise is exploring nonprofit status and building toward a larger independent newsroom. We welcome inquiries from potential partners, reporters, editors, researchers, and contributors who share our evidence-first public-interest mission. Interested collaborators may [contact us](https://tally.so/r/yPDJy6).
+Restoring Democracy’s Promise is exploring nonprofit status and building toward a larger independent newsroom. We are seeking founding board members to help guide that effort, along with potential partners, reporters, editors, researchers and contributors who share our evidence-first public-interest mission. Interested collaborators may [contact us](https://tally.so/r/yPDJy6).
 
 ## Coverage Areas
 
