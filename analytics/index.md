@@ -1,93 +1,41 @@
 ---
 title: "RDP Analytics | Restoring Democracy's Promise"
-description: "RDP Analytics applies investigative methods, statistical modeling, and cross-domain pattern analysis to public-interest questions too complex for conventional reporting alone."
+description: "RDP Analytics, the research and methods division of Restoring Democracy's Promise, builds data models, network maps and statistical analyses for public-interest reporting."
 canonical: "https://restoring-democracy.org/analytics/"
 ---
 
-![RDP Analytics](https://restoring-democracy.org/assets/rdp-analytics-logo-1200.png)Advanced Investigative Capabilities
+[Skip to main content](https://restoring-democracy.org/analytics/#main-content)
 
-# RDP Analytics — Research & Methods Division
+#   ![RDP Analytics](https://restoring-democracy.org/assets/rdp-analytics-logo-1200.png)
 
-Research & Methods Division
+The research and methods division of Restoring Democracy's Promise
 
-RDP Analytics applies investigative methods, statistical modeling, and cross-domain pattern analysis to public-interest questions that are often too complex for conventional reporting alone. We help map systems, test competing explanations, and document structural risk with evidence that can be reviewed, challenged, and sourced.
+RDP Analytics builds data models, network maps and statistical analyses for our reporting and supports journalists, researchers and public-interest organizations. We use these methods to examine public records, test competing explanations and document what the evidence establishes.
 
-Our work is designed for journalists, researchers, watchdogs, and mission-aligned institutions that need rigorous analysis of policy systems, networked power, and institutional failure.
+## How we work
 
-On this page
+Our analyses start with primary records: statutes, contracts, filings and procurement data. We build them to be auditable, adversarially tested, and reproducible. We document assumptions and explain our methods, recognizing that source protections and the availability of underlying records can limit independent replication. Datasets, charts and code are covered by our [corrections policy](https://restoring-democracy.org/corrections/).
 
-[About Us](https://restoring-democracy.org/analytics/#pillars) [Partnerships & Access](https://restoring-democracy.org/analytics/#partnerships)
+## Methods and published work
 
-Every analysis starts with primary records—statutes, contracts, filings, procurement data—and is built to be auditable, adversarially tested, and reproducible. We document our assumptions, disclose our methods, and design findings to survive scrutiny, not just to support a narrative.
+### Documenting institutional breakdowns
 
-## About Us
+RDP examined gaps in federal oversight during the 2025 government shutdown and produced two analytical exhibits. These are retrospective studies of the shutdown and its institutional context; modeling assumptions and interpretations should be distinguished from directly documented events.
 
-Three core capabilities, each demonstrated through published investigative work.
+[Oversight vacuum analysis](https://restoring-democracy.org/shutdown-analysis/) [Shutdown accountability model](https://restoring-democracy.org/shutdown-accountability/)
 
-1 Procedural Forensics
+### Network analysis and CTMV
 
-### Real-Time Procedural Forensics & Impact Mapping
+Comparative Theory & Model Validation (CTMV) means testing competing explanations against the documentary record, including whether organizations operate independently or show evidence of common relationships. Our published Pincer exhibits map connections across organizations, policies and financing. A shared connection by itself does not establish coordination.
 
-We track institutional breakdowns as they unfold, not just after official summaries appear. During the 2025 shutdown, RDP Analytics used structured analytical methods to document both the oversight vacuum itself and the broader shutdown dynamics surrounding it. This work demonstrates our ability to measure procedural failure, map structural exposure, and analyze accountability patterns in real time rather than only after the fact.
+[Pincer network map](https://restoring-democracy.org/pincer-dataviz/) [Financial Superhighway exhibit](https://restoring-democracy.org/pincer-financial/)
 
-2 Network Analysis
+## Working with RDP Analytics
 
-### Network Architecture & CTMVM Analysis
+We welcome inquiries from journalists, researchers and public-interest organizations investigating public records, policy systems and networked power. Tell us what you are examining, and we can discuss whether and how to collaborate. This is not a standing research service or a tiered access program.
 
-We use Comparative Theory & Model Validation (CTMVM) to test whether political-financial actors behave independently or as a coordinated system. In Iowa, this approach helped identify recurring shell structures, timing patterns, and organizational overlaps inconsistent with public claims of separation.
+## Contact
 
-CTMVM allows us to evaluate competing explanations with structured, evidence-based analysis rather than narrative guesswork.
+For collaboration, media or research inquiries, [use our contact form](https://tally.so/r/yPDJy6).
 
-[Financial Superhighway Exhibit](https://restoring-democracy.org/pincer-financial/) [Network Map Visualization](https://restoring-democracy.org/pincer-dataviz/)
-
-3 Risk Modeling
-
-### Predictive Risk & Vulnerability Modeling
-
-We use scenario-based modeling to assess how policy shifts, administrative changes, and institutional strain may cascade across systems. This work has included risk-path analysis related to staffing, eligibility systems, supply-chain stress, and governance bottlenecks.
-
-The goal is not speculation—it is structured early warning grounded in observable patterns and documented conditions.
-
-Featured Case Studies
-
-Explore two standalone analytical exhibits drawn from RDP Analytics’ 2025 shutdown work: one focused on the oversight vacuum itself, and one focused on modeled shutdown accountability dynamics.
-
-Oversight Vacuum Exhibit
-
-### 2025 Shutdown Analysis
-
-A dedicated analytical exhibit on the 2025 oversight lapse, including timing, structural exposure, anomaly detection, and the broader architecture of the shutdown-era accountability vacuum.
-
-[View Oversight Analysis →](https://restoring-democracy.org/shutdown-analysis/)
-
-Network Accountability Exhibit
-
-### Shutdown Accountability Analysis
-
-A separate exhibit focused on shutdown-era network dynamics, including modeled structural contribution, systems mapping, and accountability analysis within the broader crisis.
-
-[View Accountability Analysis →](https://restoring-democracy.org/shutdown-accountability/)
-
-## Mission-Aligned Partnerships
-
-RDP Analytics supports journalists, researchers, watchdog organizations, and public-interest institutions that need rigorous, reviewable analysis of policy systems, public records, and networked power. Because some of our methods involve sensitive datasets, audit trails, and reproducible research workflows, we structure access carefully and in collaboration with aligned partners.
-
-### Research Access
-
-Curated analytical outputs, methodological summaries, and case-specific support for qualified public-interest work.
-
-### Media & Academic Access
-
-Documented evidence bundles and structured analytical support for reporting, validation, and sourcing.
-
-### Institutional Access
-
-Custom baselines, scoped monitoring, or analytical support for approved public-interest and oversight use cases.
-
-## Work With Us
-
-For partnership inquiries, collaboration, media questions, research access, or other serious inquiries, please use the contact form.
-
-[Contact Us](https://tally.so/r/yPDJy6)
-
-[← Return to Newsroom](https://restoring-democracy.org/)
+Restoring Democracy's Promise is exploring nonprofit status and is seeking founding board members. [Learn more on our Team page](https://restoring-democracy.org/team/).
