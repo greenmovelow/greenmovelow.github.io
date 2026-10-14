@@ -47,7 +47,7 @@
   <meta name="twitter:description" content="Explore flagship investigations, evidence vaults, public records, and continuing accountability reporting from Restoring Democracy’s Promise." />
   <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Gen3_Gold_Aperture_1536.png" />
 
-  <link rel="alternate" type="application/rss+xml" title="RDP — The Investigations Desk" href="https://investigations.restoring-democracy.org/feed">
+  <link rel="alternate" type="application/rss+xml" title="RDP — Investigations" href="https://investigations.restoring-democracy.org/feed">
 
   <link rel="stylesheet" href="/assets/css/styles.css">
   <style>
@@ -103,11 +103,11 @@
           <a href="/#standards" class="nav-link text-brand-sand text-sm">Standards</a>
           <a href="https://investigations.restoring-democracy.org/"
              class="nav-link text-brand-gold text-sm font-semibold inline-flex items-center gap-1 whitespace-nowrap">
-            Investigations Desk
+            Browse Investigations
             <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
           </a>
           <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
-          <a href="/#support" class="ml-2 bg-brand-gold text-brand-offblack text-sm font-bold py-2 px-5 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-md">Support Our Work</a>
+          <a href="https://investigations.restoring-democracy.org/subscribe" class="ml-2 bg-brand-gold text-brand-offblack text-sm font-bold py-2 px-5 rounded-full hover:bg-brand-orange transition-all duration-200 shadow-md">Subscribe</a>
         </div>
         <button id="mobile-toggle" class="lg:hidden p-2 text-brand-sand hover:text-brand-gold transition" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -121,9 +121,9 @@
         <a href="/about/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">About</a>
         <a href="/team/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Team</a>
         <a href="/#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
-        <a href="https://investigations.restoring-democracy.org/" class="block py-2.5 px-3 text-brand-gold hover:text-brand-sand text-sm font-semibold rounded transition">Investigations Desk &#8599;</a>
+        <a href="https://investigations.restoring-democracy.org/" class="block py-2.5 px-3 text-brand-gold hover:text-brand-sand text-sm font-semibold rounded transition">Browse Investigations &#8599;</a>
         <a href="/secure-tips/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
-        <div class="pt-2 pb-1"><a href="/#support" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">Support Our Work</a></div>
+        <div class="pt-2 pb-1"><a href="https://investigations.restoring-democracy.org/subscribe" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">Subscribe</a></div>
       </div>
     </div>
   </nav>
@@ -266,14 +266,14 @@
       </ul>
     </section>
 
-    <!-- ══════════ LATEST FROM THE INVESTIGATIONS DESK ══════════ -->
+    <!-- ══════════ LATEST INVESTIGATIONS ══════════ -->
     <section aria-labelledby="latest-desk">
-      <h2 id="latest-desk" class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark mb-2">Latest from the Investigations Desk</h2>
+      <h2 id="latest-desk" class="font-serif text-2xl md:text-3xl font-bold text-brand-green-dark mb-2">Latest investigations</h2>
       <p class="text-slate-700 mb-5 max-w-3xl">New reporting, document-driven investigations, and continuing accountability coverage from Restoring Democracy’s Promise.</p>
 
       <a href="https://investigations.restoring-democracy.org/"
          class="inline-block bg-brand-gold text-brand-offblack font-bold py-2.5 px-6 rounded-full text-sm shadow-md hover:bg-brand-orange transition-all duration-200">
-        Visit the Investigations Desk &rarr;
+        Browse Investigations &rarr;
       </a>
 
       <ol id="journalism-feed" class="mt-6 space-y-2">
@@ -467,7 +467,7 @@
   </script>
 
   <script>
-    /* Latest from the Investigations Desk — progressive enhancement over the
+    /* Latest investigations — progressive enhancement over the
        static list above. Reads the same-origin /latest-investigations.json that
        .github/workflows/latest-investigations.yml builds on a schedule from the
        Desk's RSS feed (see scripts/build_latest_investigations.py). No CORS, no

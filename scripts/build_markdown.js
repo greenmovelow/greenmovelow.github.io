@@ -31,7 +31,7 @@ for (const pathname of pages) {
     const liveFeed = body.querySelector('section[aria-label="Latest publications"]');
     if (liveFeed) {
       const replacement = document.createElement('section');
-      replacement.innerHTML = '<h2>Latest reporting</h2><p><a href="https://investigations.restoring-democracy.org/archive">Read the current Investigations Desk archive</a>.</p>';
+      replacement.innerHTML = '<h2>Latest reporting</h2><p><a href="https://investigations.restoring-democracy.org/archive">Browse Investigations</a>.</p>';
       liveFeed.replaceWith(replacement);
     }
   }
