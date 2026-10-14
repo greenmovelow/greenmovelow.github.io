@@ -6,7 +6,7 @@ canonical: "https://restoring-democracy.org/analytics/"
 
 [Skip to main content](https://restoring-democracy.org/analytics/#main-content)
 
-# ![RDP Analytics](https://restoring-democracy.org/assets/rdp-analytics-logo-1200.png)
+#   ![RDP Analytics](https://restoring-democracy.org/assets/rdp-analytics-logo-1200.png)
 
 The research and methods division of Restoring Democracy's Promise
 
