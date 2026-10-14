@@ -12,7 +12,7 @@ Independent investigative journalism based in Iowa, examining surveillance, immi
 
 ## Latest reporting
 
-[Read the current Investigations Desk archive](https://investigations.restoring-democracy.org/archive).
+[Browse Investigations](https://investigations.restoring-democracy.org/archive).
 
 ## Featured investigations
 
