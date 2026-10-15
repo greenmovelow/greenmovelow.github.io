@@ -2,6 +2,24 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Justice Department Voter Data Reached ICE Before a Judge Ruled the Program Unlawful",
+      "link": "https://investigations.restoring-democracy.org/p/justice-department-voter-data-reached",
+      "date": "2026-10-15",
+      "dateLabel": "Oct 15",
+      "sectionId": 450391,
+      "category": "Voting Rights & Election Systems",
+      "categorySource": "section"
+    },
+    {
+      "title": "Court Vacates DOJ Voter List Policy, Leaving Iowa File’s Fate Unresolved",
+      "link": "https://investigations.restoring-democracy.org/p/court-vacates-doj-voter-list-policy",
+      "date": "2026-10-15",
+      "dateLabel": "Oct 15",
+      "sectionId": 450391,
+      "category": "Voting Rights & Election Systems",
+      "categorySource": "section"
+    },
+    {
       "title": "Hinson’s campaign took $24,500 from detention companies’ PACs and their CEOs",
       "link": "https://investigations.restoring-democracy.org/p/hinsons-campaign-took-24500-from",
       "date": "2026-10-04",
@@ -80,24 +98,6 @@
       "dateLabel": "Aug 10",
       "sectionId": 450382,
       "category": "Money and Institutions",
-      "categorySource": "section"
-    },
-    {
-      "title": "Trump’s 278,000 Claim Rests on Two Searches the Government Has Not Explained",
-      "link": "https://investigations.restoring-democracy.org/p/trumps-278000-claim-rests-on-two",
-      "date": "2026-07-19",
-      "dateLabel": "Jul 19",
-      "sectionId": 450391,
-      "category": "Voting Rights & Election Systems",
-      "categorySource": "section"
-    },
-    {
-      "title": "DHS Built a Four-State SAVE Workaround After a Judge Struck Down the 2025 System",
-      "link": "https://investigations.restoring-democracy.org/p/dhs-built-a-four-state-save-workaround",
-      "date": "2026-07-11",
-      "dateLabel": "Jul 11",
-      "sectionId": 450391,
-      "category": "Voting Rights & Election Systems",
       "categorySource": "section"
     }
   ]
