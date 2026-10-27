@@ -42,7 +42,7 @@
     "headline": "Bird Thanked Iowa. The Money Came From Washington.",
     "description": "Iowa records show one Washington-based RAGA Super PAC supplied most of Brenna Bird's May 2026 fundraising, with additional transfers confirmed after the filing closed.",
     "datePublished": "2026-06-07",
-    "dateModified": "2026-06-07",
+    "dateModified": "2026-10-27",
     "image": "https://restoring-democracy.org/infographics/bird-raga-money-trail/og-image.png",
     "mainEntityOfPage": {
       "@type": "WebPage",
@@ -237,6 +237,16 @@
     }
     .hero-stat .big-label{ color:var(--ink); font-size:1rem; line-height:1.4; max-width:34ch; }
 
+    /* ---------- Dated correction / update note ---------- */
+    .update-note{
+      margin:1.6rem 0 0; padding:1rem 1.15rem; background:var(--surface); max-width:600px;
+      border:1px solid var(--hairline); border-left:4px solid var(--green-dark); border-radius:10px;
+      font-size:.92rem; line-height:1.55; color:var(--ink);
+    }
+    .update-note b{ color:var(--green-dark); }
+    .update-note p{ margin:0; }
+    .update-note p + p{ margin-top:.55rem; }
+
     /* ---------- Donut (Module 1) ---------- */
     .chart-card{
       background:var(--surface); border:1px solid var(--hairline); border-radius:16px;
@@ -289,6 +299,11 @@
       table.data td{ display:flex; justify-content:space-between; gap:1rem; border-bottom:0; padding:.45rem 1.1rem; }
       table.data td::before{ content:attr(data-label); font-family:var(--mono); font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--green); font-weight:600; }
       table.data tr.total td::before{ color:var(--green-dark); }
+      table.data td::before{ flex:0 0 auto; }
+      table.data td{ align-items:center; }
+      table.data td > *{ min-width:0; text-align:right; }
+      table.data .pill{ display:inline-block; white-space:normal; border-radius:10px; line-height:1.45; }
+      table.data .pill::before{ display:inline-block; margin-right:.35rem; vertical-align:.05em; }
     }
 
     /* ---------- Donor bars (Module 3) ---------- */
@@ -300,7 +315,7 @@
     .bar-row{ padding:.55rem 0; }
     .bar-meta{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; margin-bottom:.35rem; }
     .bar-meta .bracket{ font-weight:600; font-size:.98rem; }
-    .bar-meta .donors{ font-family:var(--mono); font-size:.78rem; color:var(--muted); white-space:nowrap; }
+    .bar-meta .entries{ font-family:var(--mono); font-size:.78rem; color:var(--muted); white-space:nowrap; }
     .bar-track{ position:relative; display:flex; align-items:center; gap:.6rem; }
     .bar-svg{ height:16px; width:100%; flex:1 1 auto; display:block; border-radius:4px; overflow:hidden; background:var(--neutral); }
     .bar-svg rect.fill{ transition:width 1s cubic-bezier(.2,.7,.2,1); }
@@ -406,6 +421,11 @@
     details.data-fallback table{ width:100%; border-collapse:collapse; font-size:.85rem; }
     details.data-fallback th, details.data-fallback td{ text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--hairline-2); }
     details.data-fallback th{ font-family:var(--mono); font-size:.68rem; text-transform:uppercase; color:var(--muted); }
+    .fn-ref{ text-decoration:none; color:var(--orange-ink); font-weight:700; margin-left:.1em; }
+    .table-note{ font-size:.82rem; color:var(--muted); margin:.6rem 0 0; line-height:1.5; }
+    .table-card .table-note{ padding:0 1.2rem 1rem; }
+    .revisions{ font-size:.9rem; color:var(--muted); margin:1.2rem 0 0; padding-left:1.2rem; max-width:68ch; }
+    .revisions li{ margin:.35rem 0; }
 
     /* ---------- CTA / Sources (Module 7) ---------- */
     .sources-band{ background:var(--surface); border-top:1px solid var(--hairline); }
@@ -496,7 +516,7 @@
         <a href="#overview">Overview</a>
         <a href="#pre-primary-share">80.24%</a>
         <a href="#transfers">Transfers</a>
-        <a href="#donor-concentration">Donors</a>
+        <a href="#donor-concentration">Contribution sizes</a>
         <a href="#structure">Structure</a>
         <a href="#mar-a-lago">Mar-a-Lago</a>
         <a href="#fall-reservation">Fall Buy</a>
@@ -509,7 +529,7 @@
         <a href="#overview">Overview</a>
         <a href="#pre-primary-share">80.24%</a>
         <a href="#transfers">Transfers</a>
-        <a href="#donor-concentration">Donors</a>
+        <a href="#donor-concentration">Contribution sizes</a>
         <a href="#structure">Structure</a>
         <a href="#mar-a-lago">Mar-a-Lago</a>
         <a href="#fall-reservation">Fall Buy</a>
@@ -527,7 +547,12 @@
         <p class="kicker">RDP Investigation <span class="dot">&bull;</span> Campaign Finance</p>
         <h1 id="hero-h">Bird Thanked Iowa.<br>The Money Came From Washington.</h1>
         <p class="standfirst">The board seat, the bankroll, and the national structure behind Iowa&rsquo;s top lawyer.</p>
-        <p class="byline">By <b>Timothy C. Tucker</b> &nbsp;&bull;&nbsp; Restoring Democracy&rsquo;s Promise &nbsp;&bull;&nbsp; June 7, 2026</p>
+        <p class="byline">By <b>Timothy C. Tucker</b> &nbsp;&bull;&nbsp; Restoring Democracy&rsquo;s Promise &nbsp;&bull;&nbsp; <time datetime="2026-06-07">June 7, 2026</time> &nbsp;&bull;&nbsp; Updated <time datetime="2026-10-27">Oct. 27, 2026</time></p>
+
+        <aside id="correction" class="update-note" aria-label="Correction and update, October 27, 2026">
+          <p><b>Correction and update, Oct. 27, 2026:</b> We updated the federal confirmation status of two May 2026 RAGA Action Fund transfers, which the fund&rsquo;s July 15, 2026 FEC report confirmed. We corrected a graphic that labeled Schedule A entries as donors, and a combined small-dollar share that should have read 1.4%, not 1.5%. We clarified the distinction between campaign contributions, bank interest and a refund, and clarified that a $697,000 RLDF payment to RAGA was an expense reimbursement. The original 80.24% pre-primary RAGA share and the $3.525 million total through May 26, 2026 are unchanged.</p>
+          <p>Except where marked as updated, this exhibit reflects the filings available for the June 7, 2026 investigation. See the <a href="https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came" target="_blank" rel="noopener noreferrer">correction notice on the June 7 article</a> and the <a href="#revisions">revision history</a> below.</p>
+        </aside>
 
         <div class="hero-stat reveal">
           <span class="big tnum">80.24%</span>
@@ -546,7 +571,7 @@
           <div class="donut-layout">
             <svg class="donut-svg" viewBox="0 0 240 240" role="img" aria-labelledby="donut-title donut-desc">
               <title id="donut-title">Pre-primary funding share</title>
-              <desc id="donut-desc">Donut chart: of $1,775,913.99 in reported pre-primary cash contributions to Bird for Iowa, 80.24 percent ($1,425,000) came from the RAGA Action Fund and 19.76 percent came from all other sources combined.</desc>
+              <desc id="donut-desc">Donut chart: of $1,775,913.99 in reported pre-primary Schedule A cash receipts to Bird for Iowa, 80.24 percent ($1,425,000) came from the RAGA Action Fund and 19.76 percent ($350,913.99) came from all other sources combined. That remainder includes $4,933.96 in bank interest and a refund, which are not contributions.</desc>
               <!-- base ring (all others) -->
               <circle cx="120" cy="120" r="80" fill="none" stroke="#c8d3cd" stroke-width="34"></circle>
               <!-- orange edge halo on the RAGA wedge (wider, sits under green) -->
@@ -564,7 +589,7 @@
             </svg>
 
             <ul class="legend">
-              <li data-tip="RAGA Action Fund (federal Super PAC, FEC C00560904): <b>$1,425,000</b> of $1,775,913.99 reported cash contributions for the period ending May 14, 2026." tabindex="0">
+              <li data-tip="RAGA Action Fund (federal Super PAC, FEC C00560904): <b>$1,425,000</b> of $1,775,913.99 in reported Schedule A cash receipts for the period ending May 14, 2026." tabindex="0">
                 <span class="swatch" style="background:#2d5c4f"></span>
                 <span>
                   <span class="lbl">RAGA Action Fund</span>
@@ -572,7 +597,7 @@
                 </span>
                 <span class="pct green tnum">80.24%</span>
               </li>
-              <li data-tip="All other reported cash contributions combined: <b>$350,913.99</b> of $1,775,913.99 for the period ending May 14, 2026." tabindex="0">
+              <li data-tip="All other reported Schedule A cash receipts combined: <b>$350,913.99</b> of $1,775,913.99 for the period ending May 14, 2026, including $4,933.96 in bank interest and a refund." tabindex="0">
                 <span class="swatch" style="background:#c8d3cd"></span>
                 <span>
                   <span class="lbl">All others (combined)</span>
@@ -587,20 +612,23 @@
             <summary>Show data table</summary>
             <div class="table-scroll">
               <table>
-                <caption class="visually-hidden">Pre-primary cash contributions to Bird for Iowa, period ending May 14, 2026.</caption>
+                <caption class="visually-hidden">Reported Schedule A cash receipts, Bird for Iowa, period ending May 14, 2026.</caption>
                 <thead><tr><th scope="col">Source</th><th scope="col">Amount</th><th scope="col">Share</th></tr></thead>
                 <tbody>
                   <tr><td>RAGA Action Fund</td><td class="tnum">$1,425,000.00</td><td class="tnum">80.24%</td></tr>
                   <tr><td>All others (combined)</td><td class="tnum">$350,913.99</td><td class="tnum">19.76%</td></tr>
-                  <tr><td><strong>Total reported cash</strong></td><td class="tnum"><strong>$1,775,913.99</strong></td><td class="tnum">100%</td></tr>
+                  <tr><td><strong>Reported Schedule A cash receipts (total)</strong></td><td class="tnum"><strong>$1,775,913.99</strong></td><td class="tnum">100%</td></tr>
                 </tbody>
               </table>
+              <p class="table-note">&ldquo;All others&rdquo; includes $4,933.96 that is not contributions: four bank-interest entries ($4,888.96) and a $45 refund.</p>
             </div>
           </details>
         </div>
 
+        <p class="guardrail-note">The figures use Bird for Iowa&rsquo;s reported Schedule A cash receipts. The non-RAGA remainder includes $4,933.96 in bank interest and a refund. Chart entry counts on this page are not counts of unique donors.</p>
+
         <p class="interp">One May 13 contribution accounted for more than four of every five reported dollars in the pre-primary period; everything else combined made up the rest.</p>
-        <p class="source">Iowa Ethics &amp; Campaign Disclosure Board, Bird for Iowa DR-2 (period ending May 14, 2026).</p>
+        <p class="source">Iowa Ethics &amp; Campaign Disclosure Board, Bird for Iowa DR-2, Schedule A (period ending May 14, 2026).</p>
       </div>
     </section>
 
@@ -609,11 +637,11 @@
       <div class="wrap-wide">
         <p class="kicker">Beyond the Report</p>
         <h2 id="m2-h" class="module-title">Three transfers, one Super PAC, $3.525&nbsp;million.</h2>
-        <p class="subhead">The May DR-2 covered contributions through May 14, 2026. Transfers arriving after that date appear in later filings.</p>
+        <p class="subhead">The May DR-2 covered contributions through May 14, 2026. Transfers arriving after that date appear in later filings. This table covers transfers through May 26, 2026, the scope of the June 7 investigation.</p>
 
         <div class="table-card reveal">
           <table class="data">
-            <caption>Known RAGA Action Fund transfers to Bird for Iowa.</caption>
+            <caption>Known RAGA Action Fund transfers to Bird for Iowa through May 26, 2026. Federal status updated Oct. 27, 2026.</caption>
             <thead>
               <tr>
                 <th scope="col">Date</th>
@@ -630,29 +658,30 @@
                 <td data-label="Federal"><span class="pill confirmed">Confirmed <span class="fec">&middot; FEC C00560904</span></span></td>
               </tr>
               <tr>
-                <td data-label="Date">May 13, 2026</td>
+                <td data-label="Date"><span>May 13, 2026<a href="#transfer-dates" class="fn-ref" aria-label="See date note">*</a></span></td>
                 <td data-label="Amount" class="amt tnum">$1,425,000</td>
                 <td data-label="State"><span class="pill confirmed">Yes</span></td>
-                <td data-label="Federal"><span class="pill pending">Pending &middot; ~Jul 15, 2026</span></td>
+                <td data-label="Federal"><span class="pill confirmed">Confirmed <span class="fec">&middot; FEC Q2, July 15, 2026</span></span></td>
               </tr>
               <tr>
                 <td data-label="Date">May 26, 2026</td>
                 <td data-label="Amount" class="amt tnum">$1,100,000</td>
                 <td data-label="State"><span class="pill confirmed">Yes</span></td>
-                <td data-label="Federal"><span class="pill pending">Pending &middot; ~Jul 15, 2026</span></td>
+                <td data-label="Federal"><span class="pill confirmed">Confirmed <span class="fec">&middot; FEC Q2, July 15, 2026</span></span></td>
               </tr>
               <tr class="total">
-                <td data-label="Total">Cumulative known</td>
+                <td data-label="Total">Cumulative known through May 26, 2026</td>
                 <td data-label="Amount" class="amt tnum">$3,525,000</td>
                 <td data-label="State"></td>
                 <td data-label="Federal"></td>
               </tr>
             </tbody>
           </table>
+          <p id="transfer-dates" class="table-note">* Dates are as reported in Bird for Iowa&rsquo;s Iowa filings. The RAGA Action Fund&rsquo;s FEC reports date the first May transfer May 12, 2026 (Q2 2026, SB29.4466) and the December transfer Dec. 30, 2025 (year-end 2025, SB29.4424). Federal status of the two May transfers updated Oct. 27, 2026; it read &ldquo;Pending&rdquo; when this exhibit was published June 7, 2026.</p>
         </div>
 
-        <p class="interp">$3,525,000 from one Super PAC, in a race that does not end until November 2026.</p>
-        <p class="source">Iowa IECDB filings; FEC committee C00560904. Federal confirmation of the two May transfers expected in the mid-July 2026 FEC report.</p>
+        <p class="interp">$3,525,000 from one Super PAC through May 26, 2026, in a race that does not end until November 2026.</p>
+        <p class="source">Iowa IECDB filings; FEC committee C00560904, Form 3X year-end 2025 (filing 1943912) and Q2 2026 (filing 1994655, filed July 15, 2026; disbursements SB29.4466 and SB29.4467). The two May transfers were confirmed in the July 15, 2026 FEC report.</p>
       </div>
     </section>
 
@@ -661,43 +690,43 @@
       <div class="wrap-wide">
         <p class="kicker">The Other 19.76%</p>
         <h2 id="m3-h" class="module-title">Even the portion not from RAGA was concentrated.</h2>
-        <p class="clarifier">Percentages are of the 19.76% <em>not</em> from the RAGA Action Fund.</p>
+        <p class="clarifier">Percentages are of the 19.76% <em>not</em> from the RAGA Action Fund. Counts are Schedule A entries, not unique donors.</p>
 
         <div class="chart-card reveal">
           <div class="bars" role="img" aria-labelledby="bars-desc">
-            <p id="bars-desc" class="visually-hidden">Horizontal bar chart of the 19.76 percent of pre-primary money not from the RAGA Action Fund, broken into eight contribution-size brackets. The largest shares come from the $10,000–$24,999 bracket (10 donors, 30.0%), $5,000–$9,999 (16 donors, 23.0%), and $25,000+ (2 donors, 21.4%). The three smallest-dollar brackets together (60 donors under $500) account for 1.5%.</p>
+            <p id="bars-desc" class="visually-hidden">Horizontal bar chart of the 19.76 percent of pre-primary money not from the RAGA Action Fund, broken into eight contribution-size brackets. Counts are Schedule A entries, not unique donors. The largest shares come from the $10,000–$24,999 bracket (10 entries, 30.0%), $5,000–$9,999 (16 entries, 23.0%), and $25,000+ (2 entries, 21.4%). The three smallest-dollar brackets together (60 entries under $500, including a $45 refund) account for 1.4%; the separately rounded bracket figures may not add to this combined share.</p>
 
             <!-- bar rows: rect width = pct / 30 * 100 (scaled so the largest bracket fills the track) -->
-            <div class="bar-row" data-tip="Under $100: <b>36 donors</b> &middot; 0.3% of the non-RAGA remainder." tabindex="0">
-              <div class="bar-meta"><span class="bracket">Under $100</span><span class="donors tnum">36 donors</span></div>
+            <div class="bar-row" data-tip="Under $100: <b>36 Schedule A entries</b> (35 contributions and a $45 refund) &middot; 0.3% of the non-RAGA remainder." tabindex="0">
+              <div class="bar-meta"><span class="bracket">Under $100</span><span class="entries tnum">36 entries</span></div>
               <div class="bar-track"><svg class="bar-svg" viewBox="0 0 100 16" preserveAspectRatio="none" aria-hidden="true"><rect class="fill" x="0" y="0" width="1.00" height="16" fill="#2d5c4f"></rect></svg><span class="bar-val tnum">0.3%</span></div>
             </div>
-            <div class="bar-row" data-tip="$100–$249: <b>15 donors</b> &middot; 0.5% of the non-RAGA remainder." tabindex="0">
-              <div class="bar-meta"><span class="bracket">$100&ndash;$249</span><span class="donors tnum">15 donors</span></div>
+            <div class="bar-row" data-tip="$100–$249: <b>15 Schedule A entries</b> &middot; 0.5% of the non-RAGA remainder." tabindex="0">
+              <div class="bar-meta"><span class="bracket">$100&ndash;$249</span><span class="entries tnum">15 entries</span></div>
               <div class="bar-track"><svg class="bar-svg" viewBox="0 0 100 16" preserveAspectRatio="none" aria-hidden="true"><rect class="fill" x="0" y="0" width="1.67" height="16" fill="#2d5c4f"></rect></svg><span class="bar-val tnum">0.5%</span></div>
             </div>
-            <div class="bar-row" data-tip="$250–$499: <b>9 donors</b> &middot; 0.7% of the non-RAGA remainder." tabindex="0">
-              <div class="bar-meta"><span class="bracket">$250&ndash;$499</span><span class="donors tnum">9 donors</span></div>
+            <div class="bar-row" data-tip="$250–$499: <b>9 Schedule A entries</b> &middot; 0.7% of the non-RAGA remainder." tabindex="0">
+              <div class="bar-meta"><span class="bracket">$250&ndash;$499</span><span class="entries tnum">9 entries</span></div>
               <div class="bar-track"><svg class="bar-svg" viewBox="0 0 100 16" preserveAspectRatio="none" aria-hidden="true"><rect class="fill" x="0" y="0" width="2.33" height="16" fill="#2d5c4f"></rect></svg><span class="bar-val tnum">0.7%</span></div>
             </div>
-            <div class="bar-row" data-tip="$500–$999: <b>25 donors</b> &middot; 3.6% of the non-RAGA remainder." tabindex="0">
-              <div class="bar-meta"><span class="bracket">$500&ndash;$999</span><span class="donors tnum">25 donors</span></div>
+            <div class="bar-row" data-tip="$500–$999: <b>25 Schedule A entries</b> &middot; 3.6% of the non-RAGA remainder." tabindex="0">
+              <div class="bar-meta"><span class="bracket">$500&ndash;$999</span><span class="entries tnum">25 entries</span></div>
               <div class="bar-track"><svg class="bar-svg" viewBox="0 0 100 16" preserveAspectRatio="none" aria-hidden="true"><rect class="fill" x="0" y="0" width="12.00" height="16" fill="#2d5c4f"></rect></svg><span class="bar-val tnum">3.6%</span></div>
             </div>
-            <div class="bar-row" data-tip="$1,000–$4,999: <b>41 donors</b> &middot; 20.6% of the non-RAGA remainder." tabindex="0">
-              <div class="bar-meta"><span class="bracket">$1,000&ndash;$4,999</span><span class="donors tnum">41 donors</span></div>
+            <div class="bar-row" data-tip="$1,000–$4,999: <b>41 Schedule A entries</b> (37 contributions and four bank-interest entries totaling $4,888.96) &middot; 20.6% of the non-RAGA remainder." tabindex="0">
+              <div class="bar-meta"><span class="bracket">$1,000&ndash;$4,999</span><span class="entries tnum">41 entries</span></div>
               <div class="bar-track"><svg class="bar-svg" viewBox="0 0 100 16" preserveAspectRatio="none" aria-hidden="true"><rect class="fill" x="0" y="0" width="68.67" height="16" fill="#2d5c4f"></rect></svg><span class="bar-val tnum">20.6%</span></div>
             </div>
-            <div class="bar-row" data-tip="$5,000–$9,999: <b>16 donors</b> &middot; 23.0% of the non-RAGA remainder." tabindex="0">
-              <div class="bar-meta"><span class="bracket">$5,000&ndash;$9,999</span><span class="donors tnum">16 donors</span></div>
+            <div class="bar-row" data-tip="$5,000–$9,999: <b>16 Schedule A entries</b> &middot; 23.0% of the non-RAGA remainder." tabindex="0">
+              <div class="bar-meta"><span class="bracket">$5,000&ndash;$9,999</span><span class="entries tnum">16 entries</span></div>
               <div class="bar-track"><svg class="bar-svg" viewBox="0 0 100 16" preserveAspectRatio="none" aria-hidden="true"><rect class="fill" x="0" y="0" width="76.67" height="16" fill="#24473e"></rect></svg><span class="bar-val tnum">23.0%</span></div>
             </div>
-            <div class="bar-row" data-tip="$10,000–$24,999: <b>10 donors</b> &middot; 30.0% of the non-RAGA remainder &mdash; the largest single bracket." tabindex="0">
-              <div class="bar-meta"><span class="bracket">$10,000&ndash;$24,999</span><span class="donors tnum">10 donors</span></div>
+            <div class="bar-row" data-tip="$10,000–$24,999: <b>10 Schedule A entries</b> &middot; 30.0% of the non-RAGA remainder &mdash; the largest single bracket." tabindex="0">
+              <div class="bar-meta"><span class="bracket">$10,000&ndash;$24,999</span><span class="entries tnum">10 entries</span></div>
               <div class="bar-track"><svg class="bar-svg" viewBox="0 0 100 16" preserveAspectRatio="none" aria-hidden="true"><rect class="fill" x="0" y="0" width="100.00" height="16" fill="#24473e"></rect></svg><span class="bar-val tnum">30.0%</span></div>
             </div>
-            <div class="bar-row" data-tip="$25,000+: <b>2 donors</b> &middot; 21.4% of the non-RAGA remainder." tabindex="0">
-              <div class="bar-meta"><span class="bracket">$25,000+</span><span class="donors tnum">2 donors</span></div>
+            <div class="bar-row" data-tip="$25,000+: <b>2 Schedule A entries</b> &middot; 21.4% of the non-RAGA remainder." tabindex="0">
+              <div class="bar-meta"><span class="bracket">$25,000+</span><span class="entries tnum">2 entries</span></div>
               <div class="bar-track"><svg class="bar-svg" viewBox="0 0 100 16" preserveAspectRatio="none" aria-hidden="true"><rect class="fill" x="0" y="0" width="71.33" height="16" fill="#24473e"></rect></svg><span class="bar-val tnum">21.4%</span></div>
             </div>
           </div>
@@ -705,11 +734,11 @@
           <div class="callouts">
             <div class="callout">
               <span class="n tnum">74.4%</span>
-              <span class="t">28 donors giving $5,000 or more supplied 74.4% of the remainder.</span>
+              <span class="t">28 contributions of $5,000 or more, from 27 distinct contributor records, supplied 74.4% of the remainder.</span>
             </div>
             <div class="callout">
               <span class="n">&lt; 2%</span>
-              <span class="t">60 donors giving under $500 supplied less than 2%.</span>
+              <span class="t">59 contributions under $500, from 47 distinct contributor records, totaled $5,018.88 &mdash; less than 2% of the remainder.</span>
             </div>
           </div>
 
@@ -717,8 +746,8 @@
             <summary>Show data table</summary>
             <div class="table-scroll">
               <table>
-                <caption class="visually-hidden">Contribution-size brackets as a share of the 19.76% not from the RAGA Action Fund.</caption>
-                <thead><tr><th scope="col">Bracket</th><th scope="col">Donors</th><th scope="col">Share of remainder</th></tr></thead>
+                <caption class="visually-hidden">Contribution-size brackets as a share of the 19.76% not from the RAGA Action Fund. Counts are Schedule A entries, not unique donors.</caption>
+                <thead><tr><th scope="col">Bracket</th><th scope="col">Schedule A entries</th><th scope="col">Share of remainder</th></tr></thead>
                 <tbody>
                   <tr><td>Under $100</td><td class="tnum">36</td><td class="tnum">0.3%</td></tr>
                   <tr><td>$100&ndash;$249</td><td class="tnum">15</td><td class="tnum">0.5%</td></tr>
@@ -730,12 +759,13 @@
                   <tr><td>$25,000+</td><td class="tnum">2</td><td class="tnum">21.4%</td></tr>
                 </tbody>
               </table>
+              <p class="table-note">Entries are individual Schedule A rows, not unique donors. Five are not contributions: four bank-interest entries ($4,888.96, in the $1,000&ndash;$4,999 bracket) and a $45 refund reported as from Iowa Workforce Development (under $100). Bracket percentages are rounded separately, so they may not add to a rounded combined share: the three brackets under $500 total 1.4%, not the 1.5% their rounded figures sum to. Column heading changed from &ldquo;Donors&rdquo; Oct. 27, 2026.</p>
             </div>
           </details>
         </div>
 
         <p class="interp">The small-dollar base was thin; the non-RAGA money was itself concentrated in a few large checks.</p>
-        <p class="source">Iowa IECDB, Bird for Iowa DR-2 Schedule A; RDP bracket analysis.</p>
+        <p class="source">Iowa IECDB, Bird for Iowa DR-2 Schedule A (period ending May 14, 2026); RDP bracket analysis by Schedule A entry, re-verified against a transaction-level ledger Oct. 27, 2026.</p>
       </div>
     </section>
 
@@ -759,7 +789,7 @@
         <p class="subhead">Five distinct entities. Arrows show disclosed, entity-to-entity transfers and the periods they cover.</p>
 
         <div class="flow reveal" role="img" aria-labelledby="flow-desc">
-          <p id="flow-desc" class="visually-hidden">Flow diagram. Concord Fund gave $7 million to the RAGA 527 across tax years 2021–2023. The RAGA 527 transferred more than $12.6 million to the RAGA Action Fund in 2025. The RAGA Action Fund gave $3,525,000 to Bird for Iowa between December 2025 and May 2026. Separately, the Rule of Law Defense Fund recorded a $1.2 million political expenditure and about $697,000 in shared expenses with RAGA in tax year 2024. Brenna Bird is listed as a RAGA Executive Committee member and an RLDF director.</p>
+          <p id="flow-desc" class="visually-hidden">Flow diagram. Concord Fund gave $7 million to the RAGA 527 across tax years 2021–2023. The RAGA 527 transferred more than $12.6 million to the RAGA Action Fund in 2025. The RAGA Action Fund gave $3,525,000 to Bird for Iowa between December 2025 and May 2026. Separately, the Rule of Law Defense Fund recorded a $1.2 million political contribution to RAGA and reimbursed RAGA $697,000 for expenses in tax year 2024. The Action Fund did not retain the 2025 transfers as a continuous cash reserve; its federal year-end report showed $2,935 in cash at the close of 2025. Brenna Bird is listed as a RAGA Executive Committee member and an RLDF director.</p>
 
           <div class="spine">
             <div class="node concord">
@@ -781,7 +811,7 @@
               </div>
 
               <div class="side-connector" aria-hidden="true">
-                $1.2M political expenditure<br>+ ~$697K shared expenses<br>(TY2024)
+                $1.2M political contribution<br>+ $697K expense reimbursement<br>(TY2024)
               </div>
 
               <div class="side-node-wrap">
@@ -794,7 +824,7 @@
               </div>
             </div>
 
-            <div class="edge" data-tip="RAGA 527 &rarr; RAGA Action Fund: <b>more than $12.6 million</b> in 2025 (IRS Form 8872 / FEC)." tabindex="0">
+            <div class="edge" data-tip="RAGA 527 &rarr; RAGA Action Fund: <b>more than $12.6 million</b> in 2025 (IRS Form 8872 / FEC). The Action Fund ended 2025 with $2,935 in cash (FEC year-end report)." tabindex="0">
               <span class="arrow" aria-hidden="true">&darr;</span>
               <span class="amt tnum">&gt; $12.6 million <span>2025</span></span>
             </div>
@@ -821,7 +851,7 @@
           </div>
         </div>
 
-        <p class="guardrail-note">Arrows denote disclosed transfers between separate legal entities. They do not indicate that funds were earmarked, tracked, or directed to a specific recipient, and the amounts are stated at the entity-to-entity level.</p>
+        <p class="guardrail-note">Arrows denote disclosed transfers between separate legal entities. They do not indicate that funds were earmarked, tracked, or directed to a specific recipient, and the amounts are stated at the entity-to-entity level. The Action Fund did not retain these transfers as a continuous cash reserve. Its federal year-end report showed $2,935 in cash at the close of 2025.</p>
 
         <details class="data-fallback">
           <summary>Show data table</summary>
@@ -833,15 +863,16 @@
                 <tr><td>Concord Fund</td><td>RAGA 527</td><td class="tnum">$7,000,000</td><td>TY2021&ndash;TY2023</td></tr>
                 <tr><td>RAGA 527</td><td>RAGA Action Fund</td><td class="tnum">&gt; $12,600,000</td><td>2025</td></tr>
                 <tr><td>RAGA Action Fund</td><td>Bird for Iowa</td><td class="tnum">$3,525,000</td><td>Dec 2025&ndash;May 2026</td></tr>
-                <tr><td>RLDF (side relationship)</td><td>RAGA</td><td class="tnum">$1,200,000 + ~$697,000</td><td>TY2024</td></tr>
+                <tr><td>RLDF (side relationship)</td><td>RAGA</td><td class="tnum">$1,200,000 political contribution; $697,000 expense reimbursement</td><td>TY2024</td></tr>
               </tbody>
             </table>
             <p style="font-size:.82rem;color:var(--muted);margin:.6rem 0 0;">Documented roles: Brenna Bird &mdash; RAGA Executive Committee Member (IRS Form 8871); RLDF Director (TY2023, TY2024 Form 990).</p>
+            <p class="table-note">RLDF row: political contribution per RLDF&rsquo;s TY2024 Form 990, Schedule C; expense reimbursement per Schedule R (transaction type P). Before Oct. 27, 2026, this row read &ldquo;$1,200,000 + ~$697,000&rdquo; and the diagram described the $697,000 as shared expenses.</p>
           </div>
         </details>
 
         <p class="interp">The Super PAC writing the checks sits inside a national structure on which the candidate holds documented governance roles.</p>
-        <p class="source">IRS Forms 990 (Concord Fund, RLDF); IRS Form 8872 (RAGA 527); IRS Form 8871 (RAGA, Bird listed); FEC C00560904; Iowa IECDB.</p>
+        <p class="source">IRS Forms 990 (Concord Fund; RLDF, including TY2024 Schedules C and R); IRS Form 8872 (RAGA 527); IRS Form 8871 (RAGA, Bird listed); FEC C00560904, including the year-end 2025 Form 3X (filing 1943912); Iowa IECDB.</p>
       </div>
     </section>
 
@@ -901,8 +932,8 @@
 
         <ul class="src-list">
           <li>Iowa Ethics &amp; Campaign Disclosure Board (IECDB) filings &mdash; Bird for Iowa DR-2, Schedule A</li>
-          <li>FEC committee C00560904 (RAGA Action Fund)</li>
-          <li>IRS Form 990 &mdash; Rule of Law Defense Fund (RLDF)</li>
+          <li>FEC committee C00560904 (RAGA Action Fund) &mdash; Form 3X year-end 2025 (filing 1943912) and Q2 2026 (filing 1994655, filed July 15, 2026)</li>
+          <li>IRS Form 990 &mdash; Rule of Law Defense Fund (RLDF), including TY2024 Schedules C and R</li>
           <li>IRS Form 990 &mdash; Concord Fund</li>
           <li>IRS Form 8871 &mdash; RAGA (Bird listed)</li>
           <li>IRS Form 8872 &mdash; RAGA 527</li>
@@ -912,8 +943,16 @@
         </ul>
 
         <p class="method">
-          Figures are drawn from primary campaign-finance and tax filings. The two May 2026 RAGA Action Fund transfers are confirmed in Iowa state filings and await federal confirmation in the mid-July 2026 FEC report. The entities named &mdash; Bird for Iowa, the RAGA Action Fund, RAGA / RAGA 527, RLDF, and the Concord Fund &mdash; are legally distinct. This page describes disclosed financial structure and documented roles; it does not allege coordination, earmarking, or illegality.
+          Figures are drawn from primary campaign-finance and tax filings. The two May 2026 RAGA Action Fund transfers are confirmed in Iowa state filings and in the fund&rsquo;s July 15, 2026 FEC report (Q2 2026 Form 3X, filing 1994655). Shares in the pre-primary and contribution-size graphics use Bird for Iowa&rsquo;s reported Schedule A cash receipts, which include $4,933.96 in bank interest and a refund; entry counts are Schedule A rows, not unique donors. The entities named &mdash; Bird for Iowa, the RAGA Action Fund, RAGA / RAGA 527, RLDF, and the Concord Fund &mdash; are legally distinct. This page describes disclosed financial structure and documented roles; it does not allege coordination, earmarking, or illegality.
         </p>
+
+        <h3 id="revisions" class="kicker" style="margin-top:2rem;">Revision history</h3>
+        <ul class="revisions">
+          <li><b>June 7, 2026:</b> Exhibit published.</li>
+          <li><b>Oct. 27, 2026 &mdash; Update:</b> The two May 2026 transfers, previously shown as &ldquo;Pending &middot; ~Jul 15, 2026,&rdquo; are now shown as confirmed in the RAGA Action Fund&rsquo;s July 15, 2026 FEC report. Date-scope labels added to the $3.525 million total.</li>
+          <li><b>Oct. 27, 2026 &mdash; Correction:</b> The contribution-size chart, its data table and its description labeled Schedule A entries as &ldquo;donors.&rdquo; They now read &ldquo;entries.&rdquo; The 28 contributions of $5,000 or more came from 27 distinct contributor records; the 59 contributions under $500 came from 47. The description&rsquo;s combined share for the three brackets under $500 was corrected from 1.5% to 1.4%. Bracket counts and percentages are unchanged.</li>
+          <li><b>Oct. 27, 2026 &mdash; Clarification:</b> The $350,913.99 non-RAGA remainder includes $4,933.96 in bank interest and a refund, which are not contributions; the total is now described as reported Schedule A cash receipts. The $697,000 RLDF item, previously described as &ldquo;shared expenses,&rdquo; is an expense reimbursement to RAGA, and the $1.2 million is labeled a political contribution. A note now states that the Action Fund ended 2025 with $2,935 in cash.</li>
+        </ul>
 
         <div class="cta-row">
           <a class="btn btn-primary" href="https://exposed1.substack.com/p/bird-thanked-iowa-the-money-came" target="_blank" rel="noopener noreferrer" aria-label="Read the full investigation in a new tab">Read the full investigation &rarr;</a>
@@ -932,7 +971,7 @@
         <div class="f-tag">Engineering Precision Journalism</div>
       </div>
       <div class="f-meta">
-        Published June 7, 2026 &nbsp;&bull;&nbsp; &copy; 2023&ndash;2026 Restoring Democracy&rsquo;s Promise. All rights reserved. &nbsp;&bull;&nbsp;
+        Published June 7, 2026 &nbsp;&bull;&nbsp; Updated Oct. 27, 2026 &nbsp;&bull;&nbsp; &copy; 2023&ndash;2026 Restoring Democracy&rsquo;s Promise. All rights reserved. &nbsp;&bull;&nbsp;
         <a href="/privacy-policy.html">Privacy</a>
       </div>
     </div>
