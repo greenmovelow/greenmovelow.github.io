@@ -8,7 +8,7 @@ canonical: "https://restoring-democracy.org/corrections/"
 
 How we fix mistakes, update reporting, and revise data — transparently
 
-Effective Date: February 10, 2026  ·  Last Updated: October 6, 2026 (corrections log)
+Effective Date: February 10, 2026  ·  Last Updated: October 27, 2026 (corrections log)
 
 No Stealth Edits. No Quiet Rewrites.
 
@@ -95,12 +95,32 @@ If unpublishing occurs, we aim to leave a transparent record (for example, a ret
 
 ## 9\. Corrections Log
 
-We may publish a running log of significant corrections here over time. If this section is currently empty, that means we have no logged corrections to list yet.
+We keep a running log of significant corrections here, newest first.
 
 Logged corrections
 
-Log updated: October 6, 2026. This log lists corrections confirmed from published correction notices. It is not yet a complete inventory of earlier corrections.
+Log updated: October 27, 2026. This log lists corrections confirmed from published correction notices and corrected exhibits. It is not yet a complete inventory of earlier corrections.
 
+-   **Oct. 27, 2026 — Correction, clarification and update.** [“Bird Thanked Iowa; The Money Came From Washington,” published June 7, 2026](https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came), and its companion exhibit, [Bird–RAGA Money Trail](https://restoring-democracy.org/infographics/bird-raga-money-trail/).
+    
+    _Correction._ The article’s Figure 3, a related passage and the exhibit’s contribution-size chart described counts of entries on the campaign’s Schedule A as counts of donors. The counts were transactions, not unique contributors. The 28 contributions of $5,000 or more came from 27 distinct contributor records. The 59 contributions under $500 came from 47 distinct contributor records; a 60th entry under $500 was a $45 refund, not a contribution. The exhibit also gave the combined share of the three brackets under $500 as 1.5%, the sum of separately rounded figures; calculated from the underlying amounts, it is 1.4%.
+    
+    _Clarification._ The $350,913.99 that did not come from the RAGA Action Fund included $4,933.96 in bank interest and a refund. These were reported cash receipts on Bird for Iowa’s Schedule A, not donor contributions. The exhibit described $697,000 as expenses shared by the Rule of Law Defense Fund and RAGA; the Fund’s 2024 IRS Form 990 reports it as an expense reimbursement to RAGA, separate from a $1.2 million political contribution.
+    
+    _Update._ The exhibit listed the RAGA Action Fund’s May 13 and May 26, 2026 contributions to Bird for Iowa as awaiting federal confirmation. Both appear in the fund’s July 15, 2026 report to the Federal Election Commission (filing 1994655).
+    
+    _Status._ The exhibit was corrected on Oct. 27, 2026, with a dated note and a revision history on the page. A matching correction to the article’s Figure 3 and related passage is pending; this entry will be updated when it is posted.
+    
+    The central findings are unchanged: the RAGA Action Fund supplied 80.24% of Bird for Iowa’s reported pre-primary Schedule A cash and $3.525 million in contributions through May 26, 2026. Contributions of $5,000 or more supplied 74.4% of the non-RAGA remainder, and contributions under $500 supplied less than 2%.
+    
+-   **Oct. 26, 2026 — Correction and update.** [“Bird Thanked Iowa; The Money Came From Washington,” published June 7, 2026](https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came).
+    
+    The correction notice at the top of the article, dated Oct. 26, 2026, states that the article described $2,935 as the RAGA Action Fund’s first-quarter 2026 receipts and said the fund’s May 2026 contributions to Bird for Iowa were drawn on balances it already held. Both statements were wrong when published. The $2,935 was the fund’s cash on hand; it reported no receipts that quarter.
+    
+    The fund’s next federal report, filed July 15, 2026 (FEC filing 1994655), shows transfers from RAGA of $1,425,000 on May 12 and $1,100,000 on May 26 — the same amounts and federal transaction dates as the fund’s contributions to Bird for Iowa in that report. The report does not identify the donors behind RAGA’s transfers.
+    
+    The central findings are unchanged: the RAGA Action Fund supplied 80.24% of Bird for Iowa’s reported pre-primary Schedule A cash and $3.525 million in contributions through May 26, 2026.
+    
 -   **Sept. 4, 2026 — Correction.** [RDP’s SAVE investigation, published Dec. 10, 2025](https://investigations.restoring-democracy.org/p/save-the-benefits-database-now-monitoring). The correction notice at the top of the article states that an earlier version incorrectly described Executive Order 15 as creating a driver-data pipeline linking the Iowa Department of Transportation, the Iowa Department of Health and Human Services and SAVE; identified HHS as the state’s SAVE clearinghouse (subsequent records show the professional-licensing SAVE clearinghouse was established at the Iowa Department of Inspections, Appeals, and Licensing); stated that every Iowa driver was being run through SAVE; and overstated the November 2025 federal settlement as establishing continuous federal access to Iowa’s entire DMV database.
 
 ## 10\. Contact
