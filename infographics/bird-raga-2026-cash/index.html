@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lora-v37-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- ===== SEO / SOCIAL ===== -->
+  <title>Bird&rsquo;s 2026 Campaign Cash and RAGA: The Filings</title>
+  <meta name="description" content="The IECDB totals, tables and charts behind RDP&rsquo;s count of Bird for Iowa&rsquo;s 2026 cash: $7.6 million of $9,494,727.93 (80.04%) from the RAGA Action Fund, with Willems for Iowa on identical definitions.">
+  <meta name="robots" content="index,follow">
+
+  <link rel="canonical" href="https://restoring-democracy.org/infographics/bird-raga-2026-cash/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Restoring Democracy's Promise">
+  <meta property="og:url" content="https://restoring-democracy.org/infographics/bird-raga-2026-cash/">
+  <meta property="og:title" content="Bird's 2026 Campaign Cash and RAGA: The Filings">
+  <meta property="og:description" content="The IECDB totals, tables and charts behind RDP's count of Bird for Iowa's 2026 cash: $7.6 million of $9,494,727.93 (80.04%) from the RAGA Action Fund, with Willems for Iowa on identical definitions.">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bird's 2026 Campaign Cash and RAGA: The Filings">
+  <meta name="twitter:description" content="The IECDB totals, tables and charts behind RDP's count of Bird for Iowa's 2026 cash: $7.6 million of $9,494,727.93 (80.04%) from the RAGA Action Fund.">
+
+  <meta name="theme-color" content="#24473e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/assets/rdp_logo_gold_on_green_bg.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Bird's 2026 Campaign Cash and RAGA: The Filings",
+    "description": "The IECDB totals, tables and charts behind RDP's count of Bird for Iowa's 2026 cash: $7.6 million of $9,494,727.93 (80.04%) from the RAGA Action Fund, with Willems for Iowa on identical definitions.",
+    "datePublished": "2026-10-29",
+    "dateModified": "2026-10-29",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://restoring-democracy.org/infographics/bird-raga-2026-cash/"
+    },
+    "author": { "@type": "Person", "name": "Timothy C. Tucker" },
+    "publisher": {
+      "@type": "NewsMediaOrganization",
+      "name": "Restoring Democracy's Promise",
+      "url": "https://restoring-democracy.org/"
+    },
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <style>
+    /* ============================================================
+       RDP — Bird/RAGA 2026 Cash evidence page
+       Chrome follows /infographics/bird-raga-money-trail/; figure frames use the
+       chart palette (ivory #F9FAF4, navy #142554, hatched gray #B8BBC6).
+       Self-contained: self-hosted fonts only, no CDNs.
+       ============================================================ */
+
+    @font-face{ font-family:'Inter'; font-style:normal; font-weight:400; font-display:swap; src:url('/assets/fonts/inter-v20-latin-regular.woff2') format('woff2'); }
+    @font-face{ font-family:'Inter'; font-style:normal; font-weight:600; font-display:swap; src:url('/assets/fonts/inter-v20-latin-600.woff2') format('woff2'); }
+    @font-face{ font-family:'Inter'; font-style:normal; font-weight:700; font-display:swap; src:url('/assets/fonts/inter-v20-latin-700.woff2') format('woff2'); }
+    @font-face{ font-family:'Inter'; font-style:italic; font-weight:400; font-display:swap; src:url('/assets/fonts/inter-v20-latin-italic.woff2') format('woff2'); }
+    @font-face{ font-family:'Lora'; font-style:normal; font-weight:400; font-display:swap; src:url('/assets/fonts/lora-v37-latin-regular.woff2') format('woff2'); }
+    @font-face{ font-family:'Lora'; font-style:normal; font-weight:700; font-display:swap; src:url('/assets/fonts/lora-v37-latin-700.woff2') format('woff2'); }
+    @font-face{ font-family:'Lora'; font-style:italic; font-weight:400; font-display:swap; src:url('/assets/fonts/lora-v37-latin-italic.woff2') format('woff2'); }
+    @font-face{ font-family:'JetBrains Mono'; font-style:normal; font-weight:400; font-display:swap; src:url('/assets/fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2'); }
+    @font-face{ font-family:'JetBrains Mono'; font-style:normal; font-weight:700; font-display:swap; src:url('/assets/fonts/jetbrains-mono-v24-latin-700.woff2') format('woff2'); }
+
+    :root{
+      --green:        #2d5c4f;
+      --green-dark:   #24473e;
+      --orange:       #f4a261;
+      --orange-ink:   #b96a23;
+      --ink:          #1f2421;
+      --muted:        #5c6b64;
+      --surface:      #faf8f3;
+      --bg:           #ffffff;
+      --hairline:     rgba(31,36,33,0.12);
+      --hairline-2:   rgba(31,36,33,0.07);
+
+      /* chart palette, as printed in the SVG graphics */
+      --ivory:        #f9faf4;
+      --navy:         #142554;
+      --chart-gray:   #b8bbc6;
+
+      --serif: 'Lora', Georgia, Cambria, 'Times New Roman', serif;
+      --sans:  'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      --measure: 720px;
+      --wide:    960px;
+    }
+
+    *,*::before,*::after{ box-sizing:border-box; }
+    html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family:var(--sans); font-size:17px; line-height:1.6;
+      overflow-x:hidden; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    img{ max-width:100%; height:auto; display:block; }
+    .tnum{ font-variant-numeric: tabular-nums lining-nums; font-feature-settings:"tnum" 1,"lnum" 1; }
+    a{ color:var(--green); text-underline-offset:2px; }
+    a:hover{ color:var(--green-dark); }
+    p{ margin:.9rem 0 0; max-width:68ch; }
+
+    .skip-link{
+      position:absolute; left:-9999px; top:0; z-index:200;
+      background:var(--green); color:#fff; padding:.6rem 1rem; border-radius:0 0 8px 0;
+      font-family:var(--sans); font-weight:600;
+    }
+    .skip-link:focus{ left:0; }
+    :focus-visible{ outline:3px solid var(--orange); outline-offset:2px; border-radius:3px; }
+
+    /* ---------- Layout helpers ---------- */
+    .wrap{ width:100%; max-width:var(--measure); margin-inline:auto; padding-inline:16px; }
+    .wrap-wide{ width:100%; max-width:var(--wide); margin-inline:auto; padding-inline:16px; }
+    @media (min-width:600px){ .wrap, .wrap-wide{ padding-inline:20px; } }
+
+    .module{ padding-block:clamp(2.6rem, 6vw, 4.5rem); border-top:1px solid var(--hairline-2); scroll-margin-top:118px; }
+    .module:first-of-type{ border-top:0; }
+
+    .kicker{
+      font-family:var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+      color:var(--green); font-weight:600; margin:0 0 .9rem;
+    }
+    .kicker .dot{ color:var(--orange-ink); }
+
+    h1,h2,h3{ font-family:var(--serif); color:var(--ink); line-height:1.15; font-weight:700; margin:0; }
+    h2.module-title{ font-size:clamp(1.45rem, 4vw, 2.1rem); letter-spacing:-0.01em; max-width:30ch; }
+    h3.sub{ font-size:1.15rem; margin-top:2.2rem; }
+
+    .source{
+      font-family:var(--mono); font-size:.74rem; color:var(--muted); letter-spacing:.01em;
+      margin:.7rem 0 0; line-height:1.55;
+    }
+    .source::before{ content:"SOURCE  "; color:var(--green); font-weight:600; }
+
+    /* ---------- Masthead ---------- */
+    .masthead{
+      position:sticky; top:0; z-index:100;
+      background:rgba(255,255,255,0.94); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--hairline); padding-top:env(safe-area-inset-top);
+    }
+    .masthead-inner{
+      max-width:var(--wide); margin-inline:auto; padding:.7rem 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .brand{ display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--ink); }
+    .brand img{ height:30px; width:30px; }
+    .brand .name{ font-family:var(--serif); font-weight:700; font-size:1rem; letter-spacing:-0.01em; }
+    .brand .name b{ color:var(--green); }
+    .btn-share{
+      display:inline-flex; align-items:center; gap:.45rem;
+      background:transparent; border:1px solid var(--hairline); color:var(--green);
+      font-family:var(--sans); font-size:.82rem; font-weight:600;
+      padding:.42rem .8rem; border-radius:999px; cursor:pointer; line-height:1;
+    }
+    .btn-share:hover{ border-color:var(--green); background:var(--surface); }
+    .btn-share svg{ width:15px; height:15px; }
+    .exhibit-nav{ border-top:1px solid var(--hairline-2); }
+    .exhibit-nav-inner{
+      max-width:var(--wide); margin-inline:auto; padding:.45rem 16px;
+      display:flex; align-items:center; gap:.25rem; overflow-x:auto; scrollbar-width:none;
+    }
+    .exhibit-nav-inner::-webkit-scrollbar{ display:none; }
+    .exhibit-nav a{
+      flex:0 0 auto; padding:.25rem .48rem; border-radius:6px; color:var(--muted);
+      font-family:var(--mono); font-size:.66rem; font-weight:600; letter-spacing:.02em; text-decoration:none;
+    }
+    .exhibit-nav a:hover{ color:var(--green-dark); background:var(--surface); }
+    .mobile-exhibit-nav{ display:none; }
+
+    @media (max-width:720px){
+      .module{ scroll-margin-top:96px; }
+      .desktop-exhibit-nav{ display:none; }
+      .mobile-exhibit-nav{ display:block; position:relative; }
+      .mobile-exhibit-nav > summary{
+        cursor:pointer; list-style:none; padding:.55rem 16px; color:var(--green);
+        font-family:var(--mono); font-size:.72rem; font-weight:600; letter-spacing:.04em;
+        display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      }
+      .mobile-exhibit-nav > summary::-webkit-details-marker{ display:none; }
+      .mobile-exhibit-nav > summary::after{ content:"+"; color:var(--orange-ink); font-size:1rem; line-height:1; }
+      .mobile-exhibit-nav[open] > summary::after{ content:"\2212"; }
+      .mobile-exhibit-links{
+        display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.25rem;
+        padding:.25rem 16px .8rem; border-top:1px solid var(--hairline-2); background:rgba(255,255,255,.98);
+      }
+      .mobile-exhibit-links a{ min-width:0; padding:.48rem .55rem; font-size:.7rem; }
+      .mobile-exhibit-links .read-story{
+        grid-column:1 / -1; margin-top:.25rem; background:var(--green); color:#fff; text-align:center;
+      }
+      .mobile-exhibit-links .read-story:hover{ background:var(--green-dark); color:#fff; }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{ padding-block:clamp(2.6rem, 8vw, 5rem); }
+    .hero h1{ font-size:clamp(2rem, 6.4vw, 3.3rem); letter-spacing:-0.02em; line-height:1.06; max-width:18ch; }
+    .byline{
+      font-family:var(--mono); font-size:.74rem; letter-spacing:.04em; color:var(--muted);
+      margin:1.4rem 0 0; text-transform:uppercase; max-width:none;
+    }
+    .byline b{ color:var(--ink); font-weight:600; }
+    .purpose{ font-family:var(--serif); font-size:clamp(1.08rem, 2.4vw, 1.25rem); color:var(--ink); line-height:1.5; margin-top:1.3rem; }
+
+    /* ---------- Definitions ---------- */
+    dl.defs{ margin:1.4rem 0 0; display:grid; grid-template-columns:1fr; gap:0; border-top:1px solid var(--hairline); }
+    dl.defs > div{ padding:.85rem 0; border-bottom:1px solid var(--hairline); }
+    dl.defs dt{ font-family:var(--mono); font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; color:var(--green); font-weight:600; }
+    dl.defs dd{ margin:.25rem 0 0; max-width:68ch; }
+    @media (min-width:720px){
+      dl.defs > div{ display:grid; grid-template-columns:12rem 1fr; gap:1.2rem; }
+      dl.defs dd{ margin:0; }
+    }
+
+    /* ---------- Figures ---------- */
+    figure.fig{ margin:2rem 0 0; }
+    figure.fig .frame{
+      background:var(--ivory); border:1px solid var(--hairline); border-radius:14px;
+      padding:clamp(.5rem, 2vw, 1rem); max-width:620px;
+    }
+    figure.fig .frame a{ display:block; }
+    figure.fig figcaption{ margin:.8rem 0 0; font-size:.94rem; max-width:68ch; }
+    figure.fig figcaption b{ font-family:var(--mono); font-size:.76rem; letter-spacing:.05em; text-transform:uppercase; color:var(--navy); }
+    figure.fig figcaption ul{ margin:.4rem 0 0; padding-left:1.1rem; }
+    figure.fig figcaption li{ margin:.2rem 0; }
+    .zoom-note{ font-family:var(--mono); font-size:.7rem; color:var(--muted); margin:.4rem 0 0; }
+    @media (min-width:900px){
+      .fig-pair{ display:grid; grid-template-columns:1fr 1fr; gap:1.6rem; align-items:start; }
+      .fig-pair figure.fig .frame{ max-width:none; }
+    }
+
+    /* ---------- Tables ---------- */
+    .table-block{ margin-top:2rem; }
+    .table-block > h3{ font-size:1.05rem; margin:0 0 .3rem; }
+    .table-scroll{
+      overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:.6rem;
+      border:1px solid var(--hairline); border-radius:12px; background:var(--surface);
+    }
+    .table-scroll:focus-visible{ outline:3px solid var(--orange); }
+    table.data{ width:100%; border-collapse:collapse; font-size:.88rem; }
+    .table-cap{ color:var(--muted); font-size:.84rem; margin:.3rem 0 0; max-width:72ch; }
+    table.data th, table.data td{ padding:.6rem .85rem; text-align:left; border-bottom:1px solid var(--hairline-2); vertical-align:top; }
+    table.data thead th{
+      font-family:var(--mono); font-size:.66rem; letter-spacing:.07em; text-transform:uppercase;
+      color:var(--navy); font-weight:600; background:rgba(20,37,84,0.05); vertical-align:bottom;
+    }
+    table.data td.num, table.data th.num{ text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    table.data thead th.num{ white-space:normal; min-width:6.5em; }
+    table.data td.nw{ white-space:nowrap; }
+    table.data tbody th{ font-weight:600; }
+    table.data tr.total td, table.data tr.total th{ background:rgba(20,37,84,0.06); font-weight:700; border-top:2px solid var(--navy); }
+    table.data tr.subtle td, table.data tr.subtle th{ color:var(--muted); font-style:italic; }
+    table.data .nl{ color:var(--muted); font-style:italic; }
+    table.w-md{ min-width:560px; }
+    table.w-lg{ min-width:760px; }
+    table.w-xl{ min-width:900px; }
+    .table-note{ font-size:.84rem; color:var(--muted); margin:.6rem 0 0; line-height:1.5; max-width:72ch; }
+    code.hash{ font-family:var(--mono); font-size:.72rem; word-break:break-all; }
+
+    /* ---------- Bounds, method, sources ---------- */
+    .bounds{
+      background:var(--surface); border:1px solid var(--hairline); border-left:4px solid var(--green-dark);
+      border-radius:10px; padding:1rem 1.2rem; margin-top:1.4rem; max-width:72ch;
+    }
+    .bounds ul{ margin:0; padding-left:1.1rem; }
+    .bounds li{ margin:.45rem 0; }
+    ol.method, ul.plain{ padding-left:1.2rem; max-width:72ch; }
+    ol.method li, ul.plain li{ margin:.5rem 0; }
+    .src-group{ margin-top:1.6rem; }
+    .src-group h3{ font-family:var(--mono); font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; color:var(--green); font-weight:600; }
+    .src-list{ list-style:none; margin:.5rem 0 0; padding:0; font-size:.92rem; max-width:76ch; }
+    .src-list li{ padding:.4rem 0; border-bottom:1px solid var(--hairline-2); }
+
+    .cta-row{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.4rem; }
+    .btn{
+      display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; font-weight:600;
+      padding:.75rem 1.2rem; border-radius:10px; font-size:.95rem;
+    }
+    .btn-primary{ background:var(--green); color:#fff; }
+    .btn-primary:hover{ background:var(--green-dark); color:#fff; }
+    .btn-ghost{ background:transparent; color:var(--green); border:1px solid var(--hairline); }
+    .btn-ghost:hover{ border-color:var(--green); background:var(--surface); }
+
+    .limits{ background:var(--surface); border-top:1px solid var(--hairline); }
+
+    /* ---------- Footer ---------- */
+    footer.site{ background:var(--ink); color:#cdd8d2; padding:2.4rem 16px calc(2.4rem + env(safe-area-inset-bottom)); }
+    footer.site .f-inner{ max-width:var(--wide); margin-inline:auto; display:flex; flex-wrap:wrap; gap:1rem 2rem; align-items:center; justify-content:space-between; }
+    footer.site .f-brand{ font-family:var(--serif); font-weight:700; color:#fff; }
+    footer.site .f-tag{ font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:#8aa399; text-transform:uppercase; }
+    footer.site a{ color:var(--orange); }
+    footer.site .f-meta{ font-size:.8rem; color:#8aa399; }
+
+    .visually-hidden{
+      position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===================== MASTHEAD ===================== -->
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="/" aria-label="Restoring Democracy's Promise — home">
+        <img src="/assets/Square_logo_transparent.png" alt="" width="30" height="30">
+        <span class="name"><b>RDP</b></span>
+      </a>
+      <button id="share-btn" class="btn-share" type="button" aria-label="Share this page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+        <span id="share-label">Share</span>
+      </button>
+    </div>
+    <nav class="exhibit-nav desktop-exhibit-nav" aria-label="Exhibit sections">
+      <div class="exhibit-nav-inner">
+        <a href="#definitions">Definitions</a>
+        <a href="#bird-2026">1. Bird 2026</a>
+        <a href="#comparison">2. Bird / Willems</a>
+        <a href="#three-records">3. Three records</a>
+        <a href="#filings">4. Filings</a>
+        <a href="#method">5. Method</a>
+        <a href="#not-shown">6. Not shown</a>
+        <a href="#sources">7. Sources</a>
+        <a href="#limits">Limits</a>
+      </div>
+    </nav>
+    <details class="exhibit-nav mobile-exhibit-nav">
+      <summary>Exhibit sections</summary>
+      <nav class="mobile-exhibit-links" aria-label="Exhibit sections">
+        <a href="#definitions">Definitions</a>
+        <a href="#bird-2026">1. Bird 2026</a>
+        <a href="#comparison">2. Bird / Willems</a>
+        <a href="#three-records">3. Three records</a>
+        <a href="#filings">4. Filings</a>
+        <a href="#method">5. Method</a>
+        <a href="#not-shown">6. Not shown</a>
+        <a href="#sources">7. Sources</a>
+        <a href="#limits">Limits</a>
+        <a class="read-story" href="https://investigations.restoring-democracy.org/" target="_blank" rel="noopener noreferrer" aria-label="Read the article in a new tab">Read the article</a>
+      </nav>
+    </details>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== TITLE ===================== -->
+    <section id="overview" class="module hero" aria-labelledby="hero-h">
+      <div class="wrap">
+        <p class="kicker">RDP Evidence Exhibit <span class="dot">&bull;</span> Campaign Finance</p>
+        <h1 id="hero-h">Bird&rsquo;s 2026 Campaign Cash and RAGA: The Filings</h1>
+        <p class="byline">By <b>Timothy C. Tucker</b> &nbsp;&bull;&nbsp; Restoring Democracy&rsquo;s Promise &nbsp;&bull;&nbsp; <time datetime="2026-10-29">Oct. 29, 2026</time></p>
+        <p class="byline">Updated <time datetime="2026-10-29">Oct. 29, 2026</time> &nbsp;&bull;&nbsp; Filing versions as of <time datetime="2026-10-27">Oct. 27, 2026</time></p>
+        <p class="purpose">This page sets out the filing totals, tables and charts behind RDP&rsquo;s article so a reader can check each figure against the reports Bird for Iowa and Willems for Iowa filed with the Iowa Ethics and Campaign Disclosure Board (IECDB).</p>
+        <p>Article: <a href="https://investigations.restoring-democracy.org/" target="_blank" rel="noopener noreferrer">&ldquo;Four of Every Five Dollars in Bird&rsquo;s 2026 AG Campaign Come From RAGA,&rdquo; Oct. 29, 2026</a>.</p>
+      </div>
+    </section>
+
+    <!-- ===================== DEFINITIONS ===================== -->
+    <section id="definitions" class="module" aria-labelledby="def-h">
+      <div class="wrap">
+        <p class="kicker">Definitions</p>
+        <h2 id="def-h" class="module-title">Terms, window and basis used on this page</h2>
+        <dl class="defs">
+          <div><dt>Reported cash</dt><dd>The Schedule A total printed on each DR-2 campaign disclosure report, including any interest, refunds and returned contributions the campaign listed there. In-kind contributions (Schedule E), loans and outside spending are excluded.</dd></div>
+          <div><dt>Entries</dt><dd>Schedule A rows as printed. Bird for Iowa&rsquo;s four 2026 reports contain 2,974 entries; Willems for Iowa&rsquo;s contain 10,366.</dd></div>
+          <div><dt>Gifts</dt><dd>Contribution entries, each sized by its own amount. A contributor who gave several times is counted once per gift.</dd></div>
+          <div><dt>Contributor records</dt><dd>Distinct combinations of name, street address and ZIP code as printed on the filings. They approximate people but cannot confirm them. Counts by size bracket are not additive.</dd></div>
+          <div><dt>National committee</dt><dd>The RAGA Action Fund, the political arm of the Republican Attorneys General Association (RAGA), Iowa committee ID OSF50167; and DAGA Individual PAC, which shares the Democratic Attorneys General Association&rsquo;s (DAGA) Washington address, Iowa committee ID 8891. &ldquo;Non-national cash&rdquo; is reported cash minus the national committee&rsquo;s transfers.</dd></div>
+          <div><dt>Window</dt><dd>Jan. 1&ndash;Oct. 14, 2026: four consecutive DR-2 reports for each campaign (Jan. 1&ndash;May 14; May 15&ndash;26 supplemental; May 27&ndash;July 14; July 15&ndash;Oct. 14).</dd></div>
+          <div><dt>Basis</dt><dd>Shares are computed from exact cents and are dollar-weighted. Each report&rsquo;s entries were summed and tied to the Schedule A total printed on the filing.</dd></div>
+          <div><dt>Filing versions</dt><dd>The latest versions on the IECDB site as of Oct. 27, 2026, identified by file name and SHA-256 hash in <a href="#filings">section 4</a>.</dd></div>
+        </dl>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="bird-raga-2026-cash-aggregates.csv" download>Download the aggregated data (CSV)</a>
+        </div>
+        <p class="table-note">The CSV holds the period tie-out, the cash composition of both campaigns and the three-record reconciliation. It contains no contributor names or addresses.</p>
+      </div>
+    </section>
+
+    <!-- ===================== 1. BIRD 2026 ===================== -->
+    <section id="bird-2026" class="module" aria-labelledby="m1-h">
+      <div class="wrap-wide">
+        <p class="kicker">1 <span class="dot">&bull;</span> Bird for Iowa, 2026 reported cash</p>
+        <h2 id="m1-h" class="module-title">The RAGA Action Fund supplied $7.6 million of Bird for Iowa&rsquo;s $9,494,727.93 in 2026 reported cash</h2>
+
+        <figure class="fig" id="fig-1">
+          <div class="frame">
+            <a href="bird-2026-donut.svg" aria-label="Open Figure 1 at full size">
+              <img src="bird-2026-donut.svg" width="576" height="682" loading="lazy" decoding="async"
+                   alt="Donut chart titled 'Who Funded Bird's 2026 Campaign Cash?'. Of $9,494,727.93 in reported cash January 1 to October 14, 2026, the RAGA Action Fund supplied $7,600,000.00 (80.04%, solid navy) and all other cash was $1,894,727.93 (19.96%, gray with diagonal hatching).">
+            </a>
+          </div>
+          <figcaption>
+            <b>Figure 1.</b> RAGA Action Fund supplied $7.6 million, or 80.04 percent, of the $9,494,727.93 in cash Bird for Iowa reported from Jan. 1 to Oct. 14, 2026. That total includes $21,044.50 in bank interest and refunds that did not come from donors. Excluding them, the fund supplied 80.22 percent of contributed cash. In-kind contributions, loans, and outside spending are not included.
+            <p class="source">IECDB, Bird for Iowa DR-2 reports (four reports, latest versions as of Oct. 27, 2026); RDP analysis.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="fig" id="fig-2">
+          <div class="frame">
+            <a href="bird-four-periods.svg" aria-label="Open Figure 2 at full size">
+              <img src="bird-four-periods.svg" width="576" height="821" loading="lazy" decoding="async"
+                   alt="Four horizontal bars, each showing the RAGA Action Fund's share of Bird for Iowa's reported cash in one 2026 reporting period: 80.24% (Jan. 1-May 14), 95.63% (May 15-26, a 12-day supplemental), 76.46% (May 27-July 14) and 77.60% (July 15-Oct. 14). A separate panel shows 80.04% across all four periods combined.">
+            </a>
+          </div>
+          <figcaption>
+            <b>Figure 2.</b> The RAGA Action Fund supplied more than three-quarters of Brenna Bird&rsquo;s reported campaign cash in every 2026 reporting period examined, ranging from 76.46% to 95.63%. Across all four periods, from January 1 through October 14, RAGA contributed $7.6 million of the campaign&rsquo;s $9.49 million in reported cash receipts&mdash;80.04% overall. The May 15&ndash;26 supplemental covered 12 days. Figures include reported Schedule A cash receipts, including bank interest and refunds, but exclude in-kind contributions and independent expenditures. The periods differ in length (12 to 134 days); the overall share is computed from total dollars, not averaged across periods.
+            <p class="source">Iowa Ethics and Campaign Disclosure Board, Bird for Iowa DR-2 filings (latest versions as of Oct. 27, 2026); Restoring Democracy&rsquo;s Promise analysis.</p>
+          </figcaption>
+        </figure>
+
+        <div class="table-block" id="table-1">
+          <h3>Table 1. Four-period tie-out to the printed Schedule A totals</h3>
+          <p class="table-cap" id="t1-cap">Bird for Iowa (committee 5206), reported cash by DR-2 report, Jan. 1&ndash;Oct. 14, 2026. Each report&rsquo;s reported cash equals the Schedule A total printed on the filing.</p>
+          <div class="table-scroll" role="region" aria-labelledby="t1-cap" tabindex="0">
+            <table class="data w-xl" aria-labelledby="t1-cap">
+              <thead>
+                <tr>
+                  <th scope="col">Report period</th>
+                  <th scope="col" class="num">Days</th>
+                  <th scope="col" class="num">Entries</th>
+                  <th scope="col" class="num">Reported cash</th>
+                  <th scope="col" class="num">RAGA Action Fund</th>
+                  <th scope="col" class="num">Other reported cash</th>
+                  <th scope="col" class="num">RAGA share</th>
+                  <th scope="col" class="num">Interest and refunds</th>
+                  <th scope="col" class="num">RAGA share excluding interest and refunds</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Jan. 1&ndash;May 14, 2026</th><td class="num">134</td><td class="num">155</td><td class="num">$1,775,913.99</td><td class="num">$1,425,000.00</td><td class="num">$350,913.99</td><td class="num">80.24%</td><td class="num">$4,933.96</td><td class="num">80.46%</td></tr>
+                <tr><th scope="row">May 15&ndash;26, 2026 (supplemental)</th><td class="num">12</td><td class="num">224</td><td class="num">$1,150,209.86</td><td class="num">$1,100,000.00</td><td class="num">$50,209.86</td><td class="num">95.63%</td><td class="num">$0.00</td><td class="num">95.63%</td></tr>
+                <tr><th scope="row">May 27&ndash;July 14, 2026</th><td class="num">49</td><td class="num">449</td><td class="num">$1,961,723.11</td><td class="num">$1,500,000.00</td><td class="num">$461,723.11</td><td class="num">76.46%</td><td class="num">$4,616.17</td><td class="num">76.64%</td></tr>
+                <tr><th scope="row">July 15&ndash;Oct. 14, 2026</th><td class="num">92</td><td class="num">2,146</td><td class="num">$4,606,880.97</td><td class="num">$3,575,000.00</td><td class="num">$1,031,880.97</td><td class="num">77.60%</td><td class="num">$11,494.37</td><td class="num">77.80%</td></tr>
+                <tr class="total"><th scope="row">All four periods, dollar-weighted</th><td class="num">287</td><td class="num">2,974</td><td class="num">$9,494,727.93</td><td class="num">$7,600,000.00</td><td class="num">$1,894,727.93</td><td class="num">80.04%</td><td class="num">$21,044.50</td><td class="num">80.22%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">RAGA share = RAGA Action Fund &divide; reported cash. The all-period share is $7,600,000.00 &divide; $9,494,727.93, computed from total dollars. The $21,044.50 is 11 entries of bank interest and refunds, none in the May 15&ndash;26 report. A $1,000,000 transfer dated Dec. 31, 2025 falls outside the window and is not included.</p>
+        </div>
+
+        <div class="table-block" id="table-2">
+          <h3>Table 2. The seven RAGA Action Fund transfers in the window</h3>
+          <p class="table-cap" id="t2-cap">Each transfer is a separate Schedule A entry printed with committee ID OSF50167. Dates and pages are as printed on Bird for Iowa&rsquo;s DR-2 reports.</p>
+          <div class="table-scroll" role="region" aria-labelledby="t2-cap" tabindex="0">
+            <table class="data w-md" aria-labelledby="t2-cap">
+              <thead>
+                <tr><th scope="col">Report period</th><th scope="col">Date reported</th><th scope="col" class="num">Amount</th><th scope="col" class="num">PDF page</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Jan. 1&ndash;May 14</td><td class="nw">May 13, 2026</td><td class="num">$1,425,000.00</td><td class="num">10</td></tr>
+                <tr><td>May 15&ndash;26 supplemental</td><td class="nw">May 26, 2026</td><td class="num">$1,100,000.00</td><td class="num">13</td></tr>
+                <tr><td>May 27&ndash;July 14</td><td class="nw">July 13, 2026</td><td class="num">$1,500,000.00</td><td class="num">24</td></tr>
+                <tr><td>July 15&ndash;Oct. 14</td><td class="nw">Aug. 14, 2026</td><td class="num">$1,400,000.00</td><td class="num">40</td></tr>
+                <tr><td>July 15&ndash;Oct. 14</td><td class="nw">Sept. 3, 2026</td><td class="num">$343,000.00</td><td class="num">62</td></tr>
+                <tr><td>July 15&ndash;Oct. 14</td><td class="nw">Sept. 18, 2026</td><td class="num">$1,100,000.00</td><td class="num">80</td></tr>
+                <tr><td>July 15&ndash;Oct. 14</td><td class="nw">Oct. 13, 2026</td><td class="num">$732,000.00</td><td class="num">113</td></tr>
+                <tr class="total"><th scope="row" colspan="2">Seven transfers</th><td class="num">$7,600,000.00</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2. COMPARISON ===================== -->
+    <section id="comparison" class="module" aria-labelledby="m2-h">
+      <div class="wrap-wide">
+        <p class="kicker">2 <span class="dot">&bull;</span> Both campaigns, identical definitions</p>
+        <h2 id="m2-h" class="module-title">DAGA Individual PAC supplied 53.91% of Willems for Iowa&rsquo;s $5,583,567.15; on the same definitions, Willems reported more gifts under $500</h2>
+        <p>Both campaigns&rsquo; Schedule A entries were sorted with the same parser, size brackets, classification rules and contributor-record key over the same window. <a href="#method">Section 5</a> gives the rules.</p>
+
+        <figure class="fig" id="fig-3">
+          <div class="frame">
+            <a href="cash-composition.svg" aria-label="Open Figure 3 at full size">
+              <img src="cash-composition.svg" width="576" height="720" loading="lazy" decoding="async"
+                   alt="Two stacked 100% bars comparing Bird for Iowa and Willems for Iowa cash by source: national committee, other PACs and organizations, trusts, individuals by gift size, and interest/refund receipts, with an exact-figures table beneath. The national committee is 80.04% of Bird's cash and 53.91% of Willems's; individual gifts under $500 are 1.69% and 10.53%.">
+            </a>
+          </div>
+          <p class="zoom-note">Select the chart to open it at full size. Table 3 repeats every value.</p>
+          <figcaption>
+            <b>Figure 3.</b> Where each campaign&rsquo;s 2026 cash came from, Jan. 1&ndash;Oct. 14, 2026, using the same categories for both. The RAGA Action Fund supplied 80.04 percent of Bird&rsquo;s reported cash; DAGA Individual PAC supplied 53.91 percent of Willems&rsquo;s. Gifts under $500 from all sources were $169,172 for Bird and $591,492 for Willems.
+            <ul>
+              <li>Bird&rsquo;s total includes $21,044.50 in bank interest and refunds, shown separately; they are not contributions.</li>
+              <li>The chart&rsquo;s under-$500 band counts individuals only, net of Willems&rsquo;s $555.26 in refunds.</li>
+              <li>Willems&rsquo;s &ldquo;Other PACs &amp; organizations&rdquo; includes $360,000 from Way Back PAC.</li>
+            </ul>
+            <p class="source">IECDB, Bird for Iowa and Willems for Iowa DR-2 reports, Schedule A, four reports each (latest versions as of Oct. 27, 2026); RDP analysis.</p>
+          </figcaption>
+        </figure>
+
+        <div class="table-block" id="table-3">
+          <h3>Table 3. Composition of all reported cash</h3>
+          <p class="table-cap" id="t3-cap">Share of each campaign&rsquo;s reported cash, Jan. 1&ndash;Oct. 14, 2026, same categories and denominator for both. Individuals are natural persons as reported; trusts are shown separately.</p>
+          <div class="table-scroll" role="region" aria-labelledby="t3-cap" tabindex="0">
+            <table class="data w-lg" aria-labelledby="t3-cap">
+              <thead>
+                <tr><th scope="col">Source of cash</th><th scope="col" class="num">Bird for Iowa</th><th scope="col" class="num">Share</th><th scope="col" class="num">Willems for Iowa</th><th scope="col" class="num">Share</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">National committee (RAGA Action Fund / DAGA Individual PAC)</th><td class="num">$7,600,000.00</td><td class="num">80.04%</td><td class="num">$3,010,000.00</td><td class="num">53.91%</td></tr>
+                <tr><th scope="row">Other PACs, committees and organizations</th><td class="num">$539,447.54</td><td class="num">5.68%</td><td class="num">$701,050.00</td><td class="num">12.56%</td></tr>
+                <tr><th scope="row">Trusts</th><td class="num">$75,100.00</td><td class="num">0.79%</td><td class="num">$0.00</td><td class="num">0.00%</td></tr>
+                <tr><th scope="row">Individuals, gifts of $5,000 or more</th><td class="num">$718,050.80</td><td class="num">7.56%</td><td class="num">$686,850.00</td><td class="num">12.30%</td></tr>
+                <tr><th scope="row">Individuals, gifts of $500&ndash;$4,999.99</th><td class="num">$380,382.80</td><td class="num">4.01%</td><td class="num">$597,780.28</td><td class="num">10.71%</td></tr>
+                <tr><th scope="row">Individuals, gifts under $500 (net of reversals)</th><td class="num">$160,702.29</td><td class="num">1.69%</td><td class="num">$587,886.87</td><td class="num">10.53%</td></tr>
+                <tr><th scope="row">Interest and refund receipts (not contributions)</th><td class="num">$21,044.50</td><td class="num">0.22%</td><td class="num">$0.00</td><td class="num">0.00%</td></tr>
+                <tr class="total"><th scope="row">Total reported cash (Schedule A)</th><td class="num">$9,494,727.93</td><td class="num">100.00%</td><td class="num">$5,583,567.15</td><td class="num">100.00%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">Gifts under $500 from all contributor types, used in the article text: $169,172.29 (1.78% of reported cash) for Bird and $591,492.13 (10.59%) for Willems. The individuals-only rows above are lower by the PAC, trust and organization gifts under $500 ($8,470.00 for Bird; $3,050.00 for Willems) and, for Willems, by six refund reversals totaling &minus;$555.26.</p>
+        </div>
+
+        <div class="table-block" id="table-4">
+          <h3>Table 4. The comparison figures in the article</h3>
+          <p class="table-cap" id="t4-cap">Bird for Iowa and Willems for Iowa, Jan. 1&ndash;Oct. 14, 2026. The article rounds shares to one decimal.</p>
+          <div class="table-scroll" role="region" aria-labelledby="t4-cap" tabindex="0">
+            <table class="data w-lg" aria-labelledby="t4-cap">
+              <thead>
+                <tr><th scope="col">Measure</th><th scope="col" class="num">Bird for Iowa</th><th scope="col" class="num">Willems for Iowa</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Schedule A entries sorted</th><td class="num">2,974</td><td class="num">10,366</td></tr>
+                <tr><th scope="row">Reported cash</th><td class="num">$9,494,727.93</td><td class="num">$5,583,567.15</td></tr>
+                <tr><th scope="row">National committee share of reported cash</th><td class="num">$7,600,000.00 (80.04%)</td><td class="num">$3,010,000.00 (53.91%)</td></tr>
+                <tr><th scope="row">Individuals&rsquo; share of reported cash</th><td class="num">$1,259,135.89 (13.26%)</td><td class="num">$1,872,517.15 (33.54%)</td></tr>
+                <tr><th scope="row">Individual contributor records</th><td class="num">2,116</td><td class="num">6,153</td></tr>
+                <tr><th scope="row">Gifts under $500, all sources: dollars (share of reported cash)</th><td class="num">$169,172.29 (1.78%)</td><td class="num">$591,492.13 (10.59%)</td></tr>
+                <tr><th scope="row">Individual contributor records with an Iowa address and at least one gift under $500</th><td class="num">1,752</td><td class="num">4,977</td></tr>
+                <tr><th scope="row">Gifts under $500 made by those contributor records</th><td class="num">2,311</td><td class="num">8,555</td></tr>
+                <tr><th scope="row">Individual contribution entries with an Iowa address</th><td class="num">2,598 of 2,751 (94.44%)</td><td class="num">9,152 of 10,276 (89.06%)</td></tr>
+                <tr><th scope="row">Gifts of $10,000 or more: share of non-national cash</th><td class="num">$860,795.32 (45.43%)</td><td class="num">$1,156,350.00 (44.93%)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">Willems&rsquo;s 4,977 Iowa contributor records with a gift under $500 are about 2.8 times Bird&rsquo;s 1,752. Non-national cash: $1,894,727.93 for Bird and $2,573,567.15 for Willems.</p>
+        </div>
+
+        <div class="table-block" id="table-5">
+          <h3>Table 5. Non-national cash by gift size</h3>
+          <p class="table-cap" id="t5-cap">Each gift is bracketed by its own amount. Shares are of each campaign&rsquo;s non-national cash. Contributor records are counted once per bracket and are not additive across brackets.</p>
+          <div class="table-scroll" role="region" aria-labelledby="t5-cap" tabindex="0">
+            <table class="data w-xl" aria-labelledby="t5-cap">
+              <thead>
+                <tr>
+                  <th scope="col" rowspan="2">Gift size</th>
+                  <th scope="colgroup" colspan="4" class="num">Bird for Iowa (non-RAGA cash)</th>
+                  <th scope="colgroup" colspan="4" class="num">Willems for Iowa (non-DAGA cash)</th>
+                </tr>
+                <tr>
+                  <th scope="col" class="num">Entries</th><th scope="col" class="num">Contributor records</th><th scope="col" class="num">Dollars</th><th scope="col" class="num">Share</th>
+                  <th scope="col" class="num">Entries</th><th scope="col" class="num">Contributor records</th><th scope="col" class="num">Dollars</th><th scope="col" class="num">Share</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Under $100</th><td class="num">1,732</td><td class="num">1,303</td><td class="num">$58,440.81</td><td class="num">3.08%</td><td class="num">7,045</td><td class="num">4,170</td><td class="num">$214,218.44</td><td class="num">8.32%</td></tr>
+                <tr><th scope="row">$100&ndash;$249.99</th><td class="num">537</td><td class="num">471</td><td class="num">$62,337.50</td><td class="num">3.29%</td><td class="num">1,776</td><td class="num">1,346</td><td class="num">$201,816.07</td><td class="num">7.84%</td></tr>
+                <tr><th scope="row">$250&ndash;$499.99</th><td class="num">183</td><td class="num">170</td><td class="num">$48,393.98</td><td class="num">2.55%</td><td class="num">685</td><td class="num">526</td><td class="num">$175,457.62</td><td class="num">6.82%</td></tr>
+                <tr><th scope="row">$500&ndash;$999.99</th><td class="num">138</td><td class="num">126</td><td class="num">$70,612.65</td><td class="num">3.73%</td><td class="num">485</td><td class="num">376</td><td class="num">$247,472.00</td><td class="num">9.62%</td></tr>
+                <tr><th scope="row">$1,000&ndash;$4,999.99</th><td class="num">257</td><td class="num">231</td><td class="num">$423,372.69</td><td class="num">22.34%</td><td class="num">277</td><td class="num">221</td><td class="num">$388,308.28</td><td class="num">15.09%</td></tr>
+                <tr><th scope="row">$5,000&ndash;$9,999.99</th><td class="num">68</td><td class="num">62</td><td class="num">$349,730.48</td><td class="num">18.46%</td><td class="num">37</td><td class="num">32</td><td class="num">$190,500.00</td><td class="num">7.40%</td></tr>
+                <tr><th scope="row">$10,000&ndash;$24,999.99</th><td class="num">29</td><td class="num">25</td><td class="num">$335,820.32</td><td class="num">17.72%</td><td class="num">33</td><td class="num">30</td><td class="num">$392,350.00</td><td class="num">15.25%</td></tr>
+                <tr><th scope="row">$25,000 or more</th><td class="num">12</td><td class="num">10</td><td class="num">$524,975.00</td><td class="num">27.71%</td><td class="num">17</td><td class="num">13</td><td class="num">$764,000.00</td><td class="num">29.69%</td></tr>
+                <tr class="subtle"><th scope="row">Not sized: interest and refund receipts (Bird) / refund reversals (Willems)</th><td class="num">11</td><td class="num">&mdash;</td><td class="num">$21,044.50</td><td class="num">1.11%</td><td class="num">6</td><td class="num">&mdash;</td><td class="num">&minus;$555.26</td><td class="num">&minus;0.02%</td></tr>
+                <tr class="total"><th scope="row">Non-national cash</th><td class="num">2,967</td><td class="num"></td><td class="num">$1,894,727.93</td><td class="num">100.00%</td><td class="num">10,361</td><td class="num"></td><td class="num">$2,573,567.15</td><td class="num">100.00%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">Brackets are shares rounded separately and may not sum exactly. Gifts under $500 were 8.93% of Bird&rsquo;s non-RAGA cash and 22.98% of Willems&rsquo;s non-DAGA cash; gifts of $5,000 or more were 63.89% and 52.33%.</p>
+        </div>
+
+        <div class="fig-pair">
+          <figure class="fig" id="fig-4">
+            <div class="frame">
+              <a href="bird-other-cash-bar.svg" aria-label="Open Figure 4 at full size">
+                <img src="bird-other-cash-bar.svg" width="576" height="854" loading="lazy" decoding="async"
+                     alt="Horizontal bar chart titled 'The Other 20%: Who Funded the Rest?' showing how Bird's $1,894,727.93 of non-RAGA cash splits into eight contribution-size brackets, on a shared 0-35% scale, with individuals, trusts, PACs and other organizations in distinct fills. Gifts under $500 are 8.9% of this cash; gifts of $5,000 and up are 63.9%. The $25,000-plus bracket is the largest at 27.7%, followed by the $1,000-$4,999.99 bracket at 22.3%.">
+              </a>
+            </div>
+            <figcaption>
+              <b>Figure 4.</b> The other 19.96% of Bird&rsquo;s 2026 reported cash, by size of each contribution. Gifts under $500 were 8.9% of it; gifts of $5,000 and up were 63.9%. Bank interest and refunds ($21,044.50) are included in the total but not sized.
+              <p class="source">IECDB, Bird for Iowa DR-2 reports, Schedule A, Jan. 1&ndash;Oct. 14, 2026 (latest versions as of Oct. 27, 2026); RDP analysis. Values in Table 5.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="fig" id="fig-5">
+            <div class="frame">
+              <a href="willems-other-cash-bar.svg" aria-label="Open Figure 5 at full size">
+                <img src="willems-other-cash-bar.svg" width="576" height="854" loading="lazy" decoding="async"
+                     alt="Horizontal bar chart titled 'The Other 46%: Who Funded the Rest?' showing how Willems's $2,573,567.15 of non-DAGA cash splits into the same eight contribution-size brackets on the same 0-35% scale as the Bird chart. Gifts under $500 are 23.0% of this cash; gifts of $5,000 and up are 52.3%. The $25,000-plus bracket is the largest at 29.7%; this includes $360,000 from Way Back PAC.">
+              </a>
+            </div>
+            <figcaption>
+              <b>Figure 5.</b> The other 46.09% of Willems&rsquo;s 2026 reported cash, by size of each contribution, on the same scale as the Bird chart. Gifts under $500 were 23.0% of it; gifts of $5,000 and up were 52.3%. Includes $360,000 from Way Back PAC.
+              <p class="source">IECDB, Willems for Iowa DR-2 reports, Schedule A, Jan. 1&ndash;Oct. 14, 2026 (latest versions as of Oct. 27, 2026); RDP analysis. Values in Table 5.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <figure class="fig" id="fig-6">
+          <div class="frame">
+            <a href="willems-2026-donut.svg" aria-label="Open Figure 6 at full size">
+              <img src="willems-2026-donut.svg" width="576" height="682" loading="lazy" decoding="async"
+                   alt="Donut chart titled 'Who Funded Willems's 2026 Campaign Cash?'. Of $5,583,567.15 in reported cash January 1 to October 14, 2026, the DAGA Individual PAC supplied $3,010,000.00 (53.91%, solid navy) and all other cash was $2,573,567.15 (46.09%, gray with diagonal hatching).">
+            </a>
+          </div>
+          <figcaption>
+            <b>Figure 6.</b> Of the $5,583,567.15 in cash Willems for Iowa reported from Jan. 1 to Oct. 14, 2026, 53.91% came from the DAGA Individual PAC. The total is net of six refund reversals (&minus;$555.26); in-kind contributions, loans and outside spending are not included.
+            <p class="source">IECDB, Willems for Iowa (committee SWGA51124) DR-2 reports (four reports, latest versions as of Oct. 27, 2026); RDP analysis.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== 3. THREE RECORDS ===================== -->
+    <section id="three-records" class="module" aria-labelledby="m3-h">
+      <div class="wrap-wide">
+        <p class="kicker">3 <span class="dot">&bull;</span> Three record systems</p>
+        <h2 id="m3-h" class="module-title">The same seven payments, as Iowa, the FEC and the IRS record them</h2>
+        <p>Three public record systems track this money: the Federal Election Commission (FEC), for federal political committees; the Internal Revenue Service (IRS), which receives RAGA&rsquo;s reports as a political organization under Section 527 of the tax code; and the IECDB, which receives Bird&rsquo;s reports and the RAGA Action Fund&rsquo;s Iowa Verified Statement of Registration (VSR).</p>
+
+        <div class="table-block" id="table-6">
+          <h3>Table 6. Each 2026 RAGA Action Fund payment to Bird for Iowa in three record systems</h3>
+          <p class="table-cap" id="t6-cap">Dates are the dates each filer reported, not bank settlement dates. FEC: RAGA Action Fund (C00560904), Form 3X. IRS: RAGA (EIN 46-4501717), Form 8872. VSR: OSF50167, Oct. 23, 2026 version.</p>
+          <div class="table-scroll" role="region" aria-labelledby="t6-cap" tabindex="0">
+            <table class="data w-xl" aria-labelledby="t6-cap">
+              <thead>
+                <tr>
+                  <th scope="col">Iowa DR-2: date received</th>
+                  <th scope="col" class="num">Amount</th>
+                  <th scope="col">Iowa DR-2: report, page</th>
+                  <th scope="col">Fund&rsquo;s Iowa VSR: date</th>
+                  <th scope="col">FEC Form 3X</th>
+                  <th scope="col">RAGA IRS Form 8872: date, page</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="nw">May 13, 2026</td><td class="num">$1,425,000</td><td>Jan. 1&ndash;May 14, p. 10</td><td class="nw">May 12, 2026</td><td>Q2 2026 (filing 1994655), line SB29.4466, May 12, 2026</td><td>Q2 2026: May 12, 2026, p. 113</td></tr>
+                <tr><td class="nw">May 26, 2026</td><td class="num">$1,100,000</td><td>May 15&ndash;26 supplemental, p. 13</td><td class="nw">May 26, 2026</td><td>Q2 2026 (filing 1994655), line SB29.4467, May 26, 2026</td><td>Q2 2026: May 26, 2026, p. 81</td></tr>
+                <tr><td class="nw">July 13, 2026</td><td class="num">$1,500,000</td><td>May 27&ndash;July 14, p. 24</td><td class="nw">July 10, 2026</td><td>Not listed; Q3 2026 report (filing 2021160) shows zero receipts and disbursements</td><td>Q3 2026: July 10, 2026, p. 134</td></tr>
+                <tr><td class="nw">Aug. 14, 2026</td><td class="num">$1,400,000</td><td>July 15&ndash;Oct. 14, p. 40</td><td class="nw">Aug. 13, 2026</td><td>Not listed; Q3 2026 report (filing 2021160) shows zero receipts and disbursements</td><td>Q3 2026: July 2, 2026, p. 136</td></tr>
+                <tr><td class="nw">Sept. 3, 2026</td><td class="num">$343,000</td><td>July 15&ndash;Oct. 14, p. 62</td><td class="nw">Sept. 3, 2026</td><td>Not listed; Q3 2026 report (filing 2021160) shows zero receipts and disbursements</td><td>Q3 2026: Sept. 3, 2026, p. 143</td></tr>
+                <tr><td class="nw">Sept. 18, 2026</td><td class="num">$1,100,000</td><td>July 15&ndash;Oct. 14, p. 80</td><td class="nw">Sept. 18, 2026</td><td>Not listed; Q3 2026 report (filing 2021160) shows zero receipts and disbursements</td><td>Q3 2026: Sept. 18, 2026, p. 119</td></tr>
+                <tr><td class="nw">Oct. 13, 2026</td><td class="num">$732,000</td><td>July 15&ndash;Oct. 14, p. 113</td><td class="nw">Oct. 12, 2026</td><td class="nl">Q4 2026; outside the reports reviewed</td><td class="nl">Q4 2026; outside the reports reviewed</td></tr>
+                <tr class="total"><th scope="row">Seven payments</th><td class="num">$7,600,000</td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">The four payments Bird for Iowa reported from July 13 through Sept. 18 total $4,343,000, the same total as the four Bird for Iowa entries on RAGA&rsquo;s July&ndash;September Form 8872. RAGA&rsquo;s IRS report dates the $1.4 million payment July 2; the fund&rsquo;s Iowa statement dates it Aug. 13, and Bird&rsquo;s campaign reports receiving it by wire Aug. 14. The filings do not explain the difference.</p>
+          <p class="table-note">The fund&rsquo;s April&ndash;June FEC report (pp. 6&ndash;9) also shows RAGA transferring matching amounts into the fund on May 12 ($57,000 and $1,368,000; lines SA11C.4461 and SA11C.4462) and May 26 ($1,100,000; SA11C.4463), each labeled &ldquo;individual funds only.&rdquo; FEC line numbers are record identifiers, not bank references.</p>
+        </div>
+
+        <h3 class="sub" id="in-kind">In-kind research contributions</h3>
+        <p>Bird for Iowa&rsquo;s reports list eight in-kind research contributions from the RAGA Action Fund, valued at $231,390, beginning May 26. Two of them, $15,000 each, are dated May 26 and May 28 and appear in different reports. The filings do not show whether they describe one service or two. In-kind gifts are not counted in any share on this page.</p>
+        <div class="table-block" id="table-7">
+          <h3>Table 7. RAGA Action Fund in-kind entries on Bird for Iowa&rsquo;s Schedule E</h3>
+          <p class="table-cap" id="t7-cap">Descriptions as printed on Bird for Iowa&rsquo;s DR-2 reports. VSR: OSF50167, Oct. 23, 2026 version.</p>
+          <div class="table-scroll" role="region" aria-labelledby="t7-cap" tabindex="0">
+            <table class="data w-lg" aria-labelledby="t7-cap">
+              <thead>
+                <tr><th scope="col">Date reported</th><th scope="col" class="num">Value</th><th scope="col">Description as printed</th><th scope="col">Iowa DR-2: report, page</th><th scope="col">Fund&rsquo;s Iowa VSR</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="nw">May 26, 2026 &#9873;</td><td class="num">$15,000</td><td>Other Expenditure / Research</td><td>May 15&ndash;26 supplemental, p. 17</td><td class="nl">Not located</td></tr>
+                <tr><td class="nw">May 28, 2026 &#9873;</td><td class="num">$15,000</td><td>Professional Fees / In-kind - research</td><td>May 27&ndash;July 14, p. 33</td><td class="nl">Not located</td></tr>
+                <tr><td class="nw">June 19, 2026</td><td class="num">$13,520</td><td>Professional Fees / In-kind - research</td><td>May 27&ndash;July 14, p. 33</td><td class="nl">Not located</td></tr>
+                <tr><td class="nw">July 31, 2026</td><td class="num">$49,870</td><td>Professional Fees / In-kind - research</td><td>July 15&ndash;Oct. 14, p. 128</td><td>Aug. 17, 2026</td></tr>
+                <tr><td class="nw">Aug. 7, 2026</td><td class="num">$65,000</td><td>Professional Fees / In-kind - research</td><td>July 15&ndash;Oct. 14, p. 128</td><td class="nl">Not located</td></tr>
+                <tr><td class="nw">Sept. 17, 2026</td><td class="num">$9,000</td><td>Professional Fees / In-kind - research</td><td>July 15&ndash;Oct. 14, p. 128</td><td>Sept. 17, 2026</td></tr>
+                <tr><td class="nw">Oct. 1, 2026</td><td class="num">$9,000</td><td>Professional Fees / In-kind - research</td><td>July 15&ndash;Oct. 14, p. 128</td><td class="nl">Not located</td></tr>
+                <tr><td class="nw">Oct. 14, 2026</td><td class="num">$55,000</td><td>Professional Fees / In-kind - research</td><td>July 15&ndash;Oct. 14, p. 128</td><td class="nl">Not located</td></tr>
+                <tr class="total"><th scope="row">Eight entries</th><td class="num">$231,390</td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">&#9873; The two $15,000 entries, in different reports, may describe one service; the filings do not say. &ldquo;Not located&rdquo; means RDP did not find a matching entry in the rendered VSR; it is not a finding that none was filed. The two $9,000 entries are printed separately on the same page.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 4. FILINGS ===================== -->
+    <section id="filings" class="module" aria-labelledby="m4-h">
+      <div class="wrap-wide">
+        <p class="kicker">4 <span class="dot">&bull;</span> Filing versions and hashes</p>
+        <h2 id="m4-h" class="module-title">The eight DR-2 files RDP counted</h2>
+        <p>Each file was retrieved from the IECDB public report archive on Oct. 27, 2026. A reader can download the same file and compare its SHA-256 hash.</p>
+
+        <div class="table-block" id="table-8">
+          <h3>Table 8. Bird for Iowa (committee 5206)</h3>
+          <p class="table-cap" id="t8-cap">Status as printed on each report. The Schedule A grand total is printed on the PDF page shown.</p>
+          <div class="table-scroll" role="region" aria-labelledby="t8-cap" tabindex="0">
+            <table class="data w-xl" aria-labelledby="t8-cap">
+              <thead>
+                <tr><th scope="col">Report period</th><th scope="col">File (IECDB)</th><th scope="col">Status printed</th><th scope="col" class="num">Schedule A total page</th><th scope="col">SHA-256</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Jan. 1&ndash;May 14, 2026</td><td><a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/5206_DR2_Summary_09-30-2026T15.00.04.944.pdf" target="_blank" rel="noopener noreferrer">5206_DR2_Summary_09-30-2026T15.00.04.944.pdf</a></td><td>Adjusted (filed May 19, 2026; amended Sept. 30, 2026)</td><td class="num">10</td><td><code class="hash">c865d632c0ec368372b845bec4e70f8c07497aa9c442af7b38cf1e0e522f418d</code></td></tr>
+                <tr><td>May 15&ndash;26, 2026 (supplemental)</td><td><a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/5206_DR2_Summary_07-31-2026T22.00.04.731.pdf" target="_blank" rel="noopener noreferrer">5206_DR2_Summary_07-31-2026T22.00.04.731.pdf</a></td><td>Adjusted (filed May 29, 2026; amended July 31, 2026)</td><td class="num">13</td><td><code class="hash">de04012988867fb58b511b7303efb0d3c59d9ca887be439407f96fd2312d2dcd</code></td></tr>
+                <tr><td>May 27&ndash;July 14, 2026</td><td><a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/5206_DR2_Summary_07-31-2026T21.00.08.934.pdf" target="_blank" rel="noopener noreferrer">5206_DR2_Summary_07-31-2026T21.00.08.934.pdf</a></td><td>Adjusted (filed July 20, 2026; amended July 31, 2026)</td><td class="num">25</td><td><code class="hash">a4cfa2b933260f75a72e5c3cbbc162bed391f6cee55d7c6d7f852ea2219030e8</code></td></tr>
+                <tr><td>July 15&ndash;Oct. 14, 2026</td><td><a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/5206_DR2_Summary_10-19-2026T21.00.59.992.pdf" target="_blank" rel="noopener noreferrer">5206_DR2_Summary_10-19-2026T21.00.59.992.pdf</a></td><td>Filed (Oct. 19, 2026; no amendment)</td><td class="num">113</td><td><code class="hash">cddb2d571f00df7dd9bda96858ab89133a6b7b8f75f4b898b05571151f5d7e4f</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-block" id="table-9">
+          <h3>Table 9. Willems for Iowa (committee SWGA51124)</h3>
+          <p class="table-cap" id="t9-cap">Page count as retrieved.</p>
+          <div class="table-scroll" role="region" aria-labelledby="t9-cap" tabindex="0">
+            <table class="data w-xl" aria-labelledby="t9-cap">
+              <thead>
+                <tr><th scope="col">Report period</th><th scope="col">File (IECDB)</th><th scope="col" class="num">Pages</th><th scope="col">SHA-256</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Jan. 1&ndash;May 14, 2026</td><td><a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/SWGA51124_DR2_Summary_05-19-2026T18.00.26.866.pdf" target="_blank" rel="noopener noreferrer">SWGA51124_DR2_Summary_05-19-2026T18.00.26.866.pdf</a></td><td class="num">155</td><td><code class="hash">6afa86a2729d716cd49c5fe9b31c33f6b682d3e11cdc1e69ba36a4c8e3642554</code></td></tr>
+                <tr><td>May 15&ndash;26, 2026 (supplemental)</td><td><a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/SWGA51124_DR2_Summary_05-29-2026T21.00.16.163.pdf" target="_blank" rel="noopener noreferrer">SWGA51124_DR2_Summary_05-29-2026T21.00.16.163.pdf</a></td><td class="num">12</td><td><code class="hash">f1c0dea2b17daa6cfa8c3f9ef20ee8f5b20c6a86b8bfa36546b20a262b9fa488</code></td></tr>
+                <tr><td>May 27&ndash;July 14, 2026 (amended Aug. 6, 2026)</td><td><a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/SWGA51124_DR2_Summary_08-06-2026T14.03.03.965.pdf" target="_blank" rel="noopener noreferrer">SWGA51124_DR2_Summary_08-06-2026T14.03.03.965.pdf</a></td><td class="num">99</td><td><code class="hash">84cf782ed9881e405520eaced4d52833d44dfef6bccc3939b2049b9965c0e284</code></td></tr>
+                <tr><td>July 15&ndash;Oct. 14, 2026</td><td><a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/SWGA51124_DR2_Summary_10-19-2026T21.01.14.097.pdf" target="_blank" rel="noopener noreferrer">SWGA51124_DR2_Summary_10-19-2026T21.01.14.097.pdf</a></td><td class="num">297</td><td><code class="hash">5df6ba5b677fea99b8a79012abe5a13b54c23f0ce09fd699a1844b45ffe98549</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 5. METHOD ===================== -->
+    <section id="method" class="module" aria-labelledby="m5-h">
+      <div class="wrap">
+        <p class="kicker">5 <span class="dot">&bull;</span> Method</p>
+        <h2 id="m5-h" class="module-title">How RDP counted</h2>
+        <p>&ldquo;Reported cash&rdquo; is the Schedule A total printed on each DR-2 report, including any interest, refunds, and returned contributions the campaign listed there. &ldquo;Contributor records&rdquo; are distinct names, street addresses, and ZIP combinations as printed on the filings. They approximate people but cannot confirm them. Gift sizes use each contribution&rsquo;s own amount. In-kind contributions, loans, and outside spending are excluded throughout.</p>
+        <ol class="method">
+          <li><b>Transcribe.</b> RDP transcribed every Schedule A entry on the four 2026 DR-2 reports for each campaign, using the latest amended versions on the IECDB site as of Oct. 27, 2026. Entries that span a page break were rejoined.</li>
+          <li><b>Tie out.</b> Each report&rsquo;s entries were summed and compared with the Schedule A grand total and the summary-page Schedule A total printed on the filing. All eight reports tie to the cent.</li>
+          <li><b>Classify.</b> In order of precedence: a filing note saying interest or a refund of a deposit or expenditure marks a non-contribution receipt; a recorded manual decision, where one was needed; a committee ID printed on the entry marks a PAC or political committee; a business name (&ldquo;DBA&rdquo;) marks an other organization; trust or trustee wording marks a trust; organization keywords or suffixes mark an other organization; remaining &ldquo;Last, First&rdquo; names are individuals. A run stops if any entry is left unclassified.</li>
+          <li><b>National committee.</b> Entries printed with committee ID OSF50167 (RAGA Action Fund) for Bird and 8891 (DAGA Individual PAC) for Willems. Way Back PAC (OSF50348) is not a national committee and stays in Willems&rsquo;s non-national cash.</li>
+          <li><b>Size.</b> Each positive contribution entry is placed in one of eight brackets by its own amount. Refund reversals and interest or refund receipts are shown but not sized.</li>
+          <li><b>Contributor records.</b> A record is a distinct normalized name, normalized street and five-digit ZIP code. A looser name-and-ZIP key gives a lower bound; the two keys differ by 46 individual records for Bird (2,116 vs. 2,070) and 77 for Willems (6,153 vs. 6,076). The Iowa under-$500 counts in Table 4 count individual records whose printed state is Iowa and that have at least one positive gift under $500.</li>
+          <li><b>In-state.</b> An entry is in-state when its printed state is IA.</li>
+          <li><b>Verify.</b> A separate script recomputes brackets, totals, class totals and per-report subtotals from the saved ledgers with different code; two full runs produced identical ledgers. Period shares are dollar-weighted from exact amounts, not averages of period percentages.</li>
+        </ol>
+        <p>The three-record table compares the amount, payer and recipient, period, purpose and date in each system. No source exposes a shared bank reference, so a match is a reported counterpart, not a traced payment.</p>
+      </div>
+    </section>
+
+    <!-- ===================== 6. NOT SHOWN ===================== -->
+    <section id="not-shown" class="module" aria-labelledby="m6-h">
+      <div class="wrap">
+        <p class="kicker">6 <span class="dot">&bull;</span> Bounds</p>
+        <h2 id="m6-h" class="module-title">What this page does not show</h2>
+        <div class="bounds">
+          <ul>
+            <li>These filings show how each campaign&rsquo;s cash was made up. They do not show how RAGA or DAGA are themselves funded.</li>
+            <li>Different contribution patterns are not evidence of illegality, coordination, or improper influence by any donor or committee.</li>
+            <li>The three-record table shows what each filer reported. It does not determine which reporting rules applied to any payment.</li>
+            <li>The RAGA shares by period are not evidence of a fixed or agreed funding arrangement; the money arrived in transfers of different sizes, and its share varied by period.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 7. SOURCES ===================== -->
+    <section id="sources" class="module" aria-labelledby="m7-h">
+      <div class="wrap-wide">
+        <p class="kicker">7 <span class="dot">&bull;</span> Sources</p>
+        <h2 id="m7-h" class="module-title">Records and reporting cited on this page</h2>
+
+        <div class="src-group">
+          <h3>RDP reporting</h3>
+          <ul class="src-list">
+            <li><a href="https://investigations.restoring-democracy.org/" target="_blank" rel="noopener noreferrer">&ldquo;Four of Every Five Dollars in Bird&rsquo;s 2026 AG Campaign Come From RAGA,&rdquo; Oct. 29, 2026</a></li>
+            <li><a href="https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came" target="_blank" rel="noopener noreferrer">&ldquo;Bird Thanked Iowa; The Money Came From Washington,&rdquo; June 7, 2026</a> (corrected Oct. 26, 2026), and its exhibit, <a href="/infographics/bird-raga-money-trail/">Bird&ndash;RAGA Money Trail</a> (corrected and updated Oct. 27, 2026)</li>
+            <li><a href="/corrections/">RDP corrections log</a></li>
+          </ul>
+        </div>
+
+        <div class="src-group">
+          <h3>Iowa Ethics and Campaign Disclosure Board</h3>
+          <ul class="src-list">
+            <li>Bird for Iowa (5206), DR-2: <a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/5206_DR2_Summary_09-30-2026T15.00.04.944.pdf" target="_blank" rel="noopener noreferrer">Jan. 1&ndash;May 14, amended Sept. 30, 2026</a>; <a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/5206_DR2_Summary_07-31-2026T22.00.04.731.pdf" target="_blank" rel="noopener noreferrer">May 15&ndash;26 supplemental, amended July 31, 2026</a>; <a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/5206_DR2_Summary_07-31-2026T21.00.08.934.pdf" target="_blank" rel="noopener noreferrer">May 27&ndash;July 14, amended July 31, 2026</a>; <a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/5206_DR2_Summary_10-19-2026T21.00.59.992.pdf" target="_blank" rel="noopener noreferrer">July 15&ndash;Oct. 14, filed Oct. 19, 2026</a></li>
+            <li>Willems for Iowa (SWGA51124), DR-2: <a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/SWGA51124_DR2_Summary_05-19-2026T18.00.26.866.pdf" target="_blank" rel="noopener noreferrer">Jan. 1&ndash;May 14</a>; <a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/SWGA51124_DR2_Summary_05-29-2026T21.00.16.163.pdf" target="_blank" rel="noopener noreferrer">May 15&ndash;26 supplemental</a>; <a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/SWGA51124_DR2_Summary_08-06-2026T14.03.03.965.pdf" target="_blank" rel="noopener noreferrer">May 27&ndash;July 14, amended Aug. 6, 2026</a>; <a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/SWGA51124_DR2_Summary_10-19-2026T21.01.14.097.pdf" target="_blank" rel="noopener noreferrer">July 15&ndash;Oct. 14</a></li>
+            <li>RAGA Action Fund (OSF50167), Verified Statement of Registration: <a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/6b7a6e8e-1baa-4ca0-acb8-ca366e3258be_VSR_10-23-2026T18.00.02.064.pdf" target="_blank" rel="noopener noreferrer">Oct. 23, 2026 version</a> (used in Tables 6 and 7); <a href="https://iecdbblobstorage.blob.core.windows.net/reports-prod/6b7a6e8e-1baa-4ca0-acb8-ca366e3258be_VSR_10-27-2026T20.00.25.526.pdf" target="_blank" rel="noopener noreferrer">Oct. 27, 2026 version</a></li>
+          </ul>
+        </div>
+
+        <div class="src-group">
+          <h3>Federal Election Commission &mdash; RAGA Action Fund (<a href="https://www.fec.gov/data/committee/C00560904/" target="_blank" rel="noopener noreferrer">C00560904</a>), Form 3X</h3>
+          <ul class="src-list">
+            <li><a href="https://docquery.fec.gov/pdf/870/202607159875316870/202607159875316870.pdf" target="_blank" rel="noopener noreferrer">Q2 2026 (filing 1994655, filed July 15, 2026)</a>, pp. 6&ndash;9</li>
+            <li><a href="https://docquery.fec.gov/pdf/701/202610149908713701/202610149908713701.pdf" target="_blank" rel="noopener noreferrer">Q3 2026 (filing 2021160)</a>, p. 2</li>
+          </ul>
+        </div>
+
+        <div class="src-group">
+          <h3>Internal Revenue Service &mdash; RAGA (EIN 46-4501717), Form 8872</h3>
+          <ul class="src-list">
+            <li><a href="https://forms.irs.gov/app/pod/basicSearch/downloadFile?formId=167408&amp;formType=e8872" target="_blank" rel="noopener noreferrer">April&ndash;June 2026 (form 167408)</a>, pp. 81, 113</li>
+            <li><a href="https://forms.irs.gov/app/pod/basicSearch/downloadFile?formId=169203&amp;formType=e8872" target="_blank" rel="noopener noreferrer">July&ndash;Sept. 2026 (form 169203)</a>, pp. 119, 134, 136, 143</li>
+          </ul>
+        </div>
+
+        <div class="src-group">
+          <h3>Data</h3>
+          <ul class="src-list">
+            <li><a href="bird-raga-2026-cash-aggregates.csv" download>Aggregated data (CSV)</a>: period tie-out, cash composition for both campaigns, three-record reconciliation.</li>
+          </ul>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://investigations.restoring-democracy.org/" target="_blank" rel="noopener noreferrer" aria-label="Read the article in a new tab">Read the article &rarr;</a>
+          <a class="btn btn-ghost" href="/">Return to restoring-democracy.org</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LIMITS ===================== -->
+    <section id="limits" class="module limits" aria-labelledby="lim-h">
+      <div class="wrap">
+        <p class="kicker">Limits</p>
+        <h2 id="lim-h" class="module-title">Limits of this collection</h2>
+        <ul class="plain">
+          <li><b>The window ends Oct. 14, 2026.</b> The RAGA Action Fund&rsquo;s Iowa statement, updated Oct. 27, lists $100,000 on Oct. 19, $175,000 on Oct. 23 and $100,000 on Oct. 27. Those payments, Bird for Iowa&rsquo;s supplementary report due Oct. 30 and any amendment filed after Oct. 27 are not counted here.</li>
+          <li><b>The ledgers are withheld.</b> RDP&rsquo;s transaction ledgers contain contributors&rsquo; names and addresses and are not published. This page and its CSV carry aggregates only. RDP will share the classification rules and the per-report tie-out on request.</li>
+          <li><b>Contributor records are not people.</b> A person who moved or whose name was printed two ways can appear as two records; two people with one name and address appear as one.</li>
+          <li><b>Classification is by name pattern, printed committee ID and filing note.</b> Entries are retained as printed, including three near-duplicate Bird entries and six Willems refund reversals; RDP&rsquo;s sensitivity checks found they do not change how the two campaigns compare.</li>
+          <li><b>Dates in Tables 6 and 7 are reported dates.</b> RDP obtained no bank statements, wire confirmations or invoices. The $732,000 payment falls in a quarter for which RAGA&rsquo;s FEC and IRS reports were not available.</li>
+          <li><b>Cash only.</b> In-kind contributions, loans and independent expenditures, including RAGA&rsquo;s own advertising in Iowa, are not counted in any share.</li>
+          <li><b>The charts are scaled images.</b> On a phone the smallest chart labels are hard to read; Tables 1 through 5 carry every charted value.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site">
+    <div class="f-inner">
+      <div>
+        <div class="f-brand">Restoring Democracy&rsquo;s Promise</div>
+        <div class="f-tag">Engineering Precision Journalism</div>
+      </div>
+      <div class="f-meta">
+        Published Oct. 29, 2026 &nbsp;&bull;&nbsp; &copy; 2023&ndash;2026 Restoring Democracy&rsquo;s Promise. All rights reserved. &nbsp;&bull;&nbsp;
+        <a href="/privacy-policy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    'use strict';
+    var shareBtn = document.getElementById('share-btn');
+    var shareLabel = document.getElementById('share-label');
+    var mobileExhibitNav = document.querySelector('.mobile-exhibit-nav');
+    if (mobileExhibitNav){
+      mobileExhibitNav.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){ mobileExhibitNav.removeAttribute('open'); });
+      });
+    }
+    if (shareBtn){
+      shareBtn.addEventListener('click', function(){
+        var data = { title: document.title, url: window.location.href };
+        if (navigator.share){
+          navigator.share(data).catch(function(){});
+        } else if (navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(window.location.href).then(function(){
+            if (shareLabel){ var t = shareLabel.textContent; shareLabel.textContent = 'Copied'; setTimeout(function(){ shareLabel.textContent = t; }, 1600); }
+          }).catch(function(){ window.prompt('Copy this link:', window.location.href); });
+        } else {
+          window.prompt('Copy this link:', window.location.href);
+        }
+      });
+    }
+  })();
+  </script>
+
+  <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
+  <script
+    data-goatcounter="https://restoring-democracy.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+  </script>
+</body>
+</html>
