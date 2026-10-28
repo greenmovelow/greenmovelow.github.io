@@ -8,7 +8,7 @@ canonical: "https://restoring-democracy.org/corrections/"
 
 How we fix mistakes, update reporting, and revise data — transparently
 
-Effective Date: February 10, 2026  ·  Last Updated: October 27, 2026 (corrections log)
+Effective Date: February 10, 2026  ·  Last Updated: October 28, 2026 (corrections log)
 
 No Stealth Edits. No Quiet Rewrites.
 
@@ -99,7 +99,7 @@ We keep a running log of significant corrections here, newest first.
 
 Logged corrections
 
-Log updated: October 27, 2026. This log lists corrections confirmed from published correction notices and corrected exhibits. It is not yet a complete inventory of earlier corrections.
+Log updated: October 28, 2026. This log lists corrections confirmed from published correction notices and corrected exhibits. It is not yet a complete inventory of earlier corrections.
 
 -   **Oct. 27, 2026 — Correction, clarification and update.** [“Bird Thanked Iowa; The Money Came From Washington,” published June 7, 2026](https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came), and its companion exhibit, [Bird–RAGA Money Trail](https://restoring-democracy.org/infographics/bird-raga-money-trail/).
     
@@ -109,7 +109,7 @@ Log updated: October 27, 2026. This log lists corrections confirmed from publish
     
     _Update._ The exhibit listed the RAGA Action Fund’s May 13 and May 26, 2026 contributions to Bird for Iowa as awaiting federal confirmation. Both appear in the fund’s July 15, 2026 report to the Federal Election Commission (filing 1994655).
     
-    _Status._ The exhibit was corrected on Oct. 27, 2026, with a dated note and a revision history on the page. A matching correction to the article’s Figure 3 and related passage is pending; this entry will be updated when it is posted.
+    _Status._ The exhibit was corrected Oct. 27, 2026. The article was corrected Oct. 28, 2026, with a dated note beneath its Oct. 26 note.
     
     The central findings are unchanged: the RAGA Action Fund supplied 80.24% of Bird for Iowa’s reported pre-primary Schedule A cash and $3.525 million in contributions through May 26, 2026. Contributions of $5,000 or more supplied 74.4% of the non-RAGA remainder, and contributions under $500 supplied less than 2%.
     
@@ -118,6 +118,8 @@ Log updated: October 27, 2026. This log lists corrections confirmed from publish
     The correction notice at the top of the article, dated Oct. 26, 2026, states that the article described $2,935 as the RAGA Action Fund’s first-quarter 2026 receipts and said the fund’s May 2026 contributions to Bird for Iowa were drawn on balances it already held. Both statements were wrong when published. The $2,935 was the fund’s cash on hand; it reported no receipts that quarter.
     
     The fund’s next federal report, filed July 15, 2026 (FEC filing 1994655), shows transfers from RAGA of $1,425,000 on May 12 and $1,100,000 on May 26 — the same amounts and federal transaction dates as the fund’s contributions to Bird for Iowa in that report. The report does not identify the donors behind RAGA’s transfers.
+    
+    The article also corrected its description of the Action Fund’s 2025 transfers (removing “operating pool” and “Super PAC layer”), clarified that RAGA and the Rule of Law Defense Fund share an address and officers rather than staff, and corrected four smaller points listed in the article’s editor’s note. These edits were completed Oct. 28, 2026.
     
     The central findings are unchanged: the RAGA Action Fund supplied 80.24% of Bird for Iowa’s reported pre-primary Schedule A cash and $3.525 million in contributions through May 26, 2026.
     
