@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="432pt" height="511.2pt" viewBox="0 0 432 511.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 511.2 
+L 432 511.2 
+L 432 0 
+L 0 0 
+z
+" style="fill: #f9faf4"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 23.76 12.96 
+L 408.24 12.96 
+Q 419.04 12.96 419.04 23.76 
+L 419.04 487.44 
+Q 419.04 498.24 408.24 498.24 
+L 23.76 498.24 
+Q 12.96 498.24 12.96 487.44 
+L 12.96 23.76 
+Q 12.96 12.96 23.76 12.96 
+z
+" clip-path="url(#pcaa0ebd67b)" style="fill: #ffffff; stroke: #b8bbc6; stroke-width: 1.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 216 126 
+C 226.961281 126 237.854488 127.726288 248.278694 131.115329 
+C 258.7029 134.504369 268.52863 139.514067 277.394244 145.96004 
+C 286.259858 152.406013 294.055239 160.208196 300.493476 169.079429 
+C 306.931714 177.950662 311.93284 187.780756 315.312787 198.207915 
+C 318.692734 208.635073 320.409521 219.529782 320.39996 230.491058 
+C 320.3904 241.452335 318.654611 252.344032 315.25648 262.765278 
+C 311.858348 273.186525 306.840082 283.007881 300.38638 291.867869 
+C 293.932677 300.727858 286.123697 308.516431 277.246852 314.946928 
+C 268.370007 321.377426 258.535554 326.369976 248.105452 329.740827 
+C 237.675349 333.111679 226.779148 334.818962 215.817884 334.799841 
+C 204.85662 334.78072 193.966441 333.035432 183.548162 329.628213 
+C 173.129883 326.220993 163.312908 321.194163 154.458552 314.732735 
+C 145.604196 308.271307 137.822437 300.455537 131.399684 291.573087 
+C 124.976932 282.690637 119.992961 272.851833 116.631208 262.418794 
+C 113.269455 251.985756 111.571676 241.088069 111.600357 230.126826 
+C 111.629039 219.165583 113.383825 208.27693 116.80013 197.861627 
+L 151.006981 209.081756 
+C 148.768713 215.905575 147.619025 223.03952 147.600234 230.221024 
+C 147.581443 237.402528 148.693781 244.542392 150.896309 251.377831 
+C 153.098836 258.21327 156.364197 264.659383 160.572207 270.478919 
+C 164.780217 276.298455 169.878611 281.419132 175.679741 285.652481 
+C 181.480871 289.885831 187.912682 293.179272 194.738451 295.411588 
+C 201.56422 297.643904 208.699165 298.787368 215.880682 298.799896 
+C 223.0622 298.812423 230.201091 297.693858 237.034606 295.48537 
+C 243.868122 293.276881 250.311384 290.0059 256.127248 285.792815 
+C 261.943112 281.57973 267.05934 276.476872 271.287628 270.672052 
+C 275.515916 264.867232 278.803746 258.432551 281.030107 251.604838 
+C 283.256469 244.777124 284.39371 237.641185 284.399974 230.459659 
+C 284.406238 223.278133 283.281446 216.14022 281.066998 209.308634 
+C 278.85255 202.477047 275.57595 196.03664 271.357795 190.224453 
+C 267.139639 184.412266 262.032321 179.300491 256.223815 175.077268 
+C 250.415309 170.854044 243.977762 167.571828 237.14811 165.351422 
+C 230.318457 163.131017 223.181529 162 216 162 
+z
+" clip-path="url(#pcaa0ebd67b)" style="fill: #142554; stroke: #ffffff; stroke-width: 3; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 116.80013 197.861627 
+C 123.654989 176.96319 136.941646 158.755946 154.753148 145.853072 
+C 172.564649 132.950197 194.006052 126 216 126 
+L 216 162 
+C 201.590172 162 187.542356 166.553578 175.872752 175.007185 
+C 164.203148 183.460792 155.498096 195.389677 151.006981 209.081756 
+z
+" clip-path="url(#pcaa0ebd67b)" style="fill: url(#ha262017f08); stroke: #ffffff; stroke-width: 3; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 34.56 354.6 
+L 47.52 354.6 
+L 47.52 367.56 
+L 34.56 367.56 
+z
+" clip-path="url(#pcaa0ebd67b)" style="fill: #142554"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 34.56 381.24 
+L 47.52 381.24 
+L 47.52 394.2 
+L 34.56 394.2 
+z
+" clip-path="url(#pcaa0ebd67b)" style="fill: url(#he46a40fe69); stroke: #5b6070; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 278.514029 316.696175 
+L 286.96187 328.35782 
+" clip-path="url(#pcaa0ebd67b)" style="fill: none; stroke: #5b6070; stroke-width: 1.6; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 153.485971 144.103825 
+L 145.03813 132.44218 
+" clip-path="url(#pcaa0ebd67b)" style="fill: none; stroke: #5b6070; stroke-width: 1.6; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 34.56 405.72 
+L 397.44 405.72 
+" clip-path="url(#pcaa0ebd67b)" style="fill: none; stroke: #b8bbc6; stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #142554" x="30.24" y="43.2" transform="rotate(-0 30.24 43.2)">Who Funded Bird’s 2026</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #142554" x="30.24" y="66.24" transform="rotate(-0 30.24 66.24)">Campaign Cash?</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 9.72px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: start; fill: #5b6070" x="30.24" y="87.84" transform="rotate(-0 30.24 87.84)">Share of reported cash, Jan. 1–Oct. 14, 2026</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 8.64px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: start; fill: #5b6070" x="30.24" y="101.52" transform="rotate(-0 30.24 101.52)">Iowa Ethics and Campaign Disclosure Board, four consecutive reports</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 12.96px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: start; fill: #142554" x="291.28187" y="333.072273" transform="rotate(-0 291.28187 333.072273)">80.04%</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 12.96px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: end; fill: #23262e" x="140.71813" y="137.156633" transform="rotate(-0 140.71813 137.156633)">19.96%</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 16.56px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #142554" x="216" y="232.554009" transform="rotate(-0 216 232.554009)">$9,494,727.93</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 9.36px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: middle; fill: #5b6070" x="216" y="249.644883" transform="rotate(-0 216 249.644883)">total reported cash</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 11.88px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: start; fill: #23262e" x="54" y="365.4" transform="rotate(-0 54 365.4)">RAGA Action Fund</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 11.88px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: end; fill: #23262e" x="397.44" y="365.4" transform="rotate(-0 397.44 365.4)">80.04%  ·  $7,600,000.00</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 11.88px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: start; fill: #23262e" x="54" y="392.04" transform="rotate(-0 54 392.04)">All other cash</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 11.88px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: end; fill: #23262e" x="397.44" y="392.04" transform="rotate(-0 397.44 392.04)">19.96%  ·  $1,894,727.93</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 7.56px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: start; fill: #5b6070" x="34.56" y="420.84" transform="rotate(-0 34.56 420.84)">Source: Bird for Iowa (committee 5206) DR-2 reports to the IECDB, latest amended versions:</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 7.56px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: start; fill: #5b6070" x="34.56" y="431.424" transform="rotate(-0 34.56 431.424)">Jan. 1–May 14, May 15–26, May 27–July 14, July 15–Oct. 14, 2026. Schedule A cash only;</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 7.56px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: start; fill: #5b6070" x="34.56" y="442.008" transform="rotate(-0 34.56 442.008)">in-kind gifts, loans and outside spending excluded. The Schedule A total includes</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 7.56px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: start; fill: #5b6070" x="34.56" y="452.592" transform="rotate(-0 34.56 452.592)">$21,044.50 (0.22%) of bank interest and refunds the campaign reported there.</text>
+   </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 7.56px; font-family: 'Inter', 'DejaVu Sans'; text-anchor: start; fill: #142554" x="34.56" y="493.92" transform="rotate(-0 34.56 493.92)">Restoring Democracy’s Promise  ·  restoring-democracy.org</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pcaa0ebd67b">
+   <rect x="0" y="0" width="432" height="511.2"/>
+  </clipPath>
+ </defs>
+ <defs>
+  <pattern id="ha262017f08" patternUnits="userSpaceOnUse" x="0" y="0" width="72" height="72">
+   <rect x="0" y="0" width="73" height="73" fill="#b8bbc6"/>
+   <path d="M -36 36 
+L 36 -36 
+M -32 40 
+L 40 -32 
+M -28 44 
+L 44 -28 
+M -24 48 
+L 48 -24 
+M -20 52 
+L 52 -20 
+M -16 56 
+L 56 -16 
+M -12 60 
+L 60 -12 
+M -8 64 
+L 64 -8 
+M -4 68 
+L 68 -4 
+M 0 72 
+L 72 0 
+M 4 76 
+L 76 4 
+M 8 80 
+L 80 8 
+M 12 84 
+L 84 12 
+M 16 88 
+L 88 16 
+M 20 92 
+L 92 20 
+M 24 96 
+L 96 24 
+M 28 100 
+L 100 28 
+M 32 104 
+L 104 32 
+M 36 108 
+L 108 36 
+" style="fill: #ffffff; stroke: #ffffff; stroke-width: 1.2; stroke-linecap: butt; stroke-linejoin: miter"/>
+  </pattern>
+  <pattern id="he46a40fe69" patternUnits="userSpaceOnUse" x="0" y="0" width="72" height="72">
+   <rect x="0" y="0" width="73" height="73" fill="#b8bbc6"/>
+   <path d="M -36 36 
+L 36 -36 
+M -32 40 
+L 40 -32 
+M -28 44 
+L 44 -28 
+M -24 48 
+L 48 -24 
+M -20 52 
+L 52 -20 
+M -16 56 
+L 56 -16 
+M -12 60 
+L 60 -12 
+M -8 64 
+L 64 -8 
+M -4 68 
+L 68 -4 
+M 0 72 
+L 72 0 
+M 4 76 
+L 76 4 
+M 8 80 
+L 80 8 
+M 12 84 
+L 84 12 
+M 16 88 
+L 88 16 
+M 20 92 
+L 92 20 
+M 24 96 
+L 96 24 
+M 28 100 
+L 100 28 
+M 32 104 
+L 104 32 
+M 36 108 
+L 108 36 
+" style="fill: #5b6070; stroke: #5b6070; stroke-width: 1.2; stroke-linecap: butt; stroke-linejoin: miter"/>
+  </pattern>
+ </defs>
+</svg>
