@@ -2,6 +2,15 @@
   "source": "https://investigations.restoring-democracy.org/feed",
   "items": [
     {
+      "title": "Four of Every Five Dollars in Bird’s 2026 AG Campaign Come From RAGA",
+      "link": "https://investigations.restoring-democracy.org/p/four-of-every-five-dollars-in-birds",
+      "date": "2026-10-29",
+      "dateLabel": "Oct 29",
+      "sectionId": 95395,
+      "category": "National & State Elections",
+      "categorySource": "section"
+    },
+    {
       "title": "Justice Department Voter Data Reached ICE Before a Judge Ruled the Program Unlawful",
       "link": "https://investigations.restoring-democracy.org/p/justice-department-voter-data-reached",
       "date": "2026-10-15",
@@ -89,15 +98,6 @@
       "dateLabel": "Aug 24",
       "sectionId": 450386,
       "category": "Surveillance & Technology",
-      "categorySource": "section"
-    },
-    {
-      "title": "The Formula Behind the $25,000: What Iowa’s Next Governor Inherits",
-      "link": "https://investigations.restoring-democracy.org/p/the-formula-behind-the-25000-what",
-      "date": "2026-08-10",
-      "dateLabel": "Aug 10",
-      "sectionId": 450382,
-      "category": "Money and Institutions",
       "categorySource": "section"
     }
   ]
