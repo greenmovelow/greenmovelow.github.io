@@ -44,7 +44,7 @@ Surveillance
 
 Sept. 15, 2026
 
-RDP asked 13 central Iowa jurisdictions where they stand on automated license-plate readers. Waukee declined to renew Flock, Indianola suspended its program and deactivated eight cameras, West Des Moines recommitted, and Altoona’s network runs on more than one vendor and platform. None of the 13 municipal codes RDP searched contained an ALPR-specific ordinance.
+RDP asked 13 central Iowa jurisdictions where they stand on automated license-plate readers. Waukee declined to renew Flock, Indianola suspended its program and deactivated eight cameras, West Des Moines recommitted, and Altoona’s network runs on more than one vendor and platform. RDP located no ALPR-specific ordinance in the available codes and indexes it reviewed across 13 central Iowa jurisdictions.
 
 [Read the investigation →](https://investigations.restoring-democracy.org/p/who-decides-about-central-iowas-plate) [Explore the ALPR exhibit →](https://restoring-democracy.org/alpr-trap/)
 
