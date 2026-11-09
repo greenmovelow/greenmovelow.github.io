@@ -16,16 +16,6 @@ Independent investigative journalism based in Iowa, examining surveillance, immi
 
 ## Featured investigations
 
-Campaign finance
-
-### Bird Thanked Iowa; The Money Came From Washington
-
-June 7, 2026
-
-More than 80 percent of the money Attorney General Brenna Bird’s campaign reported for the pre-primary period came from one Washington-based super PAC.
-
-[Read the investigation →](https://investigations.restoring-democracy.org/p/bird-thanked-iowa-the-money-came) [See the money trail →](https://restoring-democracy.org/infographics/bird-raga-money-trail/)
-
 Public pensions
 
 ### Iowa’s pension proposal
@@ -38,15 +28,25 @@ Disclosure: On Nov. 8, 2025, RDP filed its own [memorandum of concern](https://i
 
 [Read the investigation →](https://investigations.restoring-democracy.org/p/exclusive-doge-pension-privatize) [Explore the interactive version →](https://restoring-democracy.org/iowa-doge-pension-privatize/)
 
-Education
+SAVE / identity systems
 
-### The DEI Hoax
+### Inside Iowa’s SAVE Clearinghouse
 
-Nov. 7, 2025
+Sept. 5, 2026
 
-On July 29, 2025, Attorney General Brenna Bird announced an investigation of University of Iowa diversity, equity and inclusion (DEI) programs within six hours of a video’s release. Reviewing public releases and reporting through Nov. 7, RDP found no follow-up report or filing.
+Records released to RDP show Iowa’s licensing agency ran 16,457 SAVE verifications from December 2025 through Aug. 11, 2026, under a December MOA with USCIS covering roughly 200 license types. DIAL told RDP on Sept. 4 that no license had been denied on a SAVE response; a July sworn federal-court declaration said more than 350 licenses could not be verified and therefore could not be issued.
 
-[Read the investigation →](https://investigations.restoring-democracy.org/p/the-dei-hoax-iowas-attorney-general)
+[Read the investigation →](https://investigations.restoring-democracy.org/p/inside-iowas-save-clearinghouse-what) [Explore The Standing Query →](https://restoring-democracy.org/infographics/standing-query/)
+
+Surveillance
+
+### Who Decides the Future of Central Iowa’s Plate Readers?
+
+Sept. 15, 2026
+
+RDP asked 13 central Iowa jurisdictions where they stand on automated license-plate readers. Waukee declined to renew Flock, Indianola suspended its program and deactivated eight cameras, West Des Moines recommitted, and Altoona’s network runs on more than one vendor and platform. None of the 13 municipal codes RDP searched contained an ALPR-specific ordinance.
+
+[Read the investigation →](https://investigations.restoring-democracy.org/p/who-decides-about-central-iowas-plate) [Explore the ALPR exhibit →](https://restoring-democracy.org/alpr-trap/)
 
 Our major investigations and their interactive exhibits are collected on the [Key Investigations](https://restoring-democracy.org/journalism/) page.
 
