@@ -340,49 +340,156 @@ html { scroll-padding-top: 68px; }
   .reveal { opacity: 1 !important; transform: none !important; }
 }
 
-/* CLS protection — metric-matched local fallbacks for self-hosted brand fonts.
-   Match average glyph advance + line box while font-display:swap loads the web fonts.
-   Inter/Arial (next/font metrics), Lora/Georgia (Capsize comparison). */
+/* CLS protection — metric-matched local fallbacks for the self-hosted brand fonts.
+   While font-display:swap loads Inter and Lora, text is set in a local font scaled to the
+   same average advance (size-adjust) and line box (ascent/descent overrides), so lines do
+   not re-wrap or move when the web fonts arrive. Each family below resolves only where its
+   local font exists; the first one available wins:
+     Arial / Liberation Sans (metric-compatible) — Windows, macOS, iOS, most Linux
+     Georgia                                      — Windows, macOS, iOS
+     Roboto / Noto Serif                          — Android, ChromeOS
+     DejaVu                                       — other Linux
+   Inter and Liberation/Roboto/Noto/DejaVu values were measured in Chrome against this page's
+   own copy (canvas advance widths and font-box ascent/descent of the woff2 files in
+   /assets/fonts) for each weight pair actually rendered: Inter 400 -> Regular, Inter 600 and
+   700 -> Bold, Lora 400 -> Regular, Lora 700 -> Bold. Overrides = web-font metric / size-adjust.
+   Georgia keeps the earlier Capsize-derived values (not measurable without the font).
+   unicode-range = the exact character coverage of the self-hosted Inter/Lora files, so these
+   faces only stand in for brand-font glyphs; characters the brand fonts lack (arrows such as
+   U+2192, U+2197) keep falling through to the system font, as they did before. */
+
 @font-face {
   font-family: 'Inter Metric Fallback';
-  src: local('Arial');
-  font-weight: 400 600;
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans');
+  font-weight: 400 500;
   font-style: normal;
-  size-adjust: 107.12%;
-  ascent-override: 90.44%;
-  descent-override: 22.52%;
+  size-adjust: 106.23%;
+  ascent-override: 91.31%;
+  descent-override: 22.59%;
   line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
 }
+
 @font-face {
   font-family: 'Inter Metric Fallback';
-  src: local('Arial Bold');
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  font-weight: 600;
+  font-style: normal;
+  size-adjust: 100.19%;
+  ascent-override: 96.82%;
+  descent-override: 23.95%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
+}
+
+@font-face {
+  font-family: 'Inter Metric Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
   font-weight: 700;
   font-style: normal;
-  size-adjust: 107.12%;
-  ascent-override: 90.44%;
-  descent-override: 22.52%;
+  size-adjust: 101.22%;
+  ascent-override: 95.83%;
+  descent-override: 23.71%;
   line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
 }
+
 @font-face {
   font-family: 'Inter Metric Fallback';
-  src: local('Arial Italic');
-  font-weight: 400 600;
+  src: local('Arial Italic'), local('Arial-ItalicMT'), local('Liberation Sans Italic'), local('LiberationSans-Italic');
+  font-weight: 400 500;
   font-style: italic;
-  size-adjust: 107.12%;
-  ascent-override: 90.44%;
-  descent-override: 22.52%;
+  size-adjust: 106.23%;
+  ascent-override: 91.31%;
+  descent-override: 22.59%;
   line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
 }
+
 @font-face {
   font-family: 'Inter Metric Fallback';
-  src: local('Arial Bold Italic');
+  src: local('Arial Bold Italic'), local('Arial-BoldItalicMT'), local('Liberation Sans Bold Italic'), local('LiberationSans-BoldItalic');
+  font-weight: 600 700;
+  font-style: italic;
+  size-adjust: 101.22%;
+  ascent-override: 95.83%;
+  descent-override: 23.71%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
+}
+
+@font-face {
+  font-family: 'Inter Fallback Roboto';
+  src: local('Roboto'), local('Roboto Regular'), local('Roboto-Regular');
+  font-weight: 400 500;
+  font-style: normal;
+  size-adjust: 107.12%;
+  ascent-override: 90.55%;
+  descent-override: 22.40%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
+}
+
+@font-face {
+  font-family: 'Inter Fallback Roboto';
+  src: local('Roboto Bold'), local('Roboto-Bold');
+  font-weight: 600;
+  font-style: normal;
+  size-adjust: 109.55%;
+  ascent-override: 88.55%;
+  descent-override: 21.91%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
+}
+
+@font-face {
+  font-family: 'Inter Fallback Roboto';
+  src: local('Roboto Bold'), local('Roboto-Bold');
   font-weight: 700;
-  font-style: italic;
-  size-adjust: 107.12%;
-  ascent-override: 90.44%;
-  descent-override: 22.52%;
+  font-style: normal;
+  size-adjust: 108.85%;
+  ascent-override: 89.11%;
+  descent-override: 22.05%;
   line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
 }
+
+@font-face {
+  font-family: 'Inter Fallback DejaVu';
+  src: local('DejaVu Sans'), local('DejaVuSans');
+  font-weight: 400 500;
+  font-style: normal;
+  size-adjust: 94.17%;
+  ascent-override: 103.00%;
+  descent-override: 25.49%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
+}
+
+@font-face {
+  font-family: 'Inter Fallback DejaVu';
+  src: local('DejaVu Sans Bold'), local('DejaVuSans-Bold');
+  font-weight: 600;
+  font-style: normal;
+  size-adjust: 86.12%;
+  ascent-override: 112.63%;
+  descent-override: 27.87%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
+}
+
+@font-face {
+  font-family: 'Inter Fallback DejaVu';
+  src: local('DejaVu Sans Bold'), local('DejaVuSans-Bold');
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 86.81%;
+  ascent-override: 111.74%;
+  descent-override: 27.65%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2002, U+2009, U+200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
+}
+
 @font-face {
   font-family: 'Lora Metric Fallback';
   src: local('Georgia');
@@ -392,54 +499,120 @@ html { scroll-padding-top: 68px; }
   ascent-override: 95.11%;
   descent-override: 25.90%;
   line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+2215;
 }
+
 @font-face {
   font-family: 'Lora Metric Fallback';
-  src: local('Georgia Bold');
+  src: local('Georgia Bold'), local('Georgia-Bold');
   font-weight: 700;
   font-style: normal;
   size-adjust: 105.77%;
   ascent-override: 95.11%;
   descent-override: 25.90%;
   line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+2215;
 }
+
 @font-face {
   font-family: 'Lora Metric Fallback';
-  src: local('Georgia Italic');
+  src: local('Georgia Italic'), local('Georgia-Italic');
   font-weight: 400 600;
   font-style: italic;
   size-adjust: 105.77%;
   ascent-override: 95.11%;
   descent-override: 25.90%;
   line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+2215;
 }
+
 @font-face {
   font-family: 'Lora Metric Fallback';
-  src: local('Georgia Bold Italic');
+  src: local('Georgia Bold Italic'), local('Georgia-BoldItalic');
   font-weight: 700;
   font-style: italic;
   size-adjust: 105.77%;
   ascent-override: 95.11%;
   descent-override: 25.90%;
   line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+2215;
 }
+
+@font-face {
+  font-family: 'Lora Fallback Noto';
+  src: local('Noto Serif'), local('Noto Serif Regular'), local('NotoSerif-Regular');
+  font-weight: 400 600;
+  font-style: normal;
+  size-adjust: 97.62%;
+  ascent-override: 103.47%;
+  descent-override: 27.66%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Lora Fallback Noto';
+  src: local('Noto Serif Bold'), local('NotoSerif-Bold');
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 94.61%;
+  ascent-override: 106.76%;
+  descent-override: 28.54%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Lora Fallback Liberation';
+  src: local('Liberation Serif'), local('LiberationSerif');
+  font-weight: 400 600;
+  font-style: normal;
+  size-adjust: 114.35%;
+  ascent-override: 88.33%;
+  descent-override: 23.61%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Lora Fallback Liberation';
+  src: local('Liberation Serif Bold'), local('LiberationSerif-Bold');
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 110.58%;
+  ascent-override: 91.33%;
+  descent-override: 24.42%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Lora Fallback DejaVu';
+  src: local('DejaVu Serif'), local('DejaVuSerif');
+  font-weight: 400 600;
+  font-style: normal;
+  size-adjust: 90.37%;
+  ascent-override: 111.77%;
+  descent-override: 29.88%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Lora Fallback DejaVu';
+  src: local('DejaVu Serif Bold'), local('DejaVuSerif-Bold');
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 84.64%;
+  ascent-override: 119.32%;
+  descent-override: 31.90%;
+  line-gap-override: 0%;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00FF, U+0102, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2032-2033, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+2215;
+}
+
 html, .font-sans {
-  font-family: 'Inter', 'Inter Metric Fallback', system-ui, sans-serif;
+  font-family: 'Inter', 'Inter Metric Fallback', 'Inter Fallback Roboto', 'Inter Fallback DejaVu', system-ui, sans-serif;
 }
 .font-serif {
-  font-family: 'Lora', 'Lora Metric Fallback', Georgia, serif;
+  font-family: 'Lora', 'Lora Metric Fallback', 'Lora Fallback Noto', 'Lora Fallback Liberation', 'Lora Fallback DejaVu', Georgia, serif;
 }
-
-/* The 11-row newsroom feed replaces a one-line network fallback.
-   Reserve only when JS is active; the fallback is unreserved on error or with JS disabled.
-   Values include the longest current three-line headlines at 390px. */
-@media (min-width: 480px) and (max-width: 767px) {
-  .feed-reserved #latest-feed { min-height: 53rem; }
-}
-@media (min-width: 360px) and (max-width: 479px) {
-  .feed-reserved #latest-feed { min-height: 60rem; }
-}
-@media (max-width: 359px) {
-  .feed-reserved #latest-feed { min-height: 68rem; }
-}
-

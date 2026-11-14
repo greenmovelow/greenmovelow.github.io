@@ -7,6 +7,9 @@ on:
       - scripts/test_latest_investigations.py
       - .github/workflows/latest-investigations.yml
       - .github/workflows/latest-feed-check.yml
+      - scripts/test_latest_feed_render.js
+      - index.html
+      - latest-investigations.json
   push:
     branches: [main]
     paths:
@@ -14,6 +17,9 @@ on:
       - scripts/test_latest_investigations.py
       - .github/workflows/latest-investigations.yml
       - .github/workflows/latest-feed-check.yml
+      - scripts/test_latest_feed_render.js
+      - index.html
+      - latest-investigations.json
 
 permissions:
   contents: read
@@ -27,3 +33,9 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m unittest discover -s scripts -p 'test_latest_investigations.py'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:feed
