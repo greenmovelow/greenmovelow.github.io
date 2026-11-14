@@ -72,7 +72,13 @@ The same run renders those items into the homepage's `#latest-feed` block in
 commits both files together, so the list is part of the initial HTML: it does
 not shift the page when it loads, and it is readable without JavaScript. In the
 browser, a small script refreshes the rows from `/latest-investigations.json`
-only when that file is newer than the cached HTML. Do not edit the generated
+only when that file is newer than the cached HTML. "Newer" is decided by a feed
+revision (the UTC time the importer generated the feed, e.g.
+`2026-11-14T03:00:00Z`) stored as `"revision"` in the JSON and as
+`data-feed-revision` on `#latest-feed`. It changes only when the items change,
+never moves backwards, and an older, equal, missing, or malformed revision never
+replaces the rows on the page, so a stale cached JSON cannot undo a newer
+homepage. Do not edit the generated
 block by hand; to re-render it from the committed JSON without network access,
 run `python scripts/build_latest_investigations.py --render-only`. If the
 markers are missing, the importer fails without changing either file.

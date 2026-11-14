@@ -16,6 +16,12 @@ Security posture:
   HTML: no layout shift when it loads, and readable without JavaScript. The
   markup mirrors the homepage refresh script; scripts/test_latest_feed_render.js
   checks that the two stay identical.
+- Stamps a feed revision (UTC generation time, "YYYY-MM-DDTHH:MM:SSZ") into
+  both the JSON ("revision") and the homepage (#latest-feed
+  data-feed-revision). It changes only when the items change, always moves
+  forward, and reflects build order rather than article dates. The browser
+  replaces the pre-rendered rows only with a JSON whose revision is newer, so
+  a stale cached JSON can never overwrite newer HTML.
 
 Run from the repository root:  python scripts/build_latest_investigations.py
 Re-render the homepage block from the committed JSON (no network):
@@ -29,7 +35,7 @@ import json
 import re
 import sys
 import xml.etree.ElementTree as ET
-from datetime import timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
@@ -61,6 +67,10 @@ FEED_BLOCK_RE = re.compile(
     r"(?P<start>[ \t]*<!-- latest-feed:start\b[^\n]*-->\n)(?P<body>.*?)(?P<end>[ \t]*<!-- latest-feed:end -->)",
     re.DOTALL,
 )
+FEED_LIST_RE = re.compile(r'<div id="latest-feed"(?P<attrs>[^>]*)>')
+FEED_REVISION_ATTR_RE = re.compile(r'\s+data-feed-revision="[^"]*"')
+REVISION_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+REVISION_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\Z")
 FEED_FALLBACK_HTML = (
     '<p class="py-2.5 text-sm text-brand-sand">'
     "Read the latest reporting in the investigations archive below.</p>"
@@ -197,6 +207,33 @@ def is_supporting_material(title: str, link: str) -> bool:
     )
 
 
+def parse_revision(value) -> datetime | None:
+    """Return the revision as an aware UTC datetime, or None if missing/malformed."""
+    if not isinstance(value, str) or not REVISION_RE.fullmatch(value):
+        return None
+    try:
+        return datetime.strptime(value, REVISION_FORMAT).replace(tzinfo=timezone.utc)
+    except ValueError:
+        return None
+
+
+def utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def next_revision(previous) -> str:
+    """A revision strictly later than the previous one, normally the current UTC second.
+
+    Monotonic even if the runner clock lags the last build, so build order is
+    always preserved.
+    """
+    now = utc_now().replace(microsecond=0)
+    last = parse_revision(previous)
+    if last is not None and now <= last:
+        now = last + timedelta(seconds=1)
+    return now.strftime(REVISION_FORMAT)
+
+
 def _attr(value: str) -> str:
     return html.escape(value, quote=True)
 
@@ -238,30 +275,44 @@ def render_feed_html(items) -> str:
     return FEED_COLUMNS_HTML + "".join(rows)
 
 
-def sync_homepage(items) -> bool:
-    """Write rendered rows between the homepage markers. Returns True if changed.
+def sync_homepage(items, revision: str) -> bool:
+    """Write rendered rows and their revision into the homepage. Returns True if changed.
 
-    Raises ValueError when the markers are missing or duplicated, so a template
-    change can never silently drop the feed.
+    Raises ValueError when the markers or the #latest-feed element are missing
+    or duplicated, or the revision is malformed, so a template change can never
+    silently drop the feed.
     """
+    if parse_revision(revision) is None:
+        raise ValueError(f"invalid feed revision {revision!r}")
     page = HOMEPAGE.read_text(encoding="utf-8")
     matches = list(FEED_BLOCK_RE.finditer(page))
     if len(matches) != 1:
         raise ValueError(f"{HOMEPAGE} must contain exactly one latest-feed:start/end block")
-    match = matches[0]
+    lists = list(FEED_LIST_RE.finditer(page))
+    if len(lists) != 1 or lists[0].end() > matches[0].start():
+        raise ValueError(f'{HOMEPAGE} must contain one <div id="latest-feed"> enclosing the feed block')
+    match, feed_list = matches[0], lists[0]
     indent = re.match(r"[ \t]*", match.group("end")).group(0)
     body = indent + render_feed_html(items) + "\n"
-    if match.group("body") == body:
+    attrs = FEED_REVISION_ATTR_RE.sub("", feed_list.group("attrs"))
+    opening = f'<div id="latest-feed" data-feed-revision="{revision}"{attrs}>'
+    updated = (
+        page[: feed_list.start()] + opening + page[feed_list.end() : match.start("body")]
+        + body + page[match.end("body") :]
+    )
+    if updated == page:
         return False
-    HOMEPAGE.write_text(page[: match.start("body")] + body + page[match.end("body") :], encoding="utf-8")
+    HOMEPAGE.write_text(updated, encoding="utf-8")
     return True
 
 
 def render_only() -> int:
-    """Re-render the homepage block from the committed JSON without network access."""
+    """Re-render the homepage block from the committed JSON and its revision, without network access."""
     try:
         data = json.loads(OUTPUT.read_text(encoding="utf-8"))
-        changed = sync_homepage(data.get("items", []) if isinstance(data, dict) else [])
+        if not isinstance(data, dict):
+            raise ValueError(f"{OUTPUT} is not a feed object")
+        changed = sync_homepage(data.get("items", []), data.get("revision"))
     except (OSError, ValueError) as exc:
         print(f"Homepage feed render failed: {exc}", file=sys.stderr)
         return 1
@@ -269,9 +320,9 @@ def render_only() -> int:
     return 0
 
 
-def write_homepage(items) -> int:
+def write_homepage(items, revision: str) -> int:
     try:
-        changed = sync_homepage(items)
+        changed = sync_homepage(items, revision)
     except (OSError, ValueError) as exc:
         print(f"Homepage feed render failed: {exc}", file=sys.stderr)
         return 1
@@ -363,17 +414,20 @@ def main() -> int:
     for item in items:
         enrich_item(item, sections, previous.get(item["link"], {}))
 
-    if existing.get("items") == items:
+    previous_revision = existing.get("revision")
+    if existing.get("items") == items and parse_revision(previous_revision) is not None:
         print("Feed unchanged; nothing to write.")
-        # Still repair a homepage block that drifted from the JSON.
-        return write_homepage(items)
+        # Keep the revision; still repair a homepage block that drifted from the JSON.
+        return write_homepage(items, previous_revision)
 
-    # Render the homepage first: if its markers are missing, fail before the
-    # JSON changes so the two committed files never disagree.
-    status = write_homepage(items)
+    # New or corrected items (or a legacy file without a revision): stamp a
+    # newer revision. Render the homepage first: if its markers are missing,
+    # fail before the JSON changes so the two committed files never disagree.
+    revision = next_revision(previous_revision)
+    status = write_homepage(items, revision)
     if status:
         return status
-    payload = {"source": FEED_URL, "items": items}
+    payload = {"source": FEED_URL, "revision": revision, "items": items}
     OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {OUTPUT} with {len(items)} items.")
     return 0

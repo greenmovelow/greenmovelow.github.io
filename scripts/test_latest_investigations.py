@@ -6,6 +6,7 @@ import json
 import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
+from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
 
@@ -69,8 +70,21 @@ class FeedTests(unittest.TestCase):
             "categorySource": "section",
         }
 
-    def seed(self, items):
-        self.output.write_text(json.dumps({"source": feed.FEED_URL, "items": items}) + "\n")
+    def seed(self, items, revision=None):
+        data = {"source": feed.FEED_URL, "items": items}
+        if revision is not None:
+            data["revision"] = revision
+        self.output.write_text(json.dumps(data) + "\n")
+
+    def at(self, stamp):
+        """Freeze the builder's clock at an ISO UTC time."""
+        frozen = datetime.strptime(stamp, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        clock = patch.object(feed, "utc_now", return_value=frozen)
+        clock.start()
+        self.addCleanup(clock.stop)
+
+    def page_revision(self):
+        return feed.FEED_LIST_RE.search(self.homepage.read_text(encoding="utf-8")).group("attrs")
 
     def run_build(self, raw=None, home=None, posts=None):
         calls = []
@@ -271,12 +285,94 @@ class FeedTests(unittest.TestCase):
         for empty in ([], None, [{"title": "x", "link": "https://example.com/p/x"}]):
             self.assertEqual(feed.render_feed_html(empty), feed.FEED_FALLBACK_HTML)
 
-    def test_render_only_uses_committed_json_without_network(self):
-        self.seed([self.previous()])
+    def render_only(self):
         with patch.object(feed, "fetch_text", side_effect=AssertionError("network used")), \
-                patch.object(feed.sys, "argv", ["build", "--render-only"]), redirect_stdout(io.StringIO()):
-            self.assertEqual(feed.main(), 0)
-        self.assertIn("/p/supreme-court", self.homepage.read_text(encoding="utf-8"))
+                patch.object(feed, "utc_now", side_effect=AssertionError("clock used")), \
+                patch.object(feed.sys, "argv", ["build", "--render-only"]), \
+                redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+            return feed.main()
+
+    def test_render_only_uses_committed_json_and_revision_without_network(self):
+        self.seed([self.previous()], revision="2026-10-29T01:02:21Z")
+        json_before = self.output.read_bytes()
+        self.assertEqual(self.render_only(), 0)
+        page = self.homepage.read_text(encoding="utf-8")
+        self.assertIn("/p/supreme-court", page)
+        self.assertIn('data-feed-revision="2026-10-29T01:02:21Z"', page)
+        self.assertEqual(self.output.read_bytes(), json_before)
+        before = self.homepage.stat().st_mtime_ns
+        self.assertEqual(self.render_only(), 0)
+        self.assertEqual(self.homepage.stat().st_mtime_ns, before)
+
+    def test_render_only_refuses_json_without_a_valid_revision(self):
+        for revision in (None, "", "2026-10-29", "2026-10-29T01:02:21+00:00", "2026-13-40T99:99:99Z", 1730163741):
+            with self.subTest(revision=revision):
+                self.seed([self.previous()], revision=revision)
+                self.assertEqual(self.render_only(), 1)
+                self.assertEqual(self.homepage.read_text(encoding="utf-8"), HOMEPAGE_TEMPLATE)
+
+    # Feed revision: one shared, monotonic generation stamp for JSON and HTML.
+
+    def test_new_feed_stamps_the_same_revision_into_json_and_homepage(self):
+        self.at("2026-11-14T03:00:00Z")
+        _, data, _ = self.run_build()
+        self.assertEqual(data["revision"], "2026-11-14T03:00:00Z")
+        self.assertIn('data-feed-revision="2026-11-14T03:00:00Z"', self.page_revision())
+
+    def test_unchanged_build_keeps_revision_and_rewrites_nothing(self):
+        self.at("2026-11-14T03:00:00Z")
+        self.run_build()
+        json_before, page_before = self.output.read_bytes(), self.homepage.read_bytes()
+        mtimes = (self.output.stat().st_mtime_ns, self.homepage.stat().st_mtime_ns)
+        self.at("2026-11-14T06:00:00Z")  # next scheduled run, same content
+        code, data, _ = self.run_build()
+        self.assertEqual(code, 0)
+        self.assertEqual(data["revision"], "2026-11-14T03:00:00Z")
+        self.assertEqual((self.output.read_bytes(), self.homepage.read_bytes()), (json_before, page_before))
+        self.assertEqual((self.output.stat().st_mtime_ns, self.homepage.stat().st_mtime_ns), mtimes)
+
+    def test_corrected_headline_gets_a_newer_revision(self):
+        self.seed([self.previous()], revision="2026-11-14T03:00:00Z")
+        self.at("2026-11-14T06:00:00Z")
+        _, data, _ = self.run_build(raw=rss(["supreme-court"]).replace(">supreme-court<", ">supreme-court (corrected)<"))
+        self.assertEqual(data["items"][0]["title"], "supreme-court (corrected)")
+        self.assertEqual(data["revision"], "2026-11-14T06:00:00Z")
+        self.assertIn('data-feed-revision="2026-11-14T06:00:00Z"', self.page_revision())
+
+    def test_revision_follows_build_order_not_article_dates(self):
+        # The RSS item is dated 2026-09-26; the revision is when the build ran.
+        self.at("2026-11-14T03:00:00Z")
+        _, data, _ = self.run_build()
+        self.assertEqual(data["items"][0]["date"], "2026-09-26")
+        self.assertEqual(data["revision"], "2026-11-14T03:00:00Z")
+
+    def test_revision_never_moves_backwards_when_the_runner_clock_lags(self):
+        self.seed([self.previous(slug="older")], revision="2026-11-14T03:00:00Z")
+        self.at("2026-11-14T02:00:00Z")
+        _, data, _ = self.run_build()
+        self.assertEqual(data["revision"], "2026-11-14T03:00:01Z")
+
+    def test_legacy_json_without_revision_gets_one_once(self):
+        self.seed([self.previous()])  # same items as the feed, no revision
+        self.at("2026-11-14T03:00:00Z")
+        _, data, _ = self.run_build()
+        self.assertEqual(data["revision"], "2026-11-14T03:00:00Z")
+        self.at("2026-11-14T06:00:00Z")
+        _, data, _ = self.run_build()
+        self.assertEqual(data["revision"], "2026-11-14T03:00:00Z")
+
+    def test_homepage_without_feed_list_element_fails_closed(self):
+        page = HOMEPAGE_TEMPLATE.replace('<div id="latest-feed">', '<div id="other">')
+        self.homepage.write_text(page, encoding="utf-8")
+        code, data, _ = self.run_build()
+        self.assertEqual(code, 1)
+        self.assertIsNone(data)
+        self.assertEqual(self.homepage.read_text(encoding="utf-8"), page)
+
+    def test_sync_rejects_malformed_revision(self):
+        with self.assertRaises(ValueError):
+            feed.sync_homepage([self.previous()], "not-a-revision")
+        self.assertEqual(self.homepage.read_text(encoding="utf-8"), HOMEPAGE_TEMPLATE)
 
 
 class CommittedHomepageTests(unittest.TestCase):
@@ -287,6 +383,8 @@ class CommittedHomepageTests(unittest.TestCase):
         matches = list(feed.FEED_BLOCK_RE.finditer(page))
         self.assertEqual(len(matches), 1)
         self.assertEqual(matches[0].group("body").strip(), feed.render_feed_html(data["items"]))
+        self.assertIsNotNone(feed.parse_revision(data.get("revision")))
+        self.assertIn(f'data-feed-revision="{data["revision"]}"', feed.FEED_LIST_RE.search(page).group(0))
 
 
 if __name__ == "__main__":
