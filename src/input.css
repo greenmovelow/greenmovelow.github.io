@@ -339,3 +339,107 @@ html { scroll-padding-top: 68px; }
   .hero-section { background: #24473e !important; }
   .reveal { opacity: 1 !important; transform: none !important; }
 }
+
+/* CLS protection — metric-matched local fallbacks for self-hosted brand fonts.
+   Match average glyph advance + line box while font-display:swap loads the web fonts.
+   Inter/Arial (next/font metrics), Lora/Georgia (Capsize comparison). */
+@font-face {
+  font-family: 'Inter Metric Fallback';
+  src: local('Arial');
+  font-weight: 400 600;
+  font-style: normal;
+  size-adjust: 107.12%;
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Inter Metric Fallback';
+  src: local('Arial Bold');
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 107.12%;
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Inter Metric Fallback';
+  src: local('Arial Italic');
+  font-weight: 400 600;
+  font-style: italic;
+  size-adjust: 107.12%;
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Inter Metric Fallback';
+  src: local('Arial Bold Italic');
+  font-weight: 700;
+  font-style: italic;
+  size-adjust: 107.12%;
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Lora Metric Fallback';
+  src: local('Georgia');
+  font-weight: 400 600;
+  font-style: normal;
+  size-adjust: 105.77%;
+  ascent-override: 95.11%;
+  descent-override: 25.90%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Lora Metric Fallback';
+  src: local('Georgia Bold');
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 105.77%;
+  ascent-override: 95.11%;
+  descent-override: 25.90%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Lora Metric Fallback';
+  src: local('Georgia Italic');
+  font-weight: 400 600;
+  font-style: italic;
+  size-adjust: 105.77%;
+  ascent-override: 95.11%;
+  descent-override: 25.90%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Lora Metric Fallback';
+  src: local('Georgia Bold Italic');
+  font-weight: 700;
+  font-style: italic;
+  size-adjust: 105.77%;
+  ascent-override: 95.11%;
+  descent-override: 25.90%;
+  line-gap-override: 0%;
+}
+html, .font-sans {
+  font-family: 'Inter', 'Inter Metric Fallback', system-ui, sans-serif;
+}
+.font-serif {
+  font-family: 'Lora', 'Lora Metric Fallback', Georgia, serif;
+}
+
+/* The 11-row newsroom feed replaces a one-line network fallback.
+   Reserve only when JS is active; the fallback is unreserved on error or with JS disabled.
+   Values include the longest current three-line headlines at 390px. */
+@media (min-width: 480px) and (max-width: 767px) {
+  .feed-reserved #latest-feed { min-height: 53rem; }
+}
+@media (min-width: 360px) and (max-width: 479px) {
+  .feed-reserved #latest-feed { min-height: 60rem; }
+}
+@media (max-width: 359px) {
+  .feed-reserved #latest-feed { min-height: 68rem; }
+}
+
