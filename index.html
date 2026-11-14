@@ -11,9 +11,6 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Reserve the async homepage feed only when JavaScript is enabled.
-       This runs before the stylesheet and the first render. -->
-  <script>document.documentElement.classList.add('feed-reserved');</script>
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -250,15 +247,18 @@
 
     <!-- ══════════════════════════════════════════
          LATEST INVESTIGATIONS
-         #latest-feed is replaced by the renderer below. The archive link
-         sits outside it so it survives both success and failure.
+         #latest-feed is pre-rendered at build time and refreshed by the
+         script below only when the JSON is newer. The archive link sits
+         outside it so it survives both success and failure.
     ══════════════════════════════════════════ -->
     <section id="latest" class="bg-brand-offblack border-b border-brand-gold/15" aria-label="Latest publications">
       <div class="max-w-5xl mx-auto px-4 py-8 md:py-10">
         <h2 class="font-serif text-2xl md:text-3xl font-bold text-brand-gold mb-5">Latest Investigations</h2>
         <p id="feed-status" class="sr-only" role="status"></p>
         <div id="latest-feed" class="min-w-0 divide-y divide-white/5">
-          <p class="py-2.5 text-sm text-brand-sand">Read the latest reporting in the investigations archive below.</p>
+          <!-- latest-feed:start — generated from latest-investigations.json by scripts/build_latest_investigations.py; do not edit by hand -->
+          <div class="feed-columns" aria-hidden="true"><span>Date</span><span>Publication</span><span>Category</span></div><a href="https://investigations.restoring-democracy.org/p/four-of-every-five-dollars-in-birds" target="_blank" rel="noopener noreferrer" class="feed-item feed-row feed-lead py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-10-29">Oct 29</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">Four of Every Five Dollars in Bird’s 2026 AG Campaign Come From RAGA</span><span class="feed-category"><span class="sr-only">Category: </span>National &amp; State Elections</span></a><a href="https://investigations.restoring-democracy.org/p/justice-department-voter-data-reached" target="_blank" rel="noopener noreferrer" class="feed-item feed-row py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-10-15">Oct 15</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">Justice Department Voter Data Reached ICE Before a Judge Ruled the Program Unlawful</span><span class="feed-category"><span class="sr-only">Category: </span>Voting Rights &amp; Election Systems</span></a><a href="https://investigations.restoring-democracy.org/p/court-vacates-doj-voter-list-policy" target="_blank" rel="noopener noreferrer" class="feed-item feed-row py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-10-15">Oct 15</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">Court Vacates DOJ Voter List Policy, Leaving Iowa File’s Fate Unresolved</span><span class="feed-category"><span class="sr-only">Category: </span>Voting Rights &amp; Election Systems</span></a><a href="https://investigations.restoring-democracy.org/p/hinsons-campaign-took-24500-from" target="_blank" rel="noopener noreferrer" class="feed-item feed-row py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-10-04">Oct 4</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">Hinson’s campaign took $24,500 from detention companies’ PACs and their CEOs</span><span class="feed-category"><span class="sr-only">Category: </span>National &amp; State Elections</span></a><a href="https://investigations.restoring-democracy.org/p/the-supreme-court-put-save-back-in" target="_blank" rel="noopener noreferrer" class="feed-item feed-row py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-09-26">Sep 26</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">The Supreme Court Put SAVE Back in Play</span><span class="feed-category"><span class="sr-only">Category: </span>Voting Rights &amp; Election Systems</span></a><a href="https://investigations.restoring-democracy.org/p/des-moines-expanded-plate-reader" target="_blank" rel="noopener noreferrer" class="feed-item feed-row py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-09-20">Sep 20</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">Des Moines Expanded Plate Reader Use, Then Asked What to Cut</span><span class="feed-category"><span class="sr-only">Category: </span>Surveillance &amp; Technology</span></a><a href="https://investigations.restoring-democracy.org/p/who-decides-about-central-iowas-plate" target="_blank" rel="noopener noreferrer" class="feed-item feed-row py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-09-15">Sep 15</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">Who Decides the Future of Central Iowa’s Plate Readers?</span><span class="feed-category"><span class="sr-only">Category: </span>Surveillance &amp; Technology</span></a><a href="https://investigations.restoring-democracy.org/p/altoonas-plate-reader-network-goes" target="_blank" rel="noopener noreferrer" class="feed-item feed-row py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-09-14">Sep 14</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">Altoona&#x27;s Plate Reader Network Goes Beyond Flock</span><span class="feed-category"><span class="sr-only">Category: </span>Surveillance &amp; Technology</span></a><a href="https://investigations.restoring-democracy.org/p/inside-iowas-save-clearinghouse-what" target="_blank" rel="noopener noreferrer" class="feed-item feed-row py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-09-05">Sep 5</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">Inside Iowa’s SAVE Clearinghouse: What the State’s Own Records Show</span><span class="feed-category"><span class="sr-only">Category: </span>Civil Liberties</span></a><a href="https://investigations.restoring-democracy.org/p/as-public-pressure-mounts-west-des" target="_blank" rel="noopener noreferrer" class="feed-item feed-row py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-08-27">Aug 27</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">As Public Pressure Mounts, West Des Moines Defends Its Flock Network</span><span class="feed-category"><span class="sr-only">Category: </span>Surveillance &amp; Technology</span></a><a href="https://investigations.restoring-democracy.org/p/signed-and-filed-dallas-county-says" target="_blank" rel="noopener noreferrer" class="feed-item feed-row py-2.5 rounded group"><time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="2026-08-24">Aug 24</time><span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">Signed and Filed. Dallas County Says Its Plate-Reader Deal Isn’t in Effect</span><span class="feed-category"><span class="sr-only">Category: </span>Surveillance &amp; Technology</span></a>
+          <!-- latest-feed:end -->
         </div>
         <p class="mt-6">
           <a href="https://investigations.restoring-democracy.org/archive"
@@ -598,47 +598,68 @@
     });
   </script>
 
-  <script>
-    /* Latest feed — progressive enhancement over the undated fallback message.
-       Fetches the same-origin /latest-investigations.json (built on a schedule
-       by .github/workflows/latest-investigations.yml from the Investigations
-       Desk RSS feed and public section metadata). No CORS involved. On ANY failure — missing file, bad
-       JSON, empty items — the fallback message stays untouched. The archive
-       link sits outside #latest-feed, so rendering never duplicates or removes it. */
+  <script data-cfasync="false">
+    /* Latest feed — refreshes the rows that scripts/build_latest_investigations.py
+       pre-renders into #latest-feed from the same-origin /latest-investigations.json
+       (built on a schedule by .github/workflows/latest-investigations.yml from the
+       Investigations Desk RSS feed and public section metadata). No CORS involved.
+       The HTML copy can be older than the JSON because of CDN and browser caching;
+       the rows are replaced only when the JSON differs, so an unchanged feed never
+       re-lays out. On ANY failure — missing file, bad JSON, empty items — the
+       pre-rendered rows (or the fallback message) stay untouched. The archive link
+       sits outside #latest-feed, so rendering never duplicates or removes it.
+       The row markup must match render_feed_html() in the builder; see
+       scripts/test_latest_feed_render.js. data-cfasync="false" stops Cloudflare
+       Rocket Loader from deferring this script until after the load event. */
     (function () {
       var ENDPOINT = '/latest-investigations.json';
       var LINK_PREFIX = 'https://investigations.restoring-democracy.org/';
       var list = document.getElementById('latest-feed');
       var statusEl = document.getElementById('feed-status');
-      if (!list || !('fetch' in window)) { document.documentElement.classList.remove('feed-reserved'); return; }
+      if (!list || !('fetch' in window)) return;
       function esc(s){ var p=document.createElement('span'); p.textContent=String(s); return p.innerHTML.replace(/"/g, '&quot;'); }
+      function rowKey(link, dt, label, title, category){ return [link, dt, label, title, category].join('\u0001'); }
+      // What the visitor already sees, read from the pre-rendered rows.
+      var shown = [].map.call(list.querySelectorAll('a.feed-item'), function (a) {
+        var time = a.querySelector('time'), title = a.querySelector('.feed-title'), cat = a.querySelector('.feed-category');
+        return rowKey(a.getAttribute('href'), time ? time.getAttribute('datetime') : '', time ? time.textContent : '',
+          title ? title.textContent : '', cat ? cat.textContent : '');
+      }).join('\u0002');
       fetch(ENDPOINT)
         .then(function (r){ if(!r.ok) throw 0; return r.json(); })
         .then(function (data){
           var items = ((data && data.items) || []).filter(function (it) {
             return it && typeof it.title === 'string' && it.title
               && typeof it.link === 'string' && it.link.indexOf(LINK_PREFIX) === 0;
-          }).slice(0, 11);
+          }).slice(0, 11).map(function (it) {
+            return {
+              link: it.link, title: it.title,
+              dt: typeof it.date === 'string' ? it.date.slice(0, 10) : '',
+              label: typeof it.dateLabel === 'string' ? it.dateLabel : '',
+              // Legacy JSON called every post "Investigation". Only display an
+              // assigned section label; tags and editorial formats are separate.
+              category: it.categorySource === 'section' && typeof it.category === 'string'
+                ? it.category.trim().slice(0, 100) : ''
+            };
+          });
           if (!items.length) throw 0;
+          var latest = items.map(function (it) {
+            return rowKey(it.link, it.dt, it.label, it.title, it.category ? 'Category: ' + it.category : '');
+          }).join('\u0002');
+          if (latest === shown) return; // Already current: leave the DOM alone.
           var rows = items.map(function (it, index){
-            var dt = typeof it.date === 'string' ? it.date.slice(0, 10) : '';
-            var label = typeof it.dateLabel === 'string' ? it.dateLabel : '';
-            // Legacy JSON called every post "Investigation". Only display an
-            // assigned section label; tags and editorial formats are separate.
-            var category = it.categorySource === 'section' && typeof it.category === 'string'
-              ? it.category.trim().slice(0, 100) : '';
             return '<a href="'+esc(it.link)+'" target="_blank" rel="noopener noreferrer"'
               + ' class="feed-item feed-row'+(index === 0 ? ' feed-lead' : '')+' py-2.5 rounded group">'
-              + '<time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="'+esc(dt)+'">'+esc(label)+'</time>'
+              + '<time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="'+esc(it.dt)+'">'+esc(it.label)+'</time>'
               + '<span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">'+esc(it.title)+'</span>'
-              + '<span class="feed-category">'+(category ? '<span class="sr-only">Category: </span>'+esc(category) : '')+'</span>'
+              + '<span class="feed-category">'+(it.category ? '<span class="sr-only">Category: </span>'+esc(it.category) : '')+'</span>'
               + '</a>';
           }).join('');
           rows = '<div class="feed-columns" aria-hidden="true"><span>Date</span><span>Publication</span><span>Category</span></div>' + rows;
           list.innerHTML = rows;
-          if (statusEl) statusEl.textContent = 'Latest investigations loaded.';
+          if (statusEl) statusEl.textContent = 'Latest investigations updated.';
         })
-        .catch(function (){ document.documentElement.classList.remove('feed-reserved'); /* Keep the fallback visible without empty reserved space. */ });
+        .catch(function (){ /* Keep the pre-rendered rows or fallback message. */ });
     })();
   </script>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->

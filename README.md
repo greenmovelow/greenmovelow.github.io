@@ -67,6 +67,16 @@ reused. The JSON itself holds the small last-good section cache, so no separate
 cache file or credentials are needed. No post bodies, tags, or subscriber data
 are persisted.
 
+The same run renders those items into the homepage's `#latest-feed` block in
+`index.html` (between the `latest-feed:start` / `latest-feed:end` markers) and
+commits both files together, so the list is part of the initial HTML: it does
+not shift the page when it loads, and it is readable without JavaScript. In the
+browser, a small script refreshes the rows from `/latest-investigations.json`
+only when that file is newer than the cached HTML. Do not edit the generated
+block by hand; to re-render it from the committed JSON without network access,
+run `python scripts/build_latest_investigations.py --render-only`. If the
+markers are missing, the importer fails without changing either file.
+
 Substack's public post endpoint and homepage preload format are unsupported
 interfaces and can change. Warnings in the Actions log identify failures; the
 next scheduled run retries. A feed fetch or XML parse failure keeps the entire
@@ -75,6 +85,7 @@ imports:
 
 ```sh
 python -m unittest discover -s scripts -p 'test_latest_investigations.py'
+npm run test:feed   # pre-rendered rows match the in-page refresh script
 python scripts/build_latest_investigations.py
 ```
 
@@ -85,7 +96,7 @@ Markdown companions at `/index.md`, `/about/index.md`, `/corrections/index.md`,
 `/analytics/index.md`, `/team/index.md`, and `/ai-use/index.md`. They are derived from the public HTML source, carry
 canonical links back to the HTML pages, and are advertised through
 `rel="alternate"` links. The homepage companion links to the live archive in
-place of the JavaScript-powered latest-feed fallback.
+place of the frequently changing latest-feed list.
 
 After editing one of these HTML files, run `npm run build:markdown` and commit
 the updated `.md` file. `npm run test:markdown` checks for drift; the PR workflow

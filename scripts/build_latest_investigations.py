@@ -11,10 +11,17 @@ Security posture:
 - Keeps last-known section metadata on lookup failure; never guesses from tags.
 - Writes the output file only when item content actually changed, so the
   scheduled workflow produces no noise commits.
+- Renders the same items into the homepage's #latest-feed block (between the
+  latest-feed:start/end markers in index.html) so the list is in the initial
+  HTML: no layout shift when it loads, and readable without JavaScript. The
+  markup mirrors the homepage refresh script; scripts/test_latest_feed_render.js
+  checks that the two stay identical.
 
 Run from the repository root:  python scripts/build_latest_investigations.py
+Re-render the homepage block from the committed JSON (no network):
+                               python scripts/build_latest_investigations.py --render-only
 Exit codes: 0 = success (changed or unchanged), 1 = fetch/parse failure
-            (existing JSON is left untouched on failure).
+            or missing homepage markers (existing files are left untouched).
 """
 
 import html
@@ -32,6 +39,7 @@ FEED_URL = "https://investigations.restoring-democracy.org/feed"  # hardcoded; d
 CANONICAL_HOST = "investigations.restoring-democracy.org"
 ALLOWED_LINK_HOSTS = {CANONICAL_HOST, "exposed1.substack.com"}
 OUTPUT = Path("latest-investigations.json")
+HOMEPAGE = Path("index.html")
 MAX_ITEMS = 11
 MAX_TITLE_LEN = 200
 PUBLICATION_URL = f"https://{CANONICAL_HOST}"
@@ -45,6 +53,22 @@ METADATA_TIMEOUT_SECONDS = 8
 # are not standalone publications and must not displace reporting in this feed.
 SUPPORTING_TITLE_PREFIXES = ("evidence locker:",)
 SUPPORTING_PATH_PREFIXES = ("/p/evidence-locker-",)
+
+# Homepage block. Rows must match the markup built by the refresh script in
+# index.html exactly; scripts/test_latest_feed_render.js enforces this.
+FEED_LINK_PREFIX = f"https://{CANONICAL_HOST}/"
+FEED_BLOCK_RE = re.compile(
+    r"(?P<start>[ \t]*<!-- latest-feed:start\b[^\n]*-->\n)(?P<body>.*?)(?P<end>[ \t]*<!-- latest-feed:end -->)",
+    re.DOTALL,
+)
+FEED_FALLBACK_HTML = (
+    '<p class="py-2.5 text-sm text-brand-sand">'
+    "Read the latest reporting in the investigations archive below.</p>"
+)
+FEED_COLUMNS_HTML = (
+    '<div class="feed-columns" aria-hidden="true">'
+    "<span>Date</span><span>Publication</span><span>Category</span></div>"
+)
 
 TAG_RE = re.compile(r"<[^>]*>")
 POST_PATH_RE = re.compile(r"/p/([a-z0-9][a-z0-9-]{0,249})/?\Z")
@@ -173,7 +197,92 @@ def is_supporting_material(title: str, link: str) -> bool:
     )
 
 
+def _attr(value: str) -> str:
+    return html.escape(value, quote=True)
+
+
+def render_feed_html(items) -> str:
+    """Render homepage feed rows exactly as the in-page refresh script does."""
+    rows = []
+    for item in items if isinstance(items, list) else []:
+        if not isinstance(item, dict):
+            continue
+        title, link = item.get("title"), item.get("link")
+        if not isinstance(title, str) or not title or not isinstance(link, str) or not link.startswith(FEED_LINK_PREFIX):
+            continue
+        date = item.get("date")
+        label = item.get("dateLabel")
+        category = item.get("category")
+        date = date[:10] if isinstance(date, str) else ""
+        label = label if isinstance(label, str) else ""
+        category = (
+            category.strip()[:MAX_CATEGORY_LEN]
+            if item.get("categorySource") == "section" and isinstance(category, str)
+            else ""
+        )
+        category_html = f'<span class="sr-only">Category: </span>{html.escape(category)}' if category else ""
+        lead = " feed-lead" if not rows else ""
+        rows.append(
+            f'<a href="{_attr(link)}" target="_blank" rel="noopener noreferrer"'
+            f' class="feed-item feed-row{lead} py-2.5 rounded group">'
+            f'<time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="{_attr(date)}">{html.escape(label)}</time>'
+            '<span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">'
+            f"{html.escape(title)}</span>"
+            f'<span class="feed-category">{category_html}</span>'
+            "</a>"
+        )
+        if len(rows) >= MAX_ITEMS:
+            break
+    if not rows:
+        return FEED_FALLBACK_HTML
+    return FEED_COLUMNS_HTML + "".join(rows)
+
+
+def sync_homepage(items) -> bool:
+    """Write rendered rows between the homepage markers. Returns True if changed.
+
+    Raises ValueError when the markers are missing or duplicated, so a template
+    change can never silently drop the feed.
+    """
+    page = HOMEPAGE.read_text(encoding="utf-8")
+    matches = list(FEED_BLOCK_RE.finditer(page))
+    if len(matches) != 1:
+        raise ValueError(f"{HOMEPAGE} must contain exactly one latest-feed:start/end block")
+    match = matches[0]
+    indent = re.match(r"[ \t]*", match.group("end")).group(0)
+    body = indent + render_feed_html(items) + "\n"
+    if match.group("body") == body:
+        return False
+    HOMEPAGE.write_text(page[: match.start("body")] + body + page[match.end("body") :], encoding="utf-8")
+    return True
+
+
+def render_only() -> int:
+    """Re-render the homepage block from the committed JSON without network access."""
+    try:
+        data = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        changed = sync_homepage(data.get("items", []) if isinstance(data, dict) else [])
+    except (OSError, ValueError) as exc:
+        print(f"Homepage feed render failed: {exc}", file=sys.stderr)
+        return 1
+    print(f"Updated {HOMEPAGE} feed block." if changed else f"{HOMEPAGE} feed block already current.")
+    return 0
+
+
+def write_homepage(items) -> int:
+    try:
+        changed = sync_homepage(items)
+    except (OSError, ValueError) as exc:
+        print(f"Homepage feed render failed: {exc}", file=sys.stderr)
+        return 1
+    if changed:
+        print(f"Updated {HOMEPAGE} feed block.")
+    return 0
+
+
 def main() -> int:
+    if "--render-only" in sys.argv[1:]:
+        return render_only()
     try:
         raw = fetch_text(FEED_URL)
     except Exception as exc:  # noqa: BLE001 - fail closed, keep last-good file
@@ -256,8 +365,14 @@ def main() -> int:
 
     if existing.get("items") == items:
         print("Feed unchanged; nothing to write.")
-        return 0
+        # Still repair a homepage block that drifted from the JSON.
+        return write_homepage(items)
 
+    # Render the homepage first: if its markers are missing, fail before the
+    # JSON changes so the two committed files never disagree.
+    status = write_homepage(items)
+    if status:
+        return status
     payload = {"source": FEED_URL, "items": items}
     OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {OUTPUT} with {len(items)} items.")

@@ -14,6 +14,14 @@ import build_latest_investigations as feed
 
 SECTION = 450391
 SECTION_NAME = "Voting Rights & Election Systems"
+REPO = Path(__file__).resolve().parent.parent
+HOMEPAGE_TEMPLATE = (
+    "<div id=\"latest-feed\">\n"
+    "  <!-- latest-feed:start generated -->\n"
+    "  <p>stale</p>\n"
+    "  <!-- latest-feed:end -->\n"
+    "</div>\n"
+)
 
 
 def rss(slugs=("supreme-court",), category="Brenna Bird"):
@@ -43,6 +51,12 @@ class FeedTests(unittest.TestCase):
         self.output_patch = patch.object(feed, "OUTPUT", self.output)
         self.output_patch.start()
         self.addCleanup(self.output_patch.stop)
+        # Never let a test touch the real homepage.
+        self.homepage = Path(self.temp.name) / "index.html"
+        self.homepage.write_text(HOMEPAGE_TEMPLATE, encoding="utf-8")
+        self.homepage_patch = patch.object(feed, "HOMEPAGE", self.homepage)
+        self.homepage_patch.start()
+        self.addCleanup(self.homepage_patch.stop)
 
     def previous(self, slug="supreme-court", category=SECTION_NAME, section=SECTION):
         return {
@@ -195,6 +209,84 @@ class FeedTests(unittest.TestCase):
         handler = feed.PublicationRedirectHandler()
         with self.assertRaises(ValueError):
             handler.redirect_request(None, None, 302, "", {}, "https://example.com/private")
+
+
+    def test_build_renders_homepage_block_and_second_run_is_a_no_op(self):
+        code, data, _ = self.run_build(raw=rss(["first-story", "second-story"]))
+        self.assertEqual(code, 0)
+        page = self.homepage.read_text(encoding="utf-8")
+        self.assertNotIn("<p>stale</p>", page)
+        self.assertIn(feed.render_feed_html(data["items"]), page)
+        self.assertEqual(page.count('class="feed-item feed-row'), 2)
+        self.assertEqual(page.count("feed-lead"), 1)
+        self.assertTrue(page.endswith("  <!-- latest-feed:end -->\n</div>\n"))
+        before = self.homepage.stat().st_mtime_ns
+        self.run_build(raw=rss(["first-story", "second-story"]))
+        self.assertEqual(self.homepage.stat().st_mtime_ns, before)
+
+    def test_unchanged_feed_still_repairs_a_drifted_homepage_block(self):
+        self.run_build()
+        self.homepage.write_text(HOMEPAGE_TEMPLATE, encoding="utf-8")
+        code, _, _ = self.run_build()
+        self.assertEqual(code, 0)
+        self.assertNotIn("<p>stale</p>", self.homepage.read_text(encoding="utf-8"))
+
+    def test_feed_failure_leaves_homepage_untouched(self):
+        code, _, _ = self.run_build(raw=TimeoutError("offline"))
+        self.assertEqual(code, 1)
+        self.assertEqual(self.homepage.read_text(encoding="utf-8"), HOMEPAGE_TEMPLATE)
+
+    def test_missing_markers_fail_closed_before_json_changes(self):
+        for page in ("<div id=\"latest-feed\"></div>\n", HOMEPAGE_TEMPLATE * 2):
+            with self.subTest(page=page[:40]):
+                self.homepage.write_text(page, encoding="utf-8")
+                code, data, _ = self.run_build()
+                self.assertEqual(code, 1)
+                self.assertIsNone(data)
+                self.assertEqual(self.homepage.read_text(encoding="utf-8"), page)
+
+    def test_render_escapes_text_and_drops_unsafe_or_unassigned_fields(self):
+        items = [
+            {"title": '<img src=x onerror=alert(1)> & "quotes"', "link": feed.PUBLICATION_URL + "/p/a?x=\"1\"",
+             "date": "2026-10-29T12:00:00Z", "dateLabel": "Oct 29", "category": " A & B ", "categorySource": "section"},
+            {"title": "Legacy label", "link": feed.PUBLICATION_URL + "/p/b", "category": "Investigation"},
+            {"title": "Off-site", "link": "https://example.com/p/c"},
+            {"title": "", "link": feed.PUBLICATION_URL + "/p/d"},
+            "not an item",
+        ]
+        out = feed.render_feed_html(items)
+        self.assertNotIn("<img", out)
+        self.assertIn("&lt;img src=x onerror=alert(1)&gt; &amp; &quot;quotes&quot;", out)
+        self.assertIn('href="' + feed.PUBLICATION_URL + '/p/a?x=&quot;1&quot;"', out)
+        self.assertIn('datetime="2026-10-29"', out)
+        self.assertIn('<span class="sr-only">Category: </span>A &amp; B</span>', out)
+        self.assertNotIn("Investigation", out)
+        self.assertNotIn("example.com", out)
+        self.assertEqual(out.count('class="feed-item'), 2)
+        self.assertTrue(out.startswith(feed.FEED_COLUMNS_HTML))
+
+    def test_render_limits_rows_and_falls_back_when_empty(self):
+        many = [{"title": f"t{i}", "link": f"{feed.PUBLICATION_URL}/p/t{i}"} for i in range(15)]
+        self.assertEqual(feed.render_feed_html(many).count('class="feed-item'), feed.MAX_ITEMS)
+        for empty in ([], None, [{"title": "x", "link": "https://example.com/p/x"}]):
+            self.assertEqual(feed.render_feed_html(empty), feed.FEED_FALLBACK_HTML)
+
+    def test_render_only_uses_committed_json_without_network(self):
+        self.seed([self.previous()])
+        with patch.object(feed, "fetch_text", side_effect=AssertionError("network used")), \
+                patch.object(feed.sys, "argv", ["build", "--render-only"]), redirect_stdout(io.StringIO()):
+            self.assertEqual(feed.main(), 0)
+        self.assertIn("/p/supreme-court", self.homepage.read_text(encoding="utf-8"))
+
+
+class CommittedHomepageTests(unittest.TestCase):
+    def test_committed_homepage_block_matches_committed_json(self):
+        """index.html must show exactly the committed feed; regenerate with --render-only."""
+        data = json.loads((REPO / "latest-investigations.json").read_text(encoding="utf-8"))
+        page = (REPO / "index.html").read_text(encoding="utf-8")
+        matches = list(feed.FEED_BLOCK_RE.finditer(page))
+        self.assertEqual(len(matches), 1)
+        self.assertEqual(matches[0].group("body").strip(), feed.render_feed_html(data["items"]))
 
 
 if __name__ == "__main__":

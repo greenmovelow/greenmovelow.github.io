@@ -5,6 +5,7 @@
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --minify",
     "build:markdown": "node scripts/build_markdown.js",
     "test:markdown": "node scripts/build_markdown.js --check",
+    "test:feed": "node scripts/test_latest_feed_render.js",
     "test:sitemap": "python scripts/audit_sitemap.py",
     "test:pwa": "python3 scripts/audit_pwa.py",
     "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --watch"
