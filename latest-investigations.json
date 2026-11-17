@@ -1,7 +1,16 @@
 {
   "source": "https://investigations.restoring-democracy.org/feed",
-  "revision": "2026-10-29T01:02:21Z",
+  "revision": "2026-11-17T01:17:30Z",
   "items": [
+    {
+      "title": "Beyond the Blue Wave: What Iowa’s Ballots Reveal",
+      "link": "https://investigations.restoring-democracy.org/p/iowa-2026-election-willems-bird-split-ticket-voting",
+      "date": "2026-11-16",
+      "dateLabel": "Nov 16",
+      "sectionId": 95395,
+      "category": "National & State Elections",
+      "categorySource": "section"
+    },
     {
       "title": "Four of Every Five Dollars in Bird’s 2026 AG Campaign Come From RAGA",
       "link": "https://investigations.restoring-democracy.org/p/four-of-every-five-dollars-in-birds",
@@ -88,15 +97,6 @@
       "link": "https://investigations.restoring-democracy.org/p/as-public-pressure-mounts-west-des",
       "date": "2026-08-27",
       "dateLabel": "Aug 27",
-      "sectionId": 450386,
-      "category": "Surveillance & Technology",
-      "categorySource": "section"
-    },
-    {
-      "title": "Signed and Filed. Dallas County Says Its Plate-Reader Deal Isn’t in Effect",
-      "link": "https://investigations.restoring-democracy.org/p/signed-and-filed-dallas-county-says",
-      "date": "2026-08-24",
-      "dateLabel": "Aug 24",
       "sectionId": 450386,
       "category": "Surveillance & Technology",
       "categorySource": "section"
