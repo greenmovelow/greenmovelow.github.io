@@ -47,7 +47,7 @@ If you believe we made an error, please contact us and include enough detail to 
 -   **Optional:** your name and how to reach you (anonymous requests are accepted, but harder to verify)
 
 Email: [compliance@restoring-democracy.org](mailto:compliance@restoring-democracy.org)  
-Signal: **restoredemocracy.27**
+Signal: **restoredemocracy.01**
 
 ## 4\. What Happens After You Contact Us
 
@@ -133,6 +133,6 @@ Restoring Democracy's Promise
 
 Email: [compliance@restoring-democracy.org](mailto:compliance@restoring-democracy.org)  
 Phone: [754-293-6975](tel:+17542936975)  
-Signal: **restoredemocracy.27**
+Signal: **restoredemocracy.01**
 
 For sensitive matters, use Signal or encrypted email rather than standard channels.

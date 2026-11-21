@@ -59,5 +59,5 @@ Christian nationalism in schools, faith-based governance, and the intersection o
 -   Education: B.S. in Electrical Engineering, Iowa State University
 -   Professional Membership: Member, Investigative Reporters & Editors (IRE)
 -   Editorial inquiries: [press@restoring-democracy.org](mailto:press@restoring-democracy.org)
--   Secure tips: Signal restoredemocracy.27
+-   Secure tips: Signal restoredemocracy.01
 -   Muck Rack: [Timothy C. Tucker](https://muckrack.com/timothyc-tucker)
