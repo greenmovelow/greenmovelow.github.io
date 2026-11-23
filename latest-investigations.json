@@ -1,7 +1,16 @@
 {
   "source": "https://investigations.restoring-democracy.org/feed",
-  "revision": "2026-11-17T01:17:30Z",
+  "revision": "2026-11-23T22:26:03Z",
   "items": [
+    {
+      "title": "Army’s Nearly $10 Million Iowa Lead-Azide Contract Leaves Cleanup Questions",
+      "link": "https://investigations.restoring-democracy.org/p/armys-nearly-10-million-iowa-lead",
+      "date": "2026-11-23",
+      "dateLabel": "Nov 23",
+      "sectionId": null,
+      "category": "",
+      "categorySource": ""
+    },
     {
       "title": "Beyond the Blue Wave: What Iowa’s Ballots Reveal",
       "link": "https://investigations.restoring-democracy.org/p/iowa-2026-election-willems-bird-split-ticket-voting",
@@ -90,15 +99,6 @@
       "dateLabel": "Sep 5",
       "sectionId": 305309,
       "category": "Civil Liberties",
-      "categorySource": "section"
-    },
-    {
-      "title": "As Public Pressure Mounts, West Des Moines Defends Its Flock Network",
-      "link": "https://investigations.restoring-democracy.org/p/as-public-pressure-mounts-west-des",
-      "date": "2026-08-27",
-      "dateLabel": "Aug 27",
-      "sectionId": 450386,
-      "category": "Surveillance & Technology",
       "categorySource": "section"
     }
   ]
