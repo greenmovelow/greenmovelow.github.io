@@ -54,7 +54,7 @@ Our major investigations and their interactive exhibits are collected on the [Ke
 
 Restoring Democracy’s Promise is an independent investigative newsroom based in Iowa, founded in 2023. We follow systems of power, not party lines.
 
-Timothy Tucker is RDP’s founder and executive editor and a member of [Investigative Reporters & Editors (IRE)](https://www.ire.org/).
+Timothy C. Tucker is RDP’s founder and executive editor and a member of [Investigative Reporters & Editors (IRE)](https://www.ire.org/).
 
 RDP Analytics, our research and methods division, builds data models, network maps and statistical analyses for our reporting and supports journalists, researchers and public-interest organizations.
 
