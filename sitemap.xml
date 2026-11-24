@@ -5,7 +5,10 @@
     <lastmod>2026-08-21</lastmod>
   </url>
 
-  <url><loc>https://restoring-democracy.org/about/</loc></url>
+  <url>
+    <loc>https://restoring-democracy.org/about/</loc>
+    <lastmod>2026-11-24</lastmod>
+  </url>
   <url><loc>https://restoring-democracy.org/alpr-trap/</loc></url>
   <url><loc>https://restoring-democracy.org/analytics/</loc></url>
   <url><loc>https://restoring-democracy.org/confidential_mou/</loc></url>
@@ -16,11 +19,11 @@
   <url><loc>https://restoring-democracy.org/ipers-wiggins/</loc></url>
   <url>
     <loc>https://restoring-democracy.org/infographics/bird-raga-money-trail/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-24</lastmod>
   </url>
   <url>
     <loc>https://restoring-democracy.org/infographics/bird-raga-2026-cash/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-11-24</lastmod>
   </url>
   <url>
     <loc>https://restoring-democracy.org/infographics/ipers-cio-performance-pay/</loc>
@@ -31,13 +34,22 @@
     <lastmod>2026-08-09</lastmod>
   </url>
   <url><loc>https://restoring-democracy.org/save_america_act/</loc></url>
-  <url><loc>https://restoring-democracy.org/save_iowa/</loc></url>
+  <url>
+    <loc>https://restoring-democracy.org/save_iowa/</loc>
+    <lastmod>2026-11-24</lastmod>
+  </url>
   <url><loc>https://restoring-democracy.org/secure-tips/</loc></url>
   <url><loc>https://restoring-democracy.org/security-policy/</loc></url>
   <url><loc>https://restoring-democracy.org/shutdown-accountability/</loc></url>
   <url><loc>https://restoring-democracy.org/shutdown-analysis/</loc></url>
-  <url><loc>https://restoring-democracy.org/team/</loc></url>
-  <url><loc>https://restoring-democracy.org/voting_rights_ia/</loc></url>
+  <url>
+    <loc>https://restoring-democracy.org/team/</loc>
+    <lastmod>2026-11-24</lastmod>
+  </url>
+  <url>
+    <loc>https://restoring-democracy.org/voting_rights_ia/</loc>
+    <lastmod>2026-11-24</lastmod>
+  </url>
 
   <url><loc>https://restoring-democracy.org/alpr-leviathan/</loc></url>
   <url><loc>https://restoring-democracy.org/assembly-line-unpacked/</loc></url>
@@ -57,7 +69,10 @@
   <url><loc>https://restoring-democracy.org/pincer-financial/</loc></url>
   <url><loc>https://restoring-democracy.org/privacy-policy/</loc></url>
   <url><loc>https://restoring-democracy.org/the-god-machine/</loc></url>
-  <url><loc>https://restoring-democracy.org/iowa-alpr-reform/</loc></url>
+  <url>
+    <loc>https://restoring-democracy.org/iowa-alpr-reform/</loc>
+    <lastmod>2026-11-24</lastmod>
+  </url>
   <url><loc>https://restoring-democracy.org/infographics/save-four-state-settlement/</loc></url>
   <url>
     <loc>https://restoring-democracy.org/infographics/standing-query/</loc>
