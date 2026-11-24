@@ -10,7 +10,7 @@ deliberate gap. Nothing here was guessed at. Search
 |---|---|---|
 | Title | `exhibit.headline` | **Set** — "Page Nine", from the article |
 | Dek | `exhibit.dek` | **Set** — from the article |
-| Byline | `exhibit.byline` | **Set** — Timothy Tucker |
+| Byline | `exhibit.byline` | **Set** — Timothy C. Tucker |
 | Publication date | `exhibit.date_display` | PROVISIONAL — "the week of 14 September 2026" |
 | Article link | `exhibit.article_link` | **Set** — editor-supplied investigation URL. |
 
