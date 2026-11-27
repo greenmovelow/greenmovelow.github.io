@@ -11,6 +11,8 @@ on:
       - _headers
       - 'assets/js/**'
       - scripts/audit_csp.py
+      - scripts/test_audit_csp.py
+      - scripts/test_actions.js
       - .github/workflows/csp-check.yml
   push:
     branches: [main]
@@ -19,6 +21,8 @@ on:
       - _headers
       - 'assets/js/**'
       - scripts/audit_csp.py
+      - scripts/test_audit_csp.py
+      - scripts/test_actions.js
       - .github/workflows/csp-check.yml
 
 permissions:
@@ -33,3 +37,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/audit_csp.py
+      - run: python -m unittest discover -s scripts -p 'test_audit_csp.py'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:actions
