@@ -39,7 +39,11 @@ REGISTRY_ENTRY_RE = re.compile(
 )
 # Matches data-action="name" in HTML and in JS strings (including \"escaped\" quotes).
 ACTION_NAME_RE = re.compile(r"""data-action\s*=\s*\\?["']([^"'\\]*)\\?["']""")
-DYNAMIC_ACTION_RE = re.compile(r"""setAttribute\(\s*['"]data-action['"]\s*,\s*(?!['"])|\.dataset\.action\s*=(?!=)""")
+# Action names assigned from JS: setAttribute('data-action', <value>) and
+# el.dataset.action = <value>. The value must be a quoted literal ('…', "…",
+# or a template string without ${…}); it is then checked against the registry.
+SET_ACTION_RE = re.compile(r"""setAttribute\(\s*(['"`])data-action\1\s*,\s*|\.dataset\.action\s*=(?!=)\s*""")
+LITERAL_VALUE_RE = re.compile(r"""(['"`])([^'"`\\$]*)\1""")
 ARGS_RE = re.compile(r"""data-action-args\s*=\s*'([^']*)'""")
 NON_EXECUTABLE_TYPES = {"application/ld+json", "application/json"}
 GOATCOUNTER_SCRIPT = "https://gc.zgo.at"
@@ -78,9 +82,13 @@ def unregistered_actions(rel, text: str, registry: set[str]) -> list[str]:
         if match.group(1) not in registry:
             line = text.count("\n", 0, match.start()) + 1
             problems.append(f"{rel}:{line}: data-action {match.group(1)!r} is not in the actions.js REGISTRY")
-    for match in DYNAMIC_ACTION_RE.finditer(text):
+    for match in SET_ACTION_RE.finditer(text):
         line = text.count("\n", 0, match.start()) + 1
-        problems.append(f"{rel}:{line}: data-action set from a non-literal; use a literal registered name")
+        literal = LITERAL_VALUE_RE.match(text, match.end())
+        if not literal:
+            problems.append(f"{rel}:{line}: data-action set from a non-literal; use a literal registered name")
+        elif literal.group(2) not in registry:
+            problems.append(f"{rel}:{line}: data-action {literal.group(2)!r} is not in the actions.js REGISTRY")
     return problems
 
 

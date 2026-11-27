@@ -81,6 +81,37 @@ class RegistryAuditTests(unittest.TestCase):
                 self.assertEqual(code, 1)
                 self.assertIn("data-action set from a non-literal", out)
 
+    def test_literal_action_names_set_from_js_are_checked_with_any_spacing(self):
+        """Registered literals pass and misspellings fail, with or without a space after the comma."""
+        self.write_page("")
+        cases = {
+            "el.setAttribute('data-action', 'showTab');": None,
+            "el.setAttribute('data-action','showTab');": None,
+            'el.setAttribute("data-action",  "showTab");': None,
+            "el.setAttribute('data-action',\n    'showTab');": None,
+            "el.setAttribute('data-action', `showTab`);": None,
+            "el.dataset.action = 'toggleOpen';": None,
+            "el.dataset.action='toggleOpen';": None,
+            "if (el.dataset.action === 'showTab') {}": None,
+            "el.setAttribute('data-action-args', '[1]');": None,
+            "el.setAttribute('data-action', 'showTabb');": "data-action 'showTabb' is not in the actions.js REGISTRY",
+            "el.setAttribute('data-action','showTabb');": "data-action 'showTabb' is not in the actions.js REGISTRY",
+            'el.setAttribute("data-action","showTabb");': "data-action 'showTabb' is not in the actions.js REGISTRY",
+            "el.dataset.action = 'toggleOpn';": "data-action 'toggleOpn' is not in the actions.js REGISTRY",
+            "el.dataset.action='toggleOpn';": "data-action 'toggleOpn' is not in the actions.js REGISTRY",
+            "el.setAttribute('data-action',name);": "data-action set from a non-literal",
+            "el.setAttribute('data-action', `${name}`);": "data-action set from a non-literal",
+        }
+        for code_line, expected in cases.items():
+            with self.subTest(code=code_line):
+                (self.root / "assets" / "js" / "pages" / "page.js").write_text(code_line + "\n", encoding="utf-8")
+                code, out = self.run_audit()
+                if expected is None:
+                    self.assertEqual(code, 0, out)
+                else:
+                    self.assertEqual(code, 1, out)
+                    self.assertIn(expected, out)
+
     def test_registry_entry_must_resolve_its_own_name(self):
         actions = self.root / "assets" / "js" / "actions.js"
         actions.write_text(actions.read_text(encoding="utf-8").replace(
