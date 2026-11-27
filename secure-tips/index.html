@@ -154,6 +154,7 @@
   </style>
 
   <meta name="twitter:url" content="https://restoring-democracy.org/secure-tips/" />
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 
 <body class="font-sans antialiased">
@@ -179,7 +180,7 @@
           <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer"
              class="nav-link text-brand-sand text-sm whitespace-nowrap">Browse Investigations</a>
           <a href="/secure-tips/" class="nav-link text-brand-gold text-sm">Secure Tips</a>
-          <button onclick="shareThisPage()" title="Share"
+          <button data-action="shareThisPage" title="Share"
                   class="p-2 rounded-md text-brand-sand/70 hover:text-brand-gold transition-colors"
                   aria-label="Share this page">
             <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -216,7 +217,7 @@
         <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer"
            class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Browse Investigations ↗</a>
         <a href="/secure-tips/" class="block py-2.5 px-3 text-brand-gold text-sm font-semibold rounded">Secure Tips</a>
-        <button onclick="shareThisPage()"
+        <button data-action="shareThisPage"
                 class="w-full text-left py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">
           Share This Page
         </button>
@@ -457,40 +458,6 @@ Can RDP identify me as a source? [No / Only after we discuss it / Yes]
     </div>
   </footer>
 
-  <script>
-    async function shareThisPage() {
-      const d = { title: document.title, url: window.location.href };
-      if (navigator.share) {
-        try { await navigator.share(d); return; } catch(e) { if(e.name==='AbortError') return; }
-      }
-      if (navigator.clipboard?.writeText) {
-        try { await navigator.clipboard.writeText(window.location.href); return; } catch(e) {}
-      }
-      window.prompt('Copy this link:', window.location.href);
-    }
-
-    const nav = document.querySelector('.nav-bar');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
-
-    const toggle = document.getElementById('mobile-toggle');
-    const menu   = document.getElementById('mobile-menu');
-    toggle.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open);
-    });
-    menu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    let n = 0, t;
-    document.getElementById('main-logo').addEventListener('click', e => {
-      e.preventDefault(); n++;
-      clearTimeout(t); t = setTimeout(() => { n = 0; }, 1000);
-      if (n === 5) window.location.href = 'vault.html';
-    });
-  </script>
+  <script src="/assets/js/pages/secure-tips.js"></script>
 </body>
 </html>

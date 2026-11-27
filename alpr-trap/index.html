@@ -291,6 +291,7 @@
   </style>
 
   <meta property="og:locale" content="en_US" />
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 
 <body class="overflow-x-hidden grid-bg">
@@ -312,7 +313,7 @@
              class="text-text-mid hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hidden md:block">
             Read Full Investigation →
           </a>
-          <button onclick="shareExhibit()" class="text-text-dim hover:text-white px-2 py-2 rounded-md transition-colors inline-flex items-center gap-1" title="Share this exhibit" aria-label="Share this exhibit">
+          <button data-action="shareExhibit" class="text-text-dim hover:text-white px-2 py-2 rounded-md transition-colors inline-flex items-center gap-1" title="Share this exhibit" aria-label="Share this exhibit">
             <span class="font-mono text-xs text-grid-cyan">&lt;</span>
             <span class="font-mono text-xs uppercase tracking-wide">Share</span>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
@@ -549,7 +550,7 @@
       <div class="mt-8 space-y-0">
 
         <!-- TIER 4: Federal Analytics (top of stack) -->
-        <div class="tier-card rounded-t-2xl bg-steel-dark p-5 md:p-7" data-tier="federal" onclick="toggleTier('federal')">
+        <div class="tier-card rounded-t-2xl bg-steel-dark p-5 md:p-7" data-tier="federal" data-action="toggleTier" data-action-args='["federal"]'>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-lg bg-signal-red/10 border border-signal-red/30 flex items-center justify-center flex-shrink-0">
@@ -591,7 +592,7 @@
         <div class="flex justify-center"><div class="tier-connector h-8"></div></div>
 
         <!-- TIER 3: State Hubs -->
-        <div class="tier-card bg-steel-dark p-5 md:p-7" data-tier="state" onclick="toggleTier('state')">
+        <div class="tier-card bg-steel-dark p-5 md:p-7" data-tier="state" data-action="toggleTier" data-action-args='["state"]'>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-lg bg-signal-red/10 border border-signal-red/20 flex items-center justify-center flex-shrink-0">
@@ -637,7 +638,7 @@
         <div class="flex justify-center"><div class="tier-connector h-8"></div></div>
 
         <!-- TIER 2: Transport -->
-        <div class="tier-card bg-steel-dark p-5 md:p-7" data-tier="transport" onclick="toggleTier('transport')">
+        <div class="tier-card bg-steel-dark p-5 md:p-7" data-tier="transport" data-action="toggleTier" data-action-args='["transport"]'>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-lg bg-grid-cyan/10 border border-grid-cyan/20 flex items-center justify-center flex-shrink-0">
@@ -692,7 +693,7 @@
         <div class="flex justify-center"><div class="tier-connector h-8"></div></div>
 
         <!-- TIER 1: Sensors (bottom) -->
-        <div class="tier-card rounded-b-2xl bg-steel-dark p-5 md:p-7" data-tier="sensors" onclick="toggleTier('sensors')">
+        <div class="tier-card rounded-b-2xl bg-steel-dark p-5 md:p-7" data-tier="sensors" data-action="toggleTier" data-action-args='["sensors"]'>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 rounded-lg bg-text-dim/10 border border-text-dim/20 flex items-center justify-center flex-shrink-0 pulse-red">
@@ -879,57 +880,7 @@
     </div>
   </footer>
 
-  <script>
-    // ===== Tier Toggle =====
-    function toggleTier(tierName) {
-      const panel = document.getElementById('detail-' + tierName);
-      const card = document.querySelector(`[data-tier="${tierName}"]`);
-      const isOpen = panel.classList.contains('open');
-
-      // Close all panels
-      document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('open'));
-      document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('active'));
-
-      // If it wasn't open, open it
-      if (!isOpen) {
-        panel.classList.add('open');
-        card.classList.add('active');
-      }
-    }
-
-    // ===== Scroll Reveal =====
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // ===== Share =====
-    function shareExhibit() {
-      const shareData = {
-        title: 'The ALPR Trap — RDP Investigation',
-        text: '20 billion plate reads per month. 49 states. No warrant. Interactive exhibit mapping the 4-tier architecture.',
-        url: window.location.href
-      };
-      if (navigator.share) {
-        navigator.share(shareData).catch(console.error);
-      } else {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          const btn = document.querySelector('[onclick="shareExhibit()"]');
-          if (btn) {
-            btn.innerHTML = '<svg class="w-5 h-5 text-grid-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
-            setTimeout(() => {
-              btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>';
-            }, 2000);
-          }
-        });
-      }
-    }
-  </script>
+  <script src="/assets/js/pages/alpr-trap.js"></script>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script
     data-goatcounter="https://restoring-democracy.goatcounter.com/count"

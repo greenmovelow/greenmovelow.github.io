@@ -1294,6 +1294,7 @@
     outline-offset: -2px;
   }
 </style>
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 <body>
 
@@ -1426,10 +1427,10 @@
     <p class="section-lede">The bill operates on two simultaneous layers. Toggle between them to see what's visible to the public — and what isn't.</p>
 
     <div class="layers-tabs" role="tablist">
-      <button class="layers-tab active-visible" id="tab-visible" role="tab" aria-selected="true" aria-controls="panel-visible" onclick="switchLayer('visible')">
+      <button class="layers-tab active-visible" id="tab-visible" role="tab" aria-selected="true" aria-controls="panel-visible" data-action="switchLayer" data-action-args='["visible"]'>
         <span class="layers-tab-indicator" aria-hidden="true"></span>Visible Reform Layer
       </button>
-      <button class="layers-tab" id="tab-hidden" role="tab" aria-selected="false" aria-controls="panel-hidden" onclick="switchLayer('hidden')">
+      <button class="layers-tab" id="tab-hidden" role="tab" aria-selected="false" aria-controls="panel-hidden" data-action="switchLayer" data-action-args='["hidden"]'>
         <span class="layers-tab-indicator" aria-hidden="true"></span>Hidden Infrastructure
       </button>
     </div>
@@ -1560,7 +1561,7 @@
 
     <!-- Card 1 -->
     <div class="evidence-card expanded">
-      <div class="evidence-card-header" onclick="toggleCard(this.parentElement)" role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard(this.parentElement);}">
+      <div class="evidence-card-header" data-action="toggleCard" data-action-args='["$parent"]' role="button" tabindex="0" aria-expanded="true" data-action-keys="Enter Space">
         <div class="evidence-card-num">01</div>
         <div class="evidence-card-main">
           <div class="evidence-card-type">Mechanism — Secrecy Clause</div>
@@ -1584,7 +1585,7 @@
 
     <!-- Card 2 -->
     <div class="evidence-card">
-      <div class="evidence-card-header" onclick="toggleCard(this.parentElement)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard(this.parentElement);}">
+      <div class="evidence-card-header" data-action="toggleCard" data-action-args='["$parent"]' role="button" tabindex="0" aria-expanded="false" data-action-keys="Enter Space">
         <div class="evidence-card-num">02</div>
         <div class="evidence-card-main">
           <div class="evidence-card-type">Mechanism — Data Sharing</div>
@@ -1608,7 +1609,7 @@
 
     <!-- Card 3 -->
     <div class="evidence-card">
-      <div class="evidence-card-header" onclick="toggleCard(this.parentElement)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard(this.parentElement);}">
+      <div class="evidence-card-header" data-action="toggleCard" data-action-args='["$parent"]' role="button" tabindex="0" aria-expanded="false" data-action-keys="Enter Space">
         <div class="evidence-card-num">03</div>
         <div class="evidence-card-main">
           <div class="evidence-card-type">Mechanism — Normalization</div>
@@ -1628,7 +1629,7 @@
 
     <!-- Card 4 -->
     <div class="evidence-card">
-      <div class="evidence-card-header" onclick="toggleCard(this.parentElement)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard(this.parentElement);}">
+      <div class="evidence-card-header" data-action="toggleCard" data-action-args='["$parent"]' role="button" tabindex="0" aria-expanded="false" data-action-keys="Enter Space">
         <div class="evidence-card-num">04</div>
         <div class="evidence-card-main">
           <div class="evidence-card-type">Mechanism — Vendor Exceptions</div>
@@ -1653,7 +1654,7 @@
 
     <!-- Card 5 -->
     <div class="evidence-card">
-      <div class="evidence-card-header" onclick="toggleCard(this.parentElement)" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCard(this.parentElement);}">
+      <div class="evidence-card-header" data-action="toggleCard" data-action-args='["$parent"]' role="button" tabindex="0" aria-expanded="false" data-action-keys="Enter Space">
         <div class="evidence-card-num">05</div>
         <div class="evidence-card-main">
           <div class="evidence-card-type">Mechanism — Process</div>
@@ -1867,78 +1868,7 @@
 </footer>
 
 <!-- ═══════════════════════════════════════════════════ JS -->
-<script>
-  // ── Two-layer tab switching ─────────────────────────
-  function switchLayer(which) {
-    const tabVisible    = document.getElementById('tab-visible');
-    const tabHidden     = document.getElementById('tab-hidden');
-    const panelVisible  = document.getElementById('panel-visible');
-    const panelHidden   = document.getElementById('panel-hidden');
-
-    if (which === 'visible') {
-      tabVisible.className = 'layers-tab active-visible';
-      tabHidden.className  = 'layers-tab';
-      tabVisible.setAttribute('aria-selected', 'true');
-      tabHidden.setAttribute('aria-selected',  'false');
-      panelVisible.classList.add('active');
-      panelVisible.removeAttribute('hidden');
-      panelHidden.classList.remove('active');
-      panelHidden.setAttribute('hidden', '');
-    } else {
-      tabHidden.className  = 'layers-tab active-hidden';
-      tabVisible.className = 'layers-tab';
-      tabHidden.setAttribute('aria-selected',  'true');
-      tabVisible.setAttribute('aria-selected', 'false');
-      panelHidden.classList.add('active');
-      panelHidden.removeAttribute('hidden');
-      panelVisible.classList.remove('active');
-      panelVisible.setAttribute('hidden', '');
-    }
-  }
-
-  // ── Evidence card expand/collapse ───────────────────
-  function toggleCard(card) {
-    const wasExpanded = card.classList.contains('expanded');
-    document.querySelectorAll('.evidence-card').forEach(c => {
-      c.classList.remove('expanded');
-      const hdr = c.querySelector('.evidence-card-header');
-      if (hdr) hdr.setAttribute('aria-expanded', 'false');
-    });
-    if (!wasExpanded) {
-      card.classList.add('expanded');
-      const hdr = card.querySelector('.evidence-card-header');
-      if (hdr) hdr.setAttribute('aria-expanded', 'true');
-    }
-  }
-
-  // ── Share button (Web Share API + clipboard fallback) ─
-  document.getElementById('share-btn').addEventListener('click', async () => {
-    const shareData = {
-      title: document.title,
-      text: "Iowa's ALPR \"Reform\" Bill Would Regulate Plate Readers — and Hide the Logs",
-      url: window.location.href
-    };
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-        return;
-      }
-    } catch (err) {
-      if (err && err.name === 'AbortError') return;
-    }
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(window.location.href);
-        const btn = document.getElementById('share-btn');
-        const original = btn.innerHTML;
-        btn.innerHTML = '<span style="color: var(--gold-lt); letter-spacing: 0.14em;">✓ Link Copied</span>';
-        setTimeout(() => { btn.innerHTML = original; }, 1800);
-        return;
-      }
-    } catch (err) { /* fall through */ }
-    window.prompt('Copy this link:', window.location.href);
-  });
-</script>
+<script src="/assets/js/pages/iowa-alpr-reform.js"></script>
 
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script

@@ -1,0 +1,35 @@
+name: Check Content-Security-Policy compatibility
+
+# The site-wide CSP in _headers omits 'unsafe-inline' from script-src, so
+# inline JavaScript and on* handlers are blocked in production. This keeps
+# them from coming back.
+
+on:
+  pull_request:
+    paths:
+      - '**/*.html'
+      - _headers
+      - 'assets/js/**'
+      - scripts/audit_csp.py
+      - .github/workflows/csp-check.yml
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - _headers
+      - 'assets/js/**'
+      - scripts/audit_csp.py
+      - .github/workflows/csp-check.yml
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/audit_csp.py

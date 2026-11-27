@@ -107,6 +107,7 @@
   </style>
 
   <meta name="twitter:url" content="https://restoring-democracy.org/shutdown-analysis/" />
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 
 <body class="bg-exhibit-dark text-brand-sand font-sans antialiased">
@@ -127,7 +128,7 @@
           <a href="/team/" class="nav-link text-brand-sand text-sm">Team</a>
           <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm whitespace-nowrap">Browse Investigations</a>
           <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
-          <button onclick="shareThisPage()" title="Share" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share">
+          <button data-action="shareThisPage" title="Share" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
           </button>
         </div>
@@ -178,7 +179,7 @@
           <a href="https://exposed1.substack.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-brand-gold/90 text-brand-offblack font-medium text-sm px-3.5 py-2 rounded-lg hover:bg-brand-gold transition-colors">
             Subscribe for free
           </a>
-          <button onclick="shareThisPage()" class="inline-flex items-center justify-center border border-brand-gold/30 text-brand-sand/90 text-sm font-medium px-4 py-2.5 rounded-lg hover:border-brand-gold/50 hover:text-brand-gold transition-colors">
+          <button data-action="shareThisPage" class="inline-flex items-center justify-center border border-brand-gold/30 text-brand-sand/90 text-sm font-medium px-4 py-2.5 rounded-lg hover:border-brand-gold/50 hover:text-brand-gold transition-colors">
             Share this analysis
           </button>
         </div>
@@ -504,11 +505,7 @@
     </div>
   </footer>
 
-  <script>
-    async function shareThisPage(){const d={title:document.title,url:window.location.href};if(navigator.share){try{await navigator.share(d);return}catch(e){if(e.name==='AbortError')return}}if(navigator.clipboard&&navigator.clipboard.writeText){try{await navigator.clipboard.writeText(window.location.href);return}catch(e){}}window.prompt('Copy this link:',window.location.href)}
-    const nav=document.querySelector('.nav-bar');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)},{passive:true});
-    const toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('mobile-menu');toggle.addEventListener('click',()=>{const o=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',o)});menu.querySelectorAll('a').forEach(l=>{l.addEventListener('click',()=>{menu.classList.remove('open');toggle.setAttribute('aria-expanded','false')})});
-  </script>
+  <script src="/assets/js/pages/shutdown-analysis.js"></script>
 </div>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script

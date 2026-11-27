@@ -8,6 +8,7 @@ on:
       - .github/workflows/latest-investigations.yml
       - .github/workflows/latest-feed-check.yml
       - scripts/test_latest_feed_render.js
+      - assets/js/latest-feed.js
       - index.html
       - latest-investigations.json
   push:
@@ -18,6 +19,7 @@ on:
       - .github/workflows/latest-investigations.yml
       - .github/workflows/latest-feed-check.yml
       - scripts/test_latest_feed_render.js
+      - assets/js/latest-feed.js
       - index.html
       - latest-investigations.json
 

@@ -151,6 +151,7 @@
   <meta name="twitter:title" content="The Assembly Line: An RDP Investigation | Restoring Democracy's Promise" />
   <meta name="twitter:description" content="Read The Assembly Line: An RDP Investigation on Restoring Democracy's Promise." />
   <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/Banner_RDP_Color.png" />
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 <body class="antialiased">
 
@@ -180,10 +181,10 @@
 
         <main class="mt-6">
             <div class="flex justify-around border-b border-custom-light mb-6">
-                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl active" onclick="showTab('summary')">Summary</button>
-                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('network')">The Machine</button>
-                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('evidence')">Evidence</button>
-                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" onclick="showTab('impact')">Impact</button>
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl active" data-action="showTab" data-action-args='["summary"]'>Summary</button>
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" data-action="showTab" data-action-args='["network"]'>The Machine</button>
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" data-action="showTab" data-action-args='["evidence"]'>Evidence</button>
+                <button class="tab-button flex-1 py-2 px-4 text-xl md:text-2xl" data-action="showTab" data-action-args='["impact"]'>Impact</button>
             </div>
 
             <div id="summary" class="tab-content active">
@@ -199,13 +200,13 @@
                     <h3 class="text-2xl text-white mb-2">The Assembly Line</h3>
                     <p class="text-gray-300 mb-4 leading-relaxed">The Machine operates a powerful "assembly line" for turning model legislation into binding law. <b class="accent-red">Click any step below for details.</b></p>
                     <div class="space-y-2">
-                        <div class="flow-node" onclick="showModal(1)"><b>1. Model Legislation</b><br><span class="text-sm text-gray-400">Drafted by national think tanks</span></div>
+                        <div class="flow-node" data-action="showModal" data-action-args='[1]'><b>1. Model Legislation</b><br><span class="text-sm text-gray-400">Drafted by national think tanks</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(2)"><b>2. Legislative Sponsor</b><br><span class="text-sm text-gray-400">Handed to aligned lawmakers</span></div>
+                        <div class="flow-node" data-action="showModal" data-action-args='[2]'><b>2. Legislative Sponsor</b><br><span class="text-sm text-gray-400">Handed to aligned lawmakers</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(3)"><b>3. Faith Mobilization</b><br><span class="text-sm text-gray-400">"Grassroots" campaigns orchestrated</span></div>
+                        <div class="flow-node" data-action="showModal" data-action-args='[3]'><b>3. Faith Mobilization</b><br><span class="text-sm text-gray-400">"Grassroots" campaigns orchestrated</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(4)"><b>4. Policy Enactment</b><br><span class="text-sm text-gray-400">Laws passed under manufactured pressure</span></div>
+                        <div class="flow-node" data-action="showModal" data-action-args='[4]'><b>4. Policy Enactment</b><br><span class="text-sm text-gray-400">Laws passed under manufactured pressure</span></div>
                     </div>
                 </div>
             </div>
@@ -290,91 +291,7 @@
         </div>
     </footer>
 
-    <script>
-        // --- Modal Data and Functions ---
-        const modalData = {
-            1: { title: 'Step 1: Model Legislation', content: 'National think tanks and legal groups like the Heritage Foundation and Alliance Defending Freedom draft "model" bills. These texts come complete with legal justifications and talking points, forming the ideological core of the legislation.' },
-            2: { title: 'Step 2: Legislative Sponsor', content: 'The model bills are distributed to allied state lawmakers. This process outsources the work of governance to a private, unaccountable network, ensuring ideological consistency across states.' },
-            3: { title: 'Step 3: Faith Mobilization', content: 'Groups like Faith Wins and state-level partners like The Family Leader orchestrate "grassroots" campaigns. They provide scripts, testimony templates, and rally supporters to create the illusion of widespread, organic demand for the legislation.' },
-            4: { title: 'Step 4: Policy Enactment', content: 'Under pressure from the manufactured outrage and lobbying from network operatives, the legislation is fast-tracked. Opposition is often neutralized through targeted pressure campaigns or primary challenges.' }
-        };
-
-        const modalContainer = document.getElementById('modal-container');
-        const modalTitle = document.getElementById('modal-title');
-        const modalBody = document.getElementById('modal-body');
-        const closeModalBtn = document.getElementById('close-modal');
-
-        function showModal(step) {
-            const data = modalData[step];
-            if (data) {
-                modalTitle.textContent = data.title;
-                modalBody.textContent = data.content;
-                modalContainer.classList.add('visible');
-            }
-        }
-
-        function hideModal() {
-            modalContainer.classList.remove('visible');
-        }
-
-        closeModalBtn.addEventListener('click', hideModal);
-        modalContainer.addEventListener('click', (e) => {
-            if (e.target === modalContainer) {
-                hideModal();
-            }
-        });
-
-        // --- Tab Navigation ---
-        function showTab(tabName) {
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.toggle('active', button.getAttribute('onclick').includes(`'${tabName}'`));
-            });
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.toggle('active', content.id === tabName);
-            });
-        }
-
-        // --- Chart.js ---
-        const ctx = document.getElementById('credentialsChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['NSCA Chaplain', 'Licensed Counselor'],
-                datasets: [{
-                    label: 'Required Training (Hours)',
-                    data: [40, 3000],
-                    backgroundColor: ['rgba(74, 85, 104, 0.7)', 'rgba(229, 62, 62, 0.7)'],
-                    borderColor: ['#4A5568', '#E53E3E'],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false, // Key fix for responsiveness
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        ticks: { color: '#A0A0A0', font: { family: "'Lora', Georgia, Cambria, 'Times New Roman', serif" } },
-                        grid: { color: '#333' }
-                    },
-                    y: {
-                       ticks: { color: '#E0E0E0', font: { size: 14, family: "'Lora', Georgia, Cambria, 'Times New Roman', serif" } },
-                       grid: { display: false }
-                    }
-                },
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        bodyFont: { family: "'Lora', Georgia, Cambria, 'Times New Roman', serif" },
-                        callbacks: {
-                            label: (context) => context.raw === 40 ? ' 40-hour online course' : ' 3,000+ supervised clinical hours + Master\'s Degree'
-                        }
-                    }
-                }
-            }
-        });
-    </script>
+    <script src="/assets/js/pages/assembly-line.js"></script>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script
     data-goatcounter="https://restoring-democracy.goatcounter.com/count"

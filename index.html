@@ -112,6 +112,7 @@
     }
   </style>
 
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 
 <body class="bg-brand-cream text-brand-offblack font-sans antialiased">
@@ -155,7 +156,7 @@
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.18 17.82a2.18 2.18 0 1 0 0-4.36 2.18 2.18 0 0 0 0 4.36ZM4 11.06A8.94 8.94 0 0 1 12.94 20h-2.4A6.54 6.54 0 0 0 4 13.46v-2.4Zm0-4.06A13 13 0 0 1 17 20h-2.4A10.6 10.6 0 0 0 4 9.4V7Z"/></svg>
           </a>
           <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
-          <button onclick="shareThisPage()" title="Share this page"
+          <button data-action="shareThisPage" title="Share this page"
                   class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors"
                   aria-label="Share this page">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -194,7 +195,7 @@
         <a href="https://investigations.restoring-democracy.org"
            class="block py-2.5 px-3 text-brand-gold hover:text-brand-sand text-sm font-semibold rounded transition">Browse Investigations &#8599;</a>
         <a href="/secure-tips/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
-        <button onclick="shareThisPage()"
+        <button data-action="shareThisPage"
                 class="w-full text-left py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">
           Share This Page
         </button>
@@ -553,127 +554,9 @@
 
 
 
-  <script>
-    async function shareThisPage() {
-      const shareData = { title: document.title, url: window.location.href };
-      if (navigator.share) {
-        try { await navigator.share(shareData); return; }
-        catch (e) { if (e.name === 'AbortError') return; }
-      }
-      if (navigator.clipboard?.writeText) {
-        try { await navigator.clipboard.writeText(window.location.href); return; }
-        catch (e) {}
-      }
-      window.prompt('Copy this link:', window.location.href);
-    }
+  <script src="/assets/js/pages/home.js"></script>
 
-    const nav = document.querySelector('.nav-bar');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    }, { passive: true });
-
-    const toggle = document.getElementById('mobile-toggle');
-    const menu   = document.getElementById('mobile-menu');
-    toggle.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open);
-    });
-    menu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-
-
-
-    let clickCount = 0, clickTimer;
-    document.getElementById('main-logo').addEventListener('click', function(e) {
-      e.preventDefault();
-      clickCount++;
-      clearTimeout(clickTimer);
-      clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
-      if (clickCount === 5) window.location.href = 'vault.html';
-    });
-  </script>
-
-  <script data-cfasync="false">
-    /* Latest feed — refreshes the rows that scripts/build_latest_investigations.py
-       pre-renders into #latest-feed from the same-origin /latest-investigations.json
-       (built on a schedule by .github/workflows/latest-investigations.yml from the
-       Investigations Desk RSS feed and public section metadata). No CORS involved.
-       Either copy can be stale because of CDN and browser caching, so both carry
-       the builder's feed revision (UTC generation time): data-feed-revision on
-       #latest-feed and "revision" in the JSON. The rows are replaced only when the
-       JSON revision is valid and strictly newer than the page's, and its rows
-       differ; an older, equal, missing or malformed revision never replaces what
-       is shown. On ANY failure — missing file, bad JSON, empty items — the
-       pre-rendered rows (or the fallback message) stay untouched. The archive link
-       sits outside #latest-feed, so rendering never duplicates or removes it.
-       The row markup must match render_feed_html() in the builder; see
-       scripts/test_latest_feed_render.js. data-cfasync="false" stops Cloudflare
-       Rocket Loader from deferring this script until after the load event. */
-    (function () {
-      var ENDPOINT = '/latest-investigations.json';
-      var LINK_PREFIX = 'https://investigations.restoring-democracy.org/';
-      var list = document.getElementById('latest-feed');
-      var statusEl = document.getElementById('feed-status');
-      if (!list || !('fetch' in window)) return;
-      function esc(s){ var p=document.createElement('span'); p.textContent=String(s); return p.innerHTML.replace(/"/g, '&quot;'); }
-      function rowKey(link, dt, label, title, category){ return [link, dt, label, title, category].join('\u0001'); }
-      // Feed revision "YYYY-MM-DDTHH:MM:SSZ" -> ms, or NaN when missing/malformed.
-      function revisionTime(v){ return typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(v) ? Date.parse(v) : NaN; }
-      var shownRevision = revisionTime(list.getAttribute('data-feed-revision'));
-      // What the visitor already sees, read from the pre-rendered rows.
-      var shown = [].map.call(list.querySelectorAll('a.feed-item'), function (a) {
-        var time = a.querySelector('time'), title = a.querySelector('.feed-title'), cat = a.querySelector('.feed-category');
-        return rowKey(a.getAttribute('href'), time ? time.getAttribute('datetime') : '', time ? time.textContent : '',
-          title ? title.textContent : '', cat ? cat.textContent : '');
-      }).join('\u0002');
-      fetch(ENDPOINT)
-        .then(function (r){ if(!r.ok) throw 0; return r.json(); })
-        .then(function (data){
-          var revision = data && data.revision;
-          var jsonRevision = revisionTime(revision);
-          // With rows on screen, only a demonstrably newer feed may replace them.
-          // (With no rows, i.e. the no-feed fallback, any valid feed is an improvement.)
-          if (shown && !(jsonRevision > shownRevision)) return;
-          var items = ((data && data.items) || []).filter(function (it) {
-            return it && typeof it.title === 'string' && it.title
-              && typeof it.link === 'string' && it.link.indexOf(LINK_PREFIX) === 0;
-          }).slice(0, 11).map(function (it) {
-            return {
-              link: it.link, title: it.title,
-              dt: typeof it.date === 'string' ? it.date.slice(0, 10) : '',
-              label: typeof it.dateLabel === 'string' ? it.dateLabel : '',
-              // Legacy JSON called every post "Investigation". Only display an
-              // assigned section label; tags and editorial formats are separate.
-              category: it.categorySource === 'section' && typeof it.category === 'string'
-                ? it.category.trim().slice(0, 100) : ''
-            };
-          });
-          if (!items.length) throw 0;
-          var latest = items.map(function (it) {
-            return rowKey(it.link, it.dt, it.label, it.title, it.category ? 'Category: ' + it.category : '');
-          }).join('\u0002');
-          if (latest === shown) { list.setAttribute('data-feed-revision', revision); return; } // Same rows: no DOM change.
-          var rows = items.map(function (it, index){
-            return '<a href="'+esc(it.link)+'" target="_blank" rel="noopener noreferrer"'
-              + ' class="feed-item feed-row'+(index === 0 ? ' feed-lead' : '')+' py-2.5 rounded group">'
-              + '<time class="feed-date text-xs text-brand-sand/80 tabular-nums" datetime="'+esc(it.dt)+'">'+esc(it.label)+'</time>'
-              + '<span class="feed-title text-sm text-brand-sand group-hover:text-brand-gold transition font-medium leading-snug">'+esc(it.title)+'</span>'
-              + '<span class="feed-category">'+(it.category ? '<span class="sr-only">Category: </span>'+esc(it.category) : '')+'</span>'
-              + '</a>';
-          }).join('');
-          rows = '<div class="feed-columns" aria-hidden="true"><span>Date</span><span>Publication</span><span>Category</span></div>' + rows;
-          list.innerHTML = rows;
-          if (!isNaN(jsonRevision)) list.setAttribute('data-feed-revision', revision);
-          if (statusEl) statusEl.textContent = 'Latest investigations updated.';
-        })
-        .catch(function (){ /* Keep the pre-rendered rows or fallback message. */ });
-    })();
-  </script>
+  <script data-cfasync="false" src="/assets/js/latest-feed.js"></script>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script
     data-goatcounter="https://restoring-democracy.goatcounter.com/count"

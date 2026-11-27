@@ -212,6 +212,7 @@
   <meta name="twitter:title" content="The God Machine Infographic | Restoring Democracy's Promise" />
   <meta name="twitter:description" content="Read The God Machine: An RDP Investigation on Restoring Democracy's Promise." />
   <meta name="twitter:image" content="https://restoring-democracy.org/assets/og/god-machine-og.png" />
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 <body class="antialiased">
 
@@ -254,10 +255,10 @@
 
         <main class="mt-6">
             <div class="flex justify-around border-b border-accent mb-6">
-                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl active" onclick="showTab('summary')">Summary</button>
-                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" onclick="showTab('network')">Components</button>
-                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" onclick="showTab('evidence')">Financial</button>
-                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" onclick="showTab('impact')">Consequences</button>
+                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl active" data-action="showTab" data-action-args='["summary"]'>Summary</button>
+                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" data-action="showTab" data-action-args='["network"]'>Components</button>
+                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" data-action="showTab" data-action-args='["evidence"]'>Financial</button>
+                <button class="tab-button flex-1 py-2 px-2 text-xs sm:text-sm md:text-lg lg:text-xl" data-action="showTab" data-action-args='["impact"]'>Consequences</button>
             </div>
 
             <div id="summary" class="tab-content active">
@@ -273,13 +274,13 @@
                     <h3 class="text-2xl text-white mb-4">The Assembly Line: Four Parts, One Purpose</h3>
                     <p class="mb-4 leading-relaxed" style="color: var(--text-light);">This is not a grassroots campaign, but a <span class="accent-color">symbiotic network</span>—a four-part machine where every function exists to generate demand, create a credentialing monopoly, and extract value. <span class class="accent-color">Click any step below for details.</span></p>
                     <div class="space-y-2">
-                        <div class="flow-node" onclick="showModal(1)"><b>1. The Bill Mill</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(National Association of Christian Lawmakers – NACL)</span></div>
+                        <div class="flow-node" data-action="showModal" data-action-args='[1]'><b>1. The Bill Mill</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(National Association of Christian Lawmakers – NACL)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(2)"><b>2. The Mobilizer</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(Faith Wins)</span></div>
+                        <div class="flow-node" data-action="showModal" data-action-args='[2]'><b>2. The Mobilizer</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(Faith Wins)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(3)"><b>3. The Credentialer</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(Mission Generation/NSCA)</span></div>
+                        <div class="flow-node" data-action="showModal" data-action-args='[3]'><b>3. The Credentialer</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(Mission Generation/NSCA)</span></div>
                         <div class="flow-arrow">↓</div>
-                        <div class="flow-node" onclick="showModal(4)"><b>4. The Money</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(Anonymous Donors via DAFs)</span></div>
+                        <div class="flow-node" data-action="showModal" data-action-args='[4]'><b>4. The Money</b><br><span class="text-sm" style="color: var(--primary-navy-blue);">(Anonymous Donors via DAFs)</span></div>
                     </div>
                 </div>
             </div>
@@ -290,19 +291,19 @@
                     <p class="leading-relaxed" style="color: var(--text-light);">The "God Machine" operates through a highly coordinated network, with each entity playing a specific, interconnected role in manufacturing demand for school chaplains.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="component-card" data-component-id="nacl" onclick="highlightAndShowComponent('nacl', 1)">
+                    <div class="component-card" data-component-id="nacl" data-action="highlightAndShowComponent" data-action-args='["nacl", 1]'>
                         <b>The Bill Mill: NACL</b><br>
                         <span style="color: var(--text-secondary);" class="leading-relaxed">The National Association of Christian Lawmakers drafts and promotes “model legislation” for friendly lawmakers, creating demand for chaplain roles.</span>
                     </div>
-                    <div class="component-card" data-component-id="faithwins" onclick="highlightAndShowComponent('faithwins', 2)">
+                    <div class="component-card" data-component-id="faithwins" data-action="highlightAndShowComponent" data-action-args='["faithwins", 2]'>
                         <b>The Mobilizer: Faith Wins</b><br>
                         <span style="color: var(--text-secondary);" class="leading-relaxed">Manufactures “grassroots” pressure campaigns, leveraging paid clergy and volunteers to lobby for these bills, creating public pressure.</span>
                     </div>
-                    <div class="component-card" data-component-id="nsca" onclick="highlightAndShowComponent('nsca', 3)">
+                    <div class="component-card" data-component-id="nsca" data-action="highlightAndShowComponent" data-action-args='["nsca", 3]'>
                         <b>The Credentialer: Mission Generation / NSCA</b><br>
                         <span style="color: var(--text-secondary);" class="leading-relaxed">Sells the only credential available for the chaplain roles the NACL-pushed laws create, monopolizing the certification process.</span>
                     </div>
-                    <div class="component-card" data-component-id="money" onclick="highlightAndShowComponent('money', 4)">
+                    <div class="component-card" data-component-id="money" data-action="highlightAndShowComponent" data-action-args='["money", 4]'>
                         <b>The Money: Anonymous Donors</b><br>
                         <span style="color: var(--text-secondary);" class="leading-relaxed">Channels untraceable grants through donor-advised funds (DAFs), ensuring secrecy and consistent underwriting for the entire operation.</span>
                     </div>
@@ -419,158 +420,7 @@
         </div>
     </footer>
 
-    <script>
-        // --- Modal Data and Functions ---
-        const modalData = {
-            1: { title: '1. The Bill Mill (NACL)', content: 'The National Association of Christian Lawmakers (NACL) drafts and promotes "model legislation" to friendly lawmakers across states. These bills create the legal framework for chaplains in public schools, manufacturing the demand for their services.' },
-            2: { title: '2. The Mobilizer (Faith Wins)', content: 'Faith Wins organizes and trains "grassroots" pressure campaigns. They mobilize paid clergy and volunteers to lobby legislators and create the illusion of widespread public demand for the chaplain bills, influencing policy enactment.' },
-            3: { title: '3. The Credentialer (Mission Generation/NSCA)', content: 'Mission Generation, operating as the National School Chaplain Association (NSCA), sells the exclusive "certified" chaplain credential. This positions them as the sole provider for the roles created by the NACL-pushed laws, establishing a monopoly.' },
-            4: { title: '4. The Money (Anonymous Donors)', content: 'Anonymous donors channel untraceable grants through Donor-Advised Funds (DAFs) to Mission Generation and potentially other network entities. This opaque funding ensures secrecy and continuity for the entire "God Machine" operation, shielding benefactors from public scrutiny.' }
-        };
-
-        const modalContainer = document.getElementById('modal-container');
-        const modalTitle = document.getElementById('modal-title');
-        const modalBody = document.getElementById('modal-body');
-        const closeModalBtn = document.getElementById('close-modal');
-
-        function showModal(step) {
-            const data = modalData[step];
-            if (data) {
-                modalTitle.textContent = data.title;
-                modalBody.textContent = data.content;
-                modalContainer.classList.add('visible');
-            }
-        }
-
-        function hideModal() {
-            modalContainer.classList.remove('visible');
-        }
-
-        closeModalBtn.addEventListener('click', hideModal);
-        modalContainer.addEventListener('click', (e) => {
-            if (e.target === modalContainer) {
-                hideModal();
-            }
-        });
-
-        // --- Tab Navigation ---
-        function showTab(tabName) {
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-                if (button.getAttribute('onclick').includes(`'${tabName}'`)) {
-                    button.classList.add('active');
-                }
-            });
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-                if (content.id === tabName) {
-                    content.classList.add('active');
-                }
-            });
-            // Reset component highlights when switching tabs
-            document.querySelectorAll('.component-card').forEach(card => {
-                card.classList.remove('active-component');
-            });
-        }
-
-        // --- Component Card Highlighting for "Network" Tab and Modal ---
-        function highlightAndShowComponent(componentId, modalStep) {
-            document.querySelectorAll('.component-card').forEach(card => {
-                card.classList.remove('active-component');
-            });
-            const activeCard = document.querySelector(`.component-card[data-component-id="${componentId}"]`);
-            if (activeCard) {
-                activeCard.classList.add('active-component');
-                activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-            showModal(modalStep);
-        }
-
-        // --- Chart.js ---
-        const ctx = document.getElementById('credentialsChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['NSCA Chaplain', 'Licensed Counselor'],
-                datasets: [{
-                    label: 'Required Training (Hours)',
-                    data: [40, 3000],
-                    backgroundColor: [
-                        'rgba(0, 43, 75, 0.7)',
-                        'rgba(184, 134, 11, 0.7)'
-                    ],
-                    borderColor: [
-                        '#002B4B',
-                        '#B8860B'
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        ticks: { color: '#333333', font: { family: "'Lora', Georgia, Cambria, 'Times New Roman', serif" } },
-                        grid: { color: '#BBBBBB' }
-                    },
-                    y: {
-                        ticks: { color: '#333333', font: { size: 14, family: "'Lora', Georgia, Cambria, 'Times New Roman', serif" } },
-                        grid: { display: false }
-                    }
-                },
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        bodyFont: { family: "'Lora', Georgia, Cambria, 'Times New Roman', serif" },
-                        callbacks: {
-                            label: (context) => context.raw === 40 ? ' 40-hour online course' : ' 3,000+ supervised clinical hours + Master\'s Degree'
-                        }
-                    }
-                }
-            }
-        });
-
-        // -- SHARE BUTTON SCRIPT ADDED HERE --
-        const shareButton = document.getElementById('share-button');
-        if (shareButton) {
-            shareButton.addEventListener('click', async () => {
-                const shareData = {
-                    title: 'The God Machine: An RDP Investigation',
-                    text: 'How a Tax-Exempt ‘Ministry’ Built a Business Selling Chaplains to Public Schools. An exclusive investigation by Restoring Democracy\'s Promise.',
-                    url: window.location.href
-                };
-                try {
-                    if (navigator.share) {
-                        await navigator.share(shareData);
-                    } else {
-                        // Fallback for desktop browsers that don't support Web Share API
-                        navigator.clipboard.writeText(window.location.href).then(() => {
-                            alert('Link to investigation copied to clipboard!');
-                        });
-                    }
-                } catch (err) {
-                    console.error("Share failed:", err);
-                    // Fallback in case of an error during share
-                    navigator.clipboard.writeText(window.location.href).then(() => {
-                        alert('Link to investigation copied to clipboard!');
-                    });
-                }
-            });
-        }
-        
-        // Initialize active tab on load, and potentially component highlight
-        document.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash.substring(1);
-            if (hash && document.getElementById(hash)) {
-                showTab(hash);
-            } else {
-                showTab('summary');
-            }
-        });
-    </script>
+    <script src="/assets/js/pages/the-god-machine.js"></script>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script
     data-goatcounter="https://restoring-democracy.goatcounter.com/count"

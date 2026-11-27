@@ -60,8 +60,9 @@ METADATA_TIMEOUT_SECONDS = 8
 SUPPORTING_TITLE_PREFIXES = ("evidence locker:",)
 SUPPORTING_PATH_PREFIXES = ("/p/evidence-locker-",)
 
-# Homepage block. Rows must match the markup built by the refresh script in
-# index.html exactly; scripts/test_latest_feed_render.js enforces this.
+# Homepage block. Rows must match the markup built by the homepage refresh
+# script (assets/js/latest-feed.js) exactly; scripts/test_latest_feed_render.js
+# enforces this.
 FEED_LINK_PREFIX = f"https://{CANONICAL_HOST}/"
 FEED_BLOCK_RE = re.compile(
     r"(?P<start>[ \t]*<!-- latest-feed:start\b[^\n]*-->\n)(?P<body>.*?)(?P<end>[ \t]*<!-- latest-feed:end -->)",
@@ -239,7 +240,7 @@ def _attr(value: str) -> str:
 
 
 def render_feed_html(items) -> str:
-    """Render homepage feed rows exactly as the in-page refresh script does."""
+    """Render homepage feed rows exactly as assets/js/latest-feed.js does."""
     rows = []
     for item in items if isinstance(items, list) else []:
         if not isinstance(item, dict):

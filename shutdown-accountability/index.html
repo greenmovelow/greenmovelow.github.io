@@ -97,6 +97,7 @@
   </style>
 
   <meta name="twitter:url" content="https://restoring-democracy.org/shutdown-accountability/" />
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 
 <body class="bg-exhibit-dark text-brand-sand font-sans antialiased">
@@ -117,7 +118,7 @@
           <a href="/team/" class="nav-link text-brand-sand text-sm">Team</a>
           <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm whitespace-nowrap">Browse Investigations</a>
           <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
-          <button onclick="shareThisPage()" title="Share" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share">
+          <button data-action="shareThisPage" title="Share" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
           </button>
         </div>
@@ -170,7 +171,7 @@
         <p class="text-brand-sand/75 text-sm leading-relaxed mb-4">Independent, systems-level reporting and modeled investigations from RDP Analytics.</p>
         <div class="flex flex-col sm:flex-row sm:items-center gap-3">
           <a href="https://exposed1.substack.com/subscribe" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-brand-green-dark/85 hover:bg-brand-green-dark text-brand-white text-sm font-semibold px-4 py-2.5 rounded-md border border-brand-gold/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold">Subscribe to Restoring Democracy's Promise</a>
-          <button type="button" onclick="shareThisPage(this)" class="inline-flex items-center justify-center gap-2 text-brand-sand/75 hover:text-brand-gold text-sm font-medium px-4 py-2.5 rounded-md border border-brand-sand/20 hover:border-brand-gold/35 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold" aria-label="Share exhibit">
+          <button type="button" data-action="shareThisPage" data-action-args='["$this"]' class="inline-flex items-center justify-center gap-2 text-brand-sand/75 hover:text-brand-gold text-sm font-medium px-4 py-2.5 rounded-md border border-brand-sand/20 hover:border-brand-gold/35 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold" aria-label="Share exhibit">
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
             <span>Share exhibit</span>
           </button>
@@ -411,31 +412,7 @@
     </div>
   </footer>
 
-  <script>
-    const canonicalUrl=document.querySelector('link[rel="canonical"]')?.href||window.location.href;
-    async function shareThisPage(trigger){
-      const feedback=document.getElementById('share-feedback');
-      const d={title:document.title,url:canonicalUrl};
-      if(navigator.share){
-        try{await navigator.share(d);return}catch(e){if(e.name==='AbortError')return}
-      }
-      if(navigator.clipboard&&navigator.clipboard.writeText){
-        try{
-          await navigator.clipboard.writeText(canonicalUrl);
-          if(feedback){
-            feedback.textContent='Link copied';
-            window.clearTimeout(shareThisPage._feedbackTimeout);
-            shareThisPage._feedbackTimeout=window.setTimeout(()=>{feedback.textContent='';},1800);
-          }
-          return;
-        }catch(e){}
-      }
-      window.prompt('Copy this link:',canonicalUrl);
-      if(trigger&&typeof trigger.focus==='function')trigger.focus();
-    }
-    const nav=document.querySelector('.nav-bar');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)},{passive:true});
-    const toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('mobile-menu');toggle.addEventListener('click',()=>{const o=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',o)});menu.querySelectorAll('a').forEach(l=>{l.addEventListener('click',()=>{menu.classList.remove('open');toggle.setAttribute('aria-expanded','false')})});
-  </script>
+  <script src="/assets/js/pages/shutdown-accountability.js"></script>
 </div>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script

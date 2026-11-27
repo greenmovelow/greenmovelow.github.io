@@ -1,10 +1,12 @@
 // Regression tests for the homepage latest-feed refresh script.
 //
 // The rows in #latest-feed are pre-rendered into index.html by
-// scripts/build_latest_investigations.py and refreshed in the browser by the
-// inline script in index.html. If the two renderers ever disagreed, a refresh
-// would visibly re-lay out the list (a layout shift). These tests run the real
-// inline script against a DOM built from the committed index.html and check:
+// scripts/build_latest_investigations.py and refreshed in the browser by
+// /assets/js/latest-feed.js, which index.html loads from a <script src> tag
+// (no inline JS: the site CSP omits 'unsafe-inline'). If the two renderers
+// ever disagreed, a refresh would visibly re-lay out the list (a layout
+// shift). These tests run the real script against a DOM built from the
+// committed index.html and check:
 //   1. JS rendering of the committed JSON equals the pre-rendered rows.
 //   2. An unchanged feed leaves the pre-rendered DOM untouched.
 //   3. Only a JSON with a strictly newer feed revision replaces the rows:
@@ -42,9 +44,12 @@ function withNewStory(revision) {
 }
 
 const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
-const feedScript = scripts.find(([, , body]) => body.includes("'/latest-investigations.json'"));
-assert.ok(feedScript, 'feed refresh script not found in index.html');
-assert.match(feedScript[1], /data-cfasync="false"/, 'feed script must opt out of Rocket Loader deferral');
+const feedTag = scripts.find(([, attrs]) => /\bsrc="\/assets\/js\/latest-feed\.js"/.test(attrs));
+assert.ok(feedTag, 'index.html must load /assets/js/latest-feed.js');
+assert.equal(feedTag[2].trim(), '', 'the feed script tag must not carry inline code');
+assert.match(feedTag[1], /data-cfasync="false"/, 'feed script must opt out of Rocket Loader deferral');
+const feedCode = fs.readFileSync(path.join(root, 'assets/js/latest-feed.js'), 'utf8');
+assert.ok(feedCode.includes("'/latest-investigations.json'"), 'latest-feed.js must fetch the feed JSON');
 
 function rowsHTML(list) {
   // Element children only: the generator markers are comments.
@@ -67,7 +72,7 @@ async function run({ json, status = 200, noFetch = false, mutate } = {}) {
   } else {
     delete window.fetch;
   }
-  vm.runInNewContext(feedScript[2], sandbox);
+  vm.runInNewContext(feedCode, sandbox);
   await new Promise(resolve => setTimeout(resolve, 20));
   return {
     list, before, document, revision: list.getAttribute('data-feed-revision'),

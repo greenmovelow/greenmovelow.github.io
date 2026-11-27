@@ -137,6 +137,7 @@
   </style>
 
   <meta property="og:locale" content="en_US" />
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 
 <body class="overflow-x-hidden vault-grid">
@@ -155,7 +156,7 @@
         </div>
         <div class="flex items-center space-x-3">
           <a href="https://exposed1.substack.com/p/save-the-benefits-database-now-monitoring" target="_blank" rel="noopener noreferrer" class="text-text-mid hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hidden md:block">Read Full Investigation →</a>
-          <button onclick="shareExhibit()" class="text-text-dim hover:text-white p-2 rounded-md transition-colors" title="Share"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg></button>
+          <button data-action="shareExhibit" class="text-text-dim hover:text-white p-2 rounded-md transition-colors" title="Share"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg></button>
         </div>
       </div>
     </div>
@@ -272,7 +273,7 @@
 
         <div class="relative space-y-0">
           <!-- TIER 1: State Sensors -->
-          <div class="node-card bg-vault rounded-t-xl border border-vault-border p-5" data-node="sensors" onclick="toggleNode('sensors')">
+          <div class="node-card bg-vault rounded-t-xl border border-vault-border p-5" data-node="sensors" data-action="toggleNode" data-action-args='["sensors"]'>
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-4">
                 <div class="w-12 h-12 rounded-lg bg-bio-violet/15 border border-bio-violet/30 flex items-center justify-center flex-shrink-0 pulse-violet">
@@ -316,7 +317,7 @@
           </div>
 
           <!-- TIER 2: HHS Clearinghouse -->
-          <div class="node-card bg-vault border-2 border-parchment/30 p-5" data-node="clearinghouse" onclick="toggleNode('clearinghouse')">
+          <div class="node-card bg-vault border-2 border-parchment/30 p-5" data-node="clearinghouse" data-action="toggleNode" data-action-args='["clearinghouse"]'>
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-4">
                 <div class="w-14 h-14 rounded-lg bg-parchment/10 border-2 border-parchment/40 flex items-center justify-center flex-shrink-0 pulse-amber">
@@ -364,7 +365,7 @@
           </div>
 
           <!-- TIER 3: Federal Engine -->
-          <div class="node-card bg-vault rounded-b-xl border border-vault-border p-5" data-node="federal" onclick="toggleNode('federal')">
+          <div class="node-card bg-vault rounded-b-xl border border-vault-border p-5" data-node="federal" data-action="toggleNode" data-action-args='["federal"]'>
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-4">
                 <div class="w-12 h-12 rounded-lg bg-rust/15 border border-rust/30 flex items-center justify-center flex-shrink-0">
@@ -716,44 +717,7 @@
     </div>
   </footer>
 
-  <script>
-    function toggleNode(name) {
-      const panel = document.getElementById('detail-' + name);
-      const card = document.querySelector(`[data-node="${name}"]`);
-      const isOpen = panel.classList.contains('open');
-      document.querySelectorAll('.expand-panel').forEach(p => p.classList.remove('open'));
-      document.querySelectorAll('.node-card').forEach(c => c.classList.remove('active'));
-      if (!isOpen) { panel.classList.add('open'); card.classList.add('active'); }
-    }
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Mobile nav active state
-    const secIds = ['pipeline','choreography','trick','data-taken','series'];
-    const mobLinks = document.querySelectorAll('.mob-link');
-    const secObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const id = e.target.id;
-          mobLinks.forEach(a => {
-            const match = a.getAttribute('data-section') === id;
-            a.classList.toggle('text-parchment', match);
-            a.classList.toggle('text-text-dim', !match);
-          });
-        }
-      });
-    }, { threshold: 0.3 });
-    secIds.forEach(id => { const el = document.getElementById(id); if (el) secObs.observe(el); });
-
-    function shareExhibit() {
-      const d = { title: "SAVE: The Database They Won't Name", text: "Iowa treated driver’s licenses as a “public benefit” to route licensed Iowans through a federal immigration database. Twenty-year contract. No public vote.", url: location.href };
-      if (navigator.share) navigator.share(d).catch(()=>{});
-      else navigator.clipboard.writeText(location.href).then(() => alert('Link copied!'));
-    }
-  </script>
+  <script src="/assets/js/pages/save_iowa.js"></script>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script
     data-goatcounter="https://restoring-democracy.goatcounter.com/count"
