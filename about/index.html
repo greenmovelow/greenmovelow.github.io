@@ -167,7 +167,10 @@
     <div class="max-w-7xl mx-auto px-4 lg:px-6">
       <div class="flex items-center justify-between h-16 lg:h-[68px]">
         <a href="/" class="flex items-center gap-3 flex-shrink-0 group">
-          <img id="main-logo" width="40" height="40" src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise home" class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          <picture>
+            <source type="image/webp" srcset="/assets/Square_logo_transparent_80.webp 80w, /assets/Square_logo_transparent.webp 180w" sizes="40px">
+            <img id="main-logo" width="40" height="40" src="/assets/Square_logo_transparent.png" alt="Restoring Democracy's Promise home" class="h-9 w-9 lg:h-10 lg:w-10 drop-shadow-md">
+          </picture>
           <span class="text-brand-gold font-serif font-bold text-base lg:text-lg tracking-tight group-hover:text-brand-orange transition-colors leading-tight">RDP</span>
         </a>
         <div class="hidden lg:flex items-center gap-5">
@@ -204,10 +207,12 @@
     <div class="hero-grain"></div>
     <div class="relative max-w-4xl mx-auto z-10">
       <picture>
-        <source srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.webp" type="image/webp">
+        <source type="image/webp"
+                srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_320.webp 320w, /assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.webp 640w"
+                sizes="(min-width:768px) 172px, 143px">
         <img src="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.png" width="1536" height="857" decoding="async" alt="Restoring Democracy's Promise logo" class="mx-auto mb-6 h-20 md:h-24 w-auto drop-shadow-2xl hero-enter hero-d1">
       </picture>
-      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brand-gold tracking-tight leading-[1.1] hero-enter hero-d2">About Restoring Democracy's Promise</h1>
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brand-gold tracking-tight leading-[1.1] hero-rise hero-d2">About Restoring Democracy's Promise</h1>
       <div class="rule-gold max-w-24 mx-auto mt-6 mb-5 hero-enter hero-d2"></div>
       <p class="text-xl md:text-2xl text-brand-orange italic font-semibold hero-enter hero-d3">Independent reporting on power, systems, and public accountability.</p>
       <p class="mt-5 text-base md:text-lg text-brand-sand leading-relaxed max-w-3xl mx-auto hero-enter hero-d3">Restoring Democracy’s Promise is an independent investigative journalism publication focused on systems, power, public accountability, and the institutions that shape democratic life.</p>
@@ -391,8 +396,8 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
         <div class="md:col-span-1">
           <picture>
-            <source srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.webp" type="image/webp">
-            <img src="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_1536.png" width="1536" height="857" loading="lazy" decoding="async" class="h-10 w-auto mb-3" alt="Restoring Democracy's Promise logo">
+            <source type="image/webp" srcset="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_320.webp">
+            <img src="/assets/og/Banner_RDP_Gen3_Gold_Aperture_Clear_640.png" width="1536" height="857" loading="lazy" decoding="async" class="h-10 w-auto mb-3" alt="Restoring Democracy's Promise logo">
           </picture>
           <p class="font-serif text-sm italic text-brand-gold">Quantifying the Truth</p>
           <p class="text-xs text-brand-sand/50 mt-0.5">Engineering Precision Journalism</p>

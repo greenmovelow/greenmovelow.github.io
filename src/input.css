@@ -301,6 +301,11 @@ html { scroll-padding-top: 68px; }
 .hero-d3 { animation-delay: 0.32s; }
 .hero-d4 { animation-delay: 0.46s; }
 @keyframes heroUp { to { opacity: 1; transform: translateY(0); } }
+/* Rise without the fade, for a hero headline that is the page's LCP element:
+   text that first paints at opacity 0 is never counted as LCP, so the fade
+   pushed LCP to whatever image or late font repaint came next. */
+.hero-rise { transform: translateY(14px); animation: heroRise 0.65s ease forwards; }
+@keyframes heroRise { to { transform: translateY(0); } }
 
 .rule-gold { border-top: 3px solid #D4AF37; }
 
