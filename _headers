@@ -1,4 +1,17 @@
 # Netlify custom headers
+
+# Site-wide Content-Security-Policy, sent by the origin. It matches the
+# site-wide policy served before this rule existed (added outside this repo,
+# at the edge), except that script-src no longer
+# allows 'unsafe-inline': all executable JavaScript lives in same-origin .js
+# files (inline on* handlers became data-action, see /assets/js/actions.js).
+# JSON-LD <script type="application/ld+json"> blocks are data and stay inline.
+# scripts/audit_csp.py fails if inline JS or handlers come back.
+# Keep this rule first: more specific rules below (e.g. the records status
+# page) set their own, stricter policy.
+/*
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; img-src 'self' data: https:; font-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://gc.zgo.at; connect-src 'self' https://cloudflareinsights.com https://*.google-analytics.com https://restoring-democracy.goatcounter.com/count; frame-src https://substack.com https://*.substack.com; upgrade-insecure-requests;
+
 # Text companions have an HTML canonical URL and do not opt into AI training.
 /index.md
   Content-Type: text/markdown; charset=utf-8

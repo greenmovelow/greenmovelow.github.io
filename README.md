@@ -91,7 +91,7 @@ imports:
 
 ```sh
 python -m unittest discover -s scripts -p 'test_latest_investigations.py'
-npm run test:feed   # pre-rendered rows match the in-page refresh script
+npm run test:feed   # pre-rendered rows match assets/js/latest-feed.js
 python scripts/build_latest_investigations.py
 ```
 

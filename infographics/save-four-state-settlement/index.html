@@ -103,6 +103,7 @@
     .footer-tooltip:hover .tooltip-text{visibility:visible;opacity:1}
     @media print{.nav-bar,.mobile-menu{display:none!important}}
   </style>
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 
 <body class="bg-exhibit-dark text-brand-sand font-sans antialiased">
@@ -123,7 +124,7 @@
           <a href="/team/" class="nav-link text-brand-sand text-sm">Team</a>
           <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm whitespace-nowrap">Browse Investigations</a>
           <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
-          <button onclick="shareThisPage()" title="Share" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share">
+          <button data-action="shareThisPage" title="Share" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
           </button>
         </div>
@@ -343,7 +344,7 @@
         <div class="mb-8">
           <p class="font-mono text-[0.62rem] text-brand-orange uppercase tracking-widest font-bold mb-2">Exhibit A &mdash; The Settlement</p>
           <p id="citation-1" class="cite-block">Settlement Agreement, State of Florida, et al. v. U.S. Department of Homeland Security, No. 3:24-cv-509-TKW-HTC, ECF No. 30-1 (N.D. Fla. Nov. 28, 2025).</p>
-          <button onclick="copyCite('citation-1', this)" class="mt-3 inline-flex items-center gap-1.5 bg-brand-gold/90 text-brand-offblack text-xs font-bold px-3 py-1.5 rounded-md hover:bg-brand-gold transition-colors" aria-label="Copy the settlement citation">
+          <button data-action="copyCite" data-action-args='["citation-1", "$this"]' class="mt-3 inline-flex items-center gap-1.5 bg-brand-gold/90 text-brand-offblack text-xs font-bold px-3 py-1.5 rounded-md hover:bg-brand-gold transition-colors" aria-label="Copy the settlement citation">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             Copy
           </button>
@@ -352,7 +353,7 @@
         <div>
           <p class="font-mono text-[0.62rem] text-brand-orange uppercase tracking-widest font-bold mb-2">Exhibit B &mdash; The Court Decision</p>
           <p id="citation-2" class="cite-block">League of Women Voters, et al. v. U.S. Department of Homeland Security, et al., No. 1:25-cv-03501-SLS, Memorandum Opinion, ECF No. 111 (D.D.C. June 22, 2026).</p>
-          <button onclick="copyCite('citation-2', this)" class="mt-3 inline-flex items-center gap-1.5 bg-brand-gold/90 text-brand-offblack text-xs font-bold px-3 py-1.5 rounded-md hover:bg-brand-gold transition-colors" aria-label="Copy the court decision citation">
+          <button data-action="copyCite" data-action-args='["citation-2", "$this"]' class="mt-3 inline-flex items-center gap-1.5 bg-brand-gold/90 text-brand-offblack text-xs font-bold px-3 py-1.5 rounded-md hover:bg-brand-gold transition-colors" aria-label="Copy the court decision citation">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             Copy
           </button>
@@ -422,12 +423,7 @@
     </div>
   </footer>
 
-  <script>
-    async function shareThisPage(){const d={title:document.title,url:window.location.href};if(navigator.share){try{await navigator.share(d);return}catch(e){if(e.name==='AbortError')return}}if(navigator.clipboard&&navigator.clipboard.writeText){try{await navigator.clipboard.writeText(window.location.href);return}catch(e){}}window.prompt('Copy this link:',window.location.href)}
-    function copyCite(id, btn){const el=document.getElementById(id);const t=(el?el.innerText:'').trim();const done=()=>{const o=btn.innerHTML;btn.innerHTML='Copied';setTimeout(()=>{btn.innerHTML=o},1800)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done).catch(()=>window.prompt('Copy citation:',t))}else{window.prompt('Copy citation:',t)}}
-    const nav=document.querySelector('.nav-bar');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)},{passive:true});
-    const toggle=document.getElementById('mobile-toggle'),menu=document.getElementById('mobile-menu');toggle.addEventListener('click',()=>{const o=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',o)});menu.querySelectorAll('a').forEach(l=>{l.addEventListener('click',()=>{menu.classList.remove('open');toggle.setAttribute('aria-expanded','false')})});
-  </script>
+  <script src="/assets/js/pages/infographics-save-four-state-settlement.js"></script>
 </div>
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script

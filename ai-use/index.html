@@ -163,6 +163,7 @@
     }
   </style>
 
+  <script src="/assets/js/actions.js" defer></script>
 </head>
 
 <body class="bg-brand-white text-brand-offblack font-sans antialiased">
@@ -183,7 +184,7 @@
           <a href="/#standards" class="nav-link text-brand-sand text-sm">Standards</a>
           <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer" class="nav-link text-brand-sand text-sm whitespace-nowrap">Browse Investigations</a>
           <a href="/secure-tips/" class="nav-link text-brand-sand text-sm">Secure Tips</a>
-          <button onclick="shareThisPage()" title="Share this page" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share this page">
+          <button data-action="shareThisPage" title="Share this page" class="p-2 rounded-md text-brand-sand/80 hover:text-brand-gold transition-colors" aria-label="Share this page">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
               <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
@@ -205,7 +206,7 @@
         <a href="/#standards" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Standards</a>
         <a href="https://investigations.restoring-democracy.org" target="_blank" rel="noopener noreferrer" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Browse Investigations ↗</a>
         <a href="/secure-tips/" class="block py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition">Secure Tips</a>
-        <button onclick="shareThisPage()" class="w-full text-left py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition" aria-label="Share this page">Share This Page</button>
+        <button data-action="shareThisPage" class="w-full text-left py-2.5 px-3 text-brand-sand hover:text-brand-gold text-sm font-medium rounded transition" aria-label="Share this page">Share This Page</button>
         <div class="pt-2 pb-1"><a href="https://investigations.restoring-democracy.org/subscribe" class="block text-center bg-brand-gold text-brand-offblack text-sm font-bold py-2.5 px-5 rounded-full">Subscribe</a></div>
       </div>
     </div>
@@ -824,44 +825,7 @@
     </div>
   </footer>
 
-  <script>
-    async function shareThisPage() {
-      const shareData = { title: document.title, url: window.location.href };
-
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-          return;
-        } catch (e) {
-          if (e.name === 'AbortError') return;
-        }
-      }
-
-      if (navigator.clipboard?.writeText) {
-        try {
-          await navigator.clipboard.writeText(window.location.href);
-          return;
-        } catch (e) {}
-      }
-
-      window.prompt('Copy this link:', window.location.href);
-    }
-
-    const nav = document.querySelector('.nav-bar');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
-    const toggle = document.getElementById('mobile-toggle');
-    const menu = document.getElementById('mobile-menu');
-    if (toggle && menu) {
-      toggle.addEventListener('click', () => {
-        const open = menu.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-      menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }));
-    }
-  </script>
+  <script src="/assets/js/pages/ai-use.js"></script>
 
   <!-- Privacy-conscious aggregate analytics. Disabled on sensitive and non-content routes. -->
   <script
